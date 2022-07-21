@@ -1,14 +1,24 @@
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<PROTEIN_COMPLEXES - APOC PROCEDURE - START>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 CALL apoc.export.json.query(
-"Match (complexInteractorN:GraphInteractor)-[complexInteractorR:interactor]-(complexParticipantN:GraphModelledParticipant)-[complexParticipantR:IC_PARTICIPANT]-(complex:GraphComplex) WHERE EXISTS(complexInteractorN.uniprotName)
+"Match (complexInteractorN:GraphInteractor)-[complexInteractorR:interactor]-(complexParticipantN:GraphModelledParticipant)-[complexParticipantR:IC_PARTICIPANT]-(complex:GraphComplex) WHERE EXISTS(complexInteractorN.uniprotName) 
+# finds proteins that take part in complexes
 WITH  COLLECT(distinct complexInteractorN) as complexInteractors
-UNWIND complexInteractors as complexInteractor
-MATCH  (complexInteractor)-[complexInteractorR:interactor]-(complexParticipantN:GraphModelledParticipant)-[complexParticipantR:IC_PARTICIPANT]-(complex:GraphComplex),(complex)-[complexAcXrefR:complexAcXref]-(complexAcXrefN:GraphXref)
-RETURN complexInteractor.uniprotName as interactor_uniprot_name, COLLECT (distinct complexAcXrefN.identifier) as complex_acs
+UNWIND complexInteractors as complexInteractor 
+# for each protein that takes part in at least one complex
+MATCH  (complexInteractor)-[complexInteractorR:interactor]-(complexParticipantN:GraphModelledParticipant)-[complexParticipantR:IC_PARTICIPANT]-(complex:GraphComplex),(complex)-[complexAcXrefR:complexAcXref]-(complexAcXrefN:GraphXref) 
+# find given complexes and return Xrefs
+RETURN complexInteractor.uniprotName as interactor_uniprot_name, COLLECT (distinct complexAcXrefN.identifier) as complex_acs 
+# return protein - complex pairs
 ORDER BY complexInteractor.uniprotName",
 "OPEN_TARGETS/protein_complexes.json",
 null)
+
+## heavy use of multiple relationships - complexAcXref has Xref, identifiers, and preferredIdentifier accompanying it. these rels have no properties, meaning that the respective property they refer to are stored in the GraphXref node they point to, which is not the most effective use of graph DB infrastructure.
+
+## the node type (ontologically) is only available by following an Xref relationship, leading to an Xref node, which then again points to a GraphCvTerm via a qualifier relationship, which then contains type information (eg fullName: complex-primary, mIIdentifier: MI:2282), as well as another GraphCvTerm via a database relationship, which then contains source information (eg fullName: complex portal, mIIdentifier: MI:2279).
+
+## i have a feeling this could be solved much easier and more efficient while being more human readable as well.
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<PROTEIN_COMPLEXES - APOC PROCEDURE - END>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -16,18 +26,34 @@ null)
 
 CALL apoc.export.json.query(
 "MATCH (typeAN:GraphCvTerm)<-[:interactorType]-(interactorA:GraphInteractor)<-[:interactorA]-(interaction:GraphBinaryInteractionEvidence)-[:interactorB]->(interactorB:GraphInteractor)-[:interactorType]->(typeBN:GraphCvTerm)
+# find connected proteins, return their interaction via GraphBinaryInteractionEvidence
+# filter proteins with uniprot ids -> interactorA and B
+# return interaction type -> typeAN and BN
 WHERE  ID(interactorA)<>ID(interactorB) AND (EXISTS(interactorA.uniprotName)
                   OR typeAN.mIIdentifier IN ['MI:0320','MI:0321','MI:0322','MI:0323','MI:2190','MI:0324','MI:2204','MI:0679','MI:0608','MI:0611','MI:0610','MI:0609','MI_0325'])
        AND (EXISTS(interactorB.uniprotName)
                   OR typeBN.mIIdentifier IN ['MI:0320','MI:0321','MI:0322','MI:0323','MI:2190','MI:0324','MI:2204','MI:0679','MI:0608','MI:0611','MI:0610','MI:0609','MI_0325'])
+# what are these other mIIdentifiers? must encode for certain types of interaction.
+# why is there one MI id with an underscore?
+
+## lots of superfluous infrastructure between agents
+## qualifiers / filters are non human readable
 
 MATCH (interaction)-[identifiersR:identifiers]-(identifiersN:GraphXref)-[sourceR:database]-(sourceN:GraphCvTerm) WHERE sourceN.shortName IN ['reactome','signor','intact']
+# find interactions from the previously returned GraphBinaryInteractionEvidence connected to GraphCvTerms that encode interactions from reactome, signor, or intact
+## could be encoded as virtual leaves
 
 WITH COLLECT(distinct interaction) as interactionColl,interactorA,interactorB,sourceN,identifiersN,typeAN,typeBN
 UNWIND interactionColl as interactionN
+# return unique interactions and unwind, while also returning the interaction partners from the first query and sources / qualifiers
 
 OPTIONAL MATCH (interactionN)-[:BIE_PARTICIPANTA]-(entityA:GraphEntity)
 OPTIONAL MATCH (interactionN)-[:BIE_PARTICIPANTB]-(entityB:GraphEntity)
+# for each interaction returned
+# search for GraphEntities (very general node type) that are connected via BIE_PARTICIPANT(A/B) relationships
+# these connect binary interaction evidence types to the respective interaction partners
+# we end up with a second set of interaction partners for each interactionN
+# what's the difference between interactorA and entityA?
 
 WITH CASE ID(interactorA)<ID(interactorB)
                      WHEN true THEN interactorA
@@ -38,6 +64,7 @@ WITH CASE ID(interactorA)<ID(interactorB)
                      WHEN true THEN interactorB
                      ELSE interactorA
                      END as interactorBN,
+# assign interactor A/B based on which has the lower graph id
 
      CASE ID(interactorA)<ID(interactorB)
                      WHEN true THEN entityA
@@ -48,6 +75,8 @@ WITH CASE ID(interactorA)<ID(interactorB)
                      WHEN true THEN entityB
                      ELSE entityA
                      END as entityBN,
+# assign entity A/B similarly
+# entity A is hard-coded by being BIE_PARTICIPANTA, but we need to sort because A-B may change by the switch above... probably not efficient; needed for uniqueness reasons?
 
      CASE ID(interactorA)<ID(interactorB)
                      WHEN true THEN typeAN
@@ -58,13 +87,17 @@ WITH CASE ID(interactorA)<ID(interactorB)
                      WHEN true THEN typeBN
                      ELSE typeAN
                      END as typeB,
+# same with types
 
                      interactionN,
                      sourceN,
                      identifiersN
 
-OPTIONAL MATCH (entityAN)-[identificationMethodsAR:identificationMethods]->(participantIdentificationMethodAN:GraphCvTerm)
+# we end up with a set of interactors (AN/BN), entities (AN/BN), types (AN/BN), interactionN, sourceN, and identifiersN for each interaction
 
+OPTIONAL MATCH (entityAN)-[identificationMethodsAR:identificationMethods]->(participantIdentificationMethodAN:GraphCvTerm)
+# for each "participant" (entity), try to find name and MI identifier 
+## why is this not a property?
 
 WITH interactionN,
      entityAN,
@@ -95,26 +128,37 @@ WITH interactionN,
              {short_name:participantIdentificationMethodBN.shortName,
               mi_identifier:participantIdentificationMethodBN.mIIdentifier}) as participantIdentificationMethodBColl
 
+# try to find preferredIdentifier and source of interactors, as well as the organism
+## we again go through the same Xref as above
 OPTIONAL MATCH (interactorAN)-[:preferredIdentifier]->(identifierAN:GraphXref)-[:database]->(identifierDatabaseAN:GraphCvTerm)
 OPTIONAL MATCH (interactorBN)-[:preferredIdentifier]->(identifierBN:GraphXref)-[:database]->(identifierDatabaseBN:GraphCvTerm)
 OPTIONAL MATCH (interactorAN)-[:organism]->(organismAN:GraphOrganism)
 OPTIONAL MATCH (interactorBN)-[:organism]->(organismBN:GraphOrganism)
 
+# try to find biological role of entities
+## biological role and many other "CvTerms" are only found by their identifying incoming relationship. inefficient use of graph DB resources, these should have a label and be indexed.
 OPTIONAL MATCH (entityAN)-[:biologicalRole]-(biologicalRoleAN:GraphCvTerm)
 OPTIONAL MATCH (entityBN)-[:biologicalRole]-(biologicalRoleBN:GraphCvTerm)
 
+# try to find clustered interactions for each interaction
 OPTIONAL MATCH (interactionN)-[clusteredInteractionR:interactions]-(clusteredInteractionN:GraphClusteredInteraction)
 
+# try to find type of each interaction
 OPTIONAL MATCH (interactionN)-[interactiontypeR:interactionType]-(interactiontypeN:GraphCvTerm)
 
+# try to find experimental evidence type for each interaction
 OPTIONAL MATCH (interactionN)-[experimentR:experiment]-(experimentN:GraphExperiment)-[interactionDetectionMethodR:interactionDetectionMethod]-(interactionDetectionMethodN:GraphCvTerm)
 
+# try to find organism for experiment that yielded interaction information
 OPTIONAL MATCH (experimentN)-[hostOrganismR:hostOrganism]-(hostOrganismN:GraphOrganism)
 
+# try to find supporting publication
 OPTIONAL MATCH (experimentN)-[publicationR:PUB_EXP]-(publicationN:GraphPublication)-[pubmedIdXrefR:pubmedId]-(pubmedIdXrefN:GraphXref)
 
+# try to find complex expansion method for interaction (whether there was a complex implicated in the interaction assigned to only one constituent protein)
 OPTIONAL MATCH (interactionN)-[complexExpansionR:complexExpansion]-(complexExpansionN:GraphCvTerm)
 
+# try to find ids for entities
 OPTIONAL MATCH (entityAN)-[identificationMethodsAR:identificationMethods]->(participantIdentificationMethodAN:GraphCvTerm)
 OPTIONAL MATCH (entityBN)-[identificationMethodsBR:identificationMethods]->(participantIdentificationMethodBN:GraphCvTerm)
 
@@ -174,14 +218,17 @@ WITH
                } )  as interaction_evidences
 
 
+# return one single summary per interaction
  RETURN interactorA,interactorB,source_info,
                {interaction_score: mi_score,
                 causal_interaction:null,
                 evidence:interaction_evidences
                } as interaction
 
+# add another query
 UNION
 
+# find interactions between two units of the same GraphInteractor (self-interactions)
 MATCH (typeAN:GraphCvTerm)<-[:interactorType]-(interactorAN:GraphInteractor)<-[:interactorA]-(interaction:GraphBinaryInteractionEvidence)-[:interactorB]->(interactorBN:GraphInteractor)
 WHERE  (ID(interactorAN)=ID(interactorBN))
        AND (EXISTS(interactorAN.uniprotName)
@@ -303,7 +350,7 @@ WITH
                 expansion_method_mi_identifier: complexExpansionN.mIIdentifier
                } )  as interaction_evidences
 
-
+# return the same information as above for the self-interactions
  RETURN interactorA,interactorB,source_info,
                {interaction_score: mi_score,
                 causal_interaction:null,
@@ -312,8 +359,10 @@ WITH
 
 ORDER BY interactorA.id
 
+# add another query
 UNION
 
+# find interactions with only interactorA (what is this, biologically? self-interactions are already covered above.)
 MATCH (typeAN:GraphCvTerm)<-[:interactorType]-(interactorAN:GraphInteractor)-[:interactorA]-(interaction:GraphBinaryInteractionEvidence)
 WHERE  (NOT (interaction)-[:interactorB]-(:GraphInteractor))
        AND (EXISTS(interactorAN.uniprotName)
@@ -400,7 +449,7 @@ WITH
                 expansion_method_mi_identifier: complexExpansionN.mIIdentifier
                } )  as interaction_evidences
 
-
+# return interaction without interaction partner?
  RETURN interactorA,interactorB,source_info,
                {interaction_score: mi_score,
                 causal_interaction:null,
