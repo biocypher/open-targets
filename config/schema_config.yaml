@@ -26,22 +26,23 @@ AminoAcidSequence:
   is_a: Polypeptide
   represented_as: node
   preferred_id: EBI
-  label_in_input: Peptide
+  label_in_input: GraphPeptide
   properties:
     ac: str
     fullName: str
     shortName: str
     preferredName: str
 
-Protein:
+Article:
   represented_as: node
-  preferred_id: UniProtKB
-  label_in_input: GraphProtein
+  preferred_id: PMID
+  label_in_input: GraphPublication
   properties:
     ac: str
-    fullName: str
-    shortName: str
-    preferredName: str
+    title: str
+    journal: str
+    authors: str
+    publicationDate: str
 
 Gene:
   represented_as: node
@@ -53,6 +54,56 @@ Gene:
     shortName: str
     preferredName: str
 
+MolecularEntity:
+  represented_as: node
+  preferred_id: id
+  label_in_input: GraphInteractor
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    
+NucleicAcidEntity:
+  represented_as: node
+  preferred_id: [IntAct, Reactome]
+  label_in_input: [intact:GraphNucleicAcid, reactome:GraphNucleicAcid]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
+
+Protein:
+  represented_as: node
+  preferred_id: UniProtKB
+  label_in_input: GraphProtein
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+
+ProteinComplex:
+  is_a: MacromolecularComplexMixin
+  represented_as: node
+  preferred_id: complexportal
+  label_in_input: GraphComplex
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+
+SmallMolecule:
+  represented_as: node
+  preferred_id: CHEBI
+  label_in_input: GraphSmallMolecule
+  properties:
+    ac: str
+    shortName: str
+    preferredName: str 
 
 # ---
 # Associations

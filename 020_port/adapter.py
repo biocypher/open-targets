@@ -5,6 +5,8 @@
 BioCypher - OTAR prototype
 """
 
+import re
+
 import biocypher
 import neo4j_utils as nu
 import pandas as pd
@@ -45,6 +47,9 @@ class BioCypherAdapter:
             max_connection_lifetime=7200,
         )
 
+        # indicator whether translation is necessary
+        self.translation_needed = False
+
     def write_to_csv_for_admin_import(self):
         """
         Write nodes and edges to admin import csv files.
@@ -64,7 +69,16 @@ class BioCypherAdapter:
             # import to pandas dataframe
             node_labels = pd.read_csv(f)
 
-        node_labels = ["GraphProtein", "GraphGene"]
+        node_labels = [
+            # "GraphProtein",
+            # "GraphGene",
+            # "GraphNucleicAcid",
+            # "GraphMolecule",
+            # "GraphComplex",
+            # above unused because they are included in GraphInteractor
+            "GraphInteractor",
+            "GraphPublication",
+        ]
 
         for label in node_labels:
             with self.driver.session() as session:
@@ -73,6 +87,9 @@ class BioCypherAdapter:
                 session.read_transaction(
                     self._get_node_ids_and_write_batches_tx, label
                 )
+
+        if self.translation_needed:
+            logger.warning("At least one node data type requires translation.")
 
     def write_edges(self) -> None:
         """
@@ -124,7 +141,7 @@ class BioCypherAdapter:
         performed inside the transaction.
         """
 
-        result = tx.run(f"MATCH (n:{label}) " "RETURN id(n) as id LIMIT 100")
+        result = tx.run(f"MATCH (n:{label}) " "RETURN id(n) as id")
 
         id_batch = []
         for record in result:
@@ -192,7 +209,9 @@ class BioCypherAdapter:
 
                 for res in results:
 
-                    _id, _type = _process_node_id_and_type(res["n"], label)
+                    _id, _type = self._process_node_id_and_type(
+                        res["n"], label
+                    )
                     _props = res["n"]
                     yield (_id, _type, _props)
 
@@ -224,8 +243,8 @@ class BioCypherAdapter:
                 for res in results:
 
                     # extract relevant id
-                    _src = _process_node_id_and_type(res["n"]["id"], src)
-                    _tar = _process_node_id_and_type(res["m"]["id"], tar)
+                    _src = self._process_node_id_and_type(res["n"]["id"], src)
+                    _tar = self._process_node_id_and_type(res["m"]["id"], tar)
 
                     # split some relationship types
                     if typ in [
@@ -270,6 +289,227 @@ class BioCypherAdapter:
             db_name=self.db_name,
         )
 
+    def _process_node_id_and_type(self, _node, _type):
+        """
+        Add prefixes to avoid multiple assignment.
+
+        Split up nodes in case of Protein (includes Peptides).
+
+        TODO regex id checks?
+
+        TODO how to handle "EBI-" accessions (they can refer to multiple
+        DBs)? is there an API that returns, eg, "intact" for the respective
+        members?
+        """
+
+        # regex patterns
+        chebi_no_prefix_pattern = re.compile("^\d{,6}$")
+        chebi_prefix_pattern = re.compile("^CHEBI:")
+        ebi_prefix_pattern = re.compile("^EBI-")
+        cid_prefix_pattern = re.compile("^CID:")
+        sid_prefix_pattern = re.compile("^SID:")
+        chembl_prefix_pattern = re.compile("^CHEMBL")
+        signor_prefix_pattern = re.compile("^SIGNOR-")
+        reactome_prefix_pattern = re.compile("^R-[A-Z]{3}-\d+(-\d+)?(\.\d+)?$")
+        uniprot_prefix_pattern = re.compile(
+            "^([A-N,R-Z][0-9]([A-Z][A-Z, 0-9][A-Z, 0-9][0-9]){1,2})|([O,P,Q][0-9][A-Z, 0-9][A-Z, 0-9][A-Z, 0-9][0-9])(\.\d+)?$"
+        )
+        uniprot_hyphenated_prefix_pattern = re.compile(
+            "^([A-N,R-Z][0-9]([A-Z][A-Z, 0-9][A-Z, 0-9][0-9]){1,2})|([O,P,Q][0-9][A-Z, 0-9][A-Z, 0-9][A-Z, 0-9][0-9])(\.\d+)?"
+        )  # removed end of line character from regex to include proteins with hyphenated accessions
+
+        _id = None
+
+        if _type == "GraphInteractor":
+            # any kind of interaction participant
+
+            _prefix = _node["uniqueKey"]
+
+            if "protein" in _prefix:
+                if "uniprotName" in _node:
+                    _id = "uniprot:" + _node["uniprotName"]
+                    _type = "GraphProtein"
+                else:
+                    _id = "intact:" + _node["ac"]
+                    _type = "GraphPeptide"
+
+            elif "nucleic acid" in _prefix:
+                if _node.get("ac"):
+                    _id = "intact:" + _node["ac"]
+                    _type = "intact:GraphNucleicAcid"
+                elif reactome_prefix_pattern.match(
+                    _node.get("preferredIdentifierStr")
+                ):
+                    _id = "reactome:" + _node["preferredIdentifierStr"]
+                    _type = "reactome:GraphNucleicAcid"
+
+            elif "molecule" in _prefix:
+                # several cases:
+                #
+                # no prefix (but chebi id, at least i assume that is the
+                # case, since those are ints up to 6 digits)
+                #
+                # "CHEBI:" prefix (remove)
+                #
+                # non-chebi ids: EBI- and CID:, SID: (pubchem); and CHEMBL
+
+                if chebi_no_prefix_pattern.match(
+                    _node.get("preferredIdentifierStr")
+                ):
+                    _id = "chebi:" + _node["preferredIdentifierStr"]
+
+                elif chebi_prefix_pattern.match(
+                    _node.get("preferredIdentifierStr")
+                ):
+                    _id = "chebi:" + _node["preferredIdentifierStr"].replace(
+                        "CHEBI:", ""
+                    )
+
+                elif ebi_prefix_pattern.match(
+                    _node.get("preferredIdentifierStr")
+                ):
+                    _id = _node["preferredIdentifierStr"]
+                    logger.debug(
+                        f"Translation necessary for {_node['preferredIdentifierStr']}"
+                    )
+                    self.translation_needed = True
+
+                elif cid_prefix_pattern.match(
+                    _node.get("preferredIdentifierStr")
+                ):
+                    _id = _node["preferredIdentifierStr"]
+                    logger.debug(
+                        f"Translation necessary for {_node['preferredIdentifierStr']}"
+                    )
+                    self.translation_needed = True
+
+                elif sid_prefix_pattern.match(
+                    _node.get("preferredIdentifierStr")
+                ):
+                    _id = _node["preferredIdentifierStr"]
+                    logger.debug(
+                        f"Translation necessary for {_node['preferredIdentifierStr']}"
+                    )
+                    self.translation_needed = True
+
+                elif chembl_prefix_pattern.match(
+                    _node.get("preferredIdentifierStr")
+                ):
+                    _id = _node["preferredIdentifierStr"]
+                    logger.debug(
+                        f"Translation necessary for {_node['preferredIdentifierStr']}"
+                    )
+                    self.translation_needed = True
+
+                else:
+                    print(_node)
+
+                _type = "GraphSmallMolecule"
+
+            elif "gene" in _prefix:
+                _id = "exac.gene:" + _node["preferredIdentifierStr"]
+                _type = "GraphGene"
+
+            elif "polymer" in _prefix:
+                # there is one small nuclear RNA with this prefix in the DB
+                # however, it has NCBI id instead of ENSEMBL
+                logger.debug(
+                    f"Translation necessary for {_node['preferredIdentifierStr']}"
+                )
+                self.translation_needed = True
+                _type = "GraphPolymer"
+
+            elif "complex" in _prefix:
+                _id = "complexportal:" + _node["preferredIdentifierStr"]
+                _type = "GraphComplex"
+
+            else:
+                # generic interactor, but can include prefixes used above
+                # prefixes included:
+                # "CID:", "CHEBI:", "SIGNOR-", "R-", "EBI-", or uniprot
+
+                if cid_prefix_pattern.match(
+                    _node.get("preferredIdentifierStr")
+                ):
+                    _id = _node["preferredIdentifierStr"]
+                    logger.debug(
+                        f"Translation necessary for {_node['preferredIdentifierStr']}"
+                    )
+                    self.translation_needed = True
+
+                elif chebi_prefix_pattern.match(
+                    _node.get("preferredIdentifierStr")
+                ):
+                    _id = _node["preferredIdentifierStr"]
+                    logger.debug(
+                        f"Translation necessary for {_node['preferredIdentifierStr']}"
+                    )
+                    self.translation_needed = True
+
+                elif signor_prefix_pattern.match(
+                    _node.get("preferredIdentifierStr")
+                ):
+                    _id = _node["preferredIdentifierStr"]
+                    logger.debug(
+                        f"Translation necessary for {_node['preferredIdentifierStr']}"
+                    )
+                    self.translation_needed = True
+
+                elif reactome_prefix_pattern.match(
+                    _node.get("preferredIdentifierStr")
+                ):
+                    _id = _node["preferredIdentifierStr"]
+                    logger.debug(
+                        f"Translation necessary for {_node['preferredIdentifierStr']}"
+                    )
+                    self.translation_needed = True
+
+                elif ebi_prefix_pattern.match(
+                    _node.get("preferredIdentifierStr")
+                ):
+                    _id = _node["preferredIdentifierStr"]
+                    logger.debug(
+                        f"Translation necessary for {_node['preferredIdentifierStr']}"
+                    )
+                    self.translation_needed = True
+
+                elif uniprot_prefix_pattern.match(
+                    _node.get("preferredIdentifierStr")
+                ):
+                    _id = _node["preferredIdentifierStr"]
+                    _type = "GraphProtein"
+                    logger.debug(
+                        f"Translation necessary for {_node['preferredIdentifierStr']}"
+                    )
+                    self.translation_needed = True
+
+                elif uniprot_hyphenated_prefix_pattern.match(
+                    _node.get("preferredIdentifierStr")
+                ):
+                    # split id at hyphen and use only first part
+                    _id = _node["preferredIdentifierStr"].split("-")[0]
+                    _type = "GraphProtein"
+                    logger.warning(
+                        f"Added protein {_id} from {_node['preferredIdentifierStr']}. "
+                        "Information may be lost."
+                    )
+
+                else:
+                    print(_type + "==============================")
+                    print(_node)
+
+        elif _type == "GraphGene":
+            _id = "exac.gene:" + _node["preferredIdentifierStr"]
+
+        elif _type == "GraphPublication":
+            if _node.get("pubmedIdStr"):
+                _id = "pubmed:" + _node["pubmedIdStr"]
+            else:
+                print(_type + "==============================")
+                print(_node)
+
+        return _id, _type
+
 
 def get_nodes_tx(tx, ids):
     result = tx.run(
@@ -287,20 +527,3 @@ def get_rels_tx(tx, ids):
         ids=ids,
     )
     return result.data()
-
-
-def _process_node_id_and_type(_node, _type):
-    """
-    Add prefixes to avoid multiple assignment.
-    """
-
-    if _type == "GraphProtein":
-        if "uniprotName" in _node:
-            _id = "uniprot:" + _node["uniprotName"]
-        else:
-            _id = "ebi:" + _node["ac"]
-            _type = "Peptide"
-    elif _type == "GraphGene":
-        _id = "exac.gene:" + _node["preferredIdentifierStr"]
-
-    return _id, _type
