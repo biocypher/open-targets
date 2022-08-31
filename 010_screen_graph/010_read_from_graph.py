@@ -1,7 +1,7 @@
-import neo4j_utils as nu
-import pandas as pd
 import json
 
+import neo4j_utils as nu
+import pandas as pd
 
 driver = nu.Driver(
     db_name="neo4j",
