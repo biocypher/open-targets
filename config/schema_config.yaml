@@ -25,8 +25,8 @@ Title: BioCypher graph schema configuration file
 AminoAcidSequence:
   is_a: Polypeptide
   represented_as: node
-  preferred_id: EBI
-  label_in_input: GraphPeptide
+  preferred_id: [intact, dip]
+  label_in_input: [intact_peptide, dip_peptide]
   properties:
     ac: str
     fullName: str
@@ -35,7 +35,7 @@ AminoAcidSequence:
 
 Article:
   represented_as: node
-  preferred_id: PMID
+  preferred_id: pubmed
   label_in_input: GraphPublication
   properties:
     ac: str
@@ -44,10 +44,66 @@ Article:
     authors: str
     publicationDate: str
 
+DNASequence:
+  is_a: NucleicAcidEntity
+  represented_as: node
+  preferred_id: [intact, genbank, ensembl]
+  label_in_input: [intact_dna, genbank_dna, ensembl_dna]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
+
+dsDNASequence:
+  is_a: [DNASequence, NucleicAcidEntity]
+  represented_as: node
+  preferred_id: [intact, uniparc, genbank, ensembl]
+  label_in_input: [intact_dsdna, uniprot_archive_dsdna, genbank_dsdna, ensembl_dsdna]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
+
+ssDNASequence:
+  is_a: [DNASequence, NucleicAcidEntity]
+  represented_as: node
+  preferred_id: [intact, genbank]
+  label_in_input: [intact_ssdna, genbank_ssdna]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
+
 Gene:
   represented_as: node
-  preferred_id: ENSEMBL
-  label_in_input: GraphGene
+  preferred_id: exac.gene
+  label_in_input: gene
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+
+GeneGroupingMixin:
+  represented_as: node
+  preferred_id: [intact, uniprot]
+  label_in_input: [intact_molecule_set, uniprot_molecule_set]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+
+microRNA:
+  represented_as: node
+  preferred_id: [rnacentral, ensembl]
+  label_in_input: [rnacentral_mirna, ensembl_mirna]
   properties:
     ac: str
     fullName: str
@@ -66,8 +122,13 @@ MolecularEntity:
     
 NucleicAcidEntity:
   represented_as: node
-  preferred_id: [IntAct, Reactome]
-  label_in_input: [intact:GraphNucleicAcid, reactome:GraphNucleicAcid]
+  preferred_id: [intact, reactome, genbank, ensembl]
+  label_in_input: [
+    intact_nucleic_acid, 
+    reactome_nucleic_acid, 
+    genbank_nucleic_acid, 
+    ensembl_nucleic_acid
+  ]
   properties:
     ac: str
     fullName: str
@@ -75,10 +136,29 @@ NucleicAcidEntity:
     preferredName: str
     sequence: str
 
+PostTranslationalInteraction:
+  represented_as: node
+  preferred_id: imex
+  label_in_input: GraphBinaryInteractionEvidence
+  properties:
+    ac: str
+    shortName: str
+    isNegative: str
+    isInferred: str
+
 Protein:
   represented_as: node
-  preferred_id: UniProtKB
-  label_in_input: GraphProtein
+  preferred_id: [uniprot, intact, uniparc, ncbigene, genbank, dip, ipi, refseq]
+  label_in_input: [
+    uniprot_protein, 
+    intact_protein, 
+    uniprot_archive_protein, 
+    entrez_protein,
+    genbank_protein,
+    dip_protein,
+    ipi_protein,
+    refseq_protein
+  ]
   properties:
     ac: str
     fullName: str
@@ -96,14 +176,126 @@ ProteinComplex:
     shortName: str
     preferredName: str
 
+RNASequence:
+  is_a: NucleicAcidEntity
+  represented_as: node
+  preferred_id: [intact, rnacentral]
+  label_in_input: [intact_rna, rnacentral_rna]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+
+dsRNASequence:
+  is_a: NucleicAcidEntity
+  represented_as: node
+  preferred_id: [intact, rnacentral]
+  label_in_input: [intact_dsrna, rnacentral_dsrna]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+
+GuideRNASequence:
+  is_a: NucleicAcidEntity
+  represented_as: node
+  preferred_id: [intact, rnacentral]
+  label_in_input: [intact_grna, rnacentral_grna]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+
+lncRNASequence:
+  is_a: NucleicAcidEntity
+  represented_as: node
+  preferred_id: [intact, refseq, rnacentral, ensembl]
+  label_in_input: [intact_lncrna, refseq_lncrna, rnacentral_lncrna, ensembl_lncrna]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
+
+rRNASequence:
+  is_a: NucleicAcidEntity
+  represented_as: node
+  preferred_id: [intact, genbank, rnacentral]
+  label_in_input: [intact_rrna, genbank_rrna, rnacentral_rrna]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+
+snRNASequence:
+  is_a: NucleicAcidEntity
+  represented_as: node
+  preferred_id: [intact, rnacentral, ensembl, genbank]
+  label_in_input: [intact_snrna, rnacentral_snrna, ensembl_snrna, genbank_snrna]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+
+snoRNASequence:
+  is_a: NucleicAcidEntity
+  represented_as: node
+  preferred_id: [rnacentral]
+  label_in_input: [snorna]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+
 SmallMolecule:
   represented_as: node
-  preferred_id: CHEBI
-  label_in_input: GraphSmallMolecule
+  preferred_id: chebi
+  label_in_input: small molecule
   properties:
     ac: str
     shortName: str
+    preferredName: str
+
+StableComplex:
+  is_a: MacromolecularComplexMixin
+  represented_as: node
+  preferred_id: complexportal
+  label_in_input: stable complex
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
     preferredName: str 
+
+Transcript:
+  represented_as: node
+  preferred_id: [ensembl, intact, hgnc, genbank, refseq]
+  label_in_input: [ensembl_mrna, intact_mrna, hgnc_mrna, genbank_mrna, refseq_mrna]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
+
+tRNA:
+  is_a: NoncodingRNAProduct
+  represented_as: node
+  preferred_id: [genbank, ensembl]
+  label_in_input: [genbank_trna, ensembl_trna]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str 
+    sequence: str
 
 # ---
 # Associations
