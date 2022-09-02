@@ -22,7 +22,7 @@ Title: BioCypher graph schema configuration file
 # for instance in the case of functional protein complexes. These are represented
 # by so-called "mixins", which are not officially part of the hierarchy.
 
-AminoAcidSequence:
+Peptide:
   is_a: Polypeptide
   represented_as: node
   preferred_id: [intact, dip]
@@ -32,6 +32,19 @@ AminoAcidSequence:
     fullName: str
     shortName: str
     preferredName: str
+    sequence: str
+
+PeptidePrecursor:
+  is_a: [Peptide, Polypeptide]
+  represented_as: node
+  preferred_id: uniprot
+  label_in_input: uniprot_peptide_precursor
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
 
 Article:
   represented_as: node
@@ -44,11 +57,21 @@ Article:
     authors: str
     publicationDate: str
 
+ChemicalEntity:
+  represented_as: node
+  preferred_id: pubchem.substance
+  label_in_input: pubchem_substance
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+
 DNASequence:
   is_a: NucleicAcidEntity
   represented_as: node
-  preferred_id: [intact, genbank, ensembl]
-  label_in_input: [intact_dna, genbank_dna, ensembl_dna]
+  preferred_id: [intact, genbank, ensembl, reactome, refseq]
+  label_in_input: [intact_dna, genbank_dna, ensembl_dna, reactome_dna, refseq_dna]
   properties:
     ac: str
     fullName: str
@@ -59,8 +82,15 @@ DNASequence:
 dsDNASequence:
   is_a: [DNASequence, NucleicAcidEntity]
   represented_as: node
-  preferred_id: [intact, uniparc, genbank, ensembl]
-  label_in_input: [intact_dsdna, uniprot_archive_dsdna, genbank_dsdna, ensembl_dsdna]
+  preferred_id: [intact, uniparc, genbank, ensembl, pubmed, refseq]
+  label_in_input: [
+    intact_dsdna, 
+    uniprot_archive_dsdna, 
+    genbank_dsdna, 
+    ensembl_dsdna, 
+    pubmed_dsdna,
+    refseq_dsdna
+  ]
   properties:
     ac: str
     fullName: str
@@ -71,8 +101,8 @@ dsDNASequence:
 ssDNASequence:
   is_a: [DNASequence, NucleicAcidEntity]
   represented_as: node
-  preferred_id: [intact, genbank]
-  label_in_input: [intact_ssdna, genbank_ssdna]
+  preferred_id: [intact, genbank, ensembl, chebi]
+  label_in_input: [intact_ssdna, genbank_ssdna, ensembl_ssdna, chebi_ssdna]
   properties:
     ac: str
     fullName: str
@@ -92,8 +122,8 @@ Gene:
 
 GeneGroupingMixin:
   represented_as: node
-  preferred_id: [intact, uniprot]
-  label_in_input: [intact_molecule_set, uniprot_molecule_set]
+  preferred_id: [intact, uniprot, signor]
+  label_in_input: [intact_molecule_set, uniprot_molecule_set, signor_molecule_set]
   properties:
     ac: str
     fullName: str
@@ -102,8 +132,8 @@ GeneGroupingMixin:
 
 microRNA:
   represented_as: node
-  preferred_id: [rnacentral, ensembl]
-  label_in_input: [rnacentral_mirna, ensembl_mirna]
+  preferred_id: [rnacentral, ensembl, mirbase]
+  label_in_input: [rnacentral_mirna, ensembl_mirna, mirbase_mirna]
   properties:
     ac: str
     fullName: str
@@ -136,6 +166,27 @@ NucleicAcidEntity:
     preferredName: str
     sequence: str
 
+PhenotypicFeature:
+  represented_as: node
+  preferred_id: signor
+  label_in_input: signor_phenotype
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+
+PolyASequenceMotif:
+  is_a: NucleicAcidSequenceMotif
+  represented_as: node
+  preferred_id: chebi
+  label_in_input: chebi_poly_a
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+
 PostTranslationalInteraction:
   represented_as: node
   preferred_id: imex
@@ -148,7 +199,19 @@ PostTranslationalInteraction:
 
 Protein:
   represented_as: node
-  preferred_id: [uniprot, intact, uniparc, ncbigene, genbank, dip, ipi, refseq]
+  preferred_id: [
+    uniprot, 
+    intact, 
+    uniparc, 
+    ncbigene, 
+    genbank, 
+    dip, 
+    ipi, 
+    refseq, 
+    drugbank, 
+    chembl, 
+    ensembl
+  ]
   label_in_input: [
     uniprot_protein, 
     intact_protein, 
@@ -157,19 +220,47 @@ Protein:
     genbank_protein,
     dip_protein,
     ipi_protein,
-    refseq_protein
+    refseq_protein,
+    drugbank_protein,
+    chembl_protein,
+    ensembl_protein
   ]
   properties:
     ac: str
     fullName: str
     shortName: str
     preferredName: str
+    sequence: str
+
+ProteinIsoform:
+  is_a: Protein
+  represented_as: node
+  preferred_id: uniprot
+  label_in_input: uniprot_protein_isoform
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
+
+ProteinPrecursor:
+  is_a: Protein
+  represented_as: node
+  preferred_id: uniprot
+  label_in_input: uniprot_protein_precursor
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
 
 ProteinComplex:
   is_a: MacromolecularComplexMixin
   represented_as: node
-  preferred_id: complexportal
-  label_in_input: GraphComplex
+  preferred_id: [signor, complexportal]
+  label_in_input: [signor_complex, complexportal_complex]
   properties:
     ac: str
     fullName: str
@@ -179,8 +270,24 @@ ProteinComplex:
 RNASequence:
   is_a: NucleicAcidEntity
   represented_as: node
-  preferred_id: [intact, rnacentral]
-  label_in_input: [intact_rna, rnacentral_rna]
+  preferred_id: [
+    intact, 
+    rnacentral, 
+    reactome, 
+    genbank, 
+    ncbigene, 
+    ensembl, 
+    refseq
+  ]
+  label_in_input: [
+    intact_rna, 
+    rnacentral_rna, 
+    reactome_rna, 
+    genbank_rna,
+    entrez_rna,
+    ensembl_rna,
+    refseq_rna
+  ]
   properties:
     ac: str
     fullName: str
@@ -190,8 +297,8 @@ RNASequence:
 dsRNASequence:
   is_a: NucleicAcidEntity
   represented_as: node
-  preferred_id: [intact, rnacentral]
-  label_in_input: [intact_dsrna, rnacentral_dsrna]
+  preferred_id: [intact, rnacentral, refseq]
+  label_in_input: [intact_dsrna, rnacentral_dsrna, refseq_dsrna]
   properties:
     ac: str
     fullName: str
@@ -224,8 +331,8 @@ lncRNASequence:
 rRNASequence:
   is_a: NucleicAcidEntity
   represented_as: node
-  preferred_id: [intact, genbank, rnacentral]
-  label_in_input: [intact_rrna, genbank_rrna, rnacentral_rrna]
+  preferred_id: [intact, genbank, rnacentral, ensembl, ncbigene]
+  label_in_input: [intact_rrna, genbank_rrna, rnacentral_rrna, ensembl_rrna, entrez_rrna]
   properties:
     ac: str
     fullName: str
@@ -256,8 +363,8 @@ snoRNASequence:
 
 SmallMolecule:
   represented_as: node
-  preferred_id: chebi
-  label_in_input: small molecule
+  preferred_id: [chebi, chembl, intact, pubchem.compound]
+  label_in_input: [chebi_small_molecule, chembl_small_molecule, intact_small_molecule, pubchem_compound]
   properties:
     ac: str
     shortName: str
@@ -267,12 +374,24 @@ StableComplex:
   is_a: MacromolecularComplexMixin
   represented_as: node
   preferred_id: complexportal
-  label_in_input: stable complex
+  label_in_input: complexportal_stable_complex
   properties:
     ac: str
     fullName: str
     shortName: str
     preferredName: str 
+
+Stimulus:
+  is_a: BiologicalEntity
+  represented_as: node
+  preferred_id: signor
+  label_in_input: signor_stimulus
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str 
+
 
 Transcript:
   represented_as: node
@@ -288,14 +407,25 @@ Transcript:
 tRNA:
   is_a: NoncodingRNAProduct
   represented_as: node
-  preferred_id: [genbank, ensembl]
-  label_in_input: [genbank_trna, ensembl_trna]
+  preferred_id: [genbank, ensembl, chebi, rnacentral]
+  label_in_input: [genbank_trna, ensembl_trna, chebi_trna, rnacentral_trna]
   properties:
     ac: str
     fullName: str
     shortName: str
     preferredName: str 
     sequence: str
+
+Xenobiotic:
+  is_a: SmallMolecule
+  represented_as: node
+  preferred_id: [pubchem.compound, chebi]
+  label_in_input: [pubchem_xenobiotic, chebi_xenobiotic]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str 
 
 # ---
 # Associations
