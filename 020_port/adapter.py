@@ -52,8 +52,8 @@ class BioCypherAdapter:
         Write nodes and edges to admin import csv files.
         """
 
-        self.write_nodes()
-        # self.write_edges()
+        # self.write_nodes()
+        self.write_edges()
         self.bcy.write_import_call()
         self.bcy.log_missing_bl_types()
 
@@ -69,17 +69,16 @@ class BioCypherAdapter:
 
         node_labels = [
             # "GraphPublication",
-            "GraphBinaryInteractionEvidence",
         ]
 
         # Interactors
-        # with self.driver.session() as session:
-        #     # writing of one type needs to be completed inside
-        #     # this session
-        #     session.read_transaction(
-        #         self._get_interactor_ids_and_write_batches_tx,
-        #         "GraphInteractor",
-        #     )
+        with self.driver.session() as session:
+            # writing of one type needs to be completed inside
+            # this session
+            session.read_transaction(
+                self._get_interactor_ids_and_write_batches_tx,
+                "GraphInteractor",
+            )
 
         for label in node_labels:
             with self.driver.session() as session:
@@ -94,40 +93,12 @@ class BioCypherAdapter:
         Write edges to admin import csv files.
         """
 
-        # get node labels from csv
-        with open("data/granular_relationships.txt", "r") as f:
-            rel_labels = f.read().splitlines()
-
-        rel_labels = rel_labels[1:]
-        rel_labels = [label.split(",") for label in rel_labels]
-
-        # rel_labels = [
-        #     ("Clinically_relevant_variant", "ASSOCIATED_WITH", "Disease"),
-        # ]
-        # rel_labels = []
-
-        for src, typ, tar in rel_labels:
-
-            # skip some types
-            if not typ in [
-                "VARIANT_FOUND_IN_CHROMOSOME",
-                "LOCATED_IN",
-                "HAS_STRUCTURE",
-                "IS_SUBSTRATE_OF",
-                "IS_QCMARKER_IN_TISSUE",
-                "VARIANT_IS_CLINICALLY_RELEVANT",
-                "IS_A_KNOWN_VARIANT",
-            ]:
-
-                with self.driver.session() as session:
-                    # writing of one type needs to be completed inside
-                    # this session
-                    session.read_transaction(
-                        self._get_rel_ids_and_write_batches_tx,
-                        src,
-                        typ,
-                        tar,
-                    )
+        with self.driver.session() as session:
+            # writing of one type needs to be completed inside
+            # this session
+            session.read_transaction(
+                self._get_binary_interaction_ids_and_write_batches_tx
+            )
 
     def _get_node_ids_and_write_batches_tx(
         self,
@@ -139,7 +110,7 @@ class BioCypherAdapter:
         performed inside the transaction.
         """
 
-        result = tx.run(f"MATCH (n:{label}) " "RETURN id(n) as id LIMIT 20")
+        result = tx.run(f"MATCH (n:{label}) " "RETURN id(n) as id")
 
         id_batch = []
         for record in result:
@@ -185,20 +156,15 @@ class BioCypherAdapter:
                 # write last batch
                 self._write_interactors(id_batch, label)
 
-    def _get_rel_ids_and_write_batches_tx(
-        self,
-        tx,
-        src,
-        typ,
-        tar,
-    ):
+    def _get_binary_interaction_ids_and_write_batches_tx(self, tx):
         """
         Write edges to admin import csv files. Writer function needs to be
         performed inside the transaction.
         """
 
         result = tx.run(
-            f"MATCH (n:{src})-[r:{typ}]->(m:{tar}) " "RETURN id(r) as id"
+            f"MATCH (n:GraphBinaryInteractionEvidence) "
+            "RETURN id(n) as id LIMIT 1000"
         )
 
         id_batch = []
@@ -210,11 +176,11 @@ class BioCypherAdapter:
                 # check if result depleted
                 if result.peek() is None:
                     # write last batch
-                    self._write_edges(id_batch, src, typ, tar)
+                    self._write_bin_int_edges(id_batch)
 
             # if full batch, trigger write process
             else:
-                self._write_edges(id_batch, src, typ, tar)
+                self._write_bin_int_edges(id_batch)
                 id_batch = []
 
     def _write_nodes(self, id_batch, label):
@@ -280,7 +246,7 @@ class BioCypherAdapter:
             db_name=self.db_name,
         )
 
-    def _write_edges(self, id_batch, src, typ, tar):
+    def _write_bin_int_edges(self, id_batch):
         """
         Write edges to admin import csv files. Needs to be performed in a
         transaction.
@@ -289,60 +255,37 @@ class BioCypherAdapter:
 
             id_batch: list of edge ids to write
 
-            src: source node label
-
-            typ: relationship type
-
-            tar: target node label
         """
 
         def edge_gen():
             with self.driver.session() as session:
-                results = session.read_transaction(get_rels_tx, id_batch)
+                results = session.read_transaction(
+                    get_bin_int_rels_tx, id_batch
+                )
 
                 for res in results:
 
                     # extract relevant id
-                    _src = self._process_node_id_and_type(res["n"]["id"], src)
-                    _tar = self._process_node_id_and_type(res["m"]["id"], tar)
+                    _src_id = res["id_a"]
+                    _tar_id = res["id_b"]
+                    _source = res["source"]
+                    _type = "_".join([res["typ_a"], res["typ_b"], _source])
 
-                    # split some relationship types
-                    if typ in [
-                        "MENTIONED_IN_PUBLICATION",
-                        "ASSOCIATED_WITH",
-                        "ANNOTATED_IN_PATHWAY",
-                        "MAPS_TO",
-                        "VARIANT_FOUND_IN_GENE",
-                        "TRANSLATED_INTO",
-                        "HAS_MODIFIED_SITE",
-                    ]:
-                        _type = "_".join([typ, src, tar])
-                    else:
-                        _type = typ
-                    _props = {}
+                    # properties of BinaryInteractionEvidence
+                    _props = res["n"]
+                    # add interactionType properties (redundant, should
+                    # be encoded in labels)
+                    _props["interactionTypeShortName"] = res["it"].get(
+                        "shortName"
+                    )
+                    _props["interactionTypeFullName"] = res["it"].get(
+                        "fullName"
+                    )
+                    _props["interactionTypeIdentifierStr"] = res["it"].get(
+                        "mIIdentifier"
+                    )
 
-                    # add properties
-                    if typ in [
-                        "ACTS_ON",
-                        "COMPILED_INTERACTS_WITH",
-                        "CURATED_INTERACTS_WITH",
-                    ]:
-                        _props = {"type": typ}
-                    elif typ == "IS_BIOMARKER_OF_DISEASE":
-                        props = res["PROPERTIES(r)"]
-                        _props = {
-                            "age_range": props.get("age_range"),
-                            "age_units": props.get("age_units"),
-                            "assay": props.get("assay"),
-                            "is_routine": props.get("is_routine"),
-                            "is_used_in_clinic": props.get(
-                                "is_used_in_clinic"
-                            ),
-                            "normal_range": props.get("normal_range"),
-                            "sex": props.get("sex"),
-                        }
-
-                    yield (_src, _tar, _type, _props)
+                    yield (_src_id, _tar_id, _type, _props)
 
         self.bcy.write_edges(
             edges=edge_gen(),
@@ -1140,6 +1083,9 @@ class BioCypherAdapter:
         return _id, _type
 
 
+### TRANSACTIONS ###
+
+
 def get_nodes_tx(tx, ids):
     result = tx.run(
         "MATCH (n) " "WHERE id(n) IN {ids} " "RETURN n",
@@ -1160,11 +1106,27 @@ def get_interactors_tx(tx, ids):
     return result.data()
 
 
-def get_rels_tx(tx, ids):
+def get_interaction_types_tx(tx, ids):
     result = tx.run(
-        "MATCH (n)-[r]->(m) "
-        "WHERE id(r) IN {ids} "
-        "RETURN n, PROPERTIES(r), m",
+        "match ()-[:interactionType]->(n:GraphCvTerm) return DISTINCT n",
+        ids=ids,
+    )
+    return result.data()
+
+
+def get_bin_int_rels_tx(tx, ids):
+    result = tx.run(
+        "MATCH (n) "
+        "WHERE id(n) IN {ids} "
+        "WITH n "
+        "MATCH (bt:GraphCvTerm)<-[:interactorType]-(b:GraphInteractor)<-"
+        "[:interactorB]-(n:GraphBinaryInteractionEvidence)-[:interactorA]->"
+        "(a:GraphInteractor)-[:interactorType]->(at:GraphCvTerm), "
+        "(n)-[:interactionType]->(it:GraphCvTerm), "
+        "(n)-[:identifiers]->(:GraphXref)-[:database]->(d:GraphCvTerm) "
+        "RETURN n, it, d.shortName AS source, "
+        "a.preferredIdentifierStr AS id_a, b.preferredIdentifierStr AS id_b, "
+        "at.shortName AS typ_a, bt.shortName AS typ_b",
         ids=ids,
     )
     return result.data()

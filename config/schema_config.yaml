@@ -187,16 +187,6 @@ PolyASequenceMotif:
     shortName: str
     preferredName: str
 
-PostTranslationalInteraction:
-  represented_as: node
-  preferred_id: imex
-  label_in_input: GraphBinaryInteractionEvidence
-  properties:
-    ac: str
-    shortName: str
-    isNegative: str
-    isInferred: str
-
 Protein:
   represented_as: node
   preferred_id: [
@@ -442,6 +432,21 @@ Xenobiotic:
 # explicit terms for protein-protein-interaction, phosphorylation, miRNA-
 # targeting, etc. Biolink proposes to use interaction identifiers from 
 # ontologies, such as https://www.ebi.ac.uk/ols/ontologies/mi/.
+
+PostTranslationalInteraction:
+  represented_as: node
+  preferred_id: intact
+  source: Protein
+  target: Protein
+  label_in_input: protein_protein_intact
+  properties:
+    ac: str
+    shortName: str
+    isNegative: str
+    isInferred: str
+    interactionTypeShortName: str
+    interactionTypeFullName: str
+    interactionTypeIdentifierStr: str
 
 ProteinToArticleAssociation:
   is_a: InformationContentEntityToNamedThingAssociation
