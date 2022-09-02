@@ -47,19 +47,13 @@ class BioCypherAdapter:
             max_connection_lifetime=7200,
         )
 
-        # indicator whether translation is necessary
-        self.translation_needed = False
-
-        # indicator of information loss (dict of lists)
-        self.information_loss = {}
-
     def write_to_csv_for_admin_import(self):
         """
         Write nodes and edges to admin import csv files.
         """
 
         self.write_nodes()
-        self.write_edges()
+        # self.write_edges()
         self.bcy.write_import_call()
         self.bcy.log_missing_bl_types()
 
@@ -74,25 +68,18 @@ class BioCypherAdapter:
             node_labels = pd.read_csv(f)
 
         node_labels = [
-            # "GraphProtein",
-            # "GraphGene",
-            # "GraphNucleicAcid",
-            # "GraphMolecule",
-            # "GraphComplex",
-            # above unused because they are included in GraphInteractor
-            # "GraphInteractor",
             # "GraphPublication",
             "GraphBinaryInteractionEvidence",
         ]
 
         # Interactors
-        with self.driver.session() as session:
-            # writing of one type needs to be completed inside
-            # this session
-            session.read_transaction(
-                self._get_interactor_ids_and_write_batches_tx,
-                "GraphInteractor",
-            )
+        # with self.driver.session() as session:
+        #     # writing of one type needs to be completed inside
+        #     # this session
+        #     session.read_transaction(
+        #         self._get_interactor_ids_and_write_batches_tx,
+        #         "GraphInteractor",
+        #     )
 
         for label in node_labels:
             with self.driver.session() as session:
@@ -101,18 +88,6 @@ class BioCypherAdapter:
                 session.read_transaction(
                     self._get_node_ids_and_write_batches_tx, label
                 )
-
-        if self.translation_needed:
-            logger.warning("At least one node data type requires translation.")
-
-        if self.information_loss:
-            logger.warning(
-                "At least one node data type has information loss: "
-                f"{self.information_loss}"
-            )
-
-        # temp
-        self.bcy.log_missing_bl_types()
 
     def write_edges(self) -> None:
         """
@@ -388,19 +363,22 @@ class BioCypherAdapter:
         """
 
         # regex patterns
-        chebi_no_prefix_pattern = re.compile("^\d{,6}$")
-        chebi_prefix_pattern = re.compile("^CHEBI:")
         ebi_prefix_pattern = re.compile("^EBI-")
         cid_prefix_pattern = re.compile("^CID:")
         sid_prefix_pattern = re.compile("^SID:")
-        chembl_prefix_pattern = re.compile("^CHEMBL")
-        chembl_no_prefix_pattern = re.compile("^\d{,10}$")
         hgnc_prefix_pattern = re.compile("^HGNC:")
-        intact_mint_prefix_pattern = re.compile("^MINT-")
+        chebi_prefix_pattern = re.compile("^CHEBI:")
+        chembl_prefix_pattern = re.compile("^CHEMBL")
         signor_prefix_pattern = re.compile("^SIGNOR-")
+        chebi_no_prefix_pattern = re.compile("^\d{,6}$")
         drugbank_prefix_pattern = re.compile("^DB\d{5}$")
+        intact_mint_prefix_pattern = re.compile("^MINT-")
+        chembl_no_prefix_pattern = re.compile("^\d{,10}$")
         complexportal_prefix_pattern = re.compile("^CPX-[0-9]+$")
         mirbase_precursor_prefix_pattern = re.compile("^MI\d{7}$")
+        dip_prefix_pattern = re.compile("^DIP(\:)?\-\d{1,}[ENXS]$")
+        uniprot_archive_prefix_pattern = re.compile("^UPI[A-F0-9]{10}$")
+        rnacentral_prefix_pattern = re.compile("^URS[0-9A-F]{10}(\_\d+)?$")
         reactome_prefix_pattern = re.compile("^R-[A-Z]{3}-\d+(-\d+)?(\.\d+)?$")
         uniprot_prefix_pattern = re.compile(
             "^([A-N,R-Z][0-9]([A-Z][A-Z, 0-9][A-Z, 0-9][0-9]){1,2})|([O,P,Q][0-9][A-Z, 0-9][A-Z, 0-9][A-Z, 0-9][0-9])(\.\d+)?$"
@@ -419,9 +397,6 @@ class BioCypherAdapter:
         ensembl_prefix_pattern = re.compile(
             "^((ENS[FPTG]\d{11}(\.\d+)?)|(FB\w{2}\d{7})|(Y[A-Z]{2}\d{3}[a-zA-Z](\-[A-Z])?)|([A-Z_a-z0-9]+(\.)?(t)?(\d+)?([a-z])?))$"
         )
-        rnacentral_prefix_pattern = re.compile("^URS[0-9A-F]{10}(\_\d+)?$")
-        uniprot_archive_prefix_pattern = re.compile("^UPI[A-F0-9]{10}$")
-        dip_prefix_pattern = re.compile("^DIP(\:)?\-\d{1,}[ENXS]$")
         refseq_prefix_pattern = re.compile(
             "^(((AC|AP|NC|NG|NM|NP|NR|NT|NW|WP|XM|XP|XR|YP|ZP)_\d+)|(NZ\_[A-Z]{2,4}\d+))(\.\d+)?$"
         )

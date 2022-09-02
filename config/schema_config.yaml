@@ -359,7 +359,19 @@ snoRNASequence:
     ac: str
     fullName: str
     shortName: str
-    preferredName: str
+    preferredName: st
+
+tRNASequence:
+  is_a: NucleicAcidEntity
+  represented_as: node
+  preferred_id: [genbank, ensembl, chebi, rnacentral]
+  label_in_input: [genbank_trna, ensembl_trna, chebi_trna, rnacentral_trna]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str 
+    sequence: strr
 
 SmallMolecule:
   represented_as: node
@@ -402,18 +414,6 @@ Transcript:
     fullName: str
     shortName: str
     preferredName: str
-    sequence: str
-
-tRNA:
-  is_a: NoncodingRNAProduct
-  represented_as: node
-  preferred_id: [genbank, ensembl, chebi, rnacentral]
-  label_in_input: [genbank_trna, ensembl_trna, chebi_trna, rnacentral_trna]
-  properties:
-    ac: str
-    fullName: str
-    shortName: str
-    preferredName: str 
     sequence: str
 
 Xenobiotic:
