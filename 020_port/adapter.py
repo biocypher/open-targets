@@ -163,8 +163,7 @@ class BioCypherAdapter:
         """
 
         result = tx.run(
-            f"MATCH (n:GraphBinaryInteractionEvidence) "
-            "RETURN id(n) as id LIMIT 1000"
+            f"MATCH (n:GraphBinaryInteractionEvidence) " "RETURN id(n) as id"
         )
 
         id_batch = []
@@ -265,7 +264,10 @@ class BioCypherAdapter:
 
                 for res in results:
 
-                    # extract relevant id
+                    # extract relevant ids
+                    _id = res["n"].get("ac")
+                    # TODO only IntAct ids?
+                    # also carrying ac: efo, rcsb pdb, wwpdb
                     _src_id = res["id_a"]
                     _tar_id = res["id_b"]
                     _source = res["source"]
@@ -285,7 +287,7 @@ class BioCypherAdapter:
                         "mIIdentifier"
                     )
 
-                    yield (_src_id, _tar_id, _type, _props)
+                    yield (_id, _src_id, _tar_id, _type, _props)
 
         self.bcy.write_edges(
             edges=edge_gen(),
@@ -298,11 +300,9 @@ class BioCypherAdapter:
 
         Split up nodes in case of Protein (includes Peptides).
 
-        TODO regex id checks?
+        TODO pull regex safeguarding into BioCypher dataclasses
 
-        TODO how to handle "EBI-" accessions (they can refer to multiple
-        DBs)? is there an API that returns, eg, "intact" for the respective
-        members?
+        TODO python 3.10: use patterns instead of elif chains
         """
 
         # regex patterns
