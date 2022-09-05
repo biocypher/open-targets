@@ -22,30 +22,6 @@ Title: BioCypher graph schema configuration file
 # for instance in the case of functional protein complexes. These are represented
 # by so-called "mixins", which are not officially part of the hierarchy.
 
-Peptide:
-  is_a: Polypeptide
-  represented_as: node
-  preferred_id: [intact, dip]
-  label_in_input: [intact_peptide, dip_peptide]
-  properties:
-    ac: str
-    fullName: str
-    shortName: str
-    preferredName: str
-    sequence: str
-
-PeptidePrecursor:
-  is_a: [Peptide, Polypeptide]
-  represented_as: node
-  preferred_id: uniprot
-  label_in_input: uniprot_peptide_precursor
-  properties:
-    ac: str
-    fullName: str
-    shortName: str
-    preferredName: str
-    sequence: str
-
 Article:
   represented_as: node
   preferred_id: pubmed
@@ -56,6 +32,14 @@ Article:
     journal: str
     authors: str
     publicationDate: str
+
+BiologicalEntity:
+  represented_as: node
+  preferred_id: [reactome, signor]
+  label_in_input: [reactome_unknown_participant, signor_unknown_participant]
+  properties:
+    preferredName: str
+    shortName: str
 
 ChemicalEntity:
   represented_as: node
@@ -159,6 +143,30 @@ NucleicAcidEntity:
     genbank_nucleic_acid, 
     ensembl_nucleic_acid
   ]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
+
+Peptide:
+  is_a: Polypeptide
+  represented_as: node
+  preferred_id: [intact, dip]
+  label_in_input: [intact_peptide, dip_peptide]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
+
+PeptidePrecursor:
+  is_a: [Peptide, Polypeptide]
+  represented_as: node
+  preferred_id: uniprot
+  label_in_input: uniprot_peptide_precursor
   properties:
     ac: str
     fullName: str

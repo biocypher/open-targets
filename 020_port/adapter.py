@@ -52,8 +52,8 @@ class BioCypherAdapter:
         Write nodes and edges to admin import csv files.
         """
 
-        # self.write_nodes()
-        self.write_edges()
+        self.write_nodes()
+        # self.write_edges()
         self.bcy.write_import_call()
         self.bcy.log_missing_bl_types()
 
@@ -213,12 +213,12 @@ class BioCypherAdapter:
 
     def _write_interactors(self, id_batch, label):
         """
-        Write edges to admin import csv files. Needs to be performed in a
-        transaction.
+        Write interactor nodes to admin import csv files. Needs to be
+        performed in a transaction.
 
         Args:
 
-            id_batch: list of edge ids to write
+            id_batch: list of node ids to write
 
             label: label of the node type
         """
@@ -434,6 +434,7 @@ class BioCypherAdapter:
                 elif _pref_id == "P17861_P17861-2":
                     # TODO resolve mapping/synonym with Signor?
                     _pref_id = "uniprot:P17861-2"
+                    _type = "uniprot_protein_isoform"
                     _node["uniprotName"] = "P17861-2"
 
                 else:
@@ -1062,8 +1063,22 @@ class BioCypherAdapter:
 
         # unknown participant,unknown participant
         elif _type == "unknown participant":
-            # logger.debug(f"Encountered {_type}, {_node}, {_source}")
-            pass
+            # can be many things, from individual species to concepts
+            # many have reactome IDs, some Signor
+            # cast to BiologicalEntity
+
+            if _source == "reactome" and reactome_prefix_pattern.match(
+                _pref_id
+            ):
+                _id = "reactome:" + _pref_id
+                _type = "reactome_unknown_participant"
+
+            elif _source == "signor" and signor_prefix_pattern.match(_pref_id):
+                _id = "signor:" + _pref_id
+                _type = "signor_unknown_participant"
+
+            else:
+                logger.debug(f"Encountered {_type}, {_node}, {_source}")
 
         elif _type == "GraphPublication":
             if _node.get("pubmedIdStr"):
