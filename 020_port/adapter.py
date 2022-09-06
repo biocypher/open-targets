@@ -27,12 +27,15 @@ class BioCypherAdapter:
         self.db_name = db_name
         self.id_batch_size = id_batch_size
 
+        self.uniprot_name_in_types = set()
+
         # write driver
         self.bcy = biocypher.Driver(
             offline=True,  # set offline to true,
             # connect to running DB for input data via the neo4j driver
             user_schema_config_path=user_schema_config_path,
             delimiter="¦",
+            skip_bad_relationships=True,
         )
         # start writer
         self.bcy.start_bl_adapter()
@@ -53,9 +56,10 @@ class BioCypherAdapter:
         """
 
         self.write_nodes()
-        # self.write_edges()
+        self.write_edges()
         self.bcy.write_import_call()
         self.bcy.log_missing_bl_types()
+        print(self.uniprot_name_in_types)
 
     def write_nodes(self):
         """
@@ -256,6 +260,11 @@ class BioCypherAdapter:
 
         """
 
+        # TODO: IntAct interaction IDs refer to multiple binary interactions;
+        # as is, nodes connected to multiple targets will have multiple edges
+        # to the same interaction node. What is the biological meaning behind
+        # this? Complexes, experiments, etc.?
+
         def edge_gen():
             with self.driver.session() as session:
                 results = session.read_transaction(
@@ -266,10 +275,21 @@ class BioCypherAdapter:
 
                     # extract relevant ids
                     _id = res["n"].get("ac")
-                    # TODO only IntAct ids?
+                    # seems like all protein-protein interactions at least have
+                    # an EBI  identifier
+                    if not _id:
+                        logger.debug(
+                            "No id found for binary interaction evidence: "
+                            f"{res}"
+                        )
                     # also carrying ac: efo, rcsb pdb, wwpdb
-                    _src_id = res["id_a"]
-                    _tar_id = res["id_b"]
+                    _src_id, _src_type = self._process_node_id_and_type(
+                        res["a"], res["typ_a"], res["src_a"]
+                    )
+                    _tar_id, _tar_type = self._process_node_id_and_type(
+                        res["b"], res["typ_b"], res["src_b"]
+                    )
+
                     _source = res["source"]
                     _type = "_".join([res["typ_a"], res["typ_b"], _source])
 
@@ -277,13 +297,13 @@ class BioCypherAdapter:
                     _props = res["n"]
                     # add interactionType properties (redundant, should
                     # be encoded in labels)
-                    _props["interactionTypeShortName"] = res["it"].get(
+                    _props["interactionTypeShortName"] = res["nt"].get(
                         "shortName"
                     )
-                    _props["interactionTypeFullName"] = res["it"].get(
+                    _props["interactionTypeFullName"] = res["nt"].get(
                         "fullName"
                     )
-                    _props["interactionTypeIdentifierStr"] = res["it"].get(
+                    _props["interactionTypeIdentifierStr"] = res["nt"].get(
                         "mIIdentifier"
                     )
 
@@ -294,7 +314,9 @@ class BioCypherAdapter:
             db_name=self.db_name,
         )
 
-    def _process_node_id_and_type(self, _node, _type, _source=None):
+    def _process_node_id_and_type(
+        self, _node: dict, _type: str, _source: str = None
+    ) -> tuple:
         """
         Add prefixes to avoid multiple assignment.
 
@@ -304,6 +326,10 @@ class BioCypherAdapter:
 
         TODO python 3.10: use patterns instead of elif chains
         """
+
+        if _node.get("uniprotName"):
+            # add _type to self.uniprot_name_in_types set
+            self.uniprot_name_in_types.add(_type)
 
         # regex patterns
         ebi_prefix_pattern = re.compile("^EBI-")
@@ -1134,14 +1160,15 @@ def get_bin_int_rels_tx(tx, ids):
         "MATCH (n) "
         "WHERE id(n) IN {ids} "
         "WITH n "
-        "MATCH (bt:GraphCvTerm)<-[:interactorType]-(b:GraphInteractor)<-"
-        "[:interactorB]-(n:GraphBinaryInteractionEvidence)-[:interactorA]->"
-        "(a:GraphInteractor)-[:interactorType]->(at:GraphCvTerm), "
-        "(n)-[:interactionType]->(it:GraphCvTerm), "
-        "(n)-[:identifiers]->(:GraphXref)-[:database]->(d:GraphCvTerm) "
-        "RETURN n, it, d.shortName AS source, "
-        "a.preferredIdentifierStr AS id_a, b.preferredIdentifierStr AS id_b, "
-        "at.shortName AS typ_a, bt.shortName AS typ_b",
+        "MATCH (bt:GraphCvTerm)<-[:interactorType]-(b:GraphInteractor)<-[:interactorB]-(n)-[:interactorA]->(a:GraphInteractor)-[:interactorType]->(at:GraphCvTerm) "
+        "OPTIONAL MATCH (n)-[:interactionType]->(nt:GraphCvTerm) "
+        "WITH n, a, b, nt, at, bt "
+        "MATCH (n)-[:identifiers]->(:GraphXref)-[:database]->(nd:GraphCvTerm) "
+        "OPTIONAL MATCH (a)-[:preferredIdentifier]->(:GraphXref)-[:database]->(ad:GraphCvTerm) "
+        "OPTIONAL MATCH (b)-[:preferredIdentifier]->(:GraphXref)-[:database]->(bd:GraphCvTerm) "
+        "RETURN n, nd.shortName AS source, nt, "
+        "a, ad.shortName AS src_a, at.shortName AS typ_a, "
+        "b, bd.shortName AS src_b, bt.shortName AS typ_b",
         ids=ids,
     )
     return result.data()

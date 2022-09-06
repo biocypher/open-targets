@@ -22,6 +22,97 @@ Title: BioCypher graph schema configuration file
 # for instance in the case of functional protein complexes. These are represented
 # by so-called "mixins", which are not officially part of the hierarchy.
 
+Article:
+  represented_as: node
+  preferred_id: pubmed
+  label_in_input: GraphPublication
+  properties:
+    ac: str
+    title: str
+    journal: str
+    authors: str
+    publicationDate: str
+
+BiologicalEntity:
+  represented_as: node
+  preferred_id: [reactome, signor]
+  label_in_input: [reactome_unknown_participant, signor_unknown_participant]
+  properties:
+    preferredName: str
+    shortName: str
+
+ChemicalEntity:
+  represented_as: node
+  preferred_id: pubchem.substance
+  label_in_input: pubchem_substance
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+
+DNASequence:
+  is_a: NucleicAcidEntity
+  represented_as: node
+  preferred_id: [intact.molecule, genbank, ensembl, reactome, refseq]
+  label_in_input: [intact_dna, genbank_dna, ensembl_dna, reactome_dna, refseq_dna]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
+
+dsDNASequence:
+  is_a: [DNASequence, NucleicAcidEntity]
+  represented_as: node
+  preferred_id: [intact.molecule, uniparc, genbank, ensembl, pubmed, refseq]
+  label_in_input: [
+    intact_dsdna, 
+    uniprot_archive_dsdna, 
+    genbank_dsdna, 
+    ensembl_dsdna, 
+    pubmed_dsdna,
+    refseq_dsdna
+  ]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
+
+ssDNASequence:
+  is_a: [DNASequence, NucleicAcidEntity]
+  represented_as: node
+  preferred_id: [intact.molecule, genbank, ensembl, chebi]
+  label_in_input: [intact_ssdna, genbank_ssdna, ensembl_ssdna, chebi_ssdna]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
+
+Gene:
+  represented_as: node
+  preferred_id: exac.gene
+  label_in_input: gene
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+
+GeneGroupingMixin:
+  represented_as: node
+  preferred_id: [intact.molecule, uniprot, signor]
+  label_in_input: [intact_molecule_set, uniprot_molecule_set, signor_molecule_set]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
 
 microRNA:
   represented_as: node
@@ -32,6 +123,22 @@ microRNA:
     fullName: str
     shortName: str
     preferredName: str
+    
+NucleicAcidEntity:
+  represented_as: node
+  preferred_id: [intact.molecule, reactome, genbank, ensembl]
+  label_in_input: [
+    intact_nucleic_acid, 
+    reactome_nucleic_acid, 
+    genbank_nucleic_acid, 
+    ensembl_nucleic_acid
+  ]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
 
 Peptide:
   is_a: Polypeptide
@@ -56,6 +163,16 @@ PeptidePrecursor:
     shortName: str
     preferredName: str
     sequence: str
+
+PhenotypicFeature:
+  represented_as: node
+  preferred_id: signor
+  label_in_input: signor_phenotype
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
 
 PolyASequenceMotif:
   is_a: NucleicAcidSequenceMotif
@@ -127,6 +244,17 @@ ProteinPrecursor:
     preferredName: str
     sequence: str
 
+ProteinComplex:
+  is_a: MacromolecularComplexMixin
+  represented_as: node
+  preferred_id: [signor, complexportal]
+  label_in_input: [signor_complex, complexportal_complex]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+
 # OTAR "rna" may be too generic; where are the actual Transcripts in the 
 # sense of the central dogma? Are they exclusively in "mrna" (below)?
 RNASequence:
@@ -150,6 +278,18 @@ RNASequence:
     ensembl_rna,
     refseq_rna
   ]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
+
+dsRNASequence:
+  is_a: NucleicAcidEntity
+  represented_as: node
+  preferred_id: [intact.molecule, rnacentral, refseq]
+  label_in_input: [intact_dsrna, rnacentral_dsrna, refseq_dsrna]
   properties:
     ac: str
     fullName: str
@@ -193,6 +333,18 @@ rRNASequence:
     preferredName: str
     sequence: str
 
+snRNASequence:
+  is_a: NucleicAcidEntity
+  represented_as: node
+  preferred_id: [intact.molecule, rnacentral, ensembl, genbank]
+  label_in_input: [intact_snrna, rnacentral_snrna, ensembl_snrna, genbank_snrna]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
+
 snoRNASequence:
   is_a: NucleicAcidEntity
   represented_as: node
@@ -217,6 +369,59 @@ tRNASequence:
     preferredName: str 
     sequence: str
 
+SmallMolecule:
+  represented_as: node
+  preferred_id: [chebi, chembl, intact.molecule, pubchem.compound]
+  label_in_input: [chebi_small_molecule, chembl_small_molecule, intact_small_molecule, pubchem_compound]
+  properties:
+    ac: str
+    shortName: str
+    preferredName: str
+
+StableComplex:
+  is_a: MacromolecularComplexMixin
+  represented_as: node
+  preferred_id: complexportal
+  label_in_input: complexportal_stable_complex
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str 
+
+Stimulus:
+  is_a: BiologicalEntity
+  represented_as: node
+  preferred_id: signor
+  label_in_input: signor_stimulus
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str 
+
+
+Transcript:
+  represented_as: node
+  preferred_id: [ensembl, intact.molecule, hgnc, genbank, refseq]
+  label_in_input: [ensembl_mrna, intact_mrna, hgnc_mrna, genbank_mrna, refseq_mrna]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
+
+Xenobiotic:
+  is_a: SmallMolecule
+  represented_as: node
+  preferred_id: [pubchem.compound, chebi]
+  label_in_input: [pubchem_xenobiotic, chebi_xenobiotic]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str 
 
 # ---
 # Associations
@@ -328,112 +533,21 @@ reactome.ProteinToRNASequenceAssociation:
 
 # 'MI:0322', guide rna
 # only intact and wwpdb
-ProteinToGuideRNAAssociation:
-  is_a: Association
-  represented_as: node
-  preferred_id: intact
-  source: Protein
-  target: GuideRNASequence
-  label_in_input: [protein_grna_intact, protein_grna_wwpdb]
-  properties:
-    ac: str
-    shortName: str
-    isNegative: str
-    isInferred: str
-    interactionTypeShortName: str
-    interactionTypeFullName: str
-    interactionTypeIdentifierStr: str
 
 # 'MI:0323', heterogeneous nuclear rna
 # not in OTAR graph
 
 # 'MI_0325', transfer rna
 # few; intact, emdb, wwpdb
-ProteinTotRNAAssociation:
-  is_a: Association
-  represented_as: node
-  preferred_id: intact
-  source: Protein
-  target: tRNASequence
-  label_in_input: [
-    protein_trna_intact,
-    trna_protein_intact,
-    protein_trna_emdb,
-    protein_trna_wwpdb
-  ]
-  properties:
-    ac: str
-    shortName: str
-    isNegative: str
-    isInferred: str
-    interactionTypeShortName: str
-    interactionTypeFullName: str
-    interactionTypeIdentifierStr: str
 
 # 'MI:0324', messenger rna
 # only intact
-ProteinTomRNAAssociation:
-  is_a: Association
-  represented_as: node
-  preferred_id: intact
-  source: Protein
-  target: mRNASequence
-  label_in_input: [
-    protein_mrna_intact,
-    mrna_protein_intact
-  ]
-  properties:
-    ac: str
-    shortName: str
-    isNegative: str
-    isInferred: str
-    interactionTypeShortName: str
-    interactionTypeFullName: str
-    interactionTypeIdentifierStr: str
 
 # 'MI:0608', ribosomal rna
 # few; intact, emdb, wwpdb, rcsb pdb
-ProteinTorRNAAssociation:
-  is_a: Association
-  represented_as: node
-  preferred_id: intact
-  source: Protein
-  target: rRNASequence
-  label_in_input: [
-    rrna_protein_intact,
-    rrna_protein_wwpdb,
-    rrna_protein_rcsb pdb,
-    protein_rrna_intact,
-    rrna_protein_emdb,
-    protein_rrna_emdb,
-    protein_rrna_wwpdb
-  ]
-  properties:
-    ac: str
-    shortName: str
-    isNegative: str
-    isInferred: str
-    interactionTypeShortName: str
-    interactionTypeFullName: str
-    interactionTypeIdentifierStr: str
 
 # 'MI:0609', small nucleolar rna
 # few, only intact
-ProteinTosnoRNAAssociation:
-  is_a: Association
-  represented_as: node
-  preferred_id: intact
-  source: Protein
-  target: snoRNASequence
-  label_in_input: protein_snorna_intact
-  properties:
-    ac: str
-    shortName: str
-    isNegative: str
-    isInferred: str
-    interactionTypeShortName: str
-    interactionTypeFullName: str
-    interactionTypeIdentifierStr: str
 
 # 'MI:0610', small interfering rna
 # not in OTAR graph
@@ -443,65 +557,11 @@ ProteinTosnoRNAAssociation:
 
 # 'MI:0679', poly adenine
 # few, only intact
-ProteinToPolyASequenceMotifAssociation:
-  is_a: Association
-  represented_as: node
-  preferred_id: intact
-  source: Protein
-  target: PolyASequenceMotif
-  label_in_input: [
-    poly a_protein_intact,
-    protein_poly a_intact
-  ]
-  properties:
-    ac: str
-    shortName: str
-    isNegative: str
-    isInferred: str
-    interactionTypeShortName: str
-    interactionTypeFullName: str
-    interactionTypeIdentifierStr: str
 
 # 'MI:2190', long non-coding ribonucleic acid
 # few, only intact
-ProteinTolncRNASequenceAssociation:
-  is_a: Association
-  represented_as: node
-  preferred_id: intact
-  source: Protein
-  target: lncRNASequence
-  label_in_input: [
-    protein_lncrna_intact,
-    lncrna_protein_intact
-  ]
-  properties:
-    ac: str
-    shortName: str
-    isNegative: str
-    isInferred: str
-    interactionTypeShortName: str
-    interactionTypeFullName: str
-    interactionTypeIdentifierStr: str
 
 # 'MI:2204', micro rna few and only intact, BUT there are quite some
 # more mRNA-miRNA interactions, which are disregarded in this schema;
 # may be a point of improvement to include those protein-mrna-mirna
 # relations
-ProteinTomicroRNASequenceAssociation:
-  is_a: Association
-  represented_as: node
-  preferred_id: intact
-  source: Protein
-  target: microRNA
-  label_in_input: [
-    mirna_protein_intact,
-    protein_mirna_intact
-  ]
-  properties:
-    ac: str
-    shortName: str
-    isNegative: str
-    isInferred: str
-    interactionTypeShortName: str
-    interactionTypeFullName: str
-    interactionTypeIdentifierStr: str
