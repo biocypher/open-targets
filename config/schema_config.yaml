@@ -14,13 +14,6 @@ Title: BioCypher graph schema configuration file
 # ---
 # "Named Things"
 # ---
-# The implementation of named things is fairly straightforward, since they are
-# usually represented in node form, which is also the Biolink recommendation.
-# The same is not true for associations.
-#
-# A little more complex is the representation of aggregates of named things, 
-# for instance in the case of functional protein complexes. These are represented
-# by so-called "mixins", which are not officially part of the hierarchy.
 
 
 microRNA:
@@ -33,8 +26,8 @@ microRNA:
     shortName: str
     preferredName: str
 
-Peptide:
-  is_a: Polypeptide
+peptide:
+  is_a: polypeptide
   represented_as: node
   preferred_id: [intact.molecule, dip]
   label_in_input: [intact_peptide, dip_peptide]
@@ -45,8 +38,8 @@ Peptide:
     preferredName: str
     sequence: str
 
-PeptidePrecursor:
-  is_a: [Peptide, Polypeptide]
+peptide precursor:
+  is_a: [peptide, polypeptide]
   represented_as: node
   preferred_id: uniprot
   label_in_input: uniprot_peptide_precursor
@@ -57,8 +50,8 @@ PeptidePrecursor:
     preferredName: str
     sequence: str
 
-PolyASequenceMotif:
-  is_a: NucleicAcidSequenceMotif
+poly a sequence motif:
+  is_a: nucleic acid sequence motif
   represented_as: node
   preferred_id: chebi
   label_in_input: chebi_poly_a
@@ -68,7 +61,7 @@ PolyASequenceMotif:
     shortName: str
     preferredName: str
 
-Protein:
+protein:
   represented_as: node
   preferred_id: [
     uniprot, 
@@ -103,8 +96,8 @@ Protein:
     preferredName: str
     sequence: str
 
-ProteinIsoform:
-  is_a: Protein
+protein isoform:
+  is_a: protein
   represented_as: node
   preferred_id: uniprot
   label_in_input: uniprot_protein_isoform
@@ -115,8 +108,8 @@ ProteinIsoform:
     preferredName: str
     sequence: str
 
-ProteinPrecursor:
-  is_a: Protein
+protein precursor:
+  is_a: protein
   represented_as: node
   preferred_id: uniprot
   label_in_input: uniprot_protein_precursor
@@ -129,8 +122,8 @@ ProteinPrecursor:
 
 # OTAR "rna" may be too generic; where are the actual Transcripts in the 
 # sense of the central dogma? Are they exclusively in "mrna" (below)?
-RNASequence:
-  is_a: NucleicAcidEntity
+RNA sequence:
+  is_a: nucleic acid entity
   represented_as: node
   preferred_id: [
     intact.molecule, 
@@ -157,8 +150,8 @@ RNASequence:
     preferredName: str
     sequence: str
 
-GuideRNASequence:
-  is_a: NucleicAcidEntity
+guide RNA sequence:
+  is_a: nucleic acid entity
   represented_as: node
   preferred_id: [intact.molecule, rnacentral]
   label_in_input: [intact_grna, rnacentral_grna]
@@ -169,8 +162,8 @@ GuideRNASequence:
     preferredName: str
     sequence: str
 
-lncRNASequence:
-  is_a: NucleicAcidEntity
+lncRNA sequence:
+  is_a: nucleic acid entity
   represented_as: node
   preferred_id: [intact.molecule, refseq, rnacentral, ensembl]
   label_in_input: [intact_lncrna, refseq_lncrna, rnacentral_lncrna, ensembl_lncrna]
@@ -181,8 +174,8 @@ lncRNASequence:
     preferredName: str
     sequence: str
 
-rRNASequence:
-  is_a: NucleicAcidEntity
+rRNA sequence:
+  is_a: nucleic acid entity
   represented_as: node
   preferred_id: [intact.molecule, genbank, rnacentral, ensembl, ncbigene]
   label_in_input: [intact_rrna, genbank_rrna, rnacentral_rrna, ensembl_rrna, entrez_rrna]
@@ -193,8 +186,8 @@ rRNASequence:
     preferredName: str
     sequence: str
 
-snoRNASequence:
-  is_a: NucleicAcidEntity
+snoRNA sequence:
+  is_a: nucleic acid entity
   represented_as: node
   preferred_id: [rnacentral]
   label_in_input: [snorna]
@@ -205,8 +198,8 @@ snoRNASequence:
     preferredName: str
     sequence: str
 
-tRNASequence:
-  is_a: NucleicAcidEntity
+tRNA sequence:
+  is_a: nucleic acid entity
   represented_as: node
   preferred_id: [genbank, ensembl, chebi, rnacentral]
   label_in_input: [genbank_trna, ensembl_trna, chebi_trna, rnacentral_trna]
@@ -221,49 +214,21 @@ tRNASequence:
 # ---
 # Associations
 # ---
-# Associations are not supposed to be represented in node form as per the 
-# specifications of Biolink. However, in an analytic context, it often makes 
-# sense to represent interactions as nodes in Neo4j, because it enables, for
-# instance, the annotation of a relationship with a publication as source of
-# evidence (also known as reification in the knowledge graph world). 
 
-# The Biolink specifications for these types of relationships do 
-# not go into depth; for example, the hierarchy for molecular interactions
-# (ie, "associations") ends at "PairwiseMolecularInteraction", there are no 
-# explicit terms for protein-protein-interaction, phosphorylation, miRNA-
-# targeting, etc. Biolink proposes to use interaction identifiers from 
-# ontologies, such as https://www.ebi.ac.uk/ols/ontologies/mi/.
+# OBO MI stratification from interaction type: https://www.ebi.ac.uk/ols/ontologies/mi/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMI_0190&lang=en&viewMode=All&siblings=false
 
-PostTranslationalInteraction:
+colocalisation:
+  is_a: [post translational interaction, association]
   represented_as: node
   preferred_id: intact
-  source: Protein
-  target: Protein
+  source: protein
+  target: protein
+  # merge for now for simplicity
   label_in_input: [
-    protein_protein_intact, 
-    protein_protein_rcsb pdb, 
-    protein_protein_wwpdb, 
-    protein_protein_dip, 
-    protein_protein_emdb, 
-    protein_protein_pdbe,
-    protein_protein_interpro,
-    protein_protein_psi-mi,
-    protein_protein_omim,
-    protein_protein_tissue list,
-    protein_protein_brenda,
-    protein_protein_mint,
-    protein_protein_proteomexchange,
-    protein_protein_zfin,
-    protein_protein_bmrb,
-    protein_protein_wikipedia,
-    protein_protein_pride,
-    protein_protein_pmc,
-    protein_protein_mpidb,
-    protein_protein_imex,
-    protein_protein_go,
-    protein_protein_efo,
-    protein_protein_reactome,
-    protein_protein_signor
+    protein_protein_colocalization,
+    protein_protein_proximity,
+
+    protein_peptide_proximity,
   ]
   properties:
     ac: str
@@ -273,6 +238,149 @@ PostTranslationalInteraction:
     interactionTypeShortName: str
     interactionTypeFullName: str
     interactionTypeIdentifierStr: str
+    src_role: str
+    tar_role: str
+
+functional association:
+  is_a: [post translational interaction, association]
+  represented_as: node
+  preferred_id: intact
+  source: protein
+  target: protein
+  label_in_input: protein_protein_functional association
+  properties:
+    ac: str
+    shortName: str
+    isNegative: str
+    isInferred: str
+    interactionTypeShortName: str
+    interactionTypeFullName: str
+    interactionTypeIdentifierStr: str
+    src_role: str
+    tar_role: str
+
+direct interaction:
+  is_a: [post translational interaction, association]
+  represented_as: node
+  preferred_id: intact
+  source: protein
+  target: protein
+  # direct inheritance chain without branches
+  label_in_input: [
+    protein_protein_direct interaction,
+    protein_protein_physical association,
+    protein_protein_association,
+    
+    protein_peptide_direct interaction,
+    protein_peptide_physical association,
+    protein_peptide_association,
+
+    peptide_protein_direct interaction,
+    peptide_protein_physical association,
+    peptide_protein_association,
+  ]
+  properties:
+    ac: str
+    shortName: str
+    isNegative: str
+    isInferred: str
+    interactionTypeShortName: str
+    interactionTypeFullName: str
+    interactionTypeIdentifierStr: str
+    src_role: str
+    tar_role: str
+
+enzymatic interaction:
+  is_a: [direct interaction, post translational interaction, association]
+  represented_as: node
+  preferred_id: intact
+  source: protein
+  target: protein
+  label_in_input: [
+    protein_protein_acetylation,
+    protein_protein_deacetylation,
+    protein_protein_phosphorylation,
+    protein_protein_protein cleavage,
+    protein_protein_cleavage,
+    protein_protein_gtpase reaction,
+    protein_protein_lipid cleavage-2,
+    protein_protein_lipid cleavage,
+    protein_protein_enzymatic reaction,
+    protein_protein_adp ribosylation,
+    protein_protein_ubiquitination,
+    protein_protein_redox reaction,
+    protein_protein_hydroxylation,
+    protein_protein_methylation,
+    protein_protein_deamidation,
+    protein_protein_sumoylation,
+    protein_protein_neddylation,
+    protein_protein_dephosphorylation,
+    protein_protein_dna cleavage,
+    protein_protein_glycosylation,
+    protein_protein_demethylation,
+    protein_protein_atpase reaction,
+    protein_protein_deubiquitination,
+    protein_protein_covalent binding,
+    protein_protein_phosphotransfer,
+    protein_protein_ampylation,
+    protein_protein_deamination,
+    protein_protein_disulfide bond,
+    protein_protein_aminoacylation,
+    protein_protein_rna cleavage,
+    protein_protein_palmitoylation,
+    protein_protein_lipid addition,
+    protein_protein_de-adp-ribosylation reaction,
+    protein_protein_rna elongation,
+    protein_protein_guanine nucleotide exchange factor reaction,
+    protein_protein_transglutamination,
+    protein_protein_deneddylation,
+    protein_protein_proline isomerization  reaction,
+    protein_protein_decarboxylation,
+    protein_protein_sulfurtransfer,
+    protein_protein_triphosphatase react,
+    protein_protein_carboxylation,
+    protein_protein_isomerase reaction,
+    protein_protein_phospholipase reaction,
+    protein_protein_p_patetheinylation,
+    protein_protein_gtpase-activating protein reaction,
+    protein_protein_desumoylation,
+    protein_protein_s-nitrosylation,
+    protein_protein_tyrosination,
+    protein_peptide_phosphorylation,
+    protein_peptide_methylation,
+    protein_peptide_enzymatic reaction,
+    protein_peptide_demethylation,
+    protein_peptide_deacetylation,
+    protein_peptide_protein cleavage,
+    protein_peptide_cleavage,
+    protein_peptide_hydroxylation,
+    protein_peptide_dephosphorylation,
+    peptide_protein_phosphorylation,
+    peptide_protein_cleavage,
+    peptide_protein_deamination,
+    peptide_protein_demethylation,
+    peptide_protein_methylation,
+    peptide_protein_dephosphorylation,
+    peptide_protein_glycosylation,
+    peptide_protein_deacetylation,
+    peptide_protein_depalmitoylation,
+    peptide_protein_demyristoylation,
+    protein_peptide_protein cleavage,
+    peptide_protein_protein cleavage,
+    peptide_protein_hydroxylation,
+    peptide_protein_enzymatic reaction,
+    peptide_protein_acetylation
+  ]
+  properties:
+    ac: str
+    shortName: str
+    isNegative: str
+    isInferred: str
+    interactionTypeShortName: str
+    interactionTypeFullName: str
+    interactionTypeIdentifierStr: str
+    src_role: str
+    tar_role: str
 
 
 ### From OTAR, Barrio-Hernandez query:
@@ -281,11 +389,11 @@ PostTranslationalInteraction:
 # protein_rna: intact, wwpdb, emdb, reactome
 # rna_protein: intact, wwpdb, emdb, rcsb pdb
 # only reactome does not have interaction ID
-intact.ProteinToRNASequenceAssociation:
-  is_a: [ProteinToRNASequenceAssociation, Association]
+intact.protein to RNA sequence association:
+  is_a: [protein to RNA sequence association, association]
   represented_as: node
   preferred_id: intact
-  source: Protein
+  source: protein
   target: RNASequence
   label_in_input: [
     protein_rna_intact,
@@ -306,11 +414,11 @@ intact.ProteinToRNASequenceAssociation:
     interactionTypeIdentifierStr: str
 
 # hack: represent virtual leaves explicitly
-reactome.ProteinToRNASequenceAssociation:
-  is_a: [ProteinToRNASequenceAssociation, Association]
+reactome.protein to RNA sequence association:
+  is_a: [protein to RNA sequence association, association]
   represented_as: node
   preferred_id: id
-  source: Protein
+  source: protein
   target: RNASequence
   label_in_input: protein_rna_reactome
   properties:
@@ -328,11 +436,11 @@ reactome.ProteinToRNASequenceAssociation:
 
 # 'MI:0322', guide rna
 # only intact and wwpdb
-ProteinToGuideRNAAssociation:
-  is_a: Association
+protein to guide RNA association:
+  is_a: association
   represented_as: node
   preferred_id: intact
-  source: Protein
+  source: protein
   target: GuideRNASequence
   label_in_input: [protein_grna_intact, protein_grna_wwpdb]
   properties:
@@ -349,11 +457,11 @@ ProteinToGuideRNAAssociation:
 
 # 'MI_0325', transfer rna
 # few; intact, emdb, wwpdb
-ProteinTotRNAAssociation:
-  is_a: Association
+protein to tRNA association:
+  is_a: association
   represented_as: node
   preferred_id: intact
-  source: Protein
+  source: protein
   target: tRNASequence
   label_in_input: [
     protein_trna_intact,
@@ -372,11 +480,11 @@ ProteinTotRNAAssociation:
 
 # 'MI:0324', messenger rna
 # only intact
-ProteinTomRNAAssociation:
-  is_a: Association
+protein to mRNA association:
+  is_a: association
   represented_as: node
   preferred_id: intact
-  source: Protein
+  source: protein
   target: mRNASequence
   label_in_input: [
     protein_mrna_intact,
@@ -393,11 +501,11 @@ ProteinTomRNAAssociation:
 
 # 'MI:0608', ribosomal rna
 # few; intact, emdb, wwpdb, rcsb pdb
-ProteinTorRNAAssociation:
-  is_a: Association
+protein to rRNA association:
+  is_a: association
   represented_as: node
   preferred_id: intact
-  source: Protein
+  source: protein
   target: rRNASequence
   label_in_input: [
     rrna_protein_intact,
@@ -419,11 +527,11 @@ ProteinTorRNAAssociation:
 
 # 'MI:0609', small nucleolar rna
 # few, only intact
-ProteinTosnoRNAAssociation:
-  is_a: Association
+protein to snoRNA association:
+  is_a: association
   represented_as: node
   preferred_id: intact
-  source: Protein
+  source: protein
   target: snoRNASequence
   label_in_input: protein_snorna_intact
   properties:
@@ -443,11 +551,11 @@ ProteinTosnoRNAAssociation:
 
 # 'MI:0679', poly adenine
 # few, only intact
-ProteinToPolyASequenceMotifAssociation:
-  is_a: Association
+protein to poly a sequence motif association:
+  is_a: association
   represented_as: node
   preferred_id: intact
-  source: Protein
+  source: protein
   target: PolyASequenceMotif
   label_in_input: [
     poly a_protein_intact,
@@ -464,11 +572,11 @@ ProteinToPolyASequenceMotifAssociation:
 
 # 'MI:2190', long non-coding ribonucleic acid
 # few, only intact
-ProteinTolncRNASequenceAssociation:
-  is_a: Association
+protein to lncRNA sequence association:
+  is_a: association
   represented_as: node
   preferred_id: intact
-  source: Protein
+  source: protein
   target: lncRNASequence
   label_in_input: [
     protein_lncrna_intact,
@@ -487,11 +595,11 @@ ProteinTolncRNASequenceAssociation:
 # more mRNA-miRNA interactions, which are disregarded in this schema;
 # may be a point of improvement to include those protein-mrna-mirna
 # relations
-ProteinTomicroRNASequenceAssociation:
-  is_a: Association
+protein to microRNA sequence association:
+  is_a: association
   represented_as: node
   preferred_id: intact
-  source: Protein
+  source: protein
   target: microRNA
   label_in_input: [
     mirna_protein_intact,

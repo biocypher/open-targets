@@ -27,8 +27,6 @@ class BioCypherAdapter:
         self.db_name = db_name
         self.id_batch_size = id_batch_size
 
-        self.uniprot_name_in_types = set()
-
         # write driver
         self.bcy = biocypher.Driver(
             offline=True,  # set offline to true,
@@ -59,7 +57,6 @@ class BioCypherAdapter:
         self.write_edges()
         self.bcy.write_import_call()
         self.bcy.log_missing_bl_types()
-        print(self.uniprot_name_in_types)
 
     def write_nodes(self):
         """
@@ -167,7 +164,9 @@ class BioCypherAdapter:
         """
 
         result = tx.run(
-            f"MATCH (n:GraphBinaryInteractionEvidence) " "RETURN id(n) as id"
+            f"MATCH (n:GraphBinaryInteractionEvidence) "
+            "RETURN id(n) as id"
+            # " LIMIT 1000"
         )
 
         id_batch = []
@@ -272,11 +271,13 @@ class BioCypherAdapter:
                 )
 
                 for res in results:
+                    # TODO role -> relationship type
 
                     # extract relevant ids
                     _id = res["n"].get("ac")
-                    # seems like all protein-protein interactions at least have
-                    # an EBI  identifier
+                    # seems like all protein-protein interactions at
+                    # least have an EBI identifier; however, these IDs
+                    # are not unique to each pairwise interaction
                     if not _id:
                         logger.debug(
                             "No id found for binary interaction evidence: "
@@ -291,7 +292,16 @@ class BioCypherAdapter:
                     )
 
                     _source = res["source"]
-                    _type = "_".join([res["typ_a"], res["typ_b"], _source])
+
+                    # subtypes according to the type of association
+                    _type = "_".join(
+                        [
+                            res["typ_a"],
+                            res["typ_b"],
+                            # _source,
+                            res["nt"].get("shortName"),
+                        ]
+                    )
 
                     # properties of BinaryInteractionEvidence
                     _props = res["n"]
@@ -306,6 +316,10 @@ class BioCypherAdapter:
                     _props["interactionTypeIdentifierStr"] = res["nt"].get(
                         "mIIdentifier"
                     )
+
+                    # pass roles of a and b: smart way to do this?
+                    _props["src_role"] = res["role_a"]
+                    _props["tar_role"] = res["role_b"]
 
                     yield (_id, _src_id, _tar_id, _type, _props)
 
@@ -326,10 +340,6 @@ class BioCypherAdapter:
 
         TODO python 3.10: use patterns instead of elif chains
         """
-
-        if _node.get("uniprotName"):
-            # add _type to self.uniprot_name_in_types set
-            self.uniprot_name_in_types.add(_type)
 
         # regex patterns
         ebi_prefix_pattern = re.compile("^EBI-")
@@ -1164,11 +1174,13 @@ def get_bin_int_rels_tx(tx, ids):
         "OPTIONAL MATCH (n)-[:interactionType]->(nt:GraphCvTerm) "
         "WITH n, a, b, nt, at, bt "
         "MATCH (n)-[:identifiers]->(:GraphXref)-[:database]->(nd:GraphCvTerm) "
+        "OPTIONAL MATCH (n)-[:BIE_PARTICIPANTA]->(pa:GraphEntity)-[:biologicalRole]->(ar:GraphCvTerm)"
+        "OPTIONAL MATCH (n)-[:BIE_PARTICIPANTB]->(pb:GraphEntity)-[:biologicalRole]->(br:GraphCvTerm)"
         "OPTIONAL MATCH (a)-[:preferredIdentifier]->(:GraphXref)-[:database]->(ad:GraphCvTerm) "
         "OPTIONAL MATCH (b)-[:preferredIdentifier]->(:GraphXref)-[:database]->(bd:GraphCvTerm) "
         "RETURN n, nd.shortName AS source, nt, "
-        "a, ad.shortName AS src_a, at.shortName AS typ_a, "
-        "b, bd.shortName AS src_b, bt.shortName AS typ_b",
+        "a, ad.shortName AS src_a, at.shortName AS typ_a, ar.shortName AS role_a, "
+        "b, bd.shortName AS src_b, bt.shortName AS typ_b, br.shortName AS role_b",
         ids=ids,
     )
     return result.data()
