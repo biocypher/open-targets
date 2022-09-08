@@ -72,14 +72,14 @@ class BioCypherAdapter:
             # "GraphPublication",
         ]
 
-        # # Interactors
-        # with self.driver.session() as session:
-        #     # writing of one type needs to be completed inside
-        #     # this session
-        #     session.read_transaction(
-        #         self._get_interactor_ids_and_write_batches_tx,
-        #         "GraphInteractor",
-        #     )
+        # Interactors
+        with self.driver.session() as session:
+            # writing of one type needs to be completed inside
+            # this session
+            session.read_transaction(
+                self._get_interactor_ids_and_write_batches_tx,
+                "GraphInteractor",
+            )
 
         # Other single labels
         for label in node_labels:
