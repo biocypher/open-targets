@@ -15,6 +15,87 @@ Title: BioCypher graph schema configuration file
 # "Named Things"
 # ---
 
+article:
+  represented_as: node
+  preferred_id: pubmed
+  label_in_input: GraphPublication
+  properties:
+    ac: str
+    title: str
+    journal: str
+    authors: str
+    publicationDate: str
+
+biological entity:
+  represented_as: node
+  preferred_id: [reactome, signor]
+  label_in_input: [reactome_unknown_participant, signor_unknown_participant]
+  properties:
+    preferredName: str
+    shortName: str
+
+DNA sequence:
+  is_a: nucleic acid entity
+  represented_as: node
+  preferred_id: [intact.molecule, genbank, ensembl, reactome, refseq]
+  label_in_input: [intact_dna, genbank_dna, ensembl_dna, reactome_dna, refseq_dna]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
+
+dsDNA sequence:
+  is_a: [DNA sequence, nucleic acid entity]
+  represented_as: node
+  preferred_id: [intact.molecule, uniparc, genbank, ensembl, pubmed, refseq]
+  label_in_input: [
+    intact_dsdna, 
+    uniprot_archive_dsdna, 
+    genbank_dsdna, 
+    ensembl_dsdna, 
+    pubmed_dsdna,
+    refseq_dsdna
+  ]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
+
+ssDNA sequence:
+  is_a: [DNA sequence, nucleic acid entity]
+  represented_as: node
+  preferred_id: [intact.molecule, genbank, ensembl, chebi]
+  label_in_input: [intact_ssdna, genbank_ssdna, ensembl_ssdna, chebi_ssdna]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
+
+gene:
+  represented_as: node
+  preferred_id: exac.gene
+  label_in_input: gene
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+
+gene grouping mixin:
+  represented_as: node
+  preferred_id: [intact.molecule, uniprot, signor]
+  label_in_input: [intact_molecule_set, uniprot_molecule_set, signor_molecule_set]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
 
 microRNA:
   represented_as: node
@@ -49,6 +130,16 @@ peptide precursor:
     shortName: str
     preferredName: str
     sequence: str
+
+phenotypic feature:
+  represented_as: node
+  preferred_id: signor
+  label_in_input: signor_phenotype
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
 
 poly a sequence motif:
   is_a: nucleic acid sequence motif
@@ -107,6 +198,17 @@ protein isoform:
     shortName: str
     preferredName: str
     sequence: str
+
+protein complex:
+  is_a: macromolecular complex mixin
+  represented_as: node
+  preferred_id: [signor, complexportal]
+  label_in_input: [signor_complex, complexportal_complex]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
 
 protein precursor:
   is_a: protein
@@ -210,6 +312,58 @@ tRNA sequence:
     preferredName: str 
     sequence: str
 
+small molecule:
+  represented_as: node
+  preferred_id: [chebi, chembl, intact.molecule, pubchem.compound]
+  label_in_input: [chebi_small_molecule, chembl_small_molecule, intact_small_molecule, pubchem_compound]
+  properties:
+    ac: str
+    shortName: str
+    preferredName: str
+
+stable complex:
+  is_a: macromolecular complex mixin
+  represented_as: node
+  preferred_id: complexportal
+  label_in_input: complexportal_stable_complex
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str 
+
+stimulus:
+  is_a: biological entity
+  represented_as: node
+  preferred_id: signor
+  label_in_input: signor_stimulus
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str 
+
+transcript:
+  represented_as: node
+  preferred_id: [ensembl, intact.molecule, hgnc, genbank, refseq]
+  label_in_input: [ensembl_mrna, intact_mrna, hgnc_mrna, genbank_mrna, refseq_mrna]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str
+    sequence: str
+
+xenobiotic:
+  is_a: small molecule
+  represented_as: node
+  preferred_id: [pubchem.compound, chebi]
+  label_in_input: [pubchem_xenobiotic, chebi_xenobiotic]
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    preferredName: str 
 
 # ---
 # Associations
@@ -224,12 +378,7 @@ colocalisation:
   source: protein
   target: protein
   # merge for now for simplicity
-  label_in_input: [
-    protein_protein_colocalization,
-    protein_protein_proximity,
-
-    protein_peptide_proximity,
-  ]
+  label_in_input: [colocalization, proximity]
   properties:
     ac: str
     shortName: str
@@ -247,7 +396,50 @@ functional association:
   preferred_id: intact
   source: protein
   target: protein
-  label_in_input: protein_protein_functional association
+  label_in_input: functional association
+  properties:
+    ac: str
+    shortName: str
+    isNegative: str
+    isInferred: str
+    interactionTypeShortName: str
+    interactionTypeFullName: str
+    interactionTypeIdentifierStr: str
+    src_role: str
+    tar_role: str
+
+molecular association:
+  is_a: [post translational interaction, association]
+  # weakest form of inference, co-detection of entities. naming clash
+  # with biolink association; the "molecular" could be a way around
+  # although it is the parent of association in the PSI-MI schema
+  represented_as: node
+  preferred_id: intact
+  source: protein
+  target: protein
+  # direct inheritance chain without branches
+  label_in_input: association
+  properties:
+    ac: str
+    shortName: str
+    isNegative: str
+    isInferred: str
+    interactionTypeShortName: str
+    interactionTypeFullName: str
+    interactionTypeIdentifierStr: str
+    src_role: str
+    tar_role: str
+
+physical association:
+  # stronger inference; simply put found in the same complex; does not
+  # imply direct contact
+  is_a: [molecular association, post translational interaction, association]
+  represented_as: node
+  preferred_id: intact
+  source: protein
+  target: protein
+  # direct inheritance chain without branches
+  label_in_input: physical association
   properties:
     ac: str
     shortName: str
@@ -260,25 +452,18 @@ functional association:
     tar_role: str
 
 direct interaction:
-  is_a: [post translational interaction, association]
+  is_a: [
+    physical association, 
+    molecular association, 
+    post translational interaction, 
+    association,
+  ]
   represented_as: node
   preferred_id: intact
   source: protein
   target: protein
   # direct inheritance chain without branches
-  label_in_input: [
-    protein_protein_direct interaction,
-    protein_protein_physical association,
-    protein_protein_association,
-    
-    protein_peptide_direct interaction,
-    protein_peptide_physical association,
-    protein_peptide_association,
-
-    peptide_protein_direct interaction,
-    peptide_protein_physical association,
-    peptide_protein_association,
-  ]
+  label_in_input: direct interaction
   properties:
     ac: str
     shortName: str
@@ -291,85 +476,68 @@ direct interaction:
     tar_role: str
 
 enzymatic interaction:
-  is_a: [direct interaction, post translational interaction, association]
+  # aggregate class of specific direct interactions
+  # create virtual leaves for all labels?
+  is_a: [
+    direct interaction,
+    physical association,
+    post translational interaction, 
+    association
+  ]
   represented_as: node
   preferred_id: intact
   source: protein
   target: protein
   label_in_input: [
-    protein_protein_acetylation,
-    protein_protein_deacetylation,
-    protein_protein_phosphorylation,
-    protein_protein_protein cleavage,
-    protein_protein_cleavage,
-    protein_protein_gtpase reaction,
-    protein_protein_lipid cleavage-2,
-    protein_protein_lipid cleavage,
-    protein_protein_enzymatic reaction,
-    protein_protein_adp ribosylation,
-    protein_protein_ubiquitination,
-    protein_protein_redox reaction,
-    protein_protein_hydroxylation,
-    protein_protein_methylation,
-    protein_protein_deamidation,
-    protein_protein_sumoylation,
-    protein_protein_neddylation,
-    protein_protein_dephosphorylation,
-    protein_protein_dna cleavage,
-    protein_protein_glycosylation,
-    protein_protein_demethylation,
-    protein_protein_atpase reaction,
-    protein_protein_deubiquitination,
-    protein_protein_covalent binding,
-    protein_protein_phosphotransfer,
-    protein_protein_ampylation,
-    protein_protein_deamination,
-    protein_protein_disulfide bond,
-    protein_protein_aminoacylation,
-    protein_protein_rna cleavage,
-    protein_protein_palmitoylation,
-    protein_protein_lipid addition,
-    protein_protein_de-adp-ribosylation reaction,
-    protein_protein_rna elongation,
-    protein_protein_guanine nucleotide exchange factor reaction,
-    protein_protein_transglutamination,
-    protein_protein_deneddylation,
-    protein_protein_proline isomerization  reaction,
-    protein_protein_decarboxylation,
-    protein_protein_sulfurtransfer,
-    protein_protein_triphosphatase react,
-    protein_protein_carboxylation,
-    protein_protein_isomerase reaction,
-    protein_protein_phospholipase reaction,
-    protein_protein_p_patetheinylation,
-    protein_protein_gtpase-activating protein reaction,
-    protein_protein_desumoylation,
-    protein_protein_s-nitrosylation,
-    protein_protein_tyrosination,
-    protein_peptide_phosphorylation,
-    protein_peptide_methylation,
-    protein_peptide_enzymatic reaction,
-    protein_peptide_demethylation,
-    protein_peptide_deacetylation,
-    protein_peptide_protein cleavage,
-    protein_peptide_cleavage,
-    protein_peptide_hydroxylation,
-    protein_peptide_dephosphorylation,
-    peptide_protein_phosphorylation,
-    peptide_protein_cleavage,
-    peptide_protein_deamination,
-    peptide_protein_demethylation,
-    peptide_protein_methylation,
-    peptide_protein_dephosphorylation,
-    peptide_protein_glycosylation,
-    peptide_protein_deacetylation,
-    peptide_protein_depalmitoylation,
-    peptide_protein_demyristoylation,
-    protein_peptide_protein cleavage,
-    peptide_protein_protein cleavage,
-    peptide_protein_hydroxylation,
-    peptide_protein_enzymatic reaction,
-    peptide_protein_acetylation
+    acetylation,
+    deacetylation,
+    phosphorylation,
+    protein cleavage,
+    cleavage,
+    gtpase reaction,
+    lipid cleavage-2,
+    lipid cleavage,
+    enzymatic reaction,
+    adp ribosylation,
+    ubiquitination,
+    redox reaction,
+    hydroxylation,
+    methylation,
+    deamidation,
+    sumoylation,
+    neddylation,
+    dephosphorylation,
+    dna cleavage,
+    glycosylation,
+    demethylation,
+    atpase reaction,
+    deubiquitination,
+    covalent binding,
+    phosphotransfer,
+    ampylation,
+    deamination,
+    disulfide bond,
+    aminoacylation,
+    rna cleavage,
+    palmitoylation,
+    lipid addition,
+    de-adp-ribosylation reaction,
+    rna elongation,
+    guanine nucleotide exchange factor reaction,
+    transglutamination,
+    deneddylation,
+    proline isomerization  reaction,
+    decarboxylation,
+    sulfurtransfer,
+    triphosphatase react,
+    carboxylation,
+    isomerase reaction,
+    phospholipase reaction,
+    p_patetheinylation,
+    gtpase-activating protein reaction,
+    desumoylation,
+    s-nitrosylation,
+    tyrosination,
   ]
   properties:
     ac: str
@@ -382,8 +550,35 @@ enzymatic interaction:
     src_role: str
     tar_role: str
 
+# covalent binding is only 6 small molecule - protein interactions.
+covalent binding:
+  # aggregate class of specific direct interactions
+  is_a: [
+    direct interaction,
+    physical association,
+    post translational interaction, 
+    association
+  ]
+  represented_as: node
+  preferred_id: intact
+  source: small molecule
+  target: protein
+  label_in_input: covalent binding
+  properties:
+    ac: str
+    shortName: str
+    isNegative: str
+    isInferred: str
+    interactionTypeShortName: str
+    interactionTypeFullName: str
+    interactionTypeIdentifierStr: str
+    src_role: str
+    tar_role: str
+
+# self interactions are not in the graph.
 
 ### From OTAR, Barrio-Hernandez query:
+## currently unused
 # 'MI:0320', ribonucleic acid
 # quite generic; probes, k-mers (shared probably), telomerase RNA
 # protein_rna: intact, wwpdb, emdb, reactome
@@ -396,13 +591,13 @@ intact.protein to RNA sequence association:
   source: protein
   target: RNASequence
   label_in_input: [
-    protein_rna_intact,
-    protein_rna_wwpdb,
-    protein_rna_emdb,
-    rna_protein_intact,
-    rna_protein_wwpdb,
-    rna_protein_emdb,
-    rna_protein_rcsb pdb,
+    protein_rna,
+    protein_rna,
+    protein_rna,
+    rna_protein,
+    rna_protein,
+    rna_protein,
+    rna_protein,
   ]
   properties:
     ac: str

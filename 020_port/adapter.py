@@ -72,15 +72,16 @@ class BioCypherAdapter:
             # "GraphPublication",
         ]
 
-        # Interactors
-        with self.driver.session() as session:
-            # writing of one type needs to be completed inside
-            # this session
-            session.read_transaction(
-                self._get_interactor_ids_and_write_batches_tx,
-                "GraphInteractor",
-            )
+        # # Interactors
+        # with self.driver.session() as session:
+        #     # writing of one type needs to be completed inside
+        #     # this session
+        #     session.read_transaction(
+        #         self._get_interactor_ids_and_write_batches_tx,
+        #         "GraphInteractor",
+        #     )
 
+        # Other single labels
         for label in node_labels:
             with self.driver.session() as session:
                 # writing of one type needs to be completed inside
@@ -203,6 +204,7 @@ class BioCypherAdapter:
 
                 for res in results:
 
+                    # TODO source
                     _id, _type = self._process_node_id_and_type(
                         res["n"], label
                     )
@@ -294,14 +296,15 @@ class BioCypherAdapter:
                     _source = res["source"]
 
                     # subtypes according to the type of association
-                    _type = "_".join(
-                        [
-                            res["typ_a"],
-                            res["typ_b"],
-                            # _source,
-                            res["nt"].get("shortName"),
-                        ]
-                    )
+                    # _type = "_".join(
+                    #     [
+                    #         res["typ_a"],
+                    #         res["typ_b"],
+                    #         _source,
+                    #         res["nt"].get("shortName"),
+                    #     ]
+                    # )
+                    _type = res["nt"].get("shortName")
 
                     # properties of BinaryInteractionEvidence
                     _props = res["n"]
@@ -317,7 +320,7 @@ class BioCypherAdapter:
                         "mIIdentifier"
                     )
 
-                    # pass roles of a and b: smart way to do this?
+                    # pass roles of a and b: is there a smarter way to do this?
                     _props["src_role"] = res["role_a"]
                     _props["tar_role"] = res["role_b"]
 
@@ -1121,14 +1124,6 @@ class BioCypherAdapter:
                 _id = "pubmed:" + _node["pubmedIdStr"]
             else:
                 print("Erroneous " + _type + " ==============================")
-                print(_node)
-
-        elif _type == "GraphBinaryInteractionEvidence":
-            if _node.get("imexId"):
-                _id = "uk:" + _node["uniqueKey"]
-            elif _node.get("ac"):
-                _id = "uk:" + _node["uniqueKey"]
-            else:
                 print(_node)
 
         return _id, _type
