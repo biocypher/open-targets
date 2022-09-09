@@ -69,7 +69,7 @@ class BioCypherAdapter:
             node_labels = pd.read_csv(f)
 
         node_labels = [
-            # "GraphPublication",
+            "GraphPublication",
         ]
 
         # Interactors

@@ -372,7 +372,7 @@ xenobiotic:
 # OBO MI stratification from interaction type: https://www.ebi.ac.uk/ols/ontologies/mi/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMI_0190&lang=en&viewMode=All&siblings=false
 
 colocalisation:
-  is_a: [post translational interaction, association]
+  is_a: association
   represented_as: node
   preferred_id: intact
   source: protein
@@ -391,7 +391,7 @@ colocalisation:
     tar_role: str
 
 functional association:
-  is_a: [post translational interaction, association]
+  is_a: association
   represented_as: node
   preferred_id: intact
   source: protein
@@ -408,8 +408,8 @@ functional association:
     src_role: str
     tar_role: str
 
-molecular association:
-  is_a: [post translational interaction, association]
+molecular association psimi:
+  is_a: association
   # weakest form of inference, co-detection of entities. naming clash
   # with biolink association; the "molecular" could be a way around
   # although it is the parent of association in the PSI-MI schema
@@ -433,7 +433,7 @@ molecular association:
 physical association:
   # stronger inference; simply put found in the same complex; does not
   # imply direct contact
-  is_a: [molecular association, post translational interaction, association]
+  is_a: [molecular association psimi, association]
   represented_as: node
   preferred_id: intact
   source: protein
@@ -454,8 +454,7 @@ physical association:
 direct interaction:
   is_a: [
     physical association, 
-    molecular association, 
-    post translational interaction, 
+    molecular association psimi, 
     association,
   ]
   represented_as: node
@@ -480,8 +479,7 @@ enzymatic interaction:
   # create virtual leaves for all labels?
   is_a: [
     direct interaction,
-    physical association,
-    post translational interaction, 
+    physical association psimi,
     association
   ]
   represented_as: node
@@ -555,8 +553,7 @@ covalent binding:
   # aggregate class of specific direct interactions
   is_a: [
     direct interaction,
-    physical association,
-    post translational interaction, 
+    physical association psimi,
     association
   ]
   represented_as: node
