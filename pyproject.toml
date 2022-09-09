@@ -8,6 +8,7 @@ authors = ["Sebastian Lobentanzer <sebastian.lobentanzer@gmail.com>"]
 python = "^3.9"
 biocypher = {path = "../BioCypher", develop = true}
 black = "^22.6.0"
+snakeviz = "^2.1.1"
 
 [tool.poetry.dev-dependencies]
 
