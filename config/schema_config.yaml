@@ -65,6 +65,15 @@ dsDNA sequence:
     preferredName: str
     sequence: str
 
+experiment:
+  is_a: information content entity
+  represented_as: node
+  preferred_id: id
+  label_in_input: GraphExperiment
+  properties:
+    pubmedId: str
+    uniqueKey: str
+
 ssDNA sequence:
   is_a: [DNA sequence, nucleic acid entity]
   represented_as: node

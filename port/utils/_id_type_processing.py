@@ -774,4 +774,7 @@ def _process_node_id_and_type(
         # unique
         _id = _node.get("uniqueKey")
 
+    elif _type == "GraphExperiment":
+        _id = _node.get("uniqueKey")
+
     return _id, _type
