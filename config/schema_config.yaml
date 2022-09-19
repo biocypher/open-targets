@@ -401,6 +401,7 @@ colocalisation:
     interactionTypeIdentifierStr: str
     src_role: str
     tar_role: str
+    mi_score: long
 
 functional association:
   is_a: association
@@ -419,6 +420,7 @@ functional association:
     interactionTypeIdentifierStr: str
     src_role: str
     tar_role: str
+    mi_score: long
 
 molecular association psimi:
   is_a: association
@@ -441,6 +443,7 @@ molecular association psimi:
     interactionTypeIdentifierStr: str
     src_role: str
     tar_role: str
+    mi_score: long
 
 physical association:
   # stronger inference; simply put found in the same complex; does not
@@ -462,6 +465,7 @@ physical association:
     interactionTypeIdentifierStr: str
     src_role: str
     tar_role: str
+    mi_score: long
 
 direct interaction:
   is_a: [
@@ -485,6 +489,7 @@ direct interaction:
     interactionTypeIdentifierStr: str
     src_role: str
     tar_role: str
+    mi_score: long
 
 enzymatic interaction:
   # aggregate class of specific direct interactions
@@ -559,6 +564,7 @@ enzymatic interaction:
     interactionTypeIdentifierStr: str
     src_role: str
     tar_role: str
+    mi_score: long
 
 # covalent binding is only 6 small molecule - protein interactions.
 covalent binding:
@@ -583,6 +589,7 @@ covalent binding:
     interactionTypeIdentifierStr: str
     src_role: str
     tar_role: str
+    mi_score: long
 
 interactor to organism association:
   is_a: association

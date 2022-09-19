@@ -145,6 +145,7 @@ OPTIONAL MATCH (entityAN)-[:biologicalRole]-(biologicalRoleAN:GraphCvTerm)
 OPTIONAL MATCH (entityBN)-[:biologicalRole]-(biologicalRoleBN:GraphCvTerm)
 
 # try to find clustered interactions for each interaction
+# done
 OPTIONAL MATCH (interactionN)-[clusteredInteractionR:interactions]-(clusteredInteractionN:GraphClusteredInteraction)
 
 # try to find type of each interaction
