@@ -70,7 +70,18 @@ class BioCypherAdapter:
 
         node_labels = [
             "GraphPublication",
+            "GraphOrganism",
+            # "GraphInteractionDetectionMethod",
         ]
+
+        # Single labels other than Interactors
+        for label in node_labels:
+            with self.driver.session() as session:
+                # writing of one type needs to be completed inside
+                # this session
+                session.read_transaction(
+                    self._get_node_ids_and_write_batches_tx, label
+                )
 
         # Interactors
         with self.driver.session() as session:
@@ -81,20 +92,12 @@ class BioCypherAdapter:
                 "GraphInteractor",
             )
 
-        # Other single labels
-        for label in node_labels:
-            with self.driver.session() as session:
-                # writing of one type needs to be completed inside
-                # this session
-                session.read_transaction(
-                    self._get_node_ids_and_write_batches_tx, label
-                )
-
     def write_edges(self) -> None:
         """
         Write edges to admin import csv files.
         """
 
+        # dedicated function for binary interactions
         with self.driver.session() as session:
             # writing of one type needs to be completed inside
             # this session
@@ -109,7 +112,8 @@ class BioCypherAdapter:
     ):
         """
         Write nodes to admin import csv files. Writer function needs to be
-        performed inside the transaction.
+        performed inside the transaction. Write edges from interactors to
+        organisms.
         """
 
         result = tx.run(f"MATCH (n:{label}) " "RETURN id(n) as id")
@@ -188,7 +192,7 @@ class BioCypherAdapter:
 
     def _write_nodes(self, id_batch, label):
         """
-        Write edges to admin import csv files. Needs to be performed in a
+        Write nodes to admin import csv files. Needs to be performed in a
         transaction.
 
         Args:
@@ -218,8 +222,9 @@ class BioCypherAdapter:
 
     def _write_interactors(self, id_batch, label):
         """
-        Write interactor nodes to admin import csv files. Needs to be
-        performed in a transaction.
+        Write interactor nodes to admin import csv files. Also write
+        interactor to organism edges. Needs to be performed in a
+        transaction.
 
         Args:
 
@@ -228,25 +233,59 @@ class BioCypherAdapter:
             label: label of the node type
         """
 
-        def node_gen():
-            with self.driver.session() as session:
-                results = session.read_transaction(
-                    get_interactors_tx, id_batch
+        nodes = []
+        edges = []
+
+        with self.driver.session() as session:
+            results = session.read_transaction(
+                get_interactor_to_organism_edges_tx, id_batch
+            )
+
+            for res in results:
+
+                typ = res["typ"]
+                src = res["src"]
+
+                (
+                    _interactor_id,
+                    _interactor_type,
+                ) = self._process_node_id_and_type(res["n"], typ or label, src)
+
+                _interactor_props = res["n"]
+
+                nodes.append(
+                    (_interactor_id, _interactor_type, _interactor_props)
                 )
 
-                for res in results:
-
-                    typ = res["typ"]
-                    src = res["src"]
-
-                    _id, _type = self._process_node_id_and_type(
-                        res["n"], typ or label, src
+                if res.get("o"):
+                    _organism_id, _ = self._process_node_id_and_type(
+                        res["o"], "GraphOrganism"
                     )
-                    _props = res["n"]
-                    yield (_id, _type, _props)
+
+                    _interaction_type = "INTERACTOR_TO_ORGANISM"
+                    _interaction_props = {}
+
+                    edges.append(
+                        (
+                            None,
+                            _interactor_id,
+                            _organism_id,
+                            _interaction_type,
+                            _interaction_props,
+                        )
+                    )
+                else:
+                    logger.debug(
+                        f"No organism found for interactor {_interactor_props}"
+                    )
 
         self.bcy.write_nodes(
-            nodes=node_gen(),
+            nodes=nodes,
+            db_name=self.db_name,
+        )
+
+        self.bcy.write_edges(
+            edges=edges,
             db_name=self.db_name,
         )
 
@@ -285,6 +324,9 @@ class BioCypherAdapter:
                             "No id found for binary interaction evidence: "
                             f"{res}"
                         )
+
+                    ## primary interaction edge
+
                     # also carrying ac: efo, rcsb pdb, wwpdb
                     _src_id, _src_type = self._process_node_id_and_type(
                         res["a"], res["typ_a"], res["src_a"]
@@ -309,7 +351,7 @@ class BioCypherAdapter:
                     # properties of BinaryInteractionEvidence
                     _props = res["n"]
                     # add interactionType properties (redundant, should
-                    # be encoded in labels)
+                    # later be encoded in labels)
                     _props["interactionTypeShortName"] = res["nt"].get(
                         "shortName"
                     )
@@ -319,6 +361,8 @@ class BioCypherAdapter:
                     _props["interactionTypeIdentifierStr"] = res["nt"].get(
                         "mIIdentifier"
                     )
+
+                    _props["organism"]
 
                     # pass roles of a and b: is there a smarter way to do this?
                     _props["src_role"] = res["role_a"]
@@ -1126,6 +1170,11 @@ class BioCypherAdapter:
                 print("Erroneous " + _type + " ==============================")
                 print(_node)
 
+        elif _type == "GraphOrganism":
+            # need to resort to uniqueKeys because none of the others is
+            # unique
+            _id = _node.get("uniqueKey")
+
         return _id, _type
 
 
@@ -1140,12 +1189,27 @@ def get_nodes_tx(tx, ids):
     return result.data()
 
 
+def get_interactor_to_organism_edges_tx(tx, ids):
+    result = tx.run(
+        "MATCH (n) "
+        "WHERE id(n) IN {ids} "
+        "WITH n "
+        "MATCH (n)-[:interactorType]->(t)"
+        "OPTIONAL MATCH (n)-[:organism]->(o:GraphOrganism) "
+        "OPTIONAL MATCH (n)-[:preferredIdentifier]->()-[:database]->(d) "
+        "RETURN n, o, t.shortName as typ, d.shortName AS src",
+        ids=ids,
+    )
+    return result.data()
+
+
 def get_interactors_tx(tx, ids):
     result = tx.run(
         "MATCH (n) "
         "WHERE id(n) IN {ids} "
         "WITH n "
-        "MATCH (n)-[:interactorType]->(t), (n)-[:preferredIdentifier]->()-[:database]->(d) "
+        "MATCH (n)-[:interactorType]->(t)"
+        "OPTIONAL MATCH (n)-[:preferredIdentifier]->()-[:database]->(d) "
         "RETURN n, t.shortName AS typ, d.shortName as src",
         ids=ids,
     )

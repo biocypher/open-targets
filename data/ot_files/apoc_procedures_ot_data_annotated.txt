@@ -131,6 +131,7 @@ WITH interactionN,
               mi_identifier:participantIdentificationMethodBN.mIIdentifier}) as participantIdentificationMethodBColl
 
 # try to find preferredIdentifier and source of interactors, as well as the organism
+# done
 ## we again go through the same Xref as above
 OPTIONAL MATCH (interactorAN)-[:preferredIdentifier]->(identifierAN:GraphXref)-[:database]->(identifierDatabaseAN:GraphCvTerm)
 OPTIONAL MATCH (interactorBN)-[:preferredIdentifier]->(identifierBN:GraphXref)-[:database]->(identifierDatabaseBN:GraphCvTerm)
@@ -138,6 +139,7 @@ OPTIONAL MATCH (interactorAN)-[:organism]->(organismAN:GraphOrganism)
 OPTIONAL MATCH (interactorBN)-[:organism]->(organismBN:GraphOrganism)
 
 # try to find biological role of entities
+# done
 ## biological role and many other "CvTerms" are only found by their identifying incoming relationship. inefficient use of graph DB resources, these should have a label and be indexed.
 OPTIONAL MATCH (entityAN)-[:biologicalRole]-(biologicalRoleAN:GraphCvTerm)
 OPTIONAL MATCH (entityBN)-[:biologicalRole]-(biologicalRoleBN:GraphCvTerm)
@@ -146,6 +148,7 @@ OPTIONAL MATCH (entityBN)-[:biologicalRole]-(biologicalRoleBN:GraphCvTerm)
 OPTIONAL MATCH (interactionN)-[clusteredInteractionR:interactions]-(clusteredInteractionN:GraphClusteredInteraction)
 
 # try to find type of each interaction
+# done
 OPTIONAL MATCH (interactionN)-[interactiontypeR:interactionType]-(interactiontypeN:GraphCvTerm)
 
 # try to find experimental evidence type for each interaction

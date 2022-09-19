@@ -4,7 +4,7 @@ import pstats
 
 from adapter import BioCypherAdapter
 
-PROFILE = True
+PROFILE = False
 
 
 def main():

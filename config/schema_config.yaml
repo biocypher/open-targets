@@ -276,6 +276,18 @@ lncRNA sequence:
     preferredName: str
     sequence: str
 
+# neither scientific name nor taxon id are unique
+# includes cell lines, samples, tissues, etc.
+organismal entity:
+  represented_as: node
+  preferred_id: ncbitaxon
+  label_in_input: GraphOrganism
+  properties:
+    commonName: str
+    scientificName: str
+    taxId: str
+    uniqueKey: str
+
 rRNA sequence:
   is_a: nucleic acid entity
   represented_as: node
@@ -572,10 +584,18 @@ covalent binding:
     src_role: str
     tar_role: str
 
+interactor to organism association:
+  is_a: association
+  represented_as: edge
+  preferred_id: id
+  source: interactor
+  target: organism
+  label_in_input: INTERACTOR_TO_ORGANISM
+
 # self interactions are not in the graph.
 
 ### From OTAR, Barrio-Hernandez query:
-## currently unused
+## currently UNUSED
 # 'MI:0320', ribonucleic acid
 # quite generic; probes, k-mers (shared probably), telomerase RNA
 # protein_rna: intact, wwpdb, emdb, reactome
