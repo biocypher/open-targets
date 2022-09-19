@@ -1203,27 +1203,6 @@ def get_interactor_to_organism_edges_tx(tx, ids):
     return result.data()
 
 
-def get_interactors_tx(tx, ids):
-    result = tx.run(
-        "MATCH (n) "
-        "WHERE id(n) IN {ids} "
-        "WITH n "
-        "MATCH (n)-[:interactorType]->(t)"
-        "OPTIONAL MATCH (n)-[:preferredIdentifier]->()-[:database]->(d) "
-        "RETURN n, t.shortName AS typ, d.shortName as src",
-        ids=ids,
-    )
-    return result.data()
-
-
-def get_interaction_types_tx(tx, ids):
-    result = tx.run(
-        "match ()-[:interactionType]->(n:GraphCvTerm) return DISTINCT n",
-        ids=ids,
-    )
-    return result.data()
-
-
 def get_bin_int_rels_tx(tx, ids):
     result = tx.run(
         "MATCH (n) "
