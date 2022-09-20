@@ -168,7 +168,7 @@ OPTIONAL MATCH (experimentN)-[publicationR:PUB_EXP]-(publicationN:GraphPublicati
 # try to find complex expansion method for interaction (whether there was a complex implicated in the interaction assigned to only one constituent protein)
 OPTIONAL MATCH (interactionN)-[complexExpansionR:complexExpansion]-(complexExpansionN:GraphCvTerm)
 
-# try to find ids for entities
+# try to find identification methods for entities
 # duplicate from above
 OPTIONAL MATCH (entityAN)-[identificationMethodsAR:identificationMethods]->(participantIdentificationMethodAN:GraphCvTerm)
 OPTIONAL MATCH (entityBN)-[identificationMethodsBR:identificationMethods]->(participantIdentificationMethodBN:GraphCvTerm)

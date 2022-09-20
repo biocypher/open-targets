@@ -13,7 +13,12 @@ def _process_node_id_and_type(
 
     Split up nodes in case of Protein (includes Peptides).
 
-    TODO pull regex safeguarding into BioCypher dataclasses
+    TODO pull regex safeguarding into BioCypher dataclasses Most of this can be
+    done by Bioregistry.
+
+    We can use a dictionary of non-standard source identifiers used here to map
+    to Bioregistry prefixes. Maybe some would be suitable for putting into
+    Bioregistry themselves.
 
     TODO python 3.10: use patterns instead of elif chains
     """
@@ -199,7 +204,7 @@ def _process_node_id_and_type(
         elif _source == "ipi":
             _id = "ipi:" + _pref_id
             _type = "ipi_protein"
-            logger.warning("Legacy database IPI used.")
+            logger.debug("Legacy database IPI used.")
 
         elif _source == "refseq" and refseq_prefix_pattern.match(_pref_id):
             _id = "refseq:" + _pref_id

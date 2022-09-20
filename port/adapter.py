@@ -9,8 +9,8 @@ import biocypher
 import neo4j_utils as nu
 import pandas as pd
 from biocypher._logger import logger
-from utils._id_type_processing import _process_node_id_and_type
-from utils._transactions import (
+from utils.id_type_processing import _process_node_id_and_type
+from utils.transactions import (
     get_bin_int_rels_tx,
     get_interactor_to_organism_edges_tx,
     get_nodes_tx,
@@ -93,9 +93,12 @@ class BioCypherAdapter:
         with self.driver.session() as session:
             # also writes edges from interactors to organisms
             session.read_transaction(
-                self._get_interactor_ids_and_write_batches_tx,
-                "GraphInteractor",
+                self._get_interactor_ids_and_write_batches_tx
             )
+
+        # Interaction/participant detection method
+        with self.driver.session() as session:
+            session.read_transaction(self._get_detection_method_nodes_tx)
 
     ## regular nodes ##
 
@@ -161,14 +164,13 @@ class BioCypherAdapter:
     def _get_interactor_ids_and_write_batches_tx(
         self,
         tx,
-        label,
     ):
         """
         Write nodes to admin import csv files. Writer function needs to be
         performed inside the transaction.
         """
 
-        result = tx.run(f"MATCH (n:{label}) " "RETURN id(n) as id")
+        result = tx.run(f"MATCH (n:GraphInteractor) " "RETURN id(n) as id")
 
         id_batch = []
         for record in result:
@@ -177,14 +179,14 @@ class BioCypherAdapter:
             if len(id_batch) == self.id_batch_size:
 
                 # if full batch, trigger write process
-                self._write_interactors(id_batch, label)
+                self._write_interactors(id_batch, "GraphInteractor")
                 id_batch = []
 
             # check if result depleted
             elif result.peek() is None:
 
                 # write last batch
-                self._write_interactors(id_batch, label)
+                self._write_interactors(id_batch, "GraphInteractor")
 
     def _write_interactors(self, id_batch, label):
         """
@@ -255,16 +257,42 @@ class BioCypherAdapter:
             db_name=self.db_name,
         )
 
+    ## detection method nodes ##
+
+    def _get_detection_method_nodes_tx(
+        self,
+        tx,
+    ):
+        """
+        Write nodes to admin import csv files. Writer function needs to be
+        performed inside the transaction.
+        """
+
+        result = tx.run(
+            "MATCH ()-[:interactionDetectionMethod]->(i) " "RETURN DISTINCT i"
+        )
+
+        det_nodes = []
+
+        for res in result:
+
+            _detection_id, _detection_type = _process_node_id_and_type(
+                res["i"], "GraphEvidenceType"
+            )
+
+            det_nodes.append((_detection_id, _detection_type, res["i"]))
+
+        self.bcy.write_nodes(
+            nodes=det_nodes,
+            db_name=self.db_name,
+        )
+
     ############################## EDGES ####################################
 
     def write_edges(self) -> None:
         """
         Write edges to admin import csv files.
         """
-
-        # experiment to publication, organism, and detection method
-        with self.driver.session() as session:
-            session.read_transaction(self._write_experiment_edges_tx)
 
         # dedicated function for binary interactions
         with self.driver.session() as session:
@@ -273,148 +301,6 @@ class BioCypherAdapter:
             session.read_transaction(
                 self._get_binary_interaction_ids_and_write_batches_tx
             )
-
-    def _write_experiment_edges_tx(self, tx):
-        """
-        Write edges from experiments to binary interaction evidences,
-        publications, organisms, and detection methods. Needs to be performed
-        in a transaction.
-        """
-
-        result = tx.run(
-            "MATCH (e:GraphExperiment) "
-            "WITH e "
-            "MATCH (e)<-[:experiment]-(b:GraphBinaryInteractionEvidence) "
-            "OPTIONAL MATCH (e)<-[:PUB_EXP]-(p:GraphPublication) "
-            "OPTIONAL MATCH (e)-[:hostOrganism]->(o:GraphOrganism) "
-            "OPTIONAL MATCH (e)-[:interactionDetectionMethod]->(d:GraphCvTerm) "
-            "RETURN e, b, p, o, d"
-            # " LIMIT 10"
-        )
-
-        edge_batch = []
-        for record in result:
-            # collect in batches
-            edge_batch.append(record)
-            if len(edge_batch) == self.id_batch_size:
-
-                # if full batch, trigger write process
-                self._write_experiment_edges(edge_batch)
-                edge_batch = []
-
-            # check if result depleted
-            elif result.peek() is None:
-
-                # write last batch
-                self._write_experiment_edges(edge_batch)
-
-    def _write_experiment_edges(self, edge_batch):
-        """
-        Write edges from experiments to publications, organisms, and
-        detection methods. Needs to be performed in a transaction.
-
-        Args:
-
-            edge_batch: list of edge records to write
-        """
-
-        bin_edges = []
-        pub_edges = []
-        org_edges = []
-        det_edges = []
-        det_nodes = []
-
-        for record in edge_batch:
-
-            _experiment_id, _ = _process_node_id_and_type(
-                record["e"], "GraphExperiment"
-            )
-
-            if record.get("b"):
-                _bin_id = record["b"].get("ac")
-
-                _interaction_type = "INTERACTION_TO_EXPERIMENT"
-                _interaction_props = {}
-
-                bin_edges.append(
-                    (
-                        None,
-                        _bin_id,
-                        _experiment_id,
-                        _interaction_type,
-                        _interaction_props,
-                    )
-                )
-
-            if record.get("p"):
-                _publication_id, _ = _process_node_id_and_type(
-                    record["p"], "GraphPublication"
-                )
-
-                _pub_edge_type = "EXPERIMENT_TO_PUBLICATION"
-                _pub_edge_props = {}
-
-                pub_edges.append(
-                    (
-                        None,
-                        _experiment_id,
-                        _publication_id,
-                        _pub_edge_type,
-                        _pub_edge_props,
-                    )
-                )
-
-            if record.get("o"):
-                _organism_id, _ = _process_node_id_and_type(
-                    record["o"], "GraphOrganism"
-                )
-
-                _org_edge_type = "EXPERIMENT_TO_ORGANISM"
-                _org_edge_props = {}
-
-                org_edges.append(
-                    (
-                        None,
-                        _experiment_id,
-                        _organism_id,
-                        _org_edge_type,
-                        _org_edge_props,
-                    )
-                )
-
-            if record.get("d"):
-                _detection_id, _detection_type = _process_node_id_and_type(
-                    record["d"], "GraphEvidenceType"
-                )
-
-                det_nodes.append((_detection_id, _detection_type, record["d"]))
-
-                _det_edge_type = "EXPERIMENT_TO_DETECTION_METHOD"
-                _det_edge_props = {}
-
-                det_edges.append(
-                    (
-                        None,
-                        _experiment_id,
-                        _detection_id,
-                        _det_edge_type,
-                        _det_edge_props,
-                    )
-                )
-
-        self.bcy.write_nodes(
-            nodes=det_nodes,
-            db_name=self.db_name,
-        )
-
-        self.bcy.write_edges(
-            edges=[
-                item
-                for sublist in [bin_edges, pub_edges, org_edges, det_edges]
-                for item in sublist
-            ],
-            db_name=self.db_name,
-        )
 
     def _get_binary_interaction_ids_and_write_batches_tx(self, tx):
         """
@@ -425,26 +311,26 @@ class BioCypherAdapter:
         result = tx.run(
             f"MATCH (n:GraphBinaryInteractionEvidence) "
             "RETURN id(n) as id"
-            # " LIMIT 10"
+            # " LIMIT 1000"
         )
 
         id_batch = []
         for record in result:
             # collect in batches
-            if len(id_batch) < self.id_batch_size:
-                id_batch.append(record["id"])
+            id_batch.append(record["id"])
+            if len(id_batch) == self.id_batch_size:
 
-                # check if result depleted
-                if result.peek() is None:
-                    # write last batch
-                    self._write_bin_int_edges(id_batch)
-
-            # if full batch, trigger write process
-            else:
-                self._write_bin_int_edges(id_batch)
+                # if full batch, trigger write process
+                self._write_binary_interactions(id_batch)
                 id_batch = []
 
-    def _write_bin_int_edges(self, id_batch):
+            # check if result depleted
+            elif result.peek() is None:
+
+                # write last batch
+                self._write_binary_interactions(id_batch)
+
+    def _write_binary_interactions(self, id_batch):
         """
         Write edges to admin import csv files. Needs to be performed in a
         transaction.
@@ -465,6 +351,12 @@ class BioCypherAdapter:
 
             # main interaction edges
             int_edges = []
+            # experiment edges
+            bin_edges = []
+            pub_edges = []
+            org_edges = []
+            det_edges = []
+            int_det_edges = []
 
             for res in results:
                 # TODO role -> relationship type
@@ -481,30 +373,39 @@ class BioCypherAdapter:
                     )
 
                 ## primary interaction edge
+                if not (res.get("a") and res.get("b")):
+                    logger.debug(
+                        "No interactors found for binary interaction evidence: "
+                        f"{res}"
+                    )
+                    continue
 
-                # also carrying ac: efo, rcsb pdb, wwpdb
-                _src_id, _src_type = _process_node_id_and_type(
-                    res["a"], res["typ_a"], res["src_a"]
+                # account for self-interactions, use same id for both if one
+                # does not exist
+                _src_id, _ = (
+                    _process_node_id_and_type(
+                        res["a"], res["typ_a"], res["src_a"]
+                    )
+                    if res.get("a")
+                    else _process_node_id_and_type(
+                        res["b"], res["typ_b"], res["src_b"]
+                    )
                 )
-                _tar_id, _tar_type = _process_node_id_and_type(
-                    res["b"], res["typ_b"], res["src_b"]
+                _tar_id, _ = (
+                    _process_node_id_and_type(
+                        res["b"], res["typ_b"], res["src_b"]
+                    )
+                    if res.get("b")
+                    else _process_node_id_and_type(
+                        res["a"], res["typ_a"], res["src_a"]
+                    )
                 )
 
-                _source = res["source"]
-
-                # subtypes according to the type of association
-                # _type = "_".join(
-                #     [
-                #         res["typ_a"],
-                #         res["typ_b"],
-                #         _source,
-                #         res["nt"].get("shortName"),
-                #     ]
-                # )
                 _type = res["nt"].get("shortName")
 
                 # properties of BinaryInteractionEvidence
                 _props = res["n"]
+
                 # add interactionType properties (redundant, should
                 # later be encoded in labels)
                 _props["interactionTypeShortName"] = res["nt"].get("shortName")
@@ -514,6 +415,7 @@ class BioCypherAdapter:
                 )
 
                 _props["mi_score"] = res["mi_score"]
+                _props["source"] = res["source"]
 
                 # TODO pass roles of a and b: is there a smarter way to do
                 # this?
@@ -522,7 +424,118 @@ class BioCypherAdapter:
 
                 int_edges.append((_id, _src_id, _tar_id, _type, _props))
 
-        self.bcy.write_edges(
-            edges=int_edges,
-            db_name=self.db_name,
-        )
+                ## experiment edges
+                _experiment_id, _ = _process_node_id_and_type(
+                    res["e"], "GraphExperiment"
+                )
+
+                # edges to binary interaction evidence
+                _interaction_type = "INTERACTION_TO_EXPERIMENT"
+                _interaction_props = {}
+
+                bin_edges.append(
+                    (
+                        None,
+                        _id,
+                        _experiment_id,
+                        _interaction_type,
+                        _interaction_props,
+                    )
+                )
+
+                # edges to publications
+                if res.get("p"):
+                    _publication_id, _ = _process_node_id_and_type(
+                        res["p"], "GraphPublication"
+                    )
+
+                    _pub_edge_type = "EXPERIMENT_TO_PUBLICATION"
+                    _pub_edge_props = {}
+
+                    pub_edges.append(
+                        (
+                            None,
+                            _experiment_id,
+                            _publication_id,
+                            _pub_edge_type,
+                            _pub_edge_props,
+                        )
+                    )
+
+                # edges to organisms
+                if res.get("o"):
+                    _organism_id, _ = _process_node_id_and_type(
+                        res["o"], "GraphOrganism"
+                    )
+
+                    _org_edge_type = "EXPERIMENT_TO_ORGANISM"
+                    _org_edge_props = {}
+
+                    org_edges.append(
+                        (
+                            None,
+                            _experiment_id,
+                            _organism_id,
+                            _org_edge_type,
+                            _org_edge_props,
+                        )
+                    )
+
+                # detection method edges to participants
+                if res.get("idm_a") and res.get("idm_b"):
+
+                    _int_det_edge_type = "PARTICIPANT_DETECTION_METHOD"
+                    _int_det_edge_props_a = res["idm_a"]
+                    _int_det_edge_props_b = res["idm_b"]
+
+                    int_det_edges.append(
+                        (
+                            None,
+                            _experiment_id,
+                            _src_id,
+                            _int_det_edge_type,
+                            _int_det_edge_props_a,
+                        )
+                    )
+                    int_det_edges.append(
+                        (
+                            None,
+                            _experiment_id,
+                            _tar_id,
+                            _int_det_edge_type,
+                            _int_det_edge_props_b,
+                        )
+                    )
+
+                # edges to detection methods and nodes
+                if res.get("d"):
+                    _detection_id, _ = _process_node_id_and_type(
+                        res["d"], "GraphEvidenceType"
+                    )
+
+                    _det_edge_type = "EXPERIMENT_TO_DETECTION_METHOD"
+                    _det_edge_props = {}
+
+                    det_edges.append(
+                        (
+                            None,
+                            _experiment_id,
+                            _detection_id,
+                            _det_edge_type,
+                            _det_edge_props,
+                        )
+                    )
+
+        # finally, write
+        for edge_set in [
+            int_edges,
+            bin_edges,
+            pub_edges,
+            org_edges,
+            det_edges,
+            int_det_edges,
+        ]:
+            self.bcy.write_edges(
+                edge_set,
+                db_name=self.db_name,
+            )

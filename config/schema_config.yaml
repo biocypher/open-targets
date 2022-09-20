@@ -651,6 +651,19 @@ interactor to organism association:
   target: organism
   label_in_input: INTERACTOR_TO_ORGANISM
 
+experiment to interactor association:
+  is_a: association
+  represented_as: edge
+  preferred_id: id
+  source: experiment
+  target: interactor
+  label_in_input: PARTICIPANT_DETECTION_METHOD
+  properties:
+    ac: str
+    shortName: str
+    fullName: str
+    mIIdentifier: str
+
 # self interactions are not in the graph.
 
 # ### From OTAR, Barrio-Hernandez query:
