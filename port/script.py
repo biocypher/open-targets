@@ -4,7 +4,7 @@ import pstats
 
 from adapter import BioCypherAdapter
 
-PROFILE = False
+PROFILE = True
 
 
 def main():
@@ -18,7 +18,7 @@ def main():
         profile.enable()
 
     # create and run adapter
-    adapter = BioCypherAdapter(db_name="ppi2")
+    adapter = BioCypherAdapter(db_name="ppi1")
     adapter.write_to_csv_for_admin_import()
 
     if PROFILE:

@@ -766,8 +766,7 @@ def _process_node_id_and_type(
         if _node.get("pubmedIdStr"):
             _id = "pubmed:" + _node["pubmedIdStr"]
         else:
-            print("Erroneous " + _type + " ==============================")
-            print(_node)
+            logger.debug(f"Erroneous {_type}: {_node}")
 
     elif _type == "GraphOrganism":
         # need to resort to uniqueKeys because none of the others is
@@ -776,5 +775,10 @@ def _process_node_id_and_type(
 
     elif _type == "GraphExperiment":
         _id = _node.get("uniqueKey")
+
+    elif _type == "GraphEvidenceType" and ebi_prefix_pattern.match(
+        _node.get("ac")
+    ):
+        _id = "intact:" + _node.get("ac")
 
     return _id, _type

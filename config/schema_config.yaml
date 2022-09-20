@@ -65,6 +65,16 @@ dsDNA sequence:
     preferredName: str
     sequence: str
 
+evidence type:
+  represented_as: node
+  preferred_id: id
+  label_in_input: GraphEvidenceType
+  properties:
+    ac: str
+    fullName: str
+    shortName: str
+    mIIdentifier: str
+
 experiment:
   is_a: information content entity
   represented_as: node
@@ -410,7 +420,7 @@ colocalisation:
     interactionTypeIdentifierStr: str
     src_role: str
     tar_role: str
-    mi_score: long
+    mi_score: double
 
 functional association:
   is_a: association
@@ -429,7 +439,7 @@ functional association:
     interactionTypeIdentifierStr: str
     src_role: str
     tar_role: str
-    mi_score: long
+    mi_score: double
 
 molecular association psimi:
   is_a: association
@@ -452,7 +462,7 @@ molecular association psimi:
     interactionTypeIdentifierStr: str
     src_role: str
     tar_role: str
-    mi_score: long
+    mi_score: double
 
 physical association:
   # stronger inference; simply put found in the same complex; does not
@@ -474,7 +484,7 @@ physical association:
     interactionTypeIdentifierStr: str
     src_role: str
     tar_role: str
-    mi_score: long
+    mi_score: double
 
 direct interaction:
   is_a: [
@@ -498,7 +508,7 @@ direct interaction:
     interactionTypeIdentifierStr: str
     src_role: str
     tar_role: str
-    mi_score: long
+    mi_score: double
 
 enzymatic interaction:
   # aggregate class of specific direct interactions
@@ -573,7 +583,7 @@ enzymatic interaction:
     interactionTypeIdentifierStr: str
     src_role: str
     tar_role: str
-    mi_score: long
+    mi_score: double
 
 # covalent binding is only 6 small molecule - protein interactions.
 covalent binding:
@@ -598,7 +608,40 @@ covalent binding:
     interactionTypeIdentifierStr: str
     src_role: str
     tar_role: str
-    mi_score: long
+    mi_score: double
+
+#################### NON PSI-MI INTERACTIONS ####################
+experiment to article association:
+  is_a: association
+  represented_as: edge
+  preferred_id: id
+  source: experiment
+  target: article
+  label_in_input: EXPERIMENT_TO_PUBLICATION
+
+experiment to organism association:
+  is_a: association
+  represented_as: edge
+  preferred_id: id
+  source: experiment
+  target: organism
+  label_in_input: EXPERIMENT_TO_ORGANISM
+
+experiment to evidence type association:
+  is_a: association
+  represented_as: edge
+  preferred_id: id
+  source: experiment
+  target: evidence type
+  label_in_input: EXPERIMENT_TO_DETECTION_METHOD
+
+interaction to experiment association:
+  is_a: association
+  represented_as: edge
+  preferred_id: id
+  source: interaction # does not exist, granular subtypes above
+  target: experiment
+  label_in_input: INTERACTION_TO_EXPERIMENT
 
 interactor to organism association:
   is_a: association
@@ -610,234 +653,234 @@ interactor to organism association:
 
 # self interactions are not in the graph.
 
-### From OTAR, Barrio-Hernandez query:
-## currently UNUSED
-# 'MI:0320', ribonucleic acid
-# quite generic; probes, k-mers (shared probably), telomerase RNA
-# protein_rna: intact, wwpdb, emdb, reactome
-# rna_protein: intact, wwpdb, emdb, rcsb pdb
-# only reactome does not have interaction ID
-intact.protein to RNA sequence association:
-  is_a: [protein to RNA sequence association, association]
-  represented_as: node
-  preferred_id: intact
-  source: protein
-  target: RNASequence
-  label_in_input: [
-    protein_rna,
-    protein_rna,
-    protein_rna,
-    rna_protein,
-    rna_protein,
-    rna_protein,
-    rna_protein,
-  ]
-  properties:
-    ac: str
-    shortName: str
-    isNegative: str
-    isInferred: str
-    interactionTypeShortName: str
-    interactionTypeFullName: str
-    interactionTypeIdentifierStr: str
+# ### From OTAR, Barrio-Hernandez query:
+# ## currently UNUSED
+# # 'MI:0320', ribonucleic acid
+# # quite generic; probes, k-mers (shared probably), telomerase RNA
+# # protein_rna: intact, wwpdb, emdb, reactome
+# # rna_protein: intact, wwpdb, emdb, rcsb pdb
+# # only reactome does not have interaction ID
+# intact.protein to RNA sequence association:
+#   is_a: [protein to RNA sequence association, association]
+#   represented_as: node
+#   preferred_id: intact
+#   source: protein
+#   target: RNASequence
+#   label_in_input: [
+#     protein_rna,
+#     protein_rna,
+#     protein_rna,
+#     rna_protein,
+#     rna_protein,
+#     rna_protein,
+#     rna_protein,
+#   ]
+#   properties:
+#     ac: str
+#     shortName: str
+#     isNegative: str
+#     isInferred: str
+#     interactionTypeShortName: str
+#     interactionTypeFullName: str
+#     interactionTypeIdentifierStr: str
 
-# hack: represent virtual leaves explicitly
-reactome.protein to RNA sequence association:
-  is_a: [protein to RNA sequence association, association]
-  represented_as: node
-  preferred_id: id
-  source: protein
-  target: RNASequence
-  label_in_input: protein_rna_reactome
-  properties:
-    ac: str
-    shortName: str
-    isNegative: str
-    isInferred: str
-    interactionTypeShortName: str
-    interactionTypeFullName: str
-    interactionTypeIdentifierStr: str
+# # hack: represent virtual leaves explicitly
+# reactome.protein to RNA sequence association:
+#   is_a: [protein to RNA sequence association, association]
+#   represented_as: node
+#   preferred_id: id
+#   source: protein
+#   target: RNASequence
+#   label_in_input: protein_rna_reactome
+#   properties:
+#     ac: str
+#     shortName: str
+#     isNegative: str
+#     isInferred: str
+#     interactionTypeShortName: str
+#     interactionTypeFullName: str
+#     interactionTypeIdentifierStr: str
 
 
-# 'MI:0321', catalytic rna
-# no "catalytic rna" in OTAR graph
+# # 'MI:0321', catalytic rna
+# # no "catalytic rna" in OTAR graph
 
-# 'MI:0322', guide rna
-# only intact and wwpdb
-protein to guide RNA association:
-  is_a: association
-  represented_as: node
-  preferred_id: intact
-  source: protein
-  target: GuideRNASequence
-  label_in_input: [protein_grna_intact, protein_grna_wwpdb]
-  properties:
-    ac: str
-    shortName: str
-    isNegative: str
-    isInferred: str
-    interactionTypeShortName: str
-    interactionTypeFullName: str
-    interactionTypeIdentifierStr: str
+# # 'MI:0322', guide rna
+# # only intact and wwpdb
+# protein to guide RNA association:
+#   is_a: association
+#   represented_as: node
+#   preferred_id: intact
+#   source: protein
+#   target: GuideRNASequence
+#   label_in_input: [protein_grna_intact, protein_grna_wwpdb]
+#   properties:
+#     ac: str
+#     shortName: str
+#     isNegative: str
+#     isInferred: str
+#     interactionTypeShortName: str
+#     interactionTypeFullName: str
+#     interactionTypeIdentifierStr: str
 
-# 'MI:0323', heterogeneous nuclear rna
-# not in OTAR graph
+# # 'MI:0323', heterogeneous nuclear rna
+# # not in OTAR graph
 
-# 'MI_0325', transfer rna
-# few; intact, emdb, wwpdb
-protein to tRNA association:
-  is_a: association
-  represented_as: node
-  preferred_id: intact
-  source: protein
-  target: tRNASequence
-  label_in_input: [
-    protein_trna_intact,
-    trna_protein_intact,
-    protein_trna_emdb,
-    protein_trna_wwpdb
-  ]
-  properties:
-    ac: str
-    shortName: str
-    isNegative: str
-    isInferred: str
-    interactionTypeShortName: str
-    interactionTypeFullName: str
-    interactionTypeIdentifierStr: str
+# # 'MI_0325', transfer rna
+# # few; intact, emdb, wwpdb
+# protein to tRNA association:
+#   is_a: association
+#   represented_as: node
+#   preferred_id: intact
+#   source: protein
+#   target: tRNASequence
+#   label_in_input: [
+#     protein_trna_intact,
+#     trna_protein_intact,
+#     protein_trna_emdb,
+#     protein_trna_wwpdb
+#   ]
+#   properties:
+#     ac: str
+#     shortName: str
+#     isNegative: str
+#     isInferred: str
+#     interactionTypeShortName: str
+#     interactionTypeFullName: str
+#     interactionTypeIdentifierStr: str
 
-# 'MI:0324', messenger rna
-# only intact
-protein to mRNA association:
-  is_a: association
-  represented_as: node
-  preferred_id: intact
-  source: protein
-  target: mRNASequence
-  label_in_input: [
-    protein_mrna_intact,
-    mrna_protein_intact
-  ]
-  properties:
-    ac: str
-    shortName: str
-    isNegative: str
-    isInferred: str
-    interactionTypeShortName: str
-    interactionTypeFullName: str
-    interactionTypeIdentifierStr: str
+# # 'MI:0324', messenger rna
+# # only intact
+# protein to mRNA association:
+#   is_a: association
+#   represented_as: node
+#   preferred_id: intact
+#   source: protein
+#   target: mRNASequence
+#   label_in_input: [
+#     protein_mrna_intact,
+#     mrna_protein_intact
+#   ]
+#   properties:
+#     ac: str
+#     shortName: str
+#     isNegative: str
+#     isInferred: str
+#     interactionTypeShortName: str
+#     interactionTypeFullName: str
+#     interactionTypeIdentifierStr: str
 
-# 'MI:0608', ribosomal rna
-# few; intact, emdb, wwpdb, rcsb pdb
-protein to rRNA association:
-  is_a: association
-  represented_as: node
-  preferred_id: intact
-  source: protein
-  target: rRNASequence
-  label_in_input: [
-    rrna_protein_intact,
-    rrna_protein_wwpdb,
-    rrna_protein_rcsb pdb,
-    protein_rrna_intact,
-    rrna_protein_emdb,
-    protein_rrna_emdb,
-    protein_rrna_wwpdb
-  ]
-  properties:
-    ac: str
-    shortName: str
-    isNegative: str
-    isInferred: str
-    interactionTypeShortName: str
-    interactionTypeFullName: str
-    interactionTypeIdentifierStr: str
+# # 'MI:0608', ribosomal rna
+# # few; intact, emdb, wwpdb, rcsb pdb
+# protein to rRNA association:
+#   is_a: association
+#   represented_as: node
+#   preferred_id: intact
+#   source: protein
+#   target: rRNASequence
+#   label_in_input: [
+#     rrna_protein_intact,
+#     rrna_protein_wwpdb,
+#     rrna_protein_rcsb pdb,
+#     protein_rrna_intact,
+#     rrna_protein_emdb,
+#     protein_rrna_emdb,
+#     protein_rrna_wwpdb
+#   ]
+#   properties:
+#     ac: str
+#     shortName: str
+#     isNegative: str
+#     isInferred: str
+#     interactionTypeShortName: str
+#     interactionTypeFullName: str
+#     interactionTypeIdentifierStr: str
 
-# 'MI:0609', small nucleolar rna
-# few, only intact
-protein to snoRNA association:
-  is_a: association
-  represented_as: node
-  preferred_id: intact
-  source: protein
-  target: snoRNASequence
-  label_in_input: protein_snorna_intact
-  properties:
-    ac: str
-    shortName: str
-    isNegative: str
-    isInferred: str
-    interactionTypeShortName: str
-    interactionTypeFullName: str
-    interactionTypeIdentifierStr: str
+# # 'MI:0609', small nucleolar rna
+# # few, only intact
+# protein to snoRNA association:
+#   is_a: association
+#   represented_as: node
+#   preferred_id: intact
+#   source: protein
+#   target: snoRNASequence
+#   label_in_input: protein_snorna_intact
+#   properties:
+#     ac: str
+#     shortName: str
+#     isNegative: str
+#     isInferred: str
+#     interactionTypeShortName: str
+#     interactionTypeFullName: str
+#     interactionTypeIdentifierStr: str
 
-# 'MI:0610', small interfering rna
-# not in OTAR graph
+# # 'MI:0610', small interfering rna
+# # not in OTAR graph
 
-# 'MI:0611', signal recognition particle rna
-# not in OTAR graph
+# # 'MI:0611', signal recognition particle rna
+# # not in OTAR graph
 
-# 'MI:0679', poly adenine
-# few, only intact
-protein to poly a sequence motif association:
-  is_a: association
-  represented_as: node
-  preferred_id: intact
-  source: protein
-  target: PolyASequenceMotif
-  label_in_input: [
-    poly a_protein_intact,
-    protein_poly a_intact
-  ]
-  properties:
-    ac: str
-    shortName: str
-    isNegative: str
-    isInferred: str
-    interactionTypeShortName: str
-    interactionTypeFullName: str
-    interactionTypeIdentifierStr: str
+# # 'MI:0679', poly adenine
+# # few, only intact
+# protein to poly a sequence motif association:
+#   is_a: association
+#   represented_as: node
+#   preferred_id: intact
+#   source: protein
+#   target: PolyASequenceMotif
+#   label_in_input: [
+#     poly a_protein_intact,
+#     protein_poly a_intact
+#   ]
+#   properties:
+#     ac: str
+#     shortName: str
+#     isNegative: str
+#     isInferred: str
+#     interactionTypeShortName: str
+#     interactionTypeFullName: str
+#     interactionTypeIdentifierStr: str
 
-# 'MI:2190', long non-coding ribonucleic acid
-# few, only intact
-protein to lncRNA sequence association:
-  is_a: association
-  represented_as: node
-  preferred_id: intact
-  source: protein
-  target: lncRNASequence
-  label_in_input: [
-    protein_lncrna_intact,
-    lncrna_protein_intact
-  ]
-  properties:
-    ac: str
-    shortName: str
-    isNegative: str
-    isInferred: str
-    interactionTypeShortName: str
-    interactionTypeFullName: str
-    interactionTypeIdentifierStr: str
+# # 'MI:2190', long non-coding ribonucleic acid
+# # few, only intact
+# protein to lncRNA sequence association:
+#   is_a: association
+#   represented_as: node
+#   preferred_id: intact
+#   source: protein
+#   target: lncRNASequence
+#   label_in_input: [
+#     protein_lncrna_intact,
+#     lncrna_protein_intact
+#   ]
+#   properties:
+#     ac: str
+#     shortName: str
+#     isNegative: str
+#     isInferred: str
+#     interactionTypeShortName: str
+#     interactionTypeFullName: str
+#     interactionTypeIdentifierStr: str
 
-# 'MI:2204', micro rna few and only intact, BUT there are quite some
-# more mRNA-miRNA interactions, which are disregarded in this schema;
-# may be a point of improvement to include those protein-mrna-mirna
-# relations
-protein to microRNA sequence association:
-  is_a: association
-  represented_as: node
-  preferred_id: intact
-  source: protein
-  target: microRNA
-  label_in_input: [
-    mirna_protein_intact,
-    protein_mirna_intact
-  ]
-  properties:
-    ac: str
-    shortName: str
-    isNegative: str
-    isInferred: str
-    interactionTypeShortName: str
-    interactionTypeFullName: str
-    interactionTypeIdentifierStr: str
+# # 'MI:2204', micro rna few and only intact, BUT there are quite some
+# # more mRNA-miRNA interactions, which are disregarded in this schema;
+# # may be a point of improvement to include those protein-mrna-mirna
+# # relations
+# protein to microRNA sequence association:
+#   is_a: association
+#   represented_as: node
+#   preferred_id: intact
+#   source: protein
+#   target: microRNA
+#   label_in_input: [
+#     mirna_protein_intact,
+#     protein_mirna_intact
+#   ]
+#   properties:
+#     ac: str
+#     shortName: str
+#     isNegative: str
+#     isInferred: str
+#     interactionTypeShortName: str
+#     interactionTypeFullName: str
+#     interactionTypeIdentifierStr: str

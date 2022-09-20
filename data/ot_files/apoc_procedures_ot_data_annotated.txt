@@ -97,6 +97,7 @@ WITH CASE ID(interactorA)<ID(interactorB)
 
 # we end up with a set of interactors (AN/BN), entities (AN/BN), types (AN/BN), interactionN, sourceN, and identifiersN for each interaction
 
+# try to find entity identification method
 OPTIONAL MATCH (entityAN)-[identificationMethodsAR:identificationMethods]->(participantIdentificationMethodAN:GraphCvTerm)
 # for each "participant" (entity), try to find name and MI identifier 
 ## why is this not a property?
@@ -153,18 +154,22 @@ OPTIONAL MATCH (interactionN)-[clusteredInteractionR:interactions]-(clusteredInt
 OPTIONAL MATCH (interactionN)-[interactiontypeR:interactionType]-(interactiontypeN:GraphCvTerm)
 
 # try to find experimental evidence type for each interaction
+# done
 OPTIONAL MATCH (interactionN)-[experimentR:experiment]-(experimentN:GraphExperiment)-[interactionDetectionMethodR:interactionDetectionMethod]-(interactionDetectionMethodN:GraphCvTerm)
 
 # try to find organism for experiment that yielded interaction information
+# done
 OPTIONAL MATCH (experimentN)-[hostOrganismR:hostOrganism]-(hostOrganismN:GraphOrganism)
 
 # try to find supporting publication
+# done
 OPTIONAL MATCH (experimentN)-[publicationR:PUB_EXP]-(publicationN:GraphPublication)-[pubmedIdXrefR:pubmedId]-(pubmedIdXrefN:GraphXref)
 
 # try to find complex expansion method for interaction (whether there was a complex implicated in the interaction assigned to only one constituent protein)
 OPTIONAL MATCH (interactionN)-[complexExpansionR:complexExpansion]-(complexExpansionN:GraphCvTerm)
 
 # try to find ids for entities
+# duplicate from above
 OPTIONAL MATCH (entityAN)-[identificationMethodsAR:identificationMethods]->(participantIdentificationMethodAN:GraphCvTerm)
 OPTIONAL MATCH (entityBN)-[identificationMethodsBR:identificationMethods]->(participantIdentificationMethodBN:GraphCvTerm)
 
