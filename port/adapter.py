@@ -346,6 +346,8 @@ class BioCypherAdapter:
         # to the same interaction node. What is the biological meaning behind
         # this? Complexes, experiments, etc.?
 
+        # TODO: separate query into smaller ones? (eg primary and experiment)
+
         with self.driver.session() as session:
             results = session.read_transaction(get_bin_int_rels_tx, id_batch)
 
