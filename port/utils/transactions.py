@@ -23,7 +23,11 @@ def get_interactor_to_organism_edges_tx(tx, ids):
     return result.data()
 
 
-# TODO lots of duplicated EBI accessions: detection methods
+# TODO source of interaction
+# TODO type field on interactor
+# TODO why is there no ID field?
+# TODO entity organism
+# TODO complex expansion
 
 
 def get_bin_int_rels_tx(tx, ids):

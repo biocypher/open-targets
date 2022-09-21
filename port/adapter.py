@@ -220,6 +220,8 @@ class BioCypherAdapter:
                 ) = _process_node_id_and_type(res["n"], typ or label, src)
 
                 _interactor_props = res["n"]
+                _interactor_props["type"] = typ
+                _interactor_props["source"] = src
 
                 nodes.append(
                     (_interactor_id, _interactor_type, _interactor_props)
