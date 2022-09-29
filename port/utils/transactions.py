@@ -23,11 +23,8 @@ def get_interactor_to_organism_edges_tx(tx, ids):
     return result.data()
 
 
-# TODO source of interaction
-# TODO type field on interactor
 # TODO why is there no ID field?
-# TODO entity organism
-# TODO complex expansion
+# TODO make role edge generic name
 
 
 def get_bin_int_rels_tx(tx, ids):
@@ -43,7 +40,10 @@ def get_bin_int_rels_tx(tx, ids):
         "OPTIONAL MATCH (n)-[:interactionType]->(nt:GraphCvTerm) "
         # get experiment
         "OPTIONAL MATCH (n)-[:experiment]->(e:GraphExperiment) "
-        "WITH n, a, b, nt, at, bt, ap, bp, e "
+        # get expansion type
+        "OPTIONAL MATCH (n)-[:complexExpansion]->(ce:GraphCvTerm) "
+        # with
+        "WITH n, a, b, nt, at, bt, ap, bp, e, ce "
         # get source
         "MATCH (n)-[:identifiers]->(:GraphXref)-[:database]->(nd:GraphCvTerm) "
         # get cluster
@@ -63,6 +63,7 @@ def get_bin_int_rels_tx(tx, ids):
         "OPTIONAL MATCH (e)-[:interactionDetectionMethod]->(d:GraphCvTerm) "
         # return
         "RETURN n, nd.shortName AS source, nt, nc.miscore AS mi_score, "
+        "ce.shortName AS expansion, ce.mIIdentifier AS expansion_id, "
         "a, ad.shortName AS src_a, at.shortName AS typ_a, "
         "ar.shortName AS role_a, idm_a, "
         "b, bd.shortName AS src_b, bt.shortName AS typ_b, "

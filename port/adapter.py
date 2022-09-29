@@ -271,18 +271,32 @@ class BioCypherAdapter:
         """
 
         result = tx.run(
-            "MATCH ()-[:interactionDetectionMethod]->(i) " "RETURN DISTINCT i"
+            "MATCH ()-[:interactionDetectionMethod]->(idm:GraphCvTerm) "
+            "WITH DISTINCT idm LIMIT 100 "
+            "RETURN idm.ac as ac, idm.shortName as shortName, "
+            "idm.fullName as fullName, idm.mIIdentifier as mIIdentifier"
         )
+        # need to do this because the distinct returns a "Node" object instead
+        # of a dict and I don't know how to convert it to one.
 
         det_nodes = []
 
         for res in result:
 
+            _detection_props = {
+                "ac": res["ac"],
+                "shortName": res["shortName"],
+                "fullName": res["fullName"],
+                "mIIdentifier": res["mIIdentifier"],
+            }
+
             _detection_id, _detection_type = _process_node_id_and_type(
-                res["i"], "GraphEvidenceType"
+                _detection_props, "GraphEvidenceType"
             )
 
-            det_nodes.append((_detection_id, _detection_type, res["i"]))
+            det_nodes.append(
+                (_detection_id, _detection_type, _detection_props)
+            )
 
         self.bcy.write_nodes(
             nodes=det_nodes,
@@ -313,7 +327,7 @@ class BioCypherAdapter:
         result = tx.run(
             f"MATCH (n:GraphBinaryInteractionEvidence) "
             "RETURN id(n) as id"
-            # " LIMIT 1000"
+            # " LIMIT 100"
         )
 
         id_batch = []
@@ -364,6 +378,11 @@ class BioCypherAdapter:
 
             for res in results:
                 # TODO role -> relationship type
+
+                # Barrio-Hernandez et al. use only reactome, intact, and signor
+                # optional filter here; could also be done in the query
+                if res["source"] not in ["reactome", "intact", "signor"]:
+                    continue
 
                 # extract relevant ids
                 _id = res["n"].get("ac")
@@ -420,6 +439,9 @@ class BioCypherAdapter:
 
                 _props["mi_score"] = res["mi_score"]
                 _props["source"] = res["source"]
+
+                _props["expansion"] = res["expansion"]
+                _props["expansion_id"] = res["expansion_id"]
 
                 # TODO pass roles of a and b: is there a smarter way to do
                 # this?

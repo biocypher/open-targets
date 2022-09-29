@@ -19,22 +19,40 @@ article:
   represented_as: node
   preferred_id: pubmed
   label_in_input: GraphPublication
+  properties:
+    ac: str
+    authors: str
+    journal: str
+    publicationDate: str
+    title: str
+    pubmedIdStr: str
+    type: str # TODO make type and source always allowed
+    source: str
 
 biological entity:
   represented_as: node
   preferred_id: [reactome, signor]
   label_in_input: [reactome_unknown_participant, signor_unknown_participant]
 
-DNA sequence:
+DNA:
   is_a: nucleic acid entity
   represented_as: node
-  preferred_id: [intact.molecule, genbank, ensembl, reactome, refseq]
+  preferred_id: [intact, genbank, ensembl, reactome, refseq]
   label_in_input: [intact_dna, genbank_dna, ensembl_dna, reactome_dna, refseq_dna]
+  properties:
+    sequence: str
+    ac: str
+    shortName: str
+    preferredName: str
+    preferredIdentifierStr: str
+    type: str
+    source: str
 
-dsDNA sequence:
-  is_a: [DNA sequence, nucleic acid entity]
+double stranded DNA:
+  is_a: [DNA, nucleic acid entity]
+  inherit_properties: true
   represented_as: node
-  preferred_id: [intact.molecule, uniparc, genbank, ensembl, pubmed, refseq]
+  preferred_id: [intact, uniparc, genbank, ensembl, pubmed, refseq]
   label_in_input: [
     intact_dsdna, 
     uniprot_archive_dsdna, 
@@ -43,6 +61,13 @@ dsDNA sequence:
     pubmed_dsdna,
     refseq_dsdna
   ]
+
+single stranded DNA:
+  is_a: [DNA, nucleic acid entity]
+  inherit_properties: true
+  represented_as: node
+  preferred_id: [intact, genbank, ensembl, chebi]
+  label_in_input: [intact_ssdna, genbank_ssdna, ensembl_ssdna, chebi_ssdna]
 
 evidence type:
   represented_as: node
@@ -54,33 +79,38 @@ experiment:
   represented_as: node
   preferred_id: id
   label_in_input: GraphExperiment
-
-ssDNA sequence:
-  is_a: [DNA sequence, nucleic acid entity]
-  represented_as: node
-  preferred_id: [intact.molecule, genbank, ensembl, chebi]
-  label_in_input: [intact_ssdna, genbank_ssdna, ensembl_ssdna, chebi_ssdna]
+  properties:
+    uniqueKey: str
+    ac: str
+    pubmedId: str
+    preferred_id: str
+    type: str
+    source: str
 
 gene:
   represented_as: node
   preferred_id: exac.gene
   label_in_input: gene
+  exclude_properties: fullName
 
 gene grouping mixin:
   represented_as: node
-  preferred_id: [intact.molecule, uniprot, signor]
+  preferred_id: [intact, uniprot, signor]
   label_in_input: [intact_molecule_set, uniprot_molecule_set, signor_molecule_set]
-
-microRNA:
-  represented_as: node
-  preferred_id: [rnacentral, ensembl, mirbase]
-  label_in_input: [rnacentral_mirna, ensembl_mirna, mirbase_mirna]
 
 peptide:
   is_a: polypeptide
   represented_as: node
-  preferred_id: [intact.molecule, dip]
+  preferred_id: [intact, dip]
   label_in_input: [intact_peptide, dip_peptide]
+  properties:
+    ac: str
+    sequence: str
+    shortName: str
+    fullName: str
+    preferredName: str
+    type: str
+    source: str
 
 peptide precursor:
   is_a: [peptide, polypeptide]
@@ -103,7 +133,7 @@ protein:
   represented_as: node
   preferred_id: [
     uniprot, 
-    intact.molecule, 
+    intact, 
     uniparc, 
     ncbigene, 
     genbank, 
@@ -127,12 +157,24 @@ protein:
     chembl_protein,
     ensembl_protein
   ]
+  properties:
+    ac: str
+    shortName: str
+    fullName: str
+    preferredName: str
+    preferredIdentifierStr: str
+    sequence: str
+    type: str
+    source: str
 
 protein isoform:
   is_a: protein
   represented_as: node
   preferred_id: uniprot
   label_in_input: uniprot_protein_isoform
+  properties:
+    shortName: str
+    fullName: str
 
 protein complex:
   is_a: macromolecular complex mixin
@@ -145,14 +187,23 @@ protein precursor:
   represented_as: node
   preferred_id: uniprot
   label_in_input: uniprot_protein_precursor
+  properties:
+    ac: str
+    shortName: str
+    fullName: str
+    preferredName: str
+    preferredIdentifierStr: str
+    sequence: str
+    type: str
+    source: str
 
 # OTAR "rna" may be too generic; where are the actual Transcripts in the 
 # sense of the central dogma? Are they exclusively in "mrna" (below)?
-RNA sequence:
+RNA:
   is_a: nucleic acid entity
   represented_as: node
   preferred_id: [
-    intact.molecule, 
+    intact, 
     rnacentral, 
     reactome, 
     genbank, 
@@ -169,18 +220,63 @@ RNA sequence:
     ensembl_rna,
     refseq_rna
   ]
+  properties: 
+    sequence: str
+    ac: str
+    shortName: str
+    preferredName: str
+    preferredIdentifierStr: str
+    type: str
+    source: str
 
-guide RNA sequence:
-  is_a: nucleic acid entity
+guide RNA:
+  is_a: [RNA, nucleic acid entity]
+  inherit_properties: true
   represented_as: node
-  preferred_id: [intact.molecule, rnacentral]
+  preferred_id: [intact, rnacentral]
   label_in_input: [intact_grna, rnacentral_grna]
 
-lncRNA sequence:
-  is_a: nucleic acid entity
+long noncoding RNA:
+  is_a: [RNA, nucleic acid entity]
+  inherit_properties: true
   represented_as: node
-  preferred_id: [intact.molecule, refseq, rnacentral, ensembl]
+  preferred_id: [intact, refseq, rnacentral, ensembl]
   label_in_input: [intact_lncrna, refseq_lncrna, rnacentral_lncrna, ensembl_lncrna]
+
+# does not need to be virtual
+microRNA:
+  represented_as: node
+  preferred_id: [rnacentral, ensembl, mirbase]
+  label_in_input: [rnacentral_mirna, ensembl_mirna, mirbase_mirna]
+  properties:
+    sequence: str
+    ac: str
+    shortName: str
+    preferredName: str
+    preferredIdentifierStr: str
+    type: str
+    source: str
+
+ribosomal RNA:
+  is_a: [RNA, nucleic acid entity]
+  inherit_properties: true
+  represented_as: node
+  preferred_id: [intact, genbank, rnacentral, ensembl, ncbigene]
+  label_in_input: [intact_rrna, genbank_rrna, rnacentral_rrna, ensembl_rrna, entrez_rrna]
+
+small nucleolar RNA:
+  is_a: [RNA, nucleic acid entity]
+  inherit_properties: true
+  represented_as: node
+  preferred_id: [rnacentral]
+  label_in_input: [snorna]
+
+transfer RNA:
+  is_a: [RNA, nucleic acid entity]
+  inherit_properties: true
+  represented_as: node
+  preferred_id: [genbank, ensembl, chebi, rnacentral]
+  label_in_input: [genbank_trna, ensembl_trna, chebi_trna, rnacentral_trna]
 
 # neither scientific name nor taxon id are unique
 # includes cell lines, samples, tissues, etc.
@@ -188,35 +284,32 @@ organismal entity:
   represented_as: node
   preferred_id: ncbitaxon
   label_in_input: GraphOrganism
-
-rRNA sequence:
-  is_a: nucleic acid entity
-  represented_as: node
-  preferred_id: [intact.molecule, genbank, rnacentral, ensembl, ncbigene]
-  label_in_input: [intact_rrna, genbank_rrna, rnacentral_rrna, ensembl_rrna, entrez_rrna]
-
-snoRNA sequence:
-  is_a: nucleic acid entity
-  represented_as: node
-  preferred_id: [rnacentral]
-  label_in_input: [snorna]
-
-tRNA sequence:
-  is_a: nucleic acid entity
-  represented_as: node
-  preferred_id: [genbank, ensembl, chebi, rnacentral]
-  label_in_input: [genbank_trna, ensembl_trna, chebi_trna, rnacentral_trna]
+  properties:
+    commonName: str
+    scientificName: str
+    taxId: str
+    uniqueKey: str
+    type: str
+    source: str
 
 small molecule:
   represented_as: node
-  preferred_id: [chebi, chembl, intact.molecule, pubchem.compound]
+  preferred_id: [chebi, chembl, intact, pubchem.compound]
   label_in_input: [chebi_small_molecule, chembl_small_molecule, intact_small_molecule, pubchem_compound]
+  properties: 
+    ac: str
+    shortName: str
+    preferredName: str
+    preferredIdentifierStr: str
+    type: str
+    source: str
 
 stable complex:
   is_a: macromolecular complex mixin
   represented_as: node
   preferred_id: complexportal
   label_in_input: complexportal_stable_complex
+  exclude_properties: fullName
 
 stimulus:
   is_a: biological entity
@@ -226,8 +319,9 @@ stimulus:
 
 transcript:
   represented_as: node
-  preferred_id: [ensembl, intact.molecule, hgnc, genbank, refseq]
+  preferred_id: [ensembl, intact, hgnc, genbank, refseq]
   label_in_input: [ensembl_mrna, intact_mrna, hgnc_mrna, genbank_mrna, refseq_mrna]
+  exclude_properties: [fullName, sequence]
 
 xenobiotic:
   is_a: small molecule
@@ -249,6 +343,7 @@ colocalisation:
   target: protein
   # merge for now for simplicity
   label_in_input: [colocalization, proximity]
+  exclude_properties: imexId
 
 functional association:
   is_a: association
@@ -257,6 +352,7 @@ functional association:
   source: protein
   target: protein
   label_in_input: functional association
+  exclude_properties: imexId
 
 molecular association psimi:
   is_a: association
@@ -269,6 +365,7 @@ molecular association psimi:
   target: protein
   # direct inheritance chain without branches
   label_in_input: association
+  exclude_properties: imexId
 
 physical association:
   # stronger inference; simply put found in the same complex; does not
@@ -280,6 +377,7 @@ physical association:
   target: protein
   # direct inheritance chain without branches
   label_in_input: physical association
+  exclude_properties: imexId
 
 direct interaction:
   is_a: [
@@ -293,6 +391,7 @@ direct interaction:
   target: protein
   # direct inheritance chain without branches
   label_in_input: direct interaction
+  exclude_properties: imexId
 
 enzymatic interaction:
   # aggregate class of specific direct interactions
@@ -357,6 +456,7 @@ enzymatic interaction:
     s-nitrosylation,
     tyrosination,
   ]
+  exclude_properties: imexId
 
 # covalent binding is only 6 small molecule - protein interactions.
 covalent binding:
@@ -371,6 +471,7 @@ covalent binding:
   source: small molecule
   target: protein
   label_in_input: covalent binding
+  exclude_properties: imexId
 
 #################### NON PSI-MI INTERACTIONS ####################
 experiment to article association:
