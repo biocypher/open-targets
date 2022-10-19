@@ -61,6 +61,7 @@ class BioCypherAdapter:
         self.write_edges()
         self.bcy.write_import_call()
         self.bcy.log_missing_bl_types()
+        self.bcy.log_duplicates()
 
     ############################## NODES ####################################
 
@@ -327,7 +328,7 @@ class BioCypherAdapter:
         result = tx.run(
             f"MATCH (n:GraphBinaryInteractionEvidence) "
             "RETURN id(n) as id"
-            # " LIMIT 100"
+            " LIMIT 100000"
         )
 
         id_batch = []
