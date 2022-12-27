@@ -10,4 +10,5 @@ disease:
 
 gene to disease association:
   represented_as: edge
-  label_in_input: affected_pathway
+  preferred_id: [affected pathway, orphanet, somatic mutation, genetic association]
+  label_in_input: [affected_pathway, orphanet, somatic_mutation, genetic_association]

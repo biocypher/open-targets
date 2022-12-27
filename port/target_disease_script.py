@@ -2,8 +2,13 @@ from target_disease_evidence_adapter import TargetDiseaseEvidenceAdapter, Target
 import biocypher
 
 datasets = [
-    TargetDiseaseDataset.SYSBIO,
+    TargetDiseaseDataset.CLINGEN,
+    TargetDiseaseDataset.EVA_SOMATIC,
+    TargetDiseaseDataset.GENE2PHENOTYPE,
+    TargetDiseaseDataset.INTOGEN,
     TargetDiseaseDataset.PROGENY,
+    TargetDiseaseDataset.SYSBIO,
+    TargetDiseaseDataset.UNIPROT_LITERATURE,
 ]
 
 node_fields = [
@@ -33,7 +38,10 @@ def main():
         edge_fields=edge_fields,
     )
 
-    adapter.load_data()
+    adapter.load_data(
+        stats=False,
+        show=False,
+    )
 
     driver.write_nodes(adapter.get_nodes())
     driver.write_edges(adapter.get_edges())
