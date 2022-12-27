@@ -1,0 +1,8 @@
+gene:
+  represented_as: node
+  preferred_id: ensembl
+
+disease:
+  represented_as: node
+  preferred_id: [mondo, efo]
+  label_in_input: [mondo, efo]
