@@ -31,6 +31,15 @@ class TargetDiseaseNodeField(Enum):
     DISEASE_ACCESSION = "diseaseId"
     TARGET_GENE_ENSG = "targetId"
 
+class TargetDiseaseEdgeField(Enum):
+    DISEASE_ACCESSION = "diseaseId"
+    INTERACTION_ACCESSION = "id"
+    LITERATURE = "literature"
+    TARGET_GENE_ENSG = "targetId"
+    SCORE = "score"
+    SOURCE = "datasourceId"
+    TYPE = "datatypeId"
+
 class TargetDiseaseEvidenceAdapter:
     def __init__(
         self, 
@@ -57,7 +66,7 @@ class TargetDiseaseEvidenceAdapter:
             .appName("port") \
             .getOrCreate()
 
-    def load_data(self, stats: bool = False):
+    def load_data(self, stats: bool = False, show: bool = False):
 
         # Read in evidence data
         self.path = "data/ot_files/evidence"
@@ -73,6 +82,11 @@ class TargetDiseaseEvidenceAdapter:
 
             # print number of rows per datasource
             self.full_df.groupBy("datasourceId").count().show(100)
+
+        if show:
+            for dataset in [field.value for field in self.datasets]:
+                self.full_df.where(self.full_df.datasourceId == dataset) \
+                    .show(1, 50, True)
 
     def show_datasources(self):
 
@@ -96,28 +110,76 @@ class TargetDiseaseEvidenceAdapter:
         target_ids = node_df.select("targetId").distinct().collect()
         disease_ids = node_df.select("diseaseId").distinct().collect()
 
+
         # yield target and disease ids
         for target_id in target_ids:
-
+            
             # normalize id
             _id = normalize_curie(f"ensembl:{target_id.targetId}")
 
-            yield (_id, "gene", {})
+            _props = {}
+            _props["version"] = "22.11"
+            _props["source"] = ["open targets"]
+            _props["licence"] = ["https://platform-docs.opentargets.org/licence"] 
+            # TODO single licences
+
+            yield (_id, "gene", _props)
 
         for disease_id in disease_ids:
 
-            # split id into prefix and accession at _
-            _id = disease_id.diseaseId.split("_")[1]
-            _type = disease_id.diseaseId.split("_")[0].lower()
+            _id, _type = self._process_disease_id_and_type(disease_id.diseaseId)
 
-            # normalize id
-            _id = normalize_curie(_type + ":" + _id)
+            _props = {}
+            _props["version"] = "22.11"
+            _props["source"] = ["open targets"]
+            _props["licence"] = ["https://platform-docs.opentargets.org/licence"] 
+            # TODO single licences
 
-            yield (_id, _type, {})
+            yield (_id, _type, _props)
 
     def get_edges(self):
         
         # select columns of interest
         edge_df = self.full_df.where(self.full_df.datasourceId.isin(
             [field.value for field in self.datasets]
-        )).select(self.edge_fields)
+        )).select(
+            [field.value for field in self.edge_fields]
+        )
+
+        # yield edges per row of edge_df, skipping null values
+        for row in edge_df.collect():
+
+            # collect properties from fields, skipping null values
+            properties = {}
+            for field in self.edge_fields:
+                if field == TargetDiseaseEdgeField.SOURCE:
+                    properties["source"] = row[field.value]
+                elif row[field.value]:
+                    properties[field.value] = row[field.value]
+
+            properties["version"] = "22.11"
+            properties["licence"] = ["https://platform-docs.opentargets.org/licence"]
+            # TODO single licences
+
+            disease_id, _ = self._process_disease_id_and_type(row.diseaseId)
+
+            yield (
+                row.id, 
+                normalize_curie(f"ensembl:{row.targetId}"), 
+                disease_id, 
+                row.datatypeId, 
+                properties,
+            )
+    
+    def _process_disease_id_and_type(self, diseaseId: str):
+        """
+        Process diseaseId and diseaseType fields from evidence data
+        """
+        # split id into prefix and accession at _
+        _id = diseaseId.split("_")[1]
+        _type = diseaseId.split("_")[0].lower()
+
+        # normalize id
+        _id = normalize_curie(_type + ":" + _id)
+
+        return (_id, _type)

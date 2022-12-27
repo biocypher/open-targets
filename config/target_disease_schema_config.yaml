@@ -7,3 +7,7 @@ disease:
   represented_as: node
   preferred_id: [mondo, efo, hp]
   label_in_input: [mondo, efo, hp]
+
+gene to disease association:
+  represented_as: edge
+  label_in_input: affected_pathway
