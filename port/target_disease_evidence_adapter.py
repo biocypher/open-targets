@@ -1,6 +1,7 @@
 import os
 from pyspark.sql import SparkSession
 from enum import Enum
+from bioregistry import normalize_curie
 
 class TargetDiseaseDataset(Enum):
     CANCER_BIOMARKERS = "cancer_biomarkers"
@@ -98,7 +99,19 @@ class TargetDiseaseEvidenceAdapter:
 
             # yield target and disease ids
             for target_id in target_ids:
-                yield target_id.targetId
+
+                # normalize id
+                _id = normalize_curie(f"ensembl:{target_id.targetId}")
+
+                yield (_id, "gene", {})
 
             for disease_id in disease_ids:
-                yield disease_id.diseaseId
+
+                # split id into prefix and accession at _
+                _id = disease_id.diseaseId.split("_")[1]
+                _type = disease_id.diseaseId.split("_")[0].lower()
+
+                # normalize id
+                _id = normalize_curie(_type + ":" + _id)
+
+                yield (_id, _type, {})

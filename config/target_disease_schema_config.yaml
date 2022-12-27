@@ -4,5 +4,5 @@ gene:
 
 disease:
   represented_as: node
-  preferred_id: [mondo, efo]
-  label_in_input: [mondo, efo]
+  preferred_id: [mondo, efo, hp]
+  label_in_input: [mondo, efo, hp]
