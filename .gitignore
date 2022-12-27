@@ -3,6 +3,7 @@
 biocypher-*
 .vscode
 *.prof
+data/ot_files/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
