@@ -5,10 +5,10 @@ gene:
 
 disease:
   represented_as: node
-  preferred_id: [mondo, efo, hp]
-  label_in_input: [mondo, efo, hp]
+  preferred_id: [mondo, efo, hp, orphanet]
+  label_in_input: [mondo, efo, hp, orphanet]
 
 gene to disease association:
-  represented_as: edge
-  preferred_id: [affected pathway, orphanet, somatic mutation, genetic association]
-  label_in_input: [affected_pathway, orphanet, somatic_mutation, genetic_association]
+  represented_as: node
+  preferred_id: [affected pathway, somatic mutation, genetic association]
+  label_in_input: [affected_pathway, somatic_mutation, genetic_association]

@@ -119,8 +119,8 @@ class TargetDiseaseEvidenceAdapter:
 
             _props = {}
             _props["version"] = "22.11"
-            _props["source"] = ["open targets"]
-            _props["licence"] = ["https://platform-docs.opentargets.org/licence"] 
+            _props["source"] = "open targets"
+            _props["licence"] = "https://platform-docs.opentargets.org/licence"
             # TODO single licences
 
             yield (_id, "gene", _props)
@@ -131,8 +131,8 @@ class TargetDiseaseEvidenceAdapter:
 
             _props = {}
             _props["version"] = "22.11"
-            _props["source"] = ["open targets"]
-            _props["licence"] = ["https://platform-docs.opentargets.org/licence"] 
+            _props["source"] = "open targets"
+            _props["licence"] = "https://platform-docs.opentargets.org/licence"
             # TODO single licences
 
             yield (_id, _type, _props)
@@ -161,7 +161,7 @@ class TargetDiseaseEvidenceAdapter:
             properties["licence"] = ["https://platform-docs.opentargets.org/licence"]
             # TODO single licences
 
-            disease_id, _ = self._process_disease_id_and_type(row.diseaseId)
+            disease_id, _type = self._process_disease_id_and_type(row.diseaseId)
 
             yield (
                 row.id, 
