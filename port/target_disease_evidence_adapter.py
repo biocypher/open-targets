@@ -88,7 +88,9 @@ class TargetDiseaseEvidenceAdapter:
         # Select columns of interest
         node_df = self.full_df.where(self.full_df.datasourceId.isin(
             [field.value for field in self.datasets]
-        )).select("targetId", "diseaseId")  
+        )).select(
+            [field.value for field in self.node_fields]
+        )  
             
         # get distinct values for each column
         target_ids = node_df.select("targetId").distinct().collect()
@@ -114,4 +116,8 @@ class TargetDiseaseEvidenceAdapter:
             yield (_id, _type, {})
 
     def get_edges(self):
-        pass
+        
+        # select columns of interest
+        edge_df = self.full_df.where(self.full_df.datasourceId.isin(
+            [field.value for field in self.datasets]
+        )).select(self.edge_fields)
