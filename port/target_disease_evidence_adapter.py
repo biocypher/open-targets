@@ -86,32 +86,32 @@ class TargetDiseaseEvidenceAdapter:
     def get_nodes(self):
 
         # Select columns of interest
-        self.node_df = self.full_df.select("datasourceId", "targetId", "diseaseId")
-        
-        for datasource in [field.value for field in self.datasets]:
+        node_df = self.full_df.where(self.full_df.datasourceId.isin(
+            [field.value for field in self.datasets]
+        )).select("targetId", "diseaseId")  
             
-            df = self.spark.read.parquet(self.path).where(f"datasourceId = '{datasource}'")
-            df.select("targetId", "diseaseId")
+        # get distinct values for each column
+        target_ids = node_df.select("targetId").distinct().collect()
+        disease_ids = node_df.select("diseaseId").distinct().collect()
 
-            # get distinct values for each column
-            target_ids = df.select("targetId").distinct().collect()
-            disease_ids = df.select("diseaseId").distinct().collect()
+        # yield target and disease ids
+        for target_id in target_ids:
 
-            # yield target and disease ids
-            for target_id in target_ids:
+            # normalize id
+            _id = normalize_curie(f"ensembl:{target_id.targetId}")
 
-                # normalize id
-                _id = normalize_curie(f"ensembl:{target_id.targetId}")
+            yield (_id, "gene", {})
 
-                yield (_id, "gene", {})
+        for disease_id in disease_ids:
 
-            for disease_id in disease_ids:
+            # split id into prefix and accession at _
+            _id = disease_id.diseaseId.split("_")[1]
+            _type = disease_id.diseaseId.split("_")[0].lower()
 
-                # split id into prefix and accession at _
-                _id = disease_id.diseaseId.split("_")[1]
-                _type = disease_id.diseaseId.split("_")[0].lower()
+            # normalize id
+            _id = normalize_curie(_type + ":" + _id)
 
-                # normalize id
-                _id = normalize_curie(_type + ":" + _id)
+            yield (_id, _type, {})
 
-                yield (_id, _type, {})
+    def get_edges(self):
+        pass

@@ -27,6 +27,11 @@ def main():
 
     driver.write_nodes(adapter.get_nodes())
 
+    driver.write_import_call()
+    driver.log_duplicates()
+    driver.log_missing_bl_types()
+    driver.show_ontology_structure()
+
 if __name__ == "__main__":
     main()
 
