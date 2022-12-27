@@ -29,6 +29,7 @@ edge_fields = [
 def main():
 
     driver = biocypher.Driver(
+        db_name="small",
         user_schema_config_path="config/target_disease_schema_config.yaml",
     )
 
