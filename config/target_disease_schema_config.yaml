@@ -2,11 +2,19 @@ gene:
   represented_as: node
   preferred_id: ensembl
   label_in_input: gene
+  properties:
+    approvedSybmol: str
+    biotype: str
 
 disease:
   represented_as: node
   preferred_id: [mondo, efo, hp, orphanet]
   label_in_input: [mondo, efo, hp, orphanet]
+  properties:
+    code: str
+    name: str
+    description: str
+    ontology: str
 
 gene to disease association:
   represented_as: node

@@ -1,19 +1,49 @@
-from target_disease_evidence_adapter import TargetDiseaseEvidenceAdapter, TargetDiseaseDataset, TargetDiseaseNodeField, TargetDiseaseEdgeField
+from target_disease_evidence_adapter import (
+    TargetDiseaseEvidenceAdapter,
+    TargetDiseaseDataset,
+    TargetNodeField,
+    DiseaseNodeField,
+    TargetDiseaseEdgeField,
+)
 import biocypher
 
 datasets = [
+    TargetDiseaseDataset.CANCER_BIOMARKERS,
+    TargetDiseaseDataset.CANCER_GENE_CENSUS,
+    TargetDiseaseDataset.CHEMBL,
     TargetDiseaseDataset.CLINGEN,
+    TargetDiseaseDataset.CRISPR,
+    TargetDiseaseDataset.EUROPE_PMC,
+    TargetDiseaseDataset.EVA,
     TargetDiseaseDataset.EVA_SOMATIC,
+    TargetDiseaseDataset.EXPRESSION_ATLAS,
+    TargetDiseaseDataset.GENOMICS_ENGLAND,
+    TargetDiseaseDataset.GENE_BURDEN,
     TargetDiseaseDataset.GENE2PHENOTYPE,
+    TargetDiseaseDataset.IMPC,
     TargetDiseaseDataset.INTOGEN,
+    TargetDiseaseDataset.ORPHANET,
+    TargetDiseaseDataset.OT_GENETICS_PORTAL,
     TargetDiseaseDataset.PROGENY,
+    TargetDiseaseDataset.REACTOME,
+    TargetDiseaseDataset.SLAP_ENRICH,
     TargetDiseaseDataset.SYSBIO,
+    TargetDiseaseDataset.UNIPROT_VARIANTS,
     TargetDiseaseDataset.UNIPROT_LITERATURE,
 ]
 
 node_fields = [
-    TargetDiseaseNodeField.DISEASE_ACCESSION,
-    TargetDiseaseNodeField.TARGET_GENE_ENSG,
+    # mandatory fields
+    TargetNodeField.TARGET_GENE_ENSG,
+    DiseaseNodeField.DISEASE_ACCESSION,
+    # optional target (gene) fields
+    TargetNodeField.TARGET_GENE_SYMBOL,
+    TargetNodeField.TARGET_GENE_BIOTYPE,
+    # optional disease fields
+    DiseaseNodeField.DISEASE_CODE,
+    DiseaseNodeField.DISEASE_NAME,
+    DiseaseNodeField.DISEASE_DESCRIPTION,
+    DiseaseNodeField.DISEASE_ONTOLOGY,
 ]
 
 edge_fields = [
@@ -25,6 +55,7 @@ edge_fields = [
     TargetDiseaseEdgeField.LITERATURE,
     TargetDiseaseEdgeField.SOURCE,
 ]
+
 
 def main():
 
@@ -41,17 +72,18 @@ def main():
 
     adapter.load_data(
         stats=False,
-        show=False,
+        show_nodes=False,
+        show_edges=False,
     )
 
     driver.write_nodes(adapter.get_nodes())
-    driver.write_edges(adapter.get_edges())
+    # driver.write_edges(adapter.get_edges())
 
-    driver.write_import_call()
-    driver.log_duplicates()
-    driver.log_missing_bl_types()
-    driver.show_ontology_structure()
+    # driver.write_import_call()
+    # driver.log_duplicates()
+    # driver.log_missing_bl_types()
+    # driver.show_ontology_structure()
+
 
 if __name__ == "__main__":
     main()
-

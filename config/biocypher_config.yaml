@@ -1,1 +1,4 @@
 strict_mode: true
+
+neo4j_delimiter: "\t"
+neo4j_array_delimiter: "|"
