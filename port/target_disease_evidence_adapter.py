@@ -1,7 +1,12 @@
 import os
-from pyspark.sql import SparkSession
+from typing import Optional
+from pyspark import SparkContext, SparkConf
+from pyspark.sql import SparkSession, DataFrame, functions as F
 from enum import Enum
 from bioregistry import normalize_curie
+from biocypher._logger import logger
+from tqdm import tqdm
+import functools
 
 
 class TargetDiseaseDataset(Enum):
@@ -35,7 +40,9 @@ class TargetDiseaseDatasetLicence(Enum):
     CHEMBL = "CC BY-SA 3.0"
     CLINGEN = "CC0 1.0"
     CRISPR = "NA"
-    EUROPE_PMC = "CC BY-NC 4.0"  # actually can be open access, CC0, CC BY, or CC BY-NC
+    EUROPE_PMC = (
+        "CC BY-NC 4.0"  # actually can be open access, CC0, CC BY, or CC BY-NC
+    )
     EVA = "EMBL-EBI terms of use"
     EVA_SOMATIC = "EMBL-EBI terms of use"
     EXPRESSION_ATLAS = "CC BY 4.0"
@@ -110,14 +117,35 @@ class DiseaseNodeField(Enum):
     DISEASE_ONTOLOGY = "ontology"
 
 
+class GeneOntologyNodeField(Enum):
+    # mandatory fields
+    GENE_ONTOLOGY_ACCESSION = "id"
+    # optional fields
+    GENE_ONTOLOGY_NAME = "name"
+
+
+class MousePhenotypeNodeField(Enum):
+    # mandatory fields
+    MOUSE_PHENOTYPE_ACCESSION = "modelPhenotypeId"
+
+    # optional fields
+    MOUSE_PHENOTYPE_MODELS = "biologicalModels"
+    MOUSE_PHENOTYPE_CLASSES = "modelPhenotypeClasses"
+    MOUSE_PHENOTYPE_LABEL = "modelPhenotypeLabel"
+    MOUSE_PHENOTYPE_HUMAN_TARGET = "targetFromSourceId"
+    MOUSE_PHENOTYPE_MOUSE_TARGET = "targetInModel"
+    MOUSE_PHENOTYPE_MOUSE_TARGET_ENSG = "targetInModelEnsemblId"
+    MOUSE_PHENOTYPE_MOUSE_TARGET_MGI = "targetInModelMgiId"
+
+
 class TargetDiseaseEdgeField(Enum):
-    DISEASE_ACCESSION = "diseaseId"
     INTERACTION_ACCESSION = "id"
-    LITERATURE = "literature"
     TARGET_GENE_ENSG = "targetId"
-    SCORE = "score"
-    SOURCE = "datasourceId"
+    DISEASE_ACCESSION = "diseaseId"
     TYPE = "datatypeId"
+    SOURCE = "datasourceId"
+    LITERATURE = "literature"
+    SCORE = "score"
 
 
 class TargetDiseaseEvidenceAdapter:
@@ -141,17 +169,42 @@ class TargetDiseaseEvidenceAdapter:
             raise ValueError("edge_fields must be provided")
 
         if not TargetNodeField.TARGET_GENE_ENSG in self.node_fields:
-            raise ValueError("TargetNodeField.TARGET_GENE_ENSG must be provided")
+            raise ValueError(
+                "TargetNodeField.TARGET_GENE_ENSG must be provided"
+            )
 
         if not DiseaseNodeField.DISEASE_ACCESSION in self.node_fields:
-            raise ValueError("DiseaseNodeField.DISEASE_ACCESSION must be provided")
+            raise ValueError(
+                "DiseaseNodeField.DISEASE_ACCESSION must be provided"
+            )
+
+        logger.info("Creating Spark session.")
+
+        # Set up Spark context
+        conf = (
+            SparkConf()
+            .setAppName("otar_biocypher")
+            .setMaster("local")
+            .set("spark.driver.memory", "4g")
+            .set("spark.executor.memory", "4g")
+        )
+        self.sc = SparkContext(conf=conf)
 
         # Create SparkSession
-        self.spark = SparkSession.builder.master("local").appName("port").getOrCreate()
+        self.spark = (
+            SparkSession.builder.master("local")
+            .appName("otar_biocypher")
+            .getOrCreate()
+        )
 
     def load_data(
-        self, stats: bool = False, show_nodes: bool = False, show_edges: bool = False
+        self,
+        stats: bool = False,
+        show_nodes: bool = False,
+        show_edges: bool = False,
     ):
+
+        logger.info("Loading data from disk.")
 
         # Read in evidence data and target / disease annotations
         evidence_path = "data/ot_files/evidence"
@@ -163,57 +216,89 @@ class TargetDiseaseEvidenceAdapter:
         disease_path = "data/ot_files/diseases"
         self.disease_df = self.spark.read.parquet(disease_path)
 
+        go_path = "data/ot_files/go"
+        self.go_df = self.spark.read.parquet(go_path)
+
+        mp_path = "data/ot_files/mousePhenotypes"
+        self.mp_df = self.spark.read.parquet(mp_path)
+
         if stats:
 
             # print schema
             print(self.evidence_df.printSchema())
             print(self.target_df.printSchema())
             print(self.disease_df.printSchema())
+            print(self.go_df.printSchema())
+            print(self.mp_df.printSchema())
 
             # print number of rows
-            print(f"Length of evidence data: {self.evidence_df.count()} entries")
+            print(
+                f"Length of evidence data: {self.evidence_df.count()} entries"
+            )
             print(f"Length of target data: {self.target_df.count()} entries")
             print(f"Length of disease data: {self.disease_df.count()} entries")
+            print(f"Length of GO data: {self.go_df.count()} entries")
+            print(
+                f"Length of Mouse Phenotype data: {self.mp_df.count()} entries"
+            )
 
             # print number of rows per datasource
             self.evidence_df.groupBy("datasourceId").count().show(100)
 
         if show_edges:
             for dataset in [field.value for field in self.datasets]:
-                self.evidence_df.where(self.evidence_df.datasourceId == dataset).show(
-                    1, 50, True
-                )
+                self.evidence_df.where(
+                    self.evidence_df.datasourceId == dataset
+                ).show(1, 50, True)
 
         if show_nodes:
             self.target_df.show(1, 50, True)
             self.disease_df.show(1, 50, True)
+            self.go_df.show(1, 50, True)
+            self.mp_df.show(1, 50, True)
 
     def show_datasources(self):
+        """
+        Utility function to get all datasources in the evidence data.
+        """
 
         # collect all distinct datasourceId values
-        datasources = self.evidence_df.select("datasourceId").distinct().collect()
+        datasources = (
+            self.evidence_df.select("datasourceId").distinct().collect()
+        )
 
         # convert to list
         self.datasources = [x.datasourceId for x in datasources]
         print(self.datasources)
 
-    def get_nodes(self):
+    def _yield_node_type(
+        self,
+        df: DataFrame,
+        node_field_type: Enum,
+        biolink_type: Optional[str] = None,
+    ):
+        """
+        Yield the node type from the dataframe.
+        """
 
-        # Targets
         # Select columns of interest
-        target_df = self.target_df.select(
+        df = df.select(
             [
                 field.value
                 for field in self.node_fields
-                if isinstance(field, TargetNodeField)
+                if isinstance(field, node_field_type)
             ]
         )
 
-        # yield target nodes
-        for target in target_df.collect():
+        logger.info(f"Generating nodes of {node_field_type}.")
+
+        for row in tqdm(df.collect()):
 
             # normalize id
-            _id = normalize_curie(f"ensembl:{target.id}")
+            if node_field_type == MousePhenotypeNodeField:
+                _id, _type = self._process_id_and_type(row.modelPhenotypeId)
+            else:
+                _id, _type = self._process_id_and_type(row.id, biolink_type)
 
             _props = {}
             _props["version"] = "22.11"
@@ -222,84 +307,137 @@ class TargetDiseaseEvidenceAdapter:
 
             for field in self.node_fields:
 
-                if not isinstance(field, TargetNodeField):
+                if not isinstance(field, node_field_type):
                     continue
 
-                if target[field.value]:
-                    _props[field.value] = target[field.value]
-
-            yield (_id, "gene", _props)
-
-        # Diseases
-        # Select columns of interest
-        disease_df = self.disease_df.select(
-            [
-                field.value
-                for field in self.node_fields
-                if isinstance(field, DiseaseNodeField)
-            ]
-        )
-
-        for disease in disease_df.collect():
-
-            _id, _type = self._process_disease_id_and_type(disease.id)
-
-            _props = {}
-            _props["version"] = "22.11"
-            _props["source"] = "open targets"
-            _props["licence"] = "https://platform-docs.opentargets.org/licence"
-
-            for field in self.node_fields:
-
-                if not isinstance(field, DiseaseNodeField):
-                    continue
-
-                if disease[field.value]:
-                    _props[field.value] = disease[field.value]
+                if row[field.value]:
+                    _props[field.value] = row[field.value]
 
             yield (_id, _type, _props)
 
+    def get_nodes(self):
+        """
+        Yield nodes from the target and disease dataframes.
+        """
+
+        # Targets
+        # yield from self._yield_node_type(
+        #     self.target_df, TargetNodeField, "ensembl"
+        # )
+        # Diseases
+        yield from self._yield_node_type(self.disease_df, DiseaseNodeField)
+        # Gene Ontology
+        yield from self._yield_node_type(self.go_df, GeneOntologyNodeField)
+        # Mouse Phenotypes
+        yield from self._yield_node_type(self.mp_df, MousePhenotypeNodeField)
+
     def get_edges(self):
+        """
+        Yield edges from the evidence dataframe.
+        """
+
+        logger.info("Generating edges.")
 
         # select columns of interest
         edge_df = self.evidence_df.where(
-            self.evidence_df.datasourceId.isin([field.value for field in self.datasets])
+            self.evidence_df.datasourceId.isin(
+                [field.value for field in self.datasets]
+            )
         ).select([field.value for field in self.edge_fields])
 
+        logger.info("Partitioning edges.")
+
+        # add partition number to edge_df as column
+        edge_df = edge_df.withColumn("partition_num", F.spark_partition_id())
+        edge_df.persist()
+
+        total_partition = [
+            int(row.partition_num)
+            for row in edge_df.select("partition_num").distinct().collect()
+        ]
+
+        # yield edges per batch
+        for batch in total_partition:
+
+            logger.info(f"Processing batch {batch} of {len(total_partition)}.")
+
+            yield from self._process_edges(
+                edge_df.where(edge_df.partition_num == batch)
+            )
+
+    def _process_edges(self, batch):
+        """
+        Process one batch of edges.
+        """
+
+        logger.info(f"Batch size: {batch.count()} edges.")
+
+        count = 0
+
         # yield edges per row of edge_df, skipping null values
-        for row in edge_df.collect():
+        for row in tqdm(batch.collect()):
+
+            count += 1
+            if count > 100:
+                break
 
             # collect properties from fields, skipping null values
             properties = {}
             for field in self.edge_fields:
+                # skip disease and target ids, relationship id, and datatype id
+                # as they are encoded in the relationship
+                if field not in [
+                    TargetDiseaseEdgeField.LITERATURE,
+                    TargetDiseaseEdgeField.SCORE,
+                    TargetDiseaseEdgeField.SOURCE,
+                ]:
+                    continue
+
                 if field == TargetDiseaseEdgeField.SOURCE:
                     properties["source"] = row[field.value]
                 elif row[field.value]:
                     properties[field.value] = row[field.value]
 
             properties["version"] = "22.11"
-            properties["licence"] = ["https://platform-docs.opentargets.org/licence"]
+            properties["licence"] = [
+                "https://platform-docs.opentargets.org/licence"
+            ]
             # TODO single licences
 
-            disease_id, _type = self._process_disease_id_and_type(row.diseaseId)
+            disease_id, _type = self._process_id_and_type(row.diseaseId)
 
             yield (
                 row.id,
-                normalize_curie(f"ensembl:{row.targetId}"),
+                self._process_gene_id(row.targetId),
                 disease_id,
                 row.datatypeId,
                 properties,
             )
 
-    def _process_disease_id_and_type(self, diseaseId: str):
+    @functools.lru_cache()
+    def _process_id_and_type(self, inputId: str, _type: Optional[str] = None):
         """
-        Process diseaseId and diseaseType fields from evidence data
+        Process diseaseId and diseaseType fields from evidence data. Process
+        gene (ENSG) ids.
         """
-        # split id into prefix and accession at _
-        _id = diseaseId.split("_")[1]
-        _type = diseaseId.split("_")[0].lower()
 
-        # normalize id
-        _id = normalize_curie(_type + ":" + _id)
+        if _type:
 
-        return (_id, _type)
+            _id = normalize_curie(f"{_type}:{inputId}")
+
+            return (_id, _type)
+
+        # detect delimiter (either _ or :)
+        if "_" in inputId:
+
+            _type = inputId.split("_")[0].lower()
+            _id = normalize_curie(inputId, sep="_")
+
+            return (_id, _type)
+
+        elif ":" in inputId:
+
+            _type = inputId.split(":")[0].lower()
+            _id = normalize_curie(inputId, sep=":")
+
+            return (_id, _type)

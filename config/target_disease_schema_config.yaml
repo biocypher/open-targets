@@ -1,22 +1,44 @@
 gene:
   represented_as: node
   preferred_id: ensembl
-  label_in_input: gene
+  label_in_input: ensembl
   properties:
     approvedSybmol: str
     biotype: str
 
+# otar has no Bioregistry entry
 disease:
   represented_as: node
-  preferred_id: [mondo, efo, hp, orphanet]
-  label_in_input: [mondo, efo, hp, orphanet]
+  preferred_id: [mondo, efo, hp, orphanet, otar, oba, ncit, doid]
+  label_in_input: [mondo, efo, hp, orphanet, otar, oba, ncit, doid]
   properties:
     code: str
     name: str
     description: str
     ontology: str
 
+go term:
+  is_a: biological entity # activity, process, or location
+  represented_as: node
+  preferred_id: go
+  label_in_input: go
+  properties:
+    name: str
+
+mouse phenotype:
+  is_a: phenotypic feature
+  represented_as: node
+  preferred_id: mp
+  label_in_input: mp
+  properties:
+    modelPhenotypeLabel: str
+    targetFromSourceId: str
+    targetInModelEnsemblId: str
+
 gene to disease association:
   represented_as: node
   preferred_id: [affected pathway, somatic mutation, genetic association]
   label_in_input: [affected_pathway, somatic_mutation, genetic_association]
+  properties:
+    literature: str[]
+    score: double
