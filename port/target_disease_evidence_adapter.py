@@ -321,9 +321,9 @@ class TargetDiseaseEvidenceAdapter:
         """
 
         # Targets
-        # yield from self._yield_node_type(
-        #     self.target_df, TargetNodeField, "ensembl"
-        # )
+        yield from self._yield_node_type(
+            self.target_df, TargetNodeField, "ensembl"
+        )
         # Diseases
         yield from self._yield_node_type(self.disease_df, DiseaseNodeField)
         # Gene Ontology
@@ -372,14 +372,14 @@ class TargetDiseaseEvidenceAdapter:
 
         logger.info(f"Batch size: {batch.count()} edges.")
 
-        count = 0
+        # count = 0
 
         # yield edges per row of edge_df, skipping null values
         for row in tqdm(batch.collect()):
 
-            count += 1
-            if count > 100:
-                break
+            # count += 1
+            # if count > 100:
+            #     break
 
             # collect properties from fields, skipping null values
             properties = {}
@@ -404,11 +404,12 @@ class TargetDiseaseEvidenceAdapter:
             ]
             # TODO single licences
 
-            disease_id, _type = self._process_id_and_type(row.diseaseId)
+            disease_id, _ = self._process_id_and_type(row.diseaseId)
+            gene_id, _ = self._process_id_and_type(row.targetId, "ensembl")
 
             yield (
                 row.id,
-                self._process_gene_id(row.targetId),
+                gene_id,
                 disease_id,
                 row.datatypeId,
                 properties,

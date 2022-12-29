@@ -4,6 +4,7 @@ gene:
   label_in_input: ensembl
   properties:
     approvedSybmol: str
+    approvedName: str
     biotype: str
 
 # otar has no Bioregistry entry
