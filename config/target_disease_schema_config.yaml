@@ -10,8 +10,8 @@ gene:
 # otar has no Bioregistry entry
 disease:
   represented_as: node
-  preferred_id: [mondo, efo, hp, orphanet, otar, oba, ncit, doid]
-  label_in_input: [mondo, efo, hp, orphanet, otar, oba, ncit, doid]
+  preferred_id: [mondo, efo, hp, orphanet, otar, oba, ncit, doid, obi, ogms]
+  label_in_input: [mondo, efo, hp, orphanet, otar, oba, ncit, doid, obi, ogms]
   properties:
     code: str
     name: str
@@ -38,8 +38,24 @@ mouse phenotype:
 
 gene to disease association:
   represented_as: node
-  preferred_id: [affected pathway, somatic mutation, genetic association]
-  label_in_input: [affected_pathway, somatic_mutation, genetic_association]
+  preferred_id: [
+    affected pathway, 
+    somatic mutation, 
+    genetic association, 
+    literature,
+    animal model,
+    known drug,
+    rna expression,
+  ]
+  label_in_input: [
+    affected_pathway, 
+    somatic_mutation, 
+    genetic_association,
+    literature,
+    animal_model,
+    known_drug,
+    rna_expression,
+  ]
   properties:
     literature: str[]
     score: double

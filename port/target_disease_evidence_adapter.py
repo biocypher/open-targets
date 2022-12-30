@@ -1,4 +1,3 @@
-import os
 from typing import Optional
 from pyspark import SparkContext, SparkConf
 from pyspark.sql import SparkSession, DataFrame, functions as F
