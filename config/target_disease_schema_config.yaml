@@ -1,4 +1,5 @@
-gene:
+human gene:
+  is_a: gene
   represented_as: node
   preferred_id: ensembl
   label_in_input: ensembl
@@ -6,6 +7,16 @@ gene:
     approvedSymbol: str
     approvedName: str
     biotype: str
+
+mouse gene:
+  is_a: gene
+  represented_as: node
+  preferred_id: ensembl
+  label_in_input: mouse gene
+  properties:
+    targetInModel: str
+    targetInModelMgiId: str
+    targetFromSourceId: str
 
 # otar has no Bioregistry entry
 disease:

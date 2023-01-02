@@ -361,6 +361,10 @@ class TargetDiseaseEvidenceAdapter:
                 row[node_field_type._PRIMARY_ID.value], biolink_type
             )
 
+            # switch mouse gene type
+            if node_field_type == MouseTargetNodeField:
+                _type = "mouse gene"
+
             if not _id:
                 continue
 
