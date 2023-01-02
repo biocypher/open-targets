@@ -3,7 +3,7 @@ gene:
   preferred_id: ensembl
   label_in_input: ensembl
   properties:
-    approvedSybmol: str
+    approvedSymbol: str
     approvedName: str
     biotype: str
 
