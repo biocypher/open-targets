@@ -128,9 +128,11 @@ class MousePhenotypeNodeField(Enum):
     MOUSE_PHENOTYPE_ACCESSION = "modelPhenotypeId"
 
     # optional fields
+    MOUSE_PHENOTYPE_LABEL = "modelPhenotypeLabel"
+
+    # combinatorial fields
     MOUSE_PHENOTYPE_MODELS = "biologicalModels"
     MOUSE_PHENOTYPE_CLASSES = "modelPhenotypeClasses"
-    MOUSE_PHENOTYPE_LABEL = "modelPhenotypeLabel"
     MOUSE_PHENOTYPE_HUMAN_TARGET = "targetFromSourceId"
     MOUSE_PHENOTYPE_MOUSE_TARGET = "targetInModel"
     MOUSE_PHENOTYPE_MOUSE_TARGET_ENSG = "targetInModelEnsemblId"
@@ -323,12 +325,18 @@ class TargetDiseaseEvidenceAdapter:
         yield from self._yield_node_type(
             self.target_df, TargetNodeField, "ensembl"
         )
+
         # Diseases
         yield from self._yield_node_type(self.disease_df, DiseaseNodeField)
+
         # Gene Ontology
         yield from self._yield_node_type(self.go_df, GeneOntologyNodeField)
+
         # Mouse Phenotypes
-        yield from self._yield_node_type(self.mp_df, MousePhenotypeNodeField)
+        only_mp_df = self.mp_df.select(
+            ["modelPhenotypeId", "modelPhenotypeLabel"]
+        ).dropDuplicates()
+        yield from self._yield_node_type(only_mp_df, MousePhenotypeNodeField)
 
     def get_edges(self):
         """
