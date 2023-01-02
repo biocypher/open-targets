@@ -7,6 +7,8 @@ from target_disease_evidence_adapter import (
     TargetDiseaseEdgeField,
     GeneOntologyNodeField,
     MousePhenotypeNodeField,
+    MouseTargetNodeField,
+    MouseModelNodeField,
 )
 
 datasets = [
@@ -40,6 +42,7 @@ node_fields = [
     DiseaseNodeField.DISEASE_ACCESSION,
     GeneOntologyNodeField.GENE_ONTOLOGY_ACCESSION,
     MousePhenotypeNodeField.MOUSE_PHENOTYPE_ACCESSION,
+    MouseTargetNodeField.MOUSE_TARGET_ENSG,
     # optional target (gene) fields
     TargetNodeField.TARGET_GENE_SYMBOL,
     TargetNodeField.TARGET_GENE_BIOTYPE,
@@ -52,8 +55,10 @@ node_fields = [
     GeneOntologyNodeField.GENE_ONTOLOGY_NAME,
     # optional mouse phenotype fields
     MousePhenotypeNodeField.MOUSE_PHENOTYPE_LABEL,
-    MousePhenotypeNodeField.MOUSE_PHENOTYPE_HUMAN_TARGET,
-    MousePhenotypeNodeField.MOUSE_PHENOTYPE_MOUSE_TARGET_ENSG,
+    # optional mouse target fields
+    MouseTargetNodeField.MOUSE_TARGET_SYMBOL,
+    MouseTargetNodeField.MOUSE_TARGET_MGI,
+    MouseTargetNodeField.HUMAN_TARGET_ENGS,
 ]
 
 edge_fields = [
@@ -87,7 +92,7 @@ def main():
     )
 
     driver.write_nodes(adapter.get_nodes())
-    driver.write_edges(adapter.get_edges())
+    # driver.write_edges(adapter.get_edges())
 
     driver.write_import_call()
     driver.log_duplicates()

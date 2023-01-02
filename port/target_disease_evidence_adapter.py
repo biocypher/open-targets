@@ -9,6 +9,11 @@ import functools
 
 
 class TargetDiseaseDataset(Enum):
+    """
+    Enum of all the datasets used in the target-disease evidence pipeline.
+    Values are the spellings used in the Open Targets parquet files.
+    """
+
     CANCER_BIOMARKERS = "cancer_biomarkers"
     CANCER_GENE_CENSUS = "cancer_gene_census"
     CHEMBL = "chembl"
@@ -34,6 +39,10 @@ class TargetDiseaseDataset(Enum):
 
 
 class TargetDiseaseDatasetLicence(Enum):
+    """
+    Enum mapping each dataset to its licence.
+    """
+
     CANCER_BIOMARKERS = "NA"  # TODO
     CANCER_GENE_CENSUS = "Commercial use for Open Targets"
     CHEMBL = "CC BY-SA 3.0"
@@ -61,6 +70,11 @@ class TargetDiseaseDatasetLicence(Enum):
 
 
 class TargetNodeField(Enum):
+    """
+    Enum of all the fields in the target dataset. Values are the spellings used
+    in the Open Targets parquet files.
+    """
+
     # mandatory fields
     TARGET_GENE_ENSG = "id"
 
@@ -95,6 +109,11 @@ class TargetNodeField(Enum):
 
 
 class DiseaseNodeField(Enum):
+    """
+    Enum of all the fields in the disease dataset. Values are the spellings used
+    in the Open Targets parquet files.
+    """
+
     # mandatory fields
     DISEASE_ACCESSION = "id"
 
@@ -117,6 +136,11 @@ class DiseaseNodeField(Enum):
 
 
 class GeneOntologyNodeField(Enum):
+    """
+    Enum of all the fields in the gene ontology dataset. Values are the
+    spellings used in the Open Targets parquet files.
+    """
+
     # mandatory fields
     GENE_ONTOLOGY_ACCESSION = "id"
     # optional fields
@@ -124,19 +148,44 @@ class GeneOntologyNodeField(Enum):
 
 
 class MousePhenotypeNodeField(Enum):
+    """
+    Enum of all the fields in the mouse phenotype dataset. Values are the
+    spellings used in the Open Targets parquet files.
+    """
+
     # mandatory fields
     MOUSE_PHENOTYPE_ACCESSION = "modelPhenotypeId"
 
     # optional fields
     MOUSE_PHENOTYPE_LABEL = "modelPhenotypeLabel"
 
-    # combinatorial fields
+
+class MouseTargetNodeField(Enum):
+    """
+    Enum of all the fields in the mouse phenotype dataset related to murine
+    targets of each biological model. Values are the spellings used in the Open
+    Targets parquet files.
+    """
+
+    # mandatory fields
+    MOUSE_TARGET_ENSG = "targetInModelEnsemblId"
+
+    # alternative ids
+    MOUSE_TARGET_SYMBOL = "targetInModel"
+    MOUSE_TARGET_MGI = "targetInModelMgiId"
+
+    # human target ensembl id
+    HUMAN_TARGET_ENGS = "targetFromSourceId"
+
+
+class MouseModelNodeField(Enum):
+    """
+    Enum of all the fields in the mouse phenotype dataset related to the mouse
+    model. Values are the spellings used in the Open Targets parquet files.
+    """
+
     MOUSE_PHENOTYPE_MODELS = "biologicalModels"
     MOUSE_PHENOTYPE_CLASSES = "modelPhenotypeClasses"
-    MOUSE_PHENOTYPE_HUMAN_TARGET = "targetFromSourceId"
-    MOUSE_PHENOTYPE_MOUSE_TARGET = "targetInModel"
-    MOUSE_PHENOTYPE_MOUSE_TARGET_ENSG = "targetInModelEnsemblId"
-    MOUSE_PHENOTYPE_MOUSE_TARGET_MGI = "targetInModelMgiId"
 
 
 class TargetDiseaseEdgeField(Enum):
@@ -293,13 +342,25 @@ class TargetDiseaseEvidenceAdapter:
 
         logger.info(f"Generating nodes of {node_field_type}.")
 
+        count = 0
+
         for row in tqdm(df.collect()):
 
+            count += 1
+
             # normalize id
+            # TODO find better way to select primary id field
             if node_field_type == MousePhenotypeNodeField:
                 _id, _type = self._process_id_and_type(row.modelPhenotypeId)
+            elif node_field_type == MouseTargetNodeField:
+                _id, _type = self._process_id_and_type(
+                    row.targetInModelEnsemblId, biolink_type
+                )
             else:
                 _id, _type = self._process_id_and_type(row.id, biolink_type)
+
+            if not _id:
+                continue
 
             _props = {}
             _props["version"] = "22.11"
@@ -321,22 +382,30 @@ class TargetDiseaseEvidenceAdapter:
         Yield nodes from the target and disease dataframes.
         """
 
-        # Targets
-        yield from self._yield_node_type(
-            self.target_df, TargetNodeField, "ensembl"
-        )
+        # # Targets
+        # yield from self._yield_node_type(
+        #     self.target_df, TargetNodeField, "ensembl"
+        # )
 
-        # Diseases
-        yield from self._yield_node_type(self.disease_df, DiseaseNodeField)
+        # # Diseases
+        # yield from self._yield_node_type(self.disease_df, DiseaseNodeField)
 
-        # Gene Ontology
-        yield from self._yield_node_type(self.go_df, GeneOntologyNodeField)
+        # # Gene Ontology
+        # yield from self._yield_node_type(self.go_df, GeneOntologyNodeField)
 
-        # Mouse Phenotypes
-        only_mp_df = self.mp_df.select(
-            ["modelPhenotypeId", "modelPhenotypeLabel"]
+        # # Mouse Phenotypes
+        # only_mp_df = self.mp_df.select(
+        #     [field.value for field in MousePhenotypeNodeField]
+        # ).dropDuplicates()
+        # yield from self._yield_node_type(only_mp_df, MousePhenotypeNodeField)
+
+        # Mouse Targets
+        mouse_target_df = self.mp_df.select(
+            [field.value for field in MouseTargetNodeField]
         ).dropDuplicates()
-        yield from self._yield_node_type(only_mp_df, MousePhenotypeNodeField)
+        yield from self._yield_node_type(
+            mouse_target_df, MouseTargetNodeField, "ensembl"
+        )
 
     def get_edges(self):
         """
@@ -428,6 +497,9 @@ class TargetDiseaseEvidenceAdapter:
         Process diseaseId and diseaseType fields from evidence data. Process
         gene (ENSG) ids.
         """
+
+        if not inputId:
+            return (None, None)
 
         if _type:
 
