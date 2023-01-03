@@ -1,5 +1,12 @@
 import biocypher
-from target_disease_evidence_adapter import (
+
+# VSCode does not add the root directory to the path (by default?). Not sure why
+# this works sometimes and not others. This is a workaround.
+import sys
+
+sys.path.append("")
+
+from adapters.target_disease_evidence_adapter import (
     TargetDiseaseEvidenceAdapter,
     TargetDiseaseDataset,
     TargetNodeField,

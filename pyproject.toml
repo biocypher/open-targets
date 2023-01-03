@@ -10,6 +10,7 @@ biocypher = {path = "../BioCypher", develop = true}
 snakeviz = "^2.1.1"
 pyspark = "^3.3.1"
 bioregistry = "^0.6.45"
+pandas = "^1.5.2"
 
 [tool.poetry.dev-dependencies]
 

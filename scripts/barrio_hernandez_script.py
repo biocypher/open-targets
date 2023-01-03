@@ -2,7 +2,13 @@ import cProfile
 import io
 import pstats
 
-from adapter import BioCypherAdapter
+# VSCode does not add the root directory to the path (by default?). Not sure why
+# this works sometimes and not others. This is a workaround.
+import sys
+
+sys.path.append("")
+
+from adapters.barrio_hernandez_adapter import BarrioHernandezAdapter
 
 PROFILE = False
 
@@ -18,7 +24,7 @@ def main():
         profile.enable()
 
     # create and run adapter
-    adapter = BioCypherAdapter(db_name="ppi1", id_batch_size=int(1e5))
+    adapter = BarrioHernandezAdapter(db_name="ppi1", id_batch_size=int(1e5))
     adapter.write_to_csv_for_admin_import()
 
     if PROFILE:

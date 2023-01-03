@@ -9,8 +9,8 @@ import biocypher
 import neo4j_utils as nu
 import pandas as pd
 from biocypher._logger import logger
-from utils.id_type_processing import _process_node_id_and_type
-from utils.transactions import (
+from adapters.utils.id_type_processing import _process_node_id_and_type
+from adapters.utils.transactions import (
     get_bin_int_rels_tx,
     get_interactor_to_organism_edges_tx,
     get_nodes_tx,
@@ -19,7 +19,7 @@ from utils.transactions import (
 logger.debug(f"Loading module {__name__}.")
 
 
-class BioCypherAdapter:
+class BarrioHernandezAdapter:
     def __init__(
         self,
         dirname=None,
@@ -40,8 +40,8 @@ class BioCypherAdapter:
             skip_bad_relationships=True,
         )
         # start writer
-        self.bcy.start_bl_adapter()
-        self.bcy.start_batch_writer(dirname=dirname, db_name=self.db_name)
+        self.bcy.start_ontology_adapter()
+        self.bcy.start_batch_writer()
 
         # read driver
         self.driver = nu.Driver(
@@ -157,7 +157,6 @@ class BioCypherAdapter:
 
         self.bcy.write_nodes(
             nodes=node_gen(),
-            db_name=self.db_name,
         )
 
     ## interactors ##
@@ -252,12 +251,10 @@ class BioCypherAdapter:
 
         self.bcy.write_nodes(
             nodes=nodes,
-            db_name=self.db_name,
         )
 
         self.bcy.write_edges(
             edges=edges,
-            db_name=self.db_name,
         )
 
     ## detection method nodes ##
@@ -295,13 +292,10 @@ class BioCypherAdapter:
                 _detection_props, "GraphEvidenceType"
             )
 
-            det_nodes.append(
-                (_detection_id, _detection_type, _detection_props)
-            )
+            det_nodes.append((_detection_id, _detection_type, _detection_props))
 
         self.bcy.write_nodes(
             nodes=det_nodes,
-            db_name=self.db_name,
         )
 
     ############################## EDGES ####################################
@@ -392,8 +386,7 @@ class BioCypherAdapter:
                 # are not unique to each pairwise interaction
                 if not _id:
                     logger.debug(
-                        "No id found for binary interaction evidence: "
-                        f"{res}"
+                        "No id found for binary interaction evidence: " f"{res}"
                     )
 
                 ## primary interaction edge
@@ -564,5 +557,4 @@ class BioCypherAdapter:
         ]:
             self.bcy.write_edges(
                 edge_set,
-                db_name=self.db_name,
             )
