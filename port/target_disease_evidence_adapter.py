@@ -38,35 +38,30 @@ class TargetDiseaseDataset(Enum):
     UNIPROT_LITERATURE = "uniprot_literature"
 
 
-class TargetDiseaseDatasetLicence(Enum):
-    """
-    Enum mapping each dataset to its licence.
-    """
-
-    CANCER_BIOMARKERS = "NA"  # TODO
-    CANCER_GENE_CENSUS = "Commercial use for Open Targets"
-    CHEMBL = "CC BY-SA 3.0"
-    CLINGEN = "CC0 1.0"
-    CRISPR = "NA"
-    EUROPE_PMC = (
-        "CC BY-NC 4.0"  # actually can be open access, CC0, CC BY, or CC BY-NC
-    )
-    EVA = "EMBL-EBI terms of use"
-    EVA_SOMATIC = "EMBL-EBI terms of use"
-    EXPRESSION_ATLAS = "CC BY 4.0"
-    GENOMICS_ENGLAND = "Commercial use for Open Targets"
-    GENE_BURDEN = "NA"  # TODO
-    GENE2PHENOTYPE = "EMBL-EBI terms of use"
-    IMPC = "NA"  # TODO
-    INTOGEN = "CC0 1.0"
-    ORPHANET = "CC BY 4.0"
-    OT_GENETICS_PORTAL = "EMBL-EBI terms of use"
-    PROGENY = "Apache 2.0"
-    REACTOME = "CC BY 4.0"
-    SLAP_ENRICH = "MIT"
-    SYSBIO = "NA"  # TODO
-    UNIPROT_VARIANTS = "CC BY 4.0"
-    UNIPROT_LITERATURE = "CC BY 4.0"
+_licences = {
+    "cancer_biomarkers": "NA",  # TODO
+    "cancer_gene_census": "Commercial use for Open Targets",
+    "chembl": "CC BY-SA 3.0",
+    "clingen": "CC0 1.0",
+    "crispr": "NA",  # TODO
+    "europepmc": "CC BY-NC 4.0",  # can be open access, CC0, CC BY, or CC BY-NC
+    "eva": "EMBL-EBI terms of use",
+    "eva_somatic": "EMBL-EBI terms of use",
+    "expression_atlas": "CC BY 4.0",
+    "genomics_england": "Commercial use for Open Targets",
+    "gene_burden": "NA",  # TODO
+    "gene2phenotype": "EMBL-EBI terms of use",
+    "impc": "NA",  # TODO
+    "intogen": "CC0 1.0",
+    "orphanet": "CC BY 4.0",
+    "ot_genetics_portal": "EMBL-EBI terms of use",
+    "progeny": "Apache 2.0",
+    "reactome": "CC BY 4.0",
+    "slapenrich": "MIT",
+    "sysbio": "NA",  # TODO
+    "uniprot_variants": "CC BY 4.0",
+    "uniprot_literature": "CC BY 4.0",
+}
 
 
 class TargetNodeField(Enum):
@@ -222,10 +217,12 @@ class TargetDiseaseEvidenceAdapter:
         datasets: list[Enum] = None,
         node_fields: list[Enum] = None,
         edge_fields: list = None,
+        test_mode: bool = False,
     ):
         self.datasets = datasets
         self.node_fields = node_fields
         self.edge_fields = edge_fields
+        self.test_mode = test_mode
 
         if not self.datasets:
             raise ValueError("datasets must be provided")
@@ -244,6 +241,12 @@ class TargetDiseaseEvidenceAdapter:
         if not DiseaseNodeField.DISEASE_ACCESSION in self.node_fields:
             raise ValueError(
                 "DiseaseNodeField.DISEASE_ACCESSION must be provided"
+            )
+
+        if self.test_mode:
+            logger.warning(
+                "Open Targets adapter: Test mode is enabled. "
+                "Only processing 100 rows."
             )
 
         logger.info("Creating Spark session.")
@@ -360,10 +363,13 @@ class TargetDiseaseEvidenceAdapter:
 
         logger.info(f"Generating nodes of {node_field_type}.")
 
+        if self.test_mode:
+            df = df.limit(100)
+
         for row in tqdm(df.collect()):
 
             # normalize id
-            _id, _type = self._process_id_and_type(
+            _id, _type = _process_id_and_type(
                 row[node_field_type._PRIMARY_ID.value], biolink_type
             )
 
@@ -482,6 +488,10 @@ class TargetDiseaseEvidenceAdapter:
 
         logger.info(f"Batch size: {batch.count()} edges.")
 
+        if self.test_mode:
+            # limit batch df to 100 rows
+            batch = batch.limit(100)
+
         # yield edges per row of edge_df, skipping null values
         for row in tqdm(batch.collect()):
 
@@ -499,18 +509,14 @@ class TargetDiseaseEvidenceAdapter:
 
                 if field == TargetDiseaseEdgeField.SOURCE:
                     properties["source"] = row[field.value]
+                    properties["licence"] = _find_licence(row[field.value])
                 elif row[field.value]:
                     properties[field.value] = row[field.value]
 
             properties["version"] = "22.11"
-            properties[
-                "licence"
-            ] = "https://platform-docs.opentargets.org/licence"
 
-            # TODO single licences
-
-            disease_id, _ = self._process_id_and_type(row.diseaseId)
-            gene_id, _ = self._process_id_and_type(row.targetId, "ensembl")
+            disease_id, _ = _process_id_and_type(row.diseaseId)
+            gene_id, _ = _process_id_and_type(row.targetId, "ensembl")
 
             yield (
                 row.id,
@@ -520,36 +526,45 @@ class TargetDiseaseEvidenceAdapter:
                 properties,
             )
 
-    @functools.lru_cache()
-    def _process_id_and_type(self, inputId: str, _type: Optional[str] = None):
-        """
-        Process diseaseId and diseaseType fields from evidence data. Process
-        gene (ENSG) ids.
-        """
 
-        if not inputId:
-            return (None, None)
+@functools.lru_cache()
+def _process_id_and_type(inputId: str, _type: Optional[str] = None):
+    """
+    Process diseaseId and diseaseType fields from evidence data. Process
+    gene (ENSG) ids.
+    """
 
-        if _type:
+    if not inputId:
+        return (None, None)
 
-            _id = normalize_curie(f"{_type}:{inputId}")
+    if _type:
 
-            return (_id, _type)
-
-        # detect delimiter (either _ or :)
-        if "_" in inputId:
-
-            _type = inputId.split("_")[0].lower()
-
-            # special case for OTAR TODO
-            if _type == "otar":
-                _id = f"otar:{inputId.split('_')[1]}"
-            else:
-                _id = normalize_curie(inputId, sep="_")
-
-        elif ":" in inputId:
-
-            _type = inputId.split(":")[0].lower()
-            _id = normalize_curie(inputId, sep=":")
+        _id = normalize_curie(f"{_type}:{inputId}")
 
         return (_id, _type)
+
+    # detect delimiter (either _ or :)
+    if "_" in inputId:
+
+        _type = inputId.split("_")[0].lower()
+
+        # special case for OTAR TODO
+        if _type == "otar":
+            _id = f"otar:{inputId.split('_')[1]}"
+        else:
+            _id = normalize_curie(inputId, sep="_")
+
+    elif ":" in inputId:
+
+        _type = inputId.split(":")[0].lower()
+        _id = normalize_curie(inputId, sep=":")
+
+    return (_id, _type)
+
+
+def _find_licence(source: str) -> str:
+    """
+    Find and return the licence for a source.
+    """
+
+    return _licences.get(source, "Unknown")

@@ -62,27 +62,32 @@ node_fields = [
 ]
 
 edge_fields = [
+    # mandatory fields
     TargetDiseaseEdgeField.INTERACTION_ACCESSION,
     TargetDiseaseEdgeField.TARGET_GENE_ENSG,
     TargetDiseaseEdgeField.DISEASE_ACCESSION,
     TargetDiseaseEdgeField.TYPE,
+    TargetDiseaseEdgeField.SOURCE,
+    # optional fields
     TargetDiseaseEdgeField.SCORE,
     TargetDiseaseEdgeField.LITERATURE,
-    TargetDiseaseEdgeField.SOURCE,
 ]
 
 
 def main():
 
+    # Start BioCypher
     driver = biocypher.Driver(
         db_name="full",
         user_schema_config_path="config/target_disease_schema_config.yaml",
     )
 
+    # Load data
     adapter = TargetDiseaseEvidenceAdapter(
         datasets=datasets,
         node_fields=node_fields,
         edge_fields=edge_fields,
+        test_mode=True,
     )
 
     adapter.load_data(
@@ -92,13 +97,14 @@ def main():
     )
 
     # Write nodes
-    # driver.write_nodes(adapter.get_nodes())
+    driver.write_nodes(adapter.get_nodes())
 
     # Write edges in batches to avoid memory issues
     batches = adapter.get_edge_batches()
     for batch in batches:
         driver.write_edges(adapter.get_edges(batch_number=batch))
 
+    # Post import functions
     driver.write_import_call()
     driver.log_duplicates()
     driver.log_missing_bl_types()
