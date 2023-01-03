@@ -268,6 +268,20 @@ class TargetDiseaseEvidenceAdapter:
             .getOrCreate()
         )
 
+    def download_data(self, version: str, force: bool = False):
+        """
+        Download datasets from Open Targets website. Manage downloading and
+        caching of files. TODO
+
+        Args:
+
+            version: Version of the Open Targets data to download.
+
+            force: Whether to force download of files even if they already
+            exist.
+        """
+        pass
+
     def load_data(
         self,
         stats: bool = False,
