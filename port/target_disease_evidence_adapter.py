@@ -201,6 +201,12 @@ class MouseModelNodeField(Enum):
 
 
 class TargetDiseaseEdgeField(Enum):
+    """
+    Enum of all the fields in the target-disease dataset. Used to generate the
+    bulk of relationships in the graph. Values are the spellings used in the
+    Open Targets parquet files.
+    """
+
     INTERACTION_ACCESSION = "id"
     TARGET_GENE_ENSG = "targetId"
     DISEASE_ACCESSION = "diseaseId"
@@ -413,39 +419,61 @@ class TargetDiseaseEvidenceAdapter:
             mouse_target_df, MouseTargetNodeField, "ensembl"
         )
 
-    def get_edges(self):
+    def get_edge_batches(self):
         """
-        Yield edges from the evidence dataframe.
+        Create a column with partition number in the evidence dataframe and
+        return a list of batch numbers.
         """
 
-        logger.info("Generating edges.")
+        logger.info("Generating batches.")
 
         # select columns of interest
-        edge_df = self.evidence_df.where(
+        self.evidence_df = self.evidence_df.where(
             self.evidence_df.datasourceId.isin(
                 [field.value for field in self.datasets]
             )
         ).select([field.value for field in self.edge_fields])
 
-        logger.info("Partitioning edges.")
+        # add partition number to self.evidence_df as column
+        self.evidence_df = self.evidence_df.withColumn(
+            "partition_num", F.spark_partition_id()
+        )
+        self.evidence_df.persist()
 
-        # add partition number to edge_df as column
-        edge_df = edge_df.withColumn("partition_num", F.spark_partition_id())
-        edge_df.persist()
-
-        total_partition = [
+        self.batches = [
             int(row.partition_num)
-            for row in edge_df.select("partition_num").distinct().collect()
+            for row in self.evidence_df.select("partition_num")
+            .distinct()
+            .collect()
         ]
 
-        # yield edges per batch
-        for batch in total_partition:
+        logger.info(f"Generated {len(self.batches)} batches.")
 
-            logger.info(f"Processing batch {batch} of {len(total_partition)}.")
+        return self.batches
 
-            yield from self._process_edges(
-                edge_df.where(edge_df.partition_num == batch)
+    def get_edges(self, batch_number: int):
+        """
+        Yield edges from the evidence dataframe per batch.
+        """
+
+        # Check if self.evidence_df has column partition_num
+        if "partition_num" not in self.evidence_df.columns:
+            raise ValueError(
+                "self.evidence_df does not have column partition_num. "
+                "Please run get_edge_batches() first."
             )
+
+        logger.info("Generating edges.")
+
+        logger.info(
+            f"Processing batch {batch_number+1} of {len(self.batches)}."
+        )
+
+        yield from self._process_edges(
+            self.evidence_df.where(
+                self.evidence_df.partition_num == batch_number
+            )
+        )
 
     def _process_edges(self, batch):
         """

@@ -91,8 +91,13 @@ def main():
         show_edges=False,
     )
 
-    driver.write_nodes(adapter.get_nodes())
-    # driver.write_edges(adapter.get_edges())
+    # Write nodes
+    # driver.write_nodes(adapter.get_nodes())
+
+    # Write edges in batches to avoid memory issues
+    batches = adapter.get_edge_batches()
+    for batch in batches:
+        driver.write_edges(adapter.get_edges(batch_number=batch))
 
     driver.write_import_call()
     driver.log_duplicates()
