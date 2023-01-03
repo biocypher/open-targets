@@ -274,6 +274,19 @@ class TargetDiseaseEvidenceAdapter:
         show_nodes: bool = False,
         show_edges: bool = False,
     ):
+        """
+        Load data from disk into Spark DataFrames.
+
+        Args:
+
+            stats: Whether to print out schema and counts of nodes and edges.
+
+            show_nodes: Whether to print out the first row of each node
+            dataframe.
+
+            show_edges: Whether to print out the first row of each edge
+            dataframe.
+        """
 
         logger.info("Loading data from disk.")
 
@@ -346,10 +359,19 @@ class TargetDiseaseEvidenceAdapter:
         self,
         df: DataFrame,
         node_field_type: Enum,
-        biolink_type: Optional[str] = None,
+        ontology_class: Optional[str] = None,
     ):
         """
         Yield the node type from the dataframe.
+
+        Args:
+
+            df: Spark DataFrame containing the node data.
+
+            node_field_type: Enum containing the node fields.
+
+            ontology_class: Ontological class of the node (corresponding to the
+            `label_in_input` field in the schema configuration).
         """
 
         # Select columns of interest
@@ -370,7 +392,7 @@ class TargetDiseaseEvidenceAdapter:
 
             # normalize id
             _id, _type = _process_id_and_type(
-                row[node_field_type._PRIMARY_ID.value], biolink_type
+                row[node_field_type._PRIMARY_ID.value], ontology_class
             )
 
             # switch mouse gene type
@@ -484,6 +506,10 @@ class TargetDiseaseEvidenceAdapter:
     def _process_edges(self, batch):
         """
         Process one batch of edges.
+
+        Args:
+
+            batch: Spark DataFrame containing the edges of one batch.
         """
 
         logger.info(f"Batch size: {batch.count()} edges.")
@@ -532,6 +558,12 @@ def _process_id_and_type(inputId: str, _type: Optional[str] = None):
     """
     Process diseaseId and diseaseType fields from evidence data. Process
     gene (ENSG) ids.
+
+    Args:
+
+        inputId: id of the node.
+
+        _type: type of the node.
     """
 
     if not inputId:
@@ -565,6 +597,11 @@ def _process_id_and_type(inputId: str, _type: Optional[str] = None):
 def _find_licence(source: str) -> str:
     """
     Find and return the licence for a source.
+
+    Args:
+
+        source: source of the evidence. Spelling as in the Open Targets
+        evidence data.
     """
 
     return _licences.get(source, "Unknown")
