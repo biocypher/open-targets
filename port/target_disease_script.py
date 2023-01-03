@@ -11,6 +11,26 @@ from target_disease_evidence_adapter import (
     MouseModelNodeField,
 )
 
+"""
+Configuration: select datasets and fields to be imported.
+
+`datasets`: list of datasets to be imported. See 
+target_disease_evidence_adapter.py for available datasets or use Enum 
+auto-complete.
+
+`node_field`: list of fields to be imported for each of the types of nodes that
+the adapter creates. See target_disease_evidence_adapter.py for available fields
+or use Enum auto-complete. Note that some fields are mandatory for the
+functioning of the adapter (primary identifiers) and some are optional (e.g.
+gene symbol).
+
+`edge_fields`: list of fields to be imported for each of the relationships that
+the adapter creates. See target_disease_evidence_adapter.py for available fields
+or use Enum auto-complete. Note that some fields are mandatory for the
+functioning of the adapter (primary identifiers) and some are optional (e.g.
+score).
+"""
+
 datasets = [
     TargetDiseaseDataset.CANCER_BIOMARKERS,
     TargetDiseaseDataset.CANCER_GENE_CENSUS,
@@ -75,6 +95,9 @@ edge_fields = [
 
 
 def main():
+    """
+    Main function running the import using BioCypher and the adapter.
+    """
 
     # Start BioCypher
     driver = biocypher.Driver(
