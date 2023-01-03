@@ -482,14 +482,8 @@ class TargetDiseaseEvidenceAdapter:
 
         logger.info(f"Batch size: {batch.count()} edges.")
 
-        # count = 0
-
         # yield edges per row of edge_df, skipping null values
         for row in tqdm(batch.collect()):
-
-            # count += 1
-            # if count > 100:
-            #     break
 
             # collect properties from fields, skipping null values
             properties = {}
@@ -509,9 +503,10 @@ class TargetDiseaseEvidenceAdapter:
                     properties[field.value] = row[field.value]
 
             properties["version"] = "22.11"
-            properties["licence"] = [
-                "https://platform-docs.opentargets.org/licence"
-            ]
+            properties[
+                "licence"
+            ] = "https://platform-docs.opentargets.org/licence"
+
             # TODO single licences
 
             disease_id, _ = self._process_id_and_type(row.diseaseId)
@@ -545,13 +540,16 @@ class TargetDiseaseEvidenceAdapter:
         if "_" in inputId:
 
             _type = inputId.split("_")[0].lower()
-            _id = normalize_curie(inputId, sep="_")
 
-            return (_id, _type)
+            # special case for OTAR TODO
+            if _type == "otar":
+                _id = f"otar:{inputId.split('_')[1]}"
+            else:
+                _id = normalize_curie(inputId, sep="_")
 
         elif ":" in inputId:
 
             _type = inputId.split(":")[0].lower()
             _id = normalize_curie(inputId, sep=":")
 
-            return (_id, _type)
+        return (_id, _type)
