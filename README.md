@@ -1,7 +1,7 @@
 # OTAR-BioCypher
 
-This is a collection of BioCypher adapters and corresponding scripts for Open
-Targets data. It is a work in progress.
+This is a collection of [BioCypher](https://biocypher.org) adapters and 
+corresponding scripts for Open Targets data. It is a work in progress.
 
 ## Installation
 The project uses [Poetry](https://python-poetry.org). You can install it like
