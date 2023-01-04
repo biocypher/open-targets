@@ -22,20 +22,21 @@ from adapters.target_disease_evidence_adapter import (
 Configuration: select datasets and fields to be imported.
 
 `datasets`: list of datasets to be imported. See 
-target_disease_evidence_adapter.py for available datasets or use Enum 
-auto-complete.
+target_disease_evidence_adapter.py for available datasets or use
+`TargetDiseaseDataset` Enum auto-complete.
 
 `node_field`: list of fields to be imported for each of the types of nodes that
 the adapter creates. See target_disease_evidence_adapter.py for available fields
-or use Enum auto-complete. Note that some fields are mandatory for the
-functioning of the adapter (primary identifiers) and some are optional (e.g.
-gene symbol).
+or use Enum auto-complete of `TargetNodeField`, `DiseaseNodeField`,
+`GeneOntologyNodeField`, `MousePhenotypeNodeField`, `MouseTargetNodeField`. Note
+that some fields are mandatory for the functioning of the adapter (primary
+identifiers) and some are optional (e.g. gene symbol).
 
 `edge_fields`: list of fields to be imported for each of the relationships that
 the adapter creates. See target_disease_evidence_adapter.py for available fields
-or use Enum auto-complete. Note that some fields are mandatory for the
-functioning of the adapter (primary identifiers) and some are optional (e.g.
-score).
+or use Enum auto-complete of `TargetDiseaseEdgeField`. Note that some fields are
+mandatory for the functioning of the adapter (primary identifiers) and some are
+optional (e.g.  score).
 """
 
 datasets = [
