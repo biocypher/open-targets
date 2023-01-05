@@ -18,6 +18,19 @@ centrally or in the project folder). You can activate it by running `poetry
 shell` inside the project directory. Alternatively, you can use a different
 package manager to install the dependencies listed in `pyproject.toml`.
 
+### Note about pycurl
+You may encounter an error in executing the script combining this adapter and
+the UniProt adapter about the SSL backend in pycurl: `ImportError: pycurl:
+libcurl link-time ssl backend (openssl) is different from compile-time ssl
+backend (none/other)`
+
+Should this happen, it can be fixed as described here:
+https://stackoverflow.com/questions/68167426/how-to-install-a-package-with-poetry-that-requires-cli-args
+by running `poetry shell` followed by `pip list`, noting the version of pycurl,
+and then running `pip install --compile --install-option="--with-openssl"
+--upgrade --force-reinstall pycurl==<version>` to provide the correct SSL
+backend.
+
 ## Open Targets target-disease associations
 Target-disease association evidence is available from the Open Targets website
 at https://platform.opentargets.org/downloads. The data can be downloaded in
