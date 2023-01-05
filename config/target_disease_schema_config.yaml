@@ -18,6 +18,13 @@ mouse gene:
     targetInModelMgiId: str
     targetFromSourceId: str
 
+protein:
+  represented_as: node
+  preferred_id: uniprot
+  label_in_input: protein
+  properties:
+    ensembl_gene_ids: str[]
+    
 # otar has no Bioregistry entry
 disease:
   represented_as: node

@@ -18,6 +18,8 @@ from adapters.target_disease_evidence_adapter import (
     MouseModelNodeField,
 )
 
+from bccb.uniprot_adapter import Uniprot, UniprotNode, UniprotNodeField
+
 """
 Configuration: select datasets and fields to be imported.
 
@@ -39,7 +41,7 @@ mandatory for the functioning of the adapter (primary identifiers) and some are
 optional (e.g.  score).
 """
 
-datasets = [
+target_disease_datasets = [
     TargetDiseaseDataset.CANCER_BIOMARKERS,
     TargetDiseaseDataset.CANCER_GENE_CENSUS,
     TargetDiseaseDataset.CHEMBL,
@@ -64,7 +66,7 @@ datasets = [
     TargetDiseaseDataset.UNIPROT_LITERATURE,
 ]
 
-node_fields = [
+target_disease_node_fields = [
     # mandatory fields
     TargetNodeField.TARGET_GENE_ENSG,
     DiseaseNodeField.DISEASE_ACCESSION,
@@ -89,7 +91,7 @@ node_fields = [
     MouseTargetNodeField.HUMAN_TARGET_ENGS,
 ]
 
-edge_fields = [
+target_disease_edge_fields = [
     # mandatory fields
     TargetDiseaseEdgeField.INTERACTION_ACCESSION,
     TargetDiseaseEdgeField.TARGET_GENE_ENSG,
@@ -99,6 +101,15 @@ edge_fields = [
     # optional fields
     TargetDiseaseEdgeField.SCORE,
     TargetDiseaseEdgeField.LITERATURE,
+]
+
+uniprot_node_types = [
+    UniprotNode.PROTEIN,
+]
+
+uniprot_node_fields = [
+    UniprotNodeField.PROTEIN_ID,
+    UniprotNodeField.PROTEIN_ENSEMBL_GENE_IDS,
 ]
 
 
@@ -114,26 +125,39 @@ def main():
     )
 
     # Load data
-    adapter = TargetDiseaseEvidenceAdapter(
-        datasets=datasets,
-        node_fields=node_fields,
-        edge_fields=edge_fields,
+    target_disease_adapter = TargetDiseaseEvidenceAdapter(
+        datasets=target_disease_datasets,
+        node_fields=target_disease_node_fields,
+        edge_fields=target_disease_edge_fields,
         test_mode=True,
     )
 
-    adapter.load_data(
+    target_disease_adapter.load_data(
         stats=False,
         show_nodes=False,
         show_edges=False,
     )
 
+    uniprot_adapter = Uniprot(
+        organism="9606",
+        node_types=uniprot_node_types,
+        node_fields=uniprot_node_fields,
+        test_mode=True,
+    )
+
+    uniprot_adapter.download_uniprot_data(
+        cache=True,
+        retries=5,
+    )
+
     # Write nodes
-    driver.write_nodes(adapter.get_nodes())
+    driver.write_nodes(target_disease_adapter.get_nodes())
+    driver.write_nodes(uniprot_adapter.get_nodes())
 
     # Write edges in batches to avoid memory issues
-    batches = adapter.get_edge_batches()
+    batches = target_disease_adapter.get_edge_batches()
     for batch in batches:
-        driver.write_edges(adapter.get_edges(batch_number=batch))
+        driver.write_edges(target_disease_adapter.get_edges(batch_number=batch))
 
     # Post import functions
     driver.write_import_call()
