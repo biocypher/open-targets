@@ -24,7 +24,7 @@ protein:
   label_in_input: protein
   properties:
     ensembl_gene_ids: str[]
-    
+
 # otar has no Bioregistry entry
 disease:
   represented_as: node
@@ -77,3 +77,8 @@ gene to disease association:
   properties:
     literature: str[]
     score: double
+
+gene to protein relationship:
+  is_a: gene to gene product relationship
+  represented_as: edge
+  label_in_input: Encodes

@@ -302,7 +302,7 @@ class TargetDiseaseEvidenceAdapter:
             dataframe.
         """
 
-        logger.info("Loading data from disk.")
+        logger.info("Loading Open Targets data from disk.")
 
         # Read in evidence data and target / disease annotations
         evidence_path = "data/ot_files/evidence"

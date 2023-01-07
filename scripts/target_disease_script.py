@@ -18,7 +18,13 @@ from adapters.target_disease_evidence_adapter import (
     MouseModelNodeField,
 )
 
-from bccb.uniprot_adapter import Uniprot, UniprotNode, UniprotNodeField
+from bccb.uniprot_adapter import (
+    Uniprot,
+    UniprotNodeType,
+    UniprotNodeField,
+    UniprotEdgeType,
+    UniprotEdgeField,
+)
 
 """
 Configuration: select datasets and fields to be imported.
@@ -104,12 +110,22 @@ target_disease_edge_fields = [
 ]
 
 uniprot_node_types = [
-    UniprotNode.PROTEIN,
+    UniprotNodeType.PROTEIN,
 ]
 
 uniprot_node_fields = [
-    UniprotNodeField.PROTEIN_ID,
+    UniprotNodeField.PROTEIN_NAMES,
+    UniprotNodeField.PROTEIN_LENGTH,
+    UniprotNodeField.PROTEIN_MASS,
     UniprotNodeField.PROTEIN_ENSEMBL_GENE_IDS,
+]
+
+uniprot_edge_types = [
+    UniprotEdgeType.GENE_TO_PROTEIN,
+]
+
+uniprot_edge_fields = [
+    UniprotEdgeField.GENE_ENSEMBL_GENE_ID,
 ]
 
 
@@ -142,6 +158,8 @@ def main():
         organism="9606",
         node_types=uniprot_node_types,
         node_fields=uniprot_node_fields,
+        edge_types=uniprot_edge_types,
+        edge_fields=uniprot_edge_fields,
         test_mode=True,
     )
 
@@ -154,7 +172,10 @@ def main():
     driver.write_nodes(target_disease_adapter.get_nodes())
     driver.write_nodes(uniprot_adapter.get_nodes())
 
-    # Write edges in batches to avoid memory issues
+    # Write edges
+    driver.write_edges(uniprot_adapter.get_edges())
+
+    # Write OTAR edges in batches to avoid memory issues
     batches = target_disease_adapter.get_edge_batches()
     for batch in batches:
         driver.write_edges(target_disease_adapter.get_edges(batch_number=batch))

@@ -81,7 +81,7 @@ tqdm = "^4.64.0"
 type = "git"
 url = "https://github.com/HUBioDataLab/CROssBAR-BioCypher-Migration.git"
 reference = "main"
-resolved_reference = "fe82bc0c56e640e51e00dae5e97510102552e39f"
+resolved_reference = "68991397490de7a783fe8e5397ff00b438433c62"
 
 [[package]]
 name = "bcrypt"
@@ -143,7 +143,7 @@ resolved_reference = "1a3fc3c59f51d1c3e68d29718bd0890ec32c6c5f"
 
 [[package]]
 name = "bioregistry"
-version = "0.6.47"
+version = "0.6.48"
 description = "Integrated registry of biological databases and nomenclatures"
 category = "main"
 optional = false
@@ -2295,8 +2295,8 @@ beautifulsoup4 = [
 ]
 biocypher = []
 bioregistry = [
-    {file = "bioregistry-0.6.47-py3-none-any.whl", hash = "sha256:b1674a15fe857037ab087a669068dcc91018dbd4fed3ed6bae43ddea64dbfb12"},
-    {file = "bioregistry-0.6.47.tar.gz", hash = "sha256:6d91eadf1bf393d8a0eb5ef79e08d08373e342e1c2928e81012541eee5be414d"},
+    {file = "bioregistry-0.6.48-py3-none-any.whl", hash = "sha256:48590731a334da656fcb3e27ec7edec9367716af23c6dca60939a827c6470738"},
+    {file = "bioregistry-0.6.48.tar.gz", hash = "sha256:5d6e6500825616edae668b386e9b77dcfc74fc66f40bf2783b4626700784efe7"},
 ]
 black = [
     {file = "black-21.12b0-py3-none-any.whl", hash = "sha256:a615e69ae185e08fdd73e4715e260e2479c861b5740057fde6e8b4e3b7dd589f"},
