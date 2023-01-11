@@ -141,6 +141,8 @@ def main():
     )
 
     # Load data
+
+    # Open Targets
     target_disease_adapter = TargetDiseaseEvidenceAdapter(
         datasets=target_disease_datasets,
         node_fields=target_disease_node_fields,
@@ -154,6 +156,7 @@ def main():
         show_edges=False,
     )
 
+    # UniProt
     uniprot_adapter = Uniprot(
         organism="9606",
         node_types=uniprot_node_types,
