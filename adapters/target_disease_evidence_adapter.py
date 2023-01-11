@@ -70,10 +70,9 @@ class TargetNodeField(Enum):
     in the Open Targets parquet files.
     """
 
-    _PRIMARY_ID = "id"
-
     # mandatory fields
     TARGET_GENE_ENSG = "id"
+    _PRIMARY_ID = TARGET_GENE_ENSG
 
     # optional fields
     TARGET_GENE_SYMBOL = "approvedSymbol"
@@ -111,10 +110,9 @@ class DiseaseNodeField(Enum):
     in the Open Targets parquet files.
     """
 
-    _PRIMARY_ID = "id"
-
     # mandatory fields
     DISEASE_ACCESSION = "id"
+    _PRIMARY_ID = DISEASE_ACCESSION
 
     # optional fields
     DISEASE_CODE = "code"
@@ -140,10 +138,10 @@ class GeneOntologyNodeField(Enum):
     spellings used in the Open Targets parquet files.
     """
 
-    _PRIMARY_ID = "id"
-
     # mandatory fields
     GENE_ONTOLOGY_ACCESSION = "id"
+    _PRIMARY_ID = GENE_ONTOLOGY_ACCESSION
+
     # optional fields
     GENE_ONTOLOGY_NAME = "name"
 
@@ -154,10 +152,9 @@ class MousePhenotypeNodeField(Enum):
     spellings used in the Open Targets parquet files.
     """
 
-    _PRIMARY_ID = "modelPhenotypeId"
-
     # mandatory fields
     MOUSE_PHENOTYPE_ACCESSION = "modelPhenotypeId"
+    _PRIMARY_ID = MOUSE_PHENOTYPE_ACCESSION
 
     # optional fields
     MOUSE_PHENOTYPE_LABEL = "modelPhenotypeLabel"
@@ -170,10 +167,9 @@ class MouseTargetNodeField(Enum):
     Targets parquet files.
     """
 
-    _PRIMARY_ID = "targetInModelEnsemblId"
-
     # mandatory fields
     MOUSE_TARGET_ENSG = "targetInModelEnsemblId"
+    _PRIMARY_ID = MOUSE_TARGET_ENSG
 
     # alternative ids
     MOUSE_TARGET_SYMBOL = "targetInModel"
@@ -189,9 +185,10 @@ class MouseModelNodeField(Enum):
     model. Values are the spellings used in the Open Targets parquet files.
     """
 
-    _PRIMARY_ID = "biologicalModels"
-
+    # mandatory fields
     MOUSE_PHENOTYPE_MODELS = "biologicalModels"
+    _PRIMARY_ID = MOUSE_PHENOTYPE_MODELS
+
     MOUSE_PHENOTYPE_CLASSES = "modelPhenotypeClasses"
 
 
@@ -202,9 +199,15 @@ class TargetDiseaseEdgeField(Enum):
     Open Targets parquet files.
     """
 
+    # mandatory fields
     INTERACTION_ACCESSION = "id"
+
     TARGET_GENE_ENSG = "targetId"
+    _PRIMARY_SOURCE_ID = TARGET_GENE_ENSG
+
     DISEASE_ACCESSION = "diseaseId"
+    _PRIMARY_TARGET_ID = DISEASE_ACCESSION
+
     TYPE = "datatypeId"
     SOURCE = "datasourceId"
     LITERATURE = "literature"
