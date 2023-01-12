@@ -15,6 +15,23 @@ from adapters.target_disease_evidence_adapter import (
     GeneOntologyNodeField,
     MousePhenotypeNodeField,
     MouseTargetNodeField,
+    MouseModelNodeField,
+)
+
+from bccb.uniprot_adapter import (
+    Uniprot,
+    UniprotNodeType,
+    UniprotNodeField,
+    UniprotEdgeType,
+    UniprotEdgeField,
+)
+
+from dmb.adapter import (
+    DepMapAdapter,
+    DepMapNodeType,
+    DepMapEdgeType,
+    DepMapCellLineNodeField,
+    DepMapGeneToCellLineEdgeField,
 )
 
 """
@@ -100,6 +117,48 @@ target_disease_edge_fields = [
     TargetDiseaseEdgeField.LITERATURE,
 ]
 
+uniprot_node_types = [
+    UniprotNodeType.PROTEIN,
+]
+
+uniprot_node_fields = [
+    UniprotNodeField.PROTEIN_NAMES,
+    UniprotNodeField.PROTEIN_LENGTH,
+    UniprotNodeField.PROTEIN_MASS,
+    UniprotNodeField.PROTEIN_ENSEMBL_GENE_IDS,
+]
+
+uniprot_edge_types = [
+    UniprotEdgeType.GENE_TO_PROTEIN,
+]
+
+uniprot_edge_fields = [
+    UniprotEdgeField.GENE_ENSEMBL_GENE_ID,
+]
+
+depmap_node_types = [
+    DepMapNodeType.CELL_LINE,
+]
+
+depmap_node_fields = [
+    DepMapCellLineNodeField.CELL_LINE_NAME,
+    DepMapCellLineNodeField.CELL_LINE_TISSUE,
+    DepMapCellLineNodeField.CELL_LINE_TUMOUR_GRADE,
+    DepMapCellLineNodeField.CELL_LINE_MUTATION_DATA,
+    DepMapCellLineNodeField.CELL_LINE_CNV_DATA,
+    # there are many more
+]
+
+depmap_edge_types = [
+    DepMapEdgeType.GENE_TO_CELL_LINE,
+]
+
+depmap_edge_fields = [
+    DepMapGeneToCellLineEdgeField._TRANSLATE_SOURCE_ID_TO_ENSG,
+    DepMapGeneToCellLineEdgeField._PRIMARY_TARGET_ID,
+    DepMapGeneToCellLineEdgeField.DEPENDENCY_SCORE_NORMALISED,
+]
+
 
 def main():
     """
@@ -109,7 +168,7 @@ def main():
     # Start BioCypher
     driver = biocypher.Driver(
         db_name="test",
-        user_schema_config_path="config/target_disease_schema_config.yaml",
+        user_schema_config_path="config/extended_target_disease_schema_config.yaml",
         skip_bad_relationships=True,  # allows import of incomplete test data
     )
 
@@ -132,8 +191,38 @@ def main():
         show_edges=False,
     )
 
+    # UniProt
+    uniprot_adapter = Uniprot(
+        organism="9606",
+        node_types=uniprot_node_types,
+        node_fields=uniprot_node_fields,
+        edge_types=uniprot_edge_types,
+        edge_fields=uniprot_edge_fields,
+        test_mode=True,
+    )
+
+    uniprot_adapter.download_uniprot_data(
+        cache=True,
+        retries=5,
+    )
+
+    # Dependency Map
+    depmap_adapter = DepMapAdapter(
+        node_types=depmap_node_types,
+        node_fields=depmap_node_fields,
+        edge_types=depmap_edge_types,
+        edge_fields=depmap_edge_fields,
+        test_mode=True,
+    )
+
     # Write nodes
     driver.write_nodes(target_disease_adapter.get_nodes())
+    driver.write_nodes(uniprot_adapter.get_nodes())
+    driver.write_nodes(depmap_adapter.get_nodes())
+
+    # Write edges
+    driver.write_edges(uniprot_adapter.get_edges())
+    driver.write_edges(depmap_adapter.get_edges())
 
     # Write OTAR edges in batches to avoid memory issues
     batches = target_disease_adapter.get_edge_batches()

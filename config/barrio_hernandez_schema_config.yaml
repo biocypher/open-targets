@@ -1,16 +1,3 @@
-Title: BioCypher graph schema configuration file
-
-# This configuration file establishes the hierarchy and connectivity in a newly
-# set-up BioCypher property graph database. Naming should adhere to Biolink
-# nomenclature (available at https://biolink.github.io/biolink-model/ or via 
-# the python module 'biolink-model-toolkit').
-
-# The BioCypher YAML file specifies only the leaves of the hierarchy tree of
-# the desired graph; the hierarchical structure of entities will be derived 
-# from the Biolink model. Thus, only the immediate constituents of the graph
-# need to be specified in the schema config.
-
-
 # ---
 # "Named Things"
 # ---

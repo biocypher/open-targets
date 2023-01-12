@@ -54,6 +54,20 @@ Please note that, by default, the adapter will be in `test mode`, which means
 that it will only process a small subset of the data. To process the full data,
 you can set the `test_mode` parameter in the adapter to `False` (or remove it).
 
+### Adapter combination: UniProt and Dependency Map
+To demonstrate the combination of multiple adapters to yield a single harmonised
+knowledge graph, we add the [UniProt
+adapter](https://github.com/HUBioDataLab/CROssBAR-BioCypher-Migration) (created
+in the context of the CROssBAR v2 project) and the [Dependency Map
+adapter](https://github.com/saezlab/DepMap-BioCypher) to the target-disease
+knowledge graph creation script. The resulting script is
+`scripts/target_disease_script_extended.py`.
+
+Please note that while the UniProt adapter downloads data directly from UniProt
+through pypath, the Dependency Map adapter is only functional for demonstration
+purposes, as it requires the availability of local data (which is limited to 
+100 entries for our demo case).
+
 ## Barrio-Hernandez et al. 2021 graph dump
 Barrio-Hernandez and colleagues used interaction data from the Open Targets
 platform to implement their method of network expansion 

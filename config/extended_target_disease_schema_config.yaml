@@ -1,6 +1,7 @@
 # ---
 # "Named Things"
 # ---
+
 human gene:
   is_a: gene
   represented_as: node
@@ -20,6 +21,13 @@ mouse gene:
     targetInModel: str
     targetInModelMgiId: str
     targetFromSourceId: str
+
+protein:
+  represented_as: node
+  preferred_id: uniprot
+  label_in_input: protein
+  properties:
+    ensembl_gene_ids: str[]
 
 # otar has no Bioregistry entry
 disease:
@@ -50,6 +58,15 @@ mouse phenotype:
     targetFromSourceId: str
     targetInModelEnsemblId: str
 
+cell line:
+  represented_as: node
+  label_in_input: cellModel
+  properties:
+    tissue: str
+    tumourGrade: str
+    mutationData: str
+    cnvData: str
+
 # ---
 # Associations
 # ---
@@ -77,3 +94,13 @@ gene to disease association:
   properties:
     literature: str[]
     score: double
+
+gene to protein relationship:
+  is_a: gene to gene product relationship
+  represented_as: edge
+  label_in_input: Encodes
+
+gene to cell line relationship:
+  is_a: association
+  represented_as: edge
+  label_in_input: CRISPRKO
