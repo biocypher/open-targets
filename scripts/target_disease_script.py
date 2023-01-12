@@ -26,6 +26,14 @@ from bccb.uniprot_adapter import (
     UniprotEdgeField,
 )
 
+from dmb.adapter import (
+    DepMapAdapter,
+    DepMapNodeType,
+    DepMapEdgeType,
+    DepMapCellLineNodeField,
+    DepMapGeneToCellLineEdgeField,
+)
+
 """
 Configuration: select datasets and fields to be imported.
 
@@ -128,6 +136,29 @@ uniprot_edge_fields = [
     UniprotEdgeField.GENE_ENSEMBL_GENE_ID,
 ]
 
+depmap_node_types = [
+    DepMapNodeType.CELL_LINE,
+]
+
+depmap_node_fields = [
+    DepMapCellLineNodeField.CELL_LINE_NAME,
+    DepMapCellLineNodeField.CELL_LINE_TISSUE,
+    DepMapCellLineNodeField.CELL_LINE_TUMOUR_GRADE,
+    DepMapCellLineNodeField.CELL_LINE_MUTATION_DATA,
+    DepMapCellLineNodeField.CELL_LINE_CNV_DATA,
+    # there are many more
+]
+
+depmap_edge_types = [
+    DepMapEdgeType.GENE_TO_CELL_LINE,
+]
+
+depmap_edge_fields = [
+    DepMapGeneToCellLineEdgeField._TRANSLATE_SOURCE_ID_TO_ENSG,
+    DepMapGeneToCellLineEdgeField._PRIMARY_TARGET_ID,
+    DepMapGeneToCellLineEdgeField.DEPENDENCY_SCORE_NORMALISED,
+]
+
 
 def main():
     """
@@ -136,9 +167,13 @@ def main():
 
     # Start BioCypher
     driver = biocypher.Driver(
-        db_name="full",
+        db_name="test",
         user_schema_config_path="config/target_disease_schema_config.yaml",
+        skip_bad_relationships=True,  # allows import of incomplete test data
     )
+
+    # Check the schema
+    driver.show_ontology_structure()
 
     # Load data
 
@@ -171,12 +206,23 @@ def main():
         retries=5,
     )
 
+    # Dependency Map
+    depmap_adapter = DepMapAdapter(
+        node_types=depmap_node_types,
+        node_fields=depmap_node_fields,
+        edge_types=depmap_edge_types,
+        edge_fields=depmap_edge_fields,
+        test_mode=True,
+    )
+
     # Write nodes
     driver.write_nodes(target_disease_adapter.get_nodes())
     driver.write_nodes(uniprot_adapter.get_nodes())
+    driver.write_nodes(depmap_adapter.get_nodes())
 
     # Write edges
     driver.write_edges(uniprot_adapter.get_edges())
+    driver.write_edges(depmap_adapter.get_edges())
 
     # Write OTAR edges in batches to avoid memory issues
     batches = target_disease_adapter.get_edge_batches()
@@ -187,7 +233,6 @@ def main():
     driver.write_import_call()
     driver.log_duplicates()
     driver.log_missing_bl_types()
-    driver.show_ontology_structure()
 
 
 if __name__ == "__main__":

@@ -54,6 +54,15 @@ mouse phenotype:
     targetFromSourceId: str
     targetInModelEnsemblId: str
 
+cell line:
+  represented_as: node
+  label_in_input: cellModel
+  properties:
+    tissue: str
+    tumourGrade: str
+    mutationData: str
+    cnvData: str
+
 gene to disease association:
   represented_as: node
   preferred_id: [
@@ -82,3 +91,8 @@ gene to protein relationship:
   is_a: gene to gene product relationship
   represented_as: edge
   label_in_input: Encodes
+
+gene to cell line relationship:
+  is_a: association
+  represented_as: edge
+  label_in_input: CRISPRKO
