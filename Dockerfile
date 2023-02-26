@@ -22,11 +22,11 @@ RUN poetry config virtualenvs.create false && poetry install
 COPY . ./
 
 WORKDIR /usr/app/data/ot_files/
-#RUN rsync -rpltvz rsync.ebi.ac.uk::pub/databases/opentargets/platform/22.11/output/etl/parquet/evidence .
-#RUN rsync -rpltvz rsync.ebi.ac.uk::pub/databases/opentargets/platform/22.11/output/etl/parquet/targets .
-#RUN rsync -rpltvz rsync.ebi.ac.uk::pub/databases/opentargets/platform/22.11/output/etl/parquet/diseases .
-#RUN rsync -rpltvz rsync.ebi.ac.uk::pub/databases/opentargets/platform/22.11/output/etl/parquet/go .
-#RUN rsync -rpltvz rsync.ebi.ac.uk::pub/databases/opentargets/platform/22.11/output/etl/parquet/mousePhenotypes .
+RUN rsync -rpltvz rsync.ebi.ac.uk::pub/databases/opentargets/platform/22.11/output/etl/parquet/evidence .
+RUN rsync -rpltvz rsync.ebi.ac.uk::pub/databases/opentargets/platform/22.11/output/etl/parquet/targets .
+RUN rsync -rpltvz rsync.ebi.ac.uk::pub/databases/opentargets/platform/22.11/output/etl/parquet/diseases .
+RUN rsync -rpltvz rsync.ebi.ac.uk::pub/databases/opentargets/platform/22.11/output/etl/parquet/go .
+RUN rsync -rpltvz rsync.ebi.ac.uk::pub/databases/opentargets/platform/22.11/output/etl/parquet/mousePhenotypes .
 WORKDIR /usr/app/
 RUN python3 scripts/target_disease_script.py
 RUN python3 scripts/update_import_script.py "/usr/app/biocypher-out/test/neo4j-admin-import-call.sh" "/usr/app/biocypher-out/" "neo4j-admin"

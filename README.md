@@ -1,9 +1,10 @@
 # OTAR-BioCypher
 
-This is a collection of [BioCypher](https://biocypher.org) adapters and 
+This is a collection of [BioCypher](https://biocypher.org) adapters and
 corresponding scripts for Open Targets data. It is a work in progress.
 
 ## Installation
+
 The project uses [Poetry](https://python-poetry.org). You can install it like
 this:
 
@@ -19,6 +20,7 @@ shell` inside the project directory. Alternatively, you can use a different
 package manager to install the dependencies listed in `pyproject.toml`.
 
 ### Note about pycurl
+
 You may encounter an error in executing the script combining this adapter and
 the UniProt adapter about the SSL backend in pycurl: `ImportError: pycurl:
 libcurl link-time ssl backend (openssl) is different from compile-time ssl
@@ -32,10 +34,11 @@ and then running `pip install --compile --install-option="--with-openssl"
 backend.
 
 ## Open Targets target-disease associations
+
 Target-disease association evidence is available from the Open Targets website
 at https://platform.opentargets.org/downloads. The data can be downloaded in
 Parquet format, which is a columnar data format that is compatible with Spark
-and other big data tools. Currently, the data have to be manually downloaded 
+and other big data tools. Currently, the data have to be manually downloaded
 (e.g. using the wget command supplied on the website) and placed in the
 `data/ot_files` directory. The adapter was created using version 22.11 of the
 data.
@@ -55,6 +58,7 @@ that it will only process a small subset of the data. To process the full data,
 you can set the `test_mode` parameter in the adapter to `False` (or remove it).
 
 ### Adapter combination: UniProt and Dependency Map
+
 To demonstrate the combination of multiple adapters to yield a single harmonised
 knowledge graph, we add the [UniProt
 adapter](https://github.com/HUBioDataLab/CROssBAR-BioCypher-Migration) (created
@@ -65,12 +69,13 @@ knowledge graph creation script. The resulting script is
 
 Please note that while the UniProt adapter downloads data directly from UniProt
 through pypath, the Dependency Map adapter is only functional for demonstration
-purposes, as it requires the availability of local data (which is limited to 
+purposes, as it requires the availability of local data (which is limited to
 100 entries for our demo case).
 
 ## Barrio-Hernandez et al. 2021 graph dump
+
 Barrio-Hernandez and colleagues used interaction data from the Open Targets
-platform to implement their method of network expansion 
+platform to implement their method of network expansion
 (https://www.biorxiv.org/content/10.1101/2021.07.19.452924v1). A dump file of
 the Neo4j knowledge graph they used is available at
 http://ftp.ebi.ac.uk/pub/databases/intact/various/ot_graphdb/current/.
@@ -85,3 +90,8 @@ neo4j-admin import command for the processed data in each individual output
 folder, under the file name `neo4j-admin-import-call.sh`, which simply needs to
 be executed in the home directory of the target database. More information about
 the BioCypher package can be found at https://biocypher.org.
+
+## Docker version
+To use start a dockerized neo4j database which will automatically load and build the database of this repository, docker
+and docker compose (former docker-compose) needs to be installed.
+Build the container using `docker-compose build` and `docker-compose up -d` to start it.
