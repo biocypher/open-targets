@@ -72,6 +72,12 @@ through pypath, the Dependency Map adapter is only functional for demonstration
 purposes, as it requires the availability of local data (which is limited to
 100 entries for our demo case).
 
+### Docker version
+To use start a dockerized neo4j database which will automatically load and build 
+the database of this repository, dockerand docker compose (former docker-compose) 
+needs to be installed. Build the container using `docker-compose build` and 
+`docker-compose up -d` to start it.
+
 ## Barrio-Hernandez et al. 2021 graph dump
 
 Barrio-Hernandez and colleagues used interaction data from the Open Targets
@@ -90,8 +96,3 @@ neo4j-admin import command for the processed data in each individual output
 folder, under the file name `neo4j-admin-import-call.sh`, which simply needs to
 be executed in the home directory of the target database. More information about
 the BioCypher package can be found at https://biocypher.org.
-
-## Docker version
-To use start a dockerized neo4j database which will automatically load and build the database of this repository, docker
-and docker compose (former docker-compose) needs to be installed.
-Build the container using `docker-compose build` and `docker-compose up -d` to start it.
