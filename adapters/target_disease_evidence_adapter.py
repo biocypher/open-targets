@@ -259,6 +259,7 @@ class TargetDiseaseEvidenceAdapter:
             SparkConf()
             .setAppName("otar_biocypher")
             .setMaster("local")
+            .set("spark.driver.bindAddress", "127.0.0.1")
             .set("spark.driver.memory", "4g")
             .set("spark.executor.memory", "4g")
         )
@@ -324,7 +325,6 @@ class TargetDiseaseEvidenceAdapter:
         self.mp_df = self.spark.read.parquet(mp_path)
 
         if stats:
-
             # print schema
             print(self.evidence_df.printSchema())
             print(self.target_df.printSchema())
@@ -406,7 +406,6 @@ class TargetDiseaseEvidenceAdapter:
             df = df.limit(100)
 
         for row in tqdm(df.collect()):
-
             # normalize id
             _id, _type = _process_id_and_type(
                 row[node_field_type._PRIMARY_ID.value], ontology_class
@@ -425,7 +424,6 @@ class TargetDiseaseEvidenceAdapter:
             _props["licence"] = "https://platform-docs.opentargets.org/licence"
 
             for field in self.node_fields:
-
                 if not isinstance(field, node_field_type):
                     continue
 
@@ -537,7 +535,6 @@ class TargetDiseaseEvidenceAdapter:
 
         # yield edges per row of edge_df, skipping null values
         for row in tqdm(batch.collect()):
-
             # collect properties from fields, skipping null values
             properties = {}
             for field in self.edge_fields:
@@ -587,14 +584,12 @@ def _process_id_and_type(inputId: str, _type: Optional[str] = None):
         return (None, None)
 
     if _type:
-
         _id = normalize_curie(f"{_type}:{inputId}")
 
         return (_id, _type)
 
     # detect delimiter (either _ or :)
     if "_" in inputId:
-
         _type = inputId.split("_")[0].lower()
 
         # special case for OTAR TODO
@@ -604,7 +599,6 @@ def _process_id_and_type(inputId: str, _type: Optional[str] = None):
             _id = normalize_curie(inputId, sep="_")
 
     elif ":" in inputId:
-
         _type = inputId.split(":")[0].lower()
         _id = normalize_curie(inputId, sep=":")
 
