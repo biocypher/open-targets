@@ -6,7 +6,7 @@ authors = ["Sebastian Lobentanzer <sebastian.lobentanzer@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-biocypher = { git = "https://github.com/saezlab/BioCypher.git", branch = "main" }
+biocypher = { git = "https://github.com/saezlab/BioCypher.git", branch = "main" , tag = "v0.4.3"}
 # biocypher = {path = "../BioCypher", develop = true}  # for local development
 snakeviz = "^2.1.1"
 pyspark = "^3.3.1"
