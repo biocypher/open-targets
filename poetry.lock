@@ -1026,7 +1026,7 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "0137598bfac41445646becf790602216254bd2621782ab32f727127d6bfc4ea9"
+content-hash = "1f091545c06ad6f1249441aba100f2d2c2c47d4869f9449c52362623dd539ca3"
 
 [metadata.files]
 appdirs = [
