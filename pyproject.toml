@@ -6,13 +6,12 @@ authors = ["Sebastian Lobentanzer <sebastian.lobentanzer@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-# biocypher = { git = "https://github.com/saezlab/BioCypher.git", branch = "main", tag = "v0.4.4" }
-# biocypher = {path = "../BioCypher", develop = true}  # for local development
+biocypher = { git = "https://github.com/saezlab/BioCypher.git", branch = "modularise" }
 snakeviz = "^2.1.1"
 pyspark = "^3.3.1"
 bioregistry = "^0.6.45"
 pandas = "^1.5.2"
-bccb = { git = "https://github.com/HUBioDataLab/CROssBAR-BioCypher-Migration.git", branch = "main" }
+bccb = { git = "https://github.com/HUBioDataLab/CROssBAR-BioCypher-Migration.git", branch = "v0.5compat" }
 # dmb = { git = "https://github.com/saezlab/DepMap-BioCypher.git", branch = "main" }
 
 [tool.poetry.dev-dependencies]

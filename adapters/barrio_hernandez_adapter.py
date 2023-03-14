@@ -5,7 +5,7 @@
 BioCypher - OTAR prototype
 """
 
-import biocypher
+from biocypher import BioCypher
 import neo4j_utils as nu
 import pandas as pd
 from biocypher._logger import logger
@@ -27,21 +27,15 @@ class BarrioHernandezAdapter:
         id_batch_size: int = int(1e6),
         user_schema_config_path="config/schema_config.yaml",
     ):
-
         self.db_name = db_name
         self.id_batch_size = id_batch_size
 
         # write driver
-        self.bcy = biocypher.Driver(
-            offline=True,  # set offline to true,
-            # connect to running DB for input data via the neo4j driver
-            user_schema_config_path=user_schema_config_path,
-            delimiter="¦",
-            skip_bad_relationships=True,
+        self.bcy = BioCypher(
+            biocypher_config_path="config/biocypher_config_barrio.yaml",
         )
         # start writer
-        self.bcy.start_ontology_adapter()
-        self.bcy.start_batch_writer()
+        self.bcy._get_writer()
 
         # read driver
         self.driver = nu.Driver(
@@ -121,14 +115,12 @@ class BarrioHernandezAdapter:
             # collect in batches
             id_batch.append(record["id"])
             if len(id_batch) == self.id_batch_size:
-
                 # if full batch, trigger write process
                 self._write_nodes(id_batch, label)
                 id_batch = []
 
             # check if result depleted
             elif result.peek() is None:
-
                 # write last batch
                 self._write_nodes(id_batch, label)
 
@@ -149,7 +141,6 @@ class BarrioHernandezAdapter:
                 results = session.read_transaction(get_nodes_tx, id_batch)
 
                 for res in results:
-
                     # TODO source
                     _id, _type = _process_node_id_and_type(res["n"], label)
                     _props = res["n"]
@@ -177,14 +168,12 @@ class BarrioHernandezAdapter:
             # collect in batches
             id_batch.append(record["id"])
             if len(id_batch) == self.id_batch_size:
-
                 # if full batch, trigger write process
                 self._write_interactors(id_batch, "GraphInteractor")
                 id_batch = []
 
             # check if result depleted
             elif result.peek() is None:
-
                 # write last batch
                 self._write_interactors(id_batch, "GraphInteractor")
 
@@ -210,7 +199,6 @@ class BarrioHernandezAdapter:
             )
 
             for res in results:
-
                 typ = res["typ"]
                 src = res["src"]
 
@@ -280,7 +268,6 @@ class BarrioHernandezAdapter:
         det_nodes = []
 
         for res in result:
-
             _detection_props = {
                 "ac": res["ac"],
                 "shortName": res["shortName"],
@@ -330,14 +317,12 @@ class BarrioHernandezAdapter:
             # collect in batches
             id_batch.append(record["id"])
             if len(id_batch) == self.id_batch_size:
-
                 # if full batch, trigger write process
                 self._write_binary_interactions(id_batch)
                 id_batch = []
 
             # check if result depleted
             elif result.peek() is None:
-
                 # write last batch
                 self._write_binary_interactions(id_batch)
 
@@ -503,7 +488,6 @@ class BarrioHernandezAdapter:
 
                 # detection method edges to participants
                 if res.get("idm_a") and res.get("idm_b"):
-
                     _int_det_edge_type = "PARTICIPANT_DETECTION_METHOD"
                     _int_det_edge_props_a = res["idm_a"]
                     _int_det_edge_props_b = res["idm_b"]

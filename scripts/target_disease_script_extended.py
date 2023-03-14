@@ -1,4 +1,4 @@
-import biocypher
+from biocypher import BioCypher
 
 # VSCode does not add the root directory to the path (by default?). Not sure why
 # this works sometimes and not others. This is a workaround.
@@ -166,14 +166,12 @@ def main():
     """
 
     # Start BioCypher
-    driver = biocypher.Driver(
-        db_name="test",
-        user_schema_config_path="config/extended_target_disease_schema_config.yaml",
-        skip_bad_relationships=True,  # allows import of incomplete test data
+    bc = BioCypher(
+        biocypher_config_path="config/biocypher_config_extended.yaml"
     )
 
     # Check the schema
-    driver.show_ontology_structure()
+    bc.show_ontology_structure()
 
     # Load data
 
@@ -216,23 +214,23 @@ def main():
     )
 
     # Write nodes
-    driver.write_nodes(target_disease_adapter.get_nodes())
-    driver.write_nodes(uniprot_adapter.get_nodes())
-    driver.write_nodes(depmap_adapter.get_nodes())
+    # bc.write_nodes(target_disease_adapter.get_nodes())
+    bc.write_nodes(uniprot_adapter.get_nodes())
+    bc.write_nodes(depmap_adapter.get_nodes())
 
     # Write edges
-    driver.write_edges(uniprot_adapter.get_edges())
-    driver.write_edges(depmap_adapter.get_edges())
+    bc.write_edges(uniprot_adapter.get_edges())
+    bc.write_edges(depmap_adapter.get_edges())
 
     # Write OTAR edges in batches to avoid memory issues
     batches = target_disease_adapter.get_edge_batches()
     for batch in batches:
-        driver.write_edges(target_disease_adapter.get_edges(batch_number=batch))
+        bc.write_edges(target_disease_adapter.get_edges(batch_number=batch))
 
     # Post import functions
-    driver.write_import_call()
-    driver.log_duplicates()
-    driver.log_missing_bl_types()
+    bc.write_import_call()
+    bc.log_duplicates()
+    bc.log_missing_bl_types()
 
 
 if __name__ == "__main__":
