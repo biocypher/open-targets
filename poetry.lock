@@ -43,7 +43,7 @@ tqdm = "^4.64.0"
 type = "git"
 url = "https://github.com/HUBioDataLab/CROssBAR-BioCypher-Migration.git"
 reference = "main"
-resolved_reference = "c2725a21eeee8ff5103250851379293c9e6cb95a"
+resolved_reference = "0afe9491f4e6776a39f0b16a701e07b892619d07"
 
 [[package]]
 name = "bcrypt"
@@ -74,7 +74,7 @@ lxml = ["lxml"]
 
 [[package]]
 name = "biocypher"
-version = "0.5.4"
+version = "0.5.6"
 description = "A unifying framework for biomedical research knowledge graphs"
 category = "main"
 optional = false
@@ -1066,8 +1066,8 @@ beautifulsoup4 = [
     {file = "beautifulsoup4-4.11.2.tar.gz", hash = "sha256:bc4bdda6717de5a2987436fb8d72f45dc90dd856bdfd512a1314ce90349a0106"},
 ]
 biocypher = [
-    {file = "biocypher-0.5.4-py3-none-any.whl", hash = "sha256:2cec3694fca12b67cca406f68f027f9c54c0649a7bbd412297143b4f7218ad6f"},
-    {file = "biocypher-0.5.4.tar.gz", hash = "sha256:1e9ea2c385269fbcb07685a9125a0a3539e280c7726f659825f43c564dfe0a22"},
+    {file = "biocypher-0.5.6-py3-none-any.whl", hash = "sha256:a0c857d56f496684413e0b9975918b2f012f087d2295c8529d5ee2bdc651bd6b"},
+    {file = "biocypher-0.5.6.tar.gz", hash = "sha256:3e60250bf1aaa0a835e32e486252afe025daf1d8201a295bfffd579dc0788fe4"},
 ]
 bioregistry = [
     {file = "bioregistry-0.6.97-py3-none-any.whl", hash = "sha256:505c81d575039165f140cafafd52efc4240b935929b426131e775b265c04168e"},
