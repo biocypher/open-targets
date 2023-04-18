@@ -1,7 +1,7 @@
-# OTAR-BioCypher
+# Open Targets BioCypher KG
 
 This is a collection of [BioCypher](https://biocypher.org) adapters and
-corresponding scripts for Open Targets data. It is a work in progress.
+corresponding scripts for Open Targets platform data. It is a work in progress.
 
 ## Installation
 
@@ -9,8 +9,8 @@ The project uses [Poetry](https://python-poetry.org). You can install it like
 this:
 
 ```
-git clone https://github.com/saezlab/OTAR-BioCypher.git
-cd OTAR-BioCypher
+git clone https://github.com/biocypher/open-targets.git
+cd open-targets
 poetry install
 ```
 
@@ -75,7 +75,7 @@ purposes, as it requires the availability of local data (which is limited to
 ### Docker version
 To use start a dockerized neo4j database which will automatically load and build 
 the database of this repository, `docker` and `docker compose` (formerly 
-`docker-compose`) need to be installed. Build the container using `docker-compose 
+`docker-compose`) need to be installed. Build the container using `docker-compose
 build` and run `docker-compose up -d` to start it.
 
 ## Barrio-Hernandez et al. 2021 graph dump
