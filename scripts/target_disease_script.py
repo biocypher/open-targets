@@ -140,8 +140,7 @@ def main():
 
     # Post import functions
     bc.write_import_call()
-    bc.log_duplicates()
-    bc.log_missing_bl_types()
+    bc.summary()
 
 
 if __name__ == "__main__":
