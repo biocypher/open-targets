@@ -358,6 +358,37 @@ class TargetDiseaseEvidenceAdapter:
             self.go_df.show(1, 50, True)
             self.mp_df.show(1, 50, True)
 
+    def _generate_evidence_id(self, df: DataFrame) -> DataFrame:
+        """
+        Uses md5 hash from the evidence data to generate a unique ID for each
+        interaction (row) in the dataframe.
+
+        Args:
+
+            df: Evidence dataframe.
+
+        Returns:
+
+            Evidence dataframe with a new column called "id" containing the
+            md5 hash of the evidence data.
+        """
+
+        # create a new column with the md5 hash of the evidence data
+        df = df.withColumn(
+            "id",
+            F.md5(
+                F.concat(
+                    *[
+                        F.col(c)
+                        for c in df.columns
+                    ]
+                )
+            ),
+        )
+
+        # return the dataframe
+        return df
+
     def show_datasources(self):
         """
         Utility function to get all datasources in the evidence data.
