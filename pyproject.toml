@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "otar-biocypher"
-version = "0.1.0"
+version = "0.1.1"
 description = "BioCypher Open Targets Knowledge Graph adapter"
 authors = ["Sebastian Lobentanzer <sebastian.lobentanzer@gmail.com>"]
 
