@@ -9,8 +9,8 @@ from biocypher import BioCypher
 import neo4j_utils as nu
 import pandas as pd
 from biocypher._logger import logger
-from adapters.utils.id_type_processing import _process_node_id_and_type
-from adapters.utils.transactions import (
+from otar_biocypher.utils.id_type_processing import _process_node_id_and_type
+from otar_biocypher.utils.transactions import (
     get_bin_int_rels_tx,
     get_interactor_to_organism_edges_tx,
     get_nodes_tx,

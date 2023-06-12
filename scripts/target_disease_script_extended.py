@@ -6,7 +6,7 @@ import sys
 
 sys.path.append("")
 
-from adapters.target_disease_evidence_adapter import (
+from otar_biocypher.target_disease_evidence_adapter import (
     TargetDiseaseEvidenceAdapter,
     TargetDiseaseDataset,
     TargetNodeField,

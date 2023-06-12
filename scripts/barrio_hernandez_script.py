@@ -8,7 +8,7 @@ import sys
 
 sys.path.append("")
 
-from adapters.barrio_hernandez_adapter import BarrioHernandezAdapter
+from otar_biocypher.barrio_hernandez_adapter import BarrioHernandezAdapter
 
 PROFILE = False
 
