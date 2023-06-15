@@ -46,7 +46,9 @@ ontology`, `Target - mouse phenotypes` and `Target - Disease Evidence`. CAVE:
 The latter, which is the main source of target-disease interactions in the open
 targets platform, is provided in two links, one for the literature evidence
 (`literature/evidence`) and one for the full aggregated set (simply `evidence`).
-The adapter uses the full set, so make sure to download the correct one.
+The adapter uses the full set, so make sure to download the correct one. The
+scripts directory contains a `parquet_download.sh` script that can be used to
+download the files (make sure to execute it in the correct folder).
 
 To transfer the columnar data to a knowledge graph, we use the adapter in
 `adapters/target_disease_evidence_adapter.py`, which is called from the script
