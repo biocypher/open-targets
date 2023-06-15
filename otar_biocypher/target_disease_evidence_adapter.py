@@ -1,8 +1,8 @@
-from typing import Optional
+from typing import Optional, Type
 from pyspark import SparkContext, SparkConf
 from pyspark.sql import SparkSession, DataFrame, functions as F
 from enum import Enum
-from bioregistry import normalize_curie
+from bioregistry.resolve import normalize_curie
 from biocypher._logger import logger
 from tqdm import tqdm
 import functools
@@ -217,9 +217,16 @@ class TargetDiseaseEdgeField(Enum):
 class TargetDiseaseEvidenceAdapter:
     def __init__(
         self,
-        datasets: list[Enum] = None,
-        node_fields: list[Enum] = None,
-        edge_fields: list = None,
+        datasets: list[TargetDiseaseDataset],
+        node_fields: list[
+            TargetNodeField
+            | DiseaseNodeField
+            | GeneOntologyNodeField
+            | MousePhenotypeNodeField
+            | MouseTargetNodeField
+            | MouseModelNodeField
+        ],
+        edge_fields: list[TargetDiseaseEdgeField],
         test_mode: bool = False,
     ):
         self.datasets = datasets
@@ -260,14 +267,14 @@ class TargetDiseaseEvidenceAdapter:
             .setAppName("otar_biocypher")
             .setMaster("local")
             .set("spark.driver.bindAddress", "127.0.0.1")
-            .set("spark.driver.memory", "4g")
-            .set("spark.executor.memory", "4g")
+            .set("spark.driver.memory", "8g")
+            .set("spark.executor.memory", "8g")
         )
         self.sc = SparkContext(conf=conf)
 
         # Create SparkSession
         self.spark = (
-            SparkSession.builder.master("local")
+            SparkSession.builder.master("local")  # type: ignore
             .appName("otar_biocypher")
             .getOrCreate()
         )
@@ -376,14 +383,7 @@ class TargetDiseaseEvidenceAdapter:
         # create a new column with the md5 hash of the evidence data
         df = df.withColumn(
             "id",
-            F.md5(
-                F.concat(
-                    *[
-                        F.col(c)
-                        for c in df.columns
-                    ]
-                )
-            ),
+            F.md5(F.concat(*[F.col(c) for c in df.columns])),
         )
 
         # return the dataframe
@@ -406,7 +406,13 @@ class TargetDiseaseEvidenceAdapter:
     def _yield_node_type(
         self,
         df: DataFrame,
-        node_field_type: Enum,
+        node_field_type: Type[
+            TargetNodeField
+            | DiseaseNodeField
+            | GeneOntologyNodeField
+            | MousePhenotypeNodeField
+            | MouseTargetNodeField
+        ],
         ontology_class: Optional[str] = None,
     ):
         """
@@ -428,7 +434,7 @@ class TargetDiseaseEvidenceAdapter:
                 field.value
                 for field in self.node_fields
                 if isinstance(field, node_field_type)
-            ]
+            ]  # type: ignore
         )
 
         logger.info(f"Generating nodes of {node_field_type}.")
@@ -614,6 +620,8 @@ def _process_id_and_type(inputId: str, _type: Optional[str] = None):
     if not inputId:
         return (None, None)
 
+    _id = None
+
     if _type:
         _id = normalize_curie(f"{_type}:{inputId}")
 
@@ -632,6 +640,9 @@ def _process_id_and_type(inputId: str, _type: Optional[str] = None):
     elif ":" in inputId:
         _type = inputId.split(":")[0].lower()
         _id = normalize_curie(inputId, sep=":")
+
+    if not _id:
+        return (None, None)
 
     return (_id, _type)
 
