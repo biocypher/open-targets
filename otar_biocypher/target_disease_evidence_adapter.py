@@ -266,9 +266,8 @@ class TargetDiseaseEvidenceAdapter:
             SparkConf()
             .setAppName("otar_biocypher")
             .setMaster("local")
-            .set("spark.driver.bindAddress", "127.0.0.1")
-            .set("spark.driver.memory", "8g")
-            .set("spark.executor.memory", "8g")
+            .set("spark.driver.memory", "4g")
+            .set("spark.executor.memory", "4g")
         )
         self.sc = SparkContext(conf=conf)
 
@@ -406,13 +405,7 @@ class TargetDiseaseEvidenceAdapter:
     def _yield_node_type(
         self,
         df: DataFrame,
-        node_field_type: Type[
-            TargetNodeField
-            | DiseaseNodeField
-            | GeneOntologyNodeField
-            | MousePhenotypeNodeField
-            | MouseTargetNodeField
-        ],
+        node_field_type,
         ontology_class: Optional[str] = None,
     ):
         """
