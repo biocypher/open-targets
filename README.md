@@ -80,26 +80,7 @@ purposes, as it requires the availability of local data (which is limited to
 100 entries for our demo case).
 
 ### Docker version
-To use start a dockerized neo4j database which will automatically load and build 
+To use start a dockerized neo4j database which will automatically load and build
 the database of this repository, `docker` and `docker compose` (formerly 
-`docker-compose`) need to be installed. Build the container using `docker-compose
-build` and run `docker-compose up -d` to start it.
-
-## Barrio-Hernandez et al. 2021 graph dump
-
-Barrio-Hernandez and colleagues used interaction data from the Open Targets
-platform to implement their method of network expansion
-(https://www.biorxiv.org/content/10.1101/2021.07.19.452924v1). A dump file of
-the Neo4j knowledge graph they used is available at
-http://ftp.ebi.ac.uk/pub/databases/intact/various/ot_graphdb/current/.
-
-Once successfully installed, porting the OTAR graph can be attempted by running
-a local (or remotely accesssible) instance of the OTAR graph dump in Neo4j and
-executing the Python script at `scripts/barrio_hernandez_script.py`. This will
-connect to BioCypher using the adapter (from
-`adapters/barrio_hernandez_adapter.py`) and write the BioCypher-compatible
-structured data to the `biocypher-out` directory. You can find a version of the
-neo4j-admin import command for the processed data in each individual output
-folder, under the file name `neo4j-admin-import-call.sh`, which simply needs to
-be executed in the home directory of the target database. More information about
-the BioCypher package can be found at https://biocypher.org.
+`docker-compose`) need to be installed. Build the container using
+`docker-compose build` and run `docker-compose up -d` to start it.

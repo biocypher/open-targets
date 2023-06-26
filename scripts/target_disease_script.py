@@ -108,7 +108,7 @@ def main():
 
     # Start BioCypher
     bc = BioCypher(
-        biocypher_config_path="config/biocypher_config_disease_target.yaml",
+        biocypher_config_path="config/biocypher_config.yaml",
     )
 
     # Check the schema
