@@ -77,7 +77,6 @@ target_disease_node_fields = [
     DiseaseNodeField.DISEASE_CODE,
     DiseaseNodeField.DISEASE_NAME,
     DiseaseNodeField.DISEASE_DESCRIPTION,
-    DiseaseNodeField.DISEASE_ONTOLOGY,
     # optional gene ontology fields
     GeneOntologyNodeField.GENE_ONTOLOGY_NAME,
     # optional mouse phenotype fields
