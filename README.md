@@ -79,9 +79,3 @@ Please note that while the UniProt adapter downloads data directly from UniProt
 through pypath, the Dependency Map adapter is only functional for demonstration
 purposes, as it requires the availability of local data (which is limited to
 100 entries for our demo case).
-
-### Docker version
-To use start a dockerized neo4j database which will automatically load and build
-the database of this repository, `docker` and `docker compose` (formerly 
-`docker-compose`) need to be installed. Build the container using
-`docker-compose build` and run `docker-compose up -d` to start it.
