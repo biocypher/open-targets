@@ -52,7 +52,7 @@ download the files (make sure to execute it in the correct folder,
 `data/ot_files`).
 
 To transfer the columnar data to a knowledge graph, we use the adapter in
-`adapters/target_disease_evidence_adapter.py`, which is called from the script
+`otar_biocypher/target_disease_evidence_adapter.py`, which is called from the script
 `scripts/target_disease_script.py`. This script produces a set of
 BioCypher-compatible files in the `biocypher-out` directory. To create the
 knowledge graph from these files, you can find a version of the neo4j-admin
