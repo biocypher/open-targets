@@ -32,6 +32,14 @@ disease:
     description: str
     ontology: str
 
+drug:
+  represented_as: node
+  preferred_id: chembl
+  label_in_input: chembl
+  properties:
+    name: str
+    description: str
+
 go term:
   is_a: biological entity # activity, process, or location
   represented_as: node

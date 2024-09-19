@@ -11,6 +11,7 @@ from otar_biocypher.target_disease_evidence_adapter import (
     TargetDiseaseDataset,
     TargetNodeField,
     DiseaseNodeField,
+    DrugNodeField,
     TargetDiseaseEdgeField,
     GeneOntologyNodeField,
     MousePhenotypeNodeField,
@@ -77,6 +78,27 @@ target_disease_node_fields = [
     DiseaseNodeField.DISEASE_CODE,
     DiseaseNodeField.DISEASE_NAME,
     DiseaseNodeField.DISEASE_DESCRIPTION,
+
+    # optional drug fields
+    DrugNodeField.DRUG_ACCESSION,
+    DrugNodeField.DRUG_BLACK_BOX_WARNING,
+    DrugNodeField.DRUG_CANONICAL_SMILES,
+    DrugNodeField.DRUG_CHEMBL_IDS,
+    DrugNodeField.DRUG_CHILD_CHEMBL_IDS,
+    DrugNodeField.DRUG_DESCRIPTION,
+    DrugNodeField.DRUG_DRUG_TYPE,
+    DrugNodeField.DRUG_HAS_BEEN_WITHDRAWN,
+    DrugNodeField.DRUG_INCHI_KEY,
+    DrugNodeField.DRUG_IS_APPROVED,
+    DrugNodeField.DRUG_LINKED_DISEASES,
+    DrugNodeField.DRUG_LINKED_TARGETS,
+    DrugNodeField.DRUG_MAX_PHASE,
+    DrugNodeField.DRUG_NAME,
+    DrugNodeField.DRUG_PARENT_ID,
+    DrugNodeField.DRUG_SYNONYMS,
+    DrugNodeField.DRUG_TRADE_NAMES,
+    DrugNodeField.DRUG_YEAR_OF_FIRST_APPROVAL,
+
     # optional gene ontology fields
     GeneOntologyNodeField.GENE_ONTOLOGY_NAME,
     # optional mouse phenotype fields
