@@ -63,7 +63,7 @@ mouse phenotype:
 # ---
 
 gene to disease association:
-  represented_as: node
+  represented_as: edge
   preferred_id: [
     affected pathway, 
     somatic mutation, 
@@ -85,3 +85,11 @@ gene to disease association:
   properties:
     literature: str[]
     score: double
+
+gene to go term association:
+  is_a: association
+  represented_as: edge
+  preferred_id: id
+  source: gene
+  target: go term
+  label_in_input: GENE_TO_GO_TERM_ASSOCIATION
