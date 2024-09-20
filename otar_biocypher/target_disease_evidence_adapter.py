@@ -237,6 +237,21 @@ class TargetDiseaseEdgeField(Enum):
     LITERATURE = "literature"
     SCORE = "score"
 
+class TargetGeneOntologyEdgeField(Enum):
+    """
+    Enum of all the fields in the target-gene ontology dataset. Used to generate the
+    bulk of relationships in the graph. Values are the spellings used in the
+    Open Targets parquet files.
+    """
+
+    # mandatory fields
+    INTERACTION_ACCESSION = "id"
+
+    TARGET_GENE_ENSG = "targetId"
+    _PRIMARY_SOURCE_ID = TARGET_GENE_ENSG
+
+    GENE_ONTOLOGY_ACCESSION = "goId"
+    _PRIMARY_TARGET_ID = GENE_ONTOLOGY_ACCESSION
 
 class TargetDiseaseEvidenceAdapter:
     def __init__(
@@ -251,7 +266,7 @@ class TargetDiseaseEvidenceAdapter:
             | MouseTargetNodeField
             | MouseModelNodeField
         ],
-        edge_fields: list[TargetDiseaseEdgeField],
+        edge_fields: list[TargetDiseaseEdgeField, TargetGeneOntologyEdgeField],
         test_mode: bool = False,
     ):
         self.datasets = datasets
@@ -276,6 +291,11 @@ class TargetDiseaseEvidenceAdapter:
         if not DiseaseNodeField.DISEASE_ACCESSION in self.node_fields:
             raise ValueError(
                 "DiseaseNodeField.DISEASE_ACCESSION must be provided"
+            )
+        
+        if not GeneOntologyNodeField.GENE_ONTOLOGY_ACCESSION in self.node_fields:
+            raise ValueError(
+                "GeneOntologyNodeField.GENE_ONTOLOGY_ACCESSION must be provided"
             )
 
         if self.test_mode:
