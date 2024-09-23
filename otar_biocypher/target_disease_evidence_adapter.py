@@ -550,7 +550,7 @@ class TargetDiseaseEvidenceAdapter:
             mouse_target_df, MouseTargetNodeField, "ensembl"
         )
 
-    def get_edge_batches(self):
+    def get_edge_batches(self, df: DataFrame):
         """
         Create a column with partition number in the evidence dataframe and
         return a list of batch numbers.
@@ -559,21 +559,21 @@ class TargetDiseaseEvidenceAdapter:
         logger.info("Generating batches.")
 
         # select columns of interest
-        self.evidence_df = self.evidence_df.where(
-            self.evidence_df.datasourceId.isin(
+        df = df.where(
+            df.datasourceId.isin(
                 [field.value for field in self.datasets]
             )
         ).select([field.value for field in self.edge_fields])
 
         # add partition number to self.evidence_df as column
-        self.evidence_df = self.evidence_df.withColumn(
+        df = df.withColumn(
             "partition_num", F.spark_partition_id()
         )
-        self.evidence_df.persist()
+        df.persist()
 
         self.batches = [
             int(row.partition_num)
-            for row in self.evidence_df.select("partition_num")
+            for row in df.select("partition_num")
             .distinct()
             .collect()
         ]
@@ -582,15 +582,15 @@ class TargetDiseaseEvidenceAdapter:
 
         return self.batches
 
-    def get_edges(self, batch_number: int):
+    def get_edges(self, df: DataFrame,  batch_number: int):
         """
         Yield edges from the evidence dataframe per batch.
         """
 
         # Check if self.evidence_df has column partition_num
-        if "partition_num" not in self.evidence_df.columns:
+        if "partition_num" not in df.columns:
             raise ValueError(
-                "self.evidence_df does not have column partition_num. "
+                "df does not have column partition_num. "
                 "Please run get_edge_batches() first."
             )
 
@@ -601,12 +601,12 @@ class TargetDiseaseEvidenceAdapter:
         )
 
         yield from self._process_edges(
-            self.evidence_df.where(
-                self.evidence_df.partition_num == batch_number
+            df.where(
+                df.partition_num == batch_number
             )
         )
 
-    def _process_edges(self, batch):
+    def _process_gene_disease_edges(self, batch):
         """
         Process one batch of edges.
 
@@ -653,6 +653,9 @@ class TargetDiseaseEvidenceAdapter:
                 row.datatypeId,
                 properties,
             )
+    
+    def _process_gene_go_edges(self, batch):
+        
 
 
 @functools.lru_cache()
