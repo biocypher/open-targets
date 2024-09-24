@@ -13,6 +13,7 @@ from otar_biocypher.target_disease_evidence_adapter import (
     DiseaseNodeField,
     DrugNodeField,
     TargetDiseaseEdgeField,
+    TargetGeneOntologyEdgeField,
     GeneOntologyNodeField,
     MousePhenotypeNodeField,
     MouseTargetNodeField,
@@ -121,6 +122,21 @@ target_disease_edge_fields = [
     TargetDiseaseEdgeField.LITERATURE,
 ]
 
+target_go_edge_fields = [
+    # mandatory fields
+    TargetGeneOntologyEdgeField.TARGET_GENE_ENSG,
+    TargetGeneOntologyEdgeField.GENE_ONTOLOGY_ACCESSION,
+
+    # TargetDiseaseEdgeField.DISEASE_ACCESSION,
+    # TargetDiseaseEdgeField.TYPE,
+    TargetGeneOntologyEdgeField.SOURCE,
+    
+    # optional fields
+    # TargetDiseaseEdgeField.SCORE,
+    # TargetDiseaseEdgeField.LITERATURE,
+]
+
+all_edge_fields = target_disease_edge_fields+ target_go_edge_fields
 
 def main():
     """
@@ -141,12 +157,12 @@ def main():
     target_disease_adapter = TargetDiseaseEvidenceAdapter(
         datasets=target_disease_datasets,
         node_fields=target_disease_node_fields,
-        edge_fields=target_disease_edge_fields,
-        test_mode=True,
+        edge_fields=all_edge_fields,
+        test_mode=False,
     )
 
     target_disease_adapter.load_data(
-        stats=False,
+        stats=True,
         show_nodes=False,
         show_edges=False,
     )
@@ -155,9 +171,21 @@ def main():
     bc.write_nodes(target_disease_adapter.get_nodes())
 
     # Write OTAR edges in batches to avoid memory issues
-    batches = target_disease_adapter.get_edge_batches()
-    for batch in batches:
-        bc.write_edges(target_disease_adapter.get_edges(batch_number=batch))
+    # Gene-Disease
+    # gene_disease_batches, evidence_df = target_disease_adapter.get_edge_batches(target_disease_adapter.evidence_df)
+    # for batch in gene_disease_batches:
+    #     bc.write_edges(target_disease_adapter.get_gene_disease_edges(evidence_df, batch_number=batch))
+
+    # Gene-GO
+    # Write OTAR edges in batches to avoid memory issues
+    go_disease_batches, go_df = target_disease_adapter.get_edge_batches(
+        target_disease_adapter.target_df, 
+        # edge_type="gene_go",
+        )
+    for batch in go_disease_batches:
+        bc.write_edges(target_disease_adapter.get_gene_go_edges(go_df, batch_number=batch))
+
+            
 
     # Post import functions
     bc.write_import_call()

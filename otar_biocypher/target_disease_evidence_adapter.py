@@ -247,11 +247,12 @@ class TargetGeneOntologyEdgeField(Enum):
     # mandatory fields
     INTERACTION_ACCESSION = "id"
 
-    TARGET_GENE_ENSG = "targetId"
+    TARGET_GENE_ENSG = "id"
     _PRIMARY_SOURCE_ID = TARGET_GENE_ENSG
 
     GENE_ONTOLOGY_ACCESSION = "goId"
     _PRIMARY_TARGET_ID = GENE_ONTOLOGY_ACCESSION
+    SOURCE = "datasourceId"
 
 class TargetDiseaseEvidenceAdapter:
     def __init__(
@@ -266,7 +267,7 @@ class TargetDiseaseEvidenceAdapter:
             | MouseTargetNodeField
             | MouseModelNodeField
         ],
-        edge_fields: list[TargetDiseaseEdgeField, TargetGeneOntologyEdgeField],
+        edge_fields: TargetGeneOntologyEdgeField | TargetDiseaseEdgeField,
         test_mode: bool = False,
     ):
         self.datasets = datasets
@@ -559,11 +560,11 @@ class TargetDiseaseEvidenceAdapter:
         logger.info("Generating batches.")
 
         # select columns of interest
-        df = df.where(
-            df.datasourceId.isin(
-                [field.value for field in self.datasets]
-            )
-        ).select([field.value for field in self.edge_fields])
+        # df = df.where(
+        #     df.datasourceId.isin(
+        #         [field.value for field in self.datasets]
+        #     )
+        # ).select([field.value for field in self.edge_fields])
 
         # add partition number to self.evidence_df as column
         df = df.withColumn(
@@ -580,9 +581,9 @@ class TargetDiseaseEvidenceAdapter:
 
         logger.info(f"Generated {len(self.batches)} batches.")
 
-        return self.batches
+        return self.batches, df
 
-    def get_edges(self, df: DataFrame,  batch_number: int):
+    def get_gene_go_edges(self, df: DataFrame,  batch_number: int):
         """
         Yield edges from the evidence dataframe per batch.
         """
@@ -600,7 +601,31 @@ class TargetDiseaseEvidenceAdapter:
             f"Processing batch {batch_number+1} of {len(self.batches)}."
         )
 
-        yield from self._process_edges(
+        yield from self._process_gene_go_edges(
+            df.where(
+                df.partition_num == batch_number
+            )
+        )
+
+    def get_gene_disease_edges(self, df: DataFrame,  batch_number: int):
+        """
+        Yield edges from the evidence dataframe per batch.
+        """
+
+        # Check if self.evidence_df has column partition_num
+        if "partition_num" not in df.columns:
+            raise ValueError(
+                "df does not have column partition_num. "
+                "Please run get_edge_batches() first."
+            )
+
+        logger.info("Generating edges.")
+
+        logger.info(
+            f"Processing batch {batch_number+1} of {len(self.batches)}."
+        )
+
+        yield from self._process_gene_disease_edges(
             df.where(
                 df.partition_num == batch_number
             )
@@ -654,7 +679,61 @@ class TargetDiseaseEvidenceAdapter:
                 properties,
             )
     
-    def _process_gene_go_edges(self, batch):
+    def _process_gene_go_edges(self, batch: DataFrame):
+        """
+        Process one batch of edges.
+
+        Args:
+
+            batch: Spark DataFrame containing the edges of one batch.
+        """
+        logger.info(f"Batch size: {batch.count()} edges.")
+
+        if self.test_mode:
+            # limit batch df to 100 rows
+            batch = batch.limit(10)
+        
+        go_exploded_df = batch.withColumn("go", F.explode(batch.go))
+        batch = go_exploded_df.withColumn("goId", go_exploded_df["go"]["id"])
+
+        # yield edges per row of edge_df, skipping null values
+        for row in tqdm(batch.collect()):
+            # collect properties from fields, skipping null values
+            properties = {}
+            print("There are fields number", len(self.edge_fields))
+            for field in self.edge_fields:
+                properties["source"] = "my_source"
+                properties["licence"] = "my_licence"
+                # skip disease and target ids, relationship id, and datatype id
+                # as they are encoded in the relationship
+                # if field not in [
+                #     TargetDiseaseEdgeField.LITERATURE,
+                #     TargetDiseaseEdgeField.SCORE,
+                #     TargetDiseaseEdgeField.SOURCE,
+                # ]:
+                #     continue
+                if field in TargetDiseaseEdgeField.__members__.values():
+                    logger.info(f"Field <{field}> belongs to TargetDiseaseEdgeField")
+                    continue # skip this field (move to the next iteration)
+                if field == TargetGeneOntologyEdgeField.SOURCE:
+                    # properties["source"] = row[field.value]
+                    # properties["licence"] = _find_licence(row[field.value])
+                    continue # skip this field (move to the next iteration)
+                elif row[field.value]:
+                    properties[field.value] = row[field.value]
+
+            properties["version"] = "22.11"
+
+            go_id, _ = _process_id_and_type(row.goId, "go")
+            gene_id, _ = _process_id_and_type(row.id, "ensembl")
+
+            yield (
+                row.id,
+                gene_id,
+                go_id,
+                "GENE_TO_GO_TERM_ASSOCIATION",
+                properties,
+            )
         
 
 
