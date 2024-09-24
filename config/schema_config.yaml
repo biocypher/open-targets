@@ -89,7 +89,7 @@ gene to disease association:
 gene to go term association:
   is_a: association
   represented_as: edge
-  preferred_id: id
+  preferred_id: go
   source: gene
   target: go term
   label_in_input: GENE_TO_GO_TERM_ASSOCIATION
