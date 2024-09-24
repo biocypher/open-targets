@@ -477,7 +477,11 @@ class TargetDiseaseEvidenceAdapter:
                 _type = "mouse gene"
 
             if not _id:
+                logger.debug(f"Node <{node_field_type}> has no id. Skipping.")
                 continue
+
+            logger.debug(f"Processed {node_field_type} with id {_id} and type {_type}")
+
 
             _props = {}
             _props["version"] = "22.11"
