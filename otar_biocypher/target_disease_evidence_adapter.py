@@ -511,7 +511,7 @@ class TargetDiseaseEvidenceAdapter:
         yield from self._yield_node_type(self.disease_df, DiseaseNodeField)
 
         # Drugs
-        yield from self._yield_node_type(self.drug_df, DrugNodeField)
+        yield from self._yield_node_type(self.drug_df, DrugNodeField, "chembl")
 
         # Gene Ontology
         yield from self._yield_node_type(self.go_df, GeneOntologyNodeField)
