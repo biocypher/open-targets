@@ -131,6 +131,30 @@ class DiseaseNodeField(Enum):
     DISEASE_INDIRECT_LOCATION_IDS = "indirectLocationIds"
     DISEASE_ONTOLOGY = "ontology"
 
+class DrugNodeField(Enum):
+    # mandatory fields
+    DRUG_ACCESSION = "id"
+    _PRIMARY_ID = DRUG_ACCESSION
+
+    # optional fields
+    DRUG_CANONICAL_SMILES = "canonicalSmiles"
+    DRUG_INCHI_KEY = "inchiKey"
+    DRUG_DRUG_TYPE = "drugType"
+    DRUG_BLACK_BOX_WARNING = "blackBoxWarning"
+    DRUG_NAME = "name"
+    DRUG_YEAR_OF_FIRST_APPROVAL = "yearOfFirstApproval"
+    DRUG_MAX_PHASE = "maximumClinicalTrialPhase"
+    DRUG_PARENT_ID = "parentId"
+    DRUG_HAS_BEEN_WITHDRAWN = "hasBeenWithdrawn"
+    DRUG_IS_APPROVED = "isApproved"
+    DRUG_TRADE_NAMES = "tradeNames"
+    DRUG_SYNONYMS = "synonyms"
+    DRUG_CHEMBL_IDS = "crossReferences"
+    DRUG_CHILD_CHEMBL_IDS   = "childChemblIds"
+    DRUG_LINKED_DISEASES = "linkedDiseases"
+    DRUG_LINKED_TARGETS = "linkedTargets"
+    DRUG_DESCRIPTION = "description"
+
 
 class GeneOntologyNodeField(Enum):
     """
@@ -221,6 +245,7 @@ class TargetDiseaseEvidenceAdapter:
         node_fields: list[
             TargetNodeField
             | DiseaseNodeField
+            | DrugNodeField
             | GeneOntologyNodeField
             | MousePhenotypeNodeField
             | MouseTargetNodeField
@@ -324,6 +349,9 @@ class TargetDiseaseEvidenceAdapter:
         disease_path = "data/ot_files/diseases"
         self.disease_df = self.spark.read.parquet(disease_path)
 
+        drug_path = "data/ot_files/molecule"
+        self.drug_df = self.spark.read.parquet(drug_path)
+
         go_path = "data/ot_files/go"
         self.go_df = self.spark.read.parquet(go_path)
 
@@ -335,6 +363,7 @@ class TargetDiseaseEvidenceAdapter:
             print(self.evidence_df.printSchema())
             print(self.target_df.printSchema())
             print(self.disease_df.printSchema())
+            print(self.drug_df.printSchema())
             print(self.go_df.printSchema())
             print(self.mp_df.printSchema())
 
@@ -344,6 +373,7 @@ class TargetDiseaseEvidenceAdapter:
             )
             print(f"Length of target data: {self.target_df.count()} entries")
             print(f"Length of disease data: {self.disease_df.count()} entries")
+            print(f"Length of drug data: {self.drug_df.count()} entries")
             print(f"Length of GO data: {self.go_df.count()} entries")
             print(
                 f"Length of Mouse Phenotype data: {self.mp_df.count()} entries"
@@ -361,6 +391,7 @@ class TargetDiseaseEvidenceAdapter:
         if show_nodes:
             self.target_df.show(1, 50, True)
             self.disease_df.show(1, 50, True)
+            self.drug_df.show(1, 50, True)
             self.go_df.show(1, 50, True)
             self.mp_df.show(1, 50, True)
 
@@ -446,7 +477,11 @@ class TargetDiseaseEvidenceAdapter:
                 _type = "mouse gene"
 
             if not _id:
+                logger.debug(f"Node <{node_field_type}> has no id. Skipping.")
                 continue
+
+            logger.debug(f"Processed {node_field_type} with id {_id} and type {_type}")
+
 
             _props = {}
             _props["version"] = "22.11"
@@ -474,6 +509,9 @@ class TargetDiseaseEvidenceAdapter:
 
         # Diseases
         yield from self._yield_node_type(self.disease_df, DiseaseNodeField)
+
+        # Drugs
+        yield from self._yield_node_type(self.drug_df, DrugNodeField, "chembl")
 
         # Gene Ontology
         yield from self._yield_node_type(self.go_df, GeneOntologyNodeField)

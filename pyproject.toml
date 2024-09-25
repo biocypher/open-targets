@@ -10,7 +10,7 @@ snakeviz = "^2.1.1"
 pyspark = "^3.3.1"
 bioregistry = "^0.6.45"
 pandas = "^2.0.1"
-bccb = { git = "https://github.com/HUBioDataLab/CROssBAR-BioCypher-Migration.git", branch = "main" }
+# bccb = { git = "https://github.com/HUBioDataLab/CROssBAR-BioCypher-Migration.git", branch = "main" }
 dmb = { git = "https://github.com/saezlab/DepMap-BioCypher.git", branch = "main" }
 biocypher = "^0.5.4"
 
