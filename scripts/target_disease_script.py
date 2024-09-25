@@ -3,6 +3,7 @@ from biocypher import BioCypher
 # VSCode does not add the root directory to the path (by default?). Not sure why
 # this works sometimes and not others. This is a workaround.
 import sys
+from pyspark import StorageLevel
 
 sys.path.append("")
 
@@ -126,17 +127,10 @@ target_go_edge_fields = [
     # mandatory fields
     TargetGeneOntologyEdgeField.TARGET_GENE_ENSG,
     TargetGeneOntologyEdgeField.GENE_ONTOLOGY_ACCESSION,
-
-    # TargetDiseaseEdgeField.DISEASE_ACCESSION,
-    # TargetDiseaseEdgeField.TYPE,
     TargetGeneOntologyEdgeField.SOURCE,
-    
-    # optional fields
-    # TargetDiseaseEdgeField.SCORE,
-    # TargetDiseaseEdgeField.LITERATURE,
 ]
 
-all_edge_fields = target_disease_edge_fields+ target_go_edge_fields
+all_edge_fields = target_disease_edge_fields + target_go_edge_fields
 
 def main():
     """
@@ -172,9 +166,10 @@ def main():
 
     # Write OTAR edges in batches to avoid memory issues
     # Gene-Disease
-    # gene_disease_batches, evidence_df = target_disease_adapter.get_edge_batches(target_disease_adapter.evidence_df)
-    # for batch in gene_disease_batches:
-    #     bc.write_edges(target_disease_adapter.get_gene_disease_edges(evidence_df, batch_number=batch))
+    gene_disease_batches, evidence_df = target_disease_adapter.get_edge_batches(target_disease_adapter.evidence_df)
+    evidence_df.persist(StorageLevel.MEMORY_AND_DISK)  # Persist with disk storage
+    for batch in gene_disease_batches:
+        bc.write_edges(target_disease_adapter.get_gene_disease_edges(evidence_df, batch_number=batch))
 
     # Gene-GO
     # Write OTAR edges in batches to avoid memory issues
