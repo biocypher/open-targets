@@ -308,13 +308,30 @@ class TargetDiseaseEvidenceAdapter:
         logger.info("Creating Spark session.")
 
         # Set up Spark context
+        # conf = (
+        #     SparkConf()
+        #     .setAppName("otar_biocypher")
+        #     .setMaster("local")
+        #     .set("spark.driver.memory", "8g")
+        #     .set("spark.executor.memory", "8g")
+        # )
+
+        # Optimized config?
         conf = (
             SparkConf()
-            .setAppName("otar_biocypher")
+            .setAppName("otar_biocypher") 
             .setMaster("local")
-            .set("spark.driver.memory", "4g")
-            .set("spark.executor.memory", "4g")
+            .set("spark.executor.memory", "32g")
+            .set("spark.driver.memory", "32g")
+            .set("spark.executor.cores", "8")
+            # .set("spark.sql.shuffle.partitions", "2000") 
+            # .set("spark.default.parallelism", "2000")
+            .set("spark.memory.fraction", "0.8")
+            .set("spark.memory.storageFraction", "0.3") 
+            .set("spark.executor.extraJavaOptions", "-XX:+UseG1GC -XX:InitiatingHeapOccupancyPercent=35 -XX:MaxGCPauseMillis=200")
+            .set("spark.driver.extraJavaOptions", "-XX:+UseG1GC -XX:InitiatingHeapOccupancyPercent=35 -XX:MaxGCPauseMillis=200")
         )
+
         self.sc = SparkContext(conf=conf)
 
         # Create SparkSession
@@ -434,7 +451,7 @@ class TargetDiseaseEvidenceAdapter:
         # create a new column with the md5 hash of the evidence data
         df = df.withColumn(
             "id",
-            F.md5(F.concat(*[F.col(c) for c in df.columns])),
+            F.md5(F.concat(*[F.col(c) for c in df.columns if type(c) == "STRING"])),
         )
 
         # return the dataframe
@@ -492,6 +509,7 @@ class TargetDiseaseEvidenceAdapter:
             _id, _type = _process_id_and_type(
                 row[node_field_type._PRIMARY_ID.value], ontology_class
             )
+            
 
             # switch mouse gene type
             if node_field_type == MouseTargetNodeField:
@@ -502,7 +520,6 @@ class TargetDiseaseEvidenceAdapter:
                 continue
 
             logger.debug(f"Processed {node_field_type} with id {_id} and type {_type}")
-
 
             _props = {}
             _props["version"] = "22.11"
@@ -565,6 +582,13 @@ class TargetDiseaseEvidenceAdapter:
         #         [field.value for field in self.datasets]
         #     )
         # ).select([field.value for field in self.edge_fields])
+
+        selected_fields = [field.value for field in self.edge_fields if field.value in df.columns]
+        df=df.select(selected_fields)
+
+
+        # Add interaction id to the dataframe
+        df = self._generate_evidence_id(df)
 
         # add partition number to self.evidence_df as column
         df = df.withColumn(
@@ -758,7 +782,7 @@ def _process_id_and_type(inputId: str, _type: Optional[str] = None):
     if _type:
         _id = normalize_curie(f"{_type}:{inputId}")
 
-        return (_id, _type)
+        return (_id, _type) 
 
     # detect delimiter (either _ or :)
     if "_" in inputId:
