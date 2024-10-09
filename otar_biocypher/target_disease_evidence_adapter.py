@@ -506,6 +506,7 @@ class TargetDiseaseEvidenceAdapter:
 
             logger.debug(f"Processed {node_field_type} with id {_id} and type {_type}")
 
+
             _props = {}
             _props["version"] = "22.11"
             _props["source"] = "Open Targets"
