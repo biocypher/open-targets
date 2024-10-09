@@ -15,6 +15,7 @@ dmb = { git = "https://github.com/saezlab/DepMap-BioCypher.git", branch = "main"
 biocypher = "^0.6.0"
 
 [tool.poetry.dev-dependencies]
+pre-commit = "^4.0.1"
 
 [tool.isort]
 profile = "black"

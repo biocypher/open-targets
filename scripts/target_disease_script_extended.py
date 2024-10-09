@@ -1,43 +1,40 @@
-from biocypher import BioCypher
-
 # VSCode does not add the root directory to the path (by default?). Not sure why
 # this works sometimes and not others. This is a workaround.
 import sys
 
-sys.path.append("")
+from bccb.uniprot_adapter import (
+    Uniprot,
+    UniprotEdgeField,
+    UniprotEdgeType,
+    UniprotNodeField,
+    UniprotNodeType,
+)
+from biocypher import BioCypher
+from dmb.adapter import (
+    DepMapAdapter,
+    DepMapCellLineNodeField,
+    DepMapEdgeType,
+    DepMapGeneToCellLineEdgeField,
+    DepMapNodeType,
+)
 
-from otar_biocypher.target_disease_evidence_adapter import (
-    TargetDiseaseEvidenceAdapter,
-    TargetDiseaseDataset,
-    TargetNodeField,
+from otar_biocypher.target_disease_evidence_adapter import (  # MouseModelNodeField,
     DiseaseNodeField,
-    TargetDiseaseEdgeField,
     GeneOntologyNodeField,
     MousePhenotypeNodeField,
     MouseTargetNodeField,
-    MouseModelNodeField,
+    TargetDiseaseDataset,
+    TargetDiseaseEdgeField,
+    TargetDiseaseEvidenceAdapter,
+    TargetNodeField,
 )
 
-from bccb.uniprot_adapter import (
-    Uniprot,
-    UniprotNodeType,
-    UniprotNodeField,
-    UniprotEdgeType,
-    UniprotEdgeField,
-)
-
-from dmb.adapter import (
-    DepMapAdapter,
-    DepMapNodeType,
-    DepMapEdgeType,
-    DepMapCellLineNodeField,
-    DepMapGeneToCellLineEdgeField,
-)
+sys.path.append("")
 
 """
 Configuration: select datasets and fields to be imported.
 
-`datasets`: list of datasets to be imported. See 
+`datasets`: list of datasets to be imported. See
 target_disease_evidence_adapter.py for available datasets or use
 `TargetDiseaseDataset` Enum auto-complete.
 
@@ -166,9 +163,7 @@ def main():
     """
 
     # Start BioCypher
-    bc = BioCypher(
-        biocypher_config_path="config/biocypher_config_extended.yaml"
-    )
+    bc = BioCypher(biocypher_config_path="config/biocypher_config_extended.yaml")
 
     # Check the schema
     bc.show_ontology_structure()

@@ -1,12 +1,13 @@
 import re
+from typing import Dict
 
 from biocypher._logger import logger
 
 logger.debug(f"Loading module {__name__}.")
 
 
-def _process_node_id_and_type(
-    _node: dict, _type: str, _source: str = None
+def _process_node_id_and_type(  # noqa:C901
+    _node: Dict[str, str], _type: str, _source: str | None = None
 ) -> tuple:
     """
     Add prefixes to avoid multiple assignment.
@@ -31,47 +32,47 @@ def _process_node_id_and_type(
     chebi_prefix_pattern = re.compile("^CHEBI:")
     chembl_prefix_pattern = re.compile("^CHEMBL")
     signor_prefix_pattern = re.compile("^SIGNOR-")
-    chebi_no_prefix_pattern = re.compile("^\d{,6}$")
-    drugbank_prefix_pattern = re.compile("^DB\d{5}$")
+    chebi_no_prefix_pattern = re.compile("^\d{,6}$")  # noqa:W605
+    drugbank_prefix_pattern = re.compile("^DB\d{5}$")  # noqa:E501,W605
     intact_mint_prefix_pattern = re.compile("^MINT-")
-    chembl_no_prefix_pattern = re.compile("^\d{,10}$")
+    chembl_no_prefix_pattern = re.compile("^\d{,10}$")  # noqa:W605
     complexportal_prefix_pattern = re.compile("^CPX-[0-9]+$")
-    mirbase_precursor_prefix_pattern = re.compile("^MI\d{7}$")
-    dip_prefix_pattern = re.compile("^DIP(\:)?\-\d{1,}[ENXS]$")
+    mirbase_precursor_prefix_pattern = re.compile("^MI\d{7}$")  # noqa:W605
+    dip_prefix_pattern = re.compile("^DIP(\:)?\-\d{1,}[ENXS]$")  # noqa:W605
     uniprot_archive_prefix_pattern = re.compile("^UPI[A-F0-9]{10}$")
-    rnacentral_prefix_pattern = re.compile("^URS[0-9A-F]{10}(\_\d+)?$")
-    reactome_prefix_pattern = re.compile("^R-[A-Z]{3}-\d+(-\d+)?(\.\d+)?$")
+    rnacentral_prefix_pattern = re.compile("^URS[0-9A-F]{10}(\_\d+)?$")  # noqa:W605
+    reactome_prefix_pattern = re.compile("^R-[A-Z]{3}-\d+(-\d+)?(\.\d+)?$")  # noqa:W605
     uniprot_prefix_pattern = re.compile(
-        "^([A-N,R-Z][0-9]([A-Z][A-Z, 0-9][A-Z, 0-9][0-9]){1,2})|([O,P,Q][0-9][A-Z, 0-9][A-Z, 0-9][A-Z, 0-9][0-9])(\.\d+)?$"
+        "^([A-N,R-Z][0-9]([A-Z][A-Z, 0-9][A-Z, 0-9][0-9]){1,2})|([O,P,Q][0-9][A-Z, 0-9][A-Z, 0-9][A-Z, 0-9][0-9])(\.\d+)?$"  # noqa:E501,W605
     )
     uniprot_wrong_precursor_prefix_pattern = re.compile(
-        "^([A-N,R-Z][0-9]([A-Z][A-Z, 0-9][A-Z, 0-9][0-9]){1,2})|([O,P,Q][0-9][A-Z, 0-9][A-Z, 0-9][A-Z, 0-9][0-9])(\.\d+)?_PRO_\d+$"
+        "^([A-N,R-Z][0-9]([A-Z][A-Z, 0-9][A-Z, 0-9][0-9]){1,2})|([O,P,Q][0-9][A-Z, 0-9][A-Z, 0-9][A-Z, 0-9][0-9])(\.\d+)?_PRO_\d+$"  # noqa:E501,W605
     )
     # hyphen replaced by underscore, unify (TODO how to resolve? synonym?)
     uniprot_precursor_prefix_pattern = re.compile(
-        "^([A-N,R-Z][0-9]([A-Z][A-Z, 0-9][A-Z, 0-9][0-9]){1,2})|([O,P,Q][0-9][A-Z, 0-9][A-Z, 0-9][A-Z, 0-9][0-9])(\.\d+)?-PRO_\d+$"
+        "^([A-N,R-Z][0-9]([A-Z][A-Z, 0-9][A-Z, 0-9][0-9]){1,2})|([O,P,Q][0-9][A-Z, 0-9][A-Z, 0-9][A-Z, 0-9][0-9])(\.\d+)?-PRO_\d+$"  # noqa:E501,W605
     )
     # TODO uniprot.chain is only the "PRO-.." part, not the whole id
     uniprot_isoform_prefix_pattern = re.compile(
-        "^([A-N,R-Z][0-9]([A-Z][A-Z, 0-9][A-Z, 0-9][0-9]){1,2})|([O,P,Q][0-9][A-Z, 0-9][A-Z, 0-9][A-Z, 0-9][0-9])(\.\d+)?-\d+$"
+        "^([A-N,R-Z][0-9]([A-Z][A-Z, 0-9][A-Z, 0-9][0-9]){1,2})|([O,P,Q][0-9][A-Z, 0-9][A-Z, 0-9][A-Z, 0-9][0-9])(\.\d+)?-\d+$"  # noqa:E501,W605
     )
     ensembl_prefix_pattern = re.compile(
-        "^((ENS[FPTG]\d{11}(\.\d+)?)|(FB\w{2}\d{7})|(Y[A-Z]{2}\d{3}[a-zA-Z](\-[A-Z])?)|([A-Z_a-z0-9]+(\.)?(t)?(\d+)?([a-z])?))$"
+        "^((ENS[FPTG]\d{11}(\.\d+)?)|(FB\w{2}\d{7})|(Y[A-Z]{2}\d{3}[a-zA-Z](\-[A-Z])?)|([A-Z_a-z0-9]+(\.)?(t)?(\d+)?([a-z])?))$"  # noqa:E501,W605
     )
     refseq_prefix_pattern = re.compile(
-        "^(((AC|AP|NC|NG|NM|NP|NR|NT|NW|WP|XM|XP|XR|YP|ZP)_\d+)|(NZ\_[A-Z]{2,4}\d+))(\.\d+)?$"
+        "^(((AC|AP|NC|NG|NM|NP|NR|NT|NW|WP|XM|XP|XR|YP|ZP)_\d+)|(NZ\_[A-Z]{2,4}\d+))(\.\d+)?$"  # noqa:E501,W605
     )
 
     _id = None
     # strip whitespace
-    if _node.get("preferredIdentifierStr"):
-        _pref_id = _node.get("preferredIdentifierStr").strip()
+    preferredIdentifierStr = _node.get("preferredIdentifierStr")
+    if preferredIdentifierStr:
+        _pref_id = preferredIdentifierStr.strip()
 
-    ## Interactor types given by graph:
+    # Interactor types given by graph:
 
     # deoxyribonucleic acid,dna
     if _type == "dna":
-
         if _source == "intact" and ebi_prefix_pattern.match(_pref_id):
             _id = "intact:" + _pref_id
             _type = "intact_dna"
@@ -114,9 +115,7 @@ def _process_node_id_and_type(
 
     # protein,protein
     elif _type == "protein":
-
         if _source == "uniprotkb":
-
             if uniprot_prefix_pattern.match(_pref_id):
                 _id = "uniprot:" + _node["uniprotName"]
                 _type = "uniprot_protein"
@@ -172,15 +171,11 @@ def _process_node_id_and_type(
             _id = "intact:" + _pref_id
             _type = "intact_protein"
 
-        elif _source == "intact" and intact_mint_prefix_pattern.match(
-            _pref_id
-        ):
+        elif _source == "intact" and intact_mint_prefix_pattern.match(_pref_id):
             _id = "intact:" + _pref_id
             _type = "intact_protein"
 
-        elif _source == "uniparc" and uniprot_archive_prefix_pattern.match(
-            _pref_id
-        ):
+        elif _source == "uniparc" and uniprot_archive_prefix_pattern.match(_pref_id):
             _id = "uniparc:" + _pref_id
             _type = "uniprot_archive_protein"
 
@@ -219,7 +214,6 @@ def _process_node_id_and_type(
 
     # double stranded deoxyribonucleic acid,ds dna
     elif _type == "ds dna":
-
         if _source == "intact" and ebi_prefix_pattern.match(_pref_id):
             _id = "intact:" + _pref_id
             _type = "intact_dsdna"
@@ -249,13 +243,11 @@ def _process_node_id_and_type(
 
     # single stranded deoxyribonucleic acid,ss dna
     elif _type == "ss dna":
-
         if _source == "intact" and ebi_prefix_pattern.match(_pref_id):
             _id = "intact:" + _pref_id
             _type = "intact_ssdna"
 
         elif _source == "chebi":
-
             if chebi_prefix_pattern.match(_pref_id):
                 _id = _pref_id.replace("CHEBI:", "chebi:")
 
@@ -280,14 +272,11 @@ def _process_node_id_and_type(
 
     # small nuclear rna,snrna
     elif _type == "snrna":
-
         if _source == "intact" and ebi_prefix_pattern.match(_pref_id):
             _id = "intact:" + _pref_id
             _type = "intact_snrna"
 
-        elif _source == "rnacentral" and rnacentral_prefix_pattern.match(
-            _pref_id
-        ):
+        elif _source == "rnacentral" and rnacentral_prefix_pattern.match(_pref_id):
             _id = "rnacentral:" + _pref_id
             _type = "rnacentral_snrna"
 
@@ -304,10 +293,7 @@ def _process_node_id_and_type(
 
     # small nucleolar rna,snorna
     elif _type == "snorna":
-
-        if _source == "rnacentral" and rnacentral_prefix_pattern.match(
-            _pref_id
-        ):
+        if _source == "rnacentral" and rnacentral_prefix_pattern.match(_pref_id):
             _id = "rnacentral:" + _pref_id
 
         else:
@@ -315,7 +301,6 @@ def _process_node_id_and_type(
 
     # long non-coding ribonucleic acid,lncrna
     elif _type == "lncrna":
-
         if _source == "intact" and ebi_prefix_pattern.match(_pref_id):
             _id = "intact:" + _pref_id
             _type = "intact_lncrna"
@@ -324,9 +309,7 @@ def _process_node_id_and_type(
             _id = "refseq:" + _pref_id
             _type = "refseq_lncrna"
 
-        elif _source == "rnacentral" and rnacentral_prefix_pattern.match(
-            _pref_id
-        ):
+        elif _source == "rnacentral" and rnacentral_prefix_pattern.match(_pref_id):
             _id = "rnacentral:" + _pref_id
             _type = "rnacentral_lncrna"
 
@@ -339,9 +322,7 @@ def _process_node_id_and_type(
 
     # xenobiotic,xenobiotic
     elif _type == "xenobiotic":
-
         if _source == "chebi":
-
             if chebi_prefix_pattern.match(_pref_id):
                 _id = _pref_id.replace("CHEBI:", "chebi:")
 
@@ -366,9 +347,7 @@ def _process_node_id_and_type(
 
     # poly adenine,poly a
     elif _type == "poly a":
-
         if _source == "chebi":
-
             if chebi_prefix_pattern.match(_pref_id):
                 _id = _pref_id.replace("CHEBI:", "chebi:")
 
@@ -385,14 +364,11 @@ def _process_node_id_and_type(
 
     # ribosomal rna,rrna
     elif _type == "rrna":
-
         if _source == "intact" and ebi_prefix_pattern.match(_pref_id):
             _id = "intact:" + _pref_id
             _type = "intact_rrna"
 
-        elif _source == "rnacentral" and rnacentral_prefix_pattern.match(
-            _pref_id
-        ):
+        elif _source == "rnacentral" and rnacentral_prefix_pattern.match(_pref_id):
             _id = "rnacentral:" + _pref_id
             _type = "rnacentral_rrna"
 
@@ -417,7 +393,6 @@ def _process_node_id_and_type(
 
     # phenotype,phenotype
     elif _type == "phenotype":
-
         if _source == "signor" and signor_prefix_pattern.match(_pref_id):
             _id = "signor:" + _pref_id
             _type = "signor_phenotype"
@@ -427,10 +402,7 @@ def _process_node_id_and_type(
 
     # stable complex,stable complex
     elif _type == "stable complex":
-
-        if _source == "complex portal" and complexportal_prefix_pattern.match(
-            _pref_id
-        ):
+        if _source == "complex portal" and complexportal_prefix_pattern.match(_pref_id):
             _id = "complexportal:" + _pref_id
             _type = "complexportal_stable_complex"
 
@@ -439,14 +411,11 @@ def _process_node_id_and_type(
 
     # guide rna,grna
     elif _type == "grna":
-
         if _source == "intact" and ebi_prefix_pattern.match(_pref_id):
             _id = "intact:" + _pref_id
             _type = "intact_grna"
 
-        elif _source == "rnacentral" and rnacentral_prefix_pattern.match(
-            _pref_id
-        ):
+        elif _source == "rnacentral" and rnacentral_prefix_pattern.match(_pref_id):
             _id = "rnacentral:" + _pref_id
             _type = "rnacentral_grna"
 
@@ -455,7 +424,6 @@ def _process_node_id_and_type(
 
     # messenger rna,mrna
     elif _type == "mrna":
-
         if _source == "ensembl" and ensembl_prefix_pattern.match(_pref_id):
             _id = "ensembl:" + _pref_id
             _type = "ensembl_mrna"
@@ -484,9 +452,7 @@ def _process_node_id_and_type(
 
     # small molecule,small molecule
     elif _type == "small molecule":
-
         if _source == "chebi":
-
             if chebi_no_prefix_pattern.match(_pref_id):
                 _id = "chebi:" + _pref_id
 
@@ -503,7 +469,6 @@ def _process_node_id_and_type(
             _type = "intact_small_molecule"
 
         elif _source == "pubchem":
-
             if cid_prefix_pattern.match(_pref_id):
                 _id = _pref_id.replace("CID:", "pubchem.compound:")
                 _type = "pubchem_compound"
@@ -516,7 +481,6 @@ def _process_node_id_and_type(
                 logger.debug(f"Encountered {_type}, {_node}, {_source}")
 
         elif _source == "chembl":
-
             if chembl_prefix_pattern.match(_pref_id):
                 _id = _pref_id.replace("CHEMBL", "chembl:")
 
@@ -533,14 +497,11 @@ def _process_node_id_and_type(
 
     # ribonucleic acid,rna
     elif _type == "rna":
-
         if _source == "intact" and ebi_prefix_pattern.match(_pref_id):
             _id = "intact:" + _pref_id
             _type = "intact_rna"
 
-        elif _source == "rnacentral" and rnacentral_prefix_pattern.match(
-            _pref_id
-        ):
+        elif _source == "rnacentral" and rnacentral_prefix_pattern.match(_pref_id):
             _id = "rnacentral:" + _pref_id
             _type = "rnacentral_rna"
 
@@ -570,7 +531,6 @@ def _process_node_id_and_type(
 
     # molecule set,molecule set
     elif _type == "molecule set":
-
         if _source == "intact":
             _id = "intact:" + _pref_id
             _type = "intact_molecule_set"
@@ -590,9 +550,7 @@ def _process_node_id_and_type(
     elif _type == "mirna":
         # TODO primary, pre, mature
 
-        if _source == "rnacentral" and rnacentral_prefix_pattern.match(
-            _pref_id
-        ):
+        if _source == "rnacentral" and rnacentral_prefix_pattern.match(_pref_id):
             _id = "rnacentral:" + _pref_id
             _type = "rnacentral_mirna"
 
@@ -600,9 +558,7 @@ def _process_node_id_and_type(
             _id = "ensembl:" + _pref_id
             _type = "ensembl_mirna"
 
-        elif _source == "mirbase" and mirbase_precursor_prefix_pattern.match(
-            _pref_id
-        ):
+        elif _source == "mirbase" and mirbase_precursor_prefix_pattern.match(_pref_id):
             _id = "mirbase:" + _pref_id
             _type = "mirbase_mirna"
 
@@ -611,7 +567,6 @@ def _process_node_id_and_type(
 
     # stimulus,stimulus
     elif _type == "stimulus":
-
         if _source == "signor" and signor_prefix_pattern.match(_pref_id):
             _id = "signor:" + _pref_id
             _type = "signor_stimulus"
@@ -621,14 +576,11 @@ def _process_node_id_and_type(
 
     # peptide,peptide
     elif _type == "peptide":
-
         if _source == "intact" and ebi_prefix_pattern.match(_pref_id):
             _id = "intact:" + _pref_id
             _type = "intact_peptide"
 
-        elif _source == "intact" and intact_mint_prefix_pattern.match(
-            _pref_id
-        ):
+        elif _source == "intact" and intact_mint_prefix_pattern.match(_pref_id):
             _id = "intact:" + _pref_id
             _type = "intact_peptide"
 
@@ -637,7 +589,6 @@ def _process_node_id_and_type(
             _type = "dip_peptide"
 
         elif _source == "uniprotkb":
-
             if uniprot_prefix_pattern.match(_pref_id):
                 _id = "uniprot:" + _pref_id
                 _type = "uniprot_peptide"
@@ -651,7 +602,6 @@ def _process_node_id_and_type(
 
     # complex,complex
     elif _type == "complex":
-
         if _source == "signor" and signor_prefix_pattern.match(_pref_id):
             _id = "signor:" + _pref_id
             _type = "signor_complex"
@@ -662,9 +612,7 @@ def _process_node_id_and_type(
             _id = "complexportal:" + _pref_id
             _type = "complexportal_complex"
 
-        elif _source == "complexportal" and signor_prefix_pattern.match(
-            _pref_id
-        ):
+        elif _source == "complexportal" and signor_prefix_pattern.match(_pref_id):
             # probably wrongly assigned
             _id = "signor:" + _pref_id
             _type = "signor_complex"
@@ -681,7 +629,6 @@ def _process_node_id_and_type(
 
     # nucleic acid,nucleic acid
     elif _type == "nucleic acid":
-
         if _source == "intact" and ebi_prefix_pattern.match(_pref_id):
             _id = "intact:" + _pref_id
             _type = "intact_nucleic_acid"
@@ -700,9 +647,7 @@ def _process_node_id_and_type(
     # bioactive entity,bioactive entity
     # only three in the graph, all have CHEBI ids
     elif _type == "bioactive entity":
-
         if _source == "chebi":
-
             if chebi_prefix_pattern.match(_pref_id):
                 _id = _pref_id.replace("CHEBI:", "chebi:")
 
@@ -719,7 +664,6 @@ def _process_node_id_and_type(
 
     # transfer rna,trna
     elif _type == "trna":
-
         if _source == "ddbj/embl/genbank":
             _id = "genbank:" + _pref_id
             _type = "genbank_trna"
@@ -729,7 +673,6 @@ def _process_node_id_and_type(
             _type = "ensembl_trna"
 
         elif _source == "chebi":
-
             if chebi_prefix_pattern.match(_pref_id):
                 _id = _pref_id.replace("CHEBI:", "chebi:")
                 _type = "chebi_trna"
@@ -741,9 +684,7 @@ def _process_node_id_and_type(
             else:
                 logger.debug(f"Encountered {_type}, {_node}, {_source}")
 
-        elif _source == "rnacentral" and rnacentral_prefix_pattern.match(
-            _pref_id
-        ):
+        elif _source == "rnacentral" and rnacentral_prefix_pattern.match(_pref_id):
             _id = "rnacentral:" + _pref_id
             _type = "rnacentral_trna"
 
@@ -781,9 +722,9 @@ def _process_node_id_and_type(
     elif _type == "GraphExperiment":
         _id = _node.get("uniqueKey")
 
-    elif _type == "GraphEvidenceType" and ebi_prefix_pattern.match(
-        _node.get("ac")
-    ):
-        _id = "intact:" + _node.get("ac")
+    elif _type == "GraphEvidenceType":
+        ac = _node.get("ac")
+        if ac and ebi_prefix_pattern.match(ac):
+            _id = "intact:" + ac
 
     return _id, _type

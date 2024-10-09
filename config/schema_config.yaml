@@ -64,24 +64,26 @@ mouse phenotype:
 
 gene to disease association:
   represented_as: edge
-  preferred_id: [
-    affected pathway, 
-    somatic mutation, 
-    genetic association, 
-    literature,
-    animal model,
-    known drug,
-    rna expression,
-  ]
-  label_in_input: [
-    affected_pathway, 
-    somatic_mutation, 
-    genetic_association,
-    literature,
-    animal_model,
-    known_drug,
-    rna_expression,
-  ]
+  preferred_id:
+    [
+      affected pathway,
+      somatic mutation,
+      genetic association,
+      literature,
+      animal model,
+      known drug,
+      rna expression,
+    ]
+  label_in_input:
+    [
+      affected_pathway,
+      somatic_mutation,
+      genetic_association,
+      literature,
+      animal_model,
+      known_drug,
+      rna_expression,
+    ]
   properties:
     literature: str[]
     score: double

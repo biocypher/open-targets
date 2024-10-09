@@ -5,5 +5,5 @@ biocypher:
 neo4j:
   database_name: test
   delimiter: '\t'
-  array_delimiter: '|'
+  array_delimiter: "|"
   skip_bad_relationships: true

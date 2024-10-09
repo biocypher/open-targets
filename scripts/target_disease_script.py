@@ -1,29 +1,31 @@
-from biocypher import BioCypher
-
 # VSCode does not add the root directory to the path (by default?). Not sure why
 # this works sometimes and not others. This is a workaround.
 import sys
-from pyspark import StorageLevel
 
-sys.path.append("")
+from biocypher import BioCypher
 
 from otar_biocypher.target_disease_evidence_adapter import (
-    TargetDiseaseEvidenceAdapter,
-    TargetDiseaseDataset,
-    TargetNodeField,
     DiseaseNodeField,
     DrugNodeField,
-    TargetDiseaseEdgeField,
-    TargetGeneOntologyEdgeField,
     GeneOntologyNodeField,
     MousePhenotypeNodeField,
     MouseTargetNodeField,
+    TargetDiseaseDataset,
+    TargetDiseaseEdgeField,
+    TargetDiseaseEvidenceAdapter,
+    TargetGeneOntologyEdgeField,
+    TargetNodeField,
 )
+
+# from pyspark import StorageLevel
+
+
+sys.path.append("")
 
 """
 Configuration: select datasets and fields to be imported.
 
-`datasets`: list of datasets to be imported. See 
+`datasets`: list of datasets to be imported. See
 target_disease_evidence_adapter.py for available datasets or use
 `TargetDiseaseDataset` Enum auto-complete.
 

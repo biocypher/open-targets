@@ -12,7 +12,6 @@ driver = nu.Driver(
 
 
 def main():
-
     num_runs = 5
     num_warmup_runs = 5
 
@@ -37,7 +36,7 @@ def test_run(print_result=False):
     WITH association LIMIT 100
     OPTIONAL MATCH (association)<--(entity1:BiologicalEntity)
     OPTIONAL MATCH (association)<--(entity2:BiologicalEntity)
-    OPTIONAL MATCH (association)-[:InteractionToExperimentAssociation]->(experiment:Experiment)-[:ExperimentToArticleAssociation]->(article:Article)
+    OPTIONAL MATCH (association)-[:InteractionToExperimentAssociation]->(experiment:Experiment)-[:ExperimentToArticleAssociation]->(article:Article)    # noqa:E501
     OPTIONAL MATCH (entity1)<-[r1:ExperimentToInteractorAssociation]-(experiment)
     OPTIONAL MATCH (entity2)<-[r2:ExperimentToInteractorAssociation]-(experiment)
     OPTIONAL MATCH (experiment)-[:ExperimentToEvidenceTypeAssociation]->(type:EvidenceType)
