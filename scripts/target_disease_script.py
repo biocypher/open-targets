@@ -166,10 +166,10 @@ def main():
 
     # Write OTAR edges in batches to avoid memory issues
     # Gene-Disease
-    gene_disease_batches, evidence_df = target_disease_adapter.get_edge_batches(target_disease_adapter.evidence_df)
-    evidence_df.persist(StorageLevel.MEMORY_AND_DISK)  # Persist with disk storage
-    for batch in gene_disease_batches:
-        bc.write_edges(target_disease_adapter.get_gene_disease_edges(evidence_df, batch_number=batch))
+    # gene_disease_batches, evidence_df = target_disease_adapter.get_edge_batches(target_disease_adapter.evidence_df)
+    # evidence_df.persist(StorageLevel.MEMORY_AND_DISK)  # Persist with disk storage
+    # for batch in gene_disease_batches:
+    #     bc.write_edges(target_disease_adapter.get_gene_disease_edges(evidence_df, batch_number=batch))
 
     # Gene-GO
     # Write OTAR edges in batches to avoid memory issues

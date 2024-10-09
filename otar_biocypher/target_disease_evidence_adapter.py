@@ -245,12 +245,12 @@ class TargetGeneOntologyEdgeField(Enum):
     """
 
     # mandatory fields
-    INTERACTION_ACCESSION = "id"
+    # INTERACTION_ACCESSION = "id"
 
     TARGET_GENE_ENSG = "id"
     _PRIMARY_SOURCE_ID = TARGET_GENE_ENSG
 
-    GENE_ONTOLOGY_ACCESSION = "goId"
+    GENE_ONTOLOGY_ACCESSION = "go"
     _PRIMARY_TARGET_ID = GENE_ONTOLOGY_ACCESSION
     SOURCE = "datasourceId"
 
@@ -717,45 +717,48 @@ class TargetDiseaseEvidenceAdapter:
             # limit batch df to 100 rows
             batch = batch.limit(10)
         
-        go_exploded_df = batch.withColumn("go", F.explode(batch.go))
-        batch = go_exploded_df.withColumn("goId", go_exploded_df["go"]["id"])
+        go_exploded_df = batch.withColumn("go_exploded", F.explode("go")).drop("go")
+        batch = go_exploded_df.withColumn("goId", F.col("go_exploded.id"))
+        batch = batch.withColumn("goSource", F.col("go_exploded.source"))
+        batch = batch.withColumn("goEvidence", F.col("go_exploded.evidence"))
+        batch = batch.withColumn("goEcoId", F.col("go_exploded.ecoId"))
+        batch = batch.withColumn("goAspect", F.col("go_exploded.aspect"))
+        batch = batch.withColumn("goGeneProduct", F.col("go_exploded.geneProduct"))
+
+        batch = batch.withColumnRenamed("id", "ensemblId")
+        batch.show(truncate=False)
 
         # yield edges per row of edge_df, skipping null values
         for row in tqdm(batch.collect()):
             # collect properties from fields, skipping null values
             properties = {}
-            print("There are fields number", len(self.edge_fields))
             for field in self.edge_fields:
                 properties["source"] = "my_source"
                 properties["licence"] = "my_licence"
-                # skip disease and target ids, relationship id, and datatype id
-                # as they are encoded in the relationship
-                # if field not in [
-                #     TargetDiseaseEdgeField.LITERATURE,
-                #     TargetDiseaseEdgeField.SCORE,
-                #     TargetDiseaseEdgeField.SOURCE,
-                # ]:
-                #     continue
-                if field in TargetDiseaseEdgeField.__members__.values():
-                    logger.info(f"Field <{field}> belongs to TargetDiseaseEdgeField")
-                    continue # skip this field (move to the next iteration)
+
+                # if field in TargetDiseaseEdgeField.__members__.values():
+                    # logger.info(f"Field <{field}> belongs to TargetDiseaseEdgeField")
+                    # continue # skip this field (move to the next iteration)
                 if field == TargetGeneOntologyEdgeField.SOURCE:
                     # properties["source"] = row[field.value]
                     # properties["licence"] = _find_licence(row[field.value])
                     continue # skip this field (move to the next iteration)
-                elif row[field.value]:
-                    properties[field.value] = row[field.value]
-
+                else:
+                    try:
+                        properties[field.value] = row[field.value]
+                    except:
+                        continue
             properties["version"] = "22.11"
 
             go_id, _ = _process_id_and_type(row.goId, "go")
-            gene_id, _ = _process_id_and_type(row.id, "ensembl")
+            gene_id, _ = _process_id_and_type(row.ensemblId, "ensembl")
+            
 
             yield (
-                row.id,
                 gene_id,
                 go_id,
                 "GENE_TO_GO_TERM_ASSOCIATION",
+                # relationship_id=row.id,
                 properties,
             )
         
