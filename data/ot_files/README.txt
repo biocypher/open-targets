@@ -5,12 +5,12 @@ This folder includes,
 1)"apoc_procedures_ot_data.txt" file
    This contains cypher queries which were executed in neo4j OTAR44 database to produce json files which are kept in data folder.
 2)"ot_graphdb.zip" file
-   This is compressed OTAR44 neo4j graph database. This database contains binary interactions between human,bacteria and virus interactors, coming from SIGNOR,  
+   This is compressed OTAR44 neo4j graph database. This database contains binary interactions between human,bacteria and virus interactors, coming from SIGNOR,
    IntAct, Complex databases and also interactions between human interactors from Reactome.
-3)"data" folder 
+3)"data" folder
    This contains two json files,
    a) interactor_pair_interactions.json
-      This contains collection of binary interactions per protein/rna pair and source, present in OTAR44 database. 
+      This contains collection of binary interactions per protein/rna pair and source, present in OTAR44 database.
    b) protein_complexes.json
       This contains collection of complex acs per protein, present in OTAR44 database.
    Further specifications on the json format used can be found here: "https://bit.ly/json_details"
@@ -48,7 +48,7 @@ apoc.export.file.enabled=true
 
 The "neo4j.conf" file is located at: $NEO4J_HOME/conf/neo4j.conf
 
-2.2)In neo4j.conf, 
+2.2)In neo4j.conf,
 
   a) Edit and uncomment #dbms.directories.plugins=plugins as given below
      dbms.directories.plugins=$NEO4J_HOME/plugins
@@ -74,4 +74,3 @@ Run the apoc procedure given in "PROTEIN_PAIR_INTERACTIONS - APOC PROCEDURE" sec
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Export protein_pair_interactions.json Yourself- END @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 ########################### How to produce the json files from OTAR44 neo4j graph database on your local? - END#############################################
-

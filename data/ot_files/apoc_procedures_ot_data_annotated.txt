@@ -1,14 +1,14 @@
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<PROTEIN_COMPLEXES - APOC PROCEDURE - START>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 CALL apoc.export.json.query(
-"Match (complexInteractorN:GraphInteractor)-[complexInteractorR:interactor]-(complexParticipantN:GraphModelledParticipant)-[complexParticipantR:IC_PARTICIPANT]-(complex:GraphComplex) WHERE EXISTS(complexInteractorN.uniprotName) 
+"Match (complexInteractorN:GraphInteractor)-[complexInteractorR:interactor]-(complexParticipantN:GraphModelledParticipant)-[complexParticipantR:IC_PARTICIPANT]-(complex:GraphComplex) WHERE EXISTS(complexInteractorN.uniprotName)
 # finds proteins that take part in complexes
 WITH  COLLECT(distinct complexInteractorN) as complexInteractors
-UNWIND complexInteractors as complexInteractor 
+UNWIND complexInteractors as complexInteractor
 # for each protein that takes part in at least one complex
-MATCH  (complexInteractor)-[complexInteractorR:interactor]-(complexParticipantN:GraphModelledParticipant)-[complexParticipantR:IC_PARTICIPANT]-(complex:GraphComplex),(complex)-[complexAcXrefR:complexAcXref]-(complexAcXrefN:GraphXref) 
+MATCH  (complexInteractor)-[complexInteractorR:interactor]-(complexParticipantN:GraphModelledParticipant)-[complexParticipantR:IC_PARTICIPANT]-(complex:GraphComplex),(complex)-[complexAcXrefR:complexAcXref]-(complexAcXrefN:GraphXref)
 # find given complexes and return Xrefs
-RETURN complexInteractor.uniprotName as interactor_uniprot_name, COLLECT (distinct complexAcXrefN.identifier) as complex_acs 
+RETURN complexInteractor.uniprotName as interactor_uniprot_name, COLLECT (distinct complexAcXrefN.identifier) as complex_acs
 # return protein - complex pairs
 ORDER BY complexInteractor.uniprotName",
 "OPEN_TARGETS/protein_complexes.json",
@@ -99,7 +99,7 @@ WITH CASE ID(interactorA)<ID(interactorB)
 
 # try to find entity identification method
 OPTIONAL MATCH (entityAN)-[identificationMethodsAR:identificationMethods]->(participantIdentificationMethodAN:GraphCvTerm)
-# for each "participant" (entity), try to find name and MI identifier 
+# for each "participant" (entity), try to find name and MI identifier
 ## why is this not a property?
 
 WITH interactionN,

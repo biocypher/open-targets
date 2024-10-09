@@ -11,7 +11,6 @@ driver = nu.Driver(
 
 
 def main():
-
     num_runs = 5
     num_warmup_runs = 5
 
@@ -34,7 +33,7 @@ def test_run(print_result=False):
     query = """
     MATCH (interaction:GraphBinaryInteractionEvidence)
     WITH interaction LIMIT 100
-    MATCH (typeAN:GraphCvTerm)<-[:interactorType]-(interactorA:GraphInteractor)<-[:interactorA]-(interaction)-[:interactorB]->(interactorB:GraphInteractor)-[:interactorType]->(typeBN:GraphCvTerm)
+    MATCH (typeAN:GraphCvTerm)<-[:interactorType]-(interactorA:GraphInteractor)<-[:interactorA]-(interaction)-[:interactorB]->(interactorB:GraphInteractor)-[:interactorType]->(typeBN:GraphCvTerm) # noqa:E501
     WHERE  ID(interactorA)<>ID(interactorB) AND (EXISTS(interactorA.uniprotName)
                     OR typeAN.mIIdentifier IN ['MI:0320','MI:0321','MI:0322','MI:0323','MI:2190','MI:0324','MI:2204','MI:0679','MI:0608','MI:0611','MI:0610','MI:0609','MI_0325'])
         AND (EXISTS(interactorB.uniprotName)
@@ -126,7 +125,7 @@ def test_run(print_result=False):
 
     OPTIONAL MATCH (interactionN)-[interactiontypeR:interactionType]-(interactiontypeN:GraphCvTerm)
 
-    OPTIONAL MATCH (interactionN)-[experimentR:experiment]-(experimentN:GraphExperiment)-[interactionDetectionMethodR:interactionDetectionMethod]-(interactionDetectionMethodN:GraphCvTerm)
+    OPTIONAL MATCH (interactionN)-[experimentR:experiment]-(experimentN:GraphExperiment)-[interactionDetectionMethodR:interactionDetectionMethod]-(interactionDetectionMethodN:GraphCvTerm) # noqa:E501
 
     OPTIONAL MATCH (experimentN)-[hostOrganismR:hostOrganism]-(hostOrganismN:GraphOrganism)
 
@@ -371,11 +370,11 @@ def test_run(print_result=False):
 
     OPTIONAL MATCH (interactionN)-[interactiontypeR:interactionType]-(interactiontypeN:GraphCvTerm)
 
-    OPTIONAL MATCH (interactionN)-[experimentR:experiment]-(experimentN:GraphExperiment)-[interactionDetectionMethodR:interactionDetectionMethod]-(interactionDetectionMethodN:GraphCvTerm)
+    OPTIONAL MATCH (interactionN)-[experimentR:experiment]-(experimentN:GraphExperiment)-[interactionDetectionMethodR:interactionDetectionMethod]-(interactionDetectionMethodN:GraphCvTerm) # noqa:E501
 
     OPTIONAL MATCH (experimentN)-[hostOrganismR:hostOrganism]-(hostOrganismN:GraphOrganism)
 
-    OPTIONAL MATCH (experimentN)-[publicationR:PUB_EXP]-(publicationN:GraphPublication)-[pubmedIdXrefR:pubmedId]-(pubmedIdXrefN:GraphXref)
+    OPTIONAL MATCH (experimentN)-[publicationR:PUB_EXP]-(publicationN:GraphPublication)-[pubmedIdXrefR:pubmedId]-(pubmedIdXrefN:GraphXref)  # noqa:E501
 
     OPTIONAL MATCH (interactionN)-[complexExpansionR:complexExpansion]-(complexExpansionN:GraphCvTerm)
 

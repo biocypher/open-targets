@@ -1,27 +1,31 @@
-from biocypher import BioCypher
-
 # VSCode does not add the root directory to the path (by default?). Not sure why
 # this works sometimes and not others. This is a workaround.
 import sys
 
-sys.path.append("")
+from biocypher import BioCypher
 
 from otar_biocypher.target_disease_evidence_adapter import (
-    TargetDiseaseEvidenceAdapter,
-    TargetDiseaseDataset,
-    TargetNodeField,
     DiseaseNodeField,
     DrugNodeField,
-    TargetDiseaseEdgeField,
     GeneOntologyNodeField,
     MousePhenotypeNodeField,
     MouseTargetNodeField,
+    TargetDiseaseDataset,
+    TargetDiseaseEdgeField,
+    TargetDiseaseEvidenceAdapter,
+    TargetGeneOntologyEdgeField,
+    TargetNodeField,
 )
+
+# from pyspark import StorageLevel
+
+
+sys.path.append("")
 
 """
 Configuration: select datasets and fields to be imported.
 
-`datasets`: list of datasets to be imported. See 
+`datasets`: list of datasets to be imported. See
 target_disease_evidence_adapter.py for available datasets or use
 `TargetDiseaseDataset` Enum auto-complete.
 
@@ -78,7 +82,6 @@ target_disease_node_fields = [
     DiseaseNodeField.DISEASE_CODE,
     DiseaseNodeField.DISEASE_NAME,
     DiseaseNodeField.DISEASE_DESCRIPTION,
-
     # optional drug fields
     DrugNodeField.DRUG_ACCESSION,
     DrugNodeField.DRUG_BLACK_BOX_WARNING,
@@ -98,7 +101,6 @@ target_disease_node_fields = [
     DrugNodeField.DRUG_SYNONYMS,
     DrugNodeField.DRUG_TRADE_NAMES,
     DrugNodeField.DRUG_YEAR_OF_FIRST_APPROVAL,
-
     # optional gene ontology fields
     GeneOntologyNodeField.GENE_ONTOLOGY_NAME,
     # optional mouse phenotype fields
@@ -121,6 +123,16 @@ target_disease_edge_fields = [
     TargetDiseaseEdgeField.LITERATURE,
 ]
 
+target_go_edge_fields = [
+    # mandatory fields
+    TargetGeneOntologyEdgeField.TARGET_GENE_ENSG,
+    TargetGeneOntologyEdgeField.GENE_ONTOLOGY_ACCESSION,
+    TargetGeneOntologyEdgeField.SOURCE,
+    TargetGeneOntologyEdgeField.EVIDENCE,
+]
+
+all_edge_fields = target_disease_edge_fields + target_go_edge_fields
+
 
 def main():
     """
@@ -141,12 +153,13 @@ def main():
     target_disease_adapter = TargetDiseaseEvidenceAdapter(
         datasets=target_disease_datasets,
         node_fields=target_disease_node_fields,
-        edge_fields=target_disease_edge_fields,
-        test_mode=True,
+        target_disease_edge_fields=target_disease_edge_fields,
+        target_go_edge_fields=target_go_edge_fields,
+        test_mode=False,
     )
 
     target_disease_adapter.load_data(
-        stats=False,
+        stats=True,
         show_nodes=False,
         show_edges=False,
     )
@@ -155,9 +168,20 @@ def main():
     bc.write_nodes(target_disease_adapter.get_nodes())
 
     # Write OTAR edges in batches to avoid memory issues
-    batches = target_disease_adapter.get_edge_batches()
-    for batch in batches:
-        bc.write_edges(target_disease_adapter.get_edges(batch_number=batch))
+    # Gene-Disease
+    # gene_disease_batches, evidence_df = target_disease_adapter.get_edge_batches(target_disease_adapter.evidence_df)
+    # evidence_df.persist(StorageLevel.MEMORY_AND_DISK)  # Persist with disk storage
+    # for batch in gene_disease_batches:
+    #     bc.write_edges(target_disease_adapter.get_gene_disease_edges(evidence_df, batch_number=batch))
+
+    # Gene-GO: These edges are derived from the targets parquet file
+    # Write Gene -> GO edges in batches to avoid memory issues
+    target_disease_adapter.target_df = target_disease_adapter.get_edge_batches(
+        target_disease_adapter.target_df,
+        # edge_type="gene_go",
+    )
+    for batch in target_disease_adapter.current_batches:
+        bc.write_edges(target_disease_adapter.get_gene_go_edges(batch_number=batch))
 
     # Post import functions
     bc.write_import_call()

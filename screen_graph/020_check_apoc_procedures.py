@@ -31,9 +31,7 @@ relationship_labels = df["Relationship"].tolist()
 # split each label into list of words using '|' as separator
 relationship_labels = [x.split("|") for x in relationship_labels]
 # flatten list of lists into list of words
-relationship_labels = [
-    item for sublist in relationship_labels for item in sublist
-]
+relationship_labels = [item for sublist in relationship_labels for item in sublist]
 # remove duplicates from list and sort
 relationship_labels = sorted(list(set(relationship_labels)))
 
@@ -50,9 +48,7 @@ print(
     f"Of {len(source_labels)} source labels, {len(used_source_labels)} are used in the OT query."
 )
 # subtract used labels from all labels to find unused labels
-unused_source_labels = [
-    x for x in source_labels if x not in used_source_labels
-]
+unused_source_labels = [x for x in source_labels if x not in used_source_labels]
 print(f"Used source labels: {used_source_labels}")
 print(f"Unused source labels: {unused_source_labels}")
 
@@ -69,9 +65,7 @@ print(
     f"Of {len(target_labels)} target labels, {len(used_target_labels)} are used in the OT query."
 )
 # subtract used labels from all labels to find unused labels
-unused_target_labels = [
-    x for x in target_labels if x not in used_target_labels
-]
+unused_target_labels = [x for x in target_labels if x not in used_target_labels]
 print(f"Used target labels: {used_target_labels}")
 print(f"Unused target labels: {unused_target_labels}")
 

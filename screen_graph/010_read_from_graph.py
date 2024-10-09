@@ -1,7 +1,8 @@
-import json
+# import json
 
 import neo4j_utils as nu
-import pandas as pd
+
+# import pandas as pd
 
 driver = nu.Driver(
     db_name="neo4j",
@@ -98,7 +99,7 @@ driver = nu.Driver(
 # df.to_csv("relationship_types.csv")
 
 # ### prepend in file
-# # prepend "somatic:" to each line in file "/Users/slobentanzer/GitHub/CKG/biocypher-out/202207112047/Somatic.SequenceVariant-part000.csv"
+# # prepend "somatic:" to each line in file "/Users/slobentanzer/GitHub/CKG/biocypher-out/202207112047/Somatic.SequenceVariant-part000.csv" # noqa:E501
 # with open(
 #     "/Users/slobentanzer/GitHub/CKG/biocypher-out/202207112047/Somatic.SequenceVariant-part000 copy.csv",
 #     "r",
