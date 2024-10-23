@@ -279,9 +279,13 @@ spark_optim_conf = (
     .set("spark.memory.fraction", "0.8")
     .set("spark.memory.storageFraction", "0.3")
     .set(
-        "spark.executor.extraJavaOptions", "-XX:+UseG1GC -XX:InitiatingHeapOccupancyPercent=35 -XX:MaxGCPauseMillis=200"
+        "spark.executor.extraJavaOptions",
+        "-XX:+UseG1GC -XX:InitiatingHeapOccupancyPercent=35 -XX:MaxGCPauseMillis=200",
     )
-    .set("spark.driver.extraJavaOptions", "-XX:+UseG1GC -XX:InitiatingHeapOccupancyPercent=35 -XX:MaxGCPauseMillis=200")
+    .set(
+        "spark.driver.extraJavaOptions",
+        "-XX:+UseG1GC -XX:InitiatingHeapOccupancyPercent=35 -XX:MaxGCPauseMillis=200",
+    )
 )
 
 
@@ -329,10 +333,15 @@ class TargetDiseaseEvidenceAdapter:
             raise ValueError("DiseaseNodeField.DISEASE_ACCESSION must be provided")
 
         if not GeneOntologyNodeField.GENE_ONTOLOGY_ACCESSION in self.node_fields:
-            raise ValueError("GeneOntologyNodeField.GENE_ONTOLOGY_ACCESSION must be provided")
+            raise ValueError(
+                "GeneOntologyNodeField.GENE_ONTOLOGY_ACCESSION must be provided"
+            )
 
         if self.test_mode:
-            logger.warning("Open Targets adapter: Test mode is enabled. " "Only processing 100 rows.")
+            logger.warning(
+                "Open Targets adapter: Test mode is enabled. "
+                "Only processing 100 rows."
+            )
 
         logger.info("Creating Spark session.")
         # Set up Spark context
@@ -418,7 +427,9 @@ class TargetDiseaseEvidenceAdapter:
 
         if show_edges:
             for dataset in [field.value for field in self.datasets]:
-                self.evidence_df.where(self.evidence_df.datasourceId == dataset).show(1, 50, True)
+                self.evidence_df.where(self.evidence_df.datasourceId == dataset).show(
+                    1, 50, True
+                )
 
         if show_nodes:
             self.target_df.show(1, 50, True)
@@ -494,7 +505,9 @@ class TargetDiseaseEvidenceAdapter:
 
         for row in tqdm(df.collect()):
             # normalize id
-            _id, _type = _process_id_and_type(row[node_field_type._PRIMARY_ID.value], ontology_class)
+            _id, _type = _process_id_and_type(
+                row[node_field_type._PRIMARY_ID.value], ontology_class
+            )
 
             # switch mouse gene type
             if node_field_type == MouseTargetNodeField:
@@ -505,7 +518,6 @@ class TargetDiseaseEvidenceAdapter:
                 continue
 
             logger.debug(f"Processed {node_field_type} with id {_id} and type {_type}")
-
 
             _props = {}
             _props["version"] = "22.11"
@@ -539,12 +551,18 @@ class TargetDiseaseEvidenceAdapter:
         yield from self._yield_node_type(self.go_df, GeneOntologyNodeField)
 
         # Mouse Phenotypes
-        only_mp_df = self.mp_df.select([field.value for field in MousePhenotypeNodeField]).dropDuplicates()
+        only_mp_df = self.mp_df.select(
+            [field.value for field in MousePhenotypeNodeField]
+        ).dropDuplicates()
         yield from self._yield_node_type(only_mp_df, MousePhenotypeNodeField)
 
         # Mouse Targets
-        mouse_target_df = self.mp_df.select([field.value for field in MouseTargetNodeField]).dropDuplicates()
-        yield from self._yield_node_type(mouse_target_df, MouseTargetNodeField, "ensembl")
+        mouse_target_df = self.mp_df.select(
+            [field.value for field in MouseTargetNodeField]
+        ).dropDuplicates()
+        yield from self._yield_node_type(
+            mouse_target_df, MouseTargetNodeField, "ensembl"
+        )
 
     def get_edge_batches(self, df: DataFrame) -> DataFrame:
         """
@@ -573,7 +591,10 @@ class TargetDiseaseEvidenceAdapter:
         df = df.withColumn("partition_num", F.spark_partition_id())
         df.persist()
 
-        self.current_batches = [int(row.partition_num) for row in df.select("partition_num").distinct().collect()]
+        self.current_batches = [
+            int(row.partition_num)
+            for row in df.select("partition_num").distinct().collect()
+        ]
 
         logger.info(f"Generated {len(self.current_batches)} batches.")
 
@@ -586,13 +607,20 @@ class TargetDiseaseEvidenceAdapter:
 
         # Check if self.evidence_df has column partition_num
         if "partition_num" not in self.target_df.columns:
-            raise ValueError("df does not have column partition_num. " "Please run get_edge_batches() first.")
+            raise ValueError(
+                "df does not have column partition_num. "
+                "Please run get_edge_batches() first."
+            )
 
         logger.info("Generating Gene -> GO edges.")
 
-        logger.info(f"Processing batch {batch_number+1} of {len(self.current_batches)}.")
+        logger.info(
+            f"Processing batch {batch_number+1} of {len(self.current_batches)}."
+        )
 
-        yield from self._process_gene_go_edges(self.target_df.where(self.target_df.partition_num == batch_number))
+        yield from self._process_gene_go_edges(
+            self.target_df.where(self.target_df.partition_num == batch_number)
+        )
 
     def _process_gene_go_edges(self, batch: DataFrame):
         """
@@ -651,13 +679,20 @@ class TargetDiseaseEvidenceAdapter:
 
         # Check if self.evidence_df has column partition_num
         if "partition_num" not in df.columns:
-            raise ValueError("df does not have column partition_num. " "Please run get_edge_batches() first.")
+            raise ValueError(
+                "df does not have column partition_num. "
+                "Please run get_edge_batches() first."
+            )
 
         logger.info("Generating edges.")
 
-        logger.info(f"Processing batch {batch_number+1} of {len(self.current_batches)}.")
+        logger.info(
+            f"Processing batch {batch_number+1} of {len(self.current_batches)}."
+        )
 
-        yield from self._process_gene_disease_edges(df.where(df.partition_num == batch_number))
+        yield from self._process_gene_disease_edges(
+            df.where(df.partition_num == batch_number)
+        )
 
     def _process_gene_disease_edges(self, batch):
         """
