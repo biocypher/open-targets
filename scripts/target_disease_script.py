@@ -153,7 +153,7 @@ def main():
         node_fields=target_disease_node_fields,
         target_disease_edge_fields=target_disease_edge_fields,
         target_go_edge_fields=target_go_edge_fields,
-        test_mode=False,
+        test_mode=True,
     )
 
     target_disease_adapter.load_data(
