@@ -625,7 +625,9 @@ class TargetDiseaseEvidenceAdapter:
     def _process_gene_go_edges(self, batch: DataFrame):
         """
         Process one batch of Gene -> GO edges.
-        :param DataFrame batch: Spark DataFrame containing the edges of one batch.
+
+        Args:
+            batch: Spark DataFrame containing the edges of one batch.
         """
         logger.info(f"Batch size: {batch.count()} edges.")
 
