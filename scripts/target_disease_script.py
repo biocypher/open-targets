@@ -153,7 +153,7 @@ def main():
         node_fields=target_disease_node_fields,
         target_disease_edge_fields=target_disease_edge_fields,
         target_go_edge_fields=target_go_edge_fields,
-        test_mode=True,
+        test_mode=False,
     )
 
     target_disease_adapter.load_data(
@@ -163,7 +163,7 @@ def main():
     )
 
     # Write nodes
-    bc.write_nodes(target_disease_adapter.get_nodes())
+    # bc.write_nodes(target_disease_adapter.get_nodes())
 
     # Write OTAR edges in batches to avoid memory issues
     # Gene-Disease
