@@ -677,6 +677,10 @@ class TargetDiseaseEvidenceAdapter:
     def get_gene_disease_edges(self, df: DataFrame, batch_number: int):
         """
         Yield edges from the evidence dataframe per batch.
+
+        Args:
+            df: The evidence dataframe.
+            batch_number: The number of the current batch.
         """
 
         # Check if self.evidence_df has column partition_num
