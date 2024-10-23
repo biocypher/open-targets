@@ -633,7 +633,7 @@ class TargetDiseaseEvidenceAdapter:
 
         if self.test_mode:
             # limit batch df to 100 rows
-            batch = batch.limit(10)
+            batch = batch.limit(100)
 
         go_exploded_df = batch.withColumn("go_exploded", F.explode("go")).drop("go")
         batch = go_exploded_df.withColumn("goId", F.col("go_exploded.id"))
