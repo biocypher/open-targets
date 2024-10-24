@@ -163,7 +163,7 @@ def main():
     )
 
     # Write nodes
-    # bc.write_nodes(target_disease_adapter.get_nodes())
+    bc.write_nodes(target_disease_adapter.get_nodes())
 
     # Write OTAR edges in batches to avoid memory issues
     # Gene-Disease
