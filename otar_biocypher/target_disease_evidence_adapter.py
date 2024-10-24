@@ -302,8 +302,8 @@ class TargetDiseaseEvidenceAdapter:
             | MouseTargetNodeField
             | MouseModelNodeField
         ],
-        target_disease_edge_fields: TargetDiseaseEdgeField,
-        target_go_edge_fields: TargetGeneOntologyEdgeField,
+        target_disease_edge_fields: list[TargetDiseaseEdgeField],
+        target_go_edge_fields: list[TargetGeneOntologyEdgeField],
         test_mode: bool = False,
         spark_config: SparkConf = spark_optim_conf,
     ):
