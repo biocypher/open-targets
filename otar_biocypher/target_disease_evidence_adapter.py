@@ -6,6 +6,7 @@ from bioregistry.resolve import normalize_curie
 from biocypher._logger import logger
 from tqdm import tqdm
 import functools
+import base64
 
 
 class TargetDiseaseDataset(Enum):
@@ -438,30 +439,6 @@ class TargetDiseaseEvidenceAdapter:
             self.go_df.show(1, 50, True)
             self.mp_df.show(1, 50, True)
 
-    def _generate_edge_id(self, df: DataFrame) -> DataFrame:
-        """
-        Uses md5 hash from the evidence data to generate a unique ID for each
-        interaction (row) in the dataframe.
-
-        Args:
-
-            df: Evidence dataframe.
-
-        Returns:
-
-            Evidence dataframe with a new column called "id" containing the
-            md5 hash of the evidence data.
-        """
-
-        # create a new column with the md5 hash of the evidence data
-        df = df.withColumn(
-            "id",
-            F.md5(F.concat(*[F.col(c) for c in df.columns if type(c) == "STRING"])),
-        )
-
-        # return the dataframe
-        return df
-
     def show_datasources(self):
         """
         Utility function to get all datasources in the evidence data.
@@ -644,10 +621,10 @@ class TargetDiseaseEvidenceAdapter:
         batch = batch.withColumn("goGeneProduct", F.col("go_exploded.geneProduct"))
 
         batch = batch.withColumnRenamed("id", "ensemblId")
-        batch = self._generate_edge_id(batch)
 
+        rows = batch.collect()
         # yield edges per row of edge_df, skipping null values
-        for row in tqdm(batch.collect()):
+        for row in tqdm(rows):
             # collect properties from fields, skipping null values
             properties = {}
             for field in self.target_go_edge_fields:
@@ -665,9 +642,11 @@ class TargetDiseaseEvidenceAdapter:
 
             go_id, _ = _process_id_and_type(row.goId, "go")
             gene_id, _ = _process_id_and_type(row.ensemblId, "ensembl")
+            hash_value = hash((gene_id, go_id, frozenset(sorted(properties.items()))))
+            id = base64.b64encode(str(hash_value).encode()).decode('utf-8')
 
             yield (
-                row.id,
+                id,
                 gene_id,
                 go_id,
                 "GENE_TO_GO_TERM_ASSOCIATION",
