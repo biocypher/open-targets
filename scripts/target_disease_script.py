@@ -129,8 +129,6 @@ target_go_edge_fields = [
     TargetGeneOntologyEdgeField.EVIDENCE,
 ]
 
-all_edge_fields = target_disease_edge_fields + target_go_edge_fields
-
 
 def main():
     """
@@ -153,7 +151,7 @@ def main():
         node_fields=target_disease_node_fields,
         target_disease_edge_fields=target_disease_edge_fields,
         target_go_edge_fields=target_go_edge_fields,
-        test_mode=False,
+        test_mode=True,
     )
 
     target_disease_adapter.load_data(
@@ -166,17 +164,19 @@ def main():
     # bc.write_nodes(target_disease_adapter.get_nodes())
 
     # Write OTAR edges in batches to avoid memory issues
-    # Gene-Disease
-    # gene_disease_batches, evidence_df = target_disease_adapter.get_edge_batches(target_disease_adapter.evidence_df)
-    # evidence_df.persist(StorageLevel.MEMORY_AND_DISK)  # Persist with disk storage
-    # for batch in gene_disease_batches:
-    #     bc.write_edges(target_disease_adapter.get_gene_disease_edges(evidence_df, batch_number=batch))
+    # Gene - Disease
+    target_disease_adapter.evidence_df = target_disease_adapter.get_edge_batches(
+        target_disease_adapter.evidence_df
+    )
+    for batch in target_disease_adapter.current_batches:
+        bc.write_edges(
+            target_disease_adapter.get_gene_disease_edges(batch_number=batch)
+        )
 
     # Gene-GO: These edges are derived from the targets parquet file
     # Write Gene -> GO edges in batches to avoid memory issues
     target_disease_adapter.target_df = target_disease_adapter.get_edge_batches(
         target_disease_adapter.target_df,
-        # edge_type="gene_go",
     )
     for batch in target_disease_adapter.current_batches:
         bc.write_edges(target_disease_adapter.get_gene_go_edges(batch_number=batch))

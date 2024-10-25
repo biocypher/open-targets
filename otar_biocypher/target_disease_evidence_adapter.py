@@ -566,26 +566,20 @@ class TargetDiseaseEvidenceAdapter:
 
     def get_edge_batches(self, df: DataFrame) -> DataFrame:
         """
-        Adds interaction id and creates a column with partition number in the evidence dataframe and
-        return a list of batch numbers.
+        Adds partition number to the evidence dataframe and returns the data
+        frame.
+
+        Args:
+
+            df: The evidence dataframe.
+
+        Returns:
+
+            The evidence dataframe with a new column "partition_num" containing
+            the partition number.
         """
 
         logger.info("Generating batches.")
-
-        # select columns of interest
-        # df = df.where(
-        #     df.datasourceId.isin(
-        #         [field.value for field in self.datasets]
-        #     )
-        # ).select([field.value for field in self.edge_fields])
-
-        # This is needed here?
-        # selected_fields = [field.value for field in self.edge_fields if field.value in df.columns]
-        # df=df.select(selected_fields)
-
-        # Add interaction id to the dataframe
-        # I don't like this here
-        # df = self._generate_evidence_id(df)
 
         # add partition number to self.evidence_df as column
         df = df.withColumn("partition_num", F.spark_partition_id())
@@ -674,17 +668,16 @@ class TargetDiseaseEvidenceAdapter:
                 properties,
             )
 
-    def get_gene_disease_edges(self, df: DataFrame, batch_number: int):
+    def get_gene_disease_edges(self, batch_number: int):
         """
         Yield edges from the evidence dataframe per batch.
 
         Args:
-            df: The evidence dataframe.
             batch_number: The number of the current batch.
         """
 
         # Check if self.evidence_df has column partition_num
-        if "partition_num" not in df.columns:
+        if "partition_num" not in self.evidence_df.columns:
             raise ValueError(
                 "df does not have column partition_num. "
                 "Please run get_edge_batches() first."
@@ -697,7 +690,7 @@ class TargetDiseaseEvidenceAdapter:
         )
 
         yield from self._process_gene_disease_edges(
-            df.where(df.partition_num == batch_number)
+            self.evidence_df.where(self.evidence_df.partition_num == batch_number)
         )
 
     def _process_gene_disease_edges(self, batch):
@@ -719,7 +712,7 @@ class TargetDiseaseEvidenceAdapter:
         for row in tqdm(batch.collect()):
             # collect properties from fields, skipping null values
             properties = {}
-            for field in self.edge_fields:
+            for field in self.target_disease_edge_fields:
                 # skip disease and target ids, relationship id, and datatype id
                 # as they are encoded in the relationship
                 if field not in [
