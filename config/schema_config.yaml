@@ -5,7 +5,7 @@ human gene:
   is_a: gene
   represented_as: node
   preferred_id: ensembl
-  label_in_input: ensembl
+  input_label: ensembl
   properties:
     approvedSymbol: str
     approvedName: str
@@ -15,7 +15,7 @@ mouse gene:
   is_a: gene
   represented_as: node
   preferred_id: ensembl
-  label_in_input: mouse gene
+  input_label: mouse gene
   properties:
     targetInModel: str
     targetInModelMgiId: str
@@ -25,7 +25,7 @@ mouse gene:
 disease:
   represented_as: node
   preferred_id: [mondo, efo, hp, orphanet, otar, oba, ncit, doid, obi, ogms]
-  label_in_input: [mondo, efo, hp, orphanet, otar, oba, ncit, doid, obi, ogms]
+  input_label: [mondo, efo, hp, orphanet, otar, oba, ncit, doid, obi, ogms]
   properties:
     code: str
     name: str
@@ -35,7 +35,7 @@ disease:
 drug:
   represented_as: node
   preferred_id: chembl
-  label_in_input: chembl
+  input_label: chembl
   properties:
     name: str
     description: str
@@ -44,7 +44,7 @@ go term:
   is_a: biological entity # activity, process, or location
   represented_as: node
   preferred_id: go
-  label_in_input: go
+  input_label: go
   properties:
     name: str
 
@@ -52,7 +52,7 @@ mouse phenotype:
   is_a: phenotypic feature
   represented_as: node
   preferred_id: mp
-  label_in_input: mp
+  input_label: mp
   properties:
     modelPhenotypeLabel: str
     targetFromSourceId: str
@@ -63,25 +63,34 @@ mouse phenotype:
 # ---
 
 gene to disease association:
-  represented_as: node
-  preferred_id: [
-    affected pathway, 
-    somatic mutation, 
-    genetic association, 
-    literature,
-    animal model,
-    known drug,
-    rna expression,
-  ]
-  label_in_input: [
-    affected_pathway, 
-    somatic_mutation, 
-    genetic_association,
-    literature,
-    animal_model,
-    known_drug,
-    rna_expression,
-  ]
+  represented_as: edge
+  preferred_id:
+    [
+      affected pathway,
+      somatic mutation,
+      genetic association,
+      literature,
+      animal model,
+      known drug,
+      rna expression,
+    ]
+  input_label:
+    [
+      affected_pathway,
+      somatic_mutation,
+      genetic_association,
+      literature,
+      animal_model,
+      known_drug,
+      rna_expression,
+    ]
   properties:
     literature: str[]
     score: double
+
+gene to go term association:
+  is_a: association
+  represented_as: edge
+  source: gene
+  target: go term
+  input_label: GENE_TO_GO_TERM_ASSOCIATION

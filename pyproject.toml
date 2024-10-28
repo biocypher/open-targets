@@ -16,6 +16,7 @@ biocypher = "^0.6.0"
 
 [tool.isort]
 profile = "black"
+line_length = 80
 multi_line_output = 3
 
 [build-system]
