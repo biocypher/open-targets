@@ -1,9 +1,0 @@
-biocypher:
-  strict_mode: true
-  schema_config_path: config/extended_schema_config.yaml
-
-neo4j:
-  database_name: test
-  delimiter: '\t'
-  array_delimiter: '|'
-  skip_bad_relationships: true
