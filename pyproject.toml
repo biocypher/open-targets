@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "otar-biocypher"
-version = "0.2.1"
+version = "0.3.0"
 description = "BioCypher Open Targets Knowledge Graph adapter"
 authors = ["Sebastian Lobentanzer <sebastian.lobentanzer@gmail.com>"]
 
@@ -10,8 +10,6 @@ snakeviz = "^2.1.1"
 pyspark = "^3.5.3"
 bioregistry = "^0.11.19"
 pandas = "^2.0.1"
-# bccb = { git = "https://github.com/HUBioDataLab/CROssBAR-BioCypher-Migration.git", branch = "main" }
-# dmb = { git = "https://github.com/saezlab/DepMap-BioCypher.git", branch = "main" }
 biocypher = "^0.6.0"
 
 [tool.poetry.dev-dependencies]
