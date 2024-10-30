@@ -1,12 +1,12 @@
 from typing import Optional, Type
-from pyspark import SparkContext, SparkConf
-from pyspark.sql import SparkSession, DataFrame, functions as F
 from enum import Enum
 from bioregistry.resolve import normalize_curie
 from biocypher._logger import logger
 from tqdm import tqdm
+from pyarrow.parquet import ParquetFile
 import functools
 import base64
+import duckdb
 
 
 class TargetDiseaseDataset(Enum):
@@ -133,92 +133,6 @@ class DiseaseNodeField(Enum):
     DISEASE_INDIRECT_LOCATION_IDS = "indirectLocationIds"
     DISEASE_ONTOLOGY = "ontology"
 
-
-class DrugNodeField(Enum):
-    # mandatory fields
-    DRUG_ACCESSION = "id"
-    _PRIMARY_ID = DRUG_ACCESSION
-
-    # optional fields
-    DRUG_CANONICAL_SMILES = "canonicalSmiles"
-    DRUG_INCHI_KEY = "inchiKey"
-    DRUG_DRUG_TYPE = "drugType"
-    DRUG_BLACK_BOX_WARNING = "blackBoxWarning"
-    DRUG_NAME = "name"
-    DRUG_YEAR_OF_FIRST_APPROVAL = "yearOfFirstApproval"
-    DRUG_MAX_PHASE = "maximumClinicalTrialPhase"
-    DRUG_PARENT_ID = "parentId"
-    DRUG_HAS_BEEN_WITHDRAWN = "hasBeenWithdrawn"
-    DRUG_IS_APPROVED = "isApproved"
-    DRUG_TRADE_NAMES = "tradeNames"
-    DRUG_SYNONYMS = "synonyms"
-    DRUG_CHEMBL_IDS = "crossReferences"
-    DRUG_CHILD_CHEMBL_IDS = "childChemblIds"
-    DRUG_LINKED_DISEASES = "linkedDiseases"
-    DRUG_LINKED_TARGETS = "linkedTargets"
-    DRUG_DESCRIPTION = "description"
-
-
-class GeneOntologyNodeField(Enum):
-    """
-    Enum of all the fields in the gene ontology dataset. Values are the
-    spellings used in the Open Targets parquet files.
-    """
-
-    # mandatory fields
-    GENE_ONTOLOGY_ACCESSION = "id"
-    _PRIMARY_ID = GENE_ONTOLOGY_ACCESSION
-
-    # optional fields
-    GENE_ONTOLOGY_NAME = "name"
-
-
-class MousePhenotypeNodeField(Enum):
-    """
-    Enum of all the fields in the mouse phenotype dataset. Values are the
-    spellings used in the Open Targets parquet files.
-    """
-
-    # mandatory fields
-    MOUSE_PHENOTYPE_ACCESSION = "modelPhenotypeId"
-    _PRIMARY_ID = MOUSE_PHENOTYPE_ACCESSION
-
-    # optional fields
-    MOUSE_PHENOTYPE_LABEL = "modelPhenotypeLabel"
-
-
-class MouseTargetNodeField(Enum):
-    """
-    Enum of all the fields in the mouse phenotype dataset related to murine
-    targets of each biological model. Values are the spellings used in the Open
-    Targets parquet files.
-    """
-
-    # mandatory fields
-    MOUSE_TARGET_ENSG = "targetInModelEnsemblId"
-    _PRIMARY_ID = MOUSE_TARGET_ENSG
-
-    # alternative ids
-    MOUSE_TARGET_SYMBOL = "targetInModel"
-    MOUSE_TARGET_MGI = "targetInModelMgiId"
-
-    # human target ensembl id
-    HUMAN_TARGET_ENGS = "targetFromSourceId"
-
-
-class MouseModelNodeField(Enum):
-    """
-    Enum of all the fields in the mouse phenotype dataset related to the mouse
-    model. Values are the spellings used in the Open Targets parquet files.
-    """
-
-    # mandatory fields
-    MOUSE_PHENOTYPE_MODELS = "biologicalModels"
-    _PRIMARY_ID = MOUSE_PHENOTYPE_MODELS
-
-    MOUSE_PHENOTYPE_CLASSES = "modelPhenotypeClasses"
-
-
 class TargetDiseaseEdgeField(Enum):
     """
     Enum of all the fields in the target-disease dataset. Used to generate the
@@ -240,56 +154,6 @@ class TargetDiseaseEdgeField(Enum):
     LITERATURE = "literature"
     SCORE = "score"
 
-
-class TargetGeneOntologyEdgeField(Enum):
-    """
-    Enum of all the fields in the target-gene ontology dataset. Used to generate the
-    bulk of relationships in the graph. Values are the spellings used in the
-    Open Targets parquet files.
-    """
-
-    # mandatory fields
-    # INTERACTION_ACCESSION = "id"
-
-    TARGET_GENE_ENSG = "ensemblId"
-    _PRIMARY_SOURCE_ID = TARGET_GENE_ENSG
-
-    GENE_ONTOLOGY_ACCESSION = "goId"
-    _PRIMARY_TARGET_ID = GENE_ONTOLOGY_ACCESSION
-    SOURCE = "goSource"
-    EVIDENCE = "goEvidence"
-
-
-spark_conf = (
-    SparkConf()
-    .setAppName("otar_biocypher")
-    .setMaster("local")
-    .set("spark.driver.memory", "8g")
-    .set("spark.executor.memory", "8g")
-)
-
-spark_optim_conf = (
-    SparkConf()
-    .setAppName("otar_biocypher")
-    .setMaster("local")
-    .set("spark.executor.memory", "32g")
-    .set("spark.driver.memory", "32g")
-    .set("spark.executor.cores", "8")
-    # .set("spark.sql.shuffle.partitions", "2000")
-    # .set("spark.default.parallelism", "2000")
-    .set("spark.memory.fraction", "0.8")
-    .set("spark.memory.storageFraction", "0.3")
-    .set(
-        "spark.executor.extraJavaOptions",
-        "-XX:+UseG1GC -XX:InitiatingHeapOccupancyPercent=35 -XX:MaxGCPauseMillis=200",
-    )
-    .set(
-        "spark.driver.extraJavaOptions",
-        "-XX:+UseG1GC -XX:InitiatingHeapOccupancyPercent=35 -XX:MaxGCPauseMillis=200",
-    )
-)
-
-
 class TargetDiseaseEvidenceAdapter:
     def __init__(
         self,
@@ -297,59 +161,20 @@ class TargetDiseaseEvidenceAdapter:
         node_fields: list[
             TargetNodeField
             | DiseaseNodeField
-            | DrugNodeField
-            | GeneOntologyNodeField
-            | MousePhenotypeNodeField
-            | MouseTargetNodeField
-            | MouseModelNodeField
         ],
         target_disease_edge_fields: list[TargetDiseaseEdgeField],
-        target_go_edge_fields: list[TargetGeneOntologyEdgeField],
         test_mode: bool = False,
-        spark_config: SparkConf = spark_optim_conf,
     ):
         self.datasets = datasets
         self.node_fields = node_fields
         self.target_disease_edge_fields = target_disease_edge_fields
-        self.target_go_edge_fields = target_go_edge_fields
         self.test_mode = test_mode
-        self.current_batches = list()
-
-        if not self.datasets:
-            raise ValueError("datasets must be provided")
-
-        if not self.node_fields:
-            raise ValueError("node_fields must be provided")
-
-        if not self.target_disease_edge_fields:
-            raise ValueError("target_disease_edge_fields must be provided")
-
-        if not self.target_go_edge_fields:
-            raise ValueError("target_go_edge_fields must be provided")
-
-        if not TargetNodeField.TARGET_GENE_ENSG in self.node_fields:
-            raise ValueError("TargetNodeField.TARGET_GENE_ENSG must be provided")
-
-        if not DiseaseNodeField.DISEASE_ACCESSION in self.node_fields:
-            raise ValueError("DiseaseNodeField.DISEASE_ACCESSION must be provided")
-
-        if not GeneOntologyNodeField.GENE_ONTOLOGY_ACCESSION in self.node_fields:
-            raise ValueError(
-                "GeneOntologyNodeField.GENE_ONTOLOGY_ACCESSION must be provided"
-            )
 
         if self.test_mode:
             logger.warning(
                 "Open Targets adapter: Test mode is enabled. "
                 "Only processing 100 rows."
             )
-
-        logger.info("Creating Spark session.")
-        # Set up Spark context
-        self.sc = SparkContext(conf=spark_config)
-
-        # Create SparkSession
-        self.spark = SparkSession.builder.master("local").appName("otar_biocypher").getOrCreate()  # type: ignore
 
     def download_data(self, version: str, force: bool = False):
         """
@@ -388,72 +213,37 @@ class TargetDiseaseEvidenceAdapter:
         logger.info("Loading Open Targets data from disk.")
 
         # Read in evidence data and target / disease annotations
-        evidence_path = "data/ot_files/evidence"
-        self.evidence_df = self.spark.read.parquet(evidence_path)
+        from pathlib import Path
+        cwd = Path.cwd()
 
-        target_path = "data/ot_files/targets"
-        self.target_df = self.spark.read.parquet(target_path)
+        evidence_path = cwd / "data/ot_files/evidence/*/*.parquet"
+        self.evidence_df = evidence_df = duckdb.read_parquet(str(evidence_path))
 
-        disease_path = "data/ot_files/diseases"
-        self.disease_df = self.spark.read.parquet(disease_path)
+        target_path = cwd / "data/ot_files/targets/*.parquet"
+        self.target_df = target_df = duckdb.read_parquet(str(target_path))
 
-        drug_path = "data/ot_files/molecule"
-        self.drug_df = self.spark.read.parquet(drug_path)
-
-        go_path = "data/ot_files/go"
-        self.go_df = self.spark.read.parquet(go_path)
-
-        mp_path = "data/ot_files/mousePhenotypes"
-        self.mp_df = self.spark.read.parquet(mp_path)
+        disease_path = cwd / "data/ot_files/diseases/*.parquet"
+        self.disease_df = disease_df = duckdb.read_parquet(str(disease_path))
 
         if stats:
             # print schema
-            print(self.evidence_df.printSchema())
-            print(self.target_df.printSchema())
-            print(self.disease_df.printSchema())
-            print(self.drug_df.printSchema())
-            print(self.go_df.printSchema())
-            print(self.mp_df.printSchema())
+            print(evidence_df.columns)
+            print(target_df.columns)
+            print(disease_df.columns)
 
-            # print number of rows
-            print(f"Length of evidence data: {self.evidence_df.count()} entries")
-            print(f"Length of target data: {self.target_df.count()} entries")
-            print(f"Length of disease data: {self.disease_df.count()} entries")
-            print(f"Length of drug data: {self.drug_df.count()} entries")
-            print(f"Length of GO data: {self.go_df.count()} entries")
-            print(f"Length of Mouse Phenotype data: {self.mp_df.count()} entries")
+            dataframes = [
+                "evidence_df",
+                "target_df",
+                "disease_df"]
+            individual_queries = [f"(SELECT '{df}' AS 'Dataframe', COUNT(*) AS 'Row Count' FROM {df})" for df in dataframes]
+            duckdb.sql("UNION ALL ".join(individual_queries)).show()
 
             # print number of rows per datasource
-            self.evidence_df.groupBy("datasourceId").count().show(100)
-
-        if show_edges:
-            for dataset in [field.value for field in self.datasets]:
-                self.evidence_df.where(self.evidence_df.datasourceId == dataset).show(
-                    1, 50, True
-                )
-
-        if show_nodes:
-            self.target_df.show(1, 50, True)
-            self.disease_df.show(1, 50, True)
-            self.drug_df.show(1, 50, True)
-            self.go_df.show(1, 50, True)
-            self.mp_df.show(1, 50, True)
-
-    def show_datasources(self):
-        """
-        Utility function to get all datasources in the evidence data.
-        """
-
-        # collect all distinct datasourceId values
-        datasources = self.evidence_df.select("datasourceId").distinct().collect()
-
-        # convert to list
-        self.datasources = [x.datasourceId for x in datasources]
-        print(self.datasources)
+            duckdb.sql("SELECT datasourceId, COUNT(*) FROM evidence_df GROUP BY datasourceId").show()
 
     def _yield_node_type(
         self,
-        df: DataFrame,
+        df,
         node_field_type,
         ontology_class: Optional[str] = None,
     ):
@@ -470,25 +260,26 @@ class TargetDiseaseEvidenceAdapter:
             `label_in_input` field in the schema configuration).
         """
 
-        # Select columns of interest
-        df = df.select(
-            [field.value for field in self.node_fields if isinstance(field, node_field_type)]  # type: ignore
-        )
+        fields = [field.value for field in self.node_fields if isinstance(field, node_field_type)]
+        query_string = f"SELECT {','.join(fields)} FROM df"
 
         logger.info(f"Generating nodes of {node_field_type}.")
 
         if self.test_mode:
-            df = df.limit(100)
+            query_string = query_string + " LIMIT 100"
 
-        for row in tqdm(df.collect()):
+        query = duckdb.sql(query_string)
+        query.execute()
+        index_field_dict = {i: idx for idx, i in enumerate(query.columns)}
+        while True:
+            row = query.fetchone()
+            if row is None:
+                break
+
             # normalize id
             _id, _type = _process_id_and_type(
-                row[node_field_type._PRIMARY_ID.value], ontology_class
+                row[index_field_dict[node_field_type._PRIMARY_ID.value]], ontology_class
             )
-
-            # switch mouse gene type
-            if node_field_type == MouseTargetNodeField:
-                _type = "mouse gene"
 
             if not _id:
                 logger.debug(f"Node <{node_field_type}> has no id. Skipping.")
@@ -501,12 +292,8 @@ class TargetDiseaseEvidenceAdapter:
             _props["source"] = "Open Targets"
             _props["licence"] = "https://platform-docs.opentargets.org/licence"
 
-            for field in self.node_fields:
-                if not isinstance(field, node_field_type):
-                    continue
-
-                if row[field.value]:
-                    _props[field.value] = row[field.value]
+            for (field_name, index) in index_field_dict.items():
+                _props[field_name] = row[index]
 
             yield (_id, _type, _props)
 
@@ -521,158 +308,10 @@ class TargetDiseaseEvidenceAdapter:
         # Diseases
         yield from self._yield_node_type(self.disease_df, DiseaseNodeField)
 
-        # Drugs
-        yield from self._yield_node_type(self.drug_df, DrugNodeField, "chembl")
+    def get_edges(self):
+        yield from self._process_gene_disease_edges(self.evidence_df)
 
-        # Gene Ontology
-        yield from self._yield_node_type(self.go_df, GeneOntologyNodeField)
-
-        # Mouse Phenotypes
-        only_mp_df = self.mp_df.select(
-            [field.value for field in MousePhenotypeNodeField]
-        ).dropDuplicates()
-        yield from self._yield_node_type(only_mp_df, MousePhenotypeNodeField)
-
-        # Mouse Targets
-        mouse_target_df = self.mp_df.select(
-            [field.value for field in MouseTargetNodeField]
-        ).dropDuplicates()
-        yield from self._yield_node_type(
-            mouse_target_df, MouseTargetNodeField, "ensembl"
-        )
-
-    def get_edge_batches(self, df: DataFrame) -> DataFrame:
-        """
-        Adds partition number to the evidence dataframe and returns the data
-        frame.
-
-        Args:
-
-            df: The evidence dataframe.
-
-        Returns:
-
-            The evidence dataframe with a new column "partition_num" containing
-            the partition number.
-        """
-
-        logger.info("Generating batches.")
-
-        # add partition number to self.evidence_df as column
-        df = df.withColumn("partition_num", F.spark_partition_id())
-        df.persist()
-
-        self.current_batches = [
-            int(row.partition_num)
-            for row in df.select("partition_num").distinct().collect()
-        ]
-
-        logger.info(f"Generated {len(self.current_batches)} batches.")
-
-        return df
-
-    def get_gene_go_edges(self, batch_number: int):
-        """
-        Yield edges from the evidence dataframe per batch.
-        """
-
-        # Check if self.evidence_df has column partition_num
-        if "partition_num" not in self.target_df.columns:
-            raise ValueError(
-                "df does not have column partition_num. "
-                "Please run get_edge_batches() first."
-            )
-
-        logger.info("Generating Gene -> GO edges.")
-
-        logger.info(
-            f"Processing batch {batch_number+1} of {len(self.current_batches)}."
-        )
-
-        yield from self._process_gene_go_edges(
-            self.target_df.where(self.target_df.partition_num == batch_number)
-        )
-
-    def _process_gene_go_edges(self, batch: DataFrame):
-        """
-        Process one batch of Gene -> GO edges.
-
-        Args:
-            batch: Spark DataFrame containing the edges of one batch.
-        """
-        logger.info(f"Batch size: {batch.count()} edges.")
-
-        if self.test_mode:
-            # limit batch df to 100 rows
-            batch = batch.limit(100)
-
-        go_exploded_df = batch.withColumn("go_exploded", F.explode("go")).drop("go")
-        batch = go_exploded_df.withColumn("goId", F.col("go_exploded.id"))
-        batch = batch.withColumn("goSource", F.col("go_exploded.source"))
-        batch = batch.withColumn("goEvidence", F.col("go_exploded.evidence"))
-        batch = batch.withColumn("goEcoId", F.col("go_exploded.ecoId"))
-        batch = batch.withColumn("goAspect", F.col("go_exploded.aspect"))
-        batch = batch.withColumn("goGeneProduct", F.col("go_exploded.geneProduct"))
-
-        batch = batch.withColumnRenamed("id", "ensemblId")
-
-        rows = batch.collect()
-        # yield edges per row of edge_df, skipping null values
-        for row in tqdm(rows):
-            # collect properties from fields, skipping null values
-            properties = {}
-            for field in self.target_go_edge_fields:
-                if field == TargetGeneOntologyEdgeField.SOURCE:
-                    field_value = field.value
-                    properties["source"] = row[field_value]
-                if field == TargetGeneOntologyEdgeField.EVIDENCE:
-                    field_value = field.value
-                    properties["evidence"] = row[field_value]
-
-                properties[field.value] = row[field.value]
-
-            properties["version"] = "22.11"
-            properties["licence"] = "my_licence"
-
-            go_id, _ = _process_id_and_type(row.goId, "go")
-            gene_id, _ = _process_id_and_type(row.ensemblId, "ensembl")
-            hash_value = hash((gene_id, go_id, frozenset(sorted(properties.items()))))
-            id = base64.b64encode(str(hash_value).encode()).decode('utf-8')
-
-            yield (
-                id,
-                gene_id,
-                go_id,
-                "GENE_TO_GO_TERM_ASSOCIATION",
-                properties,
-            )
-
-    def get_gene_disease_edges(self, batch_number: int):
-        """
-        Yield edges from the evidence dataframe per batch.
-
-        Args:
-            batch_number: The number of the current batch.
-        """
-
-        # Check if self.evidence_df has column partition_num
-        if "partition_num" not in self.evidence_df.columns:
-            raise ValueError(
-                "df does not have column partition_num. "
-                "Please run get_edge_batches() first."
-            )
-
-        logger.info("Generating edges.")
-
-        logger.info(
-            f"Processing batch {batch_number+1} of {len(self.current_batches)}."
-        )
-
-        yield from self._process_gene_disease_edges(
-            self.evidence_df.where(self.evidence_df.partition_num == batch_number)
-        )
-
-    def _process_gene_disease_edges(self, batch):
+    def _process_gene_disease_edges(self, df):
         """
         Process one batch of edges.
 
@@ -681,14 +320,20 @@ class TargetDiseaseEvidenceAdapter:
             batch: Spark DataFrame containing the edges of one batch.
         """
 
-        logger.info(f"Batch size: {batch.count()} edges.")
+        query_string = "SELECT * FROM df"
 
         if self.test_mode:
             # limit batch df to 100 rows
-            batch = batch.limit(100)
+            query_string = query_string + " LIMIT 100"
 
-        # yield edges per row of edge_df, skipping null values
-        for row in tqdm(batch.collect()):
+        query = duckdb.sql(query_string)
+        query.execute()
+        index_field_dict = {i: idx for idx, i in enumerate(query.columns)}
+        while True:
+            row = query.fetchone()
+            if row is None:
+                break
+
             # collect properties from fields, skipping null values
             properties = {}
             for field in self.target_disease_edge_fields:
@@ -702,23 +347,25 @@ class TargetDiseaseEvidenceAdapter:
                     continue
 
                 if field == TargetDiseaseEdgeField.SOURCE:
-                    properties["source"] = row[field.value]
-                    properties["licence"] = _find_licence(row[field.value])
-                elif row[field.value]:
-                    properties[field.value] = row[field.value]
+                    properties["source"] = row[index_field_dict[field.value]]
+                    properties["licence"] = _find_licence(row[index_field_dict[field.value]])
+                elif row[index_field_dict[field.value]]:
+                    properties[field.value] = row[index_field_dict[field.value]]
 
             properties["version"] = "22.11"
 
-            disease_id, _ = _process_id_and_type(row.diseaseId)
-            gene_id, _ = _process_id_and_type(row.targetId, "ensembl")
+            disease_id, _ = _process_id_and_type(row[index_field_dict["diseaseId"]])
+            gene_id, _ = _process_id_and_type(row[index_field_dict["targetId"]], "ensembl")
 
-            yield (
-                row.id,
+            edge = (
+                row[index_field_dict["id"]],
                 gene_id,
                 disease_id,
-                row.datatypeId,
+                row[index_field_dict["datatypeId"]],
                 properties,
             )
+
+            yield edge
 
 
 @functools.lru_cache()
