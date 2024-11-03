@@ -8,7 +8,6 @@ from biocypher import BioCypher
 # so this workaround is not needed anymore.
 
 # import sys
-from pyspark import StorageLevel
 
 # sys.path.append("")
 
