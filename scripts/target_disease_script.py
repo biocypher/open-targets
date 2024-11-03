@@ -2,12 +2,17 @@ from biocypher import BioCypher
 
 # VSCode does not add the root directory to the path (by default?). Not sure why
 # this works sometimes and not others. This is a workaround.
-import sys
+
+# TODO: Regarding the above ^, By adding line 6 in pyptoject.toml, and installing the project using 
+# `poetry install`, the root directory is added to the path, 
+# so this workaround is not needed anymore.
+
+# import sys
 from pyspark import StorageLevel
 
-sys.path.append("")
+# sys.path.append("")
 
-from otar_biocypher.target_disease_evidence_adapter import (
+from open_targets.target_disease_evidence_adapter import (
     TargetDiseaseEvidenceAdapter,
     TargetDiseaseDataset,
     TargetNodeField,
