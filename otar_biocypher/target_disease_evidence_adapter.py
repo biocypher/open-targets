@@ -3,11 +3,12 @@ from enum import Enum
 from bioregistry.resolve import normalize_curie
 from biocypher._logger import logger
 from tqdm import tqdm
-from pyarrow.parquet import ParquetFile
 import functools
 import base64
-import duckdb
-
+import polars as pl
+import pyarrow.parquet as pq
+import pyarrow.dataset as ds
+import pandas as pd
 
 class TargetDiseaseDataset(Enum):
     """
@@ -216,34 +217,43 @@ class TargetDiseaseEvidenceAdapter:
         from pathlib import Path
         cwd = Path.cwd()
 
-        evidence_path = cwd / "data/ot_files/evidence/*/*.parquet"
-        self.evidence_df = evidence_df = duckdb.read_parquet(str(evidence_path))
+        evidence_path = cwd / "data/ot_files/evidence/"
+        self.evidence_df = evidence_df = ds.dataset(evidence_path)
 
-        target_path = cwd / "data/ot_files/targets/*.parquet"
-        self.target_df = target_df = duckdb.read_parquet(str(target_path))
+        target_path = cwd / "data/ot_files/targets/"
+        self.target_df = target_df = ds.dataset(target_path)
 
-        disease_path = cwd / "data/ot_files/diseases/*.parquet"
-        self.disease_df = disease_df = duckdb.read_parquet(str(disease_path))
+        disease_path = cwd / "data/ot_files/diseases/"
+        self.disease_df = disease_df = ds.dataset(disease_path)
 
         if stats:
             # print schema
-            print(evidence_df.columns)
-            print(target_df.columns)
-            print(disease_df.columns)
+            print(evidence_df.schema)
+            print(target_df.schema)
+            print(disease_df.schema)
 
-            dataframes = [
-                "evidence_df",
-                "target_df",
-                "disease_df"]
-            individual_queries = [f"(SELECT '{df}' AS 'Dataframe', COUNT(*) AS 'Row Count' FROM {df})" for df in dataframes]
-            duckdb.sql("UNION ALL ".join(individual_queries)).show()
+            dfs = [
+                ("evidence_df", evidence_df),
+                ("target_df", target_df),
+                ("disease_df", disease_df),
+            ]
+            row_counts = [(df_name, df.count_rows()) for df_name, df in dfs]
+            print(pd.DataFrame(row_counts, columns=["DataFrame", "Row Count"]))
 
             # print number of rows per datasource
-            duckdb.sql("SELECT datasourceId, COUNT(*) FROM evidence_df GROUP BY datasourceId").show()
+            count_dict = dict()
+            for batch in evidence_df.to_batches(columns=["datasourceId"]):
+                group_counts = batch.to_pandas().groupby("datasourceId").size().to_dict()
+                for datasource_id, count in group_counts.items():
+                    if datasource_id in count_dict:
+                        count_dict[datasource_id] += count
+                    else:
+                        count_dict[datasource_id] = count
+            print(pd.DataFrame([(datasource_id, count) for datasource_id, count in count_dict.items()], columns=["Datasource ID", "Count"]))
 
     def _yield_node_type(
         self,
-        df,
+        df: pl.LazyFrame,
         node_field_type,
         ontology_class: Optional[str] = None,
     ):
@@ -261,41 +271,41 @@ class TargetDiseaseEvidenceAdapter:
         """
 
         fields = [field.value for field in self.node_fields if isinstance(field, node_field_type)]
-        query_string = f"SELECT {','.join(fields)} FROM df"
 
         logger.info(f"Generating nodes of {node_field_type}.")
 
-        if self.test_mode:
-            query_string = query_string + " LIMIT 100"
+        read_count = 0
+        for batch in df.to_batches(columns=fields):
+            if self.test_mode:
+                batch_df = batch.take([0, 100]).to_pandas()
+            else:
+                batch_df = batch.to_pandas()
+            read_count = read_count + batch_df.size
 
-        query = duckdb.sql(query_string)
-        query.execute()
-        index_field_dict = {i: idx for idx, i in enumerate(query.columns)}
-        while True:
-            row = query.fetchone()
-            if row is None:
+            for row_index, row in batch_df.iterrows():
+                # normalize id
+                _id, _type = _process_id_and_type(
+                    row[node_field_type._PRIMARY_ID.value], ontology_class
+                )
+
+                if not _id:
+                    logger.debug(f"Node <{node_field_type}> has no id. Skipping.")
+                    continue
+
+                logger.debug(f"Processed {node_field_type} with id {_id} and type {_type}")
+
+                _props = {}
+                _props["version"] = "22.11"
+                _props["source"] = "Open Targets"
+                _props["licence"] = "https://platform-docs.opentargets.org/licence"
+
+                for field in fields:
+                    _props[field] = row[field]
+
+                yield (_id, _type, _props)
+
+            if self.test_mode and read_count >= 100:
                 break
-
-            # normalize id
-            _id, _type = _process_id_and_type(
-                row[index_field_dict[node_field_type._PRIMARY_ID.value]], ontology_class
-            )
-
-            if not _id:
-                logger.debug(f"Node <{node_field_type}> has no id. Skipping.")
-                continue
-
-            logger.debug(f"Processed {node_field_type} with id {_id} and type {_type}")
-
-            _props = {}
-            _props["version"] = "22.11"
-            _props["source"] = "Open Targets"
-            _props["licence"] = "https://platform-docs.opentargets.org/licence"
-
-            for (field_name, index) in index_field_dict.items():
-                _props[field_name] = row[index]
-
-            yield (_id, _type, _props)
 
     def get_nodes(self):
         """
@@ -319,53 +329,50 @@ class TargetDiseaseEvidenceAdapter:
 
             batch: Spark DataFrame containing the edges of one batch.
         """
+        read_count = 0
+        for batch in df.to_batches():
+            if self.test_mode and batch.num_rows > 100:
+                batch_df = batch.take([0, 100]).to_pandas()
+            else:
+                batch_df = batch.to_pandas()
+            read_count = read_count + batch_df.size
 
-        query_string = "SELECT * FROM df"
+            for row_index, row in batch_df.iterrows():
+                # collect properties from fields, skipping null values
+                properties = {}
+                for field in self.target_disease_edge_fields:
+                    # skip disease and target ids, relationship id, and datatype id
+                    # as they are encoded in the relationship
+                    if field not in [
+                        TargetDiseaseEdgeField.LITERATURE,
+                        TargetDiseaseEdgeField.SCORE,
+                        TargetDiseaseEdgeField.SOURCE,
+                    ]:
+                        continue
 
-        if self.test_mode:
-            # limit batch df to 100 rows
-            query_string = query_string + " LIMIT 100"
+                    if field == TargetDiseaseEdgeField.SOURCE:
+                        properties["source"] = row[field.value]
+                        properties["licence"] = _find_licence(row[field.value])
+                    else:
+                        properties[field.value] = row[field.value]
 
-        query = duckdb.sql(query_string)
-        query.execute()
-        index_field_dict = {i: idx for idx, i in enumerate(query.columns)}
-        while True:
-            row = query.fetchone()
-            if row is None:
+                properties["version"] = "22.11"
+
+                disease_id, _ = _process_id_and_type(row["diseaseId"])
+                gene_id, _ = _process_id_and_type(row["targetId"], "ensembl")
+
+                edge = (
+                    row["id"],
+                    gene_id,
+                    disease_id,
+                    row["datatypeId"],
+                    properties,
+                )
+
+                yield edge
+
+            if self.test_mode and read_count >= 100:
                 break
-
-            # collect properties from fields, skipping null values
-            properties = {}
-            for field in self.target_disease_edge_fields:
-                # skip disease and target ids, relationship id, and datatype id
-                # as they are encoded in the relationship
-                if field not in [
-                    TargetDiseaseEdgeField.LITERATURE,
-                    TargetDiseaseEdgeField.SCORE,
-                    TargetDiseaseEdgeField.SOURCE,
-                ]:
-                    continue
-
-                if field == TargetDiseaseEdgeField.SOURCE:
-                    properties["source"] = row[index_field_dict[field.value]]
-                    properties["licence"] = _find_licence(row[index_field_dict[field.value]])
-                elif row[index_field_dict[field.value]]:
-                    properties[field.value] = row[index_field_dict[field.value]]
-
-            properties["version"] = "22.11"
-
-            disease_id, _ = _process_id_and_type(row[index_field_dict["diseaseId"]])
-            gene_id, _ = _process_id_and_type(row[index_field_dict["targetId"]], "ensembl")
-
-            edge = (
-                row[index_field_dict["id"]],
-                gene_id,
-                disease_id,
-                row[index_field_dict["datatypeId"]],
-                properties,
-            )
-
-            yield edge
 
 
 @functools.lru_cache()
