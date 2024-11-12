@@ -3,7 +3,6 @@ name = "open_targets"
 version = "0.3.0"
 description = "BioCypher Open Targets Knowledge Graph adapter"
 authors = ["Sebastian Lobentanzer <sebastian.lobentanzer@gmail.com>"]
-packages = [{include = "open_targets/"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
