@@ -1,4 +1,4 @@
-from typing import Optional, Type
+from typing import Optional
 from pyspark import SparkContext, SparkConf
 from pyspark.sql import SparkSession, DataFrame, functions as F
 from enum import Enum
@@ -327,13 +327,13 @@ class TargetDiseaseEvidenceAdapter:
         if not self.target_go_edge_fields:
             raise ValueError("target_go_edge_fields must be provided")
 
-        if not TargetNodeField.TARGET_GENE_ENSG in self.node_fields:
+        if TargetNodeField.TARGET_GENE_ENSG not in self.node_fields:
             raise ValueError("TargetNodeField.TARGET_GENE_ENSG must be provided")
 
-        if not DiseaseNodeField.DISEASE_ACCESSION in self.node_fields:
+        if DiseaseNodeField.DISEASE_ACCESSION not in self.node_fields:
             raise ValueError("DiseaseNodeField.DISEASE_ACCESSION must be provided")
 
-        if not GeneOntologyNodeField.GENE_ONTOLOGY_ACCESSION in self.node_fields:
+        if GeneOntologyNodeField.GENE_ONTOLOGY_ACCESSION not in self.node_fields:
             raise ValueError(
                 "GeneOntologyNodeField.GENE_ONTOLOGY_ACCESSION must be provided"
             )
