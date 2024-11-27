@@ -1,3 +1,9 @@
+"""Process Open Targets data using Spark.
+
+This module contains classes and functions for processing Open Targets data
+using Spark.
+"""
+
 import base64
 import functools
 from enum import Enum
@@ -13,6 +19,7 @@ from tqdm import tqdm
 
 class TargetDiseaseDataset(Enum):
     """Enum of all the datasets used in the target-disease evidence pipeline.
+
     Values are the spellings used in the Open Targets parquet files.
     """
 
@@ -68,8 +75,9 @@ _licences = {
 
 
 class TargetNodeField(Enum):
-    """Enum of all the fields in the target dataset. Values are the spellings used
-    in the Open Targets parquet files.
+    """Enum of all the fields in the target dataset.
+
+    Values are the spellings used in the Open Targets parquet files.
     """
 
     # mandatory fields
@@ -107,8 +115,9 @@ class TargetNodeField(Enum):
 
 
 class DiseaseNodeField(Enum):
-    """Enum of all the fields in the disease dataset. Values are the spellings used
-    in the Open Targets parquet files.
+    """Enum of all the fields in the disease dataset.
+
+    Values are the spellings used in the Open Targets parquet files.
     """
 
     # mandatory fields
@@ -134,6 +143,11 @@ class DiseaseNodeField(Enum):
 
 
 class DrugNodeField(Enum):
+    """Enum of all the fields in the drug dataset.
+
+    Values are the spellings used in the Open Targets parquet files.
+    """
+
     # mandatory fields
     DRUG_ACCESSION = "id"
     _PRIMARY_ID = DRUG_ACCESSION
@@ -159,8 +173,9 @@ class DrugNodeField(Enum):
 
 
 class GeneOntologyNodeField(Enum):
-    """Enum of all the fields in the gene ontology dataset. Values are the
-    spellings used in the Open Targets parquet files.
+    """Enum of all the fields in the gene ontology dataset.
+
+    Values are the spellings used in the Open Targets parquet files.
     """
 
     # mandatory fields
@@ -172,8 +187,9 @@ class GeneOntologyNodeField(Enum):
 
 
 class MousePhenotypeNodeField(Enum):
-    """Enum of all the fields in the mouse phenotype dataset. Values are the
-    spellings used in the Open Targets parquet files.
+    """Enum of all the fields in the mouse phenotype dataset.
+
+    Values are the spellings used in the Open Targets parquet files.
     """
 
     # mandatory fields
@@ -185,9 +201,10 @@ class MousePhenotypeNodeField(Enum):
 
 
 class MouseTargetNodeField(Enum):
-    """Enum of all the fields in the mouse phenotype dataset related to murine
-    targets of each biological model. Values are the spellings used in the Open
-    Targets parquet files.
+    """Enum of all the murine target fields in the mouse phenotype dataset.
+
+    Includes fields related to murine targets of each biological model. Values
+    are the spellings used in the Open Targets parquet files.
     """
 
     # mandatory fields
@@ -203,8 +220,9 @@ class MouseTargetNodeField(Enum):
 
 
 class MouseModelNodeField(Enum):
-    """Enum of all the fields in the mouse phenotype dataset related to the mouse
-    model. Values are the spellings used in the Open Targets parquet files.
+    """Enum of all the mouse model fields in the mouse phenotype dataset.
+
+    Values are the spellings used in the Open Targets parquet files.
     """
 
     # mandatory fields
@@ -215,9 +233,10 @@ class MouseModelNodeField(Enum):
 
 
 class TargetDiseaseEdgeField(Enum):
-    """Enum of all the fields in the target-disease dataset. Used to generate the
-    bulk of relationships in the graph. Values are the spellings used in the
-    Open Targets parquet files.
+    """Enum of all the fields in the target-disease dataset.
+
+    Used to generate the bulk of relationships in the graph. Values are the
+    spellings used in the Open Targets parquet files.
     """
 
     # mandatory fields
@@ -236,9 +255,10 @@ class TargetDiseaseEdgeField(Enum):
 
 
 class TargetGeneOntologyEdgeField(Enum):
-    """Enum of all the fields in the target-gene ontology dataset. Used to generate the
-    bulk of relationships in the graph. Values are the spellings used in the
-    Open Targets parquet files.
+    """Enum of all the fields in the target-gene ontology dataset.
+
+    Used to generate the bulk of relationships in the graph. Values are the
+    spellings used in the Open Targets parquet files.
     """
 
     # mandatory fields
@@ -718,10 +738,7 @@ def _process_id_and_type(inputId: str, _type: Optional[str] = None):
         _type = inputId.split("_")[0].lower()
 
         # special case for OTAR TODO
-        if _type == "otar":
-            _id = f"otar:{inputId.split('_')[1]}"
-        else:
-            _id = normalize_curie(inputId, sep="_")
+        _id = f"otar:{inputId.split('_')[1]}" if _type == "otar" else normalize_curie(inputId, sep="_")
 
     elif ":" in inputId:
         _type = inputId.split(":")[0].lower()
