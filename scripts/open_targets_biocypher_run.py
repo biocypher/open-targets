@@ -1,16 +1,16 @@
 from biocypher import BioCypher
 
 from open_targets.open_targets_adapter import (
-    TargetDiseaseEvidenceAdapter,
-    TargetDiseaseDataset,
-    TargetNodeField,
     DiseaseNodeField,
     DrugNodeField,
-    TargetDiseaseEdgeField,
-    TargetGeneOntologyEdgeField,
     GeneOntologyNodeField,
     MousePhenotypeNodeField,
     MouseTargetNodeField,
+    TargetDiseaseDataset,
+    TargetDiseaseEdgeField,
+    TargetDiseaseEvidenceAdapter,
+    TargetGeneOntologyEdgeField,
+    TargetNodeField,
 )
 
 """
@@ -124,10 +124,7 @@ target_go_edge_fields = [
 
 
 def main():
-    """
-    Main function running the import using BioCypher and the adapter.
-    """
-
+    """Main function running the import using BioCypher and the adapter."""
     # Start BioCypher
     bc = BioCypher(
         biocypher_config_path="config/biocypher_config.yaml",
@@ -159,11 +156,11 @@ def main():
     # Write OTAR edges in batches to avoid memory issues
     # Gene - Disease
     target_disease_adapter.evidence_df = target_disease_adapter.get_edge_batches(
-        target_disease_adapter.evidence_df
+        target_disease_adapter.evidence_df,
     )
     for batch in target_disease_adapter.current_batches:
         bc.write_edges(
-            target_disease_adapter.get_gene_disease_edges(batch_number=batch)
+            target_disease_adapter.get_gene_disease_edges(batch_number=batch),
         )
 
     # Gene-GO: These edges are derived from the targets parquet file

@@ -1,17 +1,18 @@
-from typing import Optional
-from pyspark import SparkContext, SparkConf
-from pyspark.sql import SparkSession, DataFrame, functions as F
-from enum import Enum
-from bioregistry.resolve import normalize_curie
-from biocypher._logger import logger
-from tqdm import tqdm
-import functools
 import base64
+import functools
+from enum import Enum
+from typing import Optional
+
+from biocypher._logger import logger
+from bioregistry.resolve import normalize_curie
+from pyspark import SparkConf, SparkContext
+from pyspark.sql import DataFrame, SparkSession
+from pyspark.sql import functions as F
+from tqdm import tqdm
 
 
 class TargetDiseaseDataset(Enum):
-    """
-    Enum of all the datasets used in the target-disease evidence pipeline.
+    """Enum of all the datasets used in the target-disease evidence pipeline.
     Values are the spellings used in the Open Targets parquet files.
     """
 
@@ -67,8 +68,7 @@ _licences = {
 
 
 class TargetNodeField(Enum):
-    """
-    Enum of all the fields in the target dataset. Values are the spellings used
+    """Enum of all the fields in the target dataset. Values are the spellings used
     in the Open Targets parquet files.
     """
 
@@ -107,8 +107,7 @@ class TargetNodeField(Enum):
 
 
 class DiseaseNodeField(Enum):
-    """
-    Enum of all the fields in the disease dataset. Values are the spellings used
+    """Enum of all the fields in the disease dataset. Values are the spellings used
     in the Open Targets parquet files.
     """
 
@@ -160,8 +159,7 @@ class DrugNodeField(Enum):
 
 
 class GeneOntologyNodeField(Enum):
-    """
-    Enum of all the fields in the gene ontology dataset. Values are the
+    """Enum of all the fields in the gene ontology dataset. Values are the
     spellings used in the Open Targets parquet files.
     """
 
@@ -174,8 +172,7 @@ class GeneOntologyNodeField(Enum):
 
 
 class MousePhenotypeNodeField(Enum):
-    """
-    Enum of all the fields in the mouse phenotype dataset. Values are the
+    """Enum of all the fields in the mouse phenotype dataset. Values are the
     spellings used in the Open Targets parquet files.
     """
 
@@ -188,8 +185,7 @@ class MousePhenotypeNodeField(Enum):
 
 
 class MouseTargetNodeField(Enum):
-    """
-    Enum of all the fields in the mouse phenotype dataset related to murine
+    """Enum of all the fields in the mouse phenotype dataset related to murine
     targets of each biological model. Values are the spellings used in the Open
     Targets parquet files.
     """
@@ -207,8 +203,7 @@ class MouseTargetNodeField(Enum):
 
 
 class MouseModelNodeField(Enum):
-    """
-    Enum of all the fields in the mouse phenotype dataset related to the mouse
+    """Enum of all the fields in the mouse phenotype dataset related to the mouse
     model. Values are the spellings used in the Open Targets parquet files.
     """
 
@@ -220,8 +215,7 @@ class MouseModelNodeField(Enum):
 
 
 class TargetDiseaseEdgeField(Enum):
-    """
-    Enum of all the fields in the target-disease dataset. Used to generate the
+    """Enum of all the fields in the target-disease dataset. Used to generate the
     bulk of relationships in the graph. Values are the spellings used in the
     Open Targets parquet files.
     """
@@ -242,8 +236,7 @@ class TargetDiseaseEdgeField(Enum):
 
 
 class TargetGeneOntologyEdgeField(Enum):
-    """
-    Enum of all the fields in the target-gene ontology dataset. Used to generate the
+    """Enum of all the fields in the target-gene ontology dataset. Used to generate the
     bulk of relationships in the graph. Values are the spellings used in the
     Open Targets parquet files.
     """
@@ -335,13 +328,12 @@ class TargetDiseaseEvidenceAdapter:
 
         if GeneOntologyNodeField.GENE_ONTOLOGY_ACCESSION not in self.node_fields:
             raise ValueError(
-                "GeneOntologyNodeField.GENE_ONTOLOGY_ACCESSION must be provided"
+                "GeneOntologyNodeField.GENE_ONTOLOGY_ACCESSION must be provided",
             )
 
         if self.test_mode:
             logger.warning(
-                "Open Targets adapter: Test mode is enabled. "
-                "Only processing 100 rows."
+                "Open Targets adapter: Test mode is enabled. Only processing 100 rows.",
             )
 
         logger.info("Creating Spark session.")
@@ -352,18 +344,16 @@ class TargetDiseaseEvidenceAdapter:
         self.spark = SparkSession.builder.master("local").appName("otar_biocypher").getOrCreate()  # type: ignore
 
     def download_data(self, version: str, force: bool = False):
-        """
-        Download datasets from Open Targets website. Manage downloading and
+        """Download datasets from Open Targets website. Manage downloading and
         caching of files. TODO
 
         Args:
-
             version: Version of the Open Targets data to download.
 
             force: Whether to force download of files even if they already
             exist.
+
         """
-        pass
 
     def load_data(
         self,
@@ -371,11 +361,9 @@ class TargetDiseaseEvidenceAdapter:
         show_nodes: bool = False,
         show_edges: bool = False,
     ):
-        """
-        Load data from disk into Spark DataFrames.
+        """Load data from disk into Spark DataFrames.
 
         Args:
-
             stats: Whether to print out schema and counts of nodes and edges.
 
             show_nodes: Whether to print out the first row of each node
@@ -383,8 +371,8 @@ class TargetDiseaseEvidenceAdapter:
 
             show_edges: Whether to print out the first row of each edge
             dataframe.
-        """
 
+        """
         logger.info("Loading Open Targets data from disk.")
 
         # Read in evidence data and target / disease annotations
@@ -429,7 +417,9 @@ class TargetDiseaseEvidenceAdapter:
         if show_edges:
             for dataset in [field.value for field in self.datasets]:
                 self.evidence_df.where(self.evidence_df.datasourceId == dataset).show(
-                    1, 50, True
+                    1,
+                    50,
+                    True,
                 )
 
         if show_nodes:
@@ -440,10 +430,7 @@ class TargetDiseaseEvidenceAdapter:
             self.mp_df.show(1, 50, True)
 
     def show_datasources(self):
-        """
-        Utility function to get all datasources in the evidence data.
-        """
-
+        """Utility function to get all datasources in the evidence data."""
         # collect all distinct datasourceId values
         datasources = self.evidence_df.select("datasourceId").distinct().collect()
 
@@ -457,22 +444,20 @@ class TargetDiseaseEvidenceAdapter:
         node_field_type,
         ontology_class: Optional[str] = None,
     ):
-        """
-        Yield the node type from the dataframe.
+        """Yield the node type from the dataframe.
 
         Args:
-
             df: Spark DataFrame containing the node data.
 
             node_field_type: Enum containing the node fields.
 
             ontology_class: Ontological class of the node (corresponding to the
             `label_in_input` field in the schema configuration).
-        """
 
+        """
         # Select columns of interest
         df = df.select(
-            [field.value for field in self.node_fields if isinstance(field, node_field_type)]  # type: ignore
+            [field.value for field in self.node_fields if isinstance(field, node_field_type)],  # type: ignore
         )
 
         logger.info(f"Generating nodes of {node_field_type}.")
@@ -483,7 +468,8 @@ class TargetDiseaseEvidenceAdapter:
         for row in tqdm(df.collect()):
             # normalize id
             _id, _type = _process_id_and_type(
-                row[node_field_type._PRIMARY_ID.value], ontology_class
+                row[node_field_type._PRIMARY_ID.value],
+                ontology_class,
             )
 
             # switch mouse gene type
@@ -511,10 +497,7 @@ class TargetDiseaseEvidenceAdapter:
             yield (_id, _type, _props)
 
     def get_nodes(self):
-        """
-        Yield nodes from the target and disease dataframes.
-        """
-
+        """Yield nodes from the target and disease dataframes."""
         # Targets
         yield from self._yield_node_type(self.target_df, TargetNodeField, "ensembl")
 
@@ -529,76 +512,68 @@ class TargetDiseaseEvidenceAdapter:
 
         # Mouse Phenotypes
         only_mp_df = self.mp_df.select(
-            [field.value for field in MousePhenotypeNodeField]
+            [field.value for field in MousePhenotypeNodeField],
         ).dropDuplicates()
         yield from self._yield_node_type(only_mp_df, MousePhenotypeNodeField)
 
         # Mouse Targets
         mouse_target_df = self.mp_df.select(
-            [field.value for field in MouseTargetNodeField]
+            [field.value for field in MouseTargetNodeField],
         ).dropDuplicates()
         yield from self._yield_node_type(
-            mouse_target_df, MouseTargetNodeField, "ensembl"
+            mouse_target_df,
+            MouseTargetNodeField,
+            "ensembl",
         )
 
     def get_edge_batches(self, df: DataFrame) -> DataFrame:
-        """
-        Adds partition number to the evidence dataframe and returns the data
+        """Adds partition number to the evidence dataframe and returns the data
         frame.
 
         Args:
-
             df: The evidence dataframe.
 
         Returns:
-
             The evidence dataframe with a new column "partition_num" containing
             the partition number.
-        """
 
+        """
         logger.info("Generating batches.")
 
         # add partition number to self.evidence_df as column
         df = df.withColumn("partition_num", F.spark_partition_id())
         df.persist()
 
-        self.current_batches = [
-            int(row.partition_num)
-            for row in df.select("partition_num").distinct().collect()
-        ]
+        self.current_batches = [int(row.partition_num) for row in df.select("partition_num").distinct().collect()]
 
         logger.info(f"Generated {len(self.current_batches)} batches.")
 
         return df
 
     def get_gene_go_edges(self, batch_number: int):
-        """
-        Yield edges from the evidence dataframe per batch.
-        """
-
+        """Yield edges from the evidence dataframe per batch."""
         # Check if self.evidence_df has column partition_num
         if "partition_num" not in self.target_df.columns:
             raise ValueError(
-                "df does not have column partition_num. "
-                "Please run get_edge_batches() first."
+                "df does not have column partition_num. Please run get_edge_batches() first.",
             )
 
         logger.info("Generating Gene -> GO edges.")
 
         logger.info(
-            f"Processing batch {batch_number+1} of {len(self.current_batches)}."
+            f"Processing batch {batch_number+1} of {len(self.current_batches)}.",
         )
 
         yield from self._process_gene_go_edges(
-            self.target_df.where(self.target_df.partition_num == batch_number)
+            self.target_df.where(self.target_df.partition_num == batch_number),
         )
 
     def _process_gene_go_edges(self, batch: DataFrame):
-        """
-        Process one batch of Gene -> GO edges.
+        """Process one batch of Gene -> GO edges.
 
         Args:
             batch: Spark DataFrame containing the edges of one batch.
+
         """
         logger.info(f"Batch size: {batch.count()} edges.")
 
@@ -637,7 +612,7 @@ class TargetDiseaseEvidenceAdapter:
             go_id, _ = _process_id_and_type(row.goId, "go")
             gene_id, _ = _process_id_and_type(row.ensemblId, "ensembl")
             hash_value = hash((gene_id, go_id, frozenset(sorted(properties.items()))))
-            id = base64.b64encode(str(hash_value).encode()).decode('utf-8')
+            id = base64.b64encode(str(hash_value).encode()).decode("utf-8")
 
             yield (
                 id,
@@ -648,39 +623,35 @@ class TargetDiseaseEvidenceAdapter:
             )
 
     def get_gene_disease_edges(self, batch_number: int):
-        """
-        Yield edges from the evidence dataframe per batch.
+        """Yield edges from the evidence dataframe per batch.
 
         Args:
             batch_number: The number of the current batch.
-        """
 
+        """
         # Check if self.evidence_df has column partition_num
         if "partition_num" not in self.evidence_df.columns:
             raise ValueError(
-                "df does not have column partition_num. "
-                "Please run get_edge_batches() first."
+                "df does not have column partition_num. Please run get_edge_batches() first.",
             )
 
         logger.info("Generating edges.")
 
         logger.info(
-            f"Processing batch {batch_number+1} of {len(self.current_batches)}."
+            f"Processing batch {batch_number+1} of {len(self.current_batches)}.",
         )
 
         yield from self._process_gene_disease_edges(
-            self.evidence_df.where(self.evidence_df.partition_num == batch_number)
+            self.evidence_df.where(self.evidence_df.partition_num == batch_number),
         )
 
     def _process_gene_disease_edges(self, batch):
-        """
-        Process one batch of edges.
+        """Process one batch of edges.
 
         Args:
-
             batch: Spark DataFrame containing the edges of one batch.
-        """
 
+        """
         logger.info(f"Batch size: {batch.count()} edges.")
 
         if self.test_mode:
@@ -721,19 +692,17 @@ class TargetDiseaseEvidenceAdapter:
             )
 
 
-@functools.lru_cache()
+@functools.lru_cache
 def _process_id_and_type(inputId: str, _type: Optional[str] = None):
-    """
-    Process diseaseId and diseaseType fields from evidence data. Process
+    """Process diseaseId and diseaseType fields from evidence data. Process
     gene (ENSG) ids.
 
     Args:
-
         inputId: id of the node.
 
         _type: type of the node.
-    """
 
+    """
     if not inputId:
         return (None, None)
 
@@ -765,12 +734,11 @@ def _process_id_and_type(inputId: str, _type: Optional[str] = None):
 
 
 def _find_licence(source: str) -> str:
-    """
-    Find and return the licence for a source.
+    """Find and return the licence for a source.
 
     Args:
-
         source: source of the evidence. Spelling as in the Open Targets
         evidence data.
+
     """
     return _licences.get(source, "Unknown")

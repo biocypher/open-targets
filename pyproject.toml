@@ -16,6 +16,9 @@ biocypher = "^0.6.0"
 line-length = 120
 select = ["ALL"]
 
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 80
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
