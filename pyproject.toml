@@ -24,7 +24,7 @@ select = ["ALL"]
 max-doc-length = 80
 
 [tool.ruff.lint.per-file-ignores]
-"test/*" = ["S101", "ARG001", "D100", "D103", "D104"]
+"test/*" = ["S101", "D100", "D103", "D104"]
 
 [tool.pyright]
 pythonVersion = "3.10"
