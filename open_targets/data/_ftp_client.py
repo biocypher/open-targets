@@ -1,6 +1,6 @@
 """FTP client module.
 
-This module provide convenient functions for use to list and download files from
+This module provides convenient functions listing and downloading files from the
 Open Targets Platform FTP server.
 """
 
