@@ -2,7 +2,7 @@ from typing import Final, cast
 
 import pytest
 
-from open_targets.data._ftp_helper import FTPClient
+from open_targets.data._ftp_client import FTPClient
 
 HOST: Final[str] = "ftp.ebi.ac.uk"
 

@@ -1,3 +1,9 @@
+"""FTP client module.
+
+This module provide convenient functions for use to list and download files from
+Open Targets Platform FTP server.
+"""
+
 from collections.abc import Callable
 from dataclasses import dataclass
 from ftplib import FTP
