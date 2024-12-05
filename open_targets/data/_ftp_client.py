@@ -12,12 +12,13 @@ from typing import Any, Concatenate, ParamSpec, TypeVar
 
 P = ParamSpec("P")
 R = TypeVar("R")
+Self = TypeVar("Self", bound="FTPClient")
 
 
 def _ftp_client_connect(
-    func: Callable[Concatenate["FTPClient", FTP, P], R],
-) -> Callable[Concatenate["FTPClient", P], R]:
-    def wrapper(client: "FTPClient", *args: P.args, **kwargs: P.kwargs) -> R:
+    func: Callable[Concatenate[Self, FTP, P], R],
+) -> Callable[Concatenate[Self, P], R]:
+    def wrapper(client: Self, *args: P.args, **kwargs: P.kwargs) -> R:
         ftp = FTP(client.host)  # noqa: S321
         ftp.login()
         result = func(client, ftp, *args, **kwargs)
