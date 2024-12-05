@@ -2,7 +2,7 @@ from typing import Final
 
 import requests
 
-from open_targets.data.discover.model import _OpenTargetsDatasetMetadataModel
+from open_targets.data.metadata.model import _OpenTargetsDatasetMetadataModel
 
 SCHEMA_URL: Final = "https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/24.06/output/metadata/targets/part-00000-e02604eb-9c31-403c-8e02-804b58c9b41e-c000.json"
 
