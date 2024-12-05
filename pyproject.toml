@@ -11,6 +11,7 @@ pyspark = "^3.5.3"
 bioregistry = "^0.11.19"
 pandas = "^2.0.1"
 biocypher = "^0.6.0"
+pydantic = "^2.10.3"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.4"
