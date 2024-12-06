@@ -11,8 +11,8 @@ from pydantic.alias_generators import to_camel
 class ConfiguredBaseModel(BaseModel):
     """Base model with extra configuration.
 
-    Base model configured to convert names from camel case to snake case and
-    ignore unused properties.
+    Base model configured to convert names from camel case used in JSON to snake
+    case used in Python and ignore unused properties.
     """
 
     model_config = ConfigDict(
