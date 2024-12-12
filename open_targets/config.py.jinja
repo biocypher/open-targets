@@ -2,5 +2,7 @@
 {% block content %}
 from typing import Final
 
-DATA_VERSION: Final[str] = "{{ data_version }}"
+{% for key, value in config.items() %}
+{{ key }}: Final[str] = "{{ value }}"
+{% endfor %}
 {% endblock %}

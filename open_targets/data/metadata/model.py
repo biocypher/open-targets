@@ -24,6 +24,8 @@ class ConfiguredBaseModel(BaseModel):
 
 
 class OpenTargetsDatasetFieldType(str, Enum):
+    """Data type of a dataset field."""
+
     BOOLEAN = "boolean"
     INTEGER = "integer"
     LONG = "long"
@@ -83,15 +85,17 @@ class OpenTargetsDatasetFieldModel(ConfiguredBaseModel):
 
 
 class OpenTargetsDatasetSchemaModel(OpenTargetsDatasetStructTypeModel):
-    pass
+    """Data model of a dataset schema in JSON."""
 
 
 class OpenTargetsDatasetFormat(str, Enum):
+    """Data format of a dataset."""
+
     JSON = "json"
     PARQUET = "parquet"
 
 
-class OpenTargetsDatasetMetadataResourceModel(ConfiguredBaseModel):
+class OpenTargetsDatasetResourceModel(ConfiguredBaseModel):
     """Data model of a dataset metadata resource in JSON."""
 
     format: OpenTargetsDatasetFormat
@@ -102,13 +106,13 @@ class OpenTargetsDatasetMetadataModel(ConfiguredBaseModel):
     """Data model of a dataset metadata in JSON."""
 
     id: str
-    resource: OpenTargetsDatasetMetadataResourceModel
+    resource: OpenTargetsDatasetResourceModel
     dataset_schema: Annotated[OpenTargetsDatasetSchemaModel, Field(alias="serialisedSchema")]
     time_stamp: datetime
 
     @field_validator("dataset_schema", mode="before")
     @classmethod
-    def deserialise_schema(
+    def _deserialise_schema(
         cls: type["OpenTargetsDatasetMetadataModel"],
         v: str,
     ) -> OpenTargetsDatasetSchemaModel:

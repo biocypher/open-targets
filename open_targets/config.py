@@ -4,3 +4,4 @@
 from typing import Final
 
 DATA_VERSION: Final[str] = "22.11"
+HOST: Final[str] = "ftp.ebi.ac.uk"

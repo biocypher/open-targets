@@ -3,6 +3,8 @@ from typing import Any
 
 from pydantic.alias_generators import to_pascal, to_snake
 
+from open_targets.data.metadata.model import OpenTargetsDatasetFormat
+
 
 @dataclass
 class LateAttribute:
@@ -25,23 +27,15 @@ def capitalise_first(s: str) -> str:
 
 def create_schema_render_context() -> dict[str, Any]:
     # Importing here to avoid circular dependency
-    from open_targets.data.info import get_open_targets_data_info
+    from open_targets.data.metadata import fetch_open_targets_dataset_metadatas
     from open_targets.data.metadata.model import (
         OpenTargetsDatasetArrayTypeModel,
         OpenTargetsDatasetFieldModel,
-        OpenTargetsDatasetFormat,
         OpenTargetsDatasetMapTypeModel,
         OpenTargetsDatasetStructTypeModel,
     )
 
-    data_info = get_open_targets_data_info()
-
-    datasets = [
-        variant
-        for dataset in data_info.datasets
-        for variant in dataset.variants
-        if variant.format == OpenTargetsDatasetFormat.PARQUET
-    ]
+    dataset_metadatas = fetch_open_targets_dataset_metadatas(filter_format=[OpenTargetsDatasetFormat.PARQUET])
 
     def quote(s: str) -> str:
         return f'"{s}"'
@@ -54,7 +48,9 @@ def create_schema_render_context() -> dict[str, Any]:
         # Naming in Open Targets data is inconsistent, normalise them to snake
         # case first
         normalised_name_in_snake_case = to_snake(field.name)
-        class_name = (path[-1] if len(path) > 0 else dataset_class_name) + to_pascal(normalised_name_in_snake_case)
+        class_name = (path[-1] if len(path) > 0 else "F" + dataset_class_name[1:]) + to_pascal(
+            normalised_name_in_snake_case,
+        )
         attributes = [
             LateAttribute("name", "Final[str]", quote(field.name)),
             LateAttribute(
@@ -103,12 +99,12 @@ def create_schema_render_context() -> dict[str, Any]:
         )
 
     class_infos = list[ClassInfo]()
-    for dataset in datasets:
-        class_name = capitalise_first(dataset.dataset_id)
-        attributes = [LateAttribute(name="id", type="Final[str]", value=quote(dataset.dataset_id))]
+    for dataset_metadata in dataset_metadatas:
+        class_name = "D" + capitalise_first(dataset_metadata.id)
+        attributes = [LateAttribute(name="id", type="Final[str]", value=quote(dataset_metadata.id))]
         dependants = list[ClassInfo]()
 
-        for child_field in dataset.schema.fields:
+        for child_field in dataset_metadata.dataset_schema.fields:
             child_class_info = recursive_get_class_info(class_name, child_field, [])
             dependants.append(child_class_info)
             attributes.append(
