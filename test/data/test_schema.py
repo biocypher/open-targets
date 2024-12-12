@@ -1,6 +1,6 @@
-from open_targets.data.schema import Targets
+from open_targets.data.schema import DTargets
 
 
 # Test the script is correctly generated and importable
 def test_targets() -> None:
-    assert Targets.id == "targets"
+    assert DTargets.id == "targets"
