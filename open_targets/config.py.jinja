@@ -1,27 +1,6 @@
-{% macro render_value(value) %}
-{% if value is string -%}
-"{{ value }}"
-{%- elif value is mapping -%}
-{
-    {% for k, v in value.items() %}
-    "{{ k }}": {{ render_value(v) | indent(4) }},
-    {% endfor %}
-}
-{%- elif value is sequence -%}
-[
-    {% for item in value %}
-    {{ render_value(item) | indent(4) }},
-    {% endfor %}
-]
-{%- else -%}
-{{ value }}
-{%- endif %}
-{% endmacro %}
-
-{{- header_comment }}
-
+{% extends "open_targets/base.jinja" %}
+{% block content %}
 from typing import Final
-{% for k, v in open_targets_config.items() %}
 
-{{ k|kebab_to_upper_snake }}: Final = {{ render_value(v) }}
-{% endfor %}
+DATA_VERSION: Final[str] = "{{ data_version }}"
+{% endblock %}

@@ -1,4 +1,4 @@
-[tool.open_targets]
+[tool.open-targets]
 data-version = "22.11"
 
 [tool.poetry]
@@ -22,17 +22,11 @@ jinja2 = "^3.1.4"
 tomli = "^2.2.1"
 ruff = "^0.8.2"
 
-[tool.poe.poetry_hooks]
-post_install = "generate-code"
-
-[tool.poe.tasks]
-run-code-generation-script = "python code_generation.py"
-format-generated-code = "ruff format ./**/gen_*.py"
-generate-code = ["run-code-generation-script", "format-generated-code"]
-
 [tool.ruff]
 target-version = "py310"
 line-length = 120
+
+[tool.ruff.lint]
 select = ["ALL"]
 
 [tool.ruff.lint.pycodestyle]
