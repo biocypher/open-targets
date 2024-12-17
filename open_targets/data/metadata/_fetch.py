@@ -20,7 +20,9 @@ def fetch_open_targets_dataset_metadatas(
 
     Args:
         filter_dataset_ids: If provided, only fetch metadata for the
-        specified dataset IDs.
+            specified dataset IDs.
+        filter_format: If provided, only fetch metadata for datasets with
+            the specified formats.
 
     Returns:
         A list of dataset metadatas.
