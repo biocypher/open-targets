@@ -27,7 +27,7 @@ def capitalise_first(s: str) -> str:
 
 def create_schema_render_context() -> dict[str, Any]:
     # Importing here to avoid circular dependency
-    from open_targets.data.metadata import fetch_open_targets_dataset_metadatas
+    from open_targets.data.metadata import fetch_open_targets_dataset_metadata
     from open_targets.data.metadata.model import (
         OpenTargetsDatasetArrayTypeModel,
         OpenTargetsDatasetFieldModel,
@@ -35,7 +35,7 @@ def create_schema_render_context() -> dict[str, Any]:
         OpenTargetsDatasetStructTypeModel,
     )
 
-    dataset_metadatas = fetch_open_targets_dataset_metadatas(filter_format=[OpenTargetsDatasetFormat.PARQUET])
+    dataset_metadata = fetch_open_targets_dataset_metadata(filter_format=[OpenTargetsDatasetFormat.PARQUET])
 
     def quote(s: str) -> str:
         return f'"{s}"'
@@ -99,7 +99,7 @@ def create_schema_render_context() -> dict[str, Any]:
         )
 
     class_infos = list[ClassInfo]()
-    for dataset_metadata in dataset_metadatas:
+    for dataset_metadata in dataset_metadata:
         class_name = "D" + capitalise_first(dataset_metadata.id)
         attributes = [LateAttribute(name="id", type="Final[str]", value=quote(dataset_metadata.id))]
         dependants = list[ClassInfo]()

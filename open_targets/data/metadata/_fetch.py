@@ -12,11 +12,11 @@ HOST: Final = "ftp.ebi.ac.uk"
 METADATA_PATH: Final = f"/pub/databases/opentargets/platform/{config.DATA_VERSION}/output/metadata"
 
 
-def fetch_open_targets_dataset_metadatas(
+def fetch_open_targets_dataset_metadata(
     filter_dataset_ids: list[str] | None = None,
     filter_format: list[OpenTargetsDatasetFormat] | None = None,
 ) -> list[OpenTargetsDatasetMetadataModel]:
-    """Fetch dataset metadatas from the Open Targets Platform FTP server.
+    """Fetch dataset metadata from the Open Targets Platform FTP server.
 
     Args:
         filter_dataset_ids: If provided, only fetch metadata for the
@@ -25,7 +25,7 @@ def fetch_open_targets_dataset_metadatas(
             the specified formats.
 
     Returns:
-        A list of dataset metadatas.
+        A list of dataset metadata.
 
     """
     ftp_client = FTPClient(HOST)
@@ -46,7 +46,7 @@ def fetch_open_targets_dataset_metadatas(
         ftp_client.retrieve_file(file_path, bytes_io.write)
         jsons.append(bytes_io.getvalue())
 
-    metadatas = [OpenTargetsDatasetMetadataModel.model_validate_json(json) for json in jsons]
+    metadata = [OpenTargetsDatasetMetadataModel.model_validate_json(json) for json in jsons]
     if filter_format is not None:
-        metadatas = [metadata for metadata in metadatas if metadata.resource.format in filter_format]
-    return metadatas
+        metadata = [metadata_item for metadata_item in metadata if metadata_item.resource.format in filter_format]
+    return metadata
