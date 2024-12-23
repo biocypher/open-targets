@@ -1,3 +1,5 @@
+"""Entry point for code generation."""
+
 from collections.abc import Callable
 from pathlib import Path, PurePosixPath
 from typing import Any
@@ -9,6 +11,7 @@ from code_generation.schema import create_schema_render_context
 
 
 def configure_jinja() -> Environment:
+    """Configure the jinja environment."""
     return Environment(
         loader=FileSystemLoader(Path.cwd()),
         lstrip_blocks=True,
@@ -19,6 +22,19 @@ def configure_jinja() -> Environment:
 
 
 def render(env: Environment, template_local_path: PurePosixPath, context_creator: Callable[[], dict[str, Any]]) -> None:
+    """Render a template.
+
+    Args:
+        env: The pre-configured jinja environment.
+        template_local_path: The path to the template file relative to the
+            current working directory.
+        context_creator: A function that returns a dictionary of variables to be
+            used in the template.
+
+    Render a template with the same name and location, but without the .jinja
+    extension.
+
+    """
     template_name = str(template_local_path)
     template = env.get_template(template_name)
     if template.filename is None:
