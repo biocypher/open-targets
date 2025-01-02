@@ -13,12 +13,13 @@ class {{ class_info.name }}({{ class_info.inherit_from }}):
 {% endmacro %}
 
 {%- macro recursive_render_assignments(class_info) %}
-{% for dependant in class_info.dependants %}
-{{ recursive_render_assignments(dependant) }}
-{% endfor %}
 {% for attribute in class_info.late_attributes %}
 {{ class_info.name }}.{{ attribute.name }} = {{ attribute.value }}
 {% endfor %}
+
+{% for dependant in class_info.dependants %}
+{{ recursive_render_assignments(dependant) }}
+{%- endfor %}
 {% endmacro %}
 
 {%- block content %}

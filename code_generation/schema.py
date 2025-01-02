@@ -35,6 +35,18 @@ class LateAttribute:
 
 
 @dataclass
+class PrefixedClassName:
+    """A class name with a prefix."""
+
+    prefix: str
+    name: str
+
+    def __str__(self) -> str:
+        """Return the prefixed class name."""
+        return f"{self.prefix}{self.name}"
+
+
+@dataclass
 class ClassInfo:
     """Information about a class to be generated.
 
@@ -50,7 +62,7 @@ class ClassInfo:
 
     """
 
-    name: str
+    name: PrefixedClassName
     late_attributes: list[LateAttribute]
     dependants: list["ClassInfo"]
     inherit_from: str
@@ -66,10 +78,9 @@ def quote(s: str) -> str:
     return f'"{s}"'
 
 
-def recursive_get_class_info(
-    dataset_class_name: str,
+def recursive_get_field_class_info(
     field: OpenTargetsDatasetFieldModel,
-    path: list[str],
+    path: list[PrefixedClassName],
 ) -> ClassInfo:
     """Recursively convert a field or dataset into a ClassInfo.
 
@@ -80,9 +91,8 @@ def recursive_get_class_info(
     # Naming in Open Targets data is inconsistent, normalise them to snake
     # case first
     normalised_name_in_snake_case = to_snake(field.name)
-    class_name = (path[-1] if len(path) > 0 else "F" + dataset_class_name[1:]) + to_pascal(
-        normalised_name_in_snake_case,
-    )
+    dataset_class_name = path[0]
+    class_name = PrefixedClassName("Field", path[-1].name + to_pascal(normalised_name_in_snake_case))
     attributes = [
         LateAttribute("name", "Final[str]", quote(field.name)),
         LateAttribute(
@@ -95,8 +105,8 @@ def recursive_get_class_info(
             )
             else str(field.type),
         ),
-        LateAttribute("dataset", "Final[type[Dataset]]", dataset_class_name),
-        LateAttribute("path", "Final[list[type[DatasetField]]]", f"[{', '.join([*path, class_name])}]"),
+        LateAttribute("dataset", "Final[type[Dataset]]", str(dataset_class_name)),
+        LateAttribute("path", "Final[list[type[DatasetField]]]", f"[{', '.join(str(i) for i in [*path, class_name])}]"),
     ]
     dependants = list[ClassInfo]()
 
@@ -111,13 +121,13 @@ def recursive_get_class_info(
         fields = []
 
     for child_field in fields:
-        child_class_info = recursive_get_class_info(dataset_class_name, child_field, [*path, class_name])
+        child_class_info = recursive_get_field_class_info(child_field, [*path, class_name])
         dependants.append(child_class_info)
         attributes.append(
             LateAttribute(
                 name=f"f_{to_snake(child_field.name)}",
-                type=f"Final[type[{quote(child_class_info.name)}]]",
-                value=child_class_info.name,
+                type=f"Final[type[{quote(str(child_class_info.name))}]]",
+                value=str(child_class_info.name),
             ),
         )
 
@@ -142,23 +152,28 @@ def create_schema_render_context() -> dict[str, Any]:
 
     class_infos = list[ClassInfo]()
     for dataset_metadata in datasets_metadata:
-        class_name = "D" + capitalise_first(dataset_metadata.id)
+        class_name = PrefixedClassName(prefix="Dataset", name=capitalise_first(dataset_metadata.id))
         attributes = [LateAttribute(name="id", type="Final[str]", value=quote(dataset_metadata.id))]
         dependants = list[ClassInfo]()
 
         for child_field in dataset_metadata.dataset_schema.fields:
-            child_class_info = recursive_get_class_info(class_name, child_field, [])
+            child_class_info = recursive_get_field_class_info(child_field, [class_name])
             dependants.append(child_class_info)
             attributes.append(
                 LateAttribute(
                     name=f"f_{to_snake(child_field.name)}",
-                    type=f"Final[type[{quote(child_class_info.name)}]]",
-                    value=child_class_info.name,
+                    type=f"Final[type[{quote(str(child_class_info.name))}]]",
+                    value=str(child_class_info.name),
                 ),
             )
 
         class_infos.append(
-            ClassInfo(name=class_name, late_attributes=attributes, dependants=dependants, inherit_from="Dataset"),
+            ClassInfo(
+                name=class_name,
+                late_attributes=attributes,
+                dependants=dependants,
+                inherit_from="Dataset",
+            ),
         )
 
     return {
