@@ -19,10 +19,13 @@ class ConfiguredBaseModel(BaseModel):
         alias_generator=to_camel,
         populate_by_name=True,
         extra="ignore",
+        frozen=True,
     )
 
 
-class _OpenTargetsDatasetFieldType(str, Enum):
+class OpenTargetsDatasetFieldType(str, Enum):
+    """Data type of a dataset field."""
+
     BOOLEAN = "boolean"
     INTEGER = "integer"
     LONG = "long"
@@ -30,39 +33,50 @@ class _OpenTargetsDatasetFieldType(str, Enum):
     DOUBLE = "double"
     STRING = "string"
     ARRAY = "array"
+    MAP = "map"
     STRUCT = "struct"
 
 
-class _OpenTargetsDatasetArrayTypeModel(ConfiguredBaseModel):
+class OpenTargetsDatasetArrayTypeModel(ConfiguredBaseModel):
     """Data model of an array type in JSON."""
 
-    type: Literal[_OpenTargetsDatasetFieldType.ARRAY]
+    type: Literal[OpenTargetsDatasetFieldType.ARRAY]
     element_type: "FieldTypeDataType"
     contains_null: bool
 
 
-class _OpenTargetsDatasetStructTypeModel(ConfiguredBaseModel):
+class OpenTargetsDatasetMapTypeModel(ConfiguredBaseModel):
+    """Data model of a map type in JSON."""
+
+    type: Literal[OpenTargetsDatasetFieldType.MAP]
+    key_type: "FieldTypeDataType"
+    value_type: "FieldTypeDataType"
+    value_contains_null: bool
+
+
+class OpenTargetsDatasetStructTypeModel(ConfiguredBaseModel):
     """Data model of a struct type in JSON."""
 
-    type: Literal[_OpenTargetsDatasetFieldType.STRUCT]
-    fields: list["_OpenTargetsDatasetFieldModel"]
+    type: Literal[OpenTargetsDatasetFieldType.STRUCT]
+    fields: list["OpenTargetsDatasetFieldModel"]
 
 
 FieldTypeDataType: TypeAlias = (
     Literal[
-        _OpenTargetsDatasetFieldType.BOOLEAN,
-        _OpenTargetsDatasetFieldType.INTEGER,
-        _OpenTargetsDatasetFieldType.LONG,
-        _OpenTargetsDatasetFieldType.FLOAT,
-        _OpenTargetsDatasetFieldType.DOUBLE,
-        _OpenTargetsDatasetFieldType.STRING,
+        OpenTargetsDatasetFieldType.BOOLEAN,
+        OpenTargetsDatasetFieldType.INTEGER,
+        OpenTargetsDatasetFieldType.LONG,
+        OpenTargetsDatasetFieldType.FLOAT,
+        OpenTargetsDatasetFieldType.DOUBLE,
+        OpenTargetsDatasetFieldType.STRING,
     ]
-    | _OpenTargetsDatasetArrayTypeModel
-    | _OpenTargetsDatasetStructTypeModel
+    | OpenTargetsDatasetArrayTypeModel
+    | OpenTargetsDatasetMapTypeModel
+    | OpenTargetsDatasetStructTypeModel
 )
 
 
-class _OpenTargetsDatasetFieldModel(ConfiguredBaseModel):
+class OpenTargetsDatasetFieldModel(ConfiguredBaseModel):
     """Data model of a dataset field in JSON."""
 
     name: str
@@ -70,34 +84,36 @@ class _OpenTargetsDatasetFieldModel(ConfiguredBaseModel):
     nullable: bool
 
 
-class _OpenTargetsDatasetSchemaModel(_OpenTargetsDatasetStructTypeModel):
-    pass
+class OpenTargetsDatasetSchemaModel(OpenTargetsDatasetStructTypeModel):
+    """Data model of a dataset schema in JSON."""
 
 
-class _OpenTargetsDatasetFormat(str, Enum):
+class OpenTargetsDatasetFormat(str, Enum):
+    """Data format of a dataset."""
+
     JSON = "json"
     PARQUET = "parquet"
 
 
-class _OpenTargetsDatasetMetadataResourceModel(ConfiguredBaseModel):
+class OpenTargetsDatasetResourceModel(ConfiguredBaseModel):
     """Data model of a dataset metadata resource in JSON."""
 
-    format: _OpenTargetsDatasetFormat
+    format: OpenTargetsDatasetFormat
     path: str
 
 
-class _OpenTargetsDatasetMetadataModel(ConfiguredBaseModel):
+class OpenTargetsDatasetMetadataModel(ConfiguredBaseModel):
     """Data model of a dataset metadata in JSON."""
 
     id: str
-    resource: _OpenTargetsDatasetMetadataResourceModel
-    dataset_schema: Annotated[_OpenTargetsDatasetSchemaModel, Field(alias="serialisedSchema")]
+    resource: OpenTargetsDatasetResourceModel
+    dataset_schema: Annotated[OpenTargetsDatasetSchemaModel, Field(alias="serialisedSchema")]
     time_stamp: datetime
 
     @field_validator("dataset_schema", mode="before")
     @classmethod
-    def deserialise_schema(
-        cls: type["_OpenTargetsDatasetMetadataModel"],
+    def _deserialise_schema(
+        cls: type["OpenTargetsDatasetMetadataModel"],
         v: str,
-    ) -> _OpenTargetsDatasetSchemaModel:
-        return _OpenTargetsDatasetSchemaModel.model_validate_json(v)
+    ) -> OpenTargetsDatasetSchemaModel:
+        return OpenTargetsDatasetSchemaModel.model_validate_json(v)

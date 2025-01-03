@@ -1,0 +1,52 @@
+{% extends "open_targets/base.jinja" %}
+
+{%- macro recursive_render_classes(class_info) %}
+class {{ class_info.name }}({{ class_info.inherit_from }}):
+    {% for attribute in class_info.late_attributes %}
+    {{ attribute.name }}: {{ attribute.type }}
+    {% endfor %}
+
+
+{% for dependant in class_info.dependants %}
+{{- recursive_render_classes(dependant) -}}
+{% endfor %}
+{% endmacro %}
+
+{%- macro recursive_render_assignments(class_info) %}
+{% for attribute in class_info.late_attributes %}
+{{ class_info.name }}.{{ attribute.name }} = {{ attribute.value }}
+{% endfor %}
+
+{% for dependant in class_info.dependants %}
+{{ recursive_render_assignments(dependant) }}
+{%- endfor %}
+{% endmacro %}
+
+{%- block content %}
+# ruff: noqa: D101, D102, PGH003
+# type: ignore
+
+from typing import Final
+
+from open_targets.data.metadata.model import OpenTargetsDatasetFieldType
+
+
+class Dataset:
+    id: Final[str]
+
+
+class DatasetField:
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type["Dataset"]]
+    path: Final[list[type["DatasetField"]]]
+
+
+{% for class_info in class_infos %}
+{{- recursive_render_classes(class_info) -}}
+{% endfor %}
+
+{% for class_info in class_infos %}
+{{- recursive_render_assignments(class_info) -}}
+{% endfor %}
+{% endblock %}

@@ -1,3 +1,7 @@
+[tool.open-targets]
+data-version = "22.11"
+host = "ftp.ebi.ac.uk"
+
 [tool.poetry]
 name = "open_targets"
 version = "0.3.0"
@@ -15,10 +19,15 @@ pydantic = "^2.10.3"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.4"
+jinja2 = "^3.1.4"
+tomli = "^2.2.1"
+ruff = "^0.8.2"
 
 [tool.ruff]
 target-version = "py310"
 line-length = 120
+
+[tool.ruff.lint]
 select = ["ALL"]
 
 [tool.ruff.lint.pycodestyle]
