@@ -31,57 +31,61 @@ class DatasetAOTFClickhouse(Dataset):
     f_disease_data: Final[type["FieldAOTFClickhouseDiseaseData"]]
     f_target_data: Final[type["FieldAOTFClickhouseTargetData"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldAOTFClickhouseRowId(DatasetField):
+
+class FieldAOTFClickhouseRowId(DatasetAOTFClickhouse.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAOTFClickhouseDiseaseId(DatasetField):
+class FieldAOTFClickhouseDiseaseId(DatasetAOTFClickhouse.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAOTFClickhouseTargetId(DatasetField):
+class FieldAOTFClickhouseTargetId(DatasetAOTFClickhouse.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAOTFClickhouseDatasourceId(DatasetField):
+class FieldAOTFClickhouseDatasourceId(DatasetAOTFClickhouse.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAOTFClickhouseDatatypeId(DatasetField):
+class FieldAOTFClickhouseDatatypeId(DatasetAOTFClickhouse.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAOTFClickhouseRowScore(DatasetField):
+class FieldAOTFClickhouseRowScore(DatasetAOTFClickhouse.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAOTFClickhouseDiseaseData(DatasetField):
+class FieldAOTFClickhouseDiseaseData(DatasetAOTFClickhouse.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAOTFClickhouseTargetData(DatasetField):
+class FieldAOTFClickhouseTargetData(DatasetAOTFClickhouse.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -104,92 +108,96 @@ class DatasetAdverseDrugReactions(Dataset):
     f_llr: Final[type["FieldAdverseDrugReactionsLlr"]]
     f_meddra_code: Final[type["FieldAdverseDrugReactionsMeddraCode"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldAdverseDrugReactionsReactionReactionmeddrapt(DatasetField):
+
+class FieldAdverseDrugReactionsReactionReactionmeddrapt(DatasetAdverseDrugReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseDrugReactionsUniqReportIdsByReaction(DatasetField):
+class FieldAdverseDrugReactionsUniqReportIdsByReaction(DatasetAdverseDrugReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseDrugReactionsUniqReportIdsByDrug(DatasetField):
+class FieldAdverseDrugReactionsUniqReportIdsByDrug(DatasetAdverseDrugReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseDrugReactionsA(DatasetField):
+class FieldAdverseDrugReactionsA(DatasetAdverseDrugReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseDrugReactionsChemblId(DatasetField):
+class FieldAdverseDrugReactionsChemblId(DatasetAdverseDrugReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseDrugReactionsC(DatasetField):
+class FieldAdverseDrugReactionsC(DatasetAdverseDrugReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseDrugReactionsB(DatasetField):
+class FieldAdverseDrugReactionsB(DatasetAdverseDrugReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseDrugReactionsD(DatasetField):
+class FieldAdverseDrugReactionsD(DatasetAdverseDrugReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseDrugReactionsAterm(DatasetField):
+class FieldAdverseDrugReactionsAterm(DatasetAdverseDrugReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseDrugReactionsCterm(DatasetField):
+class FieldAdverseDrugReactionsCterm(DatasetAdverseDrugReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseDrugReactionsActerm(DatasetField):
+class FieldAdverseDrugReactionsActerm(DatasetAdverseDrugReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseDrugReactionsLlr(DatasetField):
+class FieldAdverseDrugReactionsLlr(DatasetAdverseDrugReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseDrugReactionsMeddraCode(DatasetField):
+class FieldAdverseDrugReactionsMeddraCode(DatasetAdverseDrugReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -212,92 +220,96 @@ class DatasetAdverseTargetReactions(Dataset):
     f_llr: Final[type["FieldAdverseTargetReactionsLlr"]]
     f_meddra_code: Final[type["FieldAdverseTargetReactionsMeddraCode"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldAdverseTargetReactionsReactionReactionmeddrapt(DatasetField):
+
+class FieldAdverseTargetReactionsReactionReactionmeddrapt(DatasetAdverseTargetReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseTargetReactionsUniqReportIdsByReaction(DatasetField):
+class FieldAdverseTargetReactionsUniqReportIdsByReaction(DatasetAdverseTargetReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseTargetReactionsUniqReportIdsByTarget(DatasetField):
+class FieldAdverseTargetReactionsUniqReportIdsByTarget(DatasetAdverseTargetReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseTargetReactionsA(DatasetField):
+class FieldAdverseTargetReactionsA(DatasetAdverseTargetReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseTargetReactionsTargetId(DatasetField):
+class FieldAdverseTargetReactionsTargetId(DatasetAdverseTargetReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseTargetReactionsC(DatasetField):
+class FieldAdverseTargetReactionsC(DatasetAdverseTargetReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseTargetReactionsB(DatasetField):
+class FieldAdverseTargetReactionsB(DatasetAdverseTargetReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseTargetReactionsD(DatasetField):
+class FieldAdverseTargetReactionsD(DatasetAdverseTargetReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseTargetReactionsAterm(DatasetField):
+class FieldAdverseTargetReactionsAterm(DatasetAdverseTargetReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseTargetReactionsCterm(DatasetField):
+class FieldAdverseTargetReactionsCterm(DatasetAdverseTargetReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseTargetReactionsActerm(DatasetField):
+class FieldAdverseTargetReactionsActerm(DatasetAdverseTargetReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseTargetReactionsLlr(DatasetField):
+class FieldAdverseTargetReactionsLlr(DatasetAdverseTargetReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAdverseTargetReactionsMeddraCode(DatasetField):
+class FieldAdverseTargetReactionsMeddraCode(DatasetAdverseTargetReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -313,43 +325,47 @@ class DatasetAssociationByDatasourceDirect(Dataset):
     f_score: Final[type["FieldAssociationByDatasourceDirectScore"]]
     f_evidence_count: Final[type["FieldAssociationByDatasourceDirectEvidenceCount"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldAssociationByDatasourceDirectDatatypeId(DatasetField):
+
+class FieldAssociationByDatasourceDirectDatatypeId(DatasetAssociationByDatasourceDirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByDatasourceDirectDatasourceId(DatasetField):
+class FieldAssociationByDatasourceDirectDatasourceId(DatasetAssociationByDatasourceDirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByDatasourceDirectDiseaseId(DatasetField):
+class FieldAssociationByDatasourceDirectDiseaseId(DatasetAssociationByDatasourceDirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByDatasourceDirectTargetId(DatasetField):
+class FieldAssociationByDatasourceDirectTargetId(DatasetAssociationByDatasourceDirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByDatasourceDirectScore(DatasetField):
+class FieldAssociationByDatasourceDirectScore(DatasetAssociationByDatasourceDirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByDatasourceDirectEvidenceCount(DatasetField):
+class FieldAssociationByDatasourceDirectEvidenceCount(DatasetAssociationByDatasourceDirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -365,43 +381,47 @@ class DatasetAssociationByDatasourceIndirect(Dataset):
     f_score: Final[type["FieldAssociationByDatasourceIndirectScore"]]
     f_evidence_count: Final[type["FieldAssociationByDatasourceIndirectEvidenceCount"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldAssociationByDatasourceIndirectDatatypeId(DatasetField):
+
+class FieldAssociationByDatasourceIndirectDatatypeId(DatasetAssociationByDatasourceIndirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByDatasourceIndirectDatasourceId(DatasetField):
+class FieldAssociationByDatasourceIndirectDatasourceId(DatasetAssociationByDatasourceIndirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByDatasourceIndirectDiseaseId(DatasetField):
+class FieldAssociationByDatasourceIndirectDiseaseId(DatasetAssociationByDatasourceIndirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByDatasourceIndirectTargetId(DatasetField):
+class FieldAssociationByDatasourceIndirectTargetId(DatasetAssociationByDatasourceIndirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByDatasourceIndirectScore(DatasetField):
+class FieldAssociationByDatasourceIndirectScore(DatasetAssociationByDatasourceIndirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByDatasourceIndirectEvidenceCount(DatasetField):
+class FieldAssociationByDatasourceIndirectEvidenceCount(DatasetAssociationByDatasourceIndirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -416,36 +436,40 @@ class DatasetAssociationByDatatypeDirect(Dataset):
     f_score: Final[type["FieldAssociationByDatatypeDirectScore"]]
     f_evidence_count: Final[type["FieldAssociationByDatatypeDirectEvidenceCount"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldAssociationByDatatypeDirectDiseaseId(DatasetField):
+
+class FieldAssociationByDatatypeDirectDiseaseId(DatasetAssociationByDatatypeDirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByDatatypeDirectTargetId(DatasetField):
+class FieldAssociationByDatatypeDirectTargetId(DatasetAssociationByDatatypeDirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByDatatypeDirectDatatypeId(DatasetField):
+class FieldAssociationByDatatypeDirectDatatypeId(DatasetAssociationByDatatypeDirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByDatatypeDirectScore(DatasetField):
+class FieldAssociationByDatatypeDirectScore(DatasetAssociationByDatatypeDirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByDatatypeDirectEvidenceCount(DatasetField):
+class FieldAssociationByDatatypeDirectEvidenceCount(DatasetAssociationByDatatypeDirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -460,36 +484,40 @@ class DatasetAssociationByDatatypeIndirect(Dataset):
     f_score: Final[type["FieldAssociationByDatatypeIndirectScore"]]
     f_evidence_count: Final[type["FieldAssociationByDatatypeIndirectEvidenceCount"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldAssociationByDatatypeIndirectDiseaseId(DatasetField):
+
+class FieldAssociationByDatatypeIndirectDiseaseId(DatasetAssociationByDatatypeIndirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByDatatypeIndirectTargetId(DatasetField):
+class FieldAssociationByDatatypeIndirectTargetId(DatasetAssociationByDatatypeIndirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByDatatypeIndirectDatatypeId(DatasetField):
+class FieldAssociationByDatatypeIndirectDatatypeId(DatasetAssociationByDatatypeIndirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByDatatypeIndirectScore(DatasetField):
+class FieldAssociationByDatatypeIndirectScore(DatasetAssociationByDatatypeIndirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByDatatypeIndirectEvidenceCount(DatasetField):
+class FieldAssociationByDatatypeIndirectEvidenceCount(DatasetAssociationByDatatypeIndirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -503,29 +531,33 @@ class DatasetAssociationByOverallDirect(Dataset):
     f_score: Final[type["FieldAssociationByOverallDirectScore"]]
     f_evidence_count: Final[type["FieldAssociationByOverallDirectEvidenceCount"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldAssociationByOverallDirectDiseaseId(DatasetField):
+
+class FieldAssociationByOverallDirectDiseaseId(DatasetAssociationByOverallDirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByOverallDirectTargetId(DatasetField):
+class FieldAssociationByOverallDirectTargetId(DatasetAssociationByOverallDirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByOverallDirectScore(DatasetField):
+class FieldAssociationByOverallDirectScore(DatasetAssociationByOverallDirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByOverallDirectEvidenceCount(DatasetField):
+class FieldAssociationByOverallDirectEvidenceCount(DatasetAssociationByOverallDirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -539,29 +571,33 @@ class DatasetAssociationByOverallIndirect(Dataset):
     f_score: Final[type["FieldAssociationByOverallIndirectScore"]]
     f_evidence_count: Final[type["FieldAssociationByOverallIndirectEvidenceCount"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldAssociationByOverallIndirectDiseaseId(DatasetField):
+
+class FieldAssociationByOverallIndirectDiseaseId(DatasetAssociationByOverallIndirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByOverallIndirectTargetId(DatasetField):
+class FieldAssociationByOverallIndirectTargetId(DatasetAssociationByOverallIndirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByOverallIndirectScore(DatasetField):
+class FieldAssociationByOverallIndirectScore(DatasetAssociationByOverallIndirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldAssociationByOverallIndirectEvidenceCount(DatasetField):
+class FieldAssociationByOverallIndirectEvidenceCount(DatasetAssociationByOverallIndirect.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -573,15 +609,19 @@ class DatasetBaselineExpression(Dataset):
     f_id: Final[type["FieldBaselineExpressionId"]]
     f_tissues: Final[type["FieldBaselineExpressionTissues"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldBaselineExpressionId(DatasetField):
+
+class FieldBaselineExpressionId(DatasetBaselineExpression.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldBaselineExpressionTissues(DatasetField):
+class FieldBaselineExpressionTissues(DatasetBaselineExpression.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -593,36 +633,40 @@ class FieldBaselineExpressionTissues(DatasetField):
     f_rna: Final[type["FieldBaselineExpressionTissuesRna"]]
     f_protein: Final[type["FieldBaselineExpressionTissuesProtein"]]
 
+    class Field(DatasetBaselineExpression.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldBaselineExpressionTissuesEfoCode(DatasetField):
+
+class FieldBaselineExpressionTissuesEfoCode(FieldBaselineExpressionTissues.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldBaselineExpressionTissuesLabel(DatasetField):
+class FieldBaselineExpressionTissuesLabel(FieldBaselineExpressionTissues.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldBaselineExpressionTissuesOrgans(DatasetField):
+class FieldBaselineExpressionTissuesOrgans(FieldBaselineExpressionTissues.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldBaselineExpressionTissuesAnatomicalSystems(DatasetField):
+class FieldBaselineExpressionTissuesAnatomicalSystems(FieldBaselineExpressionTissues.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldBaselineExpressionTissuesRna(DatasetField):
+class FieldBaselineExpressionTissuesRna(FieldBaselineExpressionTissues.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -632,36 +676,40 @@ class FieldBaselineExpressionTissuesRna(DatasetField):
     f_level: Final[type["FieldBaselineExpressionTissuesRnaLevel"]]
     f_unit: Final[type["FieldBaselineExpressionTissuesRnaUnit"]]
 
+    class Field(FieldBaselineExpressionTissues.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldBaselineExpressionTissuesRnaValue(DatasetField):
+
+class FieldBaselineExpressionTissuesRnaValue(FieldBaselineExpressionTissuesRna.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldBaselineExpressionTissuesRnaZscore(DatasetField):
+class FieldBaselineExpressionTissuesRnaZscore(FieldBaselineExpressionTissuesRna.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldBaselineExpressionTissuesRnaLevel(DatasetField):
+class FieldBaselineExpressionTissuesRnaLevel(FieldBaselineExpressionTissuesRna.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldBaselineExpressionTissuesRnaUnit(DatasetField):
+class FieldBaselineExpressionTissuesRnaUnit(FieldBaselineExpressionTissuesRna.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldBaselineExpressionTissuesProtein(DatasetField):
+class FieldBaselineExpressionTissuesProtein(FieldBaselineExpressionTissues.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -670,22 +718,26 @@ class FieldBaselineExpressionTissuesProtein(DatasetField):
     f_level: Final[type["FieldBaselineExpressionTissuesProteinLevel"]]
     f_cell_type: Final[type["FieldBaselineExpressionTissuesProteinCellType"]]
 
+    class Field(FieldBaselineExpressionTissues.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldBaselineExpressionTissuesProteinReliability(DatasetField):
+
+class FieldBaselineExpressionTissuesProteinReliability(FieldBaselineExpressionTissuesProtein.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldBaselineExpressionTissuesProteinLevel(DatasetField):
+class FieldBaselineExpressionTissuesProteinLevel(FieldBaselineExpressionTissuesProtein.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldBaselineExpressionTissuesProteinCellType(DatasetField):
+class FieldBaselineExpressionTissuesProteinCellType(FieldBaselineExpressionTissuesProtein.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -694,22 +746,26 @@ class FieldBaselineExpressionTissuesProteinCellType(DatasetField):
     f_reliability: Final[type["FieldBaselineExpressionTissuesProteinCellTypeReliability"]]
     f_level: Final[type["FieldBaselineExpressionTissuesProteinCellTypeLevel"]]
 
+    class Field(FieldBaselineExpressionTissuesProtein.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldBaselineExpressionTissuesProteinCellTypeName(DatasetField):
+
+class FieldBaselineExpressionTissuesProteinCellTypeName(FieldBaselineExpressionTissuesProteinCellType.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldBaselineExpressionTissuesProteinCellTypeReliability(DatasetField):
+class FieldBaselineExpressionTissuesProteinCellTypeReliability(FieldBaselineExpressionTissuesProteinCellType.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldBaselineExpressionTissuesProteinCellTypeLevel(DatasetField):
+class FieldBaselineExpressionTissuesProteinCellTypeLevel(FieldBaselineExpressionTissuesProteinCellType.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -722,22 +778,26 @@ class DatasetDiseaseToPhenotype(Dataset):
     f_phenotype: Final[type["FieldDiseaseToPhenotypePhenotype"]]
     f_evidence: Final[type["FieldDiseaseToPhenotypeEvidence"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldDiseaseToPhenotypeDisease(DatasetField):
+
+class FieldDiseaseToPhenotypeDisease(DatasetDiseaseToPhenotype.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseaseToPhenotypePhenotype(DatasetField):
+class FieldDiseaseToPhenotypePhenotype(DatasetDiseaseToPhenotype.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseaseToPhenotypeEvidence(DatasetField):
+class FieldDiseaseToPhenotypeEvidence(DatasetDiseaseToPhenotype.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -757,99 +817,103 @@ class FieldDiseaseToPhenotypeEvidence(DatasetField):
     f_sex: Final[type["FieldDiseaseToPhenotypeEvidenceSex"]]
     f_resource: Final[type["FieldDiseaseToPhenotypeEvidenceResource"]]
 
+    class Field(DatasetDiseaseToPhenotype.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldDiseaseToPhenotypeEvidenceAspect(DatasetField):
+
+class FieldDiseaseToPhenotypeEvidenceAspect(FieldDiseaseToPhenotypeEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseaseToPhenotypeEvidenceBioCuration(DatasetField):
+class FieldDiseaseToPhenotypeEvidenceBioCuration(FieldDiseaseToPhenotypeEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseaseToPhenotypeEvidenceDiseaseFromSourceId(DatasetField):
+class FieldDiseaseToPhenotypeEvidenceDiseaseFromSourceId(FieldDiseaseToPhenotypeEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseaseToPhenotypeEvidenceDiseaseFromSource(DatasetField):
+class FieldDiseaseToPhenotypeEvidenceDiseaseFromSource(FieldDiseaseToPhenotypeEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseaseToPhenotypeEvidenceDiseaseName(DatasetField):
+class FieldDiseaseToPhenotypeEvidenceDiseaseName(FieldDiseaseToPhenotypeEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseaseToPhenotypeEvidenceEvidenceType(DatasetField):
+class FieldDiseaseToPhenotypeEvidenceEvidenceType(FieldDiseaseToPhenotypeEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseaseToPhenotypeEvidenceFrequency(DatasetField):
+class FieldDiseaseToPhenotypeEvidenceFrequency(FieldDiseaseToPhenotypeEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseaseToPhenotypeEvidenceModifiers(DatasetField):
+class FieldDiseaseToPhenotypeEvidenceModifiers(FieldDiseaseToPhenotypeEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseaseToPhenotypeEvidenceOnset(DatasetField):
+class FieldDiseaseToPhenotypeEvidenceOnset(FieldDiseaseToPhenotypeEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseaseToPhenotypeEvidenceQualifier(DatasetField):
+class FieldDiseaseToPhenotypeEvidenceQualifier(FieldDiseaseToPhenotypeEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseaseToPhenotypeEvidenceQualifierNot(DatasetField):
+class FieldDiseaseToPhenotypeEvidenceQualifierNot(FieldDiseaseToPhenotypeEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseaseToPhenotypeEvidenceReferences(DatasetField):
+class FieldDiseaseToPhenotypeEvidenceReferences(FieldDiseaseToPhenotypeEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseaseToPhenotypeEvidenceSex(DatasetField):
+class FieldDiseaseToPhenotypeEvidenceSex(FieldDiseaseToPhenotypeEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseaseToPhenotypeEvidenceResource(DatasetField):
+class FieldDiseaseToPhenotypeEvidenceResource(FieldDiseaseToPhenotypeEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -875,71 +939,75 @@ class DatasetDiseases(Dataset):
     f_indirect_location_ids: Final[type["FieldDiseasesIndirectLocationIds"]]
     f_ontology: Final[type["FieldDiseasesOntology"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldDiseasesId(DatasetField):
+
+class FieldDiseasesId(DatasetDiseases.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesCode(DatasetField):
+class FieldDiseasesCode(DatasetDiseases.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesDbXRefs(DatasetField):
+class FieldDiseasesDbXRefs(DatasetDiseases.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesDescription(DatasetField):
+class FieldDiseasesDescription(DatasetDiseases.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesName(DatasetField):
+class FieldDiseasesName(DatasetDiseases.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesDirectLocationIds(DatasetField):
+class FieldDiseasesDirectLocationIds(DatasetDiseases.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesObsoleteTerms(DatasetField):
+class FieldDiseasesObsoleteTerms(DatasetDiseases.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesParents(DatasetField):
+class FieldDiseasesParents(DatasetDiseases.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesSko(DatasetField):
+class FieldDiseasesSko(DatasetDiseases.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesSynonyms(DatasetField):
+class FieldDiseasesSynonyms(DatasetDiseases.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -949,71 +1017,75 @@ class FieldDiseasesSynonyms(DatasetField):
     f_has_narrow_synonym: Final[type["FieldDiseasesSynonymsHasNarrowSynonym"]]
     f_has_related_synonym: Final[type["FieldDiseasesSynonymsHasRelatedSynonym"]]
 
+    class Field(DatasetDiseases.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldDiseasesSynonymsHasBroadSynonym(DatasetField):
+
+class FieldDiseasesSynonymsHasBroadSynonym(FieldDiseasesSynonyms.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesSynonymsHasExactSynonym(DatasetField):
+class FieldDiseasesSynonymsHasExactSynonym(FieldDiseasesSynonyms.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesSynonymsHasNarrowSynonym(DatasetField):
+class FieldDiseasesSynonymsHasNarrowSynonym(FieldDiseasesSynonyms.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesSynonymsHasRelatedSynonym(DatasetField):
+class FieldDiseasesSynonymsHasRelatedSynonym(FieldDiseasesSynonyms.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesAncestors(DatasetField):
+class FieldDiseasesAncestors(DatasetDiseases.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesDescendants(DatasetField):
+class FieldDiseasesDescendants(DatasetDiseases.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesChildren(DatasetField):
+class FieldDiseasesChildren(DatasetDiseases.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesTherapeuticAreas(DatasetField):
+class FieldDiseasesTherapeuticAreas(DatasetDiseases.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesIndirectLocationIds(DatasetField):
+class FieldDiseasesIndirectLocationIds(DatasetDiseases.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesOntology(DatasetField):
+class FieldDiseasesOntology(DatasetDiseases.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -1022,22 +1094,26 @@ class FieldDiseasesOntology(DatasetField):
     f_leaf: Final[type["FieldDiseasesOntologyLeaf"]]
     f_sources: Final[type["FieldDiseasesOntologySources"]]
 
+    class Field(DatasetDiseases.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldDiseasesOntologyIsTherapeuticArea(DatasetField):
+
+class FieldDiseasesOntologyIsTherapeuticArea(FieldDiseasesOntology.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesOntologyLeaf(DatasetField):
+class FieldDiseasesOntologyLeaf(FieldDiseasesOntology.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesOntologySources(DatasetField):
+class FieldDiseasesOntologySources(FieldDiseasesOntology.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -1045,15 +1121,19 @@ class FieldDiseasesOntologySources(DatasetField):
     f_url: Final[type["FieldDiseasesOntologySourcesUrl"]]
     f_name: Final[type["FieldDiseasesOntologySourcesName"]]
 
+    class Field(FieldDiseasesOntology.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldDiseasesOntologySourcesUrl(DatasetField):
+
+class FieldDiseasesOntologySourcesUrl(FieldDiseasesOntologySources.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDiseasesOntologySourcesName(DatasetField):
+class FieldDiseasesOntologySourcesName(FieldDiseasesOntologySources.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -1072,43 +1152,47 @@ class DatasetDrugWarnings(Dataset):
     f_year: Final[type["FieldDrugWarningsYear"]]
     f_meddra_soc_code: Final[type["FieldDrugWarningsMeddraSocCode"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldDrugWarningsToxicityClass(DatasetField):
+
+class FieldDrugWarningsToxicityClass(DatasetDrugWarnings.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDrugWarningsChemblIds(DatasetField):
+class FieldDrugWarningsChemblIds(DatasetDrugWarnings.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDrugWarningsCountry(DatasetField):
+class FieldDrugWarningsCountry(DatasetDrugWarnings.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDrugWarningsDescription(DatasetField):
+class FieldDrugWarningsDescription(DatasetDrugWarnings.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDrugWarningsId(DatasetField):
+class FieldDrugWarningsId(DatasetDrugWarnings.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDrugWarningsReferences(DatasetField):
+class FieldDrugWarningsReferences(DatasetDrugWarnings.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -1117,43 +1201,47 @@ class FieldDrugWarningsReferences(DatasetField):
     f_ref_type: Final[type["FieldDrugWarningsReferencesRefType"]]
     f_ref_url: Final[type["FieldDrugWarningsReferencesRefUrl"]]
 
+    class Field(DatasetDrugWarnings.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldDrugWarningsReferencesRefId(DatasetField):
+
+class FieldDrugWarningsReferencesRefId(FieldDrugWarningsReferences.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDrugWarningsReferencesRefType(DatasetField):
+class FieldDrugWarningsReferencesRefType(FieldDrugWarningsReferences.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDrugWarningsReferencesRefUrl(DatasetField):
+class FieldDrugWarningsReferencesRefUrl(FieldDrugWarningsReferences.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDrugWarningsWarningType(DatasetField):
+class FieldDrugWarningsWarningType(DatasetDrugWarnings.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDrugWarningsYear(DatasetField):
+class FieldDrugWarningsYear(DatasetDrugWarnings.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldDrugWarningsMeddraSocCode(DatasetField):
+class FieldDrugWarningsMeddraSocCode(DatasetDrugWarnings.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -1168,36 +1256,40 @@ class DatasetEbisearchAssociations(Dataset):
     f_name: Final[type["FieldEbisearchAssociationsName"]]
     f_score: Final[type["FieldEbisearchAssociationsScore"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldEbisearchAssociationsTargetId(DatasetField):
+
+class FieldEbisearchAssociationsTargetId(DatasetEbisearchAssociations.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEbisearchAssociationsDiseaseId(DatasetField):
+class FieldEbisearchAssociationsDiseaseId(DatasetEbisearchAssociations.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEbisearchAssociationsApprovedSymbol(DatasetField):
+class FieldEbisearchAssociationsApprovedSymbol(DatasetEbisearchAssociations.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEbisearchAssociationsName(DatasetField):
+class FieldEbisearchAssociationsName(DatasetEbisearchAssociations.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEbisearchAssociationsScore(DatasetField):
+class FieldEbisearchAssociationsScore(DatasetEbisearchAssociations.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -1212,36 +1304,40 @@ class DatasetEbisearchEvidence(Dataset):
     f_name: Final[type["FieldEbisearchEvidenceName"]]
     f_score: Final[type["FieldEbisearchEvidenceScore"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldEbisearchEvidenceTargetId(DatasetField):
+
+class FieldEbisearchEvidenceTargetId(DatasetEbisearchEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEbisearchEvidenceDiseaseId(DatasetField):
+class FieldEbisearchEvidenceDiseaseId(DatasetEbisearchEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEbisearchEvidenceApprovedSymbol(DatasetField):
+class FieldEbisearchEvidenceApprovedSymbol(DatasetEbisearchEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEbisearchEvidenceName(DatasetField):
+class FieldEbisearchEvidenceName(DatasetEbisearchEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEbisearchEvidenceScore(DatasetField):
+class FieldEbisearchEvidenceScore(DatasetEbisearchEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -1331,99 +1427,103 @@ class DatasetEvidence(Dataset):
     f_id: Final[type["FieldEvidenceId"]]
     f_score: Final[type["FieldEvidenceScore"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldEvidenceDatasourceId(DatasetField):
+
+class FieldEvidenceDatasourceId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceTargetId(DatasetField):
+class FieldEvidenceTargetId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceAlleleOrigins(DatasetField):
+class FieldEvidenceAlleleOrigins(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceAllelicRequirements(DatasetField):
+class FieldEvidenceAllelicRequirements(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceAncestry(DatasetField):
+class FieldEvidenceAncestry(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceAncestryId(DatasetField):
+class FieldEvidenceAncestryId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceBeta(DatasetField):
+class FieldEvidenceBeta(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceBetaConfidenceIntervalLower(DatasetField):
+class FieldEvidenceBetaConfidenceIntervalLower(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceBetaConfidenceIntervalUpper(DatasetField):
+class FieldEvidenceBetaConfidenceIntervalUpper(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceBiologicalModelAllelicComposition(DatasetField):
+class FieldEvidenceBiologicalModelAllelicComposition(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceBiologicalModelGeneticBackground(DatasetField):
+class FieldEvidenceBiologicalModelGeneticBackground(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceBiologicalModelId(DatasetField):
+class FieldEvidenceBiologicalModelId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceBiomarkerName(DatasetField):
+class FieldEvidenceBiomarkerName(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceBiomarkers(DatasetField):
+class FieldEvidenceBiomarkers(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -1431,8 +1531,12 @@ class FieldEvidenceBiomarkers(DatasetField):
     f_gene_expression: Final[type["FieldEvidenceBiomarkersGeneExpression"]]
     f_variant: Final[type["FieldEvidenceBiomarkersVariant"]]
 
+    class Field(DatasetEvidence.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldEvidenceBiomarkersGeneExpression(DatasetField):
+
+class FieldEvidenceBiomarkersGeneExpression(FieldEvidenceBiomarkers.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -1440,22 +1544,26 @@ class FieldEvidenceBiomarkersGeneExpression(DatasetField):
     f_id: Final[type["FieldEvidenceBiomarkersGeneExpressionId"]]
     f_name: Final[type["FieldEvidenceBiomarkersGeneExpressionName"]]
 
+    class Field(FieldEvidenceBiomarkers.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldEvidenceBiomarkersGeneExpressionId(DatasetField):
+
+class FieldEvidenceBiomarkersGeneExpressionId(FieldEvidenceBiomarkersGeneExpression.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceBiomarkersGeneExpressionName(DatasetField):
+class FieldEvidenceBiomarkersGeneExpressionName(FieldEvidenceBiomarkersGeneExpression.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceBiomarkersVariant(DatasetField):
+class FieldEvidenceBiomarkersVariant(FieldEvidenceBiomarkers.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -1464,106 +1572,110 @@ class FieldEvidenceBiomarkersVariant(DatasetField):
     f_id: Final[type["FieldEvidenceBiomarkersVariantId"]]
     f_name: Final[type["FieldEvidenceBiomarkersVariantName"]]
 
+    class Field(FieldEvidenceBiomarkers.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldEvidenceBiomarkersVariantFunctionalConsequenceId(DatasetField):
+
+class FieldEvidenceBiomarkersVariantFunctionalConsequenceId(FieldEvidenceBiomarkersVariant.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceBiomarkersVariantId(DatasetField):
+class FieldEvidenceBiomarkersVariantId(FieldEvidenceBiomarkersVariant.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceBiomarkersVariantName(DatasetField):
+class FieldEvidenceBiomarkersVariantName(FieldEvidenceBiomarkersVariant.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceBiosamplesFromSource(DatasetField):
+class FieldEvidenceBiosamplesFromSource(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceClinicalPhase(DatasetField):
+class FieldEvidenceClinicalPhase(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceClinicalSignificances(DatasetField):
+class FieldEvidenceClinicalSignificances(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceClinicalStatus(DatasetField):
+class FieldEvidenceClinicalStatus(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceCohortDescription(DatasetField):
+class FieldEvidenceCohortDescription(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceCohortId(DatasetField):
+class FieldEvidenceCohortId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceCohortPhenotypes(DatasetField):
+class FieldEvidenceCohortPhenotypes(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceCohortShortName(DatasetField):
+class FieldEvidenceCohortShortName(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceConfidence(DatasetField):
+class FieldEvidenceConfidence(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceContrast(DatasetField):
+class FieldEvidenceContrast(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceDatatypeId(DatasetField):
+class FieldEvidenceDatatypeId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceDiseaseCellLines(DatasetField):
+class FieldEvidenceDiseaseCellLines(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -1573,57 +1685,61 @@ class FieldEvidenceDiseaseCellLines(DatasetField):
     f_tissue: Final[type["FieldEvidenceDiseaseCellLinesTissue"]]
     f_tissue_id: Final[type["FieldEvidenceDiseaseCellLinesTissueId"]]
 
+    class Field(DatasetEvidence.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldEvidenceDiseaseCellLinesId(DatasetField):
+
+class FieldEvidenceDiseaseCellLinesId(FieldEvidenceDiseaseCellLines.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceDiseaseCellLinesName(DatasetField):
+class FieldEvidenceDiseaseCellLinesName(FieldEvidenceDiseaseCellLines.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceDiseaseCellLinesTissue(DatasetField):
+class FieldEvidenceDiseaseCellLinesTissue(FieldEvidenceDiseaseCellLines.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceDiseaseCellLinesTissueId(DatasetField):
+class FieldEvidenceDiseaseCellLinesTissueId(FieldEvidenceDiseaseCellLines.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceDiseaseFromSource(DatasetField):
+class FieldEvidenceDiseaseFromSource(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceDiseaseFromSourceId(DatasetField):
+class FieldEvidenceDiseaseFromSourceId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceDiseaseFromSourceMappedId(DatasetField):
+class FieldEvidenceDiseaseFromSourceMappedId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceDiseaseModelAssociatedHumanPhenotypes(DatasetField):
+class FieldEvidenceDiseaseModelAssociatedHumanPhenotypes(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -1631,22 +1747,26 @@ class FieldEvidenceDiseaseModelAssociatedHumanPhenotypes(DatasetField):
     f_id: Final[type["FieldEvidenceDiseaseModelAssociatedHumanPhenotypesId"]]
     f_label: Final[type["FieldEvidenceDiseaseModelAssociatedHumanPhenotypesLabel"]]
 
+    class Field(DatasetEvidence.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldEvidenceDiseaseModelAssociatedHumanPhenotypesId(DatasetField):
+
+class FieldEvidenceDiseaseModelAssociatedHumanPhenotypesId(FieldEvidenceDiseaseModelAssociatedHumanPhenotypes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceDiseaseModelAssociatedHumanPhenotypesLabel(DatasetField):
+class FieldEvidenceDiseaseModelAssociatedHumanPhenotypesLabel(FieldEvidenceDiseaseModelAssociatedHumanPhenotypes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceDiseaseModelAssociatedModelPhenotypes(DatasetField):
+class FieldEvidenceDiseaseModelAssociatedModelPhenotypes(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -1654,64 +1774,68 @@ class FieldEvidenceDiseaseModelAssociatedModelPhenotypes(DatasetField):
     f_id: Final[type["FieldEvidenceDiseaseModelAssociatedModelPhenotypesId"]]
     f_label: Final[type["FieldEvidenceDiseaseModelAssociatedModelPhenotypesLabel"]]
 
+    class Field(DatasetEvidence.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldEvidenceDiseaseModelAssociatedModelPhenotypesId(DatasetField):
+
+class FieldEvidenceDiseaseModelAssociatedModelPhenotypesId(FieldEvidenceDiseaseModelAssociatedModelPhenotypes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceDiseaseModelAssociatedModelPhenotypesLabel(DatasetField):
+class FieldEvidenceDiseaseModelAssociatedModelPhenotypesLabel(FieldEvidenceDiseaseModelAssociatedModelPhenotypes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceDrugFromSource(DatasetField):
+class FieldEvidenceDrugFromSource(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceDrugId(DatasetField):
+class FieldEvidenceDrugId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceDrugResponse(DatasetField):
+class FieldEvidenceDrugResponse(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceLiterature(DatasetField):
+class FieldEvidenceLiterature(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceLog2FoldChangePercentileRank(DatasetField):
+class FieldEvidenceLog2FoldChangePercentileRank(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceLog2FoldChangeValue(DatasetField):
+class FieldEvidenceLog2FoldChangeValue(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceMutatedSamples(DatasetField):
+class FieldEvidenceMutatedSamples(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -1721,71 +1845,75 @@ class FieldEvidenceMutatedSamples(DatasetField):
     f_number_samples_tested: Final[type["FieldEvidenceMutatedSamplesNumberSamplesTested"]]
     f_number_samples_with_mutation_type: Final[type["FieldEvidenceMutatedSamplesNumberSamplesWithMutationType"]]
 
+    class Field(DatasetEvidence.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldEvidenceMutatedSamplesFunctionalConsequenceId(DatasetField):
+
+class FieldEvidenceMutatedSamplesFunctionalConsequenceId(FieldEvidenceMutatedSamples.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceMutatedSamplesNumberMutatedSamples(DatasetField):
+class FieldEvidenceMutatedSamplesNumberMutatedSamples(FieldEvidenceMutatedSamples.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceMutatedSamplesNumberSamplesTested(DatasetField):
+class FieldEvidenceMutatedSamplesNumberSamplesTested(FieldEvidenceMutatedSamples.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceMutatedSamplesNumberSamplesWithMutationType(DatasetField):
+class FieldEvidenceMutatedSamplesNumberSamplesWithMutationType(FieldEvidenceMutatedSamples.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceOddsRatio(DatasetField):
+class FieldEvidenceOddsRatio(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceOddsRatioConfidenceIntervalLower(DatasetField):
+class FieldEvidenceOddsRatioConfidenceIntervalLower(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceOddsRatioConfidenceIntervalUpper(DatasetField):
+class FieldEvidenceOddsRatioConfidenceIntervalUpper(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidencePValueExponent(DatasetField):
+class FieldEvidencePValueExponent(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidencePValueMantissa(DatasetField):
+class FieldEvidencePValueMantissa(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidencePathways(DatasetField):
+class FieldEvidencePathways(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -1793,197 +1921,201 @@ class FieldEvidencePathways(DatasetField):
     f_id: Final[type["FieldEvidencePathwaysId"]]
     f_name: Final[type["FieldEvidencePathwaysName"]]
 
+    class Field(DatasetEvidence.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldEvidencePathwaysId(DatasetField):
+
+class FieldEvidencePathwaysId(FieldEvidencePathways.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidencePathwaysName(DatasetField):
+class FieldEvidencePathwaysName(FieldEvidencePathways.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidencePmcIds(DatasetField):
+class FieldEvidencePmcIds(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceProjectId(DatasetField):
+class FieldEvidenceProjectId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidencePublicationFirstAuthor(DatasetField):
+class FieldEvidencePublicationFirstAuthor(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidencePublicationYear(DatasetField):
+class FieldEvidencePublicationYear(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceReactionId(DatasetField):
+class FieldEvidenceReactionId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceReactionName(DatasetField):
+class FieldEvidenceReactionName(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceResourceScore(DatasetField):
+class FieldEvidenceResourceScore(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceSex(DatasetField):
+class FieldEvidenceSex(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceSignificantDriverMethods(DatasetField):
+class FieldEvidenceSignificantDriverMethods(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceStatisticalMethod(DatasetField):
+class FieldEvidenceStatisticalMethod(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceStatisticalMethodOverview(DatasetField):
+class FieldEvidenceStatisticalMethodOverview(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceStudyCases(DatasetField):
+class FieldEvidenceStudyCases(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceStudyCasesWithQualifyingVariants(DatasetField):
+class FieldEvidenceStudyCasesWithQualifyingVariants(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceStudyId(DatasetField):
+class FieldEvidenceStudyId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceStudyOverview(DatasetField):
+class FieldEvidenceStudyOverview(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceStudySampleSize(DatasetField):
+class FieldEvidenceStudySampleSize(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceStudyStartDate(DatasetField):
+class FieldEvidenceStudyStartDate(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceStudyStopReason(DatasetField):
+class FieldEvidenceStudyStopReason(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceStudyStopReasonCategories(DatasetField):
+class FieldEvidenceStudyStopReasonCategories(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceTargetFromSource(DatasetField):
+class FieldEvidenceTargetFromSource(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceTargetFromSourceId(DatasetField):
+class FieldEvidenceTargetFromSourceId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceTargetInModel(DatasetField):
+class FieldEvidenceTargetInModel(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceTargetInModelEnsemblId(DatasetField):
+class FieldEvidenceTargetInModelEnsemblId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceTargetInModelMgiId(DatasetField):
+class FieldEvidenceTargetInModelMgiId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceTargetModulation(DatasetField):
+class FieldEvidenceTargetModulation(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceTextMiningSentences(DatasetField):
+class FieldEvidenceTextMiningSentences(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -1995,50 +2127,54 @@ class FieldEvidenceTextMiningSentences(DatasetField):
     f_t_start: Final[type["FieldEvidenceTextMiningSentencesTStart"]]
     f_text: Final[type["FieldEvidenceTextMiningSentencesText"]]
 
+    class Field(DatasetEvidence.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldEvidenceTextMiningSentencesDEnd(DatasetField):
+
+class FieldEvidenceTextMiningSentencesDEnd(FieldEvidenceTextMiningSentences.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceTextMiningSentencesDStart(DatasetField):
+class FieldEvidenceTextMiningSentencesDStart(FieldEvidenceTextMiningSentences.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceTextMiningSentencesSection(DatasetField):
+class FieldEvidenceTextMiningSentencesSection(FieldEvidenceTextMiningSentences.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceTextMiningSentencesTEnd(DatasetField):
+class FieldEvidenceTextMiningSentencesTEnd(FieldEvidenceTextMiningSentences.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceTextMiningSentencesTStart(DatasetField):
+class FieldEvidenceTextMiningSentencesTStart(FieldEvidenceTextMiningSentences.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceTextMiningSentencesText(DatasetField):
+class FieldEvidenceTextMiningSentencesText(FieldEvidenceTextMiningSentences.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceUrls(DatasetField):
+class FieldEvidenceUrls(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2046,78 +2182,82 @@ class FieldEvidenceUrls(DatasetField):
     f_nice_name: Final[type["FieldEvidenceUrlsNiceName"]]
     f_url: Final[type["FieldEvidenceUrlsUrl"]]
 
+    class Field(DatasetEvidence.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldEvidenceUrlsNiceName(DatasetField):
+
+class FieldEvidenceUrlsNiceName(FieldEvidenceUrls.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceUrlsUrl(DatasetField):
+class FieldEvidenceUrlsUrl(FieldEvidenceUrls.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceVariantAminoacidDescriptions(DatasetField):
+class FieldEvidenceVariantAminoacidDescriptions(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceVariantFunctionalConsequenceId(DatasetField):
+class FieldEvidenceVariantFunctionalConsequenceId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceVariantHgvsId(DatasetField):
+class FieldEvidenceVariantHgvsId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceVariantId(DatasetField):
+class FieldEvidenceVariantId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceVariantRsId(DatasetField):
+class FieldEvidenceVariantRsId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceSourceId(DatasetField):
+class FieldEvidenceSourceId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceDiseaseId(DatasetField):
+class FieldEvidenceDiseaseId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceId(DatasetField):
+class FieldEvidenceId(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldEvidenceScore(DatasetField):
+class FieldEvidenceScore(DatasetEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2129,15 +2269,19 @@ class DatasetGo(Dataset):
     f_id: Final[type["FieldGoId"]]
     f_name: Final[type["FieldGoName"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldGoId(DatasetField):
+
+class FieldGoId(DatasetGo.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldGoName(DatasetField):
+class FieldGoName(DatasetGo.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2154,50 +2298,54 @@ class DatasetHpo(Dataset):
     f_obsolete_terms: Final[type["FieldHpoObsoleteTerms"]]
     f_parents: Final[type["FieldHpoParents"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldHpoDbXRefs(DatasetField):
+
+class FieldHpoDbXRefs(DatasetHpo.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldHpoDescription(DatasetField):
+class FieldHpoDescription(DatasetHpo.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldHpoId(DatasetField):
+class FieldHpoId(DatasetHpo.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldHpoName(DatasetField):
+class FieldHpoName(DatasetHpo.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldHpoNamespace(DatasetField):
+class FieldHpoNamespace(DatasetHpo.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldHpoObsoleteTerms(DatasetField):
+class FieldHpoObsoleteTerms(DatasetHpo.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldHpoParents(DatasetField):
+class FieldHpoParents(DatasetHpo.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2211,15 +2359,19 @@ class DatasetIndication(Dataset):
     f_approved_indications: Final[type["FieldIndicationApprovedIndications"]]
     f_indication_count: Final[type["FieldIndicationIndicationCount"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldIndicationId(DatasetField):
+
+class FieldIndicationId(DatasetIndication.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldIndicationIndications(DatasetField):
+class FieldIndicationIndications(DatasetIndication.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2229,22 +2381,26 @@ class FieldIndicationIndications(DatasetField):
     f_references: Final[type["FieldIndicationIndicationsReferences"]]
     f_max_phase_for_indication: Final[type["FieldIndicationIndicationsMaxPhaseForIndication"]]
 
+    class Field(DatasetIndication.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldIndicationIndicationsDisease(DatasetField):
+
+class FieldIndicationIndicationsDisease(FieldIndicationIndications.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldIndicationIndicationsEfoName(DatasetField):
+class FieldIndicationIndicationsEfoName(FieldIndicationIndications.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldIndicationIndicationsReferences(DatasetField):
+class FieldIndicationIndicationsReferences(FieldIndicationIndications.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2252,36 +2408,40 @@ class FieldIndicationIndicationsReferences(DatasetField):
     f_source: Final[type["FieldIndicationIndicationsReferencesSource"]]
     f_ids: Final[type["FieldIndicationIndicationsReferencesIds"]]
 
+    class Field(FieldIndicationIndications.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldIndicationIndicationsReferencesSource(DatasetField):
+
+class FieldIndicationIndicationsReferencesSource(FieldIndicationIndicationsReferences.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldIndicationIndicationsReferencesIds(DatasetField):
+class FieldIndicationIndicationsReferencesIds(FieldIndicationIndicationsReferences.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldIndicationIndicationsMaxPhaseForIndication(DatasetField):
+class FieldIndicationIndicationsMaxPhaseForIndication(FieldIndicationIndications.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldIndicationApprovedIndications(DatasetField):
+class FieldIndicationApprovedIndications(DatasetIndication.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldIndicationIndicationCount(DatasetField):
+class FieldIndicationIndicationCount(DatasetIndication.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2302,57 +2462,61 @@ class DatasetInteraction(Dataset):
     f_count: Final[type["FieldInteractionCount"]]
     f_scoring: Final[type["FieldInteractionScoring"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldInteractionSourceDatabase(DatasetField):
+
+class FieldInteractionSourceDatabase(DatasetInteraction.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionTargetA(DatasetField):
+class FieldInteractionTargetA(DatasetInteraction.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionIntA(DatasetField):
+class FieldInteractionIntA(DatasetInteraction.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionIntABiologicalRole(DatasetField):
+class FieldInteractionIntABiologicalRole(DatasetInteraction.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionTargetB(DatasetField):
+class FieldInteractionTargetB(DatasetInteraction.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionIntB(DatasetField):
+class FieldInteractionIntB(DatasetInteraction.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionIntBBiologicalRole(DatasetField):
+class FieldInteractionIntBBiologicalRole(DatasetInteraction.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionSpeciesA(DatasetField):
+class FieldInteractionSpeciesA(DatasetInteraction.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2361,29 +2525,33 @@ class FieldInteractionSpeciesA(DatasetField):
     f_scientific_name: Final[type["FieldInteractionSpeciesAScientificName"]]
     f_taxon_id: Final[type["FieldInteractionSpeciesATaxonId"]]
 
+    class Field(DatasetInteraction.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldInteractionSpeciesAMnemonic(DatasetField):
+
+class FieldInteractionSpeciesAMnemonic(FieldInteractionSpeciesA.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionSpeciesAScientificName(DatasetField):
+class FieldInteractionSpeciesAScientificName(FieldInteractionSpeciesA.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionSpeciesATaxonId(DatasetField):
+class FieldInteractionSpeciesATaxonId(FieldInteractionSpeciesA.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionSpeciesB(DatasetField):
+class FieldInteractionSpeciesB(DatasetInteraction.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2392,36 +2560,40 @@ class FieldInteractionSpeciesB(DatasetField):
     f_scientific_name: Final[type["FieldInteractionSpeciesBScientificName"]]
     f_taxon_id: Final[type["FieldInteractionSpeciesBTaxonId"]]
 
+    class Field(DatasetInteraction.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldInteractionSpeciesBMnemonic(DatasetField):
+
+class FieldInteractionSpeciesBMnemonic(FieldInteractionSpeciesB.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionSpeciesBScientificName(DatasetField):
+class FieldInteractionSpeciesBScientificName(FieldInteractionSpeciesB.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionSpeciesBTaxonId(DatasetField):
+class FieldInteractionSpeciesBTaxonId(FieldInteractionSpeciesB.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionCount(DatasetField):
+class FieldInteractionCount(DatasetInteraction.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionScoring(DatasetField):
+class FieldInteractionScoring(DatasetInteraction.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2456,29 +2628,33 @@ class DatasetInteractionEvidence(Dataset):
     f_target_a: Final[type["FieldInteractionEvidenceTargetA"]]
     f_interaction_detection_method_mi_identifier: Final[type["FieldInteractionEvidenceInteractionDetectionMethodMiIdentifier"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldInteractionEvidenceInteractionTypeMiIdentifier(DatasetField):
+
+class FieldInteractionEvidenceInteractionTypeMiIdentifier(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceTargetB(DatasetField):
+class FieldInteractionEvidenceTargetB(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceEvidenceScore(DatasetField):
+class FieldInteractionEvidenceEvidenceScore(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceParticipantDetectionMethodA(DatasetField):
+class FieldInteractionEvidenceParticipantDetectionMethodA(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2486,29 +2662,33 @@ class FieldInteractionEvidenceParticipantDetectionMethodA(DatasetField):
     f_mi_identifier: Final[type["FieldInteractionEvidenceParticipantDetectionMethodAMiIdentifier"]]
     f_short_name: Final[type["FieldInteractionEvidenceParticipantDetectionMethodAShortName"]]
 
+    class Field(DatasetInteractionEvidence.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldInteractionEvidenceParticipantDetectionMethodAMiIdentifier(DatasetField):
+
+class FieldInteractionEvidenceParticipantDetectionMethodAMiIdentifier(FieldInteractionEvidenceParticipantDetectionMethodA.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceParticipantDetectionMethodAShortName(DatasetField):
+class FieldInteractionEvidenceParticipantDetectionMethodAShortName(FieldInteractionEvidenceParticipantDetectionMethodA.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceIntBBiologicalRole(DatasetField):
+class FieldInteractionEvidenceIntBBiologicalRole(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceInteractionResources(DatasetField):
+class FieldInteractionEvidenceInteractionResources(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2516,50 +2696,54 @@ class FieldInteractionEvidenceInteractionResources(DatasetField):
     f_database_version: Final[type["FieldInteractionEvidenceInteractionResourcesDatabaseVersion"]]
     f_source_database: Final[type["FieldInteractionEvidenceInteractionResourcesSourceDatabase"]]
 
+    class Field(DatasetInteractionEvidence.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldInteractionEvidenceInteractionResourcesDatabaseVersion(DatasetField):
+
+class FieldInteractionEvidenceInteractionResourcesDatabaseVersion(FieldInteractionEvidenceInteractionResources.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceInteractionResourcesSourceDatabase(DatasetField):
+class FieldInteractionEvidenceInteractionResourcesSourceDatabase(FieldInteractionEvidenceInteractionResources.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceInteractionTypeShortName(DatasetField):
+class FieldInteractionEvidenceInteractionTypeShortName(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceInteractionDetectionMethodShortName(DatasetField):
+class FieldInteractionEvidenceInteractionDetectionMethodShortName(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceIntA(DatasetField):
+class FieldInteractionEvidenceIntA(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceIntBSource(DatasetField):
+class FieldInteractionEvidenceIntBSource(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceSpeciesB(DatasetField):
+class FieldInteractionEvidenceSpeciesB(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2568,50 +2752,54 @@ class FieldInteractionEvidenceSpeciesB(DatasetField):
     f_scientific_name: Final[type["FieldInteractionEvidenceSpeciesBScientificName"]]
     f_taxon_id: Final[type["FieldInteractionEvidenceSpeciesBTaxonId"]]
 
+    class Field(DatasetInteractionEvidence.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldInteractionEvidenceSpeciesBMnemonic(DatasetField):
+
+class FieldInteractionEvidenceSpeciesBMnemonic(FieldInteractionEvidenceSpeciesB.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceSpeciesBScientificName(DatasetField):
+class FieldInteractionEvidenceSpeciesBScientificName(FieldInteractionEvidenceSpeciesB.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceSpeciesBTaxonId(DatasetField):
+class FieldInteractionEvidenceSpeciesBTaxonId(FieldInteractionEvidenceSpeciesB.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceInteractionIdentifier(DatasetField):
+class FieldInteractionEvidenceInteractionIdentifier(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceHostOrganismTaxId(DatasetField):
+class FieldInteractionEvidenceHostOrganismTaxId(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceExpansionMethodShortName(DatasetField):
+class FieldInteractionEvidenceExpansionMethodShortName(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceSpeciesA(DatasetField):
+class FieldInteractionEvidenceSpeciesA(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2620,71 +2808,75 @@ class FieldInteractionEvidenceSpeciesA(DatasetField):
     f_scientific_name: Final[type["FieldInteractionEvidenceSpeciesAScientificName"]]
     f_taxon_id: Final[type["FieldInteractionEvidenceSpeciesATaxonId"]]
 
+    class Field(DatasetInteractionEvidence.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldInteractionEvidenceSpeciesAMnemonic(DatasetField):
+
+class FieldInteractionEvidenceSpeciesAMnemonic(FieldInteractionEvidenceSpeciesA.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceSpeciesAScientificName(DatasetField):
+class FieldInteractionEvidenceSpeciesAScientificName(FieldInteractionEvidenceSpeciesA.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceSpeciesATaxonId(DatasetField):
+class FieldInteractionEvidenceSpeciesATaxonId(FieldInteractionEvidenceSpeciesA.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceIntASource(DatasetField):
+class FieldInteractionEvidenceIntASource(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceIntB(DatasetField):
+class FieldInteractionEvidenceIntB(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidencePubmedId(DatasetField):
+class FieldInteractionEvidencePubmedId(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceIntABiologicalRole(DatasetField):
+class FieldInteractionEvidenceIntABiologicalRole(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceExpansionMethodMiIdentifier(DatasetField):
+class FieldInteractionEvidenceExpansionMethodMiIdentifier(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceInteractionScore(DatasetField):
+class FieldInteractionEvidenceInteractionScore(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceParticipantDetectionMethodB(DatasetField):
+class FieldInteractionEvidenceParticipantDetectionMethodB(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2692,36 +2884,40 @@ class FieldInteractionEvidenceParticipantDetectionMethodB(DatasetField):
     f_mi_identifier: Final[type["FieldInteractionEvidenceParticipantDetectionMethodBMiIdentifier"]]
     f_short_name: Final[type["FieldInteractionEvidenceParticipantDetectionMethodBShortName"]]
 
+    class Field(DatasetInteractionEvidence.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldInteractionEvidenceParticipantDetectionMethodBMiIdentifier(DatasetField):
+
+class FieldInteractionEvidenceParticipantDetectionMethodBMiIdentifier(FieldInteractionEvidenceParticipantDetectionMethodB.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceParticipantDetectionMethodBShortName(DatasetField):
+class FieldInteractionEvidenceParticipantDetectionMethodBShortName(FieldInteractionEvidenceParticipantDetectionMethodB.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceHostOrganismScientificName(DatasetField):
+class FieldInteractionEvidenceHostOrganismScientificName(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceTargetA(DatasetField):
+class FieldInteractionEvidenceTargetA(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldInteractionEvidenceInteractionDetectionMethodMiIdentifier(DatasetField):
+class FieldInteractionEvidenceInteractionDetectionMethodMiIdentifier(DatasetInteractionEvidence.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2748,43 +2944,47 @@ class DatasetKnownDrugsAggregated(Dataset):
     f_mechanism_of_action: Final[type["FieldKnownDrugsAggregatedMechanismOfAction"]]
     f_target_name: Final[type["FieldKnownDrugsAggregatedTargetName"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldKnownDrugsAggregatedDrugId(DatasetField):
+
+class FieldKnownDrugsAggregatedDrugId(DatasetKnownDrugsAggregated.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldKnownDrugsAggregatedTargetId(DatasetField):
+class FieldKnownDrugsAggregatedTargetId(DatasetKnownDrugsAggregated.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldKnownDrugsAggregatedDiseaseId(DatasetField):
+class FieldKnownDrugsAggregatedDiseaseId(DatasetKnownDrugsAggregated.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldKnownDrugsAggregatedPhase(DatasetField):
+class FieldKnownDrugsAggregatedPhase(DatasetKnownDrugsAggregated.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldKnownDrugsAggregatedStatus(DatasetField):
+class FieldKnownDrugsAggregatedStatus(DatasetKnownDrugsAggregated.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldKnownDrugsAggregatedUrls(DatasetField):
+class FieldKnownDrugsAggregatedUrls(DatasetKnownDrugsAggregated.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2792,92 +2992,96 @@ class FieldKnownDrugsAggregatedUrls(DatasetField):
     f_nice_name: Final[type["FieldKnownDrugsAggregatedUrlsNiceName"]]
     f_url: Final[type["FieldKnownDrugsAggregatedUrlsUrl"]]
 
+    class Field(DatasetKnownDrugsAggregated.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldKnownDrugsAggregatedUrlsNiceName(DatasetField):
+
+class FieldKnownDrugsAggregatedUrlsNiceName(FieldKnownDrugsAggregatedUrls.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldKnownDrugsAggregatedUrlsUrl(DatasetField):
+class FieldKnownDrugsAggregatedUrlsUrl(FieldKnownDrugsAggregatedUrls.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldKnownDrugsAggregatedAncestors(DatasetField):
+class FieldKnownDrugsAggregatedAncestors(DatasetKnownDrugsAggregated.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldKnownDrugsAggregatedLabel(DatasetField):
+class FieldKnownDrugsAggregatedLabel(DatasetKnownDrugsAggregated.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldKnownDrugsAggregatedApprovedSymbol(DatasetField):
+class FieldKnownDrugsAggregatedApprovedSymbol(DatasetKnownDrugsAggregated.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldKnownDrugsAggregatedApprovedName(DatasetField):
+class FieldKnownDrugsAggregatedApprovedName(DatasetKnownDrugsAggregated.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldKnownDrugsAggregatedTargetClass(DatasetField):
+class FieldKnownDrugsAggregatedTargetClass(DatasetKnownDrugsAggregated.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldKnownDrugsAggregatedPrefName(DatasetField):
+class FieldKnownDrugsAggregatedPrefName(DatasetKnownDrugsAggregated.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldKnownDrugsAggregatedTradeNames(DatasetField):
+class FieldKnownDrugsAggregatedTradeNames(DatasetKnownDrugsAggregated.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldKnownDrugsAggregatedSynonyms(DatasetField):
+class FieldKnownDrugsAggregatedSynonyms(DatasetKnownDrugsAggregated.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldKnownDrugsAggregatedDrugType(DatasetField):
+class FieldKnownDrugsAggregatedDrugType(DatasetKnownDrugsAggregated.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldKnownDrugsAggregatedMechanismOfAction(DatasetField):
+class FieldKnownDrugsAggregatedMechanismOfAction(DatasetKnownDrugsAggregated.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldKnownDrugsAggregatedTargetName(DatasetField):
+class FieldKnownDrugsAggregatedTargetName(DatasetKnownDrugsAggregated.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2894,50 +3098,54 @@ class DatasetMechanismOfAction(Dataset):
     f_targets: Final[type["FieldMechanismOfActionTargets"]]
     f_references: Final[type["FieldMechanismOfActionReferences"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldMechanismOfActionActionType(DatasetField):
+
+class FieldMechanismOfActionActionType(DatasetMechanismOfAction.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMechanismOfActionMechanismOfAction(DatasetField):
+class FieldMechanismOfActionMechanismOfAction(DatasetMechanismOfAction.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMechanismOfActionChemblIds(DatasetField):
+class FieldMechanismOfActionChemblIds(DatasetMechanismOfAction.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMechanismOfActionTargetName(DatasetField):
+class FieldMechanismOfActionTargetName(DatasetMechanismOfAction.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMechanismOfActionTargetType(DatasetField):
+class FieldMechanismOfActionTargetType(DatasetMechanismOfAction.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMechanismOfActionTargets(DatasetField):
+class FieldMechanismOfActionTargets(DatasetMechanismOfAction.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMechanismOfActionReferences(DatasetField):
+class FieldMechanismOfActionReferences(DatasetMechanismOfAction.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2946,22 +3154,26 @@ class FieldMechanismOfActionReferences(DatasetField):
     f_ids: Final[type["FieldMechanismOfActionReferencesIds"]]
     f_urls: Final[type["FieldMechanismOfActionReferencesUrls"]]
 
+    class Field(DatasetMechanismOfAction.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldMechanismOfActionReferencesSource(DatasetField):
+
+class FieldMechanismOfActionReferencesSource(FieldMechanismOfActionReferences.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMechanismOfActionReferencesIds(DatasetField):
+class FieldMechanismOfActionReferencesIds(FieldMechanismOfActionReferences.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMechanismOfActionReferencesUrls(DatasetField):
+class FieldMechanismOfActionReferencesUrls(FieldMechanismOfActionReferences.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2990,85 +3202,89 @@ class DatasetMolecule(Dataset):
     f_linked_targets: Final[type["FieldMoleculeLinkedTargets"]]
     f_description: Final[type["FieldMoleculeDescription"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldMoleculeId(DatasetField):
+
+class FieldMoleculeId(DatasetMolecule.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeCanonicalSmiles(DatasetField):
+class FieldMoleculeCanonicalSmiles(DatasetMolecule.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeInchiKey(DatasetField):
+class FieldMoleculeInchiKey(DatasetMolecule.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeDrugType(DatasetField):
+class FieldMoleculeDrugType(DatasetMolecule.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeBlackBoxWarning(DatasetField):
+class FieldMoleculeBlackBoxWarning(DatasetMolecule.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeName(DatasetField):
+class FieldMoleculeName(DatasetMolecule.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeYearOfFirstApproval(DatasetField):
+class FieldMoleculeYearOfFirstApproval(DatasetMolecule.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeMaximumClinicalTrialPhase(DatasetField):
+class FieldMoleculeMaximumClinicalTrialPhase(DatasetMolecule.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeParentId(DatasetField):
+class FieldMoleculeParentId(DatasetMolecule.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeHasBeenWithdrawn(DatasetField):
+class FieldMoleculeHasBeenWithdrawn(DatasetMolecule.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeIsApproved(DatasetField):
+class FieldMoleculeIsApproved(DatasetMolecule.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeWithdrawnNotice(DatasetField):
+class FieldMoleculeWithdrawnNotice(DatasetMolecule.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -3077,57 +3293,61 @@ class FieldMoleculeWithdrawnNotice(DatasetField):
     f_classes: Final[type["FieldMoleculeWithdrawnNoticeClasses"]]
     f_year: Final[type["FieldMoleculeWithdrawnNoticeYear"]]
 
+    class Field(DatasetMolecule.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldMoleculeWithdrawnNoticeCountries(DatasetField):
+
+class FieldMoleculeWithdrawnNoticeCountries(FieldMoleculeWithdrawnNotice.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeWithdrawnNoticeClasses(DatasetField):
+class FieldMoleculeWithdrawnNoticeClasses(FieldMoleculeWithdrawnNotice.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeWithdrawnNoticeYear(DatasetField):
+class FieldMoleculeWithdrawnNoticeYear(FieldMoleculeWithdrawnNotice.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeTradeNames(DatasetField):
+class FieldMoleculeTradeNames(DatasetMolecule.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeSynonyms(DatasetField):
+class FieldMoleculeSynonyms(DatasetMolecule.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeCrossReferences(DatasetField):
+class FieldMoleculeCrossReferences(DatasetMolecule.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeChildChemblIds(DatasetField):
+class FieldMoleculeChildChemblIds(DatasetMolecule.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeLinkedDiseases(DatasetField):
+class FieldMoleculeLinkedDiseases(DatasetMolecule.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -3135,22 +3355,26 @@ class FieldMoleculeLinkedDiseases(DatasetField):
     f_rows: Final[type["FieldMoleculeLinkedDiseasesRows"]]
     f_count: Final[type["FieldMoleculeLinkedDiseasesCount"]]
 
+    class Field(DatasetMolecule.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldMoleculeLinkedDiseasesRows(DatasetField):
+
+class FieldMoleculeLinkedDiseasesRows(FieldMoleculeLinkedDiseases.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeLinkedDiseasesCount(DatasetField):
+class FieldMoleculeLinkedDiseasesCount(FieldMoleculeLinkedDiseases.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeLinkedTargets(DatasetField):
+class FieldMoleculeLinkedTargets(DatasetMolecule.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -3158,22 +3382,26 @@ class FieldMoleculeLinkedTargets(DatasetField):
     f_rows: Final[type["FieldMoleculeLinkedTargetsRows"]]
     f_count: Final[type["FieldMoleculeLinkedTargetsCount"]]
 
+    class Field(DatasetMolecule.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldMoleculeLinkedTargetsRows(DatasetField):
+
+class FieldMoleculeLinkedTargetsRows(FieldMoleculeLinkedTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeLinkedTargetsCount(DatasetField):
+class FieldMoleculeLinkedTargetsCount(FieldMoleculeLinkedTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMoleculeDescription(DatasetField):
+class FieldMoleculeDescription(DatasetMolecule.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -3191,8 +3419,12 @@ class DatasetMousePhenotypes(Dataset):
     f_target_in_model_ensembl_id: Final[type["FieldMousePhenotypesTargetInModelEnsemblId"]]
     f_target_in_model_mgi_id: Final[type["FieldMousePhenotypesTargetInModelMgiId"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldMousePhenotypesBiologicalModels(DatasetField):
+
+class FieldMousePhenotypesBiologicalModels(DatasetMousePhenotypes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -3202,36 +3434,40 @@ class FieldMousePhenotypesBiologicalModels(DatasetField):
     f_id: Final[type["FieldMousePhenotypesBiologicalModelsId"]]
     f_literature: Final[type["FieldMousePhenotypesBiologicalModelsLiterature"]]
 
+    class Field(DatasetMousePhenotypes.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldMousePhenotypesBiologicalModelsAllelicComposition(DatasetField):
+
+class FieldMousePhenotypesBiologicalModelsAllelicComposition(FieldMousePhenotypesBiologicalModels.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMousePhenotypesBiologicalModelsGeneticBackground(DatasetField):
+class FieldMousePhenotypesBiologicalModelsGeneticBackground(FieldMousePhenotypesBiologicalModels.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMousePhenotypesBiologicalModelsId(DatasetField):
+class FieldMousePhenotypesBiologicalModelsId(FieldMousePhenotypesBiologicalModels.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMousePhenotypesBiologicalModelsLiterature(DatasetField):
+class FieldMousePhenotypesBiologicalModelsLiterature(FieldMousePhenotypesBiologicalModels.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMousePhenotypesModelPhenotypeClasses(DatasetField):
+class FieldMousePhenotypesModelPhenotypeClasses(DatasetMousePhenotypes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -3239,57 +3475,61 @@ class FieldMousePhenotypesModelPhenotypeClasses(DatasetField):
     f_id: Final[type["FieldMousePhenotypesModelPhenotypeClassesId"]]
     f_label: Final[type["FieldMousePhenotypesModelPhenotypeClassesLabel"]]
 
+    class Field(DatasetMousePhenotypes.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldMousePhenotypesModelPhenotypeClassesId(DatasetField):
+
+class FieldMousePhenotypesModelPhenotypeClassesId(FieldMousePhenotypesModelPhenotypeClasses.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMousePhenotypesModelPhenotypeClassesLabel(DatasetField):
+class FieldMousePhenotypesModelPhenotypeClassesLabel(FieldMousePhenotypesModelPhenotypeClasses.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMousePhenotypesModelPhenotypeId(DatasetField):
+class FieldMousePhenotypesModelPhenotypeId(DatasetMousePhenotypes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMousePhenotypesModelPhenotypeLabel(DatasetField):
+class FieldMousePhenotypesModelPhenotypeLabel(DatasetMousePhenotypes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMousePhenotypesTargetFromSourceId(DatasetField):
+class FieldMousePhenotypesTargetFromSourceId(DatasetMousePhenotypes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMousePhenotypesTargetInModel(DatasetField):
+class FieldMousePhenotypesTargetInModel(DatasetMousePhenotypes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMousePhenotypesTargetInModelEnsemblId(DatasetField):
+class FieldMousePhenotypesTargetInModelEnsemblId(DatasetMousePhenotypes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldMousePhenotypesTargetInModelMgiId(DatasetField):
+class FieldMousePhenotypesTargetInModelMgiId(DatasetMousePhenotypes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -3306,50 +3546,54 @@ class DatasetReactome(Dataset):
     f_parents: Final[type["FieldReactomeParents"]]
     f_path: Final[type["FieldReactomePath"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldReactomeId(DatasetField):
+
+class FieldReactomeId(DatasetReactome.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldReactomeLabel(DatasetField):
+class FieldReactomeLabel(DatasetReactome.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldReactomeAncestors(DatasetField):
+class FieldReactomeAncestors(DatasetReactome.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldReactomeDescendants(DatasetField):
+class FieldReactomeDescendants(DatasetReactome.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldReactomeChildren(DatasetField):
+class FieldReactomeChildren(DatasetReactome.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldReactomeParents(DatasetField):
+class FieldReactomeParents(DatasetReactome.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldReactomePath(DatasetField):
+class FieldReactomePath(DatasetReactome.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -3371,85 +3615,89 @@ class DatasetSearchDisease(Dataset):
     f_terms_5: Final[type["FieldSearchDiseaseTerms5"]]
     f_multiplier: Final[type["FieldSearchDiseaseMultiplier"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldSearchDiseaseId(DatasetField):
+
+class FieldSearchDiseaseId(DatasetSearchDisease.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDiseaseName(DatasetField):
+class FieldSearchDiseaseName(DatasetSearchDisease.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDiseaseDescription(DatasetField):
+class FieldSearchDiseaseDescription(DatasetSearchDisease.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDiseaseEntity(DatasetField):
+class FieldSearchDiseaseEntity(DatasetSearchDisease.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDiseaseCategory(DatasetField):
+class FieldSearchDiseaseCategory(DatasetSearchDisease.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDiseaseKeywords(DatasetField):
+class FieldSearchDiseaseKeywords(DatasetSearchDisease.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDiseasePrefixes(DatasetField):
+class FieldSearchDiseasePrefixes(DatasetSearchDisease.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDiseaseNgrams(DatasetField):
+class FieldSearchDiseaseNgrams(DatasetSearchDisease.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDiseaseTerms(DatasetField):
+class FieldSearchDiseaseTerms(DatasetSearchDisease.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDiseaseTerms25(DatasetField):
+class FieldSearchDiseaseTerms25(DatasetSearchDisease.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDiseaseTerms5(DatasetField):
+class FieldSearchDiseaseTerms5(DatasetSearchDisease.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDiseaseMultiplier(DatasetField):
+class FieldSearchDiseaseMultiplier(DatasetSearchDisease.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -3471,85 +3719,89 @@ class DatasetSearchDrug(Dataset):
     f_terms_5: Final[type["FieldSearchDrugTerms5"]]
     f_multiplier: Final[type["FieldSearchDrugMultiplier"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldSearchDrugId(DatasetField):
+
+class FieldSearchDrugId(DatasetSearchDrug.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDrugName(DatasetField):
+class FieldSearchDrugName(DatasetSearchDrug.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDrugDescription(DatasetField):
+class FieldSearchDrugDescription(DatasetSearchDrug.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDrugEntity(DatasetField):
+class FieldSearchDrugEntity(DatasetSearchDrug.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDrugCategory(DatasetField):
+class FieldSearchDrugCategory(DatasetSearchDrug.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDrugKeywords(DatasetField):
+class FieldSearchDrugKeywords(DatasetSearchDrug.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDrugPrefixes(DatasetField):
+class FieldSearchDrugPrefixes(DatasetSearchDrug.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDrugNgrams(DatasetField):
+class FieldSearchDrugNgrams(DatasetSearchDrug.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDrugTerms(DatasetField):
+class FieldSearchDrugTerms(DatasetSearchDrug.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDrugTerms25(DatasetField):
+class FieldSearchDrugTerms25(DatasetSearchDrug.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDrugTerms5(DatasetField):
+class FieldSearchDrugTerms5(DatasetSearchDrug.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchDrugMultiplier(DatasetField):
+class FieldSearchDrugMultiplier(DatasetSearchDrug.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -3571,85 +3823,89 @@ class DatasetSearchTarget(Dataset):
     f_terms_5: Final[type["FieldSearchTargetTerms5"]]
     f_multiplier: Final[type["FieldSearchTargetMultiplier"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldSearchTargetId(DatasetField):
+
+class FieldSearchTargetId(DatasetSearchTarget.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchTargetName(DatasetField):
+class FieldSearchTargetName(DatasetSearchTarget.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchTargetDescription(DatasetField):
+class FieldSearchTargetDescription(DatasetSearchTarget.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchTargetEntity(DatasetField):
+class FieldSearchTargetEntity(DatasetSearchTarget.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchTargetCategory(DatasetField):
+class FieldSearchTargetCategory(DatasetSearchTarget.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchTargetKeywords(DatasetField):
+class FieldSearchTargetKeywords(DatasetSearchTarget.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchTargetPrefixes(DatasetField):
+class FieldSearchTargetPrefixes(DatasetSearchTarget.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchTargetNgrams(DatasetField):
+class FieldSearchTargetNgrams(DatasetSearchTarget.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchTargetTerms(DatasetField):
+class FieldSearchTargetTerms(DatasetSearchTarget.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchTargetTerms25(DatasetField):
+class FieldSearchTargetTerms25(DatasetSearchTarget.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchTargetTerms5(DatasetField):
+class FieldSearchTargetTerms5(DatasetSearchTarget.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSearchTargetMultiplier(DatasetField):
+class FieldSearchTargetMultiplier(DatasetSearchTarget.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -3665,43 +3921,47 @@ class DatasetSignificantAdverseDrugReactions(Dataset):
     f_critval: Final[type["FieldSignificantAdverseDrugReactionsCritval"]]
     f_meddra_code: Final[type["FieldSignificantAdverseDrugReactionsMeddraCode"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldSignificantAdverseDrugReactionsChemblId(DatasetField):
+
+class FieldSignificantAdverseDrugReactionsChemblId(DatasetSignificantAdverseDrugReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSignificantAdverseDrugReactionsEvent(DatasetField):
+class FieldSignificantAdverseDrugReactionsEvent(DatasetSignificantAdverseDrugReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSignificantAdverseDrugReactionsCount(DatasetField):
+class FieldSignificantAdverseDrugReactionsCount(DatasetSignificantAdverseDrugReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSignificantAdverseDrugReactionsLlr(DatasetField):
+class FieldSignificantAdverseDrugReactionsLlr(DatasetSignificantAdverseDrugReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSignificantAdverseDrugReactionsCritval(DatasetField):
+class FieldSignificantAdverseDrugReactionsCritval(DatasetSignificantAdverseDrugReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSignificantAdverseDrugReactionsMeddraCode(DatasetField):
+class FieldSignificantAdverseDrugReactionsMeddraCode(DatasetSignificantAdverseDrugReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -3717,43 +3977,47 @@ class DatasetSignificantAdverseTargetReactions(Dataset):
     f_critval: Final[type["FieldSignificantAdverseTargetReactionsCritval"]]
     f_meddra_code: Final[type["FieldSignificantAdverseTargetReactionsMeddraCode"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldSignificantAdverseTargetReactionsTargetId(DatasetField):
+
+class FieldSignificantAdverseTargetReactionsTargetId(DatasetSignificantAdverseTargetReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSignificantAdverseTargetReactionsEvent(DatasetField):
+class FieldSignificantAdverseTargetReactionsEvent(DatasetSignificantAdverseTargetReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSignificantAdverseTargetReactionsCount(DatasetField):
+class FieldSignificantAdverseTargetReactionsCount(DatasetSignificantAdverseTargetReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSignificantAdverseTargetReactionsLlr(DatasetField):
+class FieldSignificantAdverseTargetReactionsLlr(DatasetSignificantAdverseTargetReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSignificantAdverseTargetReactionsCritval(DatasetField):
+class FieldSignificantAdverseTargetReactionsCritval(DatasetSignificantAdverseTargetReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldSignificantAdverseTargetReactionsMeddraCode(DatasetField):
+class FieldSignificantAdverseTargetReactionsMeddraCode(DatasetSignificantAdverseTargetReactions.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -3791,36 +4055,40 @@ class DatasetTargets(Dataset):
     f_safety_liabilities: Final[type["FieldTargetsSafetyLiabilities"]]
     f_pathways: Final[type["FieldTargetsPathways"]]
 
+    class Field(DatasetField):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsId(DatasetField):
+
+class FieldTargetsId(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsApprovedSymbol(DatasetField):
+class FieldTargetsApprovedSymbol(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsBiotype(DatasetField):
+class FieldTargetsBiotype(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsTranscriptIds(DatasetField):
+class FieldTargetsTranscriptIds(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsCanonicalTranscript(DatasetField):
+class FieldTargetsCanonicalTranscript(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -3831,50 +4099,54 @@ class FieldTargetsCanonicalTranscript(DatasetField):
     f_end: Final[type["FieldTargetsCanonicalTranscriptEnd"]]
     f_strand: Final[type["FieldTargetsCanonicalTranscriptStrand"]]
 
+    class Field(DatasetTargets.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsCanonicalTranscriptId(DatasetField):
+
+class FieldTargetsCanonicalTranscriptId(FieldTargetsCanonicalTranscript.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsCanonicalTranscriptChromosome(DatasetField):
+class FieldTargetsCanonicalTranscriptChromosome(FieldTargetsCanonicalTranscript.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsCanonicalTranscriptStart(DatasetField):
+class FieldTargetsCanonicalTranscriptStart(FieldTargetsCanonicalTranscript.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsCanonicalTranscriptEnd(DatasetField):
+class FieldTargetsCanonicalTranscriptEnd(FieldTargetsCanonicalTranscript.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsCanonicalTranscriptStrand(DatasetField):
+class FieldTargetsCanonicalTranscriptStrand(FieldTargetsCanonicalTranscript.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsCanonicalExons(DatasetField):
+class FieldTargetsCanonicalExons(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsGenomicLocation(DatasetField):
+class FieldTargetsGenomicLocation(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -3884,50 +4156,54 @@ class FieldTargetsGenomicLocation(DatasetField):
     f_end: Final[type["FieldTargetsGenomicLocationEnd"]]
     f_strand: Final[type["FieldTargetsGenomicLocationStrand"]]
 
+    class Field(DatasetTargets.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsGenomicLocationChromosome(DatasetField):
+
+class FieldTargetsGenomicLocationChromosome(FieldTargetsGenomicLocation.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsGenomicLocationStart(DatasetField):
+class FieldTargetsGenomicLocationStart(FieldTargetsGenomicLocation.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsGenomicLocationEnd(DatasetField):
+class FieldTargetsGenomicLocationEnd(FieldTargetsGenomicLocation.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsGenomicLocationStrand(DatasetField):
+class FieldTargetsGenomicLocationStrand(FieldTargetsGenomicLocation.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsAlternativeGenes(DatasetField):
+class FieldTargetsAlternativeGenes(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsApprovedName(DatasetField):
+class FieldTargetsApprovedName(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsGo(DatasetField):
+class FieldTargetsGo(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -3939,50 +4215,54 @@ class FieldTargetsGo(DatasetField):
     f_gene_product: Final[type["FieldTargetsGoGeneProduct"]]
     f_eco_id: Final[type["FieldTargetsGoEcoId"]]
 
+    class Field(DatasetTargets.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsGoId(DatasetField):
+
+class FieldTargetsGoId(FieldTargetsGo.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsGoSource(DatasetField):
+class FieldTargetsGoSource(FieldTargetsGo.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsGoEvidence(DatasetField):
+class FieldTargetsGoEvidence(FieldTargetsGo.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsGoAspect(DatasetField):
+class FieldTargetsGoAspect(FieldTargetsGo.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsGoGeneProduct(DatasetField):
+class FieldTargetsGoGeneProduct(FieldTargetsGo.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsGoEcoId(DatasetField):
+class FieldTargetsGoEcoId(FieldTargetsGo.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsHallmarks(DatasetField):
+class FieldTargetsHallmarks(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -3990,8 +4270,12 @@ class FieldTargetsHallmarks(DatasetField):
     f_attributes: Final[type["FieldTargetsHallmarksAttributes"]]
     f_cancer_hallmarks: Final[type["FieldTargetsHallmarksCancerHallmarks"]]
 
+    class Field(DatasetTargets.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsHallmarksAttributes(DatasetField):
+
+class FieldTargetsHallmarksAttributes(FieldTargetsHallmarks.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4000,29 +4284,33 @@ class FieldTargetsHallmarksAttributes(DatasetField):
     f_description: Final[type["FieldTargetsHallmarksAttributesDescription"]]
     f_attribute_name: Final[type["FieldTargetsHallmarksAttributesAttributeName"]]
 
+    class Field(FieldTargetsHallmarks.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsHallmarksAttributesPmid(DatasetField):
+
+class FieldTargetsHallmarksAttributesPmid(FieldTargetsHallmarksAttributes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsHallmarksAttributesDescription(DatasetField):
+class FieldTargetsHallmarksAttributesDescription(FieldTargetsHallmarksAttributes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsHallmarksAttributesAttributeName(DatasetField):
+class FieldTargetsHallmarksAttributesAttributeName(FieldTargetsHallmarksAttributes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsHallmarksCancerHallmarks(DatasetField):
+class FieldTargetsHallmarksCancerHallmarks(FieldTargetsHallmarks.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4032,36 +4320,40 @@ class FieldTargetsHallmarksCancerHallmarks(DatasetField):
     f_impact: Final[type["FieldTargetsHallmarksCancerHallmarksImpact"]]
     f_label: Final[type["FieldTargetsHallmarksCancerHallmarksLabel"]]
 
+    class Field(FieldTargetsHallmarks.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsHallmarksCancerHallmarksPmid(DatasetField):
+
+class FieldTargetsHallmarksCancerHallmarksPmid(FieldTargetsHallmarksCancerHallmarks.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsHallmarksCancerHallmarksDescription(DatasetField):
+class FieldTargetsHallmarksCancerHallmarksDescription(FieldTargetsHallmarksCancerHallmarks.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsHallmarksCancerHallmarksImpact(DatasetField):
+class FieldTargetsHallmarksCancerHallmarksImpact(FieldTargetsHallmarksCancerHallmarks.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsHallmarksCancerHallmarksLabel(DatasetField):
+class FieldTargetsHallmarksCancerHallmarksLabel(FieldTargetsHallmarksCancerHallmarks.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSynonyms(DatasetField):
+class FieldTargetsSynonyms(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4069,22 +4361,26 @@ class FieldTargetsSynonyms(DatasetField):
     f_label: Final[type["FieldTargetsSynonymsLabel"]]
     f_source: Final[type["FieldTargetsSynonymsSource"]]
 
+    class Field(DatasetTargets.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsSynonymsLabel(DatasetField):
+
+class FieldTargetsSynonymsLabel(FieldTargetsSynonyms.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSynonymsSource(DatasetField):
+class FieldTargetsSynonymsSource(FieldTargetsSynonyms.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSymbolSynonyms(DatasetField):
+class FieldTargetsSymbolSynonyms(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4092,22 +4388,26 @@ class FieldTargetsSymbolSynonyms(DatasetField):
     f_label: Final[type["FieldTargetsSymbolSynonymsLabel"]]
     f_source: Final[type["FieldTargetsSymbolSynonymsSource"]]
 
+    class Field(DatasetTargets.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsSymbolSynonymsLabel(DatasetField):
+
+class FieldTargetsSymbolSynonymsLabel(FieldTargetsSymbolSynonyms.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSymbolSynonymsSource(DatasetField):
+class FieldTargetsSymbolSynonymsSource(FieldTargetsSymbolSynonyms.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsNameSynonyms(DatasetField):
+class FieldTargetsNameSynonyms(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4115,29 +4415,33 @@ class FieldTargetsNameSynonyms(DatasetField):
     f_label: Final[type["FieldTargetsNameSynonymsLabel"]]
     f_source: Final[type["FieldTargetsNameSynonymsSource"]]
 
+    class Field(DatasetTargets.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsNameSynonymsLabel(DatasetField):
+
+class FieldTargetsNameSynonymsLabel(FieldTargetsNameSynonyms.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsNameSynonymsSource(DatasetField):
+class FieldTargetsNameSynonymsSource(FieldTargetsNameSynonyms.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsFunctionDescriptions(DatasetField):
+class FieldTargetsFunctionDescriptions(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSubcellularLocations(DatasetField):
+class FieldTargetsSubcellularLocations(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4147,36 +4451,40 @@ class FieldTargetsSubcellularLocations(DatasetField):
     f_term_sl: Final[type["FieldTargetsSubcellularLocationsTermSl"]]
     f_label_sl: Final[type["FieldTargetsSubcellularLocationsLabelSl"]]
 
+    class Field(DatasetTargets.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsSubcellularLocationsLocation(DatasetField):
+
+class FieldTargetsSubcellularLocationsLocation(FieldTargetsSubcellularLocations.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSubcellularLocationsSource(DatasetField):
+class FieldTargetsSubcellularLocationsSource(FieldTargetsSubcellularLocations.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSubcellularLocationsTermSl(DatasetField):
+class FieldTargetsSubcellularLocationsTermSl(FieldTargetsSubcellularLocations.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSubcellularLocationsLabelSl(DatasetField):
+class FieldTargetsSubcellularLocationsLabelSl(FieldTargetsSubcellularLocations.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsTargetClass(DatasetField):
+class FieldTargetsTargetClass(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4185,29 +4493,33 @@ class FieldTargetsTargetClass(DatasetField):
     f_label: Final[type["FieldTargetsTargetClassLabel"]]
     f_level: Final[type["FieldTargetsTargetClassLevel"]]
 
+    class Field(DatasetTargets.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsTargetClassId(DatasetField):
+
+class FieldTargetsTargetClassId(FieldTargetsTargetClass.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsTargetClassLabel(DatasetField):
+class FieldTargetsTargetClassLabel(FieldTargetsTargetClass.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsTargetClassLevel(DatasetField):
+class FieldTargetsTargetClassLevel(FieldTargetsTargetClass.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsObsoleteSymbols(DatasetField):
+class FieldTargetsObsoleteSymbols(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4215,22 +4527,26 @@ class FieldTargetsObsoleteSymbols(DatasetField):
     f_label: Final[type["FieldTargetsObsoleteSymbolsLabel"]]
     f_source: Final[type["FieldTargetsObsoleteSymbolsSource"]]
 
+    class Field(DatasetTargets.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsObsoleteSymbolsLabel(DatasetField):
+
+class FieldTargetsObsoleteSymbolsLabel(FieldTargetsObsoleteSymbols.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsObsoleteSymbolsSource(DatasetField):
+class FieldTargetsObsoleteSymbolsSource(FieldTargetsObsoleteSymbols.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsObsoleteNames(DatasetField):
+class FieldTargetsObsoleteNames(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4238,22 +4554,26 @@ class FieldTargetsObsoleteNames(DatasetField):
     f_label: Final[type["FieldTargetsObsoleteNamesLabel"]]
     f_source: Final[type["FieldTargetsObsoleteNamesSource"]]
 
+    class Field(DatasetTargets.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsObsoleteNamesLabel(DatasetField):
+
+class FieldTargetsObsoleteNamesLabel(FieldTargetsObsoleteNames.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsObsoleteNamesSource(DatasetField):
+class FieldTargetsObsoleteNamesSource(FieldTargetsObsoleteNames.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsConstraint(DatasetField):
+class FieldTargetsConstraint(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4269,78 +4589,82 @@ class FieldTargetsConstraint(DatasetField):
     f_upper_bin: Final[type["FieldTargetsConstraintUpperBin"]]
     f_upper_bin_6: Final[type["FieldTargetsConstraintUpperBin6"]]
 
+    class Field(DatasetTargets.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsConstraintConstraintType(DatasetField):
+
+class FieldTargetsConstraintConstraintType(FieldTargetsConstraint.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsConstraintScore(DatasetField):
+class FieldTargetsConstraintScore(FieldTargetsConstraint.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsConstraintExp(DatasetField):
+class FieldTargetsConstraintExp(FieldTargetsConstraint.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsConstraintObs(DatasetField):
+class FieldTargetsConstraintObs(FieldTargetsConstraint.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsConstraintOe(DatasetField):
+class FieldTargetsConstraintOe(FieldTargetsConstraint.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsConstraintOeLower(DatasetField):
+class FieldTargetsConstraintOeLower(FieldTargetsConstraint.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsConstraintOeUpper(DatasetField):
+class FieldTargetsConstraintOeUpper(FieldTargetsConstraint.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsConstraintUpperRank(DatasetField):
+class FieldTargetsConstraintUpperRank(FieldTargetsConstraint.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsConstraintUpperBin(DatasetField):
+class FieldTargetsConstraintUpperBin(FieldTargetsConstraint.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsConstraintUpperBin6(DatasetField):
+class FieldTargetsConstraintUpperBin6(FieldTargetsConstraint.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsTep(DatasetField):
+class FieldTargetsTep(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4350,36 +4674,40 @@ class FieldTargetsTep(DatasetField):
     f_therapeutic_area: Final[type["FieldTargetsTepTherapeuticArea"]]
     f_url: Final[type["FieldTargetsTepUrl"]]
 
+    class Field(DatasetTargets.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsTepTargetFromSourceId(DatasetField):
+
+class FieldTargetsTepTargetFromSourceId(FieldTargetsTep.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsTepDescription(DatasetField):
+class FieldTargetsTepDescription(FieldTargetsTep.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsTepTherapeuticArea(DatasetField):
+class FieldTargetsTepTherapeuticArea(FieldTargetsTep.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsTepUrl(DatasetField):
+class FieldTargetsTepUrl(FieldTargetsTep.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsProteinIds(DatasetField):
+class FieldTargetsProteinIds(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4387,22 +4715,26 @@ class FieldTargetsProteinIds(DatasetField):
     f_id: Final[type["FieldTargetsProteinIdsId"]]
     f_source: Final[type["FieldTargetsProteinIdsSource"]]
 
+    class Field(DatasetTargets.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsProteinIdsId(DatasetField):
+
+class FieldTargetsProteinIdsId(FieldTargetsProteinIds.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsProteinIdsSource(DatasetField):
+class FieldTargetsProteinIdsSource(FieldTargetsProteinIds.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsDbXrefs(DatasetField):
+class FieldTargetsDbXrefs(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4410,22 +4742,26 @@ class FieldTargetsDbXrefs(DatasetField):
     f_id: Final[type["FieldTargetsDbXrefsId"]]
     f_source: Final[type["FieldTargetsDbXrefsSource"]]
 
+    class Field(DatasetTargets.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsDbXrefsId(DatasetField):
+
+class FieldTargetsDbXrefsId(FieldTargetsDbXrefs.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsDbXrefsSource(DatasetField):
+class FieldTargetsDbXrefsSource(FieldTargetsDbXrefs.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsChemicalProbes(DatasetField):
+class FieldTargetsChemicalProbes(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4443,85 +4779,89 @@ class FieldTargetsChemicalProbes(DatasetField):
     f_target_from_source_id: Final[type["FieldTargetsChemicalProbesTargetFromSourceId"]]
     f_urls: Final[type["FieldTargetsChemicalProbesUrls"]]
 
+    class Field(DatasetTargets.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsChemicalProbesControl(DatasetField):
+
+class FieldTargetsChemicalProbesControl(FieldTargetsChemicalProbes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsChemicalProbesDrugId(DatasetField):
+class FieldTargetsChemicalProbesDrugId(FieldTargetsChemicalProbes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsChemicalProbesId(DatasetField):
+class FieldTargetsChemicalProbesId(FieldTargetsChemicalProbes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsChemicalProbesIsHighQuality(DatasetField):
+class FieldTargetsChemicalProbesIsHighQuality(FieldTargetsChemicalProbes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsChemicalProbesMechanismOfAction(DatasetField):
+class FieldTargetsChemicalProbesMechanismOfAction(FieldTargetsChemicalProbes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsChemicalProbesOrigin(DatasetField):
+class FieldTargetsChemicalProbesOrigin(FieldTargetsChemicalProbes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsChemicalProbesProbeMinerScore(DatasetField):
+class FieldTargetsChemicalProbesProbeMinerScore(FieldTargetsChemicalProbes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsChemicalProbesProbesDrugsScore(DatasetField):
+class FieldTargetsChemicalProbesProbesDrugsScore(FieldTargetsChemicalProbes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsChemicalProbesScoreInCells(DatasetField):
+class FieldTargetsChemicalProbesScoreInCells(FieldTargetsChemicalProbes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsChemicalProbesScoreInOrganisms(DatasetField):
+class FieldTargetsChemicalProbesScoreInOrganisms(FieldTargetsChemicalProbes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsChemicalProbesTargetFromSourceId(DatasetField):
+class FieldTargetsChemicalProbesTargetFromSourceId(FieldTargetsChemicalProbes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsChemicalProbesUrls(DatasetField):
+class FieldTargetsChemicalProbesUrls(FieldTargetsChemicalProbes.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4529,22 +4869,26 @@ class FieldTargetsChemicalProbesUrls(DatasetField):
     f_nice_name: Final[type["FieldTargetsChemicalProbesUrlsNiceName"]]
     f_url: Final[type["FieldTargetsChemicalProbesUrlsUrl"]]
 
+    class Field(FieldTargetsChemicalProbes.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsChemicalProbesUrlsNiceName(DatasetField):
+
+class FieldTargetsChemicalProbesUrlsNiceName(FieldTargetsChemicalProbesUrls.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsChemicalProbesUrlsUrl(DatasetField):
+class FieldTargetsChemicalProbesUrlsUrl(FieldTargetsChemicalProbesUrls.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsHomologues(DatasetField):
+class FieldTargetsHomologues(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4559,71 +4903,75 @@ class FieldTargetsHomologues(DatasetField):
     f_target_percentage_identity: Final[type["FieldTargetsHomologuesTargetPercentageIdentity"]]
     f_priority: Final[type["FieldTargetsHomologuesPriority"]]
 
+    class Field(DatasetTargets.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsHomologuesSpeciesId(DatasetField):
+
+class FieldTargetsHomologuesSpeciesId(FieldTargetsHomologues.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsHomologuesSpeciesName(DatasetField):
+class FieldTargetsHomologuesSpeciesName(FieldTargetsHomologues.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsHomologuesHomologyType(DatasetField):
+class FieldTargetsHomologuesHomologyType(FieldTargetsHomologues.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsHomologuesTargetGeneId(DatasetField):
+class FieldTargetsHomologuesTargetGeneId(FieldTargetsHomologues.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsHomologuesIsHighConfidence(DatasetField):
+class FieldTargetsHomologuesIsHighConfidence(FieldTargetsHomologues.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsHomologuesTargetGeneSymbol(DatasetField):
+class FieldTargetsHomologuesTargetGeneSymbol(FieldTargetsHomologues.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsHomologuesQueryPercentageIdentity(DatasetField):
+class FieldTargetsHomologuesQueryPercentageIdentity(FieldTargetsHomologues.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsHomologuesTargetPercentageIdentity(DatasetField):
+class FieldTargetsHomologuesTargetPercentageIdentity(FieldTargetsHomologues.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsHomologuesPriority(DatasetField):
+class FieldTargetsHomologuesPriority(FieldTargetsHomologues.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsTractability(DatasetField):
+class FieldTargetsTractability(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4632,29 +4980,33 @@ class FieldTargetsTractability(DatasetField):
     f_id: Final[type["FieldTargetsTractabilityId"]]
     f_value: Final[type["FieldTargetsTractabilityValue"]]
 
+    class Field(DatasetTargets.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsTractabilityModality(DatasetField):
+
+class FieldTargetsTractabilityModality(FieldTargetsTractability.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsTractabilityId(DatasetField):
+class FieldTargetsTractabilityId(FieldTargetsTractability.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsTractabilityValue(DatasetField):
+class FieldTargetsTractabilityValue(FieldTargetsTractability.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSafetyLiabilities(DatasetField):
+class FieldTargetsSafetyLiabilities(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4668,22 +5020,26 @@ class FieldTargetsSafetyLiabilities(DatasetField):
     f_url: Final[type["FieldTargetsSafetyLiabilitiesUrl"]]
     f_study: Final[type["FieldTargetsSafetyLiabilitiesStudy"]]
 
+    class Field(DatasetTargets.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsSafetyLiabilitiesEvent(DatasetField):
+
+class FieldTargetsSafetyLiabilitiesEvent(FieldTargetsSafetyLiabilities.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSafetyLiabilitiesEventId(DatasetField):
+class FieldTargetsSafetyLiabilitiesEventId(FieldTargetsSafetyLiabilities.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSafetyLiabilitiesEffects(DatasetField):
+class FieldTargetsSafetyLiabilitiesEffects(FieldTargetsSafetyLiabilities.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4691,22 +5047,26 @@ class FieldTargetsSafetyLiabilitiesEffects(DatasetField):
     f_direction: Final[type["FieldTargetsSafetyLiabilitiesEffectsDirection"]]
     f_dosing: Final[type["FieldTargetsSafetyLiabilitiesEffectsDosing"]]
 
+    class Field(FieldTargetsSafetyLiabilities.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsSafetyLiabilitiesEffectsDirection(DatasetField):
+
+class FieldTargetsSafetyLiabilitiesEffectsDirection(FieldTargetsSafetyLiabilitiesEffects.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSafetyLiabilitiesEffectsDosing(DatasetField):
+class FieldTargetsSafetyLiabilitiesEffectsDosing(FieldTargetsSafetyLiabilitiesEffects.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSafetyLiabilitiesBiosample(DatasetField):
+class FieldTargetsSafetyLiabilitiesBiosample(FieldTargetsSafetyLiabilities.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4717,64 +5077,68 @@ class FieldTargetsSafetyLiabilitiesBiosample(DatasetField):
     f_cell_format: Final[type["FieldTargetsSafetyLiabilitiesBiosampleCellFormat"]]
     f_cell_id: Final[type["FieldTargetsSafetyLiabilitiesBiosampleCellId"]]
 
+    class Field(FieldTargetsSafetyLiabilities.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsSafetyLiabilitiesBiosampleTissueLabel(DatasetField):
+
+class FieldTargetsSafetyLiabilitiesBiosampleTissueLabel(FieldTargetsSafetyLiabilitiesBiosample.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSafetyLiabilitiesBiosampleTissueId(DatasetField):
+class FieldTargetsSafetyLiabilitiesBiosampleTissueId(FieldTargetsSafetyLiabilitiesBiosample.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSafetyLiabilitiesBiosampleCellLabel(DatasetField):
+class FieldTargetsSafetyLiabilitiesBiosampleCellLabel(FieldTargetsSafetyLiabilitiesBiosample.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSafetyLiabilitiesBiosampleCellFormat(DatasetField):
+class FieldTargetsSafetyLiabilitiesBiosampleCellFormat(FieldTargetsSafetyLiabilitiesBiosample.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSafetyLiabilitiesBiosampleCellId(DatasetField):
+class FieldTargetsSafetyLiabilitiesBiosampleCellId(FieldTargetsSafetyLiabilitiesBiosample.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSafetyLiabilitiesDatasource(DatasetField):
+class FieldTargetsSafetyLiabilitiesDatasource(FieldTargetsSafetyLiabilities.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSafetyLiabilitiesLiterature(DatasetField):
+class FieldTargetsSafetyLiabilitiesLiterature(FieldTargetsSafetyLiabilities.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSafetyLiabilitiesUrl(DatasetField):
+class FieldTargetsSafetyLiabilitiesUrl(FieldTargetsSafetyLiabilities.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSafetyLiabilitiesStudy(DatasetField):
+class FieldTargetsSafetyLiabilitiesStudy(FieldTargetsSafetyLiabilities.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4783,29 +5147,33 @@ class FieldTargetsSafetyLiabilitiesStudy(DatasetField):
     f_description: Final[type["FieldTargetsSafetyLiabilitiesStudyDescription"]]
     f_type: Final[type["FieldTargetsSafetyLiabilitiesStudyType"]]
 
+    class Field(FieldTargetsSafetyLiabilities.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsSafetyLiabilitiesStudyName(DatasetField):
+
+class FieldTargetsSafetyLiabilitiesStudyName(FieldTargetsSafetyLiabilitiesStudy.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSafetyLiabilitiesStudyDescription(DatasetField):
+class FieldTargetsSafetyLiabilitiesStudyDescription(FieldTargetsSafetyLiabilitiesStudy.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsSafetyLiabilitiesStudyType(DatasetField):
+class FieldTargetsSafetyLiabilitiesStudyType(FieldTargetsSafetyLiabilitiesStudy.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsPathways(DatasetField):
+class FieldTargetsPathways(DatasetTargets.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4814,22 +5182,26 @@ class FieldTargetsPathways(DatasetField):
     f_pathway: Final[type["FieldTargetsPathwaysPathway"]]
     f_top_level_term: Final[type["FieldTargetsPathwaysTopLevelTerm"]]
 
+    class Field(DatasetTargets.Field):
+        """Parent class of types of all fields."""
+        pass
 
-class FieldTargetsPathwaysPathwayId(DatasetField):
+
+class FieldTargetsPathwaysPathwayId(FieldTargetsPathways.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsPathwaysPathway(DatasetField):
+class FieldTargetsPathwaysPathway(FieldTargetsPathways.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[list[type[DatasetField]]]
 
 
-class FieldTargetsPathwaysTopLevelTerm(DatasetField):
+class FieldTargetsPathwaysTopLevelTerm(FieldTargetsPathways.Field):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]

@@ -5,6 +5,12 @@ class {{ class_info.name }}({{ class_info.inherit_from }}):
     {% for attribute in class_info.late_attributes %}
     {{ attribute.name }}: {{ attribute.type }}
     {% endfor %}
+{% if class_info.inner_field_class %}
+
+    class Field({{ class_info.inner_field_class.inherit_from }}):
+        """Parent class of types of all fields."""
+        pass
+{% endif %}
 
 
 {% for dependant in class_info.dependants %}

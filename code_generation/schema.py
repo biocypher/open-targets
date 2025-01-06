@@ -15,6 +15,22 @@ from open_targets.data.metadata.model import (
 
 
 @dataclass
+class InnerFieldClassInfo:
+    """Info of an inner class named Field.
+
+    An inner class named `Field` serving as an interface of fields under a
+    parent class so that the type could be used to include the full set of
+    fields under a dataset or field.
+
+    Attributes:
+        inherit_from: The class that this inner class inherits from.
+
+    """
+
+    inherit_from: str
+
+
+@dataclass
 class LateAttribute:
     """Key and value of a class attribute that is not immediately assigned.
 
@@ -66,6 +82,7 @@ class ClassInfo:
     late_attributes: list[LateAttribute]
     dependants: list["ClassInfo"]
     inherit_from: str
+    inner_field_class: InnerFieldClassInfo | None
 
 
 def capitalise_first(s: str) -> str:
@@ -135,7 +152,8 @@ def recursive_get_field_class_info(
         name=class_name,
         late_attributes=attributes,
         dependants=dependants,
-        inherit_from="DatasetField",
+        inherit_from=f"{path[-1]}.Field",
+        inner_field_class=InnerFieldClassInfo(inherit_from=f"{path[-1]}.Field") if len(dependants) > 0 else None,
     )
 
 
@@ -173,6 +191,7 @@ def create_schema_render_context() -> dict[str, Any]:
                 late_attributes=attributes,
                 dependants=dependants,
                 inherit_from="Dataset",
+                inner_field_class=InnerFieldClassInfo(inherit_from="DatasetField"),
             ),
         )
 
