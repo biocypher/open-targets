@@ -4,26 +4,42 @@ This module provides convenient functions listing and downloading files from the
 Open Targets Platform FTP server.
 """
 
+import contextlib
 from collections.abc import Callable
 from dataclasses import dataclass
-from ftplib import FTP
+from ftplib import FTP, error_reply
 from io import BytesIO
 from typing import Any, Concatenate, ParamSpec, TypeVar
 
 P = ParamSpec("P")
 R = TypeVar("R")
 Self = TypeVar("Self", bound="FTPClient")
+_ftp_cache: dict["FTPClient", FTP] = {}
 
 
 def _ftp_client_connect(
     func: Callable[Concatenate[Self, FTP, P], R],
 ) -> Callable[Concatenate[Self, P], R]:
     def wrapper(client: Self, *args: P.args, **kwargs: P.kwargs) -> R:
-        ftp = FTP(client.host)  # noqa: S321
-        ftp.login()
-        result = func(client, ftp, *args, **kwargs)
-        ftp.close()
-        return result
+        if client in _ftp_cache:
+            ftp = _ftp_cache[client]
+        else:
+            ftp = FTP(client.host)  # noqa: S321
+            ftp.login()
+            _ftp_cache[client] = ftp
+
+        try:
+            # Test if the connection is still valid
+            ftp.voidcmd("NOOP")
+        except error_reply:
+            # Try to close the old connection anyway to avoid hanging
+            # connections
+            with contextlib.suppress(Exception):
+                ftp.close()
+            ftp = FTP(client.host)  # noqa: S321
+            ftp.login()
+
+        return func(client, ftp, *args, **kwargs)
 
     return wrapper
 
