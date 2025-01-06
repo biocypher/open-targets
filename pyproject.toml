@@ -1,3 +1,7 @@
+[tool.open-targets]
+data-version = "22.11"
+host = "ftp.ebi.ac.uk"
+
 [tool.poetry]
 name = "open_targets"
 version = "0.3.0"
@@ -11,13 +15,33 @@ pyspark = "^3.5.3"
 bioregistry = "^0.11.19"
 pandas = "^2.0.1"
 biocypher = "^0.6.0"
+pydantic = "^2.10.3"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+jinja2 = "^3.1.4"
+tomli = "^2.2.1"
+ruff = "^0.8.2"
 
 [tool.ruff]
+target-version = "py310"
 line-length = 120
+
+[tool.ruff.lint]
 select = ["ALL"]
 
 [tool.ruff.lint.pycodestyle]
 max-doc-length = 80
+
+[tool.ruff.lint.per-file-ignores]
+"test/*" = ["S101", "D100", "D103", "D104"]
+
+[tool.pyright]
+pythonVersion = "3.10"
+pythonPlatform = "All"
+# strict on main code, standard on test to allow private method access
+typeCheckingMode = "standard"
+strict = ["open_targets", "scripts"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
