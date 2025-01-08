@@ -30,6 +30,7 @@ class DatasetAOTFClickhouse(Dataset):
     f_row_score: Final[type["FieldAOTFClickhouseRowScore"]]
     f_disease_data: Final[type["FieldAOTFClickhouseDiseaseData"]]
     f_target_data: Final[type["FieldAOTFClickhouseTargetData"]]
+    fields: Final[list[type["DatasetAOTFClickhouse.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -107,6 +108,7 @@ class DatasetAdverseDrugReactions(Dataset):
     f_acterm: Final[type["FieldAdverseDrugReactionsActerm"]]
     f_llr: Final[type["FieldAdverseDrugReactionsLlr"]]
     f_meddra_code: Final[type["FieldAdverseDrugReactionsMeddraCode"]]
+    fields: Final[list[type["DatasetAdverseDrugReactions.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -219,6 +221,7 @@ class DatasetAdverseTargetReactions(Dataset):
     f_acterm: Final[type["FieldAdverseTargetReactionsActerm"]]
     f_llr: Final[type["FieldAdverseTargetReactionsLlr"]]
     f_meddra_code: Final[type["FieldAdverseTargetReactionsMeddraCode"]]
+    fields: Final[list[type["DatasetAdverseTargetReactions.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -324,6 +327,7 @@ class DatasetAssociationByDatasourceDirect(Dataset):
     f_target_id: Final[type["FieldAssociationByDatasourceDirectTargetId"]]
     f_score: Final[type["FieldAssociationByDatasourceDirectScore"]]
     f_evidence_count: Final[type["FieldAssociationByDatasourceDirectEvidenceCount"]]
+    fields: Final[list[type["DatasetAssociationByDatasourceDirect.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -380,6 +384,7 @@ class DatasetAssociationByDatasourceIndirect(Dataset):
     f_target_id: Final[type["FieldAssociationByDatasourceIndirectTargetId"]]
     f_score: Final[type["FieldAssociationByDatasourceIndirectScore"]]
     f_evidence_count: Final[type["FieldAssociationByDatasourceIndirectEvidenceCount"]]
+    fields: Final[list[type["DatasetAssociationByDatasourceIndirect.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -435,6 +440,7 @@ class DatasetAssociationByDatatypeDirect(Dataset):
     f_datatype_id: Final[type["FieldAssociationByDatatypeDirectDatatypeId"]]
     f_score: Final[type["FieldAssociationByDatatypeDirectScore"]]
     f_evidence_count: Final[type["FieldAssociationByDatatypeDirectEvidenceCount"]]
+    fields: Final[list[type["DatasetAssociationByDatatypeDirect.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -483,6 +489,7 @@ class DatasetAssociationByDatatypeIndirect(Dataset):
     f_datatype_id: Final[type["FieldAssociationByDatatypeIndirectDatatypeId"]]
     f_score: Final[type["FieldAssociationByDatatypeIndirectScore"]]
     f_evidence_count: Final[type["FieldAssociationByDatatypeIndirectEvidenceCount"]]
+    fields: Final[list[type["DatasetAssociationByDatatypeIndirect.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -530,6 +537,7 @@ class DatasetAssociationByOverallDirect(Dataset):
     f_target_id: Final[type["FieldAssociationByOverallDirectTargetId"]]
     f_score: Final[type["FieldAssociationByOverallDirectScore"]]
     f_evidence_count: Final[type["FieldAssociationByOverallDirectEvidenceCount"]]
+    fields: Final[list[type["DatasetAssociationByOverallDirect.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -570,6 +578,7 @@ class DatasetAssociationByOverallIndirect(Dataset):
     f_target_id: Final[type["FieldAssociationByOverallIndirectTargetId"]]
     f_score: Final[type["FieldAssociationByOverallIndirectScore"]]
     f_evidence_count: Final[type["FieldAssociationByOverallIndirectEvidenceCount"]]
+    fields: Final[list[type["DatasetAssociationByOverallIndirect.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -608,6 +617,7 @@ class DatasetBaselineExpression(Dataset):
     id: Final[str]
     f_id: Final[type["FieldBaselineExpressionId"]]
     f_tissues: Final[type["FieldBaselineExpressionTissues"]]
+    fields: Final[list[type["DatasetBaselineExpression.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -632,6 +642,7 @@ class FieldBaselineExpressionTissues(DatasetBaselineExpression.Field):
     f_anatomical_systems: Final[type["FieldBaselineExpressionTissuesAnatomicalSystems"]]
     f_rna: Final[type["FieldBaselineExpressionTissuesRna"]]
     f_protein: Final[type["FieldBaselineExpressionTissuesProtein"]]
+    fields: Final[list[type["FieldBaselineExpressionTissues.Field"]]]
 
     class Field(DatasetBaselineExpression.Field):
         """Parent class of types of all fields."""
@@ -675,6 +686,7 @@ class FieldBaselineExpressionTissuesRna(FieldBaselineExpressionTissues.Field):
     f_zscore: Final[type["FieldBaselineExpressionTissuesRnaZscore"]]
     f_level: Final[type["FieldBaselineExpressionTissuesRnaLevel"]]
     f_unit: Final[type["FieldBaselineExpressionTissuesRnaUnit"]]
+    fields: Final[list[type["FieldBaselineExpressionTissuesRna.Field"]]]
 
     class Field(FieldBaselineExpressionTissues.Field):
         """Parent class of types of all fields."""
@@ -717,6 +729,7 @@ class FieldBaselineExpressionTissuesProtein(FieldBaselineExpressionTissues.Field
     f_reliability: Final[type["FieldBaselineExpressionTissuesProteinReliability"]]
     f_level: Final[type["FieldBaselineExpressionTissuesProteinLevel"]]
     f_cell_type: Final[type["FieldBaselineExpressionTissuesProteinCellType"]]
+    fields: Final[list[type["FieldBaselineExpressionTissuesProtein.Field"]]]
 
     class Field(FieldBaselineExpressionTissues.Field):
         """Parent class of types of all fields."""
@@ -745,6 +758,7 @@ class FieldBaselineExpressionTissuesProteinCellType(FieldBaselineExpressionTissu
     f_name: Final[type["FieldBaselineExpressionTissuesProteinCellTypeName"]]
     f_reliability: Final[type["FieldBaselineExpressionTissuesProteinCellTypeReliability"]]
     f_level: Final[type["FieldBaselineExpressionTissuesProteinCellTypeLevel"]]
+    fields: Final[list[type["FieldBaselineExpressionTissuesProteinCellType.Field"]]]
 
     class Field(FieldBaselineExpressionTissuesProtein.Field):
         """Parent class of types of all fields."""
@@ -777,6 +791,7 @@ class DatasetDiseaseToPhenotype(Dataset):
     f_disease: Final[type["FieldDiseaseToPhenotypeDisease"]]
     f_phenotype: Final[type["FieldDiseaseToPhenotypePhenotype"]]
     f_evidence: Final[type["FieldDiseaseToPhenotypeEvidence"]]
+    fields: Final[list[type["DatasetDiseaseToPhenotype.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -816,6 +831,7 @@ class FieldDiseaseToPhenotypeEvidence(DatasetDiseaseToPhenotype.Field):
     f_references: Final[type["FieldDiseaseToPhenotypeEvidenceReferences"]]
     f_sex: Final[type["FieldDiseaseToPhenotypeEvidenceSex"]]
     f_resource: Final[type["FieldDiseaseToPhenotypeEvidenceResource"]]
+    fields: Final[list[type["FieldDiseaseToPhenotypeEvidence.Field"]]]
 
     class Field(DatasetDiseaseToPhenotype.Field):
         """Parent class of types of all fields."""
@@ -938,6 +954,7 @@ class DatasetDiseases(Dataset):
     f_therapeutic_areas: Final[type["FieldDiseasesTherapeuticAreas"]]
     f_indirect_location_ids: Final[type["FieldDiseasesIndirectLocationIds"]]
     f_ontology: Final[type["FieldDiseasesOntology"]]
+    fields: Final[list[type["DatasetDiseases.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -1016,6 +1033,7 @@ class FieldDiseasesSynonyms(DatasetDiseases.Field):
     f_has_exact_synonym: Final[type["FieldDiseasesSynonymsHasExactSynonym"]]
     f_has_narrow_synonym: Final[type["FieldDiseasesSynonymsHasNarrowSynonym"]]
     f_has_related_synonym: Final[type["FieldDiseasesSynonymsHasRelatedSynonym"]]
+    fields: Final[list[type["FieldDiseasesSynonyms.Field"]]]
 
     class Field(DatasetDiseases.Field):
         """Parent class of types of all fields."""
@@ -1093,6 +1111,7 @@ class FieldDiseasesOntology(DatasetDiseases.Field):
     f_is_therapeutic_area: Final[type["FieldDiseasesOntologyIsTherapeuticArea"]]
     f_leaf: Final[type["FieldDiseasesOntologyLeaf"]]
     f_sources: Final[type["FieldDiseasesOntologySources"]]
+    fields: Final[list[type["FieldDiseasesOntology.Field"]]]
 
     class Field(DatasetDiseases.Field):
         """Parent class of types of all fields."""
@@ -1120,6 +1139,7 @@ class FieldDiseasesOntologySources(FieldDiseasesOntology.Field):
     path: Final[list[type[DatasetField]]]
     f_url: Final[type["FieldDiseasesOntologySourcesUrl"]]
     f_name: Final[type["FieldDiseasesOntologySourcesName"]]
+    fields: Final[list[type["FieldDiseasesOntologySources.Field"]]]
 
     class Field(FieldDiseasesOntology.Field):
         """Parent class of types of all fields."""
@@ -1151,6 +1171,7 @@ class DatasetDrugWarnings(Dataset):
     f_warning_type: Final[type["FieldDrugWarningsWarningType"]]
     f_year: Final[type["FieldDrugWarningsYear"]]
     f_meddra_soc_code: Final[type["FieldDrugWarningsMeddraSocCode"]]
+    fields: Final[list[type["DatasetDrugWarnings.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -1200,6 +1221,7 @@ class FieldDrugWarningsReferences(DatasetDrugWarnings.Field):
     f_ref_id: Final[type["FieldDrugWarningsReferencesRefId"]]
     f_ref_type: Final[type["FieldDrugWarningsReferencesRefType"]]
     f_ref_url: Final[type["FieldDrugWarningsReferencesRefUrl"]]
+    fields: Final[list[type["FieldDrugWarningsReferences.Field"]]]
 
     class Field(DatasetDrugWarnings.Field):
         """Parent class of types of all fields."""
@@ -1255,6 +1277,7 @@ class DatasetEbisearchAssociations(Dataset):
     f_approved_symbol: Final[type["FieldEbisearchAssociationsApprovedSymbol"]]
     f_name: Final[type["FieldEbisearchAssociationsName"]]
     f_score: Final[type["FieldEbisearchAssociationsScore"]]
+    fields: Final[list[type["DatasetEbisearchAssociations.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -1303,6 +1326,7 @@ class DatasetEbisearchEvidence(Dataset):
     f_approved_symbol: Final[type["FieldEbisearchEvidenceApprovedSymbol"]]
     f_name: Final[type["FieldEbisearchEvidenceName"]]
     f_score: Final[type["FieldEbisearchEvidenceScore"]]
+    fields: Final[list[type["DatasetEbisearchEvidence.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -1426,6 +1450,7 @@ class DatasetEvidence(Dataset):
     f_disease_id: Final[type["FieldEvidenceDiseaseId"]]
     f_id: Final[type["FieldEvidenceId"]]
     f_score: Final[type["FieldEvidenceScore"]]
+    fields: Final[list[type["DatasetEvidence.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -1530,6 +1555,7 @@ class FieldEvidenceBiomarkers(DatasetEvidence.Field):
     path: Final[list[type[DatasetField]]]
     f_gene_expression: Final[type["FieldEvidenceBiomarkersGeneExpression"]]
     f_variant: Final[type["FieldEvidenceBiomarkersVariant"]]
+    fields: Final[list[type["FieldEvidenceBiomarkers.Field"]]]
 
     class Field(DatasetEvidence.Field):
         """Parent class of types of all fields."""
@@ -1543,6 +1569,7 @@ class FieldEvidenceBiomarkersGeneExpression(FieldEvidenceBiomarkers.Field):
     path: Final[list[type[DatasetField]]]
     f_id: Final[type["FieldEvidenceBiomarkersGeneExpressionId"]]
     f_name: Final[type["FieldEvidenceBiomarkersGeneExpressionName"]]
+    fields: Final[list[type["FieldEvidenceBiomarkersGeneExpression.Field"]]]
 
     class Field(FieldEvidenceBiomarkers.Field):
         """Parent class of types of all fields."""
@@ -1571,6 +1598,7 @@ class FieldEvidenceBiomarkersVariant(FieldEvidenceBiomarkers.Field):
     f_functional_consequence_id: Final[type["FieldEvidenceBiomarkersVariantFunctionalConsequenceId"]]
     f_id: Final[type["FieldEvidenceBiomarkersVariantId"]]
     f_name: Final[type["FieldEvidenceBiomarkersVariantName"]]
+    fields: Final[list[type["FieldEvidenceBiomarkersVariant.Field"]]]
 
     class Field(FieldEvidenceBiomarkers.Field):
         """Parent class of types of all fields."""
@@ -1684,6 +1712,7 @@ class FieldEvidenceDiseaseCellLines(DatasetEvidence.Field):
     f_name: Final[type["FieldEvidenceDiseaseCellLinesName"]]
     f_tissue: Final[type["FieldEvidenceDiseaseCellLinesTissue"]]
     f_tissue_id: Final[type["FieldEvidenceDiseaseCellLinesTissueId"]]
+    fields: Final[list[type["FieldEvidenceDiseaseCellLines.Field"]]]
 
     class Field(DatasetEvidence.Field):
         """Parent class of types of all fields."""
@@ -1746,6 +1775,7 @@ class FieldEvidenceDiseaseModelAssociatedHumanPhenotypes(DatasetEvidence.Field):
     path: Final[list[type[DatasetField]]]
     f_id: Final[type["FieldEvidenceDiseaseModelAssociatedHumanPhenotypesId"]]
     f_label: Final[type["FieldEvidenceDiseaseModelAssociatedHumanPhenotypesLabel"]]
+    fields: Final[list[type["FieldEvidenceDiseaseModelAssociatedHumanPhenotypes.Field"]]]
 
     class Field(DatasetEvidence.Field):
         """Parent class of types of all fields."""
@@ -1773,6 +1803,7 @@ class FieldEvidenceDiseaseModelAssociatedModelPhenotypes(DatasetEvidence.Field):
     path: Final[list[type[DatasetField]]]
     f_id: Final[type["FieldEvidenceDiseaseModelAssociatedModelPhenotypesId"]]
     f_label: Final[type["FieldEvidenceDiseaseModelAssociatedModelPhenotypesLabel"]]
+    fields: Final[list[type["FieldEvidenceDiseaseModelAssociatedModelPhenotypes.Field"]]]
 
     class Field(DatasetEvidence.Field):
         """Parent class of types of all fields."""
@@ -1844,6 +1875,7 @@ class FieldEvidenceMutatedSamples(DatasetEvidence.Field):
     f_number_mutated_samples: Final[type["FieldEvidenceMutatedSamplesNumberMutatedSamples"]]
     f_number_samples_tested: Final[type["FieldEvidenceMutatedSamplesNumberSamplesTested"]]
     f_number_samples_with_mutation_type: Final[type["FieldEvidenceMutatedSamplesNumberSamplesWithMutationType"]]
+    fields: Final[list[type["FieldEvidenceMutatedSamples.Field"]]]
 
     class Field(DatasetEvidence.Field):
         """Parent class of types of all fields."""
@@ -1920,6 +1952,7 @@ class FieldEvidencePathways(DatasetEvidence.Field):
     path: Final[list[type[DatasetField]]]
     f_id: Final[type["FieldEvidencePathwaysId"]]
     f_name: Final[type["FieldEvidencePathwaysName"]]
+    fields: Final[list[type["FieldEvidencePathways.Field"]]]
 
     class Field(DatasetEvidence.Field):
         """Parent class of types of all fields."""
@@ -2126,6 +2159,7 @@ class FieldEvidenceTextMiningSentences(DatasetEvidence.Field):
     f_t_end: Final[type["FieldEvidenceTextMiningSentencesTEnd"]]
     f_t_start: Final[type["FieldEvidenceTextMiningSentencesTStart"]]
     f_text: Final[type["FieldEvidenceTextMiningSentencesText"]]
+    fields: Final[list[type["FieldEvidenceTextMiningSentences.Field"]]]
 
     class Field(DatasetEvidence.Field):
         """Parent class of types of all fields."""
@@ -2181,6 +2215,7 @@ class FieldEvidenceUrls(DatasetEvidence.Field):
     path: Final[list[type[DatasetField]]]
     f_nice_name: Final[type["FieldEvidenceUrlsNiceName"]]
     f_url: Final[type["FieldEvidenceUrlsUrl"]]
+    fields: Final[list[type["FieldEvidenceUrls.Field"]]]
 
     class Field(DatasetEvidence.Field):
         """Parent class of types of all fields."""
@@ -2268,6 +2303,7 @@ class DatasetGo(Dataset):
     id: Final[str]
     f_id: Final[type["FieldGoId"]]
     f_name: Final[type["FieldGoName"]]
+    fields: Final[list[type["DatasetGo.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -2297,6 +2333,7 @@ class DatasetHpo(Dataset):
     f_namespace: Final[type["FieldHpoNamespace"]]
     f_obsolete_terms: Final[type["FieldHpoObsoleteTerms"]]
     f_parents: Final[type["FieldHpoParents"]]
+    fields: Final[list[type["DatasetHpo.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -2358,6 +2395,7 @@ class DatasetIndication(Dataset):
     f_indications: Final[type["FieldIndicationIndications"]]
     f_approved_indications: Final[type["FieldIndicationApprovedIndications"]]
     f_indication_count: Final[type["FieldIndicationIndicationCount"]]
+    fields: Final[list[type["DatasetIndication.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -2380,6 +2418,7 @@ class FieldIndicationIndications(DatasetIndication.Field):
     f_efo_name: Final[type["FieldIndicationIndicationsEfoName"]]
     f_references: Final[type["FieldIndicationIndicationsReferences"]]
     f_max_phase_for_indication: Final[type["FieldIndicationIndicationsMaxPhaseForIndication"]]
+    fields: Final[list[type["FieldIndicationIndications.Field"]]]
 
     class Field(DatasetIndication.Field):
         """Parent class of types of all fields."""
@@ -2407,6 +2446,7 @@ class FieldIndicationIndicationsReferences(FieldIndicationIndications.Field):
     path: Final[list[type[DatasetField]]]
     f_source: Final[type["FieldIndicationIndicationsReferencesSource"]]
     f_ids: Final[type["FieldIndicationIndicationsReferencesIds"]]
+    fields: Final[list[type["FieldIndicationIndicationsReferences.Field"]]]
 
     class Field(FieldIndicationIndications.Field):
         """Parent class of types of all fields."""
@@ -2461,6 +2501,7 @@ class DatasetInteraction(Dataset):
     f_species_b: Final[type["FieldInteractionSpeciesB"]]
     f_count: Final[type["FieldInteractionCount"]]
     f_scoring: Final[type["FieldInteractionScoring"]]
+    fields: Final[list[type["DatasetInteraction.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -2524,6 +2565,7 @@ class FieldInteractionSpeciesA(DatasetInteraction.Field):
     f_mnemonic: Final[type["FieldInteractionSpeciesAMnemonic"]]
     f_scientific_name: Final[type["FieldInteractionSpeciesAScientificName"]]
     f_taxon_id: Final[type["FieldInteractionSpeciesATaxonId"]]
+    fields: Final[list[type["FieldInteractionSpeciesA.Field"]]]
 
     class Field(DatasetInteraction.Field):
         """Parent class of types of all fields."""
@@ -2559,6 +2601,7 @@ class FieldInteractionSpeciesB(DatasetInteraction.Field):
     f_mnemonic: Final[type["FieldInteractionSpeciesBMnemonic"]]
     f_scientific_name: Final[type["FieldInteractionSpeciesBScientificName"]]
     f_taxon_id: Final[type["FieldInteractionSpeciesBTaxonId"]]
+    fields: Final[list[type["FieldInteractionSpeciesB.Field"]]]
 
     class Field(DatasetInteraction.Field):
         """Parent class of types of all fields."""
@@ -2627,6 +2670,7 @@ class DatasetInteractionEvidence(Dataset):
     f_host_organism_scientific_name: Final[type["FieldInteractionEvidenceHostOrganismScientificName"]]
     f_target_a: Final[type["FieldInteractionEvidenceTargetA"]]
     f_interaction_detection_method_mi_identifier: Final[type["FieldInteractionEvidenceInteractionDetectionMethodMiIdentifier"]]
+    fields: Final[list[type["DatasetInteractionEvidence.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -2661,6 +2705,7 @@ class FieldInteractionEvidenceParticipantDetectionMethodA(DatasetInteractionEvid
     path: Final[list[type[DatasetField]]]
     f_mi_identifier: Final[type["FieldInteractionEvidenceParticipantDetectionMethodAMiIdentifier"]]
     f_short_name: Final[type["FieldInteractionEvidenceParticipantDetectionMethodAShortName"]]
+    fields: Final[list[type["FieldInteractionEvidenceParticipantDetectionMethodA.Field"]]]
 
     class Field(DatasetInteractionEvidence.Field):
         """Parent class of types of all fields."""
@@ -2695,6 +2740,7 @@ class FieldInteractionEvidenceInteractionResources(DatasetInteractionEvidence.Fi
     path: Final[list[type[DatasetField]]]
     f_database_version: Final[type["FieldInteractionEvidenceInteractionResourcesDatabaseVersion"]]
     f_source_database: Final[type["FieldInteractionEvidenceInteractionResourcesSourceDatabase"]]
+    fields: Final[list[type["FieldInteractionEvidenceInteractionResources.Field"]]]
 
     class Field(DatasetInteractionEvidence.Field):
         """Parent class of types of all fields."""
@@ -2751,6 +2797,7 @@ class FieldInteractionEvidenceSpeciesB(DatasetInteractionEvidence.Field):
     f_mnemonic: Final[type["FieldInteractionEvidenceSpeciesBMnemonic"]]
     f_scientific_name: Final[type["FieldInteractionEvidenceSpeciesBScientificName"]]
     f_taxon_id: Final[type["FieldInteractionEvidenceSpeciesBTaxonId"]]
+    fields: Final[list[type["FieldInteractionEvidenceSpeciesB.Field"]]]
 
     class Field(DatasetInteractionEvidence.Field):
         """Parent class of types of all fields."""
@@ -2807,6 +2854,7 @@ class FieldInteractionEvidenceSpeciesA(DatasetInteractionEvidence.Field):
     f_mnemonic: Final[type["FieldInteractionEvidenceSpeciesAMnemonic"]]
     f_scientific_name: Final[type["FieldInteractionEvidenceSpeciesAScientificName"]]
     f_taxon_id: Final[type["FieldInteractionEvidenceSpeciesATaxonId"]]
+    fields: Final[list[type["FieldInteractionEvidenceSpeciesA.Field"]]]
 
     class Field(DatasetInteractionEvidence.Field):
         """Parent class of types of all fields."""
@@ -2883,6 +2931,7 @@ class FieldInteractionEvidenceParticipantDetectionMethodB(DatasetInteractionEvid
     path: Final[list[type[DatasetField]]]
     f_mi_identifier: Final[type["FieldInteractionEvidenceParticipantDetectionMethodBMiIdentifier"]]
     f_short_name: Final[type["FieldInteractionEvidenceParticipantDetectionMethodBShortName"]]
+    fields: Final[list[type["FieldInteractionEvidenceParticipantDetectionMethodB.Field"]]]
 
     class Field(DatasetInteractionEvidence.Field):
         """Parent class of types of all fields."""
@@ -2943,6 +2992,7 @@ class DatasetKnownDrugsAggregated(Dataset):
     f_drug_type: Final[type["FieldKnownDrugsAggregatedDrugType"]]
     f_mechanism_of_action: Final[type["FieldKnownDrugsAggregatedMechanismOfAction"]]
     f_target_name: Final[type["FieldKnownDrugsAggregatedTargetName"]]
+    fields: Final[list[type["DatasetKnownDrugsAggregated.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -2991,6 +3041,7 @@ class FieldKnownDrugsAggregatedUrls(DatasetKnownDrugsAggregated.Field):
     path: Final[list[type[DatasetField]]]
     f_nice_name: Final[type["FieldKnownDrugsAggregatedUrlsNiceName"]]
     f_url: Final[type["FieldKnownDrugsAggregatedUrlsUrl"]]
+    fields: Final[list[type["FieldKnownDrugsAggregatedUrls.Field"]]]
 
     class Field(DatasetKnownDrugsAggregated.Field):
         """Parent class of types of all fields."""
@@ -3097,6 +3148,7 @@ class DatasetMechanismOfAction(Dataset):
     f_target_type: Final[type["FieldMechanismOfActionTargetType"]]
     f_targets: Final[type["FieldMechanismOfActionTargets"]]
     f_references: Final[type["FieldMechanismOfActionReferences"]]
+    fields: Final[list[type["DatasetMechanismOfAction.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -3153,6 +3205,7 @@ class FieldMechanismOfActionReferences(DatasetMechanismOfAction.Field):
     f_source: Final[type["FieldMechanismOfActionReferencesSource"]]
     f_ids: Final[type["FieldMechanismOfActionReferencesIds"]]
     f_urls: Final[type["FieldMechanismOfActionReferencesUrls"]]
+    fields: Final[list[type["FieldMechanismOfActionReferences.Field"]]]
 
     class Field(DatasetMechanismOfAction.Field):
         """Parent class of types of all fields."""
@@ -3201,6 +3254,7 @@ class DatasetMolecule(Dataset):
     f_linked_diseases: Final[type["FieldMoleculeLinkedDiseases"]]
     f_linked_targets: Final[type["FieldMoleculeLinkedTargets"]]
     f_description: Final[type["FieldMoleculeDescription"]]
+    fields: Final[list[type["DatasetMolecule.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -3292,6 +3346,7 @@ class FieldMoleculeWithdrawnNotice(DatasetMolecule.Field):
     f_countries: Final[type["FieldMoleculeWithdrawnNoticeCountries"]]
     f_classes: Final[type["FieldMoleculeWithdrawnNoticeClasses"]]
     f_year: Final[type["FieldMoleculeWithdrawnNoticeYear"]]
+    fields: Final[list[type["FieldMoleculeWithdrawnNotice.Field"]]]
 
     class Field(DatasetMolecule.Field):
         """Parent class of types of all fields."""
@@ -3354,6 +3409,7 @@ class FieldMoleculeLinkedDiseases(DatasetMolecule.Field):
     path: Final[list[type[DatasetField]]]
     f_rows: Final[type["FieldMoleculeLinkedDiseasesRows"]]
     f_count: Final[type["FieldMoleculeLinkedDiseasesCount"]]
+    fields: Final[list[type["FieldMoleculeLinkedDiseases.Field"]]]
 
     class Field(DatasetMolecule.Field):
         """Parent class of types of all fields."""
@@ -3381,6 +3437,7 @@ class FieldMoleculeLinkedTargets(DatasetMolecule.Field):
     path: Final[list[type[DatasetField]]]
     f_rows: Final[type["FieldMoleculeLinkedTargetsRows"]]
     f_count: Final[type["FieldMoleculeLinkedTargetsCount"]]
+    fields: Final[list[type["FieldMoleculeLinkedTargets.Field"]]]
 
     class Field(DatasetMolecule.Field):
         """Parent class of types of all fields."""
@@ -3418,6 +3475,7 @@ class DatasetMousePhenotypes(Dataset):
     f_target_in_model: Final[type["FieldMousePhenotypesTargetInModel"]]
     f_target_in_model_ensembl_id: Final[type["FieldMousePhenotypesTargetInModelEnsemblId"]]
     f_target_in_model_mgi_id: Final[type["FieldMousePhenotypesTargetInModelMgiId"]]
+    fields: Final[list[type["DatasetMousePhenotypes.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -3433,6 +3491,7 @@ class FieldMousePhenotypesBiologicalModels(DatasetMousePhenotypes.Field):
     f_genetic_background: Final[type["FieldMousePhenotypesBiologicalModelsGeneticBackground"]]
     f_id: Final[type["FieldMousePhenotypesBiologicalModelsId"]]
     f_literature: Final[type["FieldMousePhenotypesBiologicalModelsLiterature"]]
+    fields: Final[list[type["FieldMousePhenotypesBiologicalModels.Field"]]]
 
     class Field(DatasetMousePhenotypes.Field):
         """Parent class of types of all fields."""
@@ -3474,6 +3533,7 @@ class FieldMousePhenotypesModelPhenotypeClasses(DatasetMousePhenotypes.Field):
     path: Final[list[type[DatasetField]]]
     f_id: Final[type["FieldMousePhenotypesModelPhenotypeClassesId"]]
     f_label: Final[type["FieldMousePhenotypesModelPhenotypeClassesLabel"]]
+    fields: Final[list[type["FieldMousePhenotypesModelPhenotypeClasses.Field"]]]
 
     class Field(DatasetMousePhenotypes.Field):
         """Parent class of types of all fields."""
@@ -3545,6 +3605,7 @@ class DatasetReactome(Dataset):
     f_children: Final[type["FieldReactomeChildren"]]
     f_parents: Final[type["FieldReactomeParents"]]
     f_path: Final[type["FieldReactomePath"]]
+    fields: Final[list[type["DatasetReactome.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -3614,6 +3675,7 @@ class DatasetSearchDisease(Dataset):
     f_terms_25: Final[type["FieldSearchDiseaseTerms25"]]
     f_terms_5: Final[type["FieldSearchDiseaseTerms5"]]
     f_multiplier: Final[type["FieldSearchDiseaseMultiplier"]]
+    fields: Final[list[type["DatasetSearchDisease.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -3718,6 +3780,7 @@ class DatasetSearchDrug(Dataset):
     f_terms_25: Final[type["FieldSearchDrugTerms25"]]
     f_terms_5: Final[type["FieldSearchDrugTerms5"]]
     f_multiplier: Final[type["FieldSearchDrugMultiplier"]]
+    fields: Final[list[type["DatasetSearchDrug.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -3822,6 +3885,7 @@ class DatasetSearchTarget(Dataset):
     f_terms_25: Final[type["FieldSearchTargetTerms25"]]
     f_terms_5: Final[type["FieldSearchTargetTerms5"]]
     f_multiplier: Final[type["FieldSearchTargetMultiplier"]]
+    fields: Final[list[type["DatasetSearchTarget.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -3920,6 +3984,7 @@ class DatasetSignificantAdverseDrugReactions(Dataset):
     f_llr: Final[type["FieldSignificantAdverseDrugReactionsLlr"]]
     f_critval: Final[type["FieldSignificantAdverseDrugReactionsCritval"]]
     f_meddra_code: Final[type["FieldSignificantAdverseDrugReactionsMeddraCode"]]
+    fields: Final[list[type["DatasetSignificantAdverseDrugReactions.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -3976,6 +4041,7 @@ class DatasetSignificantAdverseTargetReactions(Dataset):
     f_llr: Final[type["FieldSignificantAdverseTargetReactionsLlr"]]
     f_critval: Final[type["FieldSignificantAdverseTargetReactionsCritval"]]
     f_meddra_code: Final[type["FieldSignificantAdverseTargetReactionsMeddraCode"]]
+    fields: Final[list[type["DatasetSignificantAdverseTargetReactions.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -4054,6 +4120,7 @@ class DatasetTargets(Dataset):
     f_tractability: Final[type["FieldTargetsTractability"]]
     f_safety_liabilities: Final[type["FieldTargetsSafetyLiabilities"]]
     f_pathways: Final[type["FieldTargetsPathways"]]
+    fields: Final[list[type["DatasetTargets.Field"]]]
 
     class Field(DatasetField):
         """Parent class of types of all fields."""
@@ -4098,6 +4165,7 @@ class FieldTargetsCanonicalTranscript(DatasetTargets.Field):
     f_start: Final[type["FieldTargetsCanonicalTranscriptStart"]]
     f_end: Final[type["FieldTargetsCanonicalTranscriptEnd"]]
     f_strand: Final[type["FieldTargetsCanonicalTranscriptStrand"]]
+    fields: Final[list[type["FieldTargetsCanonicalTranscript.Field"]]]
 
     class Field(DatasetTargets.Field):
         """Parent class of types of all fields."""
@@ -4155,6 +4223,7 @@ class FieldTargetsGenomicLocation(DatasetTargets.Field):
     f_start: Final[type["FieldTargetsGenomicLocationStart"]]
     f_end: Final[type["FieldTargetsGenomicLocationEnd"]]
     f_strand: Final[type["FieldTargetsGenomicLocationStrand"]]
+    fields: Final[list[type["FieldTargetsGenomicLocation.Field"]]]
 
     class Field(DatasetTargets.Field):
         """Parent class of types of all fields."""
@@ -4214,6 +4283,7 @@ class FieldTargetsGo(DatasetTargets.Field):
     f_aspect: Final[type["FieldTargetsGoAspect"]]
     f_gene_product: Final[type["FieldTargetsGoGeneProduct"]]
     f_eco_id: Final[type["FieldTargetsGoEcoId"]]
+    fields: Final[list[type["FieldTargetsGo.Field"]]]
 
     class Field(DatasetTargets.Field):
         """Parent class of types of all fields."""
@@ -4269,6 +4339,7 @@ class FieldTargetsHallmarks(DatasetTargets.Field):
     path: Final[list[type[DatasetField]]]
     f_attributes: Final[type["FieldTargetsHallmarksAttributes"]]
     f_cancer_hallmarks: Final[type["FieldTargetsHallmarksCancerHallmarks"]]
+    fields: Final[list[type["FieldTargetsHallmarks.Field"]]]
 
     class Field(DatasetTargets.Field):
         """Parent class of types of all fields."""
@@ -4283,6 +4354,7 @@ class FieldTargetsHallmarksAttributes(FieldTargetsHallmarks.Field):
     f_pmid: Final[type["FieldTargetsHallmarksAttributesPmid"]]
     f_description: Final[type["FieldTargetsHallmarksAttributesDescription"]]
     f_attribute_name: Final[type["FieldTargetsHallmarksAttributesAttributeName"]]
+    fields: Final[list[type["FieldTargetsHallmarksAttributes.Field"]]]
 
     class Field(FieldTargetsHallmarks.Field):
         """Parent class of types of all fields."""
@@ -4319,6 +4391,7 @@ class FieldTargetsHallmarksCancerHallmarks(FieldTargetsHallmarks.Field):
     f_description: Final[type["FieldTargetsHallmarksCancerHallmarksDescription"]]
     f_impact: Final[type["FieldTargetsHallmarksCancerHallmarksImpact"]]
     f_label: Final[type["FieldTargetsHallmarksCancerHallmarksLabel"]]
+    fields: Final[list[type["FieldTargetsHallmarksCancerHallmarks.Field"]]]
 
     class Field(FieldTargetsHallmarks.Field):
         """Parent class of types of all fields."""
@@ -4360,6 +4433,7 @@ class FieldTargetsSynonyms(DatasetTargets.Field):
     path: Final[list[type[DatasetField]]]
     f_label: Final[type["FieldTargetsSynonymsLabel"]]
     f_source: Final[type["FieldTargetsSynonymsSource"]]
+    fields: Final[list[type["FieldTargetsSynonyms.Field"]]]
 
     class Field(DatasetTargets.Field):
         """Parent class of types of all fields."""
@@ -4387,6 +4461,7 @@ class FieldTargetsSymbolSynonyms(DatasetTargets.Field):
     path: Final[list[type[DatasetField]]]
     f_label: Final[type["FieldTargetsSymbolSynonymsLabel"]]
     f_source: Final[type["FieldTargetsSymbolSynonymsSource"]]
+    fields: Final[list[type["FieldTargetsSymbolSynonyms.Field"]]]
 
     class Field(DatasetTargets.Field):
         """Parent class of types of all fields."""
@@ -4414,6 +4489,7 @@ class FieldTargetsNameSynonyms(DatasetTargets.Field):
     path: Final[list[type[DatasetField]]]
     f_label: Final[type["FieldTargetsNameSynonymsLabel"]]
     f_source: Final[type["FieldTargetsNameSynonymsSource"]]
+    fields: Final[list[type["FieldTargetsNameSynonyms.Field"]]]
 
     class Field(DatasetTargets.Field):
         """Parent class of types of all fields."""
@@ -4450,6 +4526,7 @@ class FieldTargetsSubcellularLocations(DatasetTargets.Field):
     f_source: Final[type["FieldTargetsSubcellularLocationsSource"]]
     f_term_sl: Final[type["FieldTargetsSubcellularLocationsTermSl"]]
     f_label_sl: Final[type["FieldTargetsSubcellularLocationsLabelSl"]]
+    fields: Final[list[type["FieldTargetsSubcellularLocations.Field"]]]
 
     class Field(DatasetTargets.Field):
         """Parent class of types of all fields."""
@@ -4492,6 +4569,7 @@ class FieldTargetsTargetClass(DatasetTargets.Field):
     f_id: Final[type["FieldTargetsTargetClassId"]]
     f_label: Final[type["FieldTargetsTargetClassLabel"]]
     f_level: Final[type["FieldTargetsTargetClassLevel"]]
+    fields: Final[list[type["FieldTargetsTargetClass.Field"]]]
 
     class Field(DatasetTargets.Field):
         """Parent class of types of all fields."""
@@ -4526,6 +4604,7 @@ class FieldTargetsObsoleteSymbols(DatasetTargets.Field):
     path: Final[list[type[DatasetField]]]
     f_label: Final[type["FieldTargetsObsoleteSymbolsLabel"]]
     f_source: Final[type["FieldTargetsObsoleteSymbolsSource"]]
+    fields: Final[list[type["FieldTargetsObsoleteSymbols.Field"]]]
 
     class Field(DatasetTargets.Field):
         """Parent class of types of all fields."""
@@ -4553,6 +4632,7 @@ class FieldTargetsObsoleteNames(DatasetTargets.Field):
     path: Final[list[type[DatasetField]]]
     f_label: Final[type["FieldTargetsObsoleteNamesLabel"]]
     f_source: Final[type["FieldTargetsObsoleteNamesSource"]]
+    fields: Final[list[type["FieldTargetsObsoleteNames.Field"]]]
 
     class Field(DatasetTargets.Field):
         """Parent class of types of all fields."""
@@ -4588,6 +4668,7 @@ class FieldTargetsConstraint(DatasetTargets.Field):
     f_upper_rank: Final[type["FieldTargetsConstraintUpperRank"]]
     f_upper_bin: Final[type["FieldTargetsConstraintUpperBin"]]
     f_upper_bin_6: Final[type["FieldTargetsConstraintUpperBin6"]]
+    fields: Final[list[type["FieldTargetsConstraint.Field"]]]
 
     class Field(DatasetTargets.Field):
         """Parent class of types of all fields."""
@@ -4673,6 +4754,7 @@ class FieldTargetsTep(DatasetTargets.Field):
     f_description: Final[type["FieldTargetsTepDescription"]]
     f_therapeutic_area: Final[type["FieldTargetsTepTherapeuticArea"]]
     f_url: Final[type["FieldTargetsTepUrl"]]
+    fields: Final[list[type["FieldTargetsTep.Field"]]]
 
     class Field(DatasetTargets.Field):
         """Parent class of types of all fields."""
@@ -4714,6 +4796,7 @@ class FieldTargetsProteinIds(DatasetTargets.Field):
     path: Final[list[type[DatasetField]]]
     f_id: Final[type["FieldTargetsProteinIdsId"]]
     f_source: Final[type["FieldTargetsProteinIdsSource"]]
+    fields: Final[list[type["FieldTargetsProteinIds.Field"]]]
 
     class Field(DatasetTargets.Field):
         """Parent class of types of all fields."""
@@ -4741,6 +4824,7 @@ class FieldTargetsDbXrefs(DatasetTargets.Field):
     path: Final[list[type[DatasetField]]]
     f_id: Final[type["FieldTargetsDbXrefsId"]]
     f_source: Final[type["FieldTargetsDbXrefsSource"]]
+    fields: Final[list[type["FieldTargetsDbXrefs.Field"]]]
 
     class Field(DatasetTargets.Field):
         """Parent class of types of all fields."""
@@ -4778,6 +4862,7 @@ class FieldTargetsChemicalProbes(DatasetTargets.Field):
     f_score_in_organisms: Final[type["FieldTargetsChemicalProbesScoreInOrganisms"]]
     f_target_from_source_id: Final[type["FieldTargetsChemicalProbesTargetFromSourceId"]]
     f_urls: Final[type["FieldTargetsChemicalProbesUrls"]]
+    fields: Final[list[type["FieldTargetsChemicalProbes.Field"]]]
 
     class Field(DatasetTargets.Field):
         """Parent class of types of all fields."""
@@ -4868,6 +4953,7 @@ class FieldTargetsChemicalProbesUrls(FieldTargetsChemicalProbes.Field):
     path: Final[list[type[DatasetField]]]
     f_nice_name: Final[type["FieldTargetsChemicalProbesUrlsNiceName"]]
     f_url: Final[type["FieldTargetsChemicalProbesUrlsUrl"]]
+    fields: Final[list[type["FieldTargetsChemicalProbesUrls.Field"]]]
 
     class Field(FieldTargetsChemicalProbes.Field):
         """Parent class of types of all fields."""
@@ -4902,6 +4988,7 @@ class FieldTargetsHomologues(DatasetTargets.Field):
     f_query_percentage_identity: Final[type["FieldTargetsHomologuesQueryPercentageIdentity"]]
     f_target_percentage_identity: Final[type["FieldTargetsHomologuesTargetPercentageIdentity"]]
     f_priority: Final[type["FieldTargetsHomologuesPriority"]]
+    fields: Final[list[type["FieldTargetsHomologues.Field"]]]
 
     class Field(DatasetTargets.Field):
         """Parent class of types of all fields."""
@@ -4979,6 +5066,7 @@ class FieldTargetsTractability(DatasetTargets.Field):
     f_modality: Final[type["FieldTargetsTractabilityModality"]]
     f_id: Final[type["FieldTargetsTractabilityId"]]
     f_value: Final[type["FieldTargetsTractabilityValue"]]
+    fields: Final[list[type["FieldTargetsTractability.Field"]]]
 
     class Field(DatasetTargets.Field):
         """Parent class of types of all fields."""
@@ -5019,6 +5107,7 @@ class FieldTargetsSafetyLiabilities(DatasetTargets.Field):
     f_literature: Final[type["FieldTargetsSafetyLiabilitiesLiterature"]]
     f_url: Final[type["FieldTargetsSafetyLiabilitiesUrl"]]
     f_study: Final[type["FieldTargetsSafetyLiabilitiesStudy"]]
+    fields: Final[list[type["FieldTargetsSafetyLiabilities.Field"]]]
 
     class Field(DatasetTargets.Field):
         """Parent class of types of all fields."""
@@ -5046,6 +5135,7 @@ class FieldTargetsSafetyLiabilitiesEffects(FieldTargetsSafetyLiabilities.Field):
     path: Final[list[type[DatasetField]]]
     f_direction: Final[type["FieldTargetsSafetyLiabilitiesEffectsDirection"]]
     f_dosing: Final[type["FieldTargetsSafetyLiabilitiesEffectsDosing"]]
+    fields: Final[list[type["FieldTargetsSafetyLiabilitiesEffects.Field"]]]
 
     class Field(FieldTargetsSafetyLiabilities.Field):
         """Parent class of types of all fields."""
@@ -5076,6 +5166,7 @@ class FieldTargetsSafetyLiabilitiesBiosample(FieldTargetsSafetyLiabilities.Field
     f_cell_label: Final[type["FieldTargetsSafetyLiabilitiesBiosampleCellLabel"]]
     f_cell_format: Final[type["FieldTargetsSafetyLiabilitiesBiosampleCellFormat"]]
     f_cell_id: Final[type["FieldTargetsSafetyLiabilitiesBiosampleCellId"]]
+    fields: Final[list[type["FieldTargetsSafetyLiabilitiesBiosample.Field"]]]
 
     class Field(FieldTargetsSafetyLiabilities.Field):
         """Parent class of types of all fields."""
@@ -5146,6 +5237,7 @@ class FieldTargetsSafetyLiabilitiesStudy(FieldTargetsSafetyLiabilities.Field):
     f_name: Final[type["FieldTargetsSafetyLiabilitiesStudyName"]]
     f_description: Final[type["FieldTargetsSafetyLiabilitiesStudyDescription"]]
     f_type: Final[type["FieldTargetsSafetyLiabilitiesStudyType"]]
+    fields: Final[list[type["FieldTargetsSafetyLiabilitiesStudy.Field"]]]
 
     class Field(FieldTargetsSafetyLiabilities.Field):
         """Parent class of types of all fields."""
@@ -5181,6 +5273,7 @@ class FieldTargetsPathways(DatasetTargets.Field):
     f_pathway_id: Final[type["FieldTargetsPathwaysPathwayId"]]
     f_pathway: Final[type["FieldTargetsPathwaysPathway"]]
     f_top_level_term: Final[type["FieldTargetsPathwaysTopLevelTerm"]]
+    fields: Final[list[type["FieldTargetsPathways.Field"]]]
 
     class Field(DatasetTargets.Field):
         """Parent class of types of all fields."""
@@ -5218,6 +5311,7 @@ DatasetAOTFClickhouse.f_datatype_id = FieldAOTFClickhouseDatatypeId
 DatasetAOTFClickhouse.f_row_score = FieldAOTFClickhouseRowScore
 DatasetAOTFClickhouse.f_disease_data = FieldAOTFClickhouseDiseaseData
 DatasetAOTFClickhouse.f_target_data = FieldAOTFClickhouseTargetData
+DatasetAOTFClickhouse.fields = [FieldAOTFClickhouseRowId, FieldAOTFClickhouseDiseaseId, FieldAOTFClickhouseTargetId, FieldAOTFClickhouseDatasourceId, FieldAOTFClickhouseDatatypeId, FieldAOTFClickhouseRowScore, FieldAOTFClickhouseDiseaseData, FieldAOTFClickhouseTargetData]
 
 FieldAOTFClickhouseRowId.name = "row_id"
 FieldAOTFClickhouseRowId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -5273,6 +5367,7 @@ DatasetAdverseDrugReactions.f_cterm = FieldAdverseDrugReactionsCterm
 DatasetAdverseDrugReactions.f_acterm = FieldAdverseDrugReactionsActerm
 DatasetAdverseDrugReactions.f_llr = FieldAdverseDrugReactionsLlr
 DatasetAdverseDrugReactions.f_meddra_code = FieldAdverseDrugReactionsMeddraCode
+DatasetAdverseDrugReactions.fields = [FieldAdverseDrugReactionsReactionReactionmeddrapt, FieldAdverseDrugReactionsUniqReportIdsByReaction, FieldAdverseDrugReactionsUniqReportIdsByDrug, FieldAdverseDrugReactionsA, FieldAdverseDrugReactionsChemblId, FieldAdverseDrugReactionsC, FieldAdverseDrugReactionsB, FieldAdverseDrugReactionsD, FieldAdverseDrugReactionsAterm, FieldAdverseDrugReactionsCterm, FieldAdverseDrugReactionsActerm, FieldAdverseDrugReactionsLlr, FieldAdverseDrugReactionsMeddraCode]
 
 FieldAdverseDrugReactionsReactionReactionmeddrapt.name = "reaction_reactionmeddrapt"
 FieldAdverseDrugReactionsReactionReactionmeddrapt.data_type = OpenTargetsDatasetFieldType.STRING
@@ -5353,6 +5448,7 @@ DatasetAdverseTargetReactions.f_cterm = FieldAdverseTargetReactionsCterm
 DatasetAdverseTargetReactions.f_acterm = FieldAdverseTargetReactionsActerm
 DatasetAdverseTargetReactions.f_llr = FieldAdverseTargetReactionsLlr
 DatasetAdverseTargetReactions.f_meddra_code = FieldAdverseTargetReactionsMeddraCode
+DatasetAdverseTargetReactions.fields = [FieldAdverseTargetReactionsReactionReactionmeddrapt, FieldAdverseTargetReactionsUniqReportIdsByReaction, FieldAdverseTargetReactionsUniqReportIdsByTarget, FieldAdverseTargetReactionsA, FieldAdverseTargetReactionsTargetId, FieldAdverseTargetReactionsC, FieldAdverseTargetReactionsB, FieldAdverseTargetReactionsD, FieldAdverseTargetReactionsAterm, FieldAdverseTargetReactionsCterm, FieldAdverseTargetReactionsActerm, FieldAdverseTargetReactionsLlr, FieldAdverseTargetReactionsMeddraCode]
 
 FieldAdverseTargetReactionsReactionReactionmeddrapt.name = "reaction_reactionmeddrapt"
 FieldAdverseTargetReactionsReactionReactionmeddrapt.data_type = OpenTargetsDatasetFieldType.STRING
@@ -5426,6 +5522,7 @@ DatasetAssociationByDatasourceDirect.f_disease_id = FieldAssociationByDatasource
 DatasetAssociationByDatasourceDirect.f_target_id = FieldAssociationByDatasourceDirectTargetId
 DatasetAssociationByDatasourceDirect.f_score = FieldAssociationByDatasourceDirectScore
 DatasetAssociationByDatasourceDirect.f_evidence_count = FieldAssociationByDatasourceDirectEvidenceCount
+DatasetAssociationByDatasourceDirect.fields = [FieldAssociationByDatasourceDirectDatatypeId, FieldAssociationByDatasourceDirectDatasourceId, FieldAssociationByDatasourceDirectDiseaseId, FieldAssociationByDatasourceDirectTargetId, FieldAssociationByDatasourceDirectScore, FieldAssociationByDatasourceDirectEvidenceCount]
 
 FieldAssociationByDatasourceDirectDatatypeId.name = "datatypeId"
 FieldAssociationByDatasourceDirectDatatypeId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -5464,6 +5561,7 @@ DatasetAssociationByDatasourceIndirect.f_disease_id = FieldAssociationByDatasour
 DatasetAssociationByDatasourceIndirect.f_target_id = FieldAssociationByDatasourceIndirectTargetId
 DatasetAssociationByDatasourceIndirect.f_score = FieldAssociationByDatasourceIndirectScore
 DatasetAssociationByDatasourceIndirect.f_evidence_count = FieldAssociationByDatasourceIndirectEvidenceCount
+DatasetAssociationByDatasourceIndirect.fields = [FieldAssociationByDatasourceIndirectDatatypeId, FieldAssociationByDatasourceIndirectDatasourceId, FieldAssociationByDatasourceIndirectDiseaseId, FieldAssociationByDatasourceIndirectTargetId, FieldAssociationByDatasourceIndirectScore, FieldAssociationByDatasourceIndirectEvidenceCount]
 
 FieldAssociationByDatasourceIndirectDatatypeId.name = "datatypeId"
 FieldAssociationByDatasourceIndirectDatatypeId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -5501,6 +5599,7 @@ DatasetAssociationByDatatypeDirect.f_target_id = FieldAssociationByDatatypeDirec
 DatasetAssociationByDatatypeDirect.f_datatype_id = FieldAssociationByDatatypeDirectDatatypeId
 DatasetAssociationByDatatypeDirect.f_score = FieldAssociationByDatatypeDirectScore
 DatasetAssociationByDatatypeDirect.f_evidence_count = FieldAssociationByDatatypeDirectEvidenceCount
+DatasetAssociationByDatatypeDirect.fields = [FieldAssociationByDatatypeDirectDiseaseId, FieldAssociationByDatatypeDirectTargetId, FieldAssociationByDatatypeDirectDatatypeId, FieldAssociationByDatatypeDirectScore, FieldAssociationByDatatypeDirectEvidenceCount]
 
 FieldAssociationByDatatypeDirectDiseaseId.name = "diseaseId"
 FieldAssociationByDatatypeDirectDiseaseId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -5533,6 +5632,7 @@ DatasetAssociationByDatatypeIndirect.f_target_id = FieldAssociationByDatatypeInd
 DatasetAssociationByDatatypeIndirect.f_datatype_id = FieldAssociationByDatatypeIndirectDatatypeId
 DatasetAssociationByDatatypeIndirect.f_score = FieldAssociationByDatatypeIndirectScore
 DatasetAssociationByDatatypeIndirect.f_evidence_count = FieldAssociationByDatatypeIndirectEvidenceCount
+DatasetAssociationByDatatypeIndirect.fields = [FieldAssociationByDatatypeIndirectDiseaseId, FieldAssociationByDatatypeIndirectTargetId, FieldAssociationByDatatypeIndirectDatatypeId, FieldAssociationByDatatypeIndirectScore, FieldAssociationByDatatypeIndirectEvidenceCount]
 
 FieldAssociationByDatatypeIndirectDiseaseId.name = "diseaseId"
 FieldAssociationByDatatypeIndirectDiseaseId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -5564,6 +5664,7 @@ DatasetAssociationByOverallDirect.f_disease_id = FieldAssociationByOverallDirect
 DatasetAssociationByOverallDirect.f_target_id = FieldAssociationByOverallDirectTargetId
 DatasetAssociationByOverallDirect.f_score = FieldAssociationByOverallDirectScore
 DatasetAssociationByOverallDirect.f_evidence_count = FieldAssociationByOverallDirectEvidenceCount
+DatasetAssociationByOverallDirect.fields = [FieldAssociationByOverallDirectDiseaseId, FieldAssociationByOverallDirectTargetId, FieldAssociationByOverallDirectScore, FieldAssociationByOverallDirectEvidenceCount]
 
 FieldAssociationByOverallDirectDiseaseId.name = "diseaseId"
 FieldAssociationByOverallDirectDiseaseId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -5590,6 +5691,7 @@ DatasetAssociationByOverallIndirect.f_disease_id = FieldAssociationByOverallIndi
 DatasetAssociationByOverallIndirect.f_target_id = FieldAssociationByOverallIndirectTargetId
 DatasetAssociationByOverallIndirect.f_score = FieldAssociationByOverallIndirectScore
 DatasetAssociationByOverallIndirect.f_evidence_count = FieldAssociationByOverallIndirectEvidenceCount
+DatasetAssociationByOverallIndirect.fields = [FieldAssociationByOverallIndirectDiseaseId, FieldAssociationByOverallIndirectTargetId, FieldAssociationByOverallIndirectScore, FieldAssociationByOverallIndirectEvidenceCount]
 
 FieldAssociationByOverallIndirectDiseaseId.name = "diseaseId"
 FieldAssociationByOverallIndirectDiseaseId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -5614,6 +5716,7 @@ FieldAssociationByOverallIndirectEvidenceCount.path = [DatasetAssociationByOvera
 DatasetBaselineExpression.id = "baselineExpression"
 DatasetBaselineExpression.f_id = FieldBaselineExpressionId
 DatasetBaselineExpression.f_tissues = FieldBaselineExpressionTissues
+DatasetBaselineExpression.fields = [FieldBaselineExpressionId, FieldBaselineExpressionTissues]
 
 FieldBaselineExpressionId.name = "id"
 FieldBaselineExpressionId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -5630,6 +5733,7 @@ FieldBaselineExpressionTissues.f_organs = FieldBaselineExpressionTissuesOrgans
 FieldBaselineExpressionTissues.f_anatomical_systems = FieldBaselineExpressionTissuesAnatomicalSystems
 FieldBaselineExpressionTissues.f_rna = FieldBaselineExpressionTissuesRna
 FieldBaselineExpressionTissues.f_protein = FieldBaselineExpressionTissuesProtein
+FieldBaselineExpressionTissues.fields = [FieldBaselineExpressionTissuesEfoCode, FieldBaselineExpressionTissuesLabel, FieldBaselineExpressionTissuesOrgans, FieldBaselineExpressionTissuesAnatomicalSystems, FieldBaselineExpressionTissuesRna, FieldBaselineExpressionTissuesProtein]
 
 FieldBaselineExpressionTissuesEfoCode.name = "efo_code"
 FieldBaselineExpressionTissuesEfoCode.data_type = OpenTargetsDatasetFieldType.STRING
@@ -5659,6 +5763,7 @@ FieldBaselineExpressionTissuesRna.f_value = FieldBaselineExpressionTissuesRnaVal
 FieldBaselineExpressionTissuesRna.f_zscore = FieldBaselineExpressionTissuesRnaZscore
 FieldBaselineExpressionTissuesRna.f_level = FieldBaselineExpressionTissuesRnaLevel
 FieldBaselineExpressionTissuesRna.f_unit = FieldBaselineExpressionTissuesRnaUnit
+FieldBaselineExpressionTissuesRna.fields = [FieldBaselineExpressionTissuesRnaValue, FieldBaselineExpressionTissuesRnaZscore, FieldBaselineExpressionTissuesRnaLevel, FieldBaselineExpressionTissuesRnaUnit]
 
 FieldBaselineExpressionTissuesRnaValue.name = "value"
 FieldBaselineExpressionTissuesRnaValue.data_type = OpenTargetsDatasetFieldType.DOUBLE
@@ -5687,6 +5792,7 @@ FieldBaselineExpressionTissuesProtein.path = [DatasetBaselineExpression, FieldBa
 FieldBaselineExpressionTissuesProtein.f_reliability = FieldBaselineExpressionTissuesProteinReliability
 FieldBaselineExpressionTissuesProtein.f_level = FieldBaselineExpressionTissuesProteinLevel
 FieldBaselineExpressionTissuesProtein.f_cell_type = FieldBaselineExpressionTissuesProteinCellType
+FieldBaselineExpressionTissuesProtein.fields = [FieldBaselineExpressionTissuesProteinReliability, FieldBaselineExpressionTissuesProteinLevel, FieldBaselineExpressionTissuesProteinCellType]
 
 FieldBaselineExpressionTissuesProteinReliability.name = "reliability"
 FieldBaselineExpressionTissuesProteinReliability.data_type = OpenTargetsDatasetFieldType.BOOLEAN
@@ -5705,6 +5811,7 @@ FieldBaselineExpressionTissuesProteinCellType.path = [DatasetBaselineExpression,
 FieldBaselineExpressionTissuesProteinCellType.f_name = FieldBaselineExpressionTissuesProteinCellTypeName
 FieldBaselineExpressionTissuesProteinCellType.f_reliability = FieldBaselineExpressionTissuesProteinCellTypeReliability
 FieldBaselineExpressionTissuesProteinCellType.f_level = FieldBaselineExpressionTissuesProteinCellTypeLevel
+FieldBaselineExpressionTissuesProteinCellType.fields = [FieldBaselineExpressionTissuesProteinCellTypeName, FieldBaselineExpressionTissuesProteinCellTypeReliability, FieldBaselineExpressionTissuesProteinCellTypeLevel]
 
 FieldBaselineExpressionTissuesProteinCellTypeName.name = "name"
 FieldBaselineExpressionTissuesProteinCellTypeName.data_type = OpenTargetsDatasetFieldType.STRING
@@ -5725,6 +5832,7 @@ DatasetDiseaseToPhenotype.id = "diseaseToPhenotype"
 DatasetDiseaseToPhenotype.f_disease = FieldDiseaseToPhenotypeDisease
 DatasetDiseaseToPhenotype.f_phenotype = FieldDiseaseToPhenotypePhenotype
 DatasetDiseaseToPhenotype.f_evidence = FieldDiseaseToPhenotypeEvidence
+DatasetDiseaseToPhenotype.fields = [FieldDiseaseToPhenotypeDisease, FieldDiseaseToPhenotypePhenotype, FieldDiseaseToPhenotypeEvidence]
 
 FieldDiseaseToPhenotypeDisease.name = "disease"
 FieldDiseaseToPhenotypeDisease.data_type = OpenTargetsDatasetFieldType.STRING
@@ -5754,6 +5862,7 @@ FieldDiseaseToPhenotypeEvidence.f_qualifier_not = FieldDiseaseToPhenotypeEvidenc
 FieldDiseaseToPhenotypeEvidence.f_references = FieldDiseaseToPhenotypeEvidenceReferences
 FieldDiseaseToPhenotypeEvidence.f_sex = FieldDiseaseToPhenotypeEvidenceSex
 FieldDiseaseToPhenotypeEvidence.f_resource = FieldDiseaseToPhenotypeEvidenceResource
+FieldDiseaseToPhenotypeEvidence.fields = [FieldDiseaseToPhenotypeEvidenceAspect, FieldDiseaseToPhenotypeEvidenceBioCuration, FieldDiseaseToPhenotypeEvidenceDiseaseFromSourceId, FieldDiseaseToPhenotypeEvidenceDiseaseFromSource, FieldDiseaseToPhenotypeEvidenceDiseaseName, FieldDiseaseToPhenotypeEvidenceEvidenceType, FieldDiseaseToPhenotypeEvidenceFrequency, FieldDiseaseToPhenotypeEvidenceModifiers, FieldDiseaseToPhenotypeEvidenceOnset, FieldDiseaseToPhenotypeEvidenceQualifier, FieldDiseaseToPhenotypeEvidenceQualifierNot, FieldDiseaseToPhenotypeEvidenceReferences, FieldDiseaseToPhenotypeEvidenceSex, FieldDiseaseToPhenotypeEvidenceResource]
 
 FieldDiseaseToPhenotypeEvidenceAspect.name = "aspect"
 FieldDiseaseToPhenotypeEvidenceAspect.data_type = OpenTargetsDatasetFieldType.STRING
@@ -5842,6 +5951,7 @@ DatasetDiseases.f_children = FieldDiseasesChildren
 DatasetDiseases.f_therapeutic_areas = FieldDiseasesTherapeuticAreas
 DatasetDiseases.f_indirect_location_ids = FieldDiseasesIndirectLocationIds
 DatasetDiseases.f_ontology = FieldDiseasesOntology
+DatasetDiseases.fields = [FieldDiseasesId, FieldDiseasesCode, FieldDiseasesDbXRefs, FieldDiseasesDescription, FieldDiseasesName, FieldDiseasesDirectLocationIds, FieldDiseasesObsoleteTerms, FieldDiseasesParents, FieldDiseasesSko, FieldDiseasesSynonyms, FieldDiseasesAncestors, FieldDiseasesDescendants, FieldDiseasesChildren, FieldDiseasesTherapeuticAreas, FieldDiseasesIndirectLocationIds, FieldDiseasesOntology]
 
 FieldDiseasesId.name = "id"
 FieldDiseasesId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -5896,6 +6006,7 @@ FieldDiseasesSynonyms.f_has_broad_synonym = FieldDiseasesSynonymsHasBroadSynonym
 FieldDiseasesSynonyms.f_has_exact_synonym = FieldDiseasesSynonymsHasExactSynonym
 FieldDiseasesSynonyms.f_has_narrow_synonym = FieldDiseasesSynonymsHasNarrowSynonym
 FieldDiseasesSynonyms.f_has_related_synonym = FieldDiseasesSynonymsHasRelatedSynonym
+FieldDiseasesSynonyms.fields = [FieldDiseasesSynonymsHasBroadSynonym, FieldDiseasesSynonymsHasExactSynonym, FieldDiseasesSynonymsHasNarrowSynonym, FieldDiseasesSynonymsHasRelatedSynonym]
 
 FieldDiseasesSynonymsHasBroadSynonym.name = "hasBroadSynonym"
 FieldDiseasesSynonymsHasBroadSynonym.data_type = OpenTargetsDatasetFieldType.ARRAY
@@ -5949,6 +6060,7 @@ FieldDiseasesOntology.path = [DatasetDiseases, FieldDiseasesOntology]
 FieldDiseasesOntology.f_is_therapeutic_area = FieldDiseasesOntologyIsTherapeuticArea
 FieldDiseasesOntology.f_leaf = FieldDiseasesOntologyLeaf
 FieldDiseasesOntology.f_sources = FieldDiseasesOntologySources
+FieldDiseasesOntology.fields = [FieldDiseasesOntologyIsTherapeuticArea, FieldDiseasesOntologyLeaf, FieldDiseasesOntologySources]
 
 FieldDiseasesOntologyIsTherapeuticArea.name = "isTherapeuticArea"
 FieldDiseasesOntologyIsTherapeuticArea.data_type = OpenTargetsDatasetFieldType.BOOLEAN
@@ -5966,6 +6078,7 @@ FieldDiseasesOntologySources.dataset = DatasetDiseases
 FieldDiseasesOntologySources.path = [DatasetDiseases, FieldDiseasesOntology, FieldDiseasesOntologySources]
 FieldDiseasesOntologySources.f_url = FieldDiseasesOntologySourcesUrl
 FieldDiseasesOntologySources.f_name = FieldDiseasesOntologySourcesName
+FieldDiseasesOntologySources.fields = [FieldDiseasesOntologySourcesUrl, FieldDiseasesOntologySourcesName]
 
 FieldDiseasesOntologySourcesUrl.name = "url"
 FieldDiseasesOntologySourcesUrl.data_type = OpenTargetsDatasetFieldType.STRING
@@ -5987,6 +6100,7 @@ DatasetDrugWarnings.f_references = FieldDrugWarningsReferences
 DatasetDrugWarnings.f_warning_type = FieldDrugWarningsWarningType
 DatasetDrugWarnings.f_year = FieldDrugWarningsYear
 DatasetDrugWarnings.f_meddra_soc_code = FieldDrugWarningsMeddraSocCode
+DatasetDrugWarnings.fields = [FieldDrugWarningsToxicityClass, FieldDrugWarningsChemblIds, FieldDrugWarningsCountry, FieldDrugWarningsDescription, FieldDrugWarningsId, FieldDrugWarningsReferences, FieldDrugWarningsWarningType, FieldDrugWarningsYear, FieldDrugWarningsMeddraSocCode]
 
 FieldDrugWarningsToxicityClass.name = "toxicityClass"
 FieldDrugWarningsToxicityClass.data_type = OpenTargetsDatasetFieldType.STRING
@@ -6020,6 +6134,7 @@ FieldDrugWarningsReferences.path = [DatasetDrugWarnings, FieldDrugWarningsRefere
 FieldDrugWarningsReferences.f_ref_id = FieldDrugWarningsReferencesRefId
 FieldDrugWarningsReferences.f_ref_type = FieldDrugWarningsReferencesRefType
 FieldDrugWarningsReferences.f_ref_url = FieldDrugWarningsReferencesRefUrl
+FieldDrugWarningsReferences.fields = [FieldDrugWarningsReferencesRefId, FieldDrugWarningsReferencesRefType, FieldDrugWarningsReferencesRefUrl]
 
 FieldDrugWarningsReferencesRefId.name = "ref_id"
 FieldDrugWarningsReferencesRefId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -6057,6 +6172,7 @@ DatasetEbisearchAssociations.f_disease_id = FieldEbisearchAssociationsDiseaseId
 DatasetEbisearchAssociations.f_approved_symbol = FieldEbisearchAssociationsApprovedSymbol
 DatasetEbisearchAssociations.f_name = FieldEbisearchAssociationsName
 DatasetEbisearchAssociations.f_score = FieldEbisearchAssociationsScore
+DatasetEbisearchAssociations.fields = [FieldEbisearchAssociationsTargetId, FieldEbisearchAssociationsDiseaseId, FieldEbisearchAssociationsApprovedSymbol, FieldEbisearchAssociationsName, FieldEbisearchAssociationsScore]
 
 FieldEbisearchAssociationsTargetId.name = "targetId"
 FieldEbisearchAssociationsTargetId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -6089,6 +6205,7 @@ DatasetEbisearchEvidence.f_disease_id = FieldEbisearchEvidenceDiseaseId
 DatasetEbisearchEvidence.f_approved_symbol = FieldEbisearchEvidenceApprovedSymbol
 DatasetEbisearchEvidence.f_name = FieldEbisearchEvidenceName
 DatasetEbisearchEvidence.f_score = FieldEbisearchEvidenceScore
+DatasetEbisearchEvidence.fields = [FieldEbisearchEvidenceTargetId, FieldEbisearchEvidenceDiseaseId, FieldEbisearchEvidenceApprovedSymbol, FieldEbisearchEvidenceName, FieldEbisearchEvidenceScore]
 
 FieldEbisearchEvidenceTargetId.name = "targetId"
 FieldEbisearchEvidenceTargetId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -6196,6 +6313,7 @@ DatasetEvidence.f_source_id = FieldEvidenceSourceId
 DatasetEvidence.f_disease_id = FieldEvidenceDiseaseId
 DatasetEvidence.f_id = FieldEvidenceId
 DatasetEvidence.f_score = FieldEvidenceScore
+DatasetEvidence.fields = [FieldEvidenceDatasourceId, FieldEvidenceTargetId, FieldEvidenceAlleleOrigins, FieldEvidenceAllelicRequirements, FieldEvidenceAncestry, FieldEvidenceAncestryId, FieldEvidenceBeta, FieldEvidenceBetaConfidenceIntervalLower, FieldEvidenceBetaConfidenceIntervalUpper, FieldEvidenceBiologicalModelAllelicComposition, FieldEvidenceBiologicalModelGeneticBackground, FieldEvidenceBiologicalModelId, FieldEvidenceBiomarkerName, FieldEvidenceBiomarkers, FieldEvidenceBiosamplesFromSource, FieldEvidenceClinicalPhase, FieldEvidenceClinicalSignificances, FieldEvidenceClinicalStatus, FieldEvidenceCohortDescription, FieldEvidenceCohortId, FieldEvidenceCohortPhenotypes, FieldEvidenceCohortShortName, FieldEvidenceConfidence, FieldEvidenceContrast, FieldEvidenceDatatypeId, FieldEvidenceDiseaseCellLines, FieldEvidenceDiseaseFromSource, FieldEvidenceDiseaseFromSourceId, FieldEvidenceDiseaseFromSourceMappedId, FieldEvidenceDiseaseModelAssociatedHumanPhenotypes, FieldEvidenceDiseaseModelAssociatedModelPhenotypes, FieldEvidenceDrugFromSource, FieldEvidenceDrugId, FieldEvidenceDrugResponse, FieldEvidenceLiterature, FieldEvidenceLog2FoldChangePercentileRank, FieldEvidenceLog2FoldChangeValue, FieldEvidenceMutatedSamples, FieldEvidenceOddsRatio, FieldEvidenceOddsRatioConfidenceIntervalLower, FieldEvidenceOddsRatioConfidenceIntervalUpper, FieldEvidencePValueExponent, FieldEvidencePValueMantissa, FieldEvidencePathways, FieldEvidencePmcIds, FieldEvidenceProjectId, FieldEvidencePublicationFirstAuthor, FieldEvidencePublicationYear, FieldEvidenceReactionId, FieldEvidenceReactionName, FieldEvidenceResourceScore, FieldEvidenceSex, FieldEvidenceSignificantDriverMethods, FieldEvidenceStatisticalMethod, FieldEvidenceStatisticalMethodOverview, FieldEvidenceStudyCases, FieldEvidenceStudyCasesWithQualifyingVariants, FieldEvidenceStudyId, FieldEvidenceStudyOverview, FieldEvidenceStudySampleSize, FieldEvidenceStudyStartDate, FieldEvidenceStudyStopReason, FieldEvidenceStudyStopReasonCategories, FieldEvidenceTargetFromSource, FieldEvidenceTargetFromSourceId, FieldEvidenceTargetInModel, FieldEvidenceTargetInModelEnsemblId, FieldEvidenceTargetInModelMgiId, FieldEvidenceTargetModulation, FieldEvidenceTextMiningSentences, FieldEvidenceUrls, FieldEvidenceVariantAminoacidDescriptions, FieldEvidenceVariantFunctionalConsequenceId, FieldEvidenceVariantHgvsId, FieldEvidenceVariantId, FieldEvidenceVariantRsId, FieldEvidenceSourceId, FieldEvidenceDiseaseId, FieldEvidenceId, FieldEvidenceScore]
 
 FieldEvidenceDatasourceId.name = "datasourceId"
 FieldEvidenceDatasourceId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -6268,6 +6386,7 @@ FieldEvidenceBiomarkers.dataset = DatasetEvidence
 FieldEvidenceBiomarkers.path = [DatasetEvidence, FieldEvidenceBiomarkers]
 FieldEvidenceBiomarkers.f_gene_expression = FieldEvidenceBiomarkersGeneExpression
 FieldEvidenceBiomarkers.f_variant = FieldEvidenceBiomarkersVariant
+FieldEvidenceBiomarkers.fields = [FieldEvidenceBiomarkersGeneExpression, FieldEvidenceBiomarkersVariant]
 
 FieldEvidenceBiomarkersGeneExpression.name = "geneExpression"
 FieldEvidenceBiomarkersGeneExpression.data_type = OpenTargetsDatasetFieldType.ARRAY
@@ -6275,6 +6394,7 @@ FieldEvidenceBiomarkersGeneExpression.dataset = DatasetEvidence
 FieldEvidenceBiomarkersGeneExpression.path = [DatasetEvidence, FieldEvidenceBiomarkers, FieldEvidenceBiomarkersGeneExpression]
 FieldEvidenceBiomarkersGeneExpression.f_id = FieldEvidenceBiomarkersGeneExpressionId
 FieldEvidenceBiomarkersGeneExpression.f_name = FieldEvidenceBiomarkersGeneExpressionName
+FieldEvidenceBiomarkersGeneExpression.fields = [FieldEvidenceBiomarkersGeneExpressionId, FieldEvidenceBiomarkersGeneExpressionName]
 
 FieldEvidenceBiomarkersGeneExpressionId.name = "id"
 FieldEvidenceBiomarkersGeneExpressionId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -6293,6 +6413,7 @@ FieldEvidenceBiomarkersVariant.path = [DatasetEvidence, FieldEvidenceBiomarkers,
 FieldEvidenceBiomarkersVariant.f_functional_consequence_id = FieldEvidenceBiomarkersVariantFunctionalConsequenceId
 FieldEvidenceBiomarkersVariant.f_id = FieldEvidenceBiomarkersVariantId
 FieldEvidenceBiomarkersVariant.f_name = FieldEvidenceBiomarkersVariantName
+FieldEvidenceBiomarkersVariant.fields = [FieldEvidenceBiomarkersVariantFunctionalConsequenceId, FieldEvidenceBiomarkersVariantId, FieldEvidenceBiomarkersVariantName]
 
 FieldEvidenceBiomarkersVariantFunctionalConsequenceId.name = "functionalConsequenceId"
 FieldEvidenceBiomarkersVariantFunctionalConsequenceId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -6372,6 +6493,7 @@ FieldEvidenceDiseaseCellLines.f_id = FieldEvidenceDiseaseCellLinesId
 FieldEvidenceDiseaseCellLines.f_name = FieldEvidenceDiseaseCellLinesName
 FieldEvidenceDiseaseCellLines.f_tissue = FieldEvidenceDiseaseCellLinesTissue
 FieldEvidenceDiseaseCellLines.f_tissue_id = FieldEvidenceDiseaseCellLinesTissueId
+FieldEvidenceDiseaseCellLines.fields = [FieldEvidenceDiseaseCellLinesId, FieldEvidenceDiseaseCellLinesName, FieldEvidenceDiseaseCellLinesTissue, FieldEvidenceDiseaseCellLinesTissueId]
 
 FieldEvidenceDiseaseCellLinesId.name = "id"
 FieldEvidenceDiseaseCellLinesId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -6414,6 +6536,7 @@ FieldEvidenceDiseaseModelAssociatedHumanPhenotypes.dataset = DatasetEvidence
 FieldEvidenceDiseaseModelAssociatedHumanPhenotypes.path = [DatasetEvidence, FieldEvidenceDiseaseModelAssociatedHumanPhenotypes]
 FieldEvidenceDiseaseModelAssociatedHumanPhenotypes.f_id = FieldEvidenceDiseaseModelAssociatedHumanPhenotypesId
 FieldEvidenceDiseaseModelAssociatedHumanPhenotypes.f_label = FieldEvidenceDiseaseModelAssociatedHumanPhenotypesLabel
+FieldEvidenceDiseaseModelAssociatedHumanPhenotypes.fields = [FieldEvidenceDiseaseModelAssociatedHumanPhenotypesId, FieldEvidenceDiseaseModelAssociatedHumanPhenotypesLabel]
 
 FieldEvidenceDiseaseModelAssociatedHumanPhenotypesId.name = "id"
 FieldEvidenceDiseaseModelAssociatedHumanPhenotypesId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -6431,6 +6554,7 @@ FieldEvidenceDiseaseModelAssociatedModelPhenotypes.dataset = DatasetEvidence
 FieldEvidenceDiseaseModelAssociatedModelPhenotypes.path = [DatasetEvidence, FieldEvidenceDiseaseModelAssociatedModelPhenotypes]
 FieldEvidenceDiseaseModelAssociatedModelPhenotypes.f_id = FieldEvidenceDiseaseModelAssociatedModelPhenotypesId
 FieldEvidenceDiseaseModelAssociatedModelPhenotypes.f_label = FieldEvidenceDiseaseModelAssociatedModelPhenotypesLabel
+FieldEvidenceDiseaseModelAssociatedModelPhenotypes.fields = [FieldEvidenceDiseaseModelAssociatedModelPhenotypesId, FieldEvidenceDiseaseModelAssociatedModelPhenotypesLabel]
 
 FieldEvidenceDiseaseModelAssociatedModelPhenotypesId.name = "id"
 FieldEvidenceDiseaseModelAssociatedModelPhenotypesId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -6480,6 +6604,7 @@ FieldEvidenceMutatedSamples.f_functional_consequence_id = FieldEvidenceMutatedSa
 FieldEvidenceMutatedSamples.f_number_mutated_samples = FieldEvidenceMutatedSamplesNumberMutatedSamples
 FieldEvidenceMutatedSamples.f_number_samples_tested = FieldEvidenceMutatedSamplesNumberSamplesTested
 FieldEvidenceMutatedSamples.f_number_samples_with_mutation_type = FieldEvidenceMutatedSamplesNumberSamplesWithMutationType
+FieldEvidenceMutatedSamples.fields = [FieldEvidenceMutatedSamplesFunctionalConsequenceId, FieldEvidenceMutatedSamplesNumberMutatedSamples, FieldEvidenceMutatedSamplesNumberSamplesTested, FieldEvidenceMutatedSamplesNumberSamplesWithMutationType]
 
 FieldEvidenceMutatedSamplesFunctionalConsequenceId.name = "functionalConsequenceId"
 FieldEvidenceMutatedSamplesFunctionalConsequenceId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -6532,6 +6657,7 @@ FieldEvidencePathways.dataset = DatasetEvidence
 FieldEvidencePathways.path = [DatasetEvidence, FieldEvidencePathways]
 FieldEvidencePathways.f_id = FieldEvidencePathwaysId
 FieldEvidencePathways.f_name = FieldEvidencePathwaysName
+FieldEvidencePathways.fields = [FieldEvidencePathwaysId, FieldEvidencePathwaysName]
 
 FieldEvidencePathwaysId.name = "id"
 FieldEvidencePathwaysId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -6678,6 +6804,7 @@ FieldEvidenceTextMiningSentences.f_section = FieldEvidenceTextMiningSentencesSec
 FieldEvidenceTextMiningSentences.f_t_end = FieldEvidenceTextMiningSentencesTEnd
 FieldEvidenceTextMiningSentences.f_t_start = FieldEvidenceTextMiningSentencesTStart
 FieldEvidenceTextMiningSentences.f_text = FieldEvidenceTextMiningSentencesText
+FieldEvidenceTextMiningSentences.fields = [FieldEvidenceTextMiningSentencesDEnd, FieldEvidenceTextMiningSentencesDStart, FieldEvidenceTextMiningSentencesSection, FieldEvidenceTextMiningSentencesTEnd, FieldEvidenceTextMiningSentencesTStart, FieldEvidenceTextMiningSentencesText]
 
 FieldEvidenceTextMiningSentencesDEnd.name = "dEnd"
 FieldEvidenceTextMiningSentencesDEnd.data_type = OpenTargetsDatasetFieldType.LONG
@@ -6715,6 +6842,7 @@ FieldEvidenceUrls.dataset = DatasetEvidence
 FieldEvidenceUrls.path = [DatasetEvidence, FieldEvidenceUrls]
 FieldEvidenceUrls.f_nice_name = FieldEvidenceUrlsNiceName
 FieldEvidenceUrls.f_url = FieldEvidenceUrlsUrl
+FieldEvidenceUrls.fields = [FieldEvidenceUrlsNiceName, FieldEvidenceUrlsUrl]
 
 FieldEvidenceUrlsNiceName.name = "niceName"
 FieldEvidenceUrlsNiceName.data_type = OpenTargetsDatasetFieldType.STRING
@@ -6774,6 +6902,7 @@ FieldEvidenceScore.path = [DatasetEvidence, FieldEvidenceScore]
 DatasetGo.id = "go"
 DatasetGo.f_id = FieldGoId
 DatasetGo.f_name = FieldGoName
+DatasetGo.fields = [FieldGoId, FieldGoName]
 
 FieldGoId.name = "id"
 FieldGoId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -6793,6 +6922,7 @@ DatasetHpo.f_name = FieldHpoName
 DatasetHpo.f_namespace = FieldHpoNamespace
 DatasetHpo.f_obsolete_terms = FieldHpoObsoleteTerms
 DatasetHpo.f_parents = FieldHpoParents
+DatasetHpo.fields = [FieldHpoDbXRefs, FieldHpoDescription, FieldHpoId, FieldHpoName, FieldHpoNamespace, FieldHpoObsoleteTerms, FieldHpoParents]
 
 FieldHpoDbXRefs.name = "dbXRefs"
 FieldHpoDbXRefs.data_type = OpenTargetsDatasetFieldType.ARRAY
@@ -6834,6 +6964,7 @@ DatasetIndication.f_id = FieldIndicationId
 DatasetIndication.f_indications = FieldIndicationIndications
 DatasetIndication.f_approved_indications = FieldIndicationApprovedIndications
 DatasetIndication.f_indication_count = FieldIndicationIndicationCount
+DatasetIndication.fields = [FieldIndicationId, FieldIndicationIndications, FieldIndicationApprovedIndications, FieldIndicationIndicationCount]
 
 FieldIndicationId.name = "id"
 FieldIndicationId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -6848,6 +6979,7 @@ FieldIndicationIndications.f_disease = FieldIndicationIndicationsDisease
 FieldIndicationIndications.f_efo_name = FieldIndicationIndicationsEfoName
 FieldIndicationIndications.f_references = FieldIndicationIndicationsReferences
 FieldIndicationIndications.f_max_phase_for_indication = FieldIndicationIndicationsMaxPhaseForIndication
+FieldIndicationIndications.fields = [FieldIndicationIndicationsDisease, FieldIndicationIndicationsEfoName, FieldIndicationIndicationsReferences, FieldIndicationIndicationsMaxPhaseForIndication]
 
 FieldIndicationIndicationsDisease.name = "disease"
 FieldIndicationIndicationsDisease.data_type = OpenTargetsDatasetFieldType.STRING
@@ -6865,6 +6997,7 @@ FieldIndicationIndicationsReferences.dataset = DatasetIndication
 FieldIndicationIndicationsReferences.path = [DatasetIndication, FieldIndicationIndications, FieldIndicationIndicationsReferences]
 FieldIndicationIndicationsReferences.f_source = FieldIndicationIndicationsReferencesSource
 FieldIndicationIndicationsReferences.f_ids = FieldIndicationIndicationsReferencesIds
+FieldIndicationIndicationsReferences.fields = [FieldIndicationIndicationsReferencesSource, FieldIndicationIndicationsReferencesIds]
 
 FieldIndicationIndicationsReferencesSource.name = "source"
 FieldIndicationIndicationsReferencesSource.data_type = OpenTargetsDatasetFieldType.STRING
@@ -6903,6 +7036,7 @@ DatasetInteraction.f_species_a = FieldInteractionSpeciesA
 DatasetInteraction.f_species_b = FieldInteractionSpeciesB
 DatasetInteraction.f_count = FieldInteractionCount
 DatasetInteraction.f_scoring = FieldInteractionScoring
+DatasetInteraction.fields = [FieldInteractionSourceDatabase, FieldInteractionTargetA, FieldInteractionIntA, FieldInteractionIntABiologicalRole, FieldInteractionTargetB, FieldInteractionIntB, FieldInteractionIntBBiologicalRole, FieldInteractionSpeciesA, FieldInteractionSpeciesB, FieldInteractionCount, FieldInteractionScoring]
 
 FieldInteractionSourceDatabase.name = "sourceDatabase"
 FieldInteractionSourceDatabase.data_type = OpenTargetsDatasetFieldType.STRING
@@ -6946,6 +7080,7 @@ FieldInteractionSpeciesA.path = [DatasetInteraction, FieldInteractionSpeciesA]
 FieldInteractionSpeciesA.f_mnemonic = FieldInteractionSpeciesAMnemonic
 FieldInteractionSpeciesA.f_scientific_name = FieldInteractionSpeciesAScientificName
 FieldInteractionSpeciesA.f_taxon_id = FieldInteractionSpeciesATaxonId
+FieldInteractionSpeciesA.fields = [FieldInteractionSpeciesAMnemonic, FieldInteractionSpeciesAScientificName, FieldInteractionSpeciesATaxonId]
 
 FieldInteractionSpeciesAMnemonic.name = "mnemonic"
 FieldInteractionSpeciesAMnemonic.data_type = OpenTargetsDatasetFieldType.STRING
@@ -6969,6 +7104,7 @@ FieldInteractionSpeciesB.path = [DatasetInteraction, FieldInteractionSpeciesB]
 FieldInteractionSpeciesB.f_mnemonic = FieldInteractionSpeciesBMnemonic
 FieldInteractionSpeciesB.f_scientific_name = FieldInteractionSpeciesBScientificName
 FieldInteractionSpeciesB.f_taxon_id = FieldInteractionSpeciesBTaxonId
+FieldInteractionSpeciesB.fields = [FieldInteractionSpeciesBMnemonic, FieldInteractionSpeciesBScientificName, FieldInteractionSpeciesBTaxonId]
 
 FieldInteractionSpeciesBMnemonic.name = "mnemonic"
 FieldInteractionSpeciesBMnemonic.data_type = OpenTargetsDatasetFieldType.STRING
@@ -7021,6 +7157,7 @@ DatasetInteractionEvidence.f_participant_detection_method_b = FieldInteractionEv
 DatasetInteractionEvidence.f_host_organism_scientific_name = FieldInteractionEvidenceHostOrganismScientificName
 DatasetInteractionEvidence.f_target_a = FieldInteractionEvidenceTargetA
 DatasetInteractionEvidence.f_interaction_detection_method_mi_identifier = FieldInteractionEvidenceInteractionDetectionMethodMiIdentifier
+DatasetInteractionEvidence.fields = [FieldInteractionEvidenceInteractionTypeMiIdentifier, FieldInteractionEvidenceTargetB, FieldInteractionEvidenceEvidenceScore, FieldInteractionEvidenceParticipantDetectionMethodA, FieldInteractionEvidenceIntBBiologicalRole, FieldInteractionEvidenceInteractionResources, FieldInteractionEvidenceInteractionTypeShortName, FieldInteractionEvidenceInteractionDetectionMethodShortName, FieldInteractionEvidenceIntA, FieldInteractionEvidenceIntBSource, FieldInteractionEvidenceSpeciesB, FieldInteractionEvidenceInteractionIdentifier, FieldInteractionEvidenceHostOrganismTaxId, FieldInteractionEvidenceExpansionMethodShortName, FieldInteractionEvidenceSpeciesA, FieldInteractionEvidenceIntASource, FieldInteractionEvidenceIntB, FieldInteractionEvidencePubmedId, FieldInteractionEvidenceIntABiologicalRole, FieldInteractionEvidenceExpansionMethodMiIdentifier, FieldInteractionEvidenceInteractionScore, FieldInteractionEvidenceParticipantDetectionMethodB, FieldInteractionEvidenceHostOrganismScientificName, FieldInteractionEvidenceTargetA, FieldInteractionEvidenceInteractionDetectionMethodMiIdentifier]
 
 FieldInteractionEvidenceInteractionTypeMiIdentifier.name = "interactionTypeMiIdentifier"
 FieldInteractionEvidenceInteractionTypeMiIdentifier.data_type = OpenTargetsDatasetFieldType.STRING
@@ -7043,6 +7180,7 @@ FieldInteractionEvidenceParticipantDetectionMethodA.dataset = DatasetInteraction
 FieldInteractionEvidenceParticipantDetectionMethodA.path = [DatasetInteractionEvidence, FieldInteractionEvidenceParticipantDetectionMethodA]
 FieldInteractionEvidenceParticipantDetectionMethodA.f_mi_identifier = FieldInteractionEvidenceParticipantDetectionMethodAMiIdentifier
 FieldInteractionEvidenceParticipantDetectionMethodA.f_short_name = FieldInteractionEvidenceParticipantDetectionMethodAShortName
+FieldInteractionEvidenceParticipantDetectionMethodA.fields = [FieldInteractionEvidenceParticipantDetectionMethodAMiIdentifier, FieldInteractionEvidenceParticipantDetectionMethodAShortName]
 
 FieldInteractionEvidenceParticipantDetectionMethodAMiIdentifier.name = "miIdentifier"
 FieldInteractionEvidenceParticipantDetectionMethodAMiIdentifier.data_type = OpenTargetsDatasetFieldType.STRING
@@ -7065,6 +7203,7 @@ FieldInteractionEvidenceInteractionResources.dataset = DatasetInteractionEvidenc
 FieldInteractionEvidenceInteractionResources.path = [DatasetInteractionEvidence, FieldInteractionEvidenceInteractionResources]
 FieldInteractionEvidenceInteractionResources.f_database_version = FieldInteractionEvidenceInteractionResourcesDatabaseVersion
 FieldInteractionEvidenceInteractionResources.f_source_database = FieldInteractionEvidenceInteractionResourcesSourceDatabase
+FieldInteractionEvidenceInteractionResources.fields = [FieldInteractionEvidenceInteractionResourcesDatabaseVersion, FieldInteractionEvidenceInteractionResourcesSourceDatabase]
 
 FieldInteractionEvidenceInteractionResourcesDatabaseVersion.name = "databaseVersion"
 FieldInteractionEvidenceInteractionResourcesDatabaseVersion.data_type = OpenTargetsDatasetFieldType.STRING
@@ -7103,6 +7242,7 @@ FieldInteractionEvidenceSpeciesB.path = [DatasetInteractionEvidence, FieldIntera
 FieldInteractionEvidenceSpeciesB.f_mnemonic = FieldInteractionEvidenceSpeciesBMnemonic
 FieldInteractionEvidenceSpeciesB.f_scientific_name = FieldInteractionEvidenceSpeciesBScientificName
 FieldInteractionEvidenceSpeciesB.f_taxon_id = FieldInteractionEvidenceSpeciesBTaxonId
+FieldInteractionEvidenceSpeciesB.fields = [FieldInteractionEvidenceSpeciesBMnemonic, FieldInteractionEvidenceSpeciesBScientificName, FieldInteractionEvidenceSpeciesBTaxonId]
 
 FieldInteractionEvidenceSpeciesBMnemonic.name = "mnemonic"
 FieldInteractionEvidenceSpeciesBMnemonic.data_type = OpenTargetsDatasetFieldType.STRING
@@ -7141,6 +7281,7 @@ FieldInteractionEvidenceSpeciesA.path = [DatasetInteractionEvidence, FieldIntera
 FieldInteractionEvidenceSpeciesA.f_mnemonic = FieldInteractionEvidenceSpeciesAMnemonic
 FieldInteractionEvidenceSpeciesA.f_scientific_name = FieldInteractionEvidenceSpeciesAScientificName
 FieldInteractionEvidenceSpeciesA.f_taxon_id = FieldInteractionEvidenceSpeciesATaxonId
+FieldInteractionEvidenceSpeciesA.fields = [FieldInteractionEvidenceSpeciesAMnemonic, FieldInteractionEvidenceSpeciesAScientificName, FieldInteractionEvidenceSpeciesATaxonId]
 
 FieldInteractionEvidenceSpeciesAMnemonic.name = "mnemonic"
 FieldInteractionEvidenceSpeciesAMnemonic.data_type = OpenTargetsDatasetFieldType.STRING
@@ -7193,6 +7334,7 @@ FieldInteractionEvidenceParticipantDetectionMethodB.dataset = DatasetInteraction
 FieldInteractionEvidenceParticipantDetectionMethodB.path = [DatasetInteractionEvidence, FieldInteractionEvidenceParticipantDetectionMethodB]
 FieldInteractionEvidenceParticipantDetectionMethodB.f_mi_identifier = FieldInteractionEvidenceParticipantDetectionMethodBMiIdentifier
 FieldInteractionEvidenceParticipantDetectionMethodB.f_short_name = FieldInteractionEvidenceParticipantDetectionMethodBShortName
+FieldInteractionEvidenceParticipantDetectionMethodB.fields = [FieldInteractionEvidenceParticipantDetectionMethodBMiIdentifier, FieldInteractionEvidenceParticipantDetectionMethodBShortName]
 
 FieldInteractionEvidenceParticipantDetectionMethodBMiIdentifier.name = "miIdentifier"
 FieldInteractionEvidenceParticipantDetectionMethodBMiIdentifier.data_type = OpenTargetsDatasetFieldType.STRING
@@ -7237,6 +7379,7 @@ DatasetKnownDrugsAggregated.f_synonyms = FieldKnownDrugsAggregatedSynonyms
 DatasetKnownDrugsAggregated.f_drug_type = FieldKnownDrugsAggregatedDrugType
 DatasetKnownDrugsAggregated.f_mechanism_of_action = FieldKnownDrugsAggregatedMechanismOfAction
 DatasetKnownDrugsAggregated.f_target_name = FieldKnownDrugsAggregatedTargetName
+DatasetKnownDrugsAggregated.fields = [FieldKnownDrugsAggregatedDrugId, FieldKnownDrugsAggregatedTargetId, FieldKnownDrugsAggregatedDiseaseId, FieldKnownDrugsAggregatedPhase, FieldKnownDrugsAggregatedStatus, FieldKnownDrugsAggregatedUrls, FieldKnownDrugsAggregatedAncestors, FieldKnownDrugsAggregatedLabel, FieldKnownDrugsAggregatedApprovedSymbol, FieldKnownDrugsAggregatedApprovedName, FieldKnownDrugsAggregatedTargetClass, FieldKnownDrugsAggregatedPrefName, FieldKnownDrugsAggregatedTradeNames, FieldKnownDrugsAggregatedSynonyms, FieldKnownDrugsAggregatedDrugType, FieldKnownDrugsAggregatedMechanismOfAction, FieldKnownDrugsAggregatedTargetName]
 
 FieldKnownDrugsAggregatedDrugId.name = "drugId"
 FieldKnownDrugsAggregatedDrugId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -7269,6 +7412,7 @@ FieldKnownDrugsAggregatedUrls.dataset = DatasetKnownDrugsAggregated
 FieldKnownDrugsAggregatedUrls.path = [DatasetKnownDrugsAggregated, FieldKnownDrugsAggregatedUrls]
 FieldKnownDrugsAggregatedUrls.f_nice_name = FieldKnownDrugsAggregatedUrlsNiceName
 FieldKnownDrugsAggregatedUrls.f_url = FieldKnownDrugsAggregatedUrlsUrl
+FieldKnownDrugsAggregatedUrls.fields = [FieldKnownDrugsAggregatedUrlsNiceName, FieldKnownDrugsAggregatedUrlsUrl]
 
 FieldKnownDrugsAggregatedUrlsNiceName.name = "niceName"
 FieldKnownDrugsAggregatedUrlsNiceName.data_type = OpenTargetsDatasetFieldType.STRING
@@ -7343,6 +7487,7 @@ DatasetMechanismOfAction.f_target_name = FieldMechanismOfActionTargetName
 DatasetMechanismOfAction.f_target_type = FieldMechanismOfActionTargetType
 DatasetMechanismOfAction.f_targets = FieldMechanismOfActionTargets
 DatasetMechanismOfAction.f_references = FieldMechanismOfActionReferences
+DatasetMechanismOfAction.fields = [FieldMechanismOfActionActionType, FieldMechanismOfActionMechanismOfAction, FieldMechanismOfActionChemblIds, FieldMechanismOfActionTargetName, FieldMechanismOfActionTargetType, FieldMechanismOfActionTargets, FieldMechanismOfActionReferences]
 
 FieldMechanismOfActionActionType.name = "actionType"
 FieldMechanismOfActionActionType.data_type = OpenTargetsDatasetFieldType.STRING
@@ -7381,6 +7526,7 @@ FieldMechanismOfActionReferences.path = [DatasetMechanismOfAction, FieldMechanis
 FieldMechanismOfActionReferences.f_source = FieldMechanismOfActionReferencesSource
 FieldMechanismOfActionReferences.f_ids = FieldMechanismOfActionReferencesIds
 FieldMechanismOfActionReferences.f_urls = FieldMechanismOfActionReferencesUrls
+FieldMechanismOfActionReferences.fields = [FieldMechanismOfActionReferencesSource, FieldMechanismOfActionReferencesIds, FieldMechanismOfActionReferencesUrls]
 
 FieldMechanismOfActionReferencesSource.name = "source"
 FieldMechanismOfActionReferencesSource.data_type = OpenTargetsDatasetFieldType.STRING
@@ -7417,6 +7563,7 @@ DatasetMolecule.f_child_chembl_ids = FieldMoleculeChildChemblIds
 DatasetMolecule.f_linked_diseases = FieldMoleculeLinkedDiseases
 DatasetMolecule.f_linked_targets = FieldMoleculeLinkedTargets
 DatasetMolecule.f_description = FieldMoleculeDescription
+DatasetMolecule.fields = [FieldMoleculeId, FieldMoleculeCanonicalSmiles, FieldMoleculeInchiKey, FieldMoleculeDrugType, FieldMoleculeBlackBoxWarning, FieldMoleculeName, FieldMoleculeYearOfFirstApproval, FieldMoleculeMaximumClinicalTrialPhase, FieldMoleculeParentId, FieldMoleculeHasBeenWithdrawn, FieldMoleculeIsApproved, FieldMoleculeWithdrawnNotice, FieldMoleculeTradeNames, FieldMoleculeSynonyms, FieldMoleculeCrossReferences, FieldMoleculeChildChemblIds, FieldMoleculeLinkedDiseases, FieldMoleculeLinkedTargets, FieldMoleculeDescription]
 
 FieldMoleculeId.name = "id"
 FieldMoleculeId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -7480,6 +7627,7 @@ FieldMoleculeWithdrawnNotice.path = [DatasetMolecule, FieldMoleculeWithdrawnNoti
 FieldMoleculeWithdrawnNotice.f_countries = FieldMoleculeWithdrawnNoticeCountries
 FieldMoleculeWithdrawnNotice.f_classes = FieldMoleculeWithdrawnNoticeClasses
 FieldMoleculeWithdrawnNotice.f_year = FieldMoleculeWithdrawnNoticeYear
+FieldMoleculeWithdrawnNotice.fields = [FieldMoleculeWithdrawnNoticeCountries, FieldMoleculeWithdrawnNoticeClasses, FieldMoleculeWithdrawnNoticeYear]
 
 FieldMoleculeWithdrawnNoticeCountries.name = "countries"
 FieldMoleculeWithdrawnNoticeCountries.data_type = OpenTargetsDatasetFieldType.ARRAY
@@ -7522,6 +7670,7 @@ FieldMoleculeLinkedDiseases.dataset = DatasetMolecule
 FieldMoleculeLinkedDiseases.path = [DatasetMolecule, FieldMoleculeLinkedDiseases]
 FieldMoleculeLinkedDiseases.f_rows = FieldMoleculeLinkedDiseasesRows
 FieldMoleculeLinkedDiseases.f_count = FieldMoleculeLinkedDiseasesCount
+FieldMoleculeLinkedDiseases.fields = [FieldMoleculeLinkedDiseasesRows, FieldMoleculeLinkedDiseasesCount]
 
 FieldMoleculeLinkedDiseasesRows.name = "rows"
 FieldMoleculeLinkedDiseasesRows.data_type = OpenTargetsDatasetFieldType.ARRAY
@@ -7539,6 +7688,7 @@ FieldMoleculeLinkedTargets.dataset = DatasetMolecule
 FieldMoleculeLinkedTargets.path = [DatasetMolecule, FieldMoleculeLinkedTargets]
 FieldMoleculeLinkedTargets.f_rows = FieldMoleculeLinkedTargetsRows
 FieldMoleculeLinkedTargets.f_count = FieldMoleculeLinkedTargetsCount
+FieldMoleculeLinkedTargets.fields = [FieldMoleculeLinkedTargetsRows, FieldMoleculeLinkedTargetsCount]
 
 FieldMoleculeLinkedTargetsRows.name = "rows"
 FieldMoleculeLinkedTargetsRows.data_type = OpenTargetsDatasetFieldType.ARRAY
@@ -7564,6 +7714,7 @@ DatasetMousePhenotypes.f_target_from_source_id = FieldMousePhenotypesTargetFromS
 DatasetMousePhenotypes.f_target_in_model = FieldMousePhenotypesTargetInModel
 DatasetMousePhenotypes.f_target_in_model_ensembl_id = FieldMousePhenotypesTargetInModelEnsemblId
 DatasetMousePhenotypes.f_target_in_model_mgi_id = FieldMousePhenotypesTargetInModelMgiId
+DatasetMousePhenotypes.fields = [FieldMousePhenotypesBiologicalModels, FieldMousePhenotypesModelPhenotypeClasses, FieldMousePhenotypesModelPhenotypeId, FieldMousePhenotypesModelPhenotypeLabel, FieldMousePhenotypesTargetFromSourceId, FieldMousePhenotypesTargetInModel, FieldMousePhenotypesTargetInModelEnsemblId, FieldMousePhenotypesTargetInModelMgiId]
 
 FieldMousePhenotypesBiologicalModels.name = "biologicalModels"
 FieldMousePhenotypesBiologicalModels.data_type = OpenTargetsDatasetFieldType.ARRAY
@@ -7573,6 +7724,7 @@ FieldMousePhenotypesBiologicalModels.f_allelic_composition = FieldMousePhenotype
 FieldMousePhenotypesBiologicalModels.f_genetic_background = FieldMousePhenotypesBiologicalModelsGeneticBackground
 FieldMousePhenotypesBiologicalModels.f_id = FieldMousePhenotypesBiologicalModelsId
 FieldMousePhenotypesBiologicalModels.f_literature = FieldMousePhenotypesBiologicalModelsLiterature
+FieldMousePhenotypesBiologicalModels.fields = [FieldMousePhenotypesBiologicalModelsAllelicComposition, FieldMousePhenotypesBiologicalModelsGeneticBackground, FieldMousePhenotypesBiologicalModelsId, FieldMousePhenotypesBiologicalModelsLiterature]
 
 FieldMousePhenotypesBiologicalModelsAllelicComposition.name = "allelicComposition"
 FieldMousePhenotypesBiologicalModelsAllelicComposition.data_type = OpenTargetsDatasetFieldType.STRING
@@ -7600,6 +7752,7 @@ FieldMousePhenotypesModelPhenotypeClasses.dataset = DatasetMousePhenotypes
 FieldMousePhenotypesModelPhenotypeClasses.path = [DatasetMousePhenotypes, FieldMousePhenotypesModelPhenotypeClasses]
 FieldMousePhenotypesModelPhenotypeClasses.f_id = FieldMousePhenotypesModelPhenotypeClassesId
 FieldMousePhenotypesModelPhenotypeClasses.f_label = FieldMousePhenotypesModelPhenotypeClassesLabel
+FieldMousePhenotypesModelPhenotypeClasses.fields = [FieldMousePhenotypesModelPhenotypeClassesId, FieldMousePhenotypesModelPhenotypeClassesLabel]
 
 FieldMousePhenotypesModelPhenotypeClassesId.name = "id"
 FieldMousePhenotypesModelPhenotypeClassesId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -7649,6 +7802,7 @@ DatasetReactome.f_descendants = FieldReactomeDescendants
 DatasetReactome.f_children = FieldReactomeChildren
 DatasetReactome.f_parents = FieldReactomeParents
 DatasetReactome.f_path = FieldReactomePath
+DatasetReactome.fields = [FieldReactomeId, FieldReactomeLabel, FieldReactomeAncestors, FieldReactomeDescendants, FieldReactomeChildren, FieldReactomeParents, FieldReactomePath]
 
 FieldReactomeId.name = "id"
 FieldReactomeId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -7698,6 +7852,7 @@ DatasetSearchDisease.f_terms = FieldSearchDiseaseTerms
 DatasetSearchDisease.f_terms_25 = FieldSearchDiseaseTerms25
 DatasetSearchDisease.f_terms_5 = FieldSearchDiseaseTerms5
 DatasetSearchDisease.f_multiplier = FieldSearchDiseaseMultiplier
+DatasetSearchDisease.fields = [FieldSearchDiseaseId, FieldSearchDiseaseName, FieldSearchDiseaseDescription, FieldSearchDiseaseEntity, FieldSearchDiseaseCategory, FieldSearchDiseaseKeywords, FieldSearchDiseasePrefixes, FieldSearchDiseaseNgrams, FieldSearchDiseaseTerms, FieldSearchDiseaseTerms25, FieldSearchDiseaseTerms5, FieldSearchDiseaseMultiplier]
 
 FieldSearchDiseaseId.name = "id"
 FieldSearchDiseaseId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -7772,6 +7927,7 @@ DatasetSearchDrug.f_terms = FieldSearchDrugTerms
 DatasetSearchDrug.f_terms_25 = FieldSearchDrugTerms25
 DatasetSearchDrug.f_terms_5 = FieldSearchDrugTerms5
 DatasetSearchDrug.f_multiplier = FieldSearchDrugMultiplier
+DatasetSearchDrug.fields = [FieldSearchDrugId, FieldSearchDrugName, FieldSearchDrugDescription, FieldSearchDrugEntity, FieldSearchDrugCategory, FieldSearchDrugKeywords, FieldSearchDrugPrefixes, FieldSearchDrugNgrams, FieldSearchDrugTerms, FieldSearchDrugTerms25, FieldSearchDrugTerms5, FieldSearchDrugMultiplier]
 
 FieldSearchDrugId.name = "id"
 FieldSearchDrugId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -7846,6 +8002,7 @@ DatasetSearchTarget.f_terms = FieldSearchTargetTerms
 DatasetSearchTarget.f_terms_25 = FieldSearchTargetTerms25
 DatasetSearchTarget.f_terms_5 = FieldSearchTargetTerms5
 DatasetSearchTarget.f_multiplier = FieldSearchTargetMultiplier
+DatasetSearchTarget.fields = [FieldSearchTargetId, FieldSearchTargetName, FieldSearchTargetDescription, FieldSearchTargetEntity, FieldSearchTargetCategory, FieldSearchTargetKeywords, FieldSearchTargetPrefixes, FieldSearchTargetNgrams, FieldSearchTargetTerms, FieldSearchTargetTerms25, FieldSearchTargetTerms5, FieldSearchTargetMultiplier]
 
 FieldSearchTargetId.name = "id"
 FieldSearchTargetId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -7914,6 +8071,7 @@ DatasetSignificantAdverseDrugReactions.f_count = FieldSignificantAdverseDrugReac
 DatasetSignificantAdverseDrugReactions.f_llr = FieldSignificantAdverseDrugReactionsLlr
 DatasetSignificantAdverseDrugReactions.f_critval = FieldSignificantAdverseDrugReactionsCritval
 DatasetSignificantAdverseDrugReactions.f_meddra_code = FieldSignificantAdverseDrugReactionsMeddraCode
+DatasetSignificantAdverseDrugReactions.fields = [FieldSignificantAdverseDrugReactionsChemblId, FieldSignificantAdverseDrugReactionsEvent, FieldSignificantAdverseDrugReactionsCount, FieldSignificantAdverseDrugReactionsLlr, FieldSignificantAdverseDrugReactionsCritval, FieldSignificantAdverseDrugReactionsMeddraCode]
 
 FieldSignificantAdverseDrugReactionsChemblId.name = "chembl_id"
 FieldSignificantAdverseDrugReactionsChemblId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -7952,6 +8110,7 @@ DatasetSignificantAdverseTargetReactions.f_count = FieldSignificantAdverseTarget
 DatasetSignificantAdverseTargetReactions.f_llr = FieldSignificantAdverseTargetReactionsLlr
 DatasetSignificantAdverseTargetReactions.f_critval = FieldSignificantAdverseTargetReactionsCritval
 DatasetSignificantAdverseTargetReactions.f_meddra_code = FieldSignificantAdverseTargetReactionsMeddraCode
+DatasetSignificantAdverseTargetReactions.fields = [FieldSignificantAdverseTargetReactionsTargetId, FieldSignificantAdverseTargetReactionsEvent, FieldSignificantAdverseTargetReactionsCount, FieldSignificantAdverseTargetReactionsLlr, FieldSignificantAdverseTargetReactionsCritval, FieldSignificantAdverseTargetReactionsMeddraCode]
 
 FieldSignificantAdverseTargetReactionsTargetId.name = "targetId"
 FieldSignificantAdverseTargetReactionsTargetId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8012,6 +8171,7 @@ DatasetTargets.f_homologues = FieldTargetsHomologues
 DatasetTargets.f_tractability = FieldTargetsTractability
 DatasetTargets.f_safety_liabilities = FieldTargetsSafetyLiabilities
 DatasetTargets.f_pathways = FieldTargetsPathways
+DatasetTargets.fields = [FieldTargetsId, FieldTargetsApprovedSymbol, FieldTargetsBiotype, FieldTargetsTranscriptIds, FieldTargetsCanonicalTranscript, FieldTargetsCanonicalExons, FieldTargetsGenomicLocation, FieldTargetsAlternativeGenes, FieldTargetsApprovedName, FieldTargetsGo, FieldTargetsHallmarks, FieldTargetsSynonyms, FieldTargetsSymbolSynonyms, FieldTargetsNameSynonyms, FieldTargetsFunctionDescriptions, FieldTargetsSubcellularLocations, FieldTargetsTargetClass, FieldTargetsObsoleteSymbols, FieldTargetsObsoleteNames, FieldTargetsConstraint, FieldTargetsTep, FieldTargetsProteinIds, FieldTargetsDbXrefs, FieldTargetsChemicalProbes, FieldTargetsHomologues, FieldTargetsTractability, FieldTargetsSafetyLiabilities, FieldTargetsPathways]
 
 FieldTargetsId.name = "id"
 FieldTargetsId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8042,6 +8202,7 @@ FieldTargetsCanonicalTranscript.f_chromosome = FieldTargetsCanonicalTranscriptCh
 FieldTargetsCanonicalTranscript.f_start = FieldTargetsCanonicalTranscriptStart
 FieldTargetsCanonicalTranscript.f_end = FieldTargetsCanonicalTranscriptEnd
 FieldTargetsCanonicalTranscript.f_strand = FieldTargetsCanonicalTranscriptStrand
+FieldTargetsCanonicalTranscript.fields = [FieldTargetsCanonicalTranscriptId, FieldTargetsCanonicalTranscriptChromosome, FieldTargetsCanonicalTranscriptStart, FieldTargetsCanonicalTranscriptEnd, FieldTargetsCanonicalTranscriptStrand]
 
 FieldTargetsCanonicalTranscriptId.name = "id"
 FieldTargetsCanonicalTranscriptId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8081,6 +8242,7 @@ FieldTargetsGenomicLocation.f_chromosome = FieldTargetsGenomicLocationChromosome
 FieldTargetsGenomicLocation.f_start = FieldTargetsGenomicLocationStart
 FieldTargetsGenomicLocation.f_end = FieldTargetsGenomicLocationEnd
 FieldTargetsGenomicLocation.f_strand = FieldTargetsGenomicLocationStrand
+FieldTargetsGenomicLocation.fields = [FieldTargetsGenomicLocationChromosome, FieldTargetsGenomicLocationStart, FieldTargetsGenomicLocationEnd, FieldTargetsGenomicLocationStrand]
 
 FieldTargetsGenomicLocationChromosome.name = "chromosome"
 FieldTargetsGenomicLocationChromosome.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8122,6 +8284,7 @@ FieldTargetsGo.f_evidence = FieldTargetsGoEvidence
 FieldTargetsGo.f_aspect = FieldTargetsGoAspect
 FieldTargetsGo.f_gene_product = FieldTargetsGoGeneProduct
 FieldTargetsGo.f_eco_id = FieldTargetsGoEcoId
+FieldTargetsGo.fields = [FieldTargetsGoId, FieldTargetsGoSource, FieldTargetsGoEvidence, FieldTargetsGoAspect, FieldTargetsGoGeneProduct, FieldTargetsGoEcoId]
 
 FieldTargetsGoId.name = "id"
 FieldTargetsGoId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8159,6 +8322,7 @@ FieldTargetsHallmarks.dataset = DatasetTargets
 FieldTargetsHallmarks.path = [DatasetTargets, FieldTargetsHallmarks]
 FieldTargetsHallmarks.f_attributes = FieldTargetsHallmarksAttributes
 FieldTargetsHallmarks.f_cancer_hallmarks = FieldTargetsHallmarksCancerHallmarks
+FieldTargetsHallmarks.fields = [FieldTargetsHallmarksAttributes, FieldTargetsHallmarksCancerHallmarks]
 
 FieldTargetsHallmarksAttributes.name = "attributes"
 FieldTargetsHallmarksAttributes.data_type = OpenTargetsDatasetFieldType.ARRAY
@@ -8167,6 +8331,7 @@ FieldTargetsHallmarksAttributes.path = [DatasetTargets, FieldTargetsHallmarks, F
 FieldTargetsHallmarksAttributes.f_pmid = FieldTargetsHallmarksAttributesPmid
 FieldTargetsHallmarksAttributes.f_description = FieldTargetsHallmarksAttributesDescription
 FieldTargetsHallmarksAttributes.f_attribute_name = FieldTargetsHallmarksAttributesAttributeName
+FieldTargetsHallmarksAttributes.fields = [FieldTargetsHallmarksAttributesPmid, FieldTargetsHallmarksAttributesDescription, FieldTargetsHallmarksAttributesAttributeName]
 
 FieldTargetsHallmarksAttributesPmid.name = "pmid"
 FieldTargetsHallmarksAttributesPmid.data_type = OpenTargetsDatasetFieldType.LONG
@@ -8191,6 +8356,7 @@ FieldTargetsHallmarksCancerHallmarks.f_pmid = FieldTargetsHallmarksCancerHallmar
 FieldTargetsHallmarksCancerHallmarks.f_description = FieldTargetsHallmarksCancerHallmarksDescription
 FieldTargetsHallmarksCancerHallmarks.f_impact = FieldTargetsHallmarksCancerHallmarksImpact
 FieldTargetsHallmarksCancerHallmarks.f_label = FieldTargetsHallmarksCancerHallmarksLabel
+FieldTargetsHallmarksCancerHallmarks.fields = [FieldTargetsHallmarksCancerHallmarksPmid, FieldTargetsHallmarksCancerHallmarksDescription, FieldTargetsHallmarksCancerHallmarksImpact, FieldTargetsHallmarksCancerHallmarksLabel]
 
 FieldTargetsHallmarksCancerHallmarksPmid.name = "pmid"
 FieldTargetsHallmarksCancerHallmarksPmid.data_type = OpenTargetsDatasetFieldType.LONG
@@ -8218,6 +8384,7 @@ FieldTargetsSynonyms.dataset = DatasetTargets
 FieldTargetsSynonyms.path = [DatasetTargets, FieldTargetsSynonyms]
 FieldTargetsSynonyms.f_label = FieldTargetsSynonymsLabel
 FieldTargetsSynonyms.f_source = FieldTargetsSynonymsSource
+FieldTargetsSynonyms.fields = [FieldTargetsSynonymsLabel, FieldTargetsSynonymsSource]
 
 FieldTargetsSynonymsLabel.name = "label"
 FieldTargetsSynonymsLabel.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8235,6 +8402,7 @@ FieldTargetsSymbolSynonyms.dataset = DatasetTargets
 FieldTargetsSymbolSynonyms.path = [DatasetTargets, FieldTargetsSymbolSynonyms]
 FieldTargetsSymbolSynonyms.f_label = FieldTargetsSymbolSynonymsLabel
 FieldTargetsSymbolSynonyms.f_source = FieldTargetsSymbolSynonymsSource
+FieldTargetsSymbolSynonyms.fields = [FieldTargetsSymbolSynonymsLabel, FieldTargetsSymbolSynonymsSource]
 
 FieldTargetsSymbolSynonymsLabel.name = "label"
 FieldTargetsSymbolSynonymsLabel.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8252,6 +8420,7 @@ FieldTargetsNameSynonyms.dataset = DatasetTargets
 FieldTargetsNameSynonyms.path = [DatasetTargets, FieldTargetsNameSynonyms]
 FieldTargetsNameSynonyms.f_label = FieldTargetsNameSynonymsLabel
 FieldTargetsNameSynonyms.f_source = FieldTargetsNameSynonymsSource
+FieldTargetsNameSynonyms.fields = [FieldTargetsNameSynonymsLabel, FieldTargetsNameSynonymsSource]
 
 FieldTargetsNameSynonymsLabel.name = "label"
 FieldTargetsNameSynonymsLabel.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8276,6 +8445,7 @@ FieldTargetsSubcellularLocations.f_location = FieldTargetsSubcellularLocationsLo
 FieldTargetsSubcellularLocations.f_source = FieldTargetsSubcellularLocationsSource
 FieldTargetsSubcellularLocations.f_term_sl = FieldTargetsSubcellularLocationsTermSl
 FieldTargetsSubcellularLocations.f_label_sl = FieldTargetsSubcellularLocationsLabelSl
+FieldTargetsSubcellularLocations.fields = [FieldTargetsSubcellularLocationsLocation, FieldTargetsSubcellularLocationsSource, FieldTargetsSubcellularLocationsTermSl, FieldTargetsSubcellularLocationsLabelSl]
 
 FieldTargetsSubcellularLocationsLocation.name = "location"
 FieldTargetsSubcellularLocationsLocation.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8304,6 +8474,7 @@ FieldTargetsTargetClass.path = [DatasetTargets, FieldTargetsTargetClass]
 FieldTargetsTargetClass.f_id = FieldTargetsTargetClassId
 FieldTargetsTargetClass.f_label = FieldTargetsTargetClassLabel
 FieldTargetsTargetClass.f_level = FieldTargetsTargetClassLevel
+FieldTargetsTargetClass.fields = [FieldTargetsTargetClassId, FieldTargetsTargetClassLabel, FieldTargetsTargetClassLevel]
 
 FieldTargetsTargetClassId.name = "id"
 FieldTargetsTargetClassId.data_type = OpenTargetsDatasetFieldType.LONG
@@ -8326,6 +8497,7 @@ FieldTargetsObsoleteSymbols.dataset = DatasetTargets
 FieldTargetsObsoleteSymbols.path = [DatasetTargets, FieldTargetsObsoleteSymbols]
 FieldTargetsObsoleteSymbols.f_label = FieldTargetsObsoleteSymbolsLabel
 FieldTargetsObsoleteSymbols.f_source = FieldTargetsObsoleteSymbolsSource
+FieldTargetsObsoleteSymbols.fields = [FieldTargetsObsoleteSymbolsLabel, FieldTargetsObsoleteSymbolsSource]
 
 FieldTargetsObsoleteSymbolsLabel.name = "label"
 FieldTargetsObsoleteSymbolsLabel.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8343,6 +8515,7 @@ FieldTargetsObsoleteNames.dataset = DatasetTargets
 FieldTargetsObsoleteNames.path = [DatasetTargets, FieldTargetsObsoleteNames]
 FieldTargetsObsoleteNames.f_label = FieldTargetsObsoleteNamesLabel
 FieldTargetsObsoleteNames.f_source = FieldTargetsObsoleteNamesSource
+FieldTargetsObsoleteNames.fields = [FieldTargetsObsoleteNamesLabel, FieldTargetsObsoleteNamesSource]
 
 FieldTargetsObsoleteNamesLabel.name = "label"
 FieldTargetsObsoleteNamesLabel.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8368,6 +8541,7 @@ FieldTargetsConstraint.f_oe_upper = FieldTargetsConstraintOeUpper
 FieldTargetsConstraint.f_upper_rank = FieldTargetsConstraintUpperRank
 FieldTargetsConstraint.f_upper_bin = FieldTargetsConstraintUpperBin
 FieldTargetsConstraint.f_upper_bin_6 = FieldTargetsConstraintUpperBin6
+FieldTargetsConstraint.fields = [FieldTargetsConstraintConstraintType, FieldTargetsConstraintScore, FieldTargetsConstraintExp, FieldTargetsConstraintObs, FieldTargetsConstraintOe, FieldTargetsConstraintOeLower, FieldTargetsConstraintOeUpper, FieldTargetsConstraintUpperRank, FieldTargetsConstraintUpperBin, FieldTargetsConstraintUpperBin6]
 
 FieldTargetsConstraintConstraintType.name = "constraintType"
 FieldTargetsConstraintConstraintType.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8427,6 +8601,7 @@ FieldTargetsTep.f_target_from_source_id = FieldTargetsTepTargetFromSourceId
 FieldTargetsTep.f_description = FieldTargetsTepDescription
 FieldTargetsTep.f_therapeutic_area = FieldTargetsTepTherapeuticArea
 FieldTargetsTep.f_url = FieldTargetsTepUrl
+FieldTargetsTep.fields = [FieldTargetsTepTargetFromSourceId, FieldTargetsTepDescription, FieldTargetsTepTherapeuticArea, FieldTargetsTepUrl]
 
 FieldTargetsTepTargetFromSourceId.name = "targetFromSourceId"
 FieldTargetsTepTargetFromSourceId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8454,6 +8629,7 @@ FieldTargetsProteinIds.dataset = DatasetTargets
 FieldTargetsProteinIds.path = [DatasetTargets, FieldTargetsProteinIds]
 FieldTargetsProteinIds.f_id = FieldTargetsProteinIdsId
 FieldTargetsProteinIds.f_source = FieldTargetsProteinIdsSource
+FieldTargetsProteinIds.fields = [FieldTargetsProteinIdsId, FieldTargetsProteinIdsSource]
 
 FieldTargetsProteinIdsId.name = "id"
 FieldTargetsProteinIdsId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8471,6 +8647,7 @@ FieldTargetsDbXrefs.dataset = DatasetTargets
 FieldTargetsDbXrefs.path = [DatasetTargets, FieldTargetsDbXrefs]
 FieldTargetsDbXrefs.f_id = FieldTargetsDbXrefsId
 FieldTargetsDbXrefs.f_source = FieldTargetsDbXrefsSource
+FieldTargetsDbXrefs.fields = [FieldTargetsDbXrefsId, FieldTargetsDbXrefsSource]
 
 FieldTargetsDbXrefsId.name = "id"
 FieldTargetsDbXrefsId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8498,6 +8675,7 @@ FieldTargetsChemicalProbes.f_score_in_cells = FieldTargetsChemicalProbesScoreInC
 FieldTargetsChemicalProbes.f_score_in_organisms = FieldTargetsChemicalProbesScoreInOrganisms
 FieldTargetsChemicalProbes.f_target_from_source_id = FieldTargetsChemicalProbesTargetFromSourceId
 FieldTargetsChemicalProbes.f_urls = FieldTargetsChemicalProbesUrls
+FieldTargetsChemicalProbes.fields = [FieldTargetsChemicalProbesControl, FieldTargetsChemicalProbesDrugId, FieldTargetsChemicalProbesId, FieldTargetsChemicalProbesIsHighQuality, FieldTargetsChemicalProbesMechanismOfAction, FieldTargetsChemicalProbesOrigin, FieldTargetsChemicalProbesProbeMinerScore, FieldTargetsChemicalProbesProbesDrugsScore, FieldTargetsChemicalProbesScoreInCells, FieldTargetsChemicalProbesScoreInOrganisms, FieldTargetsChemicalProbesTargetFromSourceId, FieldTargetsChemicalProbesUrls]
 
 FieldTargetsChemicalProbesControl.name = "control"
 FieldTargetsChemicalProbesControl.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8560,6 +8738,7 @@ FieldTargetsChemicalProbesUrls.dataset = DatasetTargets
 FieldTargetsChemicalProbesUrls.path = [DatasetTargets, FieldTargetsChemicalProbes, FieldTargetsChemicalProbesUrls]
 FieldTargetsChemicalProbesUrls.f_nice_name = FieldTargetsChemicalProbesUrlsNiceName
 FieldTargetsChemicalProbesUrls.f_url = FieldTargetsChemicalProbesUrlsUrl
+FieldTargetsChemicalProbesUrls.fields = [FieldTargetsChemicalProbesUrlsNiceName, FieldTargetsChemicalProbesUrlsUrl]
 
 FieldTargetsChemicalProbesUrlsNiceName.name = "niceName"
 FieldTargetsChemicalProbesUrlsNiceName.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8584,6 +8763,7 @@ FieldTargetsHomologues.f_target_gene_symbol = FieldTargetsHomologuesTargetGeneSy
 FieldTargetsHomologues.f_query_percentage_identity = FieldTargetsHomologuesQueryPercentageIdentity
 FieldTargetsHomologues.f_target_percentage_identity = FieldTargetsHomologuesTargetPercentageIdentity
 FieldTargetsHomologues.f_priority = FieldTargetsHomologuesPriority
+FieldTargetsHomologues.fields = [FieldTargetsHomologuesSpeciesId, FieldTargetsHomologuesSpeciesName, FieldTargetsHomologuesHomologyType, FieldTargetsHomologuesTargetGeneId, FieldTargetsHomologuesIsHighConfidence, FieldTargetsHomologuesTargetGeneSymbol, FieldTargetsHomologuesQueryPercentageIdentity, FieldTargetsHomologuesTargetPercentageIdentity, FieldTargetsHomologuesPriority]
 
 FieldTargetsHomologuesSpeciesId.name = "speciesId"
 FieldTargetsHomologuesSpeciesId.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8637,6 +8817,7 @@ FieldTargetsTractability.path = [DatasetTargets, FieldTargetsTractability]
 FieldTargetsTractability.f_modality = FieldTargetsTractabilityModality
 FieldTargetsTractability.f_id = FieldTargetsTractabilityId
 FieldTargetsTractability.f_value = FieldTargetsTractabilityValue
+FieldTargetsTractability.fields = [FieldTargetsTractabilityModality, FieldTargetsTractabilityId, FieldTargetsTractabilityValue]
 
 FieldTargetsTractabilityModality.name = "modality"
 FieldTargetsTractabilityModality.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8665,6 +8846,7 @@ FieldTargetsSafetyLiabilities.f_datasource = FieldTargetsSafetyLiabilitiesDataso
 FieldTargetsSafetyLiabilities.f_literature = FieldTargetsSafetyLiabilitiesLiterature
 FieldTargetsSafetyLiabilities.f_url = FieldTargetsSafetyLiabilitiesUrl
 FieldTargetsSafetyLiabilities.f_study = FieldTargetsSafetyLiabilitiesStudy
+FieldTargetsSafetyLiabilities.fields = [FieldTargetsSafetyLiabilitiesEvent, FieldTargetsSafetyLiabilitiesEventId, FieldTargetsSafetyLiabilitiesEffects, FieldTargetsSafetyLiabilitiesBiosample, FieldTargetsSafetyLiabilitiesDatasource, FieldTargetsSafetyLiabilitiesLiterature, FieldTargetsSafetyLiabilitiesUrl, FieldTargetsSafetyLiabilitiesStudy]
 
 FieldTargetsSafetyLiabilitiesEvent.name = "event"
 FieldTargetsSafetyLiabilitiesEvent.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8682,6 +8864,7 @@ FieldTargetsSafetyLiabilitiesEffects.dataset = DatasetTargets
 FieldTargetsSafetyLiabilitiesEffects.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesEffects]
 FieldTargetsSafetyLiabilitiesEffects.f_direction = FieldTargetsSafetyLiabilitiesEffectsDirection
 FieldTargetsSafetyLiabilitiesEffects.f_dosing = FieldTargetsSafetyLiabilitiesEffectsDosing
+FieldTargetsSafetyLiabilitiesEffects.fields = [FieldTargetsSafetyLiabilitiesEffectsDirection, FieldTargetsSafetyLiabilitiesEffectsDosing]
 
 FieldTargetsSafetyLiabilitiesEffectsDirection.name = "direction"
 FieldTargetsSafetyLiabilitiesEffectsDirection.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8702,6 +8885,7 @@ FieldTargetsSafetyLiabilitiesBiosample.f_tissue_id = FieldTargetsSafetyLiabiliti
 FieldTargetsSafetyLiabilitiesBiosample.f_cell_label = FieldTargetsSafetyLiabilitiesBiosampleCellLabel
 FieldTargetsSafetyLiabilitiesBiosample.f_cell_format = FieldTargetsSafetyLiabilitiesBiosampleCellFormat
 FieldTargetsSafetyLiabilitiesBiosample.f_cell_id = FieldTargetsSafetyLiabilitiesBiosampleCellId
+FieldTargetsSafetyLiabilitiesBiosample.fields = [FieldTargetsSafetyLiabilitiesBiosampleTissueLabel, FieldTargetsSafetyLiabilitiesBiosampleTissueId, FieldTargetsSafetyLiabilitiesBiosampleCellLabel, FieldTargetsSafetyLiabilitiesBiosampleCellFormat, FieldTargetsSafetyLiabilitiesBiosampleCellId]
 
 FieldTargetsSafetyLiabilitiesBiosampleTissueLabel.name = "tissueLabel"
 FieldTargetsSafetyLiabilitiesBiosampleTissueLabel.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8750,6 +8934,7 @@ FieldTargetsSafetyLiabilitiesStudy.path = [DatasetTargets, FieldTargetsSafetyLia
 FieldTargetsSafetyLiabilitiesStudy.f_name = FieldTargetsSafetyLiabilitiesStudyName
 FieldTargetsSafetyLiabilitiesStudy.f_description = FieldTargetsSafetyLiabilitiesStudyDescription
 FieldTargetsSafetyLiabilitiesStudy.f_type = FieldTargetsSafetyLiabilitiesStudyType
+FieldTargetsSafetyLiabilitiesStudy.fields = [FieldTargetsSafetyLiabilitiesStudyName, FieldTargetsSafetyLiabilitiesStudyDescription, FieldTargetsSafetyLiabilitiesStudyType]
 
 FieldTargetsSafetyLiabilitiesStudyName.name = "name"
 FieldTargetsSafetyLiabilitiesStudyName.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8773,6 +8958,7 @@ FieldTargetsPathways.path = [DatasetTargets, FieldTargetsPathways]
 FieldTargetsPathways.f_pathway_id = FieldTargetsPathwaysPathwayId
 FieldTargetsPathways.f_pathway = FieldTargetsPathwaysPathway
 FieldTargetsPathways.f_top_level_term = FieldTargetsPathwaysTopLevelTerm
+FieldTargetsPathways.fields = [FieldTargetsPathwaysPathwayId, FieldTargetsPathwaysPathway, FieldTargetsPathwaysTopLevelTerm]
 
 FieldTargetsPathwaysPathwayId.name = "pathwayId"
 FieldTargetsPathwaysPathwayId.data_type = OpenTargetsDatasetFieldType.STRING

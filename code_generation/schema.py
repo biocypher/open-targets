@@ -137,14 +137,24 @@ def recursive_get_field_class_info(
     else:
         fields = []
 
+    child_class_infos = list[ClassInfo]()
     for child_field in fields:
         child_class_info = recursive_get_field_class_info(child_field, [*path, class_name])
+        child_class_infos.append(child_class_info)
         dependants.append(child_class_info)
         attributes.append(
             LateAttribute(
                 name=f"f_{to_snake(child_field.name)}",
                 type=f"Final[type[{quote(str(child_class_info.name))}]]",
                 value=str(child_class_info.name),
+            ),
+        )
+    if len(child_class_infos) > 0:
+        attributes.append(
+            LateAttribute(
+                name="fields",
+                type=f'Final[list[type["{class_name}.Field"]]]',
+                value=f"[{', '.join(str(i.name) for i in child_class_infos)}]",
             ),
         )
 
@@ -174,14 +184,24 @@ def create_schema_render_context() -> dict[str, Any]:
         attributes = [LateAttribute(name="id", type="Final[str]", value=quote(dataset_metadata.id))]
         dependants = list[ClassInfo]()
 
+        child_class_infos = list[ClassInfo]()
         for child_field in dataset_metadata.dataset_schema.fields:
             child_class_info = recursive_get_field_class_info(child_field, [class_name])
+            child_class_infos.append(child_class_info)
             dependants.append(child_class_info)
             attributes.append(
                 LateAttribute(
                     name=f"f_{to_snake(child_field.name)}",
                     type=f"Final[type[{quote(str(child_class_info.name))}]]",
                     value=str(child_class_info.name),
+                ),
+            )
+        if len(child_class_infos) > 0:
+            attributes.append(
+                LateAttribute(
+                    name="fields",
+                    type=f'Final[list[type["{class_name}.Field"]]]',
+                    value=f"[{', '.join(str(i.name) for i in child_class_infos)}]",
                 ),
             )
 
