@@ -14,8 +14,8 @@ from open_targets.data.metadata.model import (
 )
 
 
-@dataclass
-class InnerFieldClassInfo:
+@dataclass(frozen=True)
+class InnerClassInfo:
     """Info of an inner class named Field.
 
     An inner class named `Field` serving as an interface of fields under a
@@ -30,7 +30,7 @@ class InnerFieldClassInfo:
     inherit_from: str
 
 
-@dataclass
+@dataclass(frozen=True)
 class LateAttribute:
     """Key and value of a class attribute that is not immediately assigned.
 
@@ -50,7 +50,7 @@ class LateAttribute:
     value: str
 
 
-@dataclass
+@dataclass(frozen=True)
 class PrefixedClassName:
     """A class name with a prefix."""
 
@@ -62,7 +62,7 @@ class PrefixedClassName:
         return f"{self.prefix}{self.name}"
 
 
-@dataclass
+@dataclass(frozen=True)
 class ClassInfo:
     """Information about a class to be generated.
 
@@ -82,7 +82,16 @@ class ClassInfo:
     late_attributes: list[LateAttribute]
     dependants: list["ClassInfo"]
     inherit_from: str
-    inner_field_class: InnerFieldClassInfo | None
+    inner_field_class: InnerClassInfo | None
+
+
+@dataclass(frozen=True)
+class FieldsHandlerResult:
+    """Result of recursive_handle_fields."""
+
+    class_infos: list[ClassInfo]
+    fields_attribute: LateAttribute
+    field_attributes: list[LateAttribute]
 
 
 def capitalise_first(s: str) -> str:
@@ -95,21 +104,59 @@ def quote(s: str) -> str:
     return f'"{s}"'
 
 
+def recursive_handle_fields(
+    fields: list[OpenTargetsDatasetFieldModel],
+    owner_path: list[PrefixedClassName],
+) -> FieldsHandlerResult:
+    """Generate and sort attributes and class information for fields."""
+    owner_class_name = owner_path[-1]
+    field_class_infos = list[ClassInfo]()
+    field_attributes = list[LateAttribute]()
+
+    for field in fields:
+        field_class_info = recursive_get_field_class_info(field, owner_path)
+        field_class_infos.append(field_class_info)
+        field_attributes.append(
+            LateAttribute(
+                name=f"f_{to_snake(field.name)}",
+                type=f"Final[type[{quote(str(field_class_info.name))}]]",
+                value=str(field_class_info.name),
+            ),
+        )
+
+    field_class_infos = sorted(field_class_infos, key=lambda i: str(i.name))
+    fields_attribute = LateAttribute(
+        name="fields",
+        type=f'Final[list[type["{owner_class_name}.Field"]]]',
+        value=f"[{', '.join(str(i.name) for i in field_class_infos)}]",
+    )
+    field_attributes = sorted(field_attributes, key=lambda i: i.name)
+
+    return FieldsHandlerResult(
+        class_infos=field_class_infos,
+        fields_attribute=fields_attribute,
+        field_attributes=field_attributes,
+    )
+
+
 def recursive_get_field_class_info(
     field: OpenTargetsDatasetFieldModel,
-    path: list[PrefixedClassName],
+    owner_path: list[PrefixedClassName],
 ) -> ClassInfo:
-    """Recursively convert a field or dataset into a ClassInfo.
+    """Convert a field to a ClassInfo.
 
-    Recursively convert a field or dataset and it's children into a ClassInfo
-    object.
-
+    Convert a field to a ClassInfo and it's children fields to ClassInfos
+    recursively.
     """
+    dataset_class_name = owner_path[0]
+    owner_class_name = owner_path[-1]
+
     # Naming in Open Targets data is inconsistent, normalise them to snake
     # case first
     normalised_name_in_snake_case = to_snake(field.name)
-    dataset_class_name = path[0]
-    class_name = PrefixedClassName("Field", path[-1].name + to_pascal(normalised_name_in_snake_case))
+    field_class_name = PrefixedClassName("Field", owner_class_name.name + to_pascal(normalised_name_in_snake_case))
+    field_path = [*owner_path, field_class_name]
+
     attributes = [
         LateAttribute("name", "Final[str]", quote(field.name)),
         LateAttribute(
@@ -123,7 +170,11 @@ def recursive_get_field_class_info(
             else str(field.type),
         ),
         LateAttribute("dataset", "Final[type[Dataset]]", str(dataset_class_name)),
-        LateAttribute("path", "Final[list[type[DatasetField]]]", f"[{', '.join(str(i) for i in [*path, class_name])}]"),
+        LateAttribute(
+            "path",
+            "Final[list[type[DatasetField]]]",
+            f"[{', '.join(str(i) for i in field_path)}]",
+        ),
     ]
     dependants = list[ClassInfo]()
 
@@ -137,33 +188,18 @@ def recursive_get_field_class_info(
     else:
         fields = []
 
-    child_class_infos = list[ClassInfo]()
-    for child_field in fields:
-        child_class_info = recursive_get_field_class_info(child_field, [*path, class_name])
-        child_class_infos.append(child_class_info)
-        dependants.append(child_class_info)
-        attributes.append(
-            LateAttribute(
-                name=f"f_{to_snake(child_field.name)}",
-                type=f"Final[type[{quote(str(child_class_info.name))}]]",
-                value=str(child_class_info.name),
-            ),
-        )
-    if len(child_class_infos) > 0:
-        attributes.append(
-            LateAttribute(
-                name="fields",
-                type=f'Final[list[type["{class_name}.Field"]]]',
-                value=f"[{', '.join(str(i.name) for i in child_class_infos)}]",
-            ),
-        )
+    if len(fields) > 0:
+        result = recursive_handle_fields(fields, field_path)
+        dependants.extend(result.class_infos)
+        attributes.append(result.fields_attribute)
+        attributes.extend(result.field_attributes)
 
     return ClassInfo(
-        name=class_name,
+        name=field_class_name,
         late_attributes=attributes,
         dependants=dependants,
-        inherit_from=f"{path[-1]}.Field",
-        inner_field_class=InnerFieldClassInfo(inherit_from=f"{path[-1]}.Field") if len(dependants) > 0 else None,
+        inherit_from=f"{owner_class_name}.Field",
+        inner_field_class=InnerClassInfo(inherit_from=f"{owner_class_name}.Field") if len(dependants) > 0 else None,
     )
 
 
@@ -184,26 +220,10 @@ def create_schema_render_context() -> dict[str, Any]:
         attributes = [LateAttribute(name="id", type="Final[str]", value=quote(dataset_metadata.id))]
         dependants = list[ClassInfo]()
 
-        child_class_infos = list[ClassInfo]()
-        for child_field in dataset_metadata.dataset_schema.fields:
-            child_class_info = recursive_get_field_class_info(child_field, [class_name])
-            child_class_infos.append(child_class_info)
-            dependants.append(child_class_info)
-            attributes.append(
-                LateAttribute(
-                    name=f"f_{to_snake(child_field.name)}",
-                    type=f"Final[type[{quote(str(child_class_info.name))}]]",
-                    value=str(child_class_info.name),
-                ),
-            )
-        if len(child_class_infos) > 0:
-            attributes.append(
-                LateAttribute(
-                    name="fields",
-                    type=f'Final[list[type["{class_name}.Field"]]]',
-                    value=f"[{', '.join(str(i.name) for i in child_class_infos)}]",
-                ),
-            )
+        result = recursive_handle_fields(dataset_metadata.dataset_schema.fields, [class_name])
+        dependants.extend(result.class_infos)
+        attributes.append(result.fields_attribute)
+        attributes.extend(result.field_attributes)
 
         class_infos.append(
             ClassInfo(
@@ -211,7 +231,7 @@ def create_schema_render_context() -> dict[str, Any]:
                 late_attributes=attributes,
                 dependants=dependants,
                 inherit_from="Dataset",
-                inner_field_class=InnerFieldClassInfo(inherit_from="DatasetField"),
+                inner_field_class=InnerClassInfo(inherit_from="DatasetField"),
             ),
         )
 
