@@ -5,12 +5,6 @@ class {{ class_info.name }}({{ class_info.inherit_from }}):
     {% for attribute in class_info.late_attributes %}
     {{ attribute.name }}: {{ attribute.type }}
     {% endfor %}
-{% if class_info.inner_field_class %}
-
-    class Field({{ class_info.inner_field_class.inherit_from }}):
-        """Parent class of types of all fields."""
-        pass
-{% endif %}
 
 
 {% for dependant in class_info.dependants %}
@@ -32,20 +26,11 @@ class {{ class_info.name }}({{ class_info.inherit_from }}):
 # ruff: noqa: D101, D102, PGH003
 # type: ignore
 
+from collections.abc import Sequence
 from typing import Final
 
 from open_targets.data.metadata.model import OpenTargetsDatasetFieldType
-
-
-class Dataset:
-    id: Final[str]
-
-
-class DatasetField:
-    name: Final[str]
-    data_type: Final[OpenTargetsDatasetFieldType]
-    dataset: Final[type["Dataset"]]
-    path: Final[list[type["DatasetField"]]]
+from open_targets.data.schema_base import Dataset, Field, MapField, ScalarField, SequenceField, StructField
 
 
 {% for class_info in class_infos %}
