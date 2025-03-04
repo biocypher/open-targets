@@ -1,8 +1,8 @@
 from typing import Final
 
 from open_targets.adapter.generation_definition import (
+    ExpressionNodeGenerationDefinition,
     GenerationDefinition,
-    SimpleNodeGenerationDefinition,
 )
 from open_targets.adapter.output import NodeInfo
 from open_targets.data.schema import (
@@ -10,7 +10,7 @@ from open_targets.data.schema import (
     FieldMousePhenotypesModelPhenotypeLabel,
 )
 
-node_mouse_phenotype: Final[GenerationDefinition[NodeInfo]] = SimpleNodeGenerationDefinition(
+node_mouse_phenotype: Final[GenerationDefinition[NodeInfo]] = ExpressionNodeGenerationDefinition(
     primary_id=FieldMousePhenotypesModelPhenotypeId,
     labels=[],
     properties=[

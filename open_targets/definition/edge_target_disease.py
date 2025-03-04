@@ -1,6 +1,6 @@
 from typing import Final
 
-from open_targets.adapter.generation_definition import GenerationDefinition, SimpleEdgeGenerationDefinition
+from open_targets.adapter.generation_definition import ExpressionEdgeGenerationDefinition, GenerationDefinition
 from open_targets.adapter.output import EdgeInfo
 from open_targets.data.schema import (
     FieldEvidenceDatasourceId,
@@ -12,7 +12,7 @@ from open_targets.data.schema import (
     FieldEvidenceTargetId,
 )
 
-edge_target_disease: Final[GenerationDefinition[EdgeInfo]] = SimpleEdgeGenerationDefinition(
+edge_target_disease: Final[GenerationDefinition[EdgeInfo]] = ExpressionEdgeGenerationDefinition(
     primary_id=FieldEvidenceId,
     source=FieldEvidenceTargetId,
     target=FieldEvidenceDiseaseId,

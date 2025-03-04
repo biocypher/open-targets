@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from collections.abc import Callable, Iterable, Sequence
 from dataclasses import dataclass
-from typing import Any, Generic, TypeVar
+from typing import Any, Generic, TypeAlias, TypeVar
 
 from open_targets.adapter.data_wrapper import DataWrapper
 from open_targets.adapter.expression import (
@@ -21,6 +21,8 @@ from open_targets.data.schema_base import Dataset
 
 TGraphComponent = TypeVar("TGraphComponent", NodeInfo, EdgeInfo)
 
+Source: TypeAlias = str | type[Field] | Expression[Any]
+
 
 class GenerationDefinition(Generic[TGraphComponent], ABC):
     @abstractmethod
@@ -32,11 +34,15 @@ class GenerationDefinition(Generic[TGraphComponent], ABC):
         """Generate graph components by directly accessing the context."""
 
 
-@dataclass(frozen=True)
 class ScanningGenerationDefinition(
     GenerationDefinition[TGraphComponent],
     ABC,
 ):
+    @property
+    @abstractmethod
+    def scan_operation(self) -> ScanOperation:
+        """Scan operation that is used to generate the graph components."""
+
     @abstractmethod
     def get_required_fields(self) -> Iterable[type[Field]]:
         """Fields that are requested by this definition.
@@ -51,13 +57,7 @@ class ScanningGenerationDefinition(
         self,
         context: GenerationContext,
         data_stream: Iterable[DataWrapper],
-    ) -> Iterable[TGraphComponent]:
-        pass
-
-    @property
-    @abstractmethod
-    def scan_operation(self) -> ScanOperation:
-        """Scan operation that is used to generate the graph components."""
+    ) -> Iterable[TGraphComponent]: ...
 
     def get_required_datasets(self) -> Iterable[type[Dataset]]:
         return {self.scan_operation.dataset}
@@ -87,6 +87,13 @@ class ExpressionGenerationDefinition(
         for expression in self._all_expressions:
             fields.update(recursive_get_dependent_fields(expression))
         return fields
+
+    def _to_expression(self, value: str | type[Field] | Expression[Any]) -> Expression[Any]:
+        if isinstance(value, str):
+            return LiteralExpression(value)
+        if isinstance(value, type):
+            return FieldExpression(value)
+        return value
 
     def recursive_build_expression_function(self, expression: Expression[Any]) -> Callable[[DataWrapper], Any]:
         match expression:
@@ -121,170 +128,11 @@ class ExpressionGenerationDefinition(
         return lambda record: (key_getter(record), value_getter(record))
 
 
-class ExpressionNodeGenerationDefinitionBase(ExpressionGenerationDefinition[NodeInfo], ABC):
-    """Definition of a set of nodes to be generated."""
-
-    @property
-    @abstractmethod
-    def primary_id_expr(self) -> Expression[str]:
-        """Expression that is used to get the primary id of the node."""
-
-    @property
-    @abstractmethod
-    def labels_expr(self) -> Sequence[Expression[str]]:
-        """Expressions that are used to get the labels of the node."""
-
-    @property
-    @abstractmethod
-    def properties_expr(self) -> Sequence[tuple[Expression[str], Expression[str]]]:
-        """Expressions that are used to get the properties of the node."""
-
-    @property
-    def _all_expressions(self) -> set[Expression[Any]]:
-        return {
-            self.primary_id_expr,
-            *self.labels_expr,
-            *[i[0] for i in self.properties_expr],
-            *[i[1] for i in self.properties_expr],
-        }
-
-    def generate_from_scanning(
-        self,
-        context: GenerationContext,
-        data_stream: Iterable[DataWrapper],
-    ) -> Iterable[NodeInfo]:
-        id_getter = self._create_value_getter(self.primary_id_expr)
-        label_getters = [self._create_value_getter(label) for label in self.labels_expr]
-        property_getters = [self._create_key_value_getter(prop) for prop in self.properties_expr]
-
-        for data in data_stream:
-            yield NodeInfo(
-                id=id_getter(data),
-                labels=[label_getter(data) for label_getter in label_getters],
-                properties=[property_getter(data) for property_getter in property_getters],
-            )
-
-
-class ExpressionEdgeGenerationDefinitionBase(ExpressionGenerationDefinition[EdgeInfo], ABC):
-    """Definition of a set of edges to be generated."""
-
-    @property
-    @abstractmethod
-    def primary_id_expr(self) -> Expression[str]:
-        """Expression that is used to get the primary id of the node."""
-
-    @property
-    @abstractmethod
-    def source_expr(self) -> Expression[str]:
-        """Expression that is used to get the source of the edge."""
-
-    @property
-    @abstractmethod
-    def target_expr(self) -> Expression[str]:
-        """Expression that is used to get the target of the edge."""
-
-    @property
-    @abstractmethod
-    def labels_expr(self) -> Sequence[Expression[str]]:
-        """Expressions that are used to get the labels of the node."""
-
-    @property
-    @abstractmethod
-    def properties_expr(self) -> Sequence[tuple[Expression[str], Expression[str]]]:
-        """Expressions that are used to get the properties of the node."""
-
-    @property
-    def _all_expressions(self) -> set[Expression[Any]]:
-        return {
-            self.primary_id_expr,
-            self.source_expr,
-            self.target_expr,
-            *self.labels_expr,
-            *[i[0] for i in self.properties_expr],
-            *[i[1] for i in self.properties_expr],
-        }
-
-    def generate_from_scanning(
-        self,
-        context: GenerationContext,
-        data_stream: Iterable[DataWrapper],
-    ) -> Iterable[EdgeInfo]:
-        id_getter = self._create_value_getter(self.primary_id_expr)
-        source_getter = self._create_value_getter(self.source_expr)
-        target_getter = self._create_value_getter(self.target_expr)
-        label_getters = [self._create_value_getter(label) for label in self.labels_expr]
-        property_getters = [self._create_key_value_getter(prop) for prop in self.properties_expr]
-
-        for data in data_stream:
-            yield EdgeInfo(
-                id=id_getter(data),
-                source_id=source_getter(data),
-                target_id=target_getter(data),
-                labels=[label_getter(data) for label_getter in label_getters],
-                properties=[property_getter(data) for property_getter in property_getters],
-            )
-
-
-@dataclass(frozen=True, kw_only=True)
-class ExpressionNodeGenerationDefinition(ExpressionNodeGenerationDefinitionBase):
-    primary_id: Expression[str]
-    labels: Sequence[Expression[str]]
-    properties: Sequence[tuple[Expression[str], Expression[str]]]
-
-    @property
-    def primary_id_expr(self) -> Expression[str]:
-        return self.primary_id
-
-    @property
-    def labels_expr(self) -> Sequence[Expression[str]]:
-        return self.labels
-
-    @property
-    def properties_expr(self) -> Sequence[tuple[Expression[str], Expression[str]]]:
-        return self.properties
-
-
-@dataclass(frozen=True, kw_only=True)
-class ExpressionEdgeGenerationDefinition(ExpressionEdgeGenerationDefinitionBase):
-    primary_id: Expression[str]
-    source: Expression[str]
-    target: Expression[str]
-    labels: Sequence[Expression[str]]
-    properties: Sequence[tuple[Expression[str], Expression[str]]]
-
-    @property
-    def primary_id_expr(self) -> Expression[str]:
-        return self.primary_id
-
-    @property
-    def source_expr(self) -> Expression[str]:
-        return self.source
-
-    @property
-    def target_expr(self) -> Expression[str]:
-        return self.target
-
-    @property
-    def labels_expr(self) -> Sequence[Expression[str]]:
-        return self.labels
-
-    @property
-    def properties_expr(self) -> Sequence[tuple[Expression[str], Expression[str]]]:
-        return self.properties
-
-
-class SimpleNodeGenerationDefinitionMixin:
-    def _to_expression(self, value: str | type[Field]) -> Expression[Any]:
-        if isinstance(value, str):
-            return LiteralExpression(value)
-        return FieldExpression(value)
-
-
-@dataclass(frozen=True, kw_only=True)
-class SimpleNodeGenerationDefinition(SimpleNodeGenerationDefinitionMixin, ExpressionNodeGenerationDefinitionBase):
-    primary_id: str | type[Field]
-    labels: Sequence[str | type[Field]]
-    properties: Sequence[type[Field] | tuple[str | type[Field], str | type[Field]]]
+@dataclass(frozen=True)
+class ExpressionNodeGenerationDefinition(ExpressionGenerationDefinition[NodeInfo]):
+    primary_id: Source
+    labels: Sequence[Source]
+    properties: Sequence[type[Field] | tuple[Source, Source]]
 
     @property
     def primary_id_expr(self) -> Expression[str]:
@@ -303,14 +151,42 @@ class SimpleNodeGenerationDefinition(SimpleNodeGenerationDefinitionMixin, Expres
             for prop in self.properties
         ]
 
+    @property
+    def _all_expressions(self) -> set[Expression[Any]]:
+        return {
+            self.primary_id_expr,
+            *self.labels_expr,
+            *[i[0] for i in self.properties_expr],
+            *[i[1] for i in self.properties_expr],
+        }
 
-@dataclass(frozen=True, kw_only=True)
-class SimpleEdgeGenerationDefinition(SimpleNodeGenerationDefinitionMixin, ExpressionEdgeGenerationDefinitionBase):
-    primary_id: str | type[Field]
-    source: str | type[Field]
-    target: str | type[Field]
-    labels: Sequence[str | type[Field]]
-    properties: Sequence[type[Field] | tuple[str | type[Field], str | type[Field]]]
+    def generate_from_scanning(
+        self,
+        context: GenerationContext,
+        data_stream: Iterable[DataWrapper],
+    ) -> Iterable[NodeInfo]:
+        id_getter = self._create_value_getter(self.primary_id_expr)
+        label_getters = [self._create_value_getter(label) for label in self.labels_expr]
+        property_getters = [self._create_key_value_getter(prop) for prop in self.properties_expr] + [
+            self._create_key_value_getter((LiteralExpression(prop[0]), LiteralExpression(prop[1])))
+            for prop in context.static_properties
+        ]
+
+        for data in data_stream:
+            yield NodeInfo(
+                id=id_getter(data),
+                labels=[label_getter(data) for label_getter in label_getters],
+                properties=[property_getter(data) for property_getter in property_getters],
+            )
+
+
+@dataclass(frozen=True)
+class ExpressionEdgeGenerationDefinition(ExpressionGenerationDefinition[EdgeInfo]):
+    primary_id: Source
+    source: Source
+    target: Source
+    labels: Sequence[Source]
+    properties: Sequence[type[Field] | tuple[Source, Source]]
 
     @property
     def primary_id_expr(self) -> Expression[str]:
@@ -336,3 +212,37 @@ class SimpleEdgeGenerationDefinition(SimpleNodeGenerationDefinitionMixin, Expres
             else (self._to_expression(prop.name), self._to_expression(prop))
             for prop in self.properties
         ]
+
+    @property
+    def _all_expressions(self) -> set[Expression[Any]]:
+        return {
+            self.primary_id_expr,
+            self.source_expr,
+            self.target_expr,
+            *self.labels_expr,
+            *[i[0] for i in self.properties_expr],
+            *[i[1] for i in self.properties_expr],
+        }
+
+    def generate_from_scanning(
+        self,
+        context: GenerationContext,
+        data_stream: Iterable[DataWrapper],
+    ) -> Iterable[EdgeInfo]:
+        id_getter = self._create_value_getter(self.primary_id_expr)
+        source_getter = self._create_value_getter(self.source_expr)
+        target_getter = self._create_value_getter(self.target_expr)
+        label_getters = [self._create_value_getter(label) for label in self.labels_expr]
+        property_getters = [self._create_key_value_getter(prop) for prop in self.properties_expr] + [
+            self._create_key_value_getter((LiteralExpression(prop[0]), LiteralExpression(prop[1])))
+            for prop in context.static_properties
+        ]
+
+        for data in data_stream:
+            yield EdgeInfo(
+                id=id_getter(data),
+                source_id=source_getter(data),
+                target_id=target_getter(data),
+                labels=[label_getter(data) for label_getter in label_getters],
+                properties=[property_getter(data) for property_getter in property_getters],
+            )

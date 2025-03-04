@@ -1,8 +1,8 @@
 from typing import Final
 
 from open_targets.adapter.generation_definition import (
+    ExpressionNodeGenerationDefinition,
     GenerationDefinition,
-    SimpleNodeGenerationDefinition,
 )
 from open_targets.adapter.output import NodeInfo
 from open_targets.data.schema import (
@@ -26,7 +26,7 @@ from open_targets.data.schema import (
     FieldMoleculeYearOfFirstApproval,
 )
 
-node_molecule: Final[GenerationDefinition[NodeInfo]] = SimpleNodeGenerationDefinition(
+node_molecule: Final[GenerationDefinition[NodeInfo]] = ExpressionNodeGenerationDefinition(
     primary_id=FieldMoleculeId,
     labels=[],
     properties=[

@@ -25,6 +25,7 @@ class _GenerationContextImpl(GenerationContext):
         self,
         node_definitions: list[GenerationDefinition[NodeInfo]],
         edge_definitions: list[GenerationDefinition[EdgeInfo]],
+        static_properties: list[tuple[str, str]],
         datasets_location: str | PathLike[str],
     ) -> None:
         all_datasets_required: frozenset[type[Dataset]] = frozenset(
@@ -33,11 +34,16 @@ class _GenerationContextImpl(GenerationContext):
             for dataset in definition.get_required_datasets()
         )
         self._datasets: Final[frozenset[type[Dataset]]] = all_datasets_required
+        self._static_properties: Final[list[tuple[str, str]]] = static_properties
         self.datasets_location: Final[str | PathLike[str]] = datasets_location
 
     @property
     def datasets(self) -> frozenset[type[Dataset]]:
         return self._datasets
+
+    @property
+    def static_properties(self) -> Iterable[tuple[str, str]]:
+        return self._static_properties
 
     def get_scan_result_stream(
         self,
@@ -130,6 +136,7 @@ class Adapter:
         self.context: Final[GenerationContext] = _GenerationContextImpl(
             self.node_definitions,
             self.edge_definitions,
+            self.static_properties,
             self.datasets_location,
         )
 

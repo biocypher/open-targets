@@ -2,7 +2,6 @@ from typing import Final
 
 from open_targets.adapter.expression import (
     FieldExpression,
-    LiteralExpression,
     StringConcatenationExpression,
 )
 from open_targets.adapter.generation_definition import ExpressionEdgeGenerationDefinition, GenerationDefinition
@@ -18,11 +17,11 @@ edge_target_go: Final[GenerationDefinition[EdgeInfo]] = ExpressionEdgeGeneration
     primary_id=StringConcatenationExpression(
         expressions=[FieldExpression(FieldTargetsId), FieldExpression(FieldTargetsGoElementId)],
     ),
-    source=FieldExpression(FieldTargetsId),
-    target=FieldExpression(FieldTargetsGoElementId),
+    source=FieldTargetsId,
+    target=FieldTargetsGoElementId,
     labels=[],
     properties=[
-        (LiteralExpression(FieldTargetsGoElementSource.name), FieldExpression(FieldTargetsGoElementSource)),
-        (LiteralExpression(FieldTargetsGoElementEvidence.name), FieldExpression(FieldTargetsGoElementEvidence)),
+        FieldTargetsGoElementSource,
+        FieldTargetsGoElementEvidence,
     ],
 )
