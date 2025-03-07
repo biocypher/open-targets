@@ -13,9 +13,10 @@ class License(str, Enum):
     MIT = "MIT"
     COMMERCIAL_OT = "Commercial use for Open Targets"
     NOT_AVAILABLE = "NA"
+    UNKNOWN = "Unknown"
 
 
-def get_dataset_license(dataset_id: str) -> License:
+def get_datasource_license(dataset_id: str) -> License:
     """Get the license for a given dataset ID."""
     licence = None
     match dataset_id:
@@ -38,6 +39,5 @@ def get_dataset_license(dataset_id: str) -> License:
         case "cancer_biomarkers" | "crispr" | "gene_burden" | "impc" | "sysbio":
             licence = License.NOT_AVAILABLE
         case _:
-            msg = f"Unknown dataset ID: {dataset_id}"
-            raise ValueError(msg)
+            licence = License.UNKNOWN
     return licence

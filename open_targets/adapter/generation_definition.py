@@ -3,19 +3,28 @@ from collections.abc import Callable, Iterable, Sequence
 from dataclasses import dataclass
 from typing import Any, Generic, TypeAlias, TypeVar
 
+from bioregistry.resolve import normalize_curie, normalize_parsed_curie, normalize_prefix
+
 from open_targets.adapter.data_wrapper import DataWrapper
 from open_targets.adapter.expression import (
+    BuildCurieExpression,
+    DataSourceToLicenceExpression,
     Expression,
+    ExtractCurieSchemeExpression,
+    ExtractSubstringExpression,
     FieldExpression,
     LiteralExpression,
+    NormaliseCurieExpression,
     StringConcatenationExpression,
+    StringLowerExpression,
     ToStringExpression,
     TransformExpression,
     recursive_get_dependent_fields,
 )
 from open_targets.adapter.generation_context import GenerationContext
+from open_targets.adapter.licence import get_datasource_license
 from open_targets.adapter.output import EdgeInfo, NodeInfo
-from open_targets.adapter.scan_operation import RowScanOperation, ScanOperation
+from open_targets.adapter.scan_operation import FlattenedScanOperation, ScanOperation
 from open_targets.data.schema import Field
 from open_targets.data.schema_base import Dataset
 
@@ -38,9 +47,8 @@ class ScanningGenerationDefinition(
     GenerationDefinition[TGraphComponent],
     ABC,
 ):
-    @property
     @abstractmethod
-    def scan_operation(self) -> ScanOperation:
+    def get_scan_operation(self) -> ScanOperation:
         """Scan operation that is used to generate the graph components."""
 
     @abstractmethod
@@ -60,32 +68,36 @@ class ScanningGenerationDefinition(
     ) -> Iterable[TGraphComponent]: ...
 
     def get_required_datasets(self) -> Iterable[type[Dataset]]:
-        return {self.scan_operation.dataset}
+        return {self.get_scan_operation().dataset}
 
     def generate(self, context: GenerationContext) -> Iterable[TGraphComponent]:
-        scan_result_stream = context.get_scan_result_stream(self.scan_operation, self.get_required_fields())
+        scan_result_stream = context.get_scan_result_stream(self.get_scan_operation(), self.get_required_fields())
         return self.generate_from_scanning(context, scan_result_stream)
 
 
+@dataclass(frozen=True)
 class ExpressionGenerationDefinition(
     ScanningGenerationDefinition[TGraphComponent],
     ABC,
 ):
     """Definition of a set of nodes to be generated."""
 
-    @property
-    @abstractmethod
-    def _all_expressions(self) -> set[Expression[Any]]:
-        """All expressions that are included in this definition."""
+    scan_operation: ScanOperation
 
     @property
-    def scan_operation(self) -> ScanOperation:
-        return RowScanOperation(dataset=next(iter(self.get_required_fields())).dataset)
+    @abstractmethod
+    def _all_expressions(self) -> Sequence[Expression[Any]]:
+        """All expressions that are included in this definition."""
+
+    def get_scan_operation(self) -> ScanOperation:
+        return self.scan_operation
 
     def get_required_fields(self) -> Iterable[type[Field]]:
         fields = set[type[Field]]()
         for expression in self._all_expressions:
             fields.update(recursive_get_dependent_fields(expression))
+        if isinstance(self.scan_operation, FlattenedScanOperation):
+            fields.add(self.scan_operation.flattened_field)
         return fields
 
     def _to_expression(self, value: str | type[Field] | Expression[Any]) -> Expression[Any]:
@@ -98,20 +110,74 @@ class ExpressionGenerationDefinition(
     def recursive_build_expression_function(self, expression: Expression[Any]) -> Callable[[DataWrapper], Any]:
         match expression:
             case FieldExpression():
-                return lambda record: record[expression.field]
+                return lambda data: data[expression.field]
             case LiteralExpression():
                 return lambda _: expression.value
             case TransformExpression():
-                return lambda record: expression.function(record)
+                return lambda data: expression.function(data)
             case ToStringExpression():
-                return lambda record: str(self.recursive_build_expression_function(expression.expression)(record))
+                func = self.recursive_build_expression_function(expression.expression)
+                return lambda data: str(func(data))
             case StringConcatenationExpression():
-                return lambda record: "".join(
-                    self.recursive_build_expression_function(expression)(record)
-                    for expression in expression.expressions
+                funcs = [self.recursive_build_expression_function(e) for e in expression.expressions]
+                return lambda data: "".join(func(data) for func in funcs)
+            case StringLowerExpression():
+                func = self.recursive_build_expression_function(expression.expression)
+                return lambda data: func(data).lower()
+            case BuildCurieExpression():
+                return self._get_curie_builder(expression)
+            case ExtractCurieSchemeExpression():
+                func = self.recursive_build_expression_function(expression.expression)
+                return (
+                    (lambda data: normalize_prefix(self._extract_curie_scheme(func(data))))
+                    if expression.normalise
+                    else (lambda data: self._extract_curie_scheme(func(data)))
                 )
+            case NormaliseCurieExpression():
+                func = self.recursive_build_expression_function(expression.expression)
+                return lambda data: self._normalise_curie(func(data))
+            case ExtractSubstringExpression():
+                func = self.recursive_build_expression_function(expression.expression)
+                separator_func = self.recursive_build_expression_function(expression.separator)
+                return lambda data: func(data).split(separator_func(data))[expression.index]
+            case DataSourceToLicenceExpression():
+                func = self.recursive_build_expression_function(expression.datasource)
+                return lambda data: get_datasource_license(func(data))
             case _:
-                return lambda _: expression
+                msg = f"Unsupported expression: {expression}"
+                raise ValueError(msg)
+
+    def _get_curie_builder(self, expression: BuildCurieExpression) -> Callable[[DataWrapper], str]:
+        scheme_func = self.recursive_build_expression_function(expression.scheme)
+        path_func = self.recursive_build_expression_function(expression.path)
+
+        def normalise_curie_builder(data: DataWrapper) -> str:
+            scheme, path = normalize_parsed_curie(scheme_func(data), path_func(data))
+            scheme = "" if scheme is None else scheme
+            path = "" if path is None else path
+            return f"{scheme}:{path}"
+
+        return (
+            normalise_curie_builder
+            if expression.normalised
+            else (lambda data: f"{scheme_func(data)}:{path_func(data)}")
+        )
+
+    def _normalise_curie(self, string: str):
+        if ":" in string:
+            return normalize_curie(string, sep=":")
+        if "_" in string:
+            return normalize_curie(string, sep="_")
+        if "/" in string:
+            return normalize_curie(string, sep="/")
+        return ""
+
+    def _extract_curie_scheme(self, string: str):
+        if ":" in string:
+            return string.split(":")[0]
+        if "_" in string:
+            return string.split("_")[0]
+        return ""
 
     def _create_value_getter(
         self,
@@ -130,6 +196,7 @@ class ExpressionGenerationDefinition(
 
 @dataclass(frozen=True)
 class ExpressionNodeGenerationDefinition(ExpressionGenerationDefinition[NodeInfo]):
+    scan_operation: ScanOperation
     primary_id: Source
     labels: Sequence[Source]
     properties: Sequence[type[Field] | tuple[Source, Source]]
@@ -152,13 +219,13 @@ class ExpressionNodeGenerationDefinition(ExpressionGenerationDefinition[NodeInfo
         ]
 
     @property
-    def _all_expressions(self) -> set[Expression[Any]]:
-        return {
+    def _all_expressions(self) -> Sequence[Expression[Any]]:
+        return [
             self.primary_id_expr,
             *self.labels_expr,
             *[i[0] for i in self.properties_expr],
             *[i[1] for i in self.properties_expr],
-        }
+        ]
 
     def generate_from_scanning(
         self,
@@ -167,10 +234,7 @@ class ExpressionNodeGenerationDefinition(ExpressionGenerationDefinition[NodeInfo
     ) -> Iterable[NodeInfo]:
         id_getter = self._create_value_getter(self.primary_id_expr)
         label_getters = [self._create_value_getter(label) for label in self.labels_expr]
-        property_getters = [self._create_key_value_getter(prop) for prop in self.properties_expr] + [
-            self._create_key_value_getter((LiteralExpression(prop[0]), LiteralExpression(prop[1])))
-            for prop in context.static_properties
-        ]
+        property_getters = [self._create_key_value_getter(prop) for prop in self.properties_expr]
 
         for data in data_stream:
             yield NodeInfo(
@@ -214,15 +278,15 @@ class ExpressionEdgeGenerationDefinition(ExpressionGenerationDefinition[EdgeInfo
         ]
 
     @property
-    def _all_expressions(self) -> set[Expression[Any]]:
-        return {
+    def _all_expressions(self) -> Sequence[Expression[Any]]:
+        return [
             self.primary_id_expr,
             self.source_expr,
             self.target_expr,
             *self.labels_expr,
             *[i[0] for i in self.properties_expr],
             *[i[1] for i in self.properties_expr],
-        }
+        ]
 
     def generate_from_scanning(
         self,
@@ -233,10 +297,7 @@ class ExpressionEdgeGenerationDefinition(ExpressionGenerationDefinition[EdgeInfo
         source_getter = self._create_value_getter(self.source_expr)
         target_getter = self._create_value_getter(self.target_expr)
         label_getters = [self._create_value_getter(label) for label in self.labels_expr]
-        property_getters = [self._create_key_value_getter(prop) for prop in self.properties_expr] + [
-            self._create_key_value_getter((LiteralExpression(prop[0]), LiteralExpression(prop[1])))
-            for prop in context.static_properties
-        ]
+        property_getters = [self._create_key_value_getter(prop) for prop in self.properties_expr]
 
         for data in data_stream:
             yield EdgeInfo(

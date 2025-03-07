@@ -1,6 +1,6 @@
 # pyright: reportUnknownMemberType=false
 
-from collections.abc import Iterable
+from collections.abc import Iterable, Sequence
 from os import PathLike
 from pathlib import Path
 from typing import Any, Final, TypeAlias, cast, overload
@@ -11,7 +11,7 @@ from open_targets.adapter.data_wrapper import ConvertedType, DataWrapper, Sequen
 from open_targets.adapter.generation_context import GenerationContext
 from open_targets.adapter.generation_definition import GenerationDefinition
 from open_targets.adapter.output import EdgeInfo, NodeInfo
-from open_targets.adapter.scan_operation import FlatteningScanOperation, RowScanOperation, ScanOperation
+from open_targets.adapter.scan_operation import FlattenedScanOperation, RowScanOperation, ScanOperation
 from open_targets.data.schema_base import Dataset, Field
 
 TGenericGenerationDefinition: TypeAlias = GenerationDefinition[NodeInfo] | GenerationDefinition[EdgeInfo]
@@ -25,7 +25,6 @@ class _GenerationContextImpl(GenerationContext):
         self,
         node_definitions: list[GenerationDefinition[NodeInfo]],
         edge_definitions: list[GenerationDefinition[EdgeInfo]],
-        static_properties: list[tuple[str, str]],
         datasets_location: str | PathLike[str],
     ) -> None:
         all_datasets_required: frozenset[type[Dataset]] = frozenset(
@@ -34,16 +33,11 @@ class _GenerationContextImpl(GenerationContext):
             for dataset in definition.get_required_datasets()
         )
         self._datasets: Final[frozenset[type[Dataset]]] = all_datasets_required
-        self._static_properties: Final[list[tuple[str, str]]] = static_properties
         self.datasets_location: Final[str | PathLike[str]] = datasets_location
 
     @property
     def datasets(self) -> frozenset[type[Dataset]]:
         return self._datasets
-
-    @property
-    def static_properties(self) -> Iterable[tuple[str, str]]:
-        return self._static_properties
 
     def get_scan_result_stream(
         self,
@@ -53,8 +47,8 @@ class _GenerationContextImpl(GenerationContext):
         match scan_operation:
             case RowScanOperation():
                 return self._get_row_scan_result_stream(scan_operation.dataset, required_fields)
-            case FlatteningScanOperation():
-                return self._get_flattening_scan_result_stream(
+            case FlattenedScanOperation():
+                return self._get_flattened_scan_result_stream(
                     scan_operation.dataset,
                     scan_operation.flattened_field,
                     required_fields,
@@ -71,19 +65,37 @@ class _GenerationContextImpl(GenerationContext):
         field_index_map, query_result_stream = self._get_query_result(dataset, required_fields)
         return (SequencePresentingDataWrapper(field_index_map, i) for i in query_result_stream)
 
-    def _get_flattening_scan_result_stream(
+    def _get_flattened_scan_result_stream(
         self,
         dataset: type[Dataset],
         flattened_field: type[Field],
         required_fields: Iterable[type[Field]],
     ) -> Iterable[DataWrapper]:
-        # fields_sorted_by_depth = sorted(required_fields, key=lambda field: len(field.path))
-        # placeholders: list[Any] = [None] * len(fields_sorted_by_depth)
-        # for row in self._get_row_scan_result_stream(dataset, required_fields):
-        #     for field in flattened_field.path:
-        #         if isinstance(field, SequenceField):
-        #             pass
-        raise NotImplementedError
+        fields_under_flattened_field = [
+            field
+            for field in required_fields
+            if (flattened_field in field.path) and (len(field.path) > len(flattened_field.path))
+        ]
+        upper_fields = [field for field in required_fields if field not in fields_under_flattened_field]
+        field_index_map = {field: index for index, field in enumerate(upper_fields + fields_under_flattened_field)}
+        flattened_field_index = field_index_map[flattened_field]
+        flattened_field_path_length = len(flattened_field.path)
+
+        for data in self._get_row_scan_result_stream(dataset, upper_fields):
+            upper_data = [self._get_value_from_field_path(data, field.path) for field in upper_fields]
+            sequence_data = cast(Sequence[DataWrapper], upper_data[flattened_field_index])
+            for item in sequence_data:
+                lower_data = [
+                    self._get_value_from_field_path(item, field.path[flattened_field_path_length:])
+                    for field in fields_under_flattened_field
+                ]
+                yield SequencePresentingDataWrapper(field_index_map, upper_data + lower_data)
+
+    def _get_value_from_field_path(self, data: DataWrapper, field_path: Sequence[type[Field]]) -> ConvertedType:
+        value = data[field_path[1]]
+        for field in field_path[2:]:
+            value = cast(DataWrapper, value)[field]
+        return value
 
     def _recursive_expand(
         self,
@@ -108,8 +120,8 @@ class _GenerationContextImpl(GenerationContext):
         top_fields = [field for field in required_fields if len(field.path) == TOP_FIELD_PATH_LENGTH]
         field_index_map = {field: index for index, field in enumerate(top_fields)}
         fields = ", ".join(f'"{field.name}"' for field in top_fields)
-        parquet_partitions_path = Path(self.datasets_location) / dataset.id / "*.parquet"
-        query = f"SELECT {fields} FROM read_parquet('{parquet_partitions_path}') LIMIT 100"  # noqa: S608
+        parquet_partitions_path = Path(self.datasets_location) / dataset.id / "**" / "*.parquet"
+        query = f"SELECT {fields} FROM read_parquet('{parquet_partitions_path}')"  # noqa: S608
         return field_index_map, self._get_query_result_stream(query)
 
     def _get_query_result_stream(self, query: str) -> Iterable[tuple[Any]]:
@@ -126,17 +138,14 @@ class Adapter:
         self,
         node_definitions: Iterable[GenerationDefinition[NodeInfo]],
         edge_definitions: Iterable[GenerationDefinition[EdgeInfo]],
-        static_properties: Iterable[tuple[str, str]],
         datasets_location: str | PathLike[str],
     ):
         self.node_definitions: Final[list[GenerationDefinition[NodeInfo]]] = list(node_definitions)
         self.edge_definitions: Final[list[GenerationDefinition[EdgeInfo]]] = list(edge_definitions)
-        self.static_properties: Final[list[tuple[str, str]]] = list(static_properties)
         self.datasets_location: Final[str | PathLike[str]] = datasets_location
         self.context: Final[GenerationContext] = _GenerationContextImpl(
             self.node_definitions,
             self.edge_definitions,
-            self.static_properties,
             self.datasets_location,
         )
 

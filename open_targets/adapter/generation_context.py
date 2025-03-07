@@ -12,11 +12,6 @@ class GenerationContext(ABC):
     def datasets(self) -> frozenset[type[Dataset]]:
         """Datasets that are available in the context."""
 
-    @property
-    @abstractmethod
-    def static_properties(self) -> Iterable[tuple[str, str]]:
-        """Static properties that are added to graph components."""
-
     @abstractmethod
     def get_scan_result_stream(
         self,

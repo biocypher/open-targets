@@ -46,10 +46,10 @@ class SequencePresentingDataWrapper(DataWrapper):
 
     def __getitem__(self, key: type[Field]) -> ConvertedType:
         value = self._data[self._field_index_dict[key]]
-        if isinstance(key, StructField):
+        if issubclass(key, StructField):
             return MappingPresentingDataWrapper(value)
-        if isinstance(key, SequenceField) and isinstance(key.element_type, StructField):
-            return ArrayDataWrapper(value)
+        if issubclass(key, SequenceField) and issubclass(key.element, StructField):
+            return ArrayDataWrapper(value) if value is not None else []
         return value
 
 
@@ -65,8 +65,8 @@ class MappingPresentingDataWrapper(DataWrapper):
 
     def __getitem__(self, key: type[Field]) -> ConvertedType:
         value = self._data[key.name]
-        if isinstance(key, StructField):
+        if issubclass(key, StructField):
             return MappingPresentingDataWrapper(value)
-        if isinstance(key, SequenceField) and isinstance(key.element_type, StructField):
+        if issubclass(key, SequenceField) and issubclass(key.element, StructField):
             return ArrayDataWrapper(value)
         return value
