@@ -14,12 +14,13 @@ from open_targets.data.schema import (
     FieldMousePhenotypesTargetInModelEnsemblId,
     FieldMousePhenotypesTargetInModelMgiId,
 )
+from open_targets.definition.curie_scheme import ENSEMBL_SCHEME
 from open_targets.definition.node_shared import node_static_properties
 
 node_mouse_target: Final[GenerationDefinition[NodeInfo]] = ExpressionNodeGenerationDefinition(
     scan_operation=RowScanOperation(dataset=DatasetMousePhenotypes),
     primary_id=BuildCurieExpression(
-        scheme=LiteralExpression("ensembl"),
+        scheme=LiteralExpression(ENSEMBL_SCHEME),
         path=FieldExpression(FieldMousePhenotypesTargetInModelEnsemblId),
         normalised=True,
     ),

@@ -21,7 +21,7 @@ from open_targets.data.schema import (
     FieldTargetsGoElementSource,
     FieldTargetsId,
 )
-from open_targets.definition.node_targets import _TYPE
+from open_targets.definition.curie_scheme import ENSEMBL_SCHEME
 
 edge_target_go: Final[GenerationDefinition[EdgeInfo]] = ExpressionEdgeGenerationDefinition(
     scan_operation=FlattenedScanOperation(
@@ -31,7 +31,7 @@ edge_target_go: Final[GenerationDefinition[EdgeInfo]] = ExpressionEdgeGeneration
     primary_id=StringConcatenationExpression(
         expressions=[
             BuildCurieExpression(
-                scheme=LiteralExpression(_TYPE),
+                scheme=LiteralExpression(ENSEMBL_SCHEME),
                 path=FieldExpression(FieldTargetsId),
                 normalised=True,
             ),
@@ -40,7 +40,7 @@ edge_target_go: Final[GenerationDefinition[EdgeInfo]] = ExpressionEdgeGeneration
         ],
     ),
     source=BuildCurieExpression(
-        scheme=LiteralExpression(_TYPE),
+        scheme=LiteralExpression(ENSEMBL_SCHEME),
         path=FieldExpression(FieldTargetsId),
         normalised=True,
     ),
