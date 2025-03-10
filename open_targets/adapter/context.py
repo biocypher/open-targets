@@ -3,41 +3,40 @@
 from collections.abc import Iterable, Sequence
 from os import PathLike
 from pathlib import Path
-from typing import Any, Final, TypeAlias, cast, overload
+from typing import Any, Final, cast, overload
 
 import duckdb
 
 from open_targets.adapter.data_wrapper import ConvertedType, DataWrapper, SequencePresentingDataWrapper
-from open_targets.adapter.generation_context import GenerationContext
 from open_targets.adapter.generation_definition import GenerationDefinition
 from open_targets.adapter.output import EdgeInfo, NodeInfo
 from open_targets.adapter.scan_operation import FlattenedScanOperation, RowScanOperation, ScanOperation
 from open_targets.data.schema_base import Dataset, Field
 
-TGenericGenerationDefinition: TypeAlias = GenerationDefinition[NodeInfo] | GenerationDefinition[EdgeInfo]
-
-
 TOP_FIELD_PATH_LENGTH = 2
 
 
-class _GenerationContextImpl(GenerationContext):
+class GenerationContext:
     def __init__(
         self,
         node_definitions: list[GenerationDefinition[NodeInfo]],
         edge_definitions: list[GenerationDefinition[EdgeInfo]],
         datasets_location: str | PathLike[str],
+        limit: int | None = None,
     ) -> None:
+        self.node_definitions: Final[list[GenerationDefinition[NodeInfo]]] = node_definitions
+        self.edge_definitions: Final[list[GenerationDefinition[EdgeInfo]]] = edge_definitions
         all_datasets_required: frozenset[type[Dataset]] = frozenset(
             dataset
             for definition in node_definitions + edge_definitions
             for dataset in definition.get_required_datasets()
         )
-        self._datasets: Final[frozenset[type[Dataset]]] = all_datasets_required
+        self.datasets: Final[frozenset[type[Dataset]]] = all_datasets_required
         self.datasets_location: Final[str | PathLike[str]] = datasets_location
+        self.limit: Final[int | None] = limit
 
-    @property
-    def datasets(self) -> frozenset[type[Dataset]]:
-        return self._datasets
+    def get_dataset_path(self, dataset: type[Dataset]) -> Path:
+        return Path(self.datasets_location) / dataset.id / "**" / "*.parquet"
 
     def get_scan_result_stream(
         self,
@@ -56,6 +55,25 @@ class _GenerationContextImpl(GenerationContext):
             case _:
                 msg = f"Unsupported scan operation: {scan_operation}"
                 raise ValueError(msg)
+
+    def get_generators(self) -> Iterable[Iterable[NodeInfo] | Iterable[EdgeInfo]]:
+        for definition in self.node_definitions + self.edge_definitions:
+            yield definition.generate(self)
+
+    @overload
+    def get_generator(self, definition: GenerationDefinition[NodeInfo]) -> Iterable[NodeInfo]: ...
+
+    @overload
+    def get_generator(self, definition: GenerationDefinition[EdgeInfo]) -> Iterable[EdgeInfo]: ...
+
+    def get_generator(
+        self,
+        definition: GenerationDefinition[NodeInfo] | GenerationDefinition[EdgeInfo],
+    ) -> Iterable[NodeInfo] | Iterable[EdgeInfo]:
+        if definition not in self.node_definitions + self.edge_definitions:
+            msg = f"Definition {definition} was not registered."
+            raise ValueError(msg)
+        return definition.generate(self)
 
     def _get_row_scan_result_stream(
         self,
@@ -97,21 +115,6 @@ class _GenerationContextImpl(GenerationContext):
             value = cast(DataWrapper, value)[field]
         return value
 
-    def _recursive_expand(
-        self,
-        data: ConvertedType,
-        current_level: type[Field],
-        flattened_field: type[Field],
-        sorted_required_fields: list[type[Field]],
-        placeholders: list[Any],
-    ) -> Iterable[DataWrapper]:
-        # if isinstance(current_level, SequenceField) and len(current_level.path) <= len(flattened_field.path):
-        #     for item in data:
-        #         yield from self._recursive_expand(item, current_level.element_type, flattened_field)
-        # else:
-        #     yield data
-        raise NotImplementedError
-
     def _get_query_result(
         self,
         dataset: type[Dataset],
@@ -119,48 +122,14 @@ class _GenerationContextImpl(GenerationContext):
     ) -> tuple[dict[type[Field], int], Iterable[tuple[Any]]]:
         top_fields = [field for field in required_fields if len(field.path) == TOP_FIELD_PATH_LENGTH]
         field_index_map = {field: index for index, field in enumerate(top_fields)}
-        fields = ", ".join(f'"{field.name}"' for field in top_fields)
-        parquet_partitions_path = Path(self.datasets_location) / dataset.id / "**" / "*.parquet"
-        query = f"SELECT {fields} FROM read_parquet('{parquet_partitions_path}')"  # noqa: S608
+        query = duckdb.read_parquet(str(self.get_dataset_path(dataset))).select(*[field.name for field in top_fields])
+        if self.limit is not None:
+            query = query.limit(self.limit)
         return field_index_map, self._get_query_result_stream(query)
 
-    def _get_query_result_stream(self, query: str) -> Iterable[tuple[Any]]:
-        query_result = duckdb.sql(query)
+    def _get_query_result_stream(self, query: duckdb.DuckDBPyRelation) -> Iterable[tuple[Any]]:
         while True:
-            item = cast(tuple[Any] | None, query_result.fetchone())
+            item = cast(tuple[Any] | None, query.fetchone())
             if item is None:
                 break
             yield item
-
-
-class Adapter:
-    def __init__(
-        self,
-        node_definitions: Iterable[GenerationDefinition[NodeInfo]],
-        edge_definitions: Iterable[GenerationDefinition[EdgeInfo]],
-        datasets_location: str | PathLike[str],
-    ):
-        self.node_definitions: Final[list[GenerationDefinition[NodeInfo]]] = list(node_definitions)
-        self.edge_definitions: Final[list[GenerationDefinition[EdgeInfo]]] = list(edge_definitions)
-        self.datasets_location: Final[str | PathLike[str]] = datasets_location
-        self.context: Final[GenerationContext] = _GenerationContextImpl(
-            self.node_definitions,
-            self.edge_definitions,
-            self.datasets_location,
-        )
-
-    def get_generators(self) -> Iterable[Iterable[NodeInfo] | Iterable[EdgeInfo]]:
-        for definition in self.node_definitions + self.edge_definitions:
-            yield definition.generate(self.context)
-
-    @overload
-    def get_generator(self, definition: GenerationDefinition[NodeInfo]) -> Iterable[NodeInfo]: ...
-
-    @overload
-    def get_generator(self, definition: GenerationDefinition[EdgeInfo]) -> Iterable[EdgeInfo]: ...
-
-    def get_generator(self, definition: TGenericGenerationDefinition) -> Iterable[NodeInfo] | Iterable[EdgeInfo]:
-        if definition not in self.node_definitions + self.edge_definitions:
-            msg = f"Definition {definition} was not registered."
-            raise ValueError(msg)
-        return definition.generate(self.context)

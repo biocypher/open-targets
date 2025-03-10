@@ -5,6 +5,7 @@ from typing import Any, Generic, TypeAlias, TypeVar
 
 from bioregistry.resolve import normalize_curie, normalize_parsed_curie, normalize_prefix
 
+from open_targets.adapter.context_protocol import GenerationContextProtocol
 from open_targets.adapter.data_wrapper import DataWrapper
 from open_targets.adapter.expression import (
     BuildCurieExpression,
@@ -21,7 +22,6 @@ from open_targets.adapter.expression import (
     TransformExpression,
     recursive_get_dependent_fields,
 )
-from open_targets.adapter.generation_context import GenerationContext
 from open_targets.adapter.licence import get_datasource_license
 from open_targets.adapter.output import EdgeInfo, NodeInfo
 from open_targets.adapter.scan_operation import FlattenedScanOperation, ScanOperation
@@ -39,7 +39,7 @@ class GenerationDefinition(Generic[TGraphComponent], ABC):
         """Datasets that are required by this definition."""
 
     @abstractmethod
-    def generate(self, context: GenerationContext) -> Iterable[TGraphComponent]:
+    def generate(self, context: GenerationContextProtocol) -> Iterable[TGraphComponent]:
         """Generate graph components by directly accessing the context."""
 
 
@@ -63,14 +63,14 @@ class ScanningGenerationDefinition(
     @abstractmethod
     def generate_from_scanning(
         self,
-        context: GenerationContext,
+        context: GenerationContextProtocol,
         data_stream: Iterable[DataWrapper],
     ) -> Iterable[TGraphComponent]: ...
 
     def get_required_datasets(self) -> Iterable[type[Dataset]]:
         return {self.get_scan_operation().dataset}
 
-    def generate(self, context: GenerationContext) -> Iterable[TGraphComponent]:
+    def generate(self, context: GenerationContextProtocol) -> Iterable[TGraphComponent]:
         scan_result_stream = context.get_scan_result_stream(self.get_scan_operation(), self.get_required_fields())
         return self.generate_from_scanning(context, scan_result_stream)
 
@@ -229,7 +229,7 @@ class ExpressionNodeGenerationDefinition(ExpressionGenerationDefinition[NodeInfo
 
     def generate_from_scanning(
         self,
-        context: GenerationContext,
+        context: GenerationContextProtocol,
         data_stream: Iterable[DataWrapper],
     ) -> Iterable[NodeInfo]:
         id_getter = self._create_value_getter(self.primary_id_expr)
@@ -290,7 +290,7 @@ class ExpressionEdgeGenerationDefinition(ExpressionGenerationDefinition[EdgeInfo
 
     def generate_from_scanning(
         self,
-        context: GenerationContext,
+        context: GenerationContextProtocol,
         data_stream: Iterable[DataWrapper],
     ) -> Iterable[EdgeInfo]:
         id_getter = self._create_value_getter(self.primary_id_expr)
