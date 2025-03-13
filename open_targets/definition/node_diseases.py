@@ -20,7 +20,7 @@ from open_targets.definition.node_shared import node_static_properties
 node_diseases: Final[GenerationDefinition[NodeInfo]] = ExpressionNodeGenerationDefinition(
     scan_operation=RowScanOperation(dataset=DatasetDiseases),
     primary_id=NormaliseCurieExpression(expression=FieldExpression(FieldDiseasesId)),
-    labels=[ExtractCurieSchemeExpression(FieldExpression(FieldDiseasesId))],
+    label=ExtractCurieSchemeExpression(FieldExpression(FieldDiseasesId)),
     properties=[
         FieldDiseasesCode,
         FieldDiseasesDescription,

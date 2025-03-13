@@ -13,18 +13,17 @@ from open_targets.data.schema import (
     FieldTargetsBiotype,
     FieldTargetsId,
 )
+from open_targets.definition.curie_scheme import ENSEMBL_SCHEME
 from open_targets.definition.node_shared import node_static_properties
-
-_TYPE: Final = "ensembl"
 
 node_targets: Final[GenerationDefinition[NodeInfo]] = ExpressionNodeGenerationDefinition(
     scan_operation=RowScanOperation(dataset=DatasetTargets),
     primary_id=BuildCurieExpression(
-        scheme=LiteralExpression(_TYPE),
+        scheme=LiteralExpression(ENSEMBL_SCHEME),
         path=FieldExpression(FieldTargetsId),
         normalised=True,
     ),
-    labels=[_TYPE],
+    label=ENSEMBL_SCHEME,
     properties=[
         FieldTargetsApprovedSymbol,
         FieldTargetsBiotype,

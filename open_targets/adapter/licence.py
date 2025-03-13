@@ -16,7 +16,7 @@ class License(str, Enum):
     UNKNOWN = "Unknown"
 
 
-def get_datasource_license(dataset_id: str) -> License:
+def get_datasource_license(dataset_id: str) -> str:
     """Get the license for a given dataset ID."""
     licence = None
     match dataset_id:
@@ -40,4 +40,4 @@ def get_datasource_license(dataset_id: str) -> License:
             licence = License.NOT_AVAILABLE
         case _:
             licence = License.UNKNOWN
-    return licence
+    return str(licence)

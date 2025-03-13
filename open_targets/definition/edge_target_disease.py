@@ -30,7 +30,7 @@ edge_target_disease: Final[GenerationDefinition[EdgeInfo]] = ExpressionEdgeGener
         normalised=True,
     ),
     target=NormaliseCurieExpression(FieldExpression(FieldEvidenceDiseaseId)),
-    labels=[FieldEvidenceDatatypeId],
+    label=FieldEvidenceDatatypeId,
     properties=[
         FieldEvidenceDatasourceId,
         FieldEvidenceLiterature,

@@ -45,12 +45,13 @@ edge_target_go: Final[GenerationDefinition[EdgeInfo]] = ExpressionEdgeGeneration
         normalised=True,
     ),
     target=NormaliseCurieExpression(FieldExpression(FieldTargetsGoElementId)),
-    labels=[LiteralExpression("GENE_TO_GO_TERM_ASSOCIATION")],
+    label=LiteralExpression("GENE_TO_GO_TERM_ASSOCIATION"),
     properties=[
         FieldTargetsGoElementSource,
         FieldTargetsGoElementEvidence,
         FieldTargetsGoElementEcoId,
         FieldTargetsGoElementAspect,
         FieldTargetsGoElementGeneProduct,
+        ("licence", "test"),
     ],
 )

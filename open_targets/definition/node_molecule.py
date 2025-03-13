@@ -38,7 +38,7 @@ node_molecule: Final[GenerationDefinition[NodeInfo]] = ExpressionNodeGenerationD
         path=FieldExpression(FieldMoleculeId),
         normalised=True,
     ),
-    labels=[CHEMBL_SCHEME],
+    label=CHEMBL_SCHEME,
     properties=[
         FieldMoleculeCanonicalSmiles,
         FieldMoleculeInchiKey,

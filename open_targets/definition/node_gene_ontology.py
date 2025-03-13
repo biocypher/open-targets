@@ -14,7 +14,7 @@ from open_targets.definition.node_shared import node_static_properties
 node_gene_ontology: Final[GenerationDefinition[NodeInfo]] = ExpressionNodeGenerationDefinition(
     scan_operation=RowScanOperation(dataset=DatasetGo),
     primary_id=NormaliseCurieExpression(FieldExpression(FieldGoId)),
-    labels=[ExtractCurieSchemeExpression(FieldExpression(FieldGoId))],
+    label=ExtractCurieSchemeExpression(FieldExpression(FieldGoId)),
     properties=[
         FieldGoName,
         *node_static_properties,

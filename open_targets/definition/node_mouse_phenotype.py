@@ -17,7 +17,7 @@ from open_targets.definition.node_shared import node_static_properties
 node_mouse_phenotype: Final[GenerationDefinition[NodeInfo]] = ExpressionNodeGenerationDefinition(
     scan_operation=RowScanOperation(dataset=DatasetMousePhenotypes),
     primary_id=NormaliseCurieExpression(FieldExpression(FieldMousePhenotypesModelPhenotypeId)),
-    labels=[ExtractCurieSchemeExpression(FieldExpression(FieldMousePhenotypesModelPhenotypeId))],
+    label=ExtractCurieSchemeExpression(FieldExpression(FieldMousePhenotypesModelPhenotypeId)),
     properties=[
         FieldMousePhenotypesModelPhenotypeLabel,
         *node_static_properties,

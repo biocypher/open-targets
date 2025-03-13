@@ -16,7 +16,7 @@ from open_targets.definition.node_shared import node_static_properties
 node_mouse_model: Final[GenerationDefinition[NodeInfo]] = ExpressionNodeGenerationDefinition(
     scan_operation=RowScanOperation(dataset=DatasetMousePhenotypes),
     primary_id=FieldMousePhenotypesBiologicalModels,
-    labels=[],
+    label="",
     properties=[
         FieldMousePhenotypesModelPhenotypeClasses,
         *node_static_properties,

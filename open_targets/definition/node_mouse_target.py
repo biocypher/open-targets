@@ -24,7 +24,7 @@ node_mouse_target: Final[GenerationDefinition[NodeInfo]] = ExpressionNodeGenerat
         path=FieldExpression(FieldMousePhenotypesTargetInModelEnsemblId),
         normalised=True,
     ),
-    labels=["mouse gene"],
+    label="mouse gene",
     properties=[
         FieldMousePhenotypesTargetInModel,
         FieldMousePhenotypesTargetInModelMgiId,

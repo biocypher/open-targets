@@ -1,15 +1,22 @@
-from collections.abc import Sequence
+from collections.abc import Iterator, Mapping
 from dataclasses import dataclass
+from typing import Any
 
 
 @dataclass
 class NodeInfo:
     id: str
-    labels: Sequence[str]
-    properties: Sequence[tuple[str, str]]
+    label: str
+    properties: Mapping[str, str]
 
-    def as_tuple(self) -> tuple[str, Sequence[str], Sequence[tuple[str, str]]]:
-        return self.id, self.labels, self.properties
+    def __iter__(self) -> Iterator[Any]:
+        return iter((self.id, self.label, self.properties))
+
+    def __len__(self) -> int:
+        return 3
+
+    def as_tuple(self) -> tuple[str, str, Mapping[str, str]]:
+        return self.id, self.label, self.properties
 
 
 @dataclass
@@ -17,8 +24,14 @@ class EdgeInfo:
     id: str
     source_id: str
     target_id: str
-    labels: Sequence[str]
-    properties: Sequence[tuple[str, str]]
+    label: str
+    properties: Mapping[str, str]
 
-    def as_tuple(self) -> tuple[str, str, str, Sequence[str], Sequence[tuple[str, str]]]:
-        return self.id, self.source_id, self.target_id, self.labels, self.properties
+    def __iter__(self) -> Iterator[Any]:
+        return iter((self.id, self.source_id, self.target_id, self.label, self.properties))
+
+    def __len__(self) -> int:
+        return 5
+
+    def as_tuple(self) -> tuple[str, str, str, str, Mapping[str, str]]:
+        return self.id, self.source_id, self.target_id, self.label, self.properties
