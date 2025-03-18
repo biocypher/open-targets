@@ -1,3 +1,5 @@
+"""Constants of the CURIE schemes."""
+
 from typing import Final
 
 ENSEMBL_SCHEME: Final[str] = "ensembl"

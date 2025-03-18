@@ -1,3 +1,5 @@
+"""Generation definitions for nodes of diseases."""
+
 from typing import Final
 
 from open_targets.adapter.expression import (

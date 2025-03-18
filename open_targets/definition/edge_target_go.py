@@ -1,3 +1,5 @@
+"""Generation definitions for edges between targets and GO terms."""
+
 from typing import Final
 
 from open_targets.adapter.expression import (

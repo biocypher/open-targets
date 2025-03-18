@@ -1,3 +1,9 @@
+"""Definition of generation definitions.
+
+Generation definitions also define the actual logic querying the datasets.
+"""
+
+import logging
 from abc import ABC, abstractmethod
 from collections.abc import Callable, Iterable, Sequence
 from dataclasses import dataclass
@@ -32,8 +38,18 @@ TGraphComponent = TypeVar("TGraphComponent", NodeInfo, EdgeInfo)
 
 Source: TypeAlias = str | type[Field] | Expression[Any]
 
+CURIE_SEPARATORS = [":", "_", "/"]
+
 
 class GenerationDefinition(Generic[TGraphComponent], ABC):
+    """Base class for all generation definitions.
+
+    A generation definition describes how to generate a set of nodes/edges. High
+    level definitions are provided but in the case of more complex generation
+    logic, a subclass of this class can be used to query the dataset directly to
+    provide the specific logic.
+    """
+
     @abstractmethod
     def get_required_datasets(self) -> Iterable[type[Dataset]]:
         """Datasets that are required by this definition."""
@@ -47,30 +63,35 @@ class ScanningGenerationDefinition(
     GenerationDefinition[TGraphComponent],
     ABC,
 ):
+    """Generation definition that uses a scan operation to generate.
+
+    The dataset query is abstracted out by the scan operation which determines
+    the fashion of data query. Items yielded are also wrapped for easy access
+    to the data fields.
+    """
+
     @abstractmethod
     def get_scan_operation(self) -> ScanOperation:
         """Scan operation that is used to generate the graph components."""
 
     @abstractmethod
     def get_required_fields(self) -> Iterable[type[Field]]:
-        """Fields that are requested by this definition.
-
-        The overriding value will be used to calculate the datasets required by
-        the adapter in the preparation stage. A dataset field must be included
-        here for it to be provided.
-        """
+        """Fields that are requested by this definition."""
 
     @abstractmethod
     def generate_from_scanning(
         self,
         context: GenerationContextProtocol,
         data_stream: Iterable[DataWrapper],
-    ) -> Iterable[TGraphComponent]: ...
+    ) -> Iterable[TGraphComponent]:
+        """Generate graph components from the scanning result stream."""
 
     def get_required_datasets(self) -> Iterable[type[Dataset]]:
+        """Datasets that are required by this definition."""
         return {self.get_scan_operation().dataset}
 
     def generate(self, context: GenerationContextProtocol) -> Iterable[TGraphComponent]:
+        """Create the scanning result stream from the low level access."""
         scan_result_stream = context.get_scan_result_stream(self.get_scan_operation(), self.get_required_fields())
         return self.generate_from_scanning(context, scan_result_stream)
 
@@ -80,7 +101,11 @@ class ExpressionGenerationDefinition(
     ScanningGenerationDefinition[TGraphComponent],
     ABC,
 ):
-    """Definition of a set of nodes to be generated."""
+    """Generation definition that is described by expressions.
+
+    Expressions are used to describe how to obtain values of the attributes of
+    nodes or edges from a scanning result.
+    """
 
     scan_operation: ScanOperation
 
@@ -90,9 +115,11 @@ class ExpressionGenerationDefinition(
         """All expressions that are included in this definition."""
 
     def get_scan_operation(self) -> ScanOperation:
+        """Return the provided scan operation."""
         return self.scan_operation
 
     def get_required_fields(self) -> Iterable[type[Field]]:
+        """Get all fields that are required by all the expressions."""
         fields = set[type[Field]]()
         for expression in self._all_expressions:
             fields.update(recursive_get_dependent_fields(expression))
@@ -108,6 +135,7 @@ class ExpressionGenerationDefinition(
         return value
 
     def recursive_build_expression_function(self, expression: Expression[Any]) -> Callable[[DataWrapper], Any]:
+        """Build a function chain that evaluates the expression."""
         match expression:
             case FieldExpression():
                 return lambda data: data[expression.field]
@@ -163,21 +191,23 @@ class ExpressionGenerationDefinition(
             else (lambda data: f"{scheme_func(data)}:{path_func(data)}")
         )
 
-    def _normalise_curie(self, string: str):
-        if ":" in string:
-            return normalize_curie(string, sep=":")
-        if "_" in string:
-            return normalize_curie(string, sep="_")
-        if "/" in string:
-            return normalize_curie(string, sep="/")
-        return ""
+    def _normalise_curie(self, string: str) -> str:
+        for sep in CURIE_SEPARATORS:
+            if sep in string:
+                result = normalize_curie(string, sep=sep)
+                if result is not None:
+                    return result
+                msg = f"Failed to normalize curie: {string} with separator: {sep}"
+                raise ValueError(msg)
+        msg = f"Failed to normalize curie: {string}"
+        raise ValueError(msg)
 
-    def _extract_curie_scheme(self, string: str):
-        if ":" in string:
-            return string.split(":")[0]
-        if "_" in string:
-            return string.split("_")[0]
-        return ""
+    def _extract_curie_scheme(self, string: str) -> str:
+        for sep in CURIE_SEPARATORS:
+            if sep in string:
+                return string.split(sep)[0]
+        msg = f"Failed to extract curie scheme from: {string}"
+        raise ValueError(msg)
 
     def _create_value_getter(
         self,
@@ -189,21 +219,23 @@ class ExpressionGenerationDefinition(
 
 @dataclass(frozen=True)
 class ExpressionNodeGenerationDefinition(ExpressionGenerationDefinition[NodeInfo]):
+    """Expression generation definition for nodes."""
+
     scan_operation: ScanOperation
     primary_id: Source
     label: Source
     properties: Sequence[type[Field] | tuple[Source, Source]]
 
     @property
-    def primary_id_expr(self) -> Expression[str]:
+    def _primary_id_expr(self) -> Expression[str]:
         return self._to_expression(self.primary_id)
 
     @property
-    def label_expr(self) -> Expression[str]:
+    def _label_expr(self) -> Expression[str]:
         return self._to_expression(self.label)
 
     @property
-    def property_exprs(self) -> Sequence[tuple[Expression[str], Expression[str]]]:
+    def _property_exprs(self) -> Sequence[tuple[Expression[str], Expression[str]]]:
         return [
             (self._to_expression(prop[0]), self._to_expression(prop[1]))
             if isinstance(prop, tuple)
@@ -214,10 +246,10 @@ class ExpressionNodeGenerationDefinition(ExpressionGenerationDefinition[NodeInfo
     @property
     def _all_expressions(self) -> Sequence[Expression[Any]]:
         return [
-            self.primary_id_expr,
-            self.label_expr,
-            *[i[0] for i in self.property_exprs],
-            *[i[1] for i in self.property_exprs],
+            self._primary_id_expr,
+            self._label_expr,
+            *[i[0] for i in self._property_exprs],
+            *[i[1] for i in self._property_exprs],
         ]
 
     def generate_from_scanning(
@@ -225,11 +257,12 @@ class ExpressionNodeGenerationDefinition(ExpressionGenerationDefinition[NodeInfo
         context: GenerationContextProtocol,
         data_stream: Iterable[DataWrapper],
     ) -> Iterable[NodeInfo]:
-        id_getter = self._create_value_getter(self.primary_id_expr)
-        label_getter = self._create_value_getter(self.label_expr)
+        """Build the functions that compute the values from the data stream."""
+        id_getter = self._create_value_getter(self._primary_id_expr)
+        label_getter = self._create_value_getter(self._label_expr)
         property_getters = [
             (self._create_value_getter(key_expr), self._create_value_getter(value_expr))
-            for key_expr, value_expr in self.property_exprs
+            for key_expr, value_expr in self._property_exprs
         ]
 
         for data in data_stream:
@@ -239,12 +272,14 @@ class ExpressionNodeGenerationDefinition(ExpressionGenerationDefinition[NodeInfo
                     label=label_getter(data),
                     properties={key_getter(data): value_getter(data) for key_getter, value_getter in property_getters},
                 )
-            except Exception as e:
-                print(e)
+            except Exception:  # noqa: PERF203
+                logging.exception("Failed to generate node from data: %s", data)
 
 
 @dataclass(frozen=True)
 class ExpressionEdgeGenerationDefinition(ExpressionGenerationDefinition[EdgeInfo]):
+    """Expression generation definition for edges."""
+
     primary_id: Source
     source: Source
     target: Source
@@ -252,23 +287,23 @@ class ExpressionEdgeGenerationDefinition(ExpressionGenerationDefinition[EdgeInfo
     properties: Sequence[type[Field] | tuple[Source, Source]]
 
     @property
-    def primary_id_expr(self) -> Expression[str]:
+    def _primary_id_expr(self) -> Expression[str]:
         return self._to_expression(self.primary_id)
 
     @property
-    def source_expr(self) -> Expression[str]:
+    def _source_expr(self) -> Expression[str]:
         return self._to_expression(self.source)
 
     @property
-    def target_expr(self) -> Expression[str]:
+    def _target_expr(self) -> Expression[str]:
         return self._to_expression(self.target)
 
     @property
-    def label_expr(self) -> Expression[str]:
+    def _label_expr(self) -> Expression[str]:
         return self._to_expression(self.label)
 
     @property
-    def property_exprs(self) -> Sequence[tuple[Expression[str], Expression[str]]]:
+    def _property_exprs(self) -> Sequence[tuple[Expression[str], Expression[str]]]:
         return [
             (self._to_expression(prop[0]), self._to_expression(prop[1]))
             if isinstance(prop, tuple)
@@ -279,12 +314,12 @@ class ExpressionEdgeGenerationDefinition(ExpressionGenerationDefinition[EdgeInfo
     @property
     def _all_expressions(self) -> Sequence[Expression[Any]]:
         return [
-            self.primary_id_expr,
-            self.source_expr,
-            self.target_expr,
-            self.label_expr,
-            *[i[0] for i in self.property_exprs],
-            *[i[1] for i in self.property_exprs],
+            self._primary_id_expr,
+            self._source_expr,
+            self._target_expr,
+            self._label_expr,
+            *[i[0] for i in self._property_exprs],
+            *[i[1] for i in self._property_exprs],
         ]
 
     def generate_from_scanning(
@@ -292,13 +327,14 @@ class ExpressionEdgeGenerationDefinition(ExpressionGenerationDefinition[EdgeInfo
         context: GenerationContextProtocol,
         data_stream: Iterable[DataWrapper],
     ) -> Iterable[EdgeInfo]:
-        id_getter = self._create_value_getter(self.primary_id_expr)
-        source_getter = self._create_value_getter(self.source_expr)
-        target_getter = self._create_value_getter(self.target_expr)
-        label_getter = self._create_value_getter(self.label_expr)
+        """Build the functions that compute the values from the data stream."""
+        id_getter = self._create_value_getter(self._primary_id_expr)
+        source_getter = self._create_value_getter(self._source_expr)
+        target_getter = self._create_value_getter(self._target_expr)
+        label_getter = self._create_value_getter(self._label_expr)
         property_getters = [
             (self._create_value_getter(key_expr), self._create_value_getter(value_expr))
-            for key_expr, value_expr in self.property_exprs
+            for key_expr, value_expr in self._property_exprs
         ]
 
         for data in data_stream:
@@ -310,5 +346,5 @@ class ExpressionEdgeGenerationDefinition(ExpressionGenerationDefinition[EdgeInfo
                     label=label_getter(data),
                     properties={key_getter(data): value_getter(data) for key_getter, value_getter in property_getters},
                 )
-            except Exception as e:
-                print(e)
+            except Exception:  # noqa: PERF203
+                logging.exception("Failed to generate edge from data: %s", data)

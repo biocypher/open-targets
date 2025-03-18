@@ -1,3 +1,5 @@
+"""Generation definitions for nodes of mouse models."""
+
 from typing import Final
 
 from open_targets.adapter.generation_definition import (

@@ -1,5 +1,7 @@
 # pyright: reportUnknownMemberType=false
 
+"""Implementation of the generation context protocol."""
+
 from collections.abc import Iterable, Sequence
 from os import PathLike
 from pathlib import Path
@@ -17,6 +19,8 @@ TOP_FIELD_PATH_LENGTH = 2
 
 
 class GenerationContext:
+    """An implementation of the generation context using duckdb."""
+
     def __init__(
         self,
         node_definitions: list[GenerationDefinition[NodeInfo]],
@@ -24,6 +28,12 @@ class GenerationContext:
         datasets_location: str | PathLike[str],
         limit: int | None = None,
     ) -> None:
+        """Initialize the generation context.
+
+        Datasets and fields required are automatically computed from the
+        provided definitions. Once the context is initialised, the definitions
+        are immutable.
+        """
         self.node_definitions: Final[list[GenerationDefinition[NodeInfo]]] = node_definitions
         self.edge_definitions: Final[list[GenerationDefinition[EdgeInfo]]] = edge_definitions
         all_datasets_required: frozenset[type[Dataset]] = frozenset(
@@ -36,6 +46,7 @@ class GenerationContext:
         self.limit: Final[int | None] = limit
 
     def get_dataset_path(self, dataset: type[Dataset]) -> Path:
+        """Get the path to the dataset."""
         return Path(self.datasets_location) / dataset.id / "**" / "*.parquet"
 
     def get_scan_result_stream(
@@ -43,6 +54,7 @@ class GenerationContext:
         scan_operation: ScanOperation,
         required_fields: Iterable[type[Field]],
     ) -> Iterable[DataWrapper]:
+        """Get the scan result stream."""
         match scan_operation:
             case RowScanOperation():
                 return self._get_row_scan_result_stream(scan_operation.dataset, required_fields)
@@ -57,6 +69,7 @@ class GenerationContext:
                 raise ValueError(msg)
 
     def get_generators(self) -> Iterable[Iterable[NodeInfo] | Iterable[EdgeInfo]]:
+        """Get the generators of all definitions registered."""
         for definition in self.node_definitions + self.edge_definitions:
             yield definition.generate(self)
 
@@ -70,6 +83,7 @@ class GenerationContext:
         self,
         definition: GenerationDefinition[NodeInfo] | GenerationDefinition[EdgeInfo],
     ) -> Iterable[NodeInfo] | Iterable[EdgeInfo]:
+        """Get the generator for a registered definition."""
         if definition not in self.node_definitions + self.edge_definitions:
             msg = f"Definition {definition} was not registered."
             raise ValueError(msg)

@@ -1,3 +1,5 @@
+"""Generation definitions for nodes of targets."""
+
 from typing import Final
 
 from open_targets.adapter.expression import BuildCurieExpression, FieldExpression, LiteralExpression

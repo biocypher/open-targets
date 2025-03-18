@@ -1,3 +1,5 @@
+"""Definition of the BioCypher compatible intermediate node and edge types."""
+
 from collections.abc import Iterator, Mapping
 from dataclasses import dataclass
 from typing import Any
@@ -5,22 +7,25 @@ from typing import Any
 
 @dataclass
 class NodeInfo:
+    """A type safe intermediate node compatible with BioCypher."""
+
     id: str
     label: str
     properties: Mapping[str, str]
 
     def __iter__(self) -> Iterator[Any]:
+        """Implement the tuple protocol for BioCypher."""
         return iter((self.id, self.label, self.properties))
 
     def __len__(self) -> int:
+        """Implement the tuple protocol for BioCypher."""
         return 3
-
-    def as_tuple(self) -> tuple[str, str, Mapping[str, str]]:
-        return self.id, self.label, self.properties
 
 
 @dataclass
 class EdgeInfo:
+    """A type safe intermediate edge compatible with BioCypher."""
+
     id: str
     source_id: str
     target_id: str
@@ -28,10 +33,9 @@ class EdgeInfo:
     properties: Mapping[str, str]
 
     def __iter__(self) -> Iterator[Any]:
+        """Implement the tuple protocol for BioCypher."""
         return iter((self.id, self.source_id, self.target_id, self.label, self.properties))
 
     def __len__(self) -> int:
+        """Implement the tuple protocol for BioCypher."""
         return 5
-
-    def as_tuple(self) -> tuple[str, str, str, str, Mapping[str, str]]:
-        return self.id, self.source_id, self.target_id, self.label, self.properties

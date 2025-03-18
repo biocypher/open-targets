@@ -1,3 +1,6 @@
+# ruff: noqa: D101, D102, PGH003
+# type: ignore
+
 from abc import ABC
 from collections.abc import Sequence
 from typing import Final

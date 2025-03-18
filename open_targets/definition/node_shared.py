@@ -1,3 +1,5 @@
+"""Definition of shared properties for nodes."""
+
 from collections.abc import Sequence
 from typing import Final
 

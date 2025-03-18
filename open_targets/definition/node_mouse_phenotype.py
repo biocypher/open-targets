@@ -1,3 +1,5 @@
+"""Generation definitions for nodes of mouse phenotypes."""
+
 from typing import Final
 
 from open_targets.adapter.expression import ExtractCurieSchemeExpression, FieldExpression, NormaliseCurieExpression

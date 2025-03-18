@@ -1,3 +1,5 @@
+"""Generation definition for edges between targets and diseases."""
+
 from typing import Final
 
 from open_targets.adapter.expression import (
