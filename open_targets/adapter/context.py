@@ -12,7 +12,7 @@ import duckdb
 from open_targets.adapter.data_wrapper import ConvertedType, DataWrapper, SequencePresentingDataWrapper
 from open_targets.adapter.generation_definition import GenerationDefinition
 from open_targets.adapter.output import EdgeInfo, NodeInfo
-from open_targets.adapter.scan_operation import FlattenedScanOperation, RowScanOperation, ScanOperation
+from open_targets.adapter.scan_operation import ExplodingScanOperation, RowScanOperation, ScanOperation
 from open_targets.data.schema_base import Dataset, Field
 
 TOP_FIELD_PATH_LENGTH = 2
@@ -58,10 +58,10 @@ class GenerationContext:
         match scan_operation:
             case RowScanOperation():
                 return self._get_row_scan_result_stream(scan_operation.dataset, required_fields)
-            case FlattenedScanOperation():
-                return self._get_flattened_scan_result_stream(
+            case ExplodingScanOperation():
+                return self._get_exploded_scan_result_stream(
                     scan_operation.dataset,
-                    scan_operation.flattened_field,
+                    scan_operation.exploded_field,
                     required_fields,
                 )
             case _:
@@ -97,36 +97,36 @@ class GenerationContext:
         field_index_map, query_result_stream = self._get_query_result(dataset, required_fields)
         return (SequencePresentingDataWrapper(field_index_map, i) for i in query_result_stream)
 
-    def _get_flattened_scan_result_stream(
+    def _get_exploded_scan_result_stream(
         self,
         dataset: type[Dataset],
-        flattened_field: type[Field],
+        exploded_field: type[Field],
         required_fields: Iterable[type[Field]],
     ) -> Iterable[DataWrapper]:
-        fields_under_flattened_field = [
+        fields_under_exploded_field = [
             field
             for field in required_fields
-            if (flattened_field in field.path) and (len(field.path) > len(flattened_field.path))
+            if (exploded_field in field.path) and (len(field.path) > len(exploded_field.path))
         ]
-        upper_fields = [field for field in required_fields if field not in fields_under_flattened_field]
-        field_index_map = {field: index for index, field in enumerate(upper_fields + fields_under_flattened_field)}
-        flattened_field_index = field_index_map[flattened_field]
-        flattened_field_path_length = len(flattened_field.path)
+        upper_fields = [field for field in required_fields if field not in fields_under_exploded_field]
+        field_index_map = {field: index for index, field in enumerate(upper_fields + fields_under_exploded_field)}
+        exploded_field_index = field_index_map[exploded_field]
+        exploded_field_path_length = len(exploded_field.path)
 
         for data in self._get_row_scan_result_stream(dataset, upper_fields):
             upper_data = [self._get_value_from_field_path(data, field.path) for field in upper_fields]
-            sequence_data = cast(Sequence[DataWrapper], upper_data[flattened_field_index])
+            sequence_data = cast("Sequence[DataWrapper]", upper_data[exploded_field_index])
             for item in sequence_data:
                 lower_data = [
-                    self._get_value_from_field_path(item, field.path[flattened_field_path_length:])
-                    for field in fields_under_flattened_field
+                    self._get_value_from_field_path(item, field.path[exploded_field_path_length:])
+                    for field in fields_under_exploded_field
                 ]
                 yield SequencePresentingDataWrapper(field_index_map, upper_data + lower_data)
 
     def _get_value_from_field_path(self, data: DataWrapper, field_path: Sequence[type[Field]]) -> ConvertedType:
         value = data[field_path[1]]
         for field in field_path[2:]:
-            value = cast(DataWrapper, value)[field]
+            value = cast("DataWrapper", value)[field]
         return value
 
     def _get_query_result(
@@ -143,7 +143,7 @@ class GenerationContext:
 
     def _get_query_result_stream(self, query: duckdb.DuckDBPyRelation) -> Iterable[tuple[Any]]:
         while True:
-            item = cast(tuple[Any] | None, query.fetchone())
+            item = cast("tuple[Any] | None", query.fetchone())
             if item is None:
                 break
             yield item

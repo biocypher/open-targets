@@ -30,7 +30,7 @@ from open_targets.adapter.expression import (
 )
 from open_targets.adapter.licence import get_datasource_license
 from open_targets.adapter.output import EdgeInfo, NodeInfo
-from open_targets.adapter.scan_operation import FlattenedScanOperation, ScanOperation
+from open_targets.adapter.scan_operation import ExplodingScanOperation, ScanOperation
 from open_targets.data.schema import Field
 from open_targets.data.schema_base import Dataset
 
@@ -123,8 +123,8 @@ class ExpressionGenerationDefinition(
         fields = set[type[Field]]()
         for expression in self._all_expressions:
             fields.update(recursive_get_dependent_fields(expression))
-        if isinstance(self.scan_operation, FlattenedScanOperation):
-            fields.add(self.scan_operation.flattened_field)
+        if isinstance(self.scan_operation, ExplodingScanOperation):
+            fields.add(self.scan_operation.exploded_field)
         return fields
 
     def _to_expression(self, value: str | type[Field] | Expression[Any]) -> Expression[Any]:

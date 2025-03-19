@@ -11,7 +11,7 @@ from open_targets.adapter.expression import (
 )
 from open_targets.adapter.generation_definition import ExpressionEdgeGenerationDefinition, GenerationDefinition
 from open_targets.adapter.output import EdgeInfo
-from open_targets.adapter.scan_operation import FlattenedScanOperation
+from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetTargets,
     FieldTargetsGo,
@@ -26,9 +26,9 @@ from open_targets.data.schema import (
 from open_targets.definition.curie_scheme import ENSEMBL_SCHEME
 
 edge_target_go: Final[GenerationDefinition[EdgeInfo]] = ExpressionEdgeGenerationDefinition(
-    scan_operation=FlattenedScanOperation(
+    scan_operation=ExplodingScanOperation(
         dataset=DatasetTargets,
-        flattened_field=FieldTargetsGo,
+        exploded_field=FieldTargetsGo,
     ),
     primary_id=StringConcatenationExpression(
         expressions=[

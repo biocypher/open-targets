@@ -22,24 +22,28 @@ class ScanOperation(ABC):
 
 @dataclass(frozen=True)
 class RowScanOperation(ScanOperation):
-    """Scan operation that scans each row of the dataset."""
+    """Scan operation that returns each row of the dataset."""
 
 
 @dataclass(frozen=True)
-class FlattenedScanOperation(ScanOperation):
-    """Scan operation that recursively scans and flattens nested fields.
+class ExplodingScanOperation(ScanOperation):
+    """Scan operation that returns the exploded results.
 
-    On top of RowScanOperation, this scan operation will flatten the fields
-    against the targeted sequence type field. Given a table below:
-    colA: str colB: list[str] colC: list[str]
-    a    [b, c]    [d, e]
-    f    [g, h]    [i, j]
+    This scan operation will explode the fields against the targeted sequence
+    type field. Given a table below and the targeted field is colB:
 
-    If the targeted flattened field is colC, the output will be:
-    1. a, [b, c], d
-    2. a, [b, c], e
-    3. f, [g, h], i
-    4. f, [g, h], j
+    | colA: str | colB: list[str] | colC: list[str] |
+    |-----------|-----------------|-----------------|
+    | a         | [b, c]          | [d, e]          |
+    | f         | [g, h]          | [i, j]          |
+
+    The output will be:
+    | colA: str | colBElement: str | colC: list[str] |
+    |-----------|------------------|-----------------|
+    | a         | b                | [d, e]          |
+    | a         | c                | [d, e]          |
+    | f         | g                | [i, j]          |
+    | f         | h                | [i, j]          |
     """
 
-    flattened_field: type[SequenceField]
+    exploded_field: type[SequenceField]
