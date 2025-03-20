@@ -23,6 +23,7 @@ class GenerationContext:
 
     def __init__(
         self,
+        *,
         node_definitions: list[GenerationDefinition[NodeInfo]],
         edge_definitions: list[GenerationDefinition[EdgeInfo]],
         datasets_location: str | PathLike[str],

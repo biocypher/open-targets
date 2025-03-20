@@ -37,9 +37,9 @@ def main():
 
     # Open Targets
     context = GenerationContext(
-        node_definitions,
-        edge_definitions,
-        "C:/Users/Paul/Documents/GitHub/open-targets/data/ot_files",
+        node_definitions=node_definitions,
+        edge_definitions=edge_definitions,
+        datasets_location="C:/Users/Paul/Documents/GitHub/open-targets/data/ot_files",
     )
 
     for node_definition in node_definitions:
