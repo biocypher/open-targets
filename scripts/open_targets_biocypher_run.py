@@ -1,4 +1,4 @@
-"""A sample script to run the BioCypher with the Open Targets adapter."""
+"""A pipeline to build Open Targets platform data as a BioCypher KG."""
 
 from biocypher import BioCypher
 
@@ -16,7 +16,7 @@ from open_targets.definition import (
 
 
 def main():
-    """Main function running the import using BioCypher and the adapter."""
+    """Run the import using BioCypher and the Open Targets adapter."""
     # Start BioCypher
     bc = BioCypher(
         biocypher_config_path="config/biocypher_config.yaml",
