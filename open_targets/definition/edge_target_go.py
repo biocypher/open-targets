@@ -33,8 +33,8 @@ edge_target_go: Final[GenerationDefinition[EdgeInfo]] = ExpressionEdgeGeneration
     primary_id=StringConcatenationExpression(
         expressions=[
             BuildCurieExpression(
-                scheme=LiteralExpression(ENSEMBL_SCHEME),
-                path=FieldExpression(FieldTargetsId),
+                prefix=LiteralExpression(ENSEMBL_SCHEME),
+                reference=FieldExpression(FieldTargetsId),
                 normalised=True,
             ),
             LiteralExpression("->"),
@@ -42,8 +42,8 @@ edge_target_go: Final[GenerationDefinition[EdgeInfo]] = ExpressionEdgeGeneration
         ],
     ),
     source=BuildCurieExpression(
-        scheme=LiteralExpression(ENSEMBL_SCHEME),
-        path=FieldExpression(FieldTargetsId),
+        prefix=LiteralExpression(ENSEMBL_SCHEME),
+        reference=FieldExpression(FieldTargetsId),
         normalised=True,
     ),
     target=NormaliseCurieExpression(FieldExpression(FieldTargetsGoElementId)),

@@ -17,7 +17,7 @@ from open_targets.adapter.expression import (
     BuildCurieExpression,
     DataSourceToLicenceExpression,
     Expression,
-    ExtractCurieSchemeExpression,
+    ExtractCuriePrefixExpression,
     ExtractSubstringExpression,
     FieldExpression,
     LiteralExpression,
@@ -154,7 +154,7 @@ class ExpressionGenerationDefinition(
                 return lambda data: func(data).lower()
             case BuildCurieExpression():
                 return self._get_curie_builder(expression)
-            case ExtractCurieSchemeExpression():
+            case ExtractCuriePrefixExpression():
                 func = self.recursive_build_expression_function(expression.expression)
                 return (
                     (lambda data: normalize_prefix(self._extract_curie_scheme(func(data))))
@@ -176,8 +176,8 @@ class ExpressionGenerationDefinition(
                 raise ValueError(msg)
 
     def _get_curie_builder(self, expression: BuildCurieExpression) -> Callable[[DataWrapper], str]:
-        scheme_func = self.recursive_build_expression_function(expression.scheme)
-        path_func = self.recursive_build_expression_function(expression.path)
+        scheme_func = self.recursive_build_expression_function(expression.prefix)
+        path_func = self.recursive_build_expression_function(expression.reference)
 
         def normalise_curie_builder(data: DataWrapper) -> str:
             scheme, path = normalize_parsed_curie(scheme_func(data), path_func(data))
@@ -214,7 +214,7 @@ class ExpressionGenerationDefinition(
         expression: Expression[Any],
     ) -> Callable[[DataWrapper], Any]:
         func = self.recursive_build_expression_function(expression)
-        return lambda data: str(func(data))
+        return lambda data: func(data)
 
 
 @dataclass(frozen=True)
@@ -235,7 +235,7 @@ class ExpressionNodeGenerationDefinition(ExpressionGenerationDefinition[NodeInfo
         return self._to_expression(self.label)
 
     @property
-    def _property_exprs(self) -> Sequence[tuple[Expression[str], Expression[str]]]:
+    def _property_exprs(self) -> Sequence[tuple[Expression[str], Expression[Any]]]:
         return [
             (self._to_expression(prop[0]), self._to_expression(prop[1]))
             if isinstance(prop, tuple)
@@ -303,7 +303,7 @@ class ExpressionEdgeGenerationDefinition(ExpressionGenerationDefinition[EdgeInfo
         return self._to_expression(self.label)
 
     @property
-    def _property_exprs(self) -> Sequence[tuple[Expression[str], Expression[str]]]:
+    def _property_exprs(self) -> Sequence[tuple[Expression[str], Expression[Any]]]:
         return [
             (self._to_expression(prop[0]), self._to_expression(prop[1]))
             if isinstance(prop, tuple)
