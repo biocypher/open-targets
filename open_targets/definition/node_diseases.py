@@ -3,7 +3,7 @@
 from typing import Final
 
 from open_targets.adapter.expression import (
-    ExtractCurieSchemeExpression,
+    ExtractCuriePrefixExpression,
     FieldExpression,
     NormaliseCurieExpression,
 )
@@ -22,7 +22,7 @@ from open_targets.definition.node_shared import node_static_properties
 node_diseases: Final[GenerationDefinition[NodeInfo]] = ExpressionNodeGenerationDefinition(
     scan_operation=RowScanOperation(dataset=DatasetDiseases),
     primary_id=NormaliseCurieExpression(expression=FieldExpression(FieldDiseasesId)),
-    label=ExtractCurieSchemeExpression(FieldExpression(FieldDiseasesId)),
+    label=ExtractCuriePrefixExpression(FieldExpression(FieldDiseasesId)),
     properties=[
         FieldDiseasesCode,
         FieldDiseasesDescription,

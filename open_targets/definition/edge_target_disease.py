@@ -27,8 +27,8 @@ edge_target_disease: Final[GenerationDefinition[EdgeInfo]] = ExpressionEdgeGener
     scan_operation=RowScanOperation(dataset=DatasetEvidence),
     primary_id=FieldEvidenceId,
     source=BuildCurieExpression(
-        scheme=LiteralExpression("ensembl"),
-        path=FieldExpression(FieldEvidenceTargetId),
+        prefix=LiteralExpression("ensembl"),
+        reference=FieldExpression(FieldEvidenceTargetId),
         normalised=True,
     ),
     target=NormaliseCurieExpression(FieldExpression(FieldEvidenceDiseaseId)),

@@ -21,8 +21,8 @@ from open_targets.definition.node_shared import node_static_properties
 node_targets: Final[GenerationDefinition[NodeInfo]] = ExpressionNodeGenerationDefinition(
     scan_operation=RowScanOperation(dataset=DatasetTargets),
     primary_id=BuildCurieExpression(
-        scheme=LiteralExpression(ENSEMBL_SCHEME),
-        path=FieldExpression(FieldTargetsId),
+        prefix=LiteralExpression(ENSEMBL_SCHEME),
+        reference=FieldExpression(FieldTargetsId),
         normalised=True,
     ),
     label=ENSEMBL_SCHEME,

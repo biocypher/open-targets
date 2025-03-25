@@ -4,6 +4,7 @@ from collections.abc import Callable, Sequence
 from dataclasses import dataclass, fields
 from typing import Any, Final, Generic, TypeVar, get_origin
 
+from open_targets.adapter.data_wrapper import ConvertedType
 from open_targets.data.schema_base import Field
 
 TValue = TypeVar("TValue")
@@ -18,7 +19,7 @@ class Expression(Generic[TValue]):
 
 
 @dataclass(frozen=True)
-class FieldExpression(Expression[Any]):
+class FieldExpression(Expression[ConvertedType]):
     """Expression that retrives values from a field.
 
     This is one of the leaf expressions that provides the source of data down to
@@ -43,6 +44,7 @@ class LiteralExpression(Expression[TValue]):
 class TransformExpression(Expression[TValue]):
     """Expression that transforms values using a custom function."""
 
+    expression: Expression[Any] | None
     function: Callable[[Any], TValue]
 
 
@@ -57,7 +59,7 @@ class ToStringExpression(Expression[str]):
 class StringConcatenationExpression(Expression[str]):
     """Expression that concatenates strings."""
 
-    expressions: Sequence[Expression[Any]]
+    expressions: Sequence[Expression[str]]
 
 
 @dataclass(frozen=True)
@@ -71,14 +73,14 @@ class StringLowerExpression(Expression[str]):
 class BuildCurieExpression(Expression[str]):
     """Expression that builds a CURIE from parts."""
 
-    scheme: Expression[Any]
-    path: Expression[Any]
+    prefix: Expression[Any]
+    reference: Expression[Any]
     normalised: bool = True
 
 
 @dataclass(frozen=True)
-class ExtractCurieSchemeExpression(Expression[str]):
-    """Expression that extracts the scheme from a CURIE like string.
+class ExtractCuriePrefixExpression(Expression[str]):
+    """Expression that extracts the prefix from a CURIE like string.
 
     For example, `GO_00000` results into `go`.
     """

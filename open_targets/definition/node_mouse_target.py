@@ -22,8 +22,8 @@ from open_targets.definition.node_shared import node_static_properties
 node_mouse_target: Final[GenerationDefinition[NodeInfo]] = ExpressionNodeGenerationDefinition(
     scan_operation=RowScanOperation(dataset=DatasetMousePhenotypes),
     primary_id=BuildCurieExpression(
-        scheme=LiteralExpression(ENSEMBL_SCHEME),
-        path=FieldExpression(FieldMousePhenotypesTargetInModelEnsemblId),
+        prefix=LiteralExpression(ENSEMBL_SCHEME),
+        reference=FieldExpression(FieldMousePhenotypesTargetInModelEnsemblId),
         normalised=True,
     ),
     label="mouse gene",

@@ -36,8 +36,8 @@ from open_targets.definition.node_shared import node_static_properties
 node_molecule: Final[GenerationDefinition[NodeInfo]] = ExpressionNodeGenerationDefinition(
     scan_operation=RowScanOperation(dataset=DatasetMolecule),
     primary_id=BuildCurieExpression(
-        scheme=LiteralExpression(CHEMBL_SCHEME),
-        path=FieldExpression(FieldMoleculeId),
+        prefix=LiteralExpression(CHEMBL_SCHEME),
+        reference=FieldExpression(FieldMoleculeId),
         normalised=True,
     ),
     label=CHEMBL_SCHEME,
