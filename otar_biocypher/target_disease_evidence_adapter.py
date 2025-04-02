@@ -391,19 +391,19 @@ class TargetDiseaseEvidenceAdapter:
         evidence_path = "data/ot_files/evidence"
         self.evidence_df = self.spark.read.parquet(evidence_path)
 
-        target_path = "data/ot_files/targets"
+        target_path = "data/ot_files/target"
         self.target_df = self.spark.read.parquet(target_path)
 
-        disease_path = "data/ot_files/diseases"
+        disease_path = "data/ot_files/disease"
         self.disease_df = self.spark.read.parquet(disease_path)
 
-        drug_path = "data/ot_files/molecule"
+        drug_path = "data/ot_files/drug_molecule"
         self.drug_df = self.spark.read.parquet(drug_path)
 
         go_path = "data/ot_files/go"
         self.go_df = self.spark.read.parquet(go_path)
 
-        mp_path = "data/ot_files/mousePhenotypes"
+        mp_path = "data/ot_files/mouse_phenotype"
         self.mp_df = self.spark.read.parquet(mp_path)
 
         if stats:
@@ -497,7 +497,7 @@ class TargetDiseaseEvidenceAdapter:
             logger.debug(f"Processed {node_field_type} with id {_id} and type {_type}")
 
             _props = {}
-            _props["version"] = "22.11"
+            _props["version"] = "25.03"
             _props["source"] = "Open Targets"
             _props["licence"] = "https://platform-docs.opentargets.org/licence"
 
@@ -631,7 +631,7 @@ class TargetDiseaseEvidenceAdapter:
 
                 properties[field.value] = row[field.value]
 
-            properties["version"] = "22.11"
+            properties["version"] = "25.03"
             properties["licence"] = "my_licence"
 
             go_id, _ = _process_id_and_type(row.goId, "go")
@@ -707,7 +707,7 @@ class TargetDiseaseEvidenceAdapter:
                 elif row[field.value]:
                     properties[field.value] = row[field.value]
 
-            properties["version"] = "22.11"
+            properties["version"] = "25.03"
 
             disease_id, _ = _process_id_and_type(row.diseaseId)
             gene_id, _ = _process_id_and_type(row.targetId, "ensembl")
