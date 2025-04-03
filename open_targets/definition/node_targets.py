@@ -15,7 +15,7 @@ from open_targets.data.schema import (
     FieldTargetsBiotype,
     FieldTargetsId,
 )
-from open_targets.definition.curie_scheme import ENSEMBL_PREFIX
+from open_targets.definition.curie_prefix import ENSEMBL_PREFIX
 from open_targets.definition.node_shared import node_static_properties
 
 node_targets: Final[GenerationDefinition[NodeInfo]] = ExpressionNodeGenerationDefinition(

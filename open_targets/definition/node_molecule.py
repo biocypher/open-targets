@@ -30,7 +30,7 @@ from open_targets.data.schema import (
     FieldMoleculeTradeNames,
     FieldMoleculeYearOfFirstApproval,
 )
-from open_targets.definition.curie_scheme import CHEMBL_PREFIX
+from open_targets.definition.curie_prefix import CHEMBL_PREFIX
 from open_targets.definition.node_shared import node_static_properties
 
 node_molecule: Final[GenerationDefinition[NodeInfo]] = ExpressionNodeGenerationDefinition(

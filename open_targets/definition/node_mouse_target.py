@@ -16,7 +16,7 @@ from open_targets.data.schema import (
     FieldMousePhenotypesTargetInModelEnsemblId,
     FieldMousePhenotypesTargetInModelMgiId,
 )
-from open_targets.definition.curie_scheme import ENSEMBL_PREFIX
+from open_targets.definition.curie_prefix import ENSEMBL_PREFIX
 from open_targets.definition.node_shared import node_static_properties
 
 node_mouse_target: Final[GenerationDefinition[NodeInfo]] = ExpressionNodeGenerationDefinition(

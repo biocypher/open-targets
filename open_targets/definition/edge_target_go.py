@@ -24,7 +24,7 @@ from open_targets.data.schema import (
     FieldTargetsGoElementSource,
     FieldTargetsId,
 )
-from open_targets.definition.curie_scheme import ENSEMBL_PREFIX
+from open_targets.definition.curie_prefix import ENSEMBL_PREFIX
 
 edge_target_go: Final[GenerationDefinition[EdgeInfo]] = ExpressionEdgeGenerationDefinition(
     scan_operation=ExplodingScanOperation(
