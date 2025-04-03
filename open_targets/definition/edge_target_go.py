@@ -1,7 +1,8 @@
-"""Generation definitions for edges between targets and GO terms."""
+"""Acquisition definitions for edges between targets and GO terms."""
 
 from typing import Final
 
+from open_targets.adapter.acquisition_definition import AcquisitionDefinition, ExpressionEdgeAcquisitionDefinition
 from open_targets.adapter.expression import (
     BuildCurieExpression,
     FieldExpression,
@@ -10,7 +11,6 @@ from open_targets.adapter.expression import (
     StringConcatenationExpression,
     ToStringExpression,
 )
-from open_targets.adapter.generation_definition import ExpressionEdgeGenerationDefinition, GenerationDefinition
 from open_targets.adapter.output import EdgeInfo
 from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
@@ -26,7 +26,7 @@ from open_targets.data.schema import (
 )
 from open_targets.definition.curie_prefix import ENSEMBL_PREFIX
 
-edge_target_go: Final[GenerationDefinition[EdgeInfo]] = ExpressionEdgeGenerationDefinition(
+edge_target_go: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
     scan_operation=ExplodingScanOperation(
         dataset=DatasetTargets,
         exploded_field=FieldTargetsGo,

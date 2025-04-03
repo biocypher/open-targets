@@ -9,7 +9,7 @@ from open_targets.adapter.scan_operation import ScanOperation
 from open_targets.data.schema_base import Dataset, Field
 
 
-class GenerationContextProtocol(Protocol):
+class AcquisitionContextProtocol(Protocol):
     """Protocol for the generation context.
 
     A generation context provides information of a generation session and low

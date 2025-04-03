@@ -1,6 +1,6 @@
-"""Definition of generation definitions.
+"""Definition of acquisition definitions.
 
-Generation definitions also define the actual logic querying the datasets.
+Acquisition definitions also define the actual logic querying the datasets.
 """
 
 import logging
@@ -11,7 +11,7 @@ from typing import Any, Generic, TypeAlias, TypeVar
 
 from bioregistry.resolve import normalize_curie, normalize_parsed_curie, normalize_prefix
 
-from open_targets.adapter.context_protocol import GenerationContextProtocol
+from open_targets.adapter.context_protocol import AcquisitionContextProtocol
 from open_targets.adapter.data_wrapper import DataWrapper
 from open_targets.adapter.expression import (
     BuildCurieExpression,
@@ -41,13 +41,13 @@ Source: TypeAlias = str | type[Field] | Expression[Any]
 CURIE_SEPARATORS = [":", "_", "/"]
 
 
-class GenerationDefinition(Generic[TGraphComponent], ABC):
-    """Base class for all generation definitions.
+class AcquisitionDefinition(Generic[TGraphComponent], ABC):
+    """Base class for all acquisition definitions.
 
-    A generation definition describes how to generate a set of nodes/edges. High
-    level definitions are provided but in the case of more complex generation
-    logic, a subclass of this class can be used to query the dataset directly to
-    provide the specific logic.
+    An acquisition definition describes how to acquire a set of nodes/edges.
+    High level definitions are provided but in the case of more complex
+    acquisition logic, a subclass of this class can be used to query the
+    dataset directly to provide the specific logic.
     """
 
     @abstractmethod
@@ -55,15 +55,15 @@ class GenerationDefinition(Generic[TGraphComponent], ABC):
         """Datasets that are required by this definition."""
 
     @abstractmethod
-    def generate(self, context: GenerationContextProtocol) -> Iterable[TGraphComponent]:
-        """Generate graph components by directly accessing the context."""
+    def acquire(self, context: AcquisitionContextProtocol) -> Iterable[TGraphComponent]:
+        """Acquire graph components by directly accessing the context."""
 
 
-class ScanningGenerationDefinition(
-    GenerationDefinition[TGraphComponent],
+class ScanningAcquisitionDefinition(
+    AcquisitionDefinition[TGraphComponent],
     ABC,
 ):
-    """Generation definition that uses a scan operation to generate.
+    """Acquisition definition that uses a scan operation to acquire.
 
     The dataset query is abstracted out by the scan operation which determines
     the fashion of data query. Items yielded are also wrapped for easy access
@@ -72,36 +72,36 @@ class ScanningGenerationDefinition(
 
     @abstractmethod
     def get_scan_operation(self) -> ScanOperation:
-        """Scan operation that is used to generate the graph components."""
+        """Scan operation that is used to acquire the graph components."""
 
     @abstractmethod
     def get_required_fields(self) -> Iterable[type[Field]]:
         """Fields that are requested by this definition."""
 
     @abstractmethod
-    def generate_from_scanning(
+    def acquire_from_scanning(
         self,
-        context: GenerationContextProtocol,
+        context: AcquisitionContextProtocol,
         data_stream: Iterable[DataWrapper],
     ) -> Iterable[TGraphComponent]:
-        """Generate graph components from the scanning result stream."""
+        """Acquire graph components from the scanning result stream."""
 
     def get_required_datasets(self) -> Iterable[type[Dataset]]:
         """Datasets that are required by this definition."""
         return {self.get_scan_operation().dataset}
 
-    def generate(self, context: GenerationContextProtocol) -> Iterable[TGraphComponent]:
+    def acquire(self, context: AcquisitionContextProtocol) -> Iterable[TGraphComponent]:
         """Create the scanning result stream from the low level access."""
         scan_result_stream = context.get_scan_result_stream(self.get_scan_operation(), self.get_required_fields())
-        return self.generate_from_scanning(context, scan_result_stream)
+        return self.acquire_from_scanning(context, scan_result_stream)
 
 
 @dataclass(frozen=True)
-class ExpressionGenerationDefinition(
-    ScanningGenerationDefinition[TGraphComponent],
+class ExpressionAcquisitionDefinition(
+    ScanningAcquisitionDefinition[TGraphComponent],
     ABC,
 ):
-    """Generation definition that is described by expressions.
+    """Acquisition definition that is described by expressions.
 
     Expressions are used to describe how to obtain values of the attributes of
     nodes or edges from a scanning result.
@@ -218,8 +218,8 @@ class ExpressionGenerationDefinition(
 
 
 @dataclass(frozen=True)
-class ExpressionNodeGenerationDefinition(ExpressionGenerationDefinition[NodeInfo]):
-    """Expression generation definition for nodes."""
+class ExpressionNodeAcquisitionDefinition(ExpressionAcquisitionDefinition[NodeInfo]):
+    """Expression acquisition definition for nodes."""
 
     scan_operation: ScanOperation
     primary_id: Source
@@ -252,9 +252,9 @@ class ExpressionNodeGenerationDefinition(ExpressionGenerationDefinition[NodeInfo
             *[i[1] for i in self._property_exprs],
         ]
 
-    def generate_from_scanning(
+    def acquire_from_scanning(
         self,
-        context: GenerationContextProtocol,
+        context: AcquisitionContextProtocol,
         data_stream: Iterable[DataWrapper],
     ) -> Iterable[NodeInfo]:
         """Build the functions that compute the values from the data stream."""
@@ -273,12 +273,12 @@ class ExpressionNodeGenerationDefinition(ExpressionGenerationDefinition[NodeInfo
                     properties={key_getter(data): value_getter(data) for key_getter, value_getter in property_getters},
                 )
             except Exception:  # noqa: PERF203
-                logging.exception("Failed to generate node from data: %s", data)
+                logging.exception("Failed to acquire node from data: %s", data)
 
 
 @dataclass(frozen=True)
-class ExpressionEdgeGenerationDefinition(ExpressionGenerationDefinition[EdgeInfo]):
-    """Expression generation definition for edges."""
+class ExpressionEdgeAcquisitionDefinition(ExpressionAcquisitionDefinition[EdgeInfo]):
+    """Expression acquisition definition for edges."""
 
     primary_id: Source
     source: Source
@@ -322,9 +322,9 @@ class ExpressionEdgeGenerationDefinition(ExpressionGenerationDefinition[EdgeInfo
             *[i[1] for i in self._property_exprs],
         ]
 
-    def generate_from_scanning(
+    def acquire_from_scanning(
         self,
-        context: GenerationContextProtocol,
+        context: AcquisitionContextProtocol,
         data_stream: Iterable[DataWrapper],
     ) -> Iterable[EdgeInfo]:
         """Build the functions that compute the values from the data stream."""
@@ -347,4 +347,4 @@ class ExpressionEdgeGenerationDefinition(ExpressionGenerationDefinition[EdgeInfo
                     properties={key_getter(data): value_getter(data) for key_getter, value_getter in property_getters},
                 )
             except Exception:  # noqa: PERF203
-                logging.exception("Failed to generate edge from data: %s", data)
+                logging.exception("Failed to acquire edge from data: %s", data)

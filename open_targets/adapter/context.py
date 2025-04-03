@@ -1,6 +1,6 @@
 # pyright: reportUnknownMemberType=false
 
-"""Implementation of the generation context protocol."""
+"""Implementation of the acquisition context protocol."""
 
 from collections.abc import Iterable, Sequence
 from os import PathLike
@@ -9,8 +9,8 @@ from typing import Any, Final, cast, overload
 
 import duckdb
 
+from open_targets.adapter.acquisition_definition import AcquisitionDefinition
 from open_targets.adapter.data_wrapper import ConvertedType, DataWrapper, SequencePresentingDataWrapper
-from open_targets.adapter.generation_definition import GenerationDefinition
 from open_targets.adapter.output import EdgeInfo, NodeInfo
 from open_targets.adapter.scan_operation import ExplodingScanOperation, RowScanOperation, ScanOperation
 from open_targets.data.schema_base import Dataset, Field
@@ -18,25 +18,25 @@ from open_targets.data.schema_base import Dataset, Field
 TOP_FIELD_PATH_LENGTH = 2
 
 
-class GenerationContext:
-    """An implementation of the generation context using duckdb."""
+class AcquisitionContext:
+    """An implementation of the acquisition context using duckdb."""
 
     def __init__(
         self,
         *,
-        node_definitions: list[GenerationDefinition[NodeInfo]],
-        edge_definitions: list[GenerationDefinition[EdgeInfo]],
+        node_definitions: list[AcquisitionDefinition[NodeInfo]],
+        edge_definitions: list[AcquisitionDefinition[EdgeInfo]],
         datasets_location: str | PathLike[str],
         limit: int | None = None,
     ) -> None:
-        """Initialize the generation context.
+        """Initialize the acquisition context.
 
         Datasets and fields required are automatically computed from the
         provided definitions. Once the context is initialised, the definitions
         are immutable.
         """
-        self.node_definitions: Final[list[GenerationDefinition[NodeInfo]]] = node_definitions
-        self.edge_definitions: Final[list[GenerationDefinition[EdgeInfo]]] = edge_definitions
+        self.node_definitions: Final[list[AcquisitionDefinition[NodeInfo]]] = node_definitions
+        self.edge_definitions: Final[list[AcquisitionDefinition[EdgeInfo]]] = edge_definitions
         all_datasets_required: frozenset[type[Dataset]] = frozenset(
             dataset
             for definition in node_definitions + edge_definitions
@@ -69,26 +69,26 @@ class GenerationContext:
                 msg = f"Unsupported scan operation: {scan_operation}"
                 raise ValueError(msg)
 
-    def get_generators(self) -> Iterable[Iterable[NodeInfo] | Iterable[EdgeInfo]]:
-        """Get the generators of all definitions registered."""
+    def get_acquisitors(self) -> Iterable[Iterable[NodeInfo] | Iterable[EdgeInfo]]:
+        """Get the acquisitors of all definitions registered."""
         for definition in self.node_definitions + self.edge_definitions:
-            yield definition.generate(self)
+            yield definition.acquire(self)
 
     @overload
-    def get_generator(self, definition: GenerationDefinition[NodeInfo]) -> Iterable[NodeInfo]: ...
+    def get_acquisitor(self, definition: AcquisitionDefinition[NodeInfo]) -> Iterable[NodeInfo]: ...
 
     @overload
-    def get_generator(self, definition: GenerationDefinition[EdgeInfo]) -> Iterable[EdgeInfo]: ...
+    def get_acquisitor(self, definition: AcquisitionDefinition[EdgeInfo]) -> Iterable[EdgeInfo]: ...
 
-    def get_generator(
+    def get_acquisitor(
         self,
-        definition: GenerationDefinition[NodeInfo] | GenerationDefinition[EdgeInfo],
+        definition: AcquisitionDefinition[NodeInfo] | AcquisitionDefinition[EdgeInfo],
     ) -> Iterable[NodeInfo] | Iterable[EdgeInfo]:
-        """Get the generator for a registered definition."""
+        """Get the acquisitor for a registered definition."""
         if definition not in self.node_definitions + self.edge_definitions:
             msg = f"Definition {definition} was not registered."
             raise ValueError(msg)
-        return definition.generate(self)
+        return definition.acquire(self)
 
     def _get_row_scan_result_stream(
         self,
