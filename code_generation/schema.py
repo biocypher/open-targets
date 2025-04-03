@@ -1,4 +1,18 @@
-"""Functions for generating the schema.py file."""
+"""Functions for generating the schema.py file.
+
+To ease the use of the adaptor and move as many errors as possible to edit time,
+the schema of the Open Targets datasets are represented as Python accurately
+typed classes in `schema.py`. By referencing these classes instead of hard
+coding the information such as dataset or field names, errors are caught at
+edit time instead of run time. This is particularly useful when the targeted
+Open Targets version is updated. The schema in Python domain is also useful for
+code completion, type checking and dataset discovery, especially for LLM
+integration.
+
+To generate the schema, metadata from the Open Targets server is downloaded
+and deserialised into Python objects. Jinja then is used to generate the schema
+classes from the metadata.
+"""
 
 from dataclasses import dataclass, replace
 from typing import Any
