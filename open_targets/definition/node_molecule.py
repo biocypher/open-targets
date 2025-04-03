@@ -30,17 +30,17 @@ from open_targets.data.schema import (
     FieldMoleculeTradeNames,
     FieldMoleculeYearOfFirstApproval,
 )
-from open_targets.definition.curie_scheme import CHEMBL_SCHEME
+from open_targets.definition.curie_scheme import CHEMBL_PREFIX
 from open_targets.definition.node_shared import node_static_properties
 
 node_molecule: Final[GenerationDefinition[NodeInfo]] = ExpressionNodeGenerationDefinition(
     scan_operation=RowScanOperation(dataset=DatasetMolecule),
     primary_id=BuildCurieExpression(
-        prefix=LiteralExpression(CHEMBL_SCHEME),
+        prefix=LiteralExpression(CHEMBL_PREFIX),
         reference=FieldExpression(FieldMoleculeId),
         normalised=True,
     ),
-    label=CHEMBL_SCHEME,
+    label=CHEMBL_PREFIX,
     properties=[
         FieldMoleculeCanonicalSmiles,
         FieldMoleculeInchiKey,

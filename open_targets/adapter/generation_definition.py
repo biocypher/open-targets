@@ -157,9 +157,9 @@ class ExpressionGenerationDefinition(
             case ExtractCuriePrefixExpression():
                 func = self.recursive_build_expression_function(expression.expression)
                 return (
-                    (lambda data: normalize_prefix(self._extract_curie_scheme(func(data))))
+                    (lambda data: normalize_prefix(self._extract_curie_prefix(func(data))))
                     if expression.normalise
-                    else (lambda data: self._extract_curie_scheme(func(data)))
+                    else (lambda data: self._extract_curie_prefix(func(data)))
                 )
             case NormaliseCurieExpression():
                 func = self.recursive_build_expression_function(expression.expression)
@@ -176,19 +176,19 @@ class ExpressionGenerationDefinition(
                 raise ValueError(msg)
 
     def _get_curie_builder(self, expression: BuildCurieExpression) -> Callable[[DataWrapper], str]:
-        scheme_func = self.recursive_build_expression_function(expression.prefix)
-        path_func = self.recursive_build_expression_function(expression.reference)
+        prefix_func = self.recursive_build_expression_function(expression.prefix)
+        reference_func = self.recursive_build_expression_function(expression.reference)
 
         def normalise_curie_builder(data: DataWrapper) -> str:
-            scheme, path = normalize_parsed_curie(scheme_func(data), path_func(data))
-            scheme = "" if scheme is None else scheme
-            path = "" if path is None else path
-            return f"{scheme}:{path}"
+            prefix, reference = normalize_parsed_curie(prefix_func(data), reference_func(data))
+            prefix = "" if prefix is None else prefix
+            reference = "" if reference is None else reference
+            return f"{prefix}:{reference}"
 
         return (
             normalise_curie_builder
             if expression.normalised
-            else (lambda data: f"{scheme_func(data)}:{path_func(data)}")
+            else (lambda data: f"{prefix_func(data)}:{reference_func(data)}")
         )
 
     def _normalise_curie(self, string: str) -> str:
@@ -202,11 +202,11 @@ class ExpressionGenerationDefinition(
         msg = f"Failed to normalize curie: {string}"
         raise ValueError(msg)
 
-    def _extract_curie_scheme(self, string: str) -> str:
+    def _extract_curie_prefix(self, string: str) -> str:
         for sep in CURIE_SEPARATORS:
             if sep in string:
                 return string.split(sep)[0]
-        msg = f"Failed to extract curie scheme from: {string}"
+        msg = f"Failed to extract curie prefix from: {string}"
         raise ValueError(msg)
 
     def _create_value_getter(
