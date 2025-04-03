@@ -34,6 +34,20 @@ class AcquisitionContext:
         Datasets and fields required are automatically computed from the
         provided definitions. Once the context is initialised, the definitions
         are immutable.
+
+        Args:
+            node_definitions (list[AcquisitionDefinition[NodeInfo]]): The
+                definitions of the nodes to acquire.
+            edge_definitions (list[AcquisitionDefinition[EdgeInfo]]): The
+                definitions of the edges to acquire.
+            datasets_location (str | PathLike[str]): The location of the
+                directory containing the datasets.
+            limit (int | None): The maximum number of rows to retrieve from each
+                dataset. If None, all rows are retrieved.
+
+        Returns:
+            AcquisitionContext: The acquisition context that can be used to
+                get generators of definitions to stream the acquired data.
         """
         self.node_definitions: Final[list[AcquisitionDefinition[NodeInfo]]] = node_definitions
         self.edge_definitions: Final[list[AcquisitionDefinition[EdgeInfo]]] = edge_definitions
@@ -69,22 +83,22 @@ class AcquisitionContext:
                 msg = f"Unsupported scan operation: {scan_operation}"
                 raise ValueError(msg)
 
-    def get_acquisitors(self) -> Iterable[Iterable[NodeInfo] | Iterable[EdgeInfo]]:
-        """Get the acquisitors of all definitions registered."""
+    def get_acquisition_generators(self) -> Iterable[Iterable[NodeInfo] | Iterable[EdgeInfo]]:
+        """Get the acquisition generators of all definitions registered."""
         for definition in self.node_definitions + self.edge_definitions:
             yield definition.acquire(self)
 
     @overload
-    def get_acquisitor(self, definition: AcquisitionDefinition[NodeInfo]) -> Iterable[NodeInfo]: ...
+    def get_acquisition_generator(self, definition: AcquisitionDefinition[NodeInfo]) -> Iterable[NodeInfo]: ...
 
     @overload
-    def get_acquisitor(self, definition: AcquisitionDefinition[EdgeInfo]) -> Iterable[EdgeInfo]: ...
+    def get_acquisition_generator(self, definition: AcquisitionDefinition[EdgeInfo]) -> Iterable[EdgeInfo]: ...
 
-    def get_acquisitor(
+    def get_acquisition_generator(
         self,
         definition: AcquisitionDefinition[NodeInfo] | AcquisitionDefinition[EdgeInfo],
     ) -> Iterable[NodeInfo] | Iterable[EdgeInfo]:
-        """Get the acquisitor for a registered definition."""
+        """Get the acquisition generator for a registered definition."""
         if definition not in self.node_definitions + self.edge_definitions:
             msg = f"Definition {definition} was not registered."
             raise ValueError(msg)
