@@ -17,7 +17,7 @@ class Field(ABC):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type["Dataset"]]
-    path: Final[Sequence[type["Field"]]]
+    path: Final[Sequence[type["Dataset"] | type["Field"]]]
     nullable: Final[bool]
 
 

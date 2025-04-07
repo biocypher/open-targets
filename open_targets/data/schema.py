@@ -13,7 +13,7 @@ from open_targets.data.schema_base import Dataset, Field, MapField, ScalarField,
 
 class DatasetAOTFClickhouse(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_datasource_id: Final[type["FieldAOTFClickhouseDatasourceId"]]
     f_datatype_id: Final[type["FieldAOTFClickhouseDatatypeId"]]
     f_disease_data: Final[type["FieldAOTFClickhouseDiseaseData"]]
@@ -28,61 +28,61 @@ class FieldAOTFClickhouseDatasourceId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAOTFClickhouseDatatypeId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAOTFClickhouseDiseaseData(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAOTFClickhouseDiseaseId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAOTFClickhouseRowId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAOTFClickhouseRowScore(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAOTFClickhouseTargetData(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAOTFClickhouseTargetId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetAdverseDrugReactions(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_a: Final[type["FieldAdverseDrugReactionsA"]]
     f_acterm: Final[type["FieldAdverseDrugReactionsActerm"]]
     f_aterm: Final[type["FieldAdverseDrugReactionsAterm"]]
@@ -102,96 +102,96 @@ class FieldAdverseDrugReactionsA(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseDrugReactionsActerm(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseDrugReactionsAterm(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseDrugReactionsB(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseDrugReactionsC(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseDrugReactionsChemblId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseDrugReactionsCterm(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseDrugReactionsD(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseDrugReactionsLlr(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseDrugReactionsMeddraCode(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseDrugReactionsReactionReactionmeddrapt(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseDrugReactionsUniqReportIdsByDrug(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseDrugReactionsUniqReportIdsByReaction(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetAdverseTargetReactions(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_a: Final[type["FieldAdverseTargetReactionsA"]]
     f_acterm: Final[type["FieldAdverseTargetReactionsActerm"]]
     f_aterm: Final[type["FieldAdverseTargetReactionsAterm"]]
@@ -211,96 +211,96 @@ class FieldAdverseTargetReactionsA(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseTargetReactionsActerm(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseTargetReactionsAterm(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseTargetReactionsB(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseTargetReactionsC(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseTargetReactionsCterm(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseTargetReactionsD(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseTargetReactionsLlr(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseTargetReactionsMeddraCode(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseTargetReactionsReactionReactionmeddrapt(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseTargetReactionsTargetId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseTargetReactionsUniqReportIdsByReaction(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAdverseTargetReactionsUniqReportIdsByTarget(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetAssociationByDatasourceDirect(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_datasource_id: Final[type["FieldAssociationByDatasourceDirectDatasourceId"]]
     f_datatype_id: Final[type["FieldAssociationByDatasourceDirectDatatypeId"]]
     f_disease_id: Final[type["FieldAssociationByDatasourceDirectDiseaseId"]]
@@ -313,47 +313,47 @@ class FieldAssociationByDatasourceDirectDatasourceId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByDatasourceDirectDatatypeId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByDatasourceDirectDiseaseId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByDatasourceDirectEvidenceCount(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByDatasourceDirectScore(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByDatasourceDirectTargetId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetAssociationByDatasourceIndirect(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_datasource_id: Final[type["FieldAssociationByDatasourceIndirectDatasourceId"]]
     f_datatype_id: Final[type["FieldAssociationByDatasourceIndirectDatatypeId"]]
     f_disease_id: Final[type["FieldAssociationByDatasourceIndirectDiseaseId"]]
@@ -366,47 +366,47 @@ class FieldAssociationByDatasourceIndirectDatasourceId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByDatasourceIndirectDatatypeId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByDatasourceIndirectDiseaseId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByDatasourceIndirectEvidenceCount(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByDatasourceIndirectScore(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByDatasourceIndirectTargetId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetAssociationByDatatypeDirect(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_datatype_id: Final[type["FieldAssociationByDatatypeDirectDatatypeId"]]
     f_disease_id: Final[type["FieldAssociationByDatatypeDirectDiseaseId"]]
     f_evidence_count: Final[type["FieldAssociationByDatatypeDirectEvidenceCount"]]
@@ -418,40 +418,40 @@ class FieldAssociationByDatatypeDirectDatatypeId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByDatatypeDirectDiseaseId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByDatatypeDirectEvidenceCount(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByDatatypeDirectScore(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByDatatypeDirectTargetId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetAssociationByDatatypeIndirect(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_datatype_id: Final[type["FieldAssociationByDatatypeIndirectDatatypeId"]]
     f_disease_id: Final[type["FieldAssociationByDatatypeIndirectDiseaseId"]]
     f_evidence_count: Final[type["FieldAssociationByDatatypeIndirectEvidenceCount"]]
@@ -463,40 +463,40 @@ class FieldAssociationByDatatypeIndirectDatatypeId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByDatatypeIndirectDiseaseId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByDatatypeIndirectEvidenceCount(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByDatatypeIndirectScore(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByDatatypeIndirectTargetId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetAssociationByOverallDirect(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_disease_id: Final[type["FieldAssociationByOverallDirectDiseaseId"]]
     f_evidence_count: Final[type["FieldAssociationByOverallDirectEvidenceCount"]]
     f_score: Final[type["FieldAssociationByOverallDirectScore"]]
@@ -507,33 +507,33 @@ class FieldAssociationByOverallDirectDiseaseId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByOverallDirectEvidenceCount(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByOverallDirectScore(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByOverallDirectTargetId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetAssociationByOverallIndirect(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_disease_id: Final[type["FieldAssociationByOverallIndirectDiseaseId"]]
     f_evidence_count: Final[type["FieldAssociationByOverallIndirectEvidenceCount"]]
     f_score: Final[type["FieldAssociationByOverallIndirectScore"]]
@@ -544,33 +544,33 @@ class FieldAssociationByOverallIndirectDiseaseId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByOverallIndirectEvidenceCount(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByOverallIndirectScore(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldAssociationByOverallIndirectTargetId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetBaselineExpression(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_id: Final[type["FieldBaselineExpressionId"]]
     f_tissues: Final[type["FieldBaselineExpressionTissues"]]
 
@@ -579,14 +579,14 @@ class FieldBaselineExpressionId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldBaselineExpressionTissues(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldBaselineExpressionTissuesElement"]]
 
 
@@ -594,8 +594,8 @@ class FieldBaselineExpressionTissuesElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_anatomical_systems: Final[type["FieldBaselineExpressionTissuesElementAnatomicalSystems"]]
     f_efo_code: Final[type["FieldBaselineExpressionTissuesElementEfoCode"]]
     f_label: Final[type["FieldBaselineExpressionTissuesElementLabel"]]
@@ -608,7 +608,7 @@ class FieldBaselineExpressionTissuesElementAnatomicalSystems(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldBaselineExpressionTissuesElementAnatomicalSystemsElement"]]
 
 
@@ -616,28 +616,28 @@ class FieldBaselineExpressionTissuesElementAnatomicalSystemsElement(ScalarField)
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldBaselineExpressionTissuesElementEfoCode(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldBaselineExpressionTissuesElementLabel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldBaselineExpressionTissuesElementOrgans(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldBaselineExpressionTissuesElementOrgansElement"]]
 
 
@@ -645,15 +645,15 @@ class FieldBaselineExpressionTissuesElementOrgansElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldBaselineExpressionTissuesElementProtein(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_cell_type: Final[type["FieldBaselineExpressionTissuesElementProteinCellType"]]
     f_level: Final[type["FieldBaselineExpressionTissuesElementProteinLevel"]]
     f_reliability: Final[type["FieldBaselineExpressionTissuesElementProteinReliability"]]
@@ -663,7 +663,7 @@ class FieldBaselineExpressionTissuesElementProteinCellType(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldBaselineExpressionTissuesElementProteinCellTypeElement"]]
 
 
@@ -671,8 +671,8 @@ class FieldBaselineExpressionTissuesElementProteinCellTypeElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_level: Final[type["FieldBaselineExpressionTissuesElementProteinCellTypeElementLevel"]]
     f_name: Final[type["FieldBaselineExpressionTissuesElementProteinCellTypeElementName"]]
     f_reliability: Final[type["FieldBaselineExpressionTissuesElementProteinCellTypeElementReliability"]]
@@ -682,43 +682,43 @@ class FieldBaselineExpressionTissuesElementProteinCellTypeElementLevel(ScalarFie
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldBaselineExpressionTissuesElementProteinCellTypeElementName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldBaselineExpressionTissuesElementProteinCellTypeElementReliability(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldBaselineExpressionTissuesElementProteinLevel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldBaselineExpressionTissuesElementProteinReliability(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldBaselineExpressionTissuesElementRna(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_level: Final[type["FieldBaselineExpressionTissuesElementRnaLevel"]]
     f_unit: Final[type["FieldBaselineExpressionTissuesElementRnaUnit"]]
     f_value: Final[type["FieldBaselineExpressionTissuesElementRnaValue"]]
@@ -729,33 +729,33 @@ class FieldBaselineExpressionTissuesElementRnaLevel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldBaselineExpressionTissuesElementRnaUnit(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldBaselineExpressionTissuesElementRnaValue(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldBaselineExpressionTissuesElementRnaZscore(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetDiseaseToPhenotype(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_disease: Final[type["FieldDiseaseToPhenotypeDisease"]]
     f_evidence: Final[type["FieldDiseaseToPhenotypeEvidence"]]
     f_phenotype: Final[type["FieldDiseaseToPhenotypePhenotype"]]
@@ -765,14 +765,14 @@ class FieldDiseaseToPhenotypeDisease(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseaseToPhenotypeEvidence(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldDiseaseToPhenotypeEvidenceElement"]]
 
 
@@ -780,8 +780,8 @@ class FieldDiseaseToPhenotypeEvidenceElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_aspect: Final[type["FieldDiseaseToPhenotypeEvidenceElementAspect"]]
     f_bio_curation: Final[type["FieldDiseaseToPhenotypeEvidenceElementBioCuration"]]
     f_disease_from_source: Final[type["FieldDiseaseToPhenotypeEvidenceElementDiseaseFromSource"]]
@@ -802,56 +802,56 @@ class FieldDiseaseToPhenotypeEvidenceElementAspect(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseaseToPhenotypeEvidenceElementBioCuration(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseaseToPhenotypeEvidenceElementDiseaseFromSource(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseaseToPhenotypeEvidenceElementDiseaseFromSourceId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseaseToPhenotypeEvidenceElementDiseaseName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseaseToPhenotypeEvidenceElementEvidenceType(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseaseToPhenotypeEvidenceElementFrequency(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseaseToPhenotypeEvidenceElementModifiers(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldDiseaseToPhenotypeEvidenceElementModifiersElement"]]
 
 
@@ -859,14 +859,14 @@ class FieldDiseaseToPhenotypeEvidenceElementModifiersElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseaseToPhenotypeEvidenceElementOnset(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldDiseaseToPhenotypeEvidenceElementOnsetElement"]]
 
 
@@ -874,28 +874,28 @@ class FieldDiseaseToPhenotypeEvidenceElementOnsetElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseaseToPhenotypeEvidenceElementQualifier(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseaseToPhenotypeEvidenceElementQualifierNot(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseaseToPhenotypeEvidenceElementReferences(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldDiseaseToPhenotypeEvidenceElementReferencesElement"]]
 
 
@@ -903,33 +903,33 @@ class FieldDiseaseToPhenotypeEvidenceElementReferencesElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseaseToPhenotypeEvidenceElementResource(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseaseToPhenotypeEvidenceElementSex(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseaseToPhenotypePhenotype(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetDiseases(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_ancestors: Final[type["FieldDiseasesAncestors"]]
     f_children: Final[type["FieldDiseasesChildren"]]
     f_code: Final[type["FieldDiseasesCode"]]
@@ -952,7 +952,7 @@ class FieldDiseasesAncestors(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldDiseasesAncestorsElement"]]
 
 
@@ -960,14 +960,14 @@ class FieldDiseasesAncestorsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesChildren(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldDiseasesChildrenElement"]]
 
 
@@ -975,21 +975,21 @@ class FieldDiseasesChildrenElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesCode(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesDbXRefs(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldDiseasesDbXRefsElement"]]
 
 
@@ -997,14 +997,14 @@ class FieldDiseasesDbXRefsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesDescendants(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldDiseasesDescendantsElement"]]
 
 
@@ -1012,21 +1012,21 @@ class FieldDiseasesDescendantsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesDescription(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesDirectLocationIds(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldDiseasesDirectLocationIdsElement"]]
 
 
@@ -1034,21 +1034,21 @@ class FieldDiseasesDirectLocationIdsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesIndirectLocationIds(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldDiseasesIndirectLocationIdsElement"]]
 
 
@@ -1056,21 +1056,21 @@ class FieldDiseasesIndirectLocationIdsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesObsoleteTerms(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldDiseasesObsoleteTermsElement"]]
 
 
@@ -1078,15 +1078,15 @@ class FieldDiseasesObsoleteTermsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesOntology(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_is_therapeutic_area: Final[type["FieldDiseasesOntologyIsTherapeuticArea"]]
     f_leaf: Final[type["FieldDiseasesOntologyLeaf"]]
     f_sources: Final[type["FieldDiseasesOntologySources"]]
@@ -1096,22 +1096,22 @@ class FieldDiseasesOntologyIsTherapeuticArea(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesOntologyLeaf(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesOntologySources(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_name: Final[type["FieldDiseasesOntologySourcesName"]]
     f_url: Final[type["FieldDiseasesOntologySourcesUrl"]]
 
@@ -1120,21 +1120,21 @@ class FieldDiseasesOntologySourcesName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesOntologySourcesUrl(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesParents(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldDiseasesParentsElement"]]
 
 
@@ -1142,14 +1142,14 @@ class FieldDiseasesParentsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesSko(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldDiseasesSkoElement"]]
 
 
@@ -1157,15 +1157,15 @@ class FieldDiseasesSkoElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesSynonyms(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_has_broad_synonym: Final[type["FieldDiseasesSynonymsHasBroadSynonym"]]
     f_has_exact_synonym: Final[type["FieldDiseasesSynonymsHasExactSynonym"]]
     f_has_narrow_synonym: Final[type["FieldDiseasesSynonymsHasNarrowSynonym"]]
@@ -1176,7 +1176,7 @@ class FieldDiseasesSynonymsHasBroadSynonym(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldDiseasesSynonymsHasBroadSynonymElement"]]
 
 
@@ -1184,14 +1184,14 @@ class FieldDiseasesSynonymsHasBroadSynonymElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesSynonymsHasExactSynonym(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldDiseasesSynonymsHasExactSynonymElement"]]
 
 
@@ -1199,14 +1199,14 @@ class FieldDiseasesSynonymsHasExactSynonymElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesSynonymsHasNarrowSynonym(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldDiseasesSynonymsHasNarrowSynonymElement"]]
 
 
@@ -1214,14 +1214,14 @@ class FieldDiseasesSynonymsHasNarrowSynonymElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesSynonymsHasRelatedSynonym(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldDiseasesSynonymsHasRelatedSynonymElement"]]
 
 
@@ -1229,14 +1229,14 @@ class FieldDiseasesSynonymsHasRelatedSynonymElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDiseasesTherapeuticAreas(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldDiseasesTherapeuticAreasElement"]]
 
 
@@ -1244,12 +1244,12 @@ class FieldDiseasesTherapeuticAreasElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetDrugWarnings(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_chembl_ids: Final[type["FieldDrugWarningsChemblIds"]]
     f_country: Final[type["FieldDrugWarningsCountry"]]
     f_description: Final[type["FieldDrugWarningsDescription"]]
@@ -1265,7 +1265,7 @@ class FieldDrugWarningsChemblIds(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldDrugWarningsChemblIdsElement"]]
 
 
@@ -1273,42 +1273,42 @@ class FieldDrugWarningsChemblIdsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDrugWarningsCountry(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDrugWarningsDescription(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDrugWarningsId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDrugWarningsMeddraSocCode(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDrugWarningsReferences(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldDrugWarningsReferencesElement"]]
 
 
@@ -1316,8 +1316,8 @@ class FieldDrugWarningsReferencesElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_ref_id: Final[type["FieldDrugWarningsReferencesElementRefId"]]
     f_ref_type: Final[type["FieldDrugWarningsReferencesElementRefType"]]
     f_ref_url: Final[type["FieldDrugWarningsReferencesElementRefUrl"]]
@@ -1327,47 +1327,47 @@ class FieldDrugWarningsReferencesElementRefId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDrugWarningsReferencesElementRefType(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDrugWarningsReferencesElementRefUrl(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDrugWarningsToxicityClass(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDrugWarningsWarningType(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldDrugWarningsYear(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetEbisearchAssociations(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_approved_symbol: Final[type["FieldEbisearchAssociationsApprovedSymbol"]]
     f_disease_id: Final[type["FieldEbisearchAssociationsDiseaseId"]]
     f_name: Final[type["FieldEbisearchAssociationsName"]]
@@ -1379,40 +1379,40 @@ class FieldEbisearchAssociationsApprovedSymbol(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEbisearchAssociationsDiseaseId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEbisearchAssociationsName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEbisearchAssociationsScore(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEbisearchAssociationsTargetId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetEbisearchEvidence(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_approved_symbol: Final[type["FieldEbisearchEvidenceApprovedSymbol"]]
     f_disease_id: Final[type["FieldEbisearchEvidenceDiseaseId"]]
     f_name: Final[type["FieldEbisearchEvidenceName"]]
@@ -1424,40 +1424,40 @@ class FieldEbisearchEvidenceApprovedSymbol(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEbisearchEvidenceDiseaseId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEbisearchEvidenceName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEbisearchEvidenceScore(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEbisearchEvidenceTargetId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetEvidence(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_allele_origins: Final[type["FieldEvidenceAlleleOrigins"]]
     f_allelic_requirements: Final[type["FieldEvidenceAllelicRequirements"]]
     f_ancestry: Final[type["FieldEvidenceAncestry"]]
@@ -1544,7 +1544,7 @@ class FieldEvidenceAlleleOrigins(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldEvidenceAlleleOriginsElement"]]
 
 
@@ -1552,14 +1552,14 @@ class FieldEvidenceAlleleOriginsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceAllelicRequirements(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldEvidenceAllelicRequirementsElement"]]
 
 
@@ -1567,78 +1567,78 @@ class FieldEvidenceAllelicRequirementsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceAncestry(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceAncestryId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceBeta(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceBetaConfidenceIntervalLower(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceBetaConfidenceIntervalUpper(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceBiologicalModelAllelicComposition(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceBiologicalModelGeneticBackground(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceBiologicalModelId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceBiomarkerName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceBiomarkers(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_gene_expression: Final[type["FieldEvidenceBiomarkersGeneExpression"]]
     f_variant: Final[type["FieldEvidenceBiomarkersVariant"]]
 
@@ -1647,7 +1647,7 @@ class FieldEvidenceBiomarkersGeneExpression(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldEvidenceBiomarkersGeneExpressionElement"]]
 
 
@@ -1655,8 +1655,8 @@ class FieldEvidenceBiomarkersGeneExpressionElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_id: Final[type["FieldEvidenceBiomarkersGeneExpressionElementId"]]
     f_name: Final[type["FieldEvidenceBiomarkersGeneExpressionElementName"]]
 
@@ -1665,21 +1665,21 @@ class FieldEvidenceBiomarkersGeneExpressionElementId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceBiomarkersGeneExpressionElementName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceBiomarkersVariant(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldEvidenceBiomarkersVariantElement"]]
 
 
@@ -1687,8 +1687,8 @@ class FieldEvidenceBiomarkersVariantElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_functional_consequence_id: Final[type["FieldEvidenceBiomarkersVariantElementFunctionalConsequenceId"]]
     f_id: Final[type["FieldEvidenceBiomarkersVariantElementId"]]
     f_name: Final[type["FieldEvidenceBiomarkersVariantElementName"]]
@@ -1698,28 +1698,28 @@ class FieldEvidenceBiomarkersVariantElementFunctionalConsequenceId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceBiomarkersVariantElementId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceBiomarkersVariantElementName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceBiosamplesFromSource(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldEvidenceBiosamplesFromSourceElement"]]
 
 
@@ -1727,21 +1727,21 @@ class FieldEvidenceBiosamplesFromSourceElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceClinicalPhase(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceClinicalSignificances(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldEvidenceClinicalSignificancesElement"]]
 
 
@@ -1749,35 +1749,35 @@ class FieldEvidenceClinicalSignificancesElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceClinicalStatus(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceCohortDescription(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceCohortId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceCohortPhenotypes(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldEvidenceCohortPhenotypesElement"]]
 
 
@@ -1785,49 +1785,49 @@ class FieldEvidenceCohortPhenotypesElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceCohortShortName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceConfidence(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceContrast(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceDatasourceId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceDatatypeId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceDiseaseCellLines(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldEvidenceDiseaseCellLinesElement"]]
 
 
@@ -1835,8 +1835,8 @@ class FieldEvidenceDiseaseCellLinesElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_id: Final[type["FieldEvidenceDiseaseCellLinesElementId"]]
     f_name: Final[type["FieldEvidenceDiseaseCellLinesElementName"]]
     f_tissue: Final[type["FieldEvidenceDiseaseCellLinesElementTissue"]]
@@ -1847,63 +1847,63 @@ class FieldEvidenceDiseaseCellLinesElementId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceDiseaseCellLinesElementName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceDiseaseCellLinesElementTissue(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceDiseaseCellLinesElementTissueId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceDiseaseFromSource(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceDiseaseFromSourceId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceDiseaseFromSourceMappedId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceDiseaseId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceDiseaseModelAssociatedHumanPhenotypes(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldEvidenceDiseaseModelAssociatedHumanPhenotypesElement"]]
 
 
@@ -1911,8 +1911,8 @@ class FieldEvidenceDiseaseModelAssociatedHumanPhenotypesElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_id: Final[type["FieldEvidenceDiseaseModelAssociatedHumanPhenotypesElementId"]]
     f_label: Final[type["FieldEvidenceDiseaseModelAssociatedHumanPhenotypesElementLabel"]]
 
@@ -1921,21 +1921,21 @@ class FieldEvidenceDiseaseModelAssociatedHumanPhenotypesElementId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceDiseaseModelAssociatedHumanPhenotypesElementLabel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceDiseaseModelAssociatedModelPhenotypes(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldEvidenceDiseaseModelAssociatedModelPhenotypesElement"]]
 
 
@@ -1943,8 +1943,8 @@ class FieldEvidenceDiseaseModelAssociatedModelPhenotypesElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_id: Final[type["FieldEvidenceDiseaseModelAssociatedModelPhenotypesElementId"]]
     f_label: Final[type["FieldEvidenceDiseaseModelAssociatedModelPhenotypesElementLabel"]]
 
@@ -1953,49 +1953,49 @@ class FieldEvidenceDiseaseModelAssociatedModelPhenotypesElementId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceDiseaseModelAssociatedModelPhenotypesElementLabel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceDrugFromSource(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceDrugId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceDrugResponse(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceLiterature(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldEvidenceLiteratureElement"]]
 
 
@@ -2003,28 +2003,28 @@ class FieldEvidenceLiteratureElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceLog2FoldChangePercentileRank(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceLog2FoldChangeValue(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceMutatedSamples(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldEvidenceMutatedSamplesElement"]]
 
 
@@ -2032,8 +2032,8 @@ class FieldEvidenceMutatedSamplesElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_functional_consequence_id: Final[type["FieldEvidenceMutatedSamplesElementFunctionalConsequenceId"]]
     f_number_mutated_samples: Final[type["FieldEvidenceMutatedSamplesElementNumberMutatedSamples"]]
     f_number_samples_tested: Final[type["FieldEvidenceMutatedSamplesElementNumberSamplesTested"]]
@@ -2044,70 +2044,70 @@ class FieldEvidenceMutatedSamplesElementFunctionalConsequenceId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceMutatedSamplesElementNumberMutatedSamples(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceMutatedSamplesElementNumberSamplesTested(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceMutatedSamplesElementNumberSamplesWithMutationType(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceOddsRatio(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceOddsRatioConfidenceIntervalLower(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceOddsRatioConfidenceIntervalUpper(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidencePValueExponent(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidencePValueMantissa(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidencePathways(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldEvidencePathwaysElement"]]
 
 
@@ -2115,8 +2115,8 @@ class FieldEvidencePathwaysElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_id: Final[type["FieldEvidencePathwaysElementId"]]
     f_name: Final[type["FieldEvidencePathwaysElementName"]]
 
@@ -2125,21 +2125,21 @@ class FieldEvidencePathwaysElementId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidencePathwaysElementName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidencePmcIds(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldEvidencePmcIdsElement"]]
 
 
@@ -2147,63 +2147,63 @@ class FieldEvidencePmcIdsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceProjectId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidencePublicationFirstAuthor(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidencePublicationYear(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceReactionId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceReactionName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceResourceScore(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceScore(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceSex(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldEvidenceSexElement"]]
 
 
@@ -2211,14 +2211,14 @@ class FieldEvidenceSexElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceSignificantDriverMethods(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldEvidenceSignificantDriverMethodsElement"]]
 
 
@@ -2226,84 +2226,84 @@ class FieldEvidenceSignificantDriverMethodsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceSourceId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceStatisticalMethod(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceStatisticalMethodOverview(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceStudyCases(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceStudyCasesWithQualifyingVariants(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceStudyId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceStudyOverview(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceStudySampleSize(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceStudyStartDate(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceStudyStopReason(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceStudyStopReasonCategories(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldEvidenceStudyStopReasonCategoriesElement"]]
 
 
@@ -2311,63 +2311,63 @@ class FieldEvidenceStudyStopReasonCategoriesElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceTargetFromSource(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceTargetFromSourceId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceTargetId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceTargetInModel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceTargetInModelEnsemblId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceTargetInModelMgiId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceTargetModulation(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceTextMiningSentences(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldEvidenceTextMiningSentencesElement"]]
 
 
@@ -2375,8 +2375,8 @@ class FieldEvidenceTextMiningSentencesElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_d_end: Final[type["FieldEvidenceTextMiningSentencesElementDEnd"]]
     f_d_start: Final[type["FieldEvidenceTextMiningSentencesElementDStart"]]
     f_section: Final[type["FieldEvidenceTextMiningSentencesElementSection"]]
@@ -2389,49 +2389,49 @@ class FieldEvidenceTextMiningSentencesElementDEnd(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceTextMiningSentencesElementDStart(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceTextMiningSentencesElementSection(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceTextMiningSentencesElementTEnd(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceTextMiningSentencesElementTStart(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceTextMiningSentencesElementText(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceUrls(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldEvidenceUrlsElement"]]
 
 
@@ -2439,8 +2439,8 @@ class FieldEvidenceUrlsElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_nice_name: Final[type["FieldEvidenceUrlsElementNiceName"]]
     f_url: Final[type["FieldEvidenceUrlsElementUrl"]]
 
@@ -2449,21 +2449,21 @@ class FieldEvidenceUrlsElementNiceName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceUrlsElementUrl(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceVariantAminoacidDescriptions(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldEvidenceVariantAminoacidDescriptionsElement"]]
 
 
@@ -2471,40 +2471,40 @@ class FieldEvidenceVariantAminoacidDescriptionsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceVariantFunctionalConsequenceId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceVariantHgvsId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceVariantId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldEvidenceVariantRsId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetGo(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_id: Final[type["FieldGoId"]]
     f_name: Final[type["FieldGoName"]]
 
@@ -2513,19 +2513,19 @@ class FieldGoId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldGoName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetHpo(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_db_x_refs: Final[type["FieldHpoDbXRefs"]]
     f_description: Final[type["FieldHpoDescription"]]
     f_id: Final[type["FieldHpoId"]]
@@ -2539,7 +2539,7 @@ class FieldHpoDbXRefs(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldHpoDbXRefsElement"]]
 
 
@@ -2547,35 +2547,35 @@ class FieldHpoDbXRefsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldHpoDescription(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldHpoId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldHpoName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldHpoNamespace(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldHpoNamespaceElement"]]
 
 
@@ -2583,14 +2583,14 @@ class FieldHpoNamespaceElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldHpoObsoleteTerms(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldHpoObsoleteTermsElement"]]
 
 
@@ -2598,14 +2598,14 @@ class FieldHpoObsoleteTermsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldHpoParents(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldHpoParentsElement"]]
 
 
@@ -2613,12 +2613,12 @@ class FieldHpoParentsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetIndication(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_approved_indications: Final[type["FieldIndicationApprovedIndications"]]
     f_id: Final[type["FieldIndicationId"]]
     f_indication_count: Final[type["FieldIndicationIndicationCount"]]
@@ -2629,7 +2629,7 @@ class FieldIndicationApprovedIndications(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldIndicationApprovedIndicationsElement"]]
 
 
@@ -2637,28 +2637,28 @@ class FieldIndicationApprovedIndicationsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldIndicationId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldIndicationIndicationCount(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldIndicationIndications(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldIndicationIndicationsElement"]]
 
 
@@ -2666,8 +2666,8 @@ class FieldIndicationIndicationsElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_disease: Final[type["FieldIndicationIndicationsElementDisease"]]
     f_efo_name: Final[type["FieldIndicationIndicationsElementEfoName"]]
     f_max_phase_for_indication: Final[type["FieldIndicationIndicationsElementMaxPhaseForIndication"]]
@@ -2678,28 +2678,28 @@ class FieldIndicationIndicationsElementDisease(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldIndicationIndicationsElementEfoName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldIndicationIndicationsElementMaxPhaseForIndication(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldIndicationIndicationsElementReferences(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldIndicationIndicationsElementReferencesElement"]]
 
 
@@ -2707,8 +2707,8 @@ class FieldIndicationIndicationsElementReferencesElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_ids: Final[type["FieldIndicationIndicationsElementReferencesElementIds"]]
     f_source: Final[type["FieldIndicationIndicationsElementReferencesElementSource"]]
 
@@ -2717,7 +2717,7 @@ class FieldIndicationIndicationsElementReferencesElementIds(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldIndicationIndicationsElementReferencesElementIdsElement"]]
 
 
@@ -2725,19 +2725,19 @@ class FieldIndicationIndicationsElementReferencesElementIdsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldIndicationIndicationsElementReferencesElementSource(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetInteraction(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_count: Final[type["FieldInteractionCount"]]
     f_int_a: Final[type["FieldInteractionIntA"]]
     f_int_a_biological_role: Final[type["FieldInteractionIntABiologicalRole"]]
@@ -2755,57 +2755,57 @@ class FieldInteractionCount(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionIntA(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionIntABiologicalRole(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionIntB(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionIntBBiologicalRole(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionScoring(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionSourceDatabase(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionSpeciesA(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_mnemonic: Final[type["FieldInteractionSpeciesAMnemonic"]]
     f_scientific_name: Final[type["FieldInteractionSpeciesAScientificName"]]
     f_taxon_id: Final[type["FieldInteractionSpeciesATaxonId"]]
@@ -2815,29 +2815,29 @@ class FieldInteractionSpeciesAMnemonic(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionSpeciesAScientificName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionSpeciesATaxonId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionSpeciesB(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_mnemonic: Final[type["FieldInteractionSpeciesBMnemonic"]]
     f_scientific_name: Final[type["FieldInteractionSpeciesBScientificName"]]
     f_taxon_id: Final[type["FieldInteractionSpeciesBTaxonId"]]
@@ -2847,40 +2847,40 @@ class FieldInteractionSpeciesBMnemonic(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionSpeciesBScientificName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionSpeciesBTaxonId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionTargetA(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionTargetB(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetInteractionEvidence(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_evidence_score: Final[type["FieldInteractionEvidenceEvidenceScore"]]
     f_expansion_method_mi_identifier: Final[type["FieldInteractionEvidenceExpansionMethodMiIdentifier"]]
     f_expansion_method_short_name: Final[type["FieldInteractionEvidenceExpansionMethodShortName"]]
@@ -2916,106 +2916,106 @@ class FieldInteractionEvidenceEvidenceScore(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceExpansionMethodMiIdentifier(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceExpansionMethodShortName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceHostOrganismScientificName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceHostOrganismTaxId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceIntA(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceIntABiologicalRole(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceIntASource(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceIntB(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceIntBBiologicalRole(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceIntBSource(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceInteractionDetectionMethodMiIdentifier(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceInteractionDetectionMethodShortName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceInteractionIdentifier(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceInteractionResources(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_database_version: Final[type["FieldInteractionEvidenceInteractionResourcesDatabaseVersion"]]
     f_source_database: Final[type["FieldInteractionEvidenceInteractionResourcesSourceDatabase"]]
 
@@ -3024,42 +3024,42 @@ class FieldInteractionEvidenceInteractionResourcesDatabaseVersion(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceInteractionResourcesSourceDatabase(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceInteractionScore(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceInteractionTypeMiIdentifier(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceInteractionTypeShortName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceParticipantDetectionMethodA(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldInteractionEvidenceParticipantDetectionMethodAElement"]]
 
 
@@ -3067,8 +3067,8 @@ class FieldInteractionEvidenceParticipantDetectionMethodAElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_mi_identifier: Final[type["FieldInteractionEvidenceParticipantDetectionMethodAElementMiIdentifier"]]
     f_short_name: Final[type["FieldInteractionEvidenceParticipantDetectionMethodAElementShortName"]]
 
@@ -3077,21 +3077,21 @@ class FieldInteractionEvidenceParticipantDetectionMethodAElementMiIdentifier(Sca
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceParticipantDetectionMethodAElementShortName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceParticipantDetectionMethodB(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldInteractionEvidenceParticipantDetectionMethodBElement"]]
 
 
@@ -3099,8 +3099,8 @@ class FieldInteractionEvidenceParticipantDetectionMethodBElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_mi_identifier: Final[type["FieldInteractionEvidenceParticipantDetectionMethodBElementMiIdentifier"]]
     f_short_name: Final[type["FieldInteractionEvidenceParticipantDetectionMethodBElementShortName"]]
 
@@ -3109,29 +3109,29 @@ class FieldInteractionEvidenceParticipantDetectionMethodBElementMiIdentifier(Sca
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceParticipantDetectionMethodBElementShortName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidencePubmedId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceSpeciesA(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_mnemonic: Final[type["FieldInteractionEvidenceSpeciesAMnemonic"]]
     f_scientific_name: Final[type["FieldInteractionEvidenceSpeciesAScientificName"]]
     f_taxon_id: Final[type["FieldInteractionEvidenceSpeciesATaxonId"]]
@@ -3141,29 +3141,29 @@ class FieldInteractionEvidenceSpeciesAMnemonic(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceSpeciesAScientificName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceSpeciesATaxonId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceSpeciesB(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_mnemonic: Final[type["FieldInteractionEvidenceSpeciesBMnemonic"]]
     f_scientific_name: Final[type["FieldInteractionEvidenceSpeciesBScientificName"]]
     f_taxon_id: Final[type["FieldInteractionEvidenceSpeciesBTaxonId"]]
@@ -3173,40 +3173,40 @@ class FieldInteractionEvidenceSpeciesBMnemonic(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceSpeciesBScientificName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceSpeciesBTaxonId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceTargetA(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldInteractionEvidenceTargetB(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetKnownDrugsAggregated(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_ancestors: Final[type["FieldKnownDrugsAggregatedAncestors"]]
     f_approved_name: Final[type["FieldKnownDrugsAggregatedApprovedName"]]
     f_approved_symbol: Final[type["FieldKnownDrugsAggregatedApprovedSymbol"]]
@@ -3230,7 +3230,7 @@ class FieldKnownDrugsAggregatedAncestors(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldKnownDrugsAggregatedAncestorsElement"]]
 
 
@@ -3238,84 +3238,84 @@ class FieldKnownDrugsAggregatedAncestorsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldKnownDrugsAggregatedApprovedName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldKnownDrugsAggregatedApprovedSymbol(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldKnownDrugsAggregatedDiseaseId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldKnownDrugsAggregatedDrugId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldKnownDrugsAggregatedDrugType(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldKnownDrugsAggregatedLabel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldKnownDrugsAggregatedMechanismOfAction(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldKnownDrugsAggregatedPhase(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldKnownDrugsAggregatedPrefName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldKnownDrugsAggregatedStatus(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldKnownDrugsAggregatedSynonyms(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldKnownDrugsAggregatedSynonymsElement"]]
 
 
@@ -3323,14 +3323,14 @@ class FieldKnownDrugsAggregatedSynonymsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldKnownDrugsAggregatedTargetClass(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldKnownDrugsAggregatedTargetClassElement"]]
 
 
@@ -3338,28 +3338,28 @@ class FieldKnownDrugsAggregatedTargetClassElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldKnownDrugsAggregatedTargetId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldKnownDrugsAggregatedTargetName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldKnownDrugsAggregatedTradeNames(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldKnownDrugsAggregatedTradeNamesElement"]]
 
 
@@ -3367,14 +3367,14 @@ class FieldKnownDrugsAggregatedTradeNamesElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldKnownDrugsAggregatedUrls(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldKnownDrugsAggregatedUrlsElement"]]
 
 
@@ -3382,8 +3382,8 @@ class FieldKnownDrugsAggregatedUrlsElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_nice_name: Final[type["FieldKnownDrugsAggregatedUrlsElementNiceName"]]
     f_url: Final[type["FieldKnownDrugsAggregatedUrlsElementUrl"]]
 
@@ -3392,19 +3392,19 @@ class FieldKnownDrugsAggregatedUrlsElementNiceName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldKnownDrugsAggregatedUrlsElementUrl(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetMechanismOfAction(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_action_type: Final[type["FieldMechanismOfActionActionType"]]
     f_chembl_ids: Final[type["FieldMechanismOfActionChemblIds"]]
     f_mechanism_of_action: Final[type["FieldMechanismOfActionMechanismOfAction"]]
@@ -3418,14 +3418,14 @@ class FieldMechanismOfActionActionType(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMechanismOfActionChemblIds(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldMechanismOfActionChemblIdsElement"]]
 
 
@@ -3433,21 +3433,21 @@ class FieldMechanismOfActionChemblIdsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMechanismOfActionMechanismOfAction(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMechanismOfActionReferences(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldMechanismOfActionReferencesElement"]]
 
 
@@ -3455,8 +3455,8 @@ class FieldMechanismOfActionReferencesElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_ids: Final[type["FieldMechanismOfActionReferencesElementIds"]]
     f_source: Final[type["FieldMechanismOfActionReferencesElementSource"]]
     f_urls: Final[type["FieldMechanismOfActionReferencesElementUrls"]]
@@ -3466,7 +3466,7 @@ class FieldMechanismOfActionReferencesElementIds(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldMechanismOfActionReferencesElementIdsElement"]]
 
 
@@ -3474,21 +3474,21 @@ class FieldMechanismOfActionReferencesElementIdsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMechanismOfActionReferencesElementSource(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMechanismOfActionReferencesElementUrls(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldMechanismOfActionReferencesElementUrlsElement"]]
 
 
@@ -3496,28 +3496,28 @@ class FieldMechanismOfActionReferencesElementUrlsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMechanismOfActionTargetName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMechanismOfActionTargetType(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMechanismOfActionTargets(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldMechanismOfActionTargetsElement"]]
 
 
@@ -3525,12 +3525,12 @@ class FieldMechanismOfActionTargetsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetMolecule(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_black_box_warning: Final[type["FieldMoleculeBlackBoxWarning"]]
     f_canonical_smiles: Final[type["FieldMoleculeCanonicalSmiles"]]
     f_child_chembl_ids: Final[type["FieldMoleculeChildChemblIds"]]
@@ -3556,21 +3556,21 @@ class FieldMoleculeBlackBoxWarning(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeCanonicalSmiles(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeChildChemblIds(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldMoleculeChildChemblIdsElement"]]
 
 
@@ -3578,14 +3578,14 @@ class FieldMoleculeChildChemblIdsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeCrossReferences(MapField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     key: Final[type["FieldMoleculeCrossReferencesKey"]]
     value: Final[type["FieldMoleculeCrossReferencesValue"]]
 
@@ -3594,14 +3594,14 @@ class FieldMoleculeCrossReferencesKey(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeCrossReferencesValue(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldMoleculeCrossReferencesValueElement"]]
 
 
@@ -3609,57 +3609,57 @@ class FieldMoleculeCrossReferencesValueElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeDescription(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeDrugType(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeHasBeenWithdrawn(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeInchiKey(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeIsApproved(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeLinkedDiseases(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_count: Final[type["FieldMoleculeLinkedDiseasesCount"]]
     f_rows: Final[type["FieldMoleculeLinkedDiseasesRows"]]
 
@@ -3668,14 +3668,14 @@ class FieldMoleculeLinkedDiseasesCount(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeLinkedDiseasesRows(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldMoleculeLinkedDiseasesRowsElement"]]
 
 
@@ -3683,15 +3683,15 @@ class FieldMoleculeLinkedDiseasesRowsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeLinkedTargets(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_count: Final[type["FieldMoleculeLinkedTargetsCount"]]
     f_rows: Final[type["FieldMoleculeLinkedTargetsRows"]]
 
@@ -3700,14 +3700,14 @@ class FieldMoleculeLinkedTargetsCount(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeLinkedTargetsRows(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldMoleculeLinkedTargetsRowsElement"]]
 
 
@@ -3715,35 +3715,35 @@ class FieldMoleculeLinkedTargetsRowsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeMaximumClinicalTrialPhase(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeParentId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeSynonyms(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldMoleculeSynonymsElement"]]
 
 
@@ -3751,14 +3751,14 @@ class FieldMoleculeSynonymsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeTradeNames(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldMoleculeTradeNamesElement"]]
 
 
@@ -3766,15 +3766,15 @@ class FieldMoleculeTradeNamesElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeWithdrawnNotice(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_classes: Final[type["FieldMoleculeWithdrawnNoticeClasses"]]
     f_countries: Final[type["FieldMoleculeWithdrawnNoticeCountries"]]
     f_year: Final[type["FieldMoleculeWithdrawnNoticeYear"]]
@@ -3784,7 +3784,7 @@ class FieldMoleculeWithdrawnNoticeClasses(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldMoleculeWithdrawnNoticeClassesElement"]]
 
 
@@ -3792,14 +3792,14 @@ class FieldMoleculeWithdrawnNoticeClassesElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeWithdrawnNoticeCountries(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldMoleculeWithdrawnNoticeCountriesElement"]]
 
 
@@ -3807,26 +3807,26 @@ class FieldMoleculeWithdrawnNoticeCountriesElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeWithdrawnNoticeYear(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMoleculeYearOfFirstApproval(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetMousePhenotypes(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_biological_models: Final[type["FieldMousePhenotypesBiologicalModels"]]
     f_model_phenotype_classes: Final[type["FieldMousePhenotypesModelPhenotypeClasses"]]
     f_model_phenotype_id: Final[type["FieldMousePhenotypesModelPhenotypeId"]]
@@ -3841,7 +3841,7 @@ class FieldMousePhenotypesBiologicalModels(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldMousePhenotypesBiologicalModelsElement"]]
 
 
@@ -3849,8 +3849,8 @@ class FieldMousePhenotypesBiologicalModelsElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_allelic_composition: Final[type["FieldMousePhenotypesBiologicalModelsElementAllelicComposition"]]
     f_genetic_background: Final[type["FieldMousePhenotypesBiologicalModelsElementGeneticBackground"]]
     f_id: Final[type["FieldMousePhenotypesBiologicalModelsElementId"]]
@@ -3861,28 +3861,28 @@ class FieldMousePhenotypesBiologicalModelsElementAllelicComposition(ScalarField)
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMousePhenotypesBiologicalModelsElementGeneticBackground(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMousePhenotypesBiologicalModelsElementId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMousePhenotypesBiologicalModelsElementLiterature(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldMousePhenotypesBiologicalModelsElementLiteratureElement"]]
 
 
@@ -3890,14 +3890,14 @@ class FieldMousePhenotypesBiologicalModelsElementLiteratureElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMousePhenotypesModelPhenotypeClasses(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldMousePhenotypesModelPhenotypeClassesElement"]]
 
 
@@ -3905,8 +3905,8 @@ class FieldMousePhenotypesModelPhenotypeClassesElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_id: Final[type["FieldMousePhenotypesModelPhenotypeClassesElementId"]]
     f_label: Final[type["FieldMousePhenotypesModelPhenotypeClassesElementLabel"]]
 
@@ -3915,61 +3915,61 @@ class FieldMousePhenotypesModelPhenotypeClassesElementId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMousePhenotypesModelPhenotypeClassesElementLabel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMousePhenotypesModelPhenotypeId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMousePhenotypesModelPhenotypeLabel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMousePhenotypesTargetFromSourceId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMousePhenotypesTargetInModel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMousePhenotypesTargetInModelEnsemblId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldMousePhenotypesTargetInModelMgiId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetReactome(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_ancestors: Final[type["FieldReactomeAncestors"]]
     f_children: Final[type["FieldReactomeChildren"]]
     f_descendants: Final[type["FieldReactomeDescendants"]]
@@ -3983,7 +3983,7 @@ class FieldReactomeAncestors(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldReactomeAncestorsElement"]]
 
 
@@ -3991,14 +3991,14 @@ class FieldReactomeAncestorsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldReactomeChildren(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldReactomeChildrenElement"]]
 
 
@@ -4006,14 +4006,14 @@ class FieldReactomeChildrenElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldReactomeDescendants(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldReactomeDescendantsElement"]]
 
 
@@ -4021,28 +4021,28 @@ class FieldReactomeDescendantsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldReactomeId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldReactomeLabel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldReactomeParents(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldReactomeParentsElement"]]
 
 
@@ -4050,14 +4050,14 @@ class FieldReactomeParentsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldReactomePath(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldReactomePathElement"]]
 
 
@@ -4065,7 +4065,7 @@ class FieldReactomePathElement(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldReactomePathElementElement"]]
 
 
@@ -4073,12 +4073,12 @@ class FieldReactomePathElementElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetSearchDisease(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_category: Final[type["FieldSearchDiseaseCategory"]]
     f_description: Final[type["FieldSearchDiseaseDescription"]]
     f_entity: Final[type["FieldSearchDiseaseEntity"]]
@@ -4097,7 +4097,7 @@ class FieldSearchDiseaseCategory(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchDiseaseCategoryElement"]]
 
 
@@ -4105,35 +4105,35 @@ class FieldSearchDiseaseCategoryElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDiseaseDescription(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDiseaseEntity(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDiseaseId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDiseaseKeywords(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchDiseaseKeywordsElement"]]
 
 
@@ -4141,28 +4141,28 @@ class FieldSearchDiseaseKeywordsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDiseaseMultiplier(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDiseaseName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDiseaseNgrams(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchDiseaseNgramsElement"]]
 
 
@@ -4170,14 +4170,14 @@ class FieldSearchDiseaseNgramsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDiseasePrefixes(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchDiseasePrefixesElement"]]
 
 
@@ -4185,14 +4185,14 @@ class FieldSearchDiseasePrefixesElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDiseaseTerms(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchDiseaseTermsElement"]]
 
 
@@ -4200,14 +4200,14 @@ class FieldSearchDiseaseTermsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDiseaseTerms25(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchDiseaseTerms25Element"]]
 
 
@@ -4215,14 +4215,14 @@ class FieldSearchDiseaseTerms25Element(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDiseaseTerms5(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchDiseaseTerms5Element"]]
 
 
@@ -4230,12 +4230,12 @@ class FieldSearchDiseaseTerms5Element(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetSearchDrug(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_category: Final[type["FieldSearchDrugCategory"]]
     f_description: Final[type["FieldSearchDrugDescription"]]
     f_entity: Final[type["FieldSearchDrugEntity"]]
@@ -4254,7 +4254,7 @@ class FieldSearchDrugCategory(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchDrugCategoryElement"]]
 
 
@@ -4262,35 +4262,35 @@ class FieldSearchDrugCategoryElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDrugDescription(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDrugEntity(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDrugId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDrugKeywords(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchDrugKeywordsElement"]]
 
 
@@ -4298,28 +4298,28 @@ class FieldSearchDrugKeywordsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDrugMultiplier(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDrugName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDrugNgrams(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchDrugNgramsElement"]]
 
 
@@ -4327,14 +4327,14 @@ class FieldSearchDrugNgramsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDrugPrefixes(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchDrugPrefixesElement"]]
 
 
@@ -4342,14 +4342,14 @@ class FieldSearchDrugPrefixesElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDrugTerms(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchDrugTermsElement"]]
 
 
@@ -4357,14 +4357,14 @@ class FieldSearchDrugTermsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDrugTerms25(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchDrugTerms25Element"]]
 
 
@@ -4372,14 +4372,14 @@ class FieldSearchDrugTerms25Element(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchDrugTerms5(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchDrugTerms5Element"]]
 
 
@@ -4387,12 +4387,12 @@ class FieldSearchDrugTerms5Element(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetSearchTarget(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_category: Final[type["FieldSearchTargetCategory"]]
     f_description: Final[type["FieldSearchTargetDescription"]]
     f_entity: Final[type["FieldSearchTargetEntity"]]
@@ -4411,7 +4411,7 @@ class FieldSearchTargetCategory(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchTargetCategoryElement"]]
 
 
@@ -4419,35 +4419,35 @@ class FieldSearchTargetCategoryElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchTargetDescription(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchTargetEntity(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchTargetId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchTargetKeywords(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchTargetKeywordsElement"]]
 
 
@@ -4455,28 +4455,28 @@ class FieldSearchTargetKeywordsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchTargetMultiplier(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchTargetName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchTargetNgrams(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchTargetNgramsElement"]]
 
 
@@ -4484,14 +4484,14 @@ class FieldSearchTargetNgramsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchTargetPrefixes(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchTargetPrefixesElement"]]
 
 
@@ -4499,14 +4499,14 @@ class FieldSearchTargetPrefixesElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchTargetTerms(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchTargetTermsElement"]]
 
 
@@ -4514,14 +4514,14 @@ class FieldSearchTargetTermsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchTargetTerms25(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchTargetTerms25Element"]]
 
 
@@ -4529,14 +4529,14 @@ class FieldSearchTargetTerms25Element(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSearchTargetTerms5(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldSearchTargetTerms5Element"]]
 
 
@@ -4544,12 +4544,12 @@ class FieldSearchTargetTerms5Element(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetSignificantAdverseDrugReactions(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_chembl_id: Final[type["FieldSignificantAdverseDrugReactionsChemblId"]]
     f_count: Final[type["FieldSignificantAdverseDrugReactionsCount"]]
     f_critval: Final[type["FieldSignificantAdverseDrugReactionsCritval"]]
@@ -4562,47 +4562,47 @@ class FieldSignificantAdverseDrugReactionsChemblId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSignificantAdverseDrugReactionsCount(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSignificantAdverseDrugReactionsCritval(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSignificantAdverseDrugReactionsEvent(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSignificantAdverseDrugReactionsLlr(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSignificantAdverseDrugReactionsMeddraCode(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetSignificantAdverseTargetReactions(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_count: Final[type["FieldSignificantAdverseTargetReactionsCount"]]
     f_critval: Final[type["FieldSignificantAdverseTargetReactionsCritval"]]
     f_event: Final[type["FieldSignificantAdverseTargetReactionsEvent"]]
@@ -4615,47 +4615,47 @@ class FieldSignificantAdverseTargetReactionsCount(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSignificantAdverseTargetReactionsCritval(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSignificantAdverseTargetReactionsEvent(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSignificantAdverseTargetReactionsLlr(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSignificantAdverseTargetReactionsMeddraCode(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldSignificantAdverseTargetReactionsTargetId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class DatasetTargets(Dataset):
     id: Final[str]
-    fields: Final[Sequence[type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_alternative_genes: Final[type["FieldTargetsAlternativeGenes"]]
     f_approved_name: Final[type["FieldTargetsApprovedName"]]
     f_approved_symbol: Final[type["FieldTargetsApprovedSymbol"]]
@@ -4690,7 +4690,7 @@ class FieldTargetsAlternativeGenes(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsAlternativeGenesElement"]]
 
 
@@ -4698,35 +4698,35 @@ class FieldTargetsAlternativeGenesElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsApprovedName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsApprovedSymbol(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsBiotype(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsCanonicalExons(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsCanonicalExonsElement"]]
 
 
@@ -4734,15 +4734,15 @@ class FieldTargetsCanonicalExonsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsCanonicalTranscript(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_chromosome: Final[type["FieldTargetsCanonicalTranscriptChromosome"]]
     f_end: Final[type["FieldTargetsCanonicalTranscriptEnd"]]
     f_id: Final[type["FieldTargetsCanonicalTranscriptId"]]
@@ -4754,42 +4754,42 @@ class FieldTargetsCanonicalTranscriptChromosome(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsCanonicalTranscriptEnd(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsCanonicalTranscriptId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsCanonicalTranscriptStart(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsCanonicalTranscriptStrand(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsChemicalProbes(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsChemicalProbesElement"]]
 
 
@@ -4797,8 +4797,8 @@ class FieldTargetsChemicalProbesElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_control: Final[type["FieldTargetsChemicalProbesElementControl"]]
     f_drug_id: Final[type["FieldTargetsChemicalProbesElementDrugId"]]
     f_id: Final[type["FieldTargetsChemicalProbesElementId"]]
@@ -4817,35 +4817,35 @@ class FieldTargetsChemicalProbesElementControl(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsChemicalProbesElementDrugId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsChemicalProbesElementId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsChemicalProbesElementIsHighQuality(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsChemicalProbesElementMechanismOfAction(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsChemicalProbesElementMechanismOfActionElement"]]
 
 
@@ -4853,14 +4853,14 @@ class FieldTargetsChemicalProbesElementMechanismOfActionElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsChemicalProbesElementOrigin(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsChemicalProbesElementOriginElement"]]
 
 
@@ -4868,49 +4868,49 @@ class FieldTargetsChemicalProbesElementOriginElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsChemicalProbesElementProbeMinerScore(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsChemicalProbesElementProbesDrugsScore(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsChemicalProbesElementScoreInCells(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsChemicalProbesElementScoreInOrganisms(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsChemicalProbesElementTargetFromSourceId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsChemicalProbesElementUrls(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsChemicalProbesElementUrlsElement"]]
 
 
@@ -4918,8 +4918,8 @@ class FieldTargetsChemicalProbesElementUrlsElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_nice_name: Final[type["FieldTargetsChemicalProbesElementUrlsElementNiceName"]]
     f_url: Final[type["FieldTargetsChemicalProbesElementUrlsElementUrl"]]
 
@@ -4928,21 +4928,21 @@ class FieldTargetsChemicalProbesElementUrlsElementNiceName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsChemicalProbesElementUrlsElementUrl(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsConstraint(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsConstraintElement"]]
 
 
@@ -4950,8 +4950,8 @@ class FieldTargetsConstraintElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_constraint_type: Final[type["FieldTargetsConstraintElementConstraintType"]]
     f_exp: Final[type["FieldTargetsConstraintElementExp"]]
     f_obs: Final[type["FieldTargetsConstraintElementObs"]]
@@ -4968,77 +4968,77 @@ class FieldTargetsConstraintElementConstraintType(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsConstraintElementExp(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsConstraintElementObs(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsConstraintElementOe(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsConstraintElementOeLower(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsConstraintElementOeUpper(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsConstraintElementScore(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsConstraintElementUpperBin(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsConstraintElementUpperBin6(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsConstraintElementUpperRank(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsDbXrefs(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsDbXrefsElement"]]
 
 
@@ -5046,8 +5046,8 @@ class FieldTargetsDbXrefsElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_id: Final[type["FieldTargetsDbXrefsElementId"]]
     f_source: Final[type["FieldTargetsDbXrefsElementSource"]]
 
@@ -5056,21 +5056,21 @@ class FieldTargetsDbXrefsElementId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsDbXrefsElementSource(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsFunctionDescriptions(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsFunctionDescriptionsElement"]]
 
 
@@ -5078,15 +5078,15 @@ class FieldTargetsFunctionDescriptionsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsGenomicLocation(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_chromosome: Final[type["FieldTargetsGenomicLocationChromosome"]]
     f_end: Final[type["FieldTargetsGenomicLocationEnd"]]
     f_start: Final[type["FieldTargetsGenomicLocationStart"]]
@@ -5097,35 +5097,35 @@ class FieldTargetsGenomicLocationChromosome(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsGenomicLocationEnd(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsGenomicLocationStart(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsGenomicLocationStrand(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsGo(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsGoElement"]]
 
 
@@ -5133,8 +5133,8 @@ class FieldTargetsGoElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_aspect: Final[type["FieldTargetsGoElementAspect"]]
     f_eco_id: Final[type["FieldTargetsGoElementEcoId"]]
     f_evidence: Final[type["FieldTargetsGoElementEvidence"]]
@@ -5147,50 +5147,50 @@ class FieldTargetsGoElementAspect(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsGoElementEcoId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsGoElementEvidence(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsGoElementGeneProduct(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsGoElementId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsGoElementSource(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsHallmarks(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_attributes: Final[type["FieldTargetsHallmarksAttributes"]]
     f_cancer_hallmarks: Final[type["FieldTargetsHallmarksCancerHallmarks"]]
 
@@ -5199,7 +5199,7 @@ class FieldTargetsHallmarksAttributes(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsHallmarksAttributesElement"]]
 
 
@@ -5207,8 +5207,8 @@ class FieldTargetsHallmarksAttributesElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_attribute_name: Final[type["FieldTargetsHallmarksAttributesElementAttributeName"]]
     f_description: Final[type["FieldTargetsHallmarksAttributesElementDescription"]]
     f_pmid: Final[type["FieldTargetsHallmarksAttributesElementPmid"]]
@@ -5218,28 +5218,28 @@ class FieldTargetsHallmarksAttributesElementAttributeName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsHallmarksAttributesElementDescription(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsHallmarksAttributesElementPmid(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsHallmarksCancerHallmarks(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsHallmarksCancerHallmarksElement"]]
 
 
@@ -5247,8 +5247,8 @@ class FieldTargetsHallmarksCancerHallmarksElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_description: Final[type["FieldTargetsHallmarksCancerHallmarksElementDescription"]]
     f_impact: Final[type["FieldTargetsHallmarksCancerHallmarksElementImpact"]]
     f_label: Final[type["FieldTargetsHallmarksCancerHallmarksElementLabel"]]
@@ -5259,35 +5259,35 @@ class FieldTargetsHallmarksCancerHallmarksElementDescription(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsHallmarksCancerHallmarksElementImpact(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsHallmarksCancerHallmarksElementLabel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsHallmarksCancerHallmarksElementPmid(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsHomologues(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsHomologuesElement"]]
 
 
@@ -5295,8 +5295,8 @@ class FieldTargetsHomologuesElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_homology_type: Final[type["FieldTargetsHomologuesElementHomologyType"]]
     f_is_high_confidence: Final[type["FieldTargetsHomologuesElementIsHighConfidence"]]
     f_priority: Final[type["FieldTargetsHomologuesElementPriority"]]
@@ -5312,77 +5312,77 @@ class FieldTargetsHomologuesElementHomologyType(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsHomologuesElementIsHighConfidence(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsHomologuesElementPriority(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsHomologuesElementQueryPercentageIdentity(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsHomologuesElementSpeciesId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsHomologuesElementSpeciesName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsHomologuesElementTargetGeneId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsHomologuesElementTargetGeneSymbol(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsHomologuesElementTargetPercentageIdentity(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsNameSynonyms(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsNameSynonymsElement"]]
 
 
@@ -5390,8 +5390,8 @@ class FieldTargetsNameSynonymsElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_label: Final[type["FieldTargetsNameSynonymsElementLabel"]]
     f_source: Final[type["FieldTargetsNameSynonymsElementSource"]]
 
@@ -5400,21 +5400,21 @@ class FieldTargetsNameSynonymsElementLabel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsNameSynonymsElementSource(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsObsoleteNames(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsObsoleteNamesElement"]]
 
 
@@ -5422,8 +5422,8 @@ class FieldTargetsObsoleteNamesElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_label: Final[type["FieldTargetsObsoleteNamesElementLabel"]]
     f_source: Final[type["FieldTargetsObsoleteNamesElementSource"]]
 
@@ -5432,21 +5432,21 @@ class FieldTargetsObsoleteNamesElementLabel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsObsoleteNamesElementSource(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsObsoleteSymbols(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsObsoleteSymbolsElement"]]
 
 
@@ -5454,8 +5454,8 @@ class FieldTargetsObsoleteSymbolsElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_label: Final[type["FieldTargetsObsoleteSymbolsElementLabel"]]
     f_source: Final[type["FieldTargetsObsoleteSymbolsElementSource"]]
 
@@ -5464,21 +5464,21 @@ class FieldTargetsObsoleteSymbolsElementLabel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsObsoleteSymbolsElementSource(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsPathways(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsPathwaysElement"]]
 
 
@@ -5486,8 +5486,8 @@ class FieldTargetsPathwaysElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_pathway: Final[type["FieldTargetsPathwaysElementPathway"]]
     f_pathway_id: Final[type["FieldTargetsPathwaysElementPathwayId"]]
     f_top_level_term: Final[type["FieldTargetsPathwaysElementTopLevelTerm"]]
@@ -5497,28 +5497,28 @@ class FieldTargetsPathwaysElementPathway(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsPathwaysElementPathwayId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsPathwaysElementTopLevelTerm(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsProteinIds(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsProteinIdsElement"]]
 
 
@@ -5526,8 +5526,8 @@ class FieldTargetsProteinIdsElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_id: Final[type["FieldTargetsProteinIdsElementId"]]
     f_source: Final[type["FieldTargetsProteinIdsElementSource"]]
 
@@ -5536,21 +5536,21 @@ class FieldTargetsProteinIdsElementId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsProteinIdsElementSource(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSafetyLiabilities(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsSafetyLiabilitiesElement"]]
 
 
@@ -5558,8 +5558,8 @@ class FieldTargetsSafetyLiabilitiesElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_biosample: Final[type["FieldTargetsSafetyLiabilitiesElementBiosample"]]
     f_datasource: Final[type["FieldTargetsSafetyLiabilitiesElementDatasource"]]
     f_effects: Final[type["FieldTargetsSafetyLiabilitiesElementEffects"]]
@@ -5574,7 +5574,7 @@ class FieldTargetsSafetyLiabilitiesElementBiosample(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsSafetyLiabilitiesElementBiosampleElement"]]
 
 
@@ -5582,8 +5582,8 @@ class FieldTargetsSafetyLiabilitiesElementBiosampleElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_cell_format: Final[type["FieldTargetsSafetyLiabilitiesElementBiosampleElementCellFormat"]]
     f_cell_id: Final[type["FieldTargetsSafetyLiabilitiesElementBiosampleElementCellId"]]
     f_cell_label: Final[type["FieldTargetsSafetyLiabilitiesElementBiosampleElementCellLabel"]]
@@ -5595,49 +5595,49 @@ class FieldTargetsSafetyLiabilitiesElementBiosampleElementCellFormat(ScalarField
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSafetyLiabilitiesElementBiosampleElementCellId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSafetyLiabilitiesElementBiosampleElementCellLabel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSafetyLiabilitiesElementBiosampleElementTissueId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSafetyLiabilitiesElementBiosampleElementTissueLabel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSafetyLiabilitiesElementDatasource(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSafetyLiabilitiesElementEffects(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsSafetyLiabilitiesElementEffectsElement"]]
 
 
@@ -5645,8 +5645,8 @@ class FieldTargetsSafetyLiabilitiesElementEffectsElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_direction: Final[type["FieldTargetsSafetyLiabilitiesElementEffectsElementDirection"]]
     f_dosing: Final[type["FieldTargetsSafetyLiabilitiesElementEffectsElementDosing"]]
 
@@ -5655,42 +5655,42 @@ class FieldTargetsSafetyLiabilitiesElementEffectsElementDirection(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSafetyLiabilitiesElementEffectsElementDosing(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSafetyLiabilitiesElementEvent(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSafetyLiabilitiesElementEventId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSafetyLiabilitiesElementLiterature(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSafetyLiabilitiesElementStudy(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsSafetyLiabilitiesElementStudyElement"]]
 
 
@@ -5698,8 +5698,8 @@ class FieldTargetsSafetyLiabilitiesElementStudyElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_description: Final[type["FieldTargetsSafetyLiabilitiesElementStudyElementDescription"]]
     f_name: Final[type["FieldTargetsSafetyLiabilitiesElementStudyElementName"]]
     f_type: Final[type["FieldTargetsSafetyLiabilitiesElementStudyElementType"]]
@@ -5709,35 +5709,35 @@ class FieldTargetsSafetyLiabilitiesElementStudyElementDescription(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSafetyLiabilitiesElementStudyElementName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSafetyLiabilitiesElementStudyElementType(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSafetyLiabilitiesElementUrl(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSubcellularLocations(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsSubcellularLocationsElement"]]
 
 
@@ -5745,8 +5745,8 @@ class FieldTargetsSubcellularLocationsElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_label_sl: Final[type["FieldTargetsSubcellularLocationsElementLabelSl"]]
     f_location: Final[type["FieldTargetsSubcellularLocationsElementLocation"]]
     f_source: Final[type["FieldTargetsSubcellularLocationsElementSource"]]
@@ -5757,35 +5757,35 @@ class FieldTargetsSubcellularLocationsElementLabelSl(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSubcellularLocationsElementLocation(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSubcellularLocationsElementSource(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSubcellularLocationsElementTermSl(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSymbolSynonyms(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsSymbolSynonymsElement"]]
 
 
@@ -5793,8 +5793,8 @@ class FieldTargetsSymbolSynonymsElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_label: Final[type["FieldTargetsSymbolSynonymsElementLabel"]]
     f_source: Final[type["FieldTargetsSymbolSynonymsElementSource"]]
 
@@ -5803,21 +5803,21 @@ class FieldTargetsSymbolSynonymsElementLabel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSymbolSynonymsElementSource(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSynonyms(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsSynonymsElement"]]
 
 
@@ -5825,8 +5825,8 @@ class FieldTargetsSynonymsElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_label: Final[type["FieldTargetsSynonymsElementLabel"]]
     f_source: Final[type["FieldTargetsSynonymsElementSource"]]
 
@@ -5835,21 +5835,21 @@ class FieldTargetsSynonymsElementLabel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsSynonymsElementSource(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsTargetClass(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsTargetClassElement"]]
 
 
@@ -5857,8 +5857,8 @@ class FieldTargetsTargetClassElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_id: Final[type["FieldTargetsTargetClassElementId"]]
     f_label: Final[type["FieldTargetsTargetClassElementLabel"]]
     f_level: Final[type["FieldTargetsTargetClassElementLevel"]]
@@ -5868,29 +5868,29 @@ class FieldTargetsTargetClassElementId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsTargetClassElementLabel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsTargetClassElementLevel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsTep(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_description: Final[type["FieldTargetsTepDescription"]]
     f_target_from_source_id: Final[type["FieldTargetsTepTargetFromSourceId"]]
     f_therapeutic_area: Final[type["FieldTargetsTepTherapeuticArea"]]
@@ -5901,35 +5901,35 @@ class FieldTargetsTepDescription(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsTepTargetFromSourceId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsTepTherapeuticArea(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsTepUrl(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsTractability(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsTractabilityElement"]]
 
 
@@ -5937,8 +5937,8 @@ class FieldTargetsTractabilityElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
-    fields: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Dataset] | type[Field]]]
     f_id: Final[type["FieldTargetsTractabilityElementId"]]
     f_modality: Final[type["FieldTargetsTractabilityElementModality"]]
     f_value: Final[type["FieldTargetsTractabilityElementValue"]]
@@ -5948,28 +5948,28 @@ class FieldTargetsTractabilityElementId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsTractabilityElementModality(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsTractabilityElementValue(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 class FieldTargetsTranscriptIds(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
     element: Final[type["FieldTargetsTranscriptIdsElement"]]
 
 
@@ -5977,7 +5977,7 @@ class FieldTargetsTranscriptIdsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Field]]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
 DatasetAOTFClickhouse.id = "AOTFClickhouse"

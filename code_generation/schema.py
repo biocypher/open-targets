@@ -175,7 +175,7 @@ def recursive_handle_fields(
     field_class_infos = sorted(field_class_infos, key=lambda i: str(i.name))
     fields_attribute = LateAttribute(
         name="fields",
-        type=f"Final[Sequence[type[{Field.__name__}]]]",
+        type=f"Final[Sequence[type[{Dataset.__name__}] | type[{Field.__name__}]]]",
         value=f"[{', '.join(str(i.name) for i in field_class_infos)}]",
     )
     field_attributes = sorted(field_attributes, key=lambda i: i.name)
@@ -217,7 +217,7 @@ def recursive_get_field_class_info(
         LateAttribute("dataset", f"Final[type[{Dataset.__name__}]]", str(dataset_class_name)),
         LateAttribute(
             "path",
-            f"Final[Sequence[type[{Field.__name__}]]]",
+            f"Final[Sequence[type[{Dataset.__name__}] | type[{Field.__name__}]]]",
             f"[{', '.join(str(i) for i in field_path)}]",
         ),
     ]
