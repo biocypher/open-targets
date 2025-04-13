@@ -1,0 +1,8 @@
+{% extends "open_targets/base.jinja" %}
+{% block content %}
+from typing import Final
+
+{% for key, value in config.items() %}
+{{ key }}: Final[str] = "{{ value }}"
+{% endfor %}
+{% endblock %}
