@@ -8,7 +8,7 @@ from open_targets.adapter.acquisition_definition import (
     ExpressionEdgeAcquisitionDefinition,
     ExpressionNodeAcquisitionDefinition,
 )
-from open_targets.adapter.data_wrapper import DataView
+from open_targets.adapter.data_view import DataView
 from open_targets.adapter.expression import (
     BuildCurieExpression,
     DataSourceToLicenceExpression,

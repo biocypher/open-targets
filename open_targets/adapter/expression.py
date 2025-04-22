@@ -5,7 +5,7 @@ from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 from typing import Any, Final, Generic, TypeVar
 
-from open_targets.adapter.data_wrapper import DataViewValue
+from open_targets.adapter.data_view import DataViewValue
 from open_targets.data.schema_base import Field
 
 TValue = TypeVar("TValue")

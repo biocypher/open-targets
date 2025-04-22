@@ -3,7 +3,7 @@ from typing import Any
 
 from bioregistry.resolve import normalize_curie, normalize_parsed_curie, normalize_prefix
 
-from open_targets.adapter.data_wrapper import DataView
+from open_targets.adapter.data_view import DataView
 from open_targets.adapter.expression import (
     BuildCurieExpression,
     DataSourceToLicenceExpression,

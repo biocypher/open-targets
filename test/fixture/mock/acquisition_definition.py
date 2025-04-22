@@ -7,7 +7,7 @@ from open_targets.adapter.acquisition_definition import (
     _ExpressionAcquisitionDefinition,
 )
 from open_targets.adapter.context_protocol import AcquisitionContextProtocol
-from open_targets.adapter.data_wrapper import DataView, DataViewValue
+from open_targets.adapter.data_view import DataView, DataViewValue
 from open_targets.adapter.expression import Expression
 from open_targets.adapter.scan_operation import ScanOperation
 from open_targets.data.schema import Field

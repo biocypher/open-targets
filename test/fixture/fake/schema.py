@@ -24,7 +24,7 @@
 from collections.abc import Mapping, Sequence
 from typing import Any, Final
 
-from open_targets.adapter.data_wrapper import DataView
+from open_targets.adapter.data_view import DataView
 from open_targets.data.metadata.model import OpenTargetsDatasetFieldType
 from open_targets.data.schema_base import Dataset, ScalarField, SequenceField, StructField
 
