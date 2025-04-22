@@ -1,7 +1,7 @@
 """Definition of data views."""
 
-from collections.abc import Iterable, Iterator, Mapping, Sequence
-from typing import Any, Protocol, TypeAlias, overload, runtime_checkable
+from collections.abc import Iterator, Mapping, Sequence
+from typing import Any, Protocol, TypeAlias, cast, overload, runtime_checkable
 
 from open_targets.data.schema_base import Field, SequenceField, StructField
 
@@ -74,14 +74,34 @@ class SequenceBackedDataView(DataViewProtocol, DataView):
     """Data view for raw data that is a sequence.
 
     A dictionary is needed to map the field class to the index of the data in
-    the sequence.
+    the sequence. This view also supports virtual keys which access nested
+    fields directly. A virtual key is a field class that translates to a
+    sequence of fields which are used to access a nested structure in the
+    data. When a virtual key is accessed, the view is recursively created.
+
+    For instance, an field index mapping and data could be as follows:
+    field_index_mapping = {
+        FieldA: 0,
+        FieldB: 1,
+        FieldC: [FieldB, FieldC],
+    }
+    data = (
+        123,
+        {
+            "FieldC": "value",
+        },
+    )
+    As a result, the following access is allowed:
+    view[FieldA] -> 123
+    view[FieldB] -> { "FieldC": "value" }
+    view[FieldC] -> "value"
     """
 
     def __init__(
         self,
-        field_index_mapping: Mapping[type[Field], int],
+        field_path_mapping: Mapping[type[Field], int | Sequence[type[Field]]],
         data: Sequence[Any],
-        mapped_fields: Iterable[type[Field]],
+        mapped_fields: Sequence[type[Field]],
     ) -> None:
         """Initialize the data view with raw data that is a sequence.
 
@@ -91,17 +111,17 @@ class SequenceBackedDataView(DataViewProtocol, DataView):
             data: The raw data.
             mapped_fields: The fields that the view will present.
         """
-        self._field_index_mapping = field_index_mapping
+        self._field_path_mapping = field_path_mapping
         self._data = data
         self._mapped_fields = mapped_fields
 
     def __iter__(self) -> Iterator[type[Field]]:
         """Get the keys which are the field classes."""
-        return iter(key for key in self._field_index_mapping if key in self._mapped_fields)
+        return iter(self._mapped_fields)
 
     def __len__(self) -> int:
         """Get the length of the sequence."""
-        return len(self._field_index_mapping)
+        return len(self._mapped_fields)
 
     def __getitem__(self, key: type[Field]) -> DataViewValue:
         """Get the data by using field classes as keys.
@@ -109,12 +129,26 @@ class SequenceBackedDataView(DataViewProtocol, DataView):
         If the access value is not a leaf value, a view is returned, otherwise
         the raw value is returned
         """
-        value = self._data[self._field_index_mapping[key]]
-        if issubclass(key, StructField):
-            return MappingBackedDataView(value, key.fields)
-        if issubclass(key, SequenceField) and issubclass(key.element, StructField):
-            return ArrayDataView(value, key.element.fields) if value is not None else []
-        return value
+        path = self._field_path_mapping[key]
+        if isinstance(path, int):
+            return _create_view_value(self._data[path], key)
+        return self._deep_create_view_value(self._data, path)
+
+    def _deep_create_view_value(
+        self,
+        data: Any,
+        path: Sequence[type[Field]],
+    ) -> DataViewValue:
+        field = cast("type[Field]", None)
+        for field in path:
+            if isinstance(data, Mapping):
+                data = data[field.name]
+            elif isinstance(data, Sequence):
+                data = data[cast("int", self._field_path_mapping[field])]
+            else:
+                msg = f"Path {path} involves non-container field {field} in the middle."
+                raise KeyError(msg)
+        return _create_view_value(data, field)
 
     @property
     def raw_data(self) -> Any:
@@ -149,14 +183,18 @@ class MappingBackedDataView(DataViewProtocol, DataView):
         If the accessed value is not a leaf value, a view is returned,
         otherwise the raw value is returned
         """
-        value = self._data[key.name]
-        if issubclass(key, StructField):
-            return MappingBackedDataView(value, key.fields)
-        if issubclass(key, SequenceField) and issubclass(key.element, StructField):
-            return ArrayDataView(value, key.element.fields)
-        return value
+        path = key.name
+        return _create_view_value(self._data[path], key)
 
     @property
     def raw_data(self) -> Any:
         """Get the raw data."""
         return self._data
+
+
+def _create_view_value(data: Any, field: type[Field]) -> DataViewValue:
+    if issubclass(field, StructField):
+        return MappingBackedDataView(data, field.fields)
+    if issubclass(field, SequenceField) and issubclass(field.element, StructField):
+        return ArrayDataView(data, field.element.fields)
+    return data

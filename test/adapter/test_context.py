@@ -4,11 +4,7 @@ from typing import Any
 import pytest
 
 from open_targets.adapter.context import AcquisitionContext
-from open_targets.adapter.data_view import (
-    ArrayDataView,
-    MappingBackedDataView,
-    SequenceBackedDataView,
-)
+from open_targets.adapter.data_view import ArrayDataView, MappingBackedDataView, SequenceBackedDataView
 from open_targets.adapter.scan_operation import ExplodingScanOperation, RowScanOperation
 from open_targets.data.schema_base import Dataset, Field
 from test.fixture.fake.schema import (
@@ -149,12 +145,12 @@ def test_get_scan_result_stream_exploding_scan_operation(
 
 
 def _serialise(
-    view: Any,
+    value: Any,
 ) -> Sequence[Any] | Mapping[type[Field], Any]:
-    if isinstance(view, ArrayDataView):
-        return [_serialise(i) for i in view]
-    if isinstance(view, SequenceBackedDataView):
-        return {i: _serialise(v) for i, v in view.items()}
-    if isinstance(view, MappingBackedDataView):
-        return {i: _serialise(v) for i, v in view.items()}
-    return view
+    if isinstance(value, ArrayDataView):
+        return [_serialise(i) for i in value]
+    if isinstance(value, SequenceBackedDataView):
+        return {i: _serialise(v) for i, v in value.items()}
+    if isinstance(value, MappingBackedDataView):
+        return {i: _serialise(v) for i, v in value.items()}
+    return value

@@ -1,6 +1,6 @@
 """Definition of the generation context protocol."""
 
-from collections.abc import Iterable
+from collections.abc import Iterable, Sequence
 from pathlib import Path
 from typing import Protocol
 
@@ -24,7 +24,7 @@ class AcquisitionContextProtocol(Protocol):
     def get_scan_result_stream(
         self,
         scan_operation: ScanOperation,
-        requested_fields: Iterable[type[Field]],
+        requested_fields: Sequence[type[Field]],
     ) -> Iterable[DataView]:
         """Get the scan result stream.
 

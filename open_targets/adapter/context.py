@@ -10,7 +10,7 @@ from typing import Any, Final, cast, overload
 import duckdb
 
 from open_targets.adapter.acquisition_definition import AcquisitionDefinition
-from open_targets.adapter.data_view import DataView, DataViewProtocol, DataViewValue, SequenceBackedDataView
+from open_targets.adapter.data_view import DataView, DataViewProtocol, SequenceBackedDataView
 from open_targets.adapter.output import EdgeInfo, NodeInfo
 from open_targets.adapter.scan_operation import ExplodingScanOperation, RowScanOperation, ScanOperation
 from open_targets.data.schema_base import Dataset, Field, SequenceField
@@ -68,7 +68,7 @@ class AcquisitionContext:
     def get_scan_result_stream(
         self,
         scan_operation: ScanOperation,
-        requested_fields: Iterable[type[Field]],
+        requested_fields: Sequence[type[Field]],
     ) -> Iterable[DataView]:
         """Get the scan result stream."""
         match scan_operation:
@@ -108,51 +108,57 @@ class AcquisitionContext:
     def _get_row_scan_result_stream(
         self,
         dataset: type[Dataset],
-        requested_fields: Iterable[type[Field]],
+        requested_fields: Sequence[type[Field]],
     ) -> Iterable[DataView]:
         top_fields, nested_fields = self._compute_field_hierarchy(requested_fields, TOP_FIELD_PATH_INDEX)
-        field_index_map = {field: index for index, field in enumerate(top_fields + nested_fields)}
+        field_index_map = {field: index for index, field in enumerate(top_fields)}
+        field_path_map: dict[type[Field], int | Sequence[type[Field]]] = {
+            field: cast("Sequence[type[Field]]", field.path[TOP_FIELD_PATH_INDEX:]) for field in nested_fields
+        }
+        field_path_map.update(field_index_map)
         query_result_stream = self._get_query_result(dataset, top_fields)
         for data in query_result_stream:
-            view = SequenceBackedDataView(field_index_map, data, top_fields)
-            nested_data = tuple(
-                self._deep_get_item(view, cast("Sequence[type[Field]]", field.path[TOP_FIELD_PATH_INDEX:]))
-                for field in nested_fields
-            )
-            yield SequenceBackedDataView(field_index_map, data + nested_data, requested_fields)
+            yield SequenceBackedDataView(field_path_map, data, requested_fields)
 
     def _get_exploded_scan_result_stream(
         self,
         dataset: type[Dataset],
         exploded_field: type[SequenceField],
-        requested_fields: Iterable[type[Field]],
+        requested_fields: Sequence[type[Field]],
     ) -> Iterable[DataView]:
-        fields_under_exploded_field = [
-            field
-            for field in requested_fields
-            if (exploded_field in field.path) and (len(field.path) > len(exploded_field.path))
+        required_fields = [exploded_field, *requested_fields]
+        top_fields, nested_fields = self._compute_field_hierarchy(required_fields, TOP_FIELD_PATH_INDEX)
+        field_index_map = {field: index for index, field in enumerate([*top_fields, exploded_field.element])}
+        nested_fields_above_exploded_field = [
+            field for field in nested_fields if len(field.path) <= len(exploded_field.path)
         ]
-        fields_above_exploded_field = [field for field in requested_fields if field not in fields_under_exploded_field]
-        field_index_map = {
-            field: index for index, field in enumerate(fields_above_exploded_field + fields_under_exploded_field)
-        }
-        exploded_field_path_length = len(exploded_field.path)
+        nested_fields_under_exploded_field = [
+            field for field in nested_fields if len(field.path) > len(exploded_field.element.path)
+        ]
+        field_path_map: dict[type[Field], int | Sequence[type[Field]]] = {}
+        field_path_map.update(field_index_map)
+        field_path_map.update(
+            {
+                field: cast("Sequence[type[Field]]", field.path[TOP_FIELD_PATH_INDEX:])
+                for field in nested_fields_above_exploded_field
+            },
+        )
+        field_path_map.update(
+            {
+                field: cast("Sequence[type[Field]]", field.path[len(exploded_field.path) :])
+                for field in nested_fields_under_exploded_field
+            },
+        )
 
-        for view in self._get_row_scan_result_stream(dataset, [exploded_field, *fields_above_exploded_field]):
+        for data in self._get_query_result(dataset, top_fields):
+            view = SequenceBackedDataView(field_path_map, data, required_fields)
             sequence_data = cast("Sequence[DataView]", view[exploded_field])
-            upper_data = [
-                self._deep_get_item(view, cast("Sequence[type[Field]]", field.path[TOP_FIELD_PATH_INDEX:]))
-                for field in fields_above_exploded_field
-            ]
             for item in sequence_data:
-                lower_data = [
-                    self._deep_get_item(
-                        item,
-                        cast("Sequence[type[Field]]", field.path[exploded_field_path_length + 1 :]),
-                    )
-                    for field in fields_under_exploded_field
-                ]
-                yield SequenceBackedDataView(field_index_map, upper_data + lower_data, requested_fields)
+                yield SequenceBackedDataView(
+                    field_path_map,
+                    [*data, cast("DataViewProtocol", item).raw_data],
+                    requested_fields,
+                )
 
     def _compute_field_hierarchy(
         self,
@@ -162,18 +168,6 @@ class AcquisitionContext:
         top_fields = list({cast("type[Field]", field.path[starting_position]) for field in fields})
         nested_fields = [field for field in fields if field not in top_fields]
         return top_fields, nested_fields
-
-    def _deep_get_item(
-        self,
-        data: DataViewValue,
-        path: Sequence[type[Field]],
-    ) -> Any:
-        value = data
-        for field in path:
-            value = cast("DataView", value)[field]
-        if isinstance(value, DataViewProtocol):
-            return value.raw_data
-        return value
 
     def _get_query_result(
         self,

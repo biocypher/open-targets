@@ -80,7 +80,10 @@ class ScanningAcquisitionDefinition(
     @override
     def acquire(self, context: AcquisitionContextProtocol) -> Iterable[TAcqusitionOutput]:
         """Create the scanning result stream from the low level access."""
-        scan_result_stream = context.get_scan_result_stream(self._get_scan_operation(), self._get_required_fields())
+        scan_result_stream = context.get_scan_result_stream(
+            self._get_scan_operation(),
+            list(self._get_required_fields()),
+        )
         return self._acquire_from_scanning(context, scan_result_stream)
 
 
