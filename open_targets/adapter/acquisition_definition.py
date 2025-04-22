@@ -30,10 +30,10 @@ TAcqusitionOutput = TypeVar("TAcqusitionOutput")
 class AcquisitionDefinition(Generic[TAcqusitionOutput], ABC):
     """Base class for all acquisition definitions.
 
-    An acquisition definition describes how to acquire a set of nodes/edges.
-    High level definitions are provided but in the case of more complex
-    acquisition logic, a subclass of this class can be used to query the
-    dataset directly to provide the specific logic.
+    An acquisition definition describes how to acquire a set of nodes/edges from
+    the original dataset. High level definitions are provided but, in the case
+    of more complex acquisition logic, a subclass of this class can be used to
+    query the dataset directly to provide the specific logic.
     """
 
     @abstractmethod
