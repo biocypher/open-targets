@@ -67,7 +67,7 @@ class TestExpressionAcquisitionDefinition:
         expression: Expression[Any],
         expected: Any,
     ) -> None:
-        def test():
+        def test() -> None:
             context = MockAcquisitionContext()
             context.get_scan_result_stream = MagicMock(return_value=[field_map])
             definition = MockSingleExpressionAcquisitionDefinition(expression)
