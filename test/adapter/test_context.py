@@ -10,10 +10,10 @@ from open_targets.data.schema_base import Dataset, Field
 from test.fixture.fake.schema import (
     DatasetFake,
     FieldFakeScalar,
-    FieldFakeSequence,
-    FieldFakeSequenceElement,
-    FieldFakeSequenceElementScalar,
     FieldFakeStruct,
+    FieldFakeStructSequence,
+    FieldFakeStructSequenceElement,
+    FieldFakeStructSequenceElementScalar,
     FieldFakeStructStruct,
     FieldFakeStructStructScalar,
 )
@@ -22,7 +22,7 @@ from test.fixture.fake.schema import (
 def mock_get_query_result_field_value(field: type[Field]) -> Any:
     if field is FieldFakeScalar or field is FieldFakeStruct:
         return field.get_value(row_id=0)
-    if field is FieldFakeSequence:
+    if field is FieldFakeStructSequence:
         return field.get_value(row_id=0, num_elements=2)
     msg = f"Field {field} is not a top field"
     raise ValueError(msg)
@@ -46,8 +46,22 @@ def context(requested_fields: Sequence[type[Field]]) -> AcquisitionContext:
 @pytest.mark.parametrize(
     ("requested_fields", "expected_result"),
     [
-        ((FieldFakeScalar, FieldFakeStruct, FieldFakeSequence), DatasetFake.get_field_mapped_row(row_id=0)),
-        ((FieldFakeSequence, FieldFakeScalar, FieldFakeStruct), DatasetFake.get_field_mapped_row(row_id=0)),
+        (
+            (FieldFakeScalar, FieldFakeStruct, FieldFakeStructSequence),
+            {
+                FieldFakeScalar: FieldFakeScalar.get_value(row_id=0),
+                FieldFakeStruct: FieldFakeStruct.get_field_mapped_value(row_id=0),
+                FieldFakeStructSequence: FieldFakeStructSequence.get_field_mapped_value(row_id=0, num_elements=2),
+            },
+        ),
+        (
+            (FieldFakeStructSequence, FieldFakeScalar, FieldFakeStruct),
+            {
+                FieldFakeStructSequence: FieldFakeStructSequence.get_field_mapped_value(row_id=0, num_elements=2),
+                FieldFakeScalar: FieldFakeScalar.get_value(row_id=0),
+                FieldFakeStruct: FieldFakeStruct.get_field_mapped_value(row_id=0),
+            },
+        ),
         ((FieldFakeScalar,), {FieldFakeScalar: FieldFakeScalar.get_value(row_id=0)}),
         ((FieldFakeStructStruct,), {FieldFakeStructStruct: FieldFakeStructStruct.get_field_mapped_value(row_id=0)}),
         (
@@ -81,50 +95,74 @@ def test_get_scan_result_stream_row_scan_operation(
     ("requested_fields", "expected_result"),
     [
         (
-            (FieldFakeSequenceElement,),
+            (FieldFakeStructSequenceElement,),
             [
                 {
-                    FieldFakeSequenceElement: FieldFakeSequenceElement.get_field_mapped_value(row_id=0, element_id=0),
+                    FieldFakeStructSequenceElement: FieldFakeStructSequenceElement.get_field_mapped_value(
+                        row_id=0,
+                        element_id=0,
+                    ),
                 },
                 {
-                    FieldFakeSequenceElement: FieldFakeSequenceElement.get_field_mapped_value(row_id=0, element_id=1),
+                    FieldFakeStructSequenceElement: FieldFakeStructSequenceElement.get_field_mapped_value(
+                        row_id=0,
+                        element_id=1,
+                    ),
                 },
             ],
         ),
         (
-            (FieldFakeSequenceElementScalar,),
+            (FieldFakeStructSequenceElementScalar,),
             [
                 {
-                    FieldFakeSequenceElementScalar: FieldFakeSequenceElementScalar.get_value(row_id=0, element_id=0),
+                    FieldFakeStructSequenceElementScalar: FieldFakeStructSequenceElementScalar.get_value(
+                        row_id=0,
+                        element_id=0,
+                    ),
                 },
                 {
-                    FieldFakeSequenceElementScalar: FieldFakeSequenceElementScalar.get_value(row_id=0, element_id=1),
+                    FieldFakeStructSequenceElementScalar: FieldFakeStructSequenceElementScalar.get_value(
+                        row_id=0,
+                        element_id=1,
+                    ),
                 },
             ],
         ),
         (
-            (FieldFakeSequence, FieldFakeSequenceElement),
+            (FieldFakeStructSequence, FieldFakeStructSequenceElement),
             [
                 {
-                    FieldFakeSequence: FieldFakeSequence.get_field_mapped_value(row_id=0, num_elements=2),
-                    FieldFakeSequenceElement: FieldFakeSequenceElement.get_field_mapped_value(row_id=0, element_id=0),
+                    FieldFakeStructSequence: FieldFakeStructSequence.get_field_mapped_value(row_id=0, num_elements=2),
+                    FieldFakeStructSequenceElement: FieldFakeStructSequenceElement.get_field_mapped_value(
+                        row_id=0,
+                        element_id=0,
+                    ),
                 },
                 {
-                    FieldFakeSequence: FieldFakeSequence.get_field_mapped_value(row_id=0, num_elements=2),
-                    FieldFakeSequenceElement: FieldFakeSequenceElement.get_field_mapped_value(row_id=0, element_id=1),
+                    FieldFakeStructSequence: FieldFakeStructSequence.get_field_mapped_value(row_id=0, num_elements=2),
+                    FieldFakeStructSequenceElement: FieldFakeStructSequenceElement.get_field_mapped_value(
+                        row_id=0,
+                        element_id=1,
+                    ),
                 },
             ],
         ),
         (
-            (FieldFakeScalar, FieldFakeSequenceElement),
+            (FieldFakeScalar, FieldFakeStructSequenceElement),
             [
                 {
                     FieldFakeScalar: FieldFakeScalar.get_value(row_id=0),
-                    FieldFakeSequenceElement: FieldFakeSequenceElement.get_field_mapped_value(row_id=0, element_id=0),
+                    FieldFakeStructSequenceElement: FieldFakeStructSequenceElement.get_field_mapped_value(
+                        row_id=0,
+                        element_id=0,
+                    ),
                 },
                 {
                     FieldFakeScalar: FieldFakeScalar.get_value(row_id=0),
-                    FieldFakeSequenceElement: FieldFakeSequenceElement.get_field_mapped_value(row_id=0, element_id=1),
+                    FieldFakeStructSequenceElement: FieldFakeStructSequenceElement.get_field_mapped_value(
+                        row_id=0,
+                        element_id=1,
+                    ),
                 },
             ],
         ),
@@ -136,7 +174,7 @@ def test_get_scan_result_stream_exploding_scan_operation(
     expected_result: Sequence[Any],
 ) -> None:
     stream = context.get_scan_result_stream(
-        ExplodingScanOperation(DatasetFake, FieldFakeSequence),
+        ExplodingScanOperation(DatasetFake, FieldFakeStructSequence),
         requested_fields,
     )
     result = list(stream)

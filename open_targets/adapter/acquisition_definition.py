@@ -61,7 +61,7 @@ class ScanningAcquisitionDefinition(
         """Scan operation that is used to acquire the graph components."""
 
     @abstractmethod
-    def _get_required_fields(self) -> Iterable[type[Field]]:
+    def _get_required_fields(self) -> Sequence[type[Field]]:
         """Fields that are requested by this definition."""
 
     @abstractmethod
@@ -82,7 +82,7 @@ class ScanningAcquisitionDefinition(
         """Create the scanning result stream from the low level access."""
         scan_result_stream = context.get_scan_result_stream(
             self._get_scan_operation(),
-            list(self._get_required_fields()),
+            self._get_required_fields(),
         )
         return self._acquire_from_scanning(context, scan_result_stream)
 
@@ -111,14 +111,14 @@ class _ExpressionAcquisitionDefinition(
         return self.scan_operation
 
     @override
-    def _get_required_fields(self) -> Iterable[type[Field]]:
+    def _get_required_fields(self) -> Sequence[type[Field]]:
         """Get all fields that are required by all the expressions."""
         fields = set[type[Field]]()
         for expression in self._all_expressions:
             fields.update(recursive_get_dependent_fields(expression))
         if isinstance(self.scan_operation, ExplodingScanOperation):
             fields.add(self.scan_operation.exploded_field)
-        return fields
+        return list(fields)
 
     def _create_value_getter(
         self,

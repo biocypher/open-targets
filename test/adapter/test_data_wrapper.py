@@ -12,10 +12,10 @@ from open_targets.data.schema_base import Field
 from test.fixture.fake.schema import (
     DatasetFake,
     FieldFakeScalar,
-    FieldFakeSequence,
-    FieldFakeSequenceElement,
-    FieldFakeSequenceElementScalar,
     FieldFakeStruct,
+    FieldFakeStructSequence,
+    FieldFakeStructSequenceElement,
+    FieldFakeStructSequenceElementScalar,
     FieldFakeStructStruct,
     FieldFakeStructStructScalar,
 )
@@ -26,7 +26,7 @@ def dataset_first_row() -> Mapping[str, Any]:
     return DatasetFake.get_row(row_id=0)
 
 
-@pytest.mark.parametrize("key", [FieldFakeScalar, FieldFakeStruct, FieldFakeSequence])
+@pytest.mark.parametrize("key", [FieldFakeScalar, FieldFakeStruct])
 def test_mapping_backed_data_view(dataset_first_row: Mapping[str, Any], key: type[Field]) -> None:
     view = MappingBackedDataView(dataset_first_row, DatasetFake.fields)
     assert_data_view_equals_raw_data(view[key], dataset_first_row[key.name])
@@ -35,9 +35,8 @@ def test_mapping_backed_data_view(dataset_first_row: Mapping[str, Any], key: typ
 @pytest.mark.parametrize(
     "order",
     [
-        (FieldFakeScalar, FieldFakeStruct, FieldFakeSequence),
-        (FieldFakeSequence, FieldFakeScalar, FieldFakeStruct),
-        (FieldFakeStruct, FieldFakeSequence, FieldFakeScalar),
+        (FieldFakeScalar, FieldFakeStruct),
+        (FieldFakeStruct, FieldFakeScalar),
     ],
 )
 def test_sequence_backed_data_view(
@@ -48,16 +47,16 @@ def test_sequence_backed_data_view(
     field_index_dict = {field: index for index, field in enumerate(order)}
     view = SequenceBackedDataView(field_index_dict, ordered, order)
 
-    for field in [FieldFakeScalar, FieldFakeStruct, FieldFakeSequence]:
+    for field in [FieldFakeScalar, FieldFakeStruct]:
         assert_data_view_equals_raw_data(view[field], dataset_first_row[field.name])
 
 
 def test_mapping_backed_data_view_get_keys(dataset_first_row: Mapping[str, Any]) -> None:
     view = MappingBackedDataView(dataset_first_row, DatasetFake.fields)
-    assert set(view.keys()) == {FieldFakeScalar, FieldFakeStruct, FieldFakeSequence}
+    assert set(view.keys()) == {FieldFakeScalar, FieldFakeStruct}
     nested = view[FieldFakeStruct]
     assert isinstance(nested, MappingBackedDataView)
-    assert set(nested.keys()) == {FieldFakeStructStruct}
+    assert set(nested.keys()) == {FieldFakeStructStruct, FieldFakeStructSequence}
 
 
 def test_sequence_backed_data_view_get_keys(dataset_first_row: Mapping[str, Any]) -> None:
@@ -80,8 +79,8 @@ def test_sequence_backed_data_view_get_keys(dataset_first_row: Mapping[str, Any]
             FieldFakeStruct.get_value(row_id=0),
         ),
         (
-            (FieldFakeSequence,),
-            FieldFakeSequence.get_value(row_id=0, num_elements=2),
+            (FieldFakeStruct, FieldFakeStructSequence),
+            FieldFakeStructSequence.get_value(row_id=0, num_elements=2),
         ),
         (
             (FieldFakeStruct, FieldFakeStructStruct),
@@ -92,20 +91,20 @@ def test_sequence_backed_data_view_get_keys(dataset_first_row: Mapping[str, Any]
             FieldFakeStructStructScalar.get_value(row_id=0),
         ),
         (
-            (FieldFakeSequence, 0),
-            FieldFakeSequenceElement.get_value(row_id=0, element_id=0),
+            (FieldFakeStruct, FieldFakeStructSequence, 0),
+            FieldFakeStructSequenceElement.get_value(row_id=0, element_id=0),
         ),
         (
-            (FieldFakeSequence, 0, FieldFakeSequenceElementScalar),
-            FieldFakeSequenceElementScalar.get_value(row_id=0, element_id=0),
+            (FieldFakeStruct, FieldFakeStructSequence, 0, FieldFakeStructSequenceElementScalar),
+            FieldFakeStructSequenceElementScalar.get_value(row_id=0, element_id=0),
         ),
         (
-            (FieldFakeSequence, 1),
-            FieldFakeSequenceElement.get_value(row_id=0, element_id=1),
+            (FieldFakeStruct, FieldFakeStructSequence, 1),
+            FieldFakeStructSequenceElement.get_value(row_id=0, element_id=1),
         ),
         (
-            (FieldFakeSequence, 1, FieldFakeSequenceElementScalar),
-            FieldFakeSequenceElementScalar.get_value(row_id=0, element_id=1),
+            (FieldFakeStruct, FieldFakeStructSequence, 1, FieldFakeStructSequenceElementScalar),
+            FieldFakeStructSequenceElementScalar.get_value(row_id=0, element_id=1),
         ),
     ],
 )

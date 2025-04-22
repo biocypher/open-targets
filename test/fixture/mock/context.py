@@ -1,4 +1,4 @@
-from collections.abc import Iterable
+from collections.abc import Iterable, Sequence
 from pathlib import Path
 
 from open_targets.adapter.context_protocol import AcquisitionContextProtocol
@@ -13,5 +13,5 @@ class MockAcquisitionContext(AcquisitionContextProtocol):
     def get_scan_result_stream(
         self,
         scan_operation: ScanOperation,
-        requested_fields: Iterable[type[Field]],
+        requested_fields: Sequence[type[Field]],
     ) -> Iterable[DataView]: ...
