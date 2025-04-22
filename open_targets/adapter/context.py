@@ -10,12 +10,13 @@ from typing import Any, Final, cast, overload
 import duckdb
 
 from open_targets.adapter.acquisition_definition import AcquisitionDefinition
-from open_targets.adapter.data_wrapper import ConvertedType, DataWrapper, SequencePresentingDataWrapper
+from open_targets.adapter.data_wrapper import DataNode, DataWrapper, FieldMap, SequencePresentingDataWrapper
 from open_targets.adapter.output import EdgeInfo, NodeInfo
 from open_targets.adapter.scan_operation import ExplodingScanOperation, RowScanOperation, ScanOperation
-from open_targets.data.schema_base import Dataset, Field
+from open_targets.data.schema_base import Dataset, Field, SequenceField
 
-TOP_FIELD_PATH_LENGTH = 2
+TOP_FIELD_PATH_INDEX = 1
+TOP_FIELD_PATH_LENGTH = TOP_FIELD_PATH_INDEX + 1
 
 
 class AcquisitionContext:
@@ -67,17 +68,17 @@ class AcquisitionContext:
     def get_scan_result_stream(
         self,
         scan_operation: ScanOperation,
-        required_fields: Iterable[type[Field]],
-    ) -> Iterable[DataWrapper]:
+        requested_fields: Iterable[type[Field]],
+    ) -> Iterable[FieldMap]:
         """Get the scan result stream."""
         match scan_operation:
             case RowScanOperation():
-                return self._get_row_scan_result_stream(scan_operation.dataset, required_fields)
+                return self._get_row_scan_result_stream(scan_operation.dataset, requested_fields)
             case ExplodingScanOperation():
                 return self._get_exploded_scan_result_stream(
                     scan_operation.dataset,
                     scan_operation.exploded_field,
-                    required_fields,
+                    requested_fields,
                 )
             case _:
                 msg = f"Unsupported scan operation: {scan_operation}"
@@ -107,54 +108,82 @@ class AcquisitionContext:
     def _get_row_scan_result_stream(
         self,
         dataset: type[Dataset],
-        required_fields: Iterable[type[Field]],
-    ) -> Iterable[DataWrapper]:
-        field_index_map, query_result_stream = self._get_query_result(dataset, required_fields)
-        return (SequencePresentingDataWrapper(field_index_map, i) for i in query_result_stream)
+        requested_fields: Iterable[type[Field]],
+    ) -> Iterable[FieldMap]:
+        top_fields, nested_fields = self._compute_field_hierarchy(requested_fields, TOP_FIELD_PATH_INDEX)
+        field_index_map = {field: index for index, field in enumerate(top_fields + nested_fields)}
+        query_result_stream = self._get_query_result(dataset, top_fields)
+        for data in query_result_stream:
+            wrapped = SequencePresentingDataWrapper(field_index_map, data, top_fields)
+            nested_data = tuple(
+                self._deep_get_item(wrapped, cast("Sequence[type[Field]]", field.path[TOP_FIELD_PATH_INDEX:]))
+                for field in nested_fields
+            )
+            yield SequencePresentingDataWrapper(field_index_map, data + nested_data, requested_fields)
 
     def _get_exploded_scan_result_stream(
         self,
         dataset: type[Dataset],
-        exploded_field: type[Field],
-        required_fields: Iterable[type[Field]],
-    ) -> Iterable[DataWrapper]:
+        exploded_field: type[SequenceField],
+        requested_fields: Iterable[type[Field]],
+    ) -> Iterable[FieldMap]:
         fields_under_exploded_field = [
             field
-            for field in required_fields
+            for field in requested_fields
             if (exploded_field in field.path) and (len(field.path) > len(exploded_field.path))
         ]
-        upper_fields = [field for field in required_fields if field not in fields_under_exploded_field]
-        field_index_map = {field: index for index, field in enumerate(upper_fields + fields_under_exploded_field)}
-        exploded_field_index = field_index_map[exploded_field]
+        fields_above_exploded_field = [field for field in requested_fields if field not in fields_under_exploded_field]
+        field_index_map = {
+            field: index for index, field in enumerate(fields_above_exploded_field + fields_under_exploded_field)
+        }
         exploded_field_path_length = len(exploded_field.path)
 
-        for data in self._get_row_scan_result_stream(dataset, upper_fields):
-            upper_data = [self._get_value_from_field_path(data, field.path) for field in upper_fields]
-            sequence_data = cast("Sequence[DataWrapper]", upper_data[exploded_field_index])
+        for wrapped in self._get_row_scan_result_stream(dataset, [exploded_field, *fields_above_exploded_field]):
+            sequence_data = cast("Sequence[FieldMap]", wrapped[exploded_field])
+            upper_data = [
+                self._deep_get_item(wrapped, cast("Sequence[type[Field]]", field.path[TOP_FIELD_PATH_INDEX:]))
+                for field in fields_above_exploded_field
+            ]
             for item in sequence_data:
                 lower_data = [
-                    self._get_value_from_field_path(item, field.path[exploded_field_path_length:])
+                    self._deep_get_item(
+                        item,
+                        cast("Sequence[type[Field]]", field.path[exploded_field_path_length + 1 :]),
+                    )
                     for field in fields_under_exploded_field
                 ]
-                yield SequencePresentingDataWrapper(field_index_map, upper_data + lower_data)
+                yield SequencePresentingDataWrapper(field_index_map, upper_data + lower_data, requested_fields)
 
-    def _get_value_from_field_path(self, data: DataWrapper, field_path: Sequence[type[Field]]) -> ConvertedType:
-        value = data[field_path[1]]
-        for field in field_path[2:]:
-            value = cast("DataWrapper", value)[field]
+    def _compute_field_hierarchy(
+        self,
+        fields: Iterable[type[Field]],
+        starting_position: int,
+    ) -> tuple[list[type[Field]], list[type[Field]]]:
+        top_fields = list({cast("type[Field]", field.path[starting_position]) for field in fields})
+        nested_fields = [field for field in fields if field not in top_fields]
+        return top_fields, nested_fields
+
+    def _deep_get_item(
+        self,
+        data: DataNode,
+        path: Sequence[type[Field]],
+    ) -> Any:
+        value = data
+        for field in path:
+            value = cast("FieldMap", value)[field]
+        if isinstance(value, DataWrapper):
+            return value.raw_data
         return value
 
     def _get_query_result(
         self,
         dataset: type[Dataset],
-        required_fields: Iterable[type[Field]],
-    ) -> tuple[dict[type[Field], int], Iterable[tuple[Any]]]:
-        top_fields = [field for field in required_fields if len(field.path) == TOP_FIELD_PATH_LENGTH]
-        field_index_map = {field: index for index, field in enumerate(top_fields)}
-        query = duckdb.read_parquet(str(self.get_dataset_path(dataset))).select(*[field.name for field in top_fields])
+        fields: Iterable[type[Field]],
+    ) -> Iterable[tuple[Any]]:
+        query = duckdb.read_parquet(str(self.get_dataset_path(dataset))).select(*[field.name for field in fields])
         if self.limit is not None:
             query = query.limit(self.limit)
-        return field_index_map, self._get_query_result_stream(query)
+        return self._get_query_result_stream(query)
 
     def _get_query_result_stream(self, query: duckdb.DuckDBPyRelation) -> Iterable[tuple[Any]]:
         while True:

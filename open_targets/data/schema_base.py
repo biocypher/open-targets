@@ -1,4 +1,4 @@
-# ruff: noqa: D101, D102, PGH003
+# ruff: noqa: PGH003
 # type: ignore
 
 from abc import ABC

@@ -23,7 +23,7 @@ node_targets: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisition
     primary_id=BuildCurieExpression(
         prefix=LiteralExpression(ENSEMBL_PREFIX),
         reference=FieldExpression(FieldTargetsId),
-        normalised=True,
+        normalise=True,
     ),
     label=ENSEMBL_PREFIX,
     properties=[

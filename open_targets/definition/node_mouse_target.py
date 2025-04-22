@@ -24,7 +24,7 @@ node_mouse_target: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquis
     primary_id=BuildCurieExpression(
         prefix=LiteralExpression(ENSEMBL_PREFIX),
         reference=FieldExpression(FieldMousePhenotypesTargetInModelEnsemblId),
-        normalised=True,
+        normalise=True,
     ),
     label="mouse gene",
     properties=[

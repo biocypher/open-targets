@@ -38,7 +38,7 @@ node_molecule: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitio
     primary_id=BuildCurieExpression(
         prefix=LiteralExpression(CHEMBL_PREFIX),
         reference=FieldExpression(FieldMoleculeId),
-        normalised=True,
+        normalise=True,
     ),
     label=CHEMBL_PREFIX,
     properties=[

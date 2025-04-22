@@ -4,7 +4,7 @@ from collections.abc import Iterable
 from pathlib import Path
 from typing import Protocol
 
-from open_targets.adapter.data_wrapper import DataWrapper
+from open_targets.adapter.data_wrapper import FieldMap
 from open_targets.adapter.scan_operation import ScanOperation
 from open_targets.data.schema_base import Dataset, Field
 
@@ -24,8 +24,8 @@ class AcquisitionContextProtocol(Protocol):
     def get_scan_result_stream(
         self,
         scan_operation: ScanOperation,
-        required_fields: Iterable[type[Field]],
-    ) -> Iterable[DataWrapper]:
+        requested_fields: Iterable[type[Field]],
+    ) -> Iterable[FieldMap]:
         """Get the scan result stream.
 
         Each item yielded by the stream is a set of values wrapped to allow

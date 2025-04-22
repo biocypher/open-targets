@@ -36,7 +36,7 @@ edge_target_go: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisiti
             BuildCurieExpression(
                 prefix=LiteralExpression(ENSEMBL_PREFIX),
                 reference=FieldExpression(FieldTargetsId),
-                normalised=True,
+                normalise=True,
             ),
             LiteralExpression("->"),
             NormaliseCurieExpression(ToStringExpression(FieldExpression(FieldTargetsGoElementId))),
@@ -45,7 +45,7 @@ edge_target_go: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisiti
     source=BuildCurieExpression(
         prefix=LiteralExpression(ENSEMBL_PREFIX),
         reference=FieldExpression(FieldTargetsId),
-        normalised=True,
+        normalise=True,
     ),
     target=NormaliseCurieExpression(ToStringExpression(FieldExpression(FieldTargetsGoElementId))),
     label=LiteralExpression("GENE_TO_GO_TERM_ASSOCIATION"),

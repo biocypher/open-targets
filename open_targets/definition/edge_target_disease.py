@@ -31,7 +31,7 @@ edge_target_disease: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcqu
     source=BuildCurieExpression(
         prefix=LiteralExpression(ENSEMBL_PREFIX),
         reference=FieldExpression(FieldEvidenceTargetId),
-        normalised=True,
+        normalise=True,
     ),
     target=NormaliseCurieExpression(ToStringExpression(FieldExpression(FieldEvidenceDiseaseId))),
     label=FieldEvidenceDatatypeId,
