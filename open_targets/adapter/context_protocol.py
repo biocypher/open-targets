@@ -4,7 +4,7 @@ from collections.abc import Iterable
 from pathlib import Path
 from typing import Protocol
 
-from open_targets.adapter.data_wrapper import FieldMap
+from open_targets.adapter.data_view import DataView
 from open_targets.adapter.scan_operation import ScanOperation
 from open_targets.data.schema_base import Dataset, Field
 
@@ -25,13 +25,13 @@ class AcquisitionContextProtocol(Protocol):
         self,
         scan_operation: ScanOperation,
         requested_fields: Iterable[type[Field]],
-    ) -> Iterable[FieldMap]:
+    ) -> Iterable[DataView]:
         """Get the scan result stream.
 
-        Each item yielded by the stream is a set of values wrapped to allow
-        access by field classes. The values produced depend on the scan
-        operation and the required fields provided. For details of scan
-        operations, see their docstrings. The actual query executed could be
-        optimised but not guaranteed.
+        Each item yielded by the stream is a data view to allow access by field
+        classes. The values produced depend on the scan operation and the
+        required fields provided. For details of scan operations, see their
+        docstrings. The actual query executed could be optimised but not
+        guaranteed.
         """
         ...

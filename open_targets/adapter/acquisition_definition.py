@@ -14,7 +14,7 @@ from typing_extensions import override
 from open_targets.adapter._helper._acquisition_definition import recursive_build_expression_function
 from open_targets.adapter._helper._expression import recursive_get_dependent_fields, to_expression
 from open_targets.adapter.context_protocol import AcquisitionContextProtocol
-from open_targets.adapter.data_wrapper import FieldMap
+from open_targets.adapter.data_view import DataView
 from open_targets.adapter.expression import (
     Expression,
 )
@@ -52,7 +52,7 @@ class ScanningAcquisitionDefinition(
     """Acquisition definition that uses a scan operation to acquire.
 
     The dataset query is abstracted out by the scan operation which determines
-    the fashion of data query. Items yielded are also wrapped for easy access
+    the fashion of data query. Items yielded are data views for easy access
     to the data fields.
     """
 
@@ -68,7 +68,7 @@ class ScanningAcquisitionDefinition(
     def _acquire_from_scanning(
         self,
         context: AcquisitionContextProtocol,
-        data_stream: Iterable[FieldMap],
+        data_stream: Iterable[DataView],
     ) -> Iterable[TAcqusitionOutput]:
         """Acquire graph components from the scanning result stream."""
 
@@ -120,7 +120,7 @@ class _ExpressionAcquisitionDefinition(
     def _create_value_getter(
         self,
         expression: Expression[Any],
-    ) -> Callable[[FieldMap], Any]:
+    ) -> Callable[[DataView], Any]:
         func = recursive_build_expression_function(expression)
         return lambda data: func(data)
 
@@ -164,7 +164,7 @@ class ExpressionNodeAcquisitionDefinition(_ExpressionAcquisitionDefinition[NodeI
     def _acquire_from_scanning(
         self,
         context: AcquisitionContextProtocol,
-        data_stream: Iterable[FieldMap],
+        data_stream: Iterable[DataView],
     ) -> Iterable[NodeInfo]:
         """Build the functions that compute the values from the data stream."""
         id_getter = self._create_value_getter(self._primary_id_expr)
@@ -235,7 +235,7 @@ class ExpressionEdgeAcquisitionDefinition(_ExpressionAcquisitionDefinition[EdgeI
     def _acquire_from_scanning(
         self,
         context: AcquisitionContextProtocol,
-        data_stream: Iterable[FieldMap],
+        data_stream: Iterable[DataView],
     ) -> Iterable[EdgeInfo]:
         """Build the functions that compute the values from the data stream."""
         id_getter = self._create_value_getter(self._primary_id_expr)

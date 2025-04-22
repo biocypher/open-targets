@@ -3,7 +3,7 @@ from typing import Any
 
 from bioregistry.resolve import normalize_curie, normalize_parsed_curie, normalize_prefix
 
-from open_targets.adapter.data_wrapper import FieldMap
+from open_targets.adapter.data_wrapper import DataView
 from open_targets.adapter.expression import (
     BuildCurieExpression,
     DataSourceToLicenceExpression,
@@ -25,7 +25,7 @@ CURIE_SEPARATORS = [":", "_", "/"]
 
 def recursive_build_expression_function(
     expression: Expression[Any],
-) -> Callable[[FieldMap], Any]:
+) -> Callable[[DataView], Any]:
     """Build a function chain that evaluates the expression."""
     match expression:
         case FieldExpression():
@@ -72,11 +72,11 @@ def recursive_build_expression_function(
 
 def get_curie_builder(
     expression: BuildCurieExpression,
-) -> Callable[[FieldMap], str]:
+) -> Callable[[DataView], str]:
     prefix_func = recursive_build_expression_function(expression.prefix)
     reference_func = recursive_build_expression_function(expression.reference)
 
-    def normalise_curie_builder(data: FieldMap) -> str:
+    def normalise_curie_builder(data: DataView) -> str:
         prefix, reference = normalize_parsed_curie(prefix_func(data), reference_func(data))
         prefix = "" if prefix is None else prefix
         reference = "" if reference is None else reference

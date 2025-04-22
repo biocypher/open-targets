@@ -4,10 +4,10 @@ from typing import Any
 import pytest
 
 from open_targets.adapter.context import AcquisitionContext
-from open_targets.adapter.data_wrapper import (
-    ArrayDataWrapper,
-    MappingPresentingDataWrapper,
-    SequencePresentingDataWrapper,
+from open_targets.adapter.data_view import (
+    ArrayDataView,
+    MappingBackedDataView,
+    SequenceBackedDataView,
 )
 from open_targets.adapter.scan_operation import ExplodingScanOperation, RowScanOperation
 from open_targets.data.schema_base import Dataset, Field
@@ -149,12 +149,12 @@ def test_get_scan_result_stream_exploding_scan_operation(
 
 
 def _serialise(
-    wrapped: Any,
+    view: Any,
 ) -> Sequence[Any] | Mapping[type[Field], Any]:
-    if isinstance(wrapped, ArrayDataWrapper):
-        return [_serialise(i) for i in wrapped]
-    if isinstance(wrapped, SequencePresentingDataWrapper):
-        return {i: _serialise(v) for i, v in wrapped.items()}
-    if isinstance(wrapped, MappingPresentingDataWrapper):
-        return {i: _serialise(v) for i, v in wrapped.items()}
-    return wrapped
+    if isinstance(view, ArrayDataView):
+        return [_serialise(i) for i in view]
+    if isinstance(view, SequenceBackedDataView):
+        return {i: _serialise(v) for i, v in view.items()}
+    if isinstance(view, MappingBackedDataView):
+        return {i: _serialise(v) for i, v in view.items()}
+    return view

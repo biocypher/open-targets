@@ -10,7 +10,7 @@ from typing import Any, Final, cast, overload
 import duckdb
 
 from open_targets.adapter.acquisition_definition import AcquisitionDefinition
-from open_targets.adapter.data_wrapper import DataNode, DataWrapper, FieldMap, SequencePresentingDataWrapper
+from open_targets.adapter.data_view import DataView, DataViewProtocol, DataViewValue, SequenceBackedDataView
 from open_targets.adapter.output import EdgeInfo, NodeInfo
 from open_targets.adapter.scan_operation import ExplodingScanOperation, RowScanOperation, ScanOperation
 from open_targets.data.schema_base import Dataset, Field, SequenceField
@@ -69,7 +69,7 @@ class AcquisitionContext:
         self,
         scan_operation: ScanOperation,
         requested_fields: Iterable[type[Field]],
-    ) -> Iterable[FieldMap]:
+    ) -> Iterable[DataView]:
         """Get the scan result stream."""
         match scan_operation:
             case RowScanOperation():
@@ -109,24 +109,24 @@ class AcquisitionContext:
         self,
         dataset: type[Dataset],
         requested_fields: Iterable[type[Field]],
-    ) -> Iterable[FieldMap]:
+    ) -> Iterable[DataView]:
         top_fields, nested_fields = self._compute_field_hierarchy(requested_fields, TOP_FIELD_PATH_INDEX)
         field_index_map = {field: index for index, field in enumerate(top_fields + nested_fields)}
         query_result_stream = self._get_query_result(dataset, top_fields)
         for data in query_result_stream:
-            wrapped = SequencePresentingDataWrapper(field_index_map, data, top_fields)
+            view = SequenceBackedDataView(field_index_map, data, top_fields)
             nested_data = tuple(
-                self._deep_get_item(wrapped, cast("Sequence[type[Field]]", field.path[TOP_FIELD_PATH_INDEX:]))
+                self._deep_get_item(view, cast("Sequence[type[Field]]", field.path[TOP_FIELD_PATH_INDEX:]))
                 for field in nested_fields
             )
-            yield SequencePresentingDataWrapper(field_index_map, data + nested_data, requested_fields)
+            yield SequenceBackedDataView(field_index_map, data + nested_data, requested_fields)
 
     def _get_exploded_scan_result_stream(
         self,
         dataset: type[Dataset],
         exploded_field: type[SequenceField],
         requested_fields: Iterable[type[Field]],
-    ) -> Iterable[FieldMap]:
+    ) -> Iterable[DataView]:
         fields_under_exploded_field = [
             field
             for field in requested_fields
@@ -138,10 +138,10 @@ class AcquisitionContext:
         }
         exploded_field_path_length = len(exploded_field.path)
 
-        for wrapped in self._get_row_scan_result_stream(dataset, [exploded_field, *fields_above_exploded_field]):
-            sequence_data = cast("Sequence[FieldMap]", wrapped[exploded_field])
+        for view in self._get_row_scan_result_stream(dataset, [exploded_field, *fields_above_exploded_field]):
+            sequence_data = cast("Sequence[DataView]", view[exploded_field])
             upper_data = [
-                self._deep_get_item(wrapped, cast("Sequence[type[Field]]", field.path[TOP_FIELD_PATH_INDEX:]))
+                self._deep_get_item(view, cast("Sequence[type[Field]]", field.path[TOP_FIELD_PATH_INDEX:]))
                 for field in fields_above_exploded_field
             ]
             for item in sequence_data:
@@ -152,7 +152,7 @@ class AcquisitionContext:
                     )
                     for field in fields_under_exploded_field
                 ]
-                yield SequencePresentingDataWrapper(field_index_map, upper_data + lower_data, requested_fields)
+                yield SequenceBackedDataView(field_index_map, upper_data + lower_data, requested_fields)
 
     def _compute_field_hierarchy(
         self,
@@ -165,13 +165,13 @@ class AcquisitionContext:
 
     def _deep_get_item(
         self,
-        data: DataNode,
+        data: DataViewValue,
         path: Sequence[type[Field]],
     ) -> Any:
         value = data
         for field in path:
-            value = cast("FieldMap", value)[field]
-        if isinstance(value, DataWrapper):
+            value = cast("DataView", value)[field]
+        if isinstance(value, DataViewProtocol):
             return value.raw_data
         return value
 

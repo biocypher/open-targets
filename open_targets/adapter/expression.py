@@ -5,7 +5,7 @@ from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 from typing import Any, Final, Generic, TypeVar
 
-from open_targets.adapter.data_wrapper import DataNode
+from open_targets.adapter.data_wrapper import DataViewValue
 from open_targets.data.schema_base import Field
 
 TValue = TypeVar("TValue")
@@ -29,7 +29,7 @@ class HasDependentExpressionMixin:
 
 
 @dataclass(frozen=True)
-class FieldExpression(Expression[DataNode]):
+class FieldExpression(Expression[DataViewValue]):
     """Expression that retrives values from a field.
 
     This is one of the leaf expressions that provides the source of data down to

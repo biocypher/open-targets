@@ -8,7 +8,7 @@ from open_targets.adapter.acquisition_definition import (
     ExpressionEdgeAcquisitionDefinition,
     ExpressionNodeAcquisitionDefinition,
 )
-from open_targets.adapter.data_wrapper import FieldMap
+from open_targets.adapter.data_wrapper import DataView
 from open_targets.adapter.expression import (
     BuildCurieExpression,
     DataSourceToLicenceExpression,
@@ -63,7 +63,7 @@ class TestScanningAcquisitionDefinition:
 class TestExpressionAcquisitionDefinition:
     def perform_test(
         self,
-        field_map: FieldMap,
+        field_map: DataView,
         expression: Expression[Any],
         expected: Any,
     ) -> None:
@@ -95,7 +95,7 @@ class TestExpressionAcquisitionDefinition:
     )
     def test_transform_expression(
         self,
-        field_map: FieldMap,
+        field_map: DataView,
         expression: Expression[Any],
         expected: Any,
     ) -> None:
@@ -137,7 +137,7 @@ class TestExpressionAcquisitionDefinition:
     )
     def test_build_curie_expression(
         self,
-        field_map: FieldMap,
+        field_map: DataView,
         expression: Expression[Any],
         expected: Any,
     ) -> None:
@@ -160,7 +160,7 @@ class TestExpressionAcquisitionDefinition:
     )
     def test_extract_curie_prefix_expression(
         self,
-        field_map: FieldMap,
+        field_map: DataView,
         expression: Expression[Any],
         expected: Any,
     ) -> None:
@@ -207,7 +207,7 @@ class TestExpressionAcquisitionDefinition:
     )
     def test_extract_substring_expression(
         self,
-        field_map: FieldMap,
+        field_map: DataView,
         expression: Expression[Any],
         expected: Any,
     ) -> None:
@@ -230,7 +230,7 @@ class TestExpressionAcquisitionDefinition:
     )
     def test_data_source_to_licence_expression(
         self,
-        field_map: FieldMap,
+        field_map: DataView,
         expression: Expression[Any],
         expected: Any,
     ) -> None:
@@ -295,7 +295,7 @@ class TestExpressionNodeAcquisitionDefinition:
     )
     def test_node_acquisition_definition(
         self,
-        field_map: FieldMap,
+        field_map: DataView,
         primary_id: str,
         label: str,
         properties: list[Any],
@@ -378,7 +378,7 @@ class TestExpressionEdgeAcquisitionDefinition:
     )
     def test_edge_acquisition_definition(
         self,
-        field_map: FieldMap,
+        field_map: DataView,
         primary_id: str,
         source: str,
         target: str,

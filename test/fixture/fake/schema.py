@@ -24,7 +24,7 @@
 from collections.abc import Mapping, Sequence
 from typing import Any, Final
 
-from open_targets.adapter.data_wrapper import FieldMap
+from open_targets.adapter.data_wrapper import DataView
 from open_targets.data.metadata.model import OpenTargetsDatasetFieldType
 from open_targets.data.schema_base import Dataset, ScalarField, SequenceField, StructField
 
@@ -47,7 +47,7 @@ class DatasetFake(Dataset):
         }
 
     @classmethod
-    def get_field_mapped_row(cls, *, row_id: int) -> FieldMap:
+    def get_field_mapped_row(cls, *, row_id: int) -> DataView:
         return {
             cls.f_scalar: FieldFakeScalar.get_value(row_id=row_id),
             cls.f_struct: FieldFakeStruct.get_field_mapped_value(row_id=row_id),
@@ -71,7 +71,7 @@ class FieldFakeStruct(StructField):
         }
 
     @classmethod
-    def get_field_mapped_value(cls, *, row_id: int) -> FieldMap:
+    def get_field_mapped_value(cls, *, row_id: int) -> DataView:
         return {
             cls.f_struct: FieldFakeStructStruct.get_field_mapped_value(row_id=row_id),
         }
@@ -83,7 +83,7 @@ class FieldFakeSequence(SequenceField):
         return [FieldFakeSequenceElement.get_value(row_id=row_id, element_id=i) for i in range(num_elements)]
 
     @classmethod
-    def get_field_mapped_value(cls, *, row_id: int, num_elements: int) -> Sequence[FieldMap]:
+    def get_field_mapped_value(cls, *, row_id: int, num_elements: int) -> Sequence[DataView]:
         return [
             FieldFakeSequenceElement.get_field_mapped_value(row_id=row_id, element_id=i) for i in range(num_elements)
         ]
@@ -99,7 +99,7 @@ class FieldFakeStructStruct(StructField):
         }
 
     @classmethod
-    def get_field_mapped_value(cls, *, row_id: int) -> FieldMap:
+    def get_field_mapped_value(cls, *, row_id: int) -> DataView:
         return {
             cls.f_scalar: FieldFakeStructStructScalar.get_value(row_id=row_id),
         }
@@ -115,7 +115,7 @@ class FieldFakeSequenceElement(StructField):
         }
 
     @classmethod
-    def get_field_mapped_value(cls, *, row_id: int, element_id: int) -> FieldMap:
+    def get_field_mapped_value(cls, *, row_id: int, element_id: int) -> DataView:
         return {
             cls.f_scalar: FieldFakeSequenceElementScalar.get_value(row_id=row_id, element_id=element_id),
         }

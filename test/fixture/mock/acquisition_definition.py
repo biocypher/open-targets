@@ -7,7 +7,7 @@ from open_targets.adapter.acquisition_definition import (
     _ExpressionAcquisitionDefinition,
 )
 from open_targets.adapter.context_protocol import AcquisitionContextProtocol
-from open_targets.adapter.data_wrapper import DataNode, FieldMap
+from open_targets.adapter.data_wrapper import DataView, DataViewValue
 from open_targets.adapter.expression import Expression
 from open_targets.adapter.scan_operation import ScanOperation
 from open_targets.data.schema import Field
@@ -23,7 +23,7 @@ class MockScanningAcquisitionDefinition(ScanningAcquisitionDefinition[TAcqusitio
     def _acquire_from_scanning(
         self,
         context: AcquisitionContextProtocol,
-        data_stream: Iterable[DataNode],
+        data_stream: Iterable[DataViewValue],
     ) -> Iterable[TAcqusitionOutput]: ...
 
 
@@ -35,7 +35,7 @@ class MockSingleExpressionAcquisitionDefinition(_ExpressionAcquisitionDefinition
     def _acquire_from_scanning(
         self,
         context: AcquisitionContextProtocol,
-        data_stream: Iterable[FieldMap],
+        data_stream: Iterable[DataView],
     ) -> Iterable[Any]:
         value_getter = self._create_value_getter(self._expression)
         return (value_getter(data) for data in data_stream)
