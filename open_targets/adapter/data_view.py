@@ -196,5 +196,5 @@ def _create_view_value(data: Any, field: type[Field]) -> DataViewValue:
     if issubclass(field, StructField):
         return MappingBackedDataView(data, field.fields)
     if issubclass(field, SequenceField) and issubclass(field.element, StructField):
-        return ArrayDataView(data, field.element.fields)
+        return ArrayDataView(data if data is not None else [], field.element.fields)
     return data
