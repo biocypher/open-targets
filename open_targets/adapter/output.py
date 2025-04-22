@@ -5,13 +5,13 @@ from dataclasses import dataclass
 from typing import Any
 
 
-@dataclass
+@dataclass(frozen=True)
 class NodeInfo:
     """A type safe intermediate node compatible with BioCypher."""
 
     id: str
     label: str
-    properties: Mapping[str, str]
+    properties: Mapping[str, Any]
 
     def __iter__(self) -> Iterator[Any]:
         """Implement the tuple protocol for BioCypher."""
@@ -22,7 +22,7 @@ class NodeInfo:
         return 3
 
 
-@dataclass
+@dataclass(frozen=True)
 class EdgeInfo:
     """A type safe intermediate edge compatible with BioCypher."""
 
@@ -30,7 +30,7 @@ class EdgeInfo:
     source_id: str
     target_id: str
     label: str
-    properties: Mapping[str, str]
+    properties: Mapping[str, Any]
 
     def __iter__(self) -> Iterator[Any]:
         """Implement the tuple protocol for BioCypher."""

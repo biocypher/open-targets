@@ -1,15 +1,15 @@
 """Definition of the generation context protocol."""
 
-from collections.abc import Iterable
+from collections.abc import Iterable, Sequence
 from pathlib import Path
 from typing import Protocol
 
-from open_targets.adapter.data_wrapper import DataWrapper
+from open_targets.adapter.data_view import DataView
 from open_targets.adapter.scan_operation import ScanOperation
 from open_targets.data.schema_base import Dataset, Field
 
 
-class GenerationContextProtocol(Protocol):
+class AcquisitionContextProtocol(Protocol):
     """Protocol for the generation context.
 
     A generation context provides information of a generation session and low
@@ -24,14 +24,14 @@ class GenerationContextProtocol(Protocol):
     def get_scan_result_stream(
         self,
         scan_operation: ScanOperation,
-        required_fields: Iterable[type[Field]],
-    ) -> Iterable[DataWrapper]:
+        requested_fields: Sequence[type[Field]],
+    ) -> Iterable[DataView]:
         """Get the scan result stream.
 
-        Each item yielded by the stream is a set of values wrapped to allow
-        access by field classes. The values produced depend on the scan
-        operation and the required fields provided. For details of scan
-        operations, see their docstrings. The actual query executed could be
-        optimised but not guaranteed.
+        Each item yielded by the stream is a data view to allow access by field
+        classes. The values produced depend on the scan operation and the
+        required fields provided. For details of scan operations, see their
+        docstrings. The actual query executed could be optimised but not
+        guaranteed.
         """
         ...

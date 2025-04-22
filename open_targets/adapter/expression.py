@@ -1,10 +1,11 @@
 """Definition of expressions."""
 
+from abc import abstractmethod
 from collections.abc import Callable, Sequence
-from dataclasses import dataclass, fields
-from typing import Any, Final, Generic, TypeVar, get_origin
+from dataclasses import dataclass
+from typing import Any, Final, Generic, TypeVar
 
-from open_targets.adapter.data_wrapper import ConvertedType
+from open_targets.adapter.data_view import DataViewValue
 from open_targets.data.schema_base import Field
 
 TValue = TypeVar("TValue")
@@ -18,8 +19,17 @@ class Expression(Generic[TValue]):
     """
 
 
+class HasDependentExpressionMixin:
+    """Mixin for expressions that have dependent expressions."""
+
+    @property
+    @abstractmethod
+    def dependents(self) -> Sequence[Expression[Any]]:
+        """The dependent expressions."""
+
+
 @dataclass(frozen=True)
-class FieldExpression(Expression[ConvertedType]):
+class FieldExpression(Expression[DataViewValue]):
     """Expression that retrives values from a field.
 
     This is one of the leaf expressions that provides the source of data down to
@@ -41,45 +51,70 @@ class LiteralExpression(Expression[TValue]):
 
 
 @dataclass(frozen=True)
-class TransformExpression(Expression[TValue]):
+class TransformExpression(HasDependentExpressionMixin, Expression[TValue]):
     """Expression that transforms values using a custom function."""
 
     expression: Expression[Any] | None
     function: Callable[[Any], TValue]
 
+    @property
+    def dependents(self) -> Sequence[Expression[Any]]:
+        """The dependent expressions."""
+        return [self.expression] if self.expression else []
+
 
 @dataclass(frozen=True)
-class ToStringExpression(Expression[str]):
+class ToStringExpression(HasDependentExpressionMixin, Expression[str]):
     """Expression that converts any value to a string."""
 
     expression: Expression[Any]
 
+    @property
+    def dependents(self) -> Sequence[Expression[Any]]:
+        """The dependent expressions."""
+        return [self.expression]
+
 
 @dataclass(frozen=True)
-class StringConcatenationExpression(Expression[str]):
+class StringConcatenationExpression(HasDependentExpressionMixin, Expression[str]):
     """Expression that concatenates strings."""
 
     expressions: Sequence[Expression[str]]
 
+    @property
+    def dependents(self) -> Sequence[Expression[Any]]:
+        """The dependent expressions."""
+        return self.expressions
+
 
 @dataclass(frozen=True)
-class StringLowerExpression(Expression[str]):
+class StringLowerExpression(HasDependentExpressionMixin, Expression[str]):
     """Expression that converts a string to lowercase."""
 
     expression: Expression[str]
 
+    @property
+    def dependents(self) -> Sequence[Expression[Any]]:
+        """The dependent expressions."""
+        return [self.expression]
+
 
 @dataclass(frozen=True)
-class BuildCurieExpression(Expression[str]):
+class BuildCurieExpression(HasDependentExpressionMixin, Expression[str]):
     """Expression that builds a CURIE from parts."""
 
     prefix: Expression[Any]
     reference: Expression[Any]
-    normalised: bool = True
+    normalise: bool = True
+
+    @property
+    def dependents(self) -> Sequence[Expression[Any]]:
+        """The dependent expressions."""
+        return [self.prefix, self.reference]
 
 
 @dataclass(frozen=True)
-class ExtractCuriePrefixExpression(Expression[str]):
+class ExtractCuriePrefixExpression(HasDependentExpressionMixin, Expression[str]):
     """Expression that extracts the prefix from a CURIE like string.
 
     For example, `GO_00000` results into `go`.
@@ -88,9 +123,14 @@ class ExtractCuriePrefixExpression(Expression[str]):
     expression: Expression[str]
     normalise: bool = True
 
+    @property
+    def dependents(self) -> Sequence[Expression[Any]]:
+        """The dependent expressions."""
+        return [self.expression]
+
 
 @dataclass(frozen=True)
-class NormaliseCurieExpression(Expression[str]):
+class NormaliseCurieExpression(HasDependentExpressionMixin, Expression[str]):
     """Expression that normalises a CURIE like string.
 
     For example, `GO_00000` results into `go:00000`.
@@ -98,9 +138,14 @@ class NormaliseCurieExpression(Expression[str]):
 
     expression: Expression[str]
 
+    @property
+    def dependents(self) -> Sequence[Expression[Any]]:
+        """The dependent expressions."""
+        return [self.expression]
+
 
 @dataclass(frozen=True)
-class ExtractSubstringExpression(Expression[str]):
+class ExtractSubstringExpression(HasDependentExpressionMixin, Expression[str]):
     """Expression that extracts a substring.
 
     The string is split by the separator and the substring at the given index is
@@ -111,26 +156,19 @@ class ExtractSubstringExpression(Expression[str]):
     separator: Expression[str]
     index: int
 
+    @property
+    def dependents(self) -> Sequence[Expression[Any]]:
+        """The dependent expressions."""
+        return [self.expression, self.separator]
+
 
 @dataclass(frozen=True)
-class DataSourceToLicenceExpression(Expression[str]):
+class DataSourceToLicenceExpression(HasDependentExpressionMixin, Expression[str]):
     """Expression that converts a data source to a licence."""
 
     datasource: Expression[str]
 
-
-def recursive_get_dependent_fields(
-    expression: Expression[Any],
-) -> set[type[Field]]:
-    """Get all dataset fields that an expression depends on.
-
-    This is used to determine the dataset fields that need to be referenced to
-    fulfill the expression.
-    """
-    if isinstance(expression, FieldExpression):
-        return {expression.field}
-    dataset_fields = set[type[Field]]()
-    for field in fields(expression):
-        if get_origin(field.type) is Expression:
-            dataset_fields.update(recursive_get_dependent_fields(getattr(expression, field.name)))
-    return dataset_fields
+    @property
+    def dependents(self) -> Sequence[Expression[Any]]:
+        """The dependent expressions."""
+        return [self.datasource]

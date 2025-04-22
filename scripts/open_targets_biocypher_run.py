@@ -2,7 +2,7 @@
 
 from biocypher import BioCypher
 
-from open_targets.adapter.context import GenerationContext
+from open_targets.adapter.context import AcquisitionContext
 from open_targets.definition import (
     edge_target_disease,
     edge_target_go,
@@ -36,7 +36,7 @@ def main():
     edge_definitions = [edge_target_disease, edge_target_go]
 
     # Open Targets
-    context = GenerationContext(
+    context = AcquisitionContext(
         node_definitions=node_definitions,
         edge_definitions=edge_definitions,
         datasets_location="data/ot_files",
@@ -44,9 +44,9 @@ def main():
     )
 
     for node_definition in node_definitions:
-        bc.write_nodes(context.get_generator(node_definition))
+        bc.write_nodes(context.get_acquisition_generator(node_definition))
     for edge_definition in edge_definitions:
-        bc.write_edges(context.get_generator(edge_definition))
+        bc.write_edges(context.get_acquisition_generator(edge_definition))
 
     # Post import functions
     bc.write_import_call()

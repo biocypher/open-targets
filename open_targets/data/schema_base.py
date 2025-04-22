@@ -1,4 +1,4 @@
-# ruff: noqa: D101, D102, PGH003
+# ruff: noqa: PGH003
 # type: ignore
 
 from abc import ABC
@@ -17,7 +17,7 @@ class Field(ABC):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type["Dataset"]]
-    path: Final[Sequence[type["Field"]]]
+    path: Final[Sequence[type["Dataset"] | type["Field"]]]
     nullable: Final[bool]
 
 

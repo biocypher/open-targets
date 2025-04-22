@@ -30,8 +30,11 @@ select = ["ALL"]
 [tool.ruff.lint.pycodestyle]
 max-doc-length = 80
 
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
 [tool.ruff.lint.per-file-ignores]
-"test/*" = ["S101", "D100", "D103", "D104"]
+"test/*" = ["S101", "D100", "D101", "D102", "D103", "D104", "SLF001"]
 
 [tool.pyright]
 pythonVersion = "3.10"

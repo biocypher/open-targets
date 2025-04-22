@@ -1,4 +1,18 @@
-"""Functions for generating the schema.py file."""
+"""Functions for generating the schema.py file.
+
+To ease the use of the adaptor and move as many errors as possible to edit time,
+the schema of the Open Targets datasets are represented as Python accurately
+typed classes in `schema.py`. By referencing these classes instead of hard
+coding the information such as dataset or field names, errors are caught at
+edit time instead of run time. This is particularly useful when the targeted
+Open Targets version is updated. The schema in Python domain is also useful for
+code completion, type checking and dataset discovery, especially for LLM
+integration.
+
+To generate the schema, metadata from the Open Targets server is downloaded
+and deserialised into Python objects. Jinja then is used to generate the schema
+classes from the metadata.
+"""
 
 from dataclasses import dataclass, replace
 from typing import Any
@@ -161,7 +175,7 @@ def recursive_handle_fields(
     field_class_infos = sorted(field_class_infos, key=lambda i: str(i.name))
     fields_attribute = LateAttribute(
         name="fields",
-        type=f"Final[Sequence[type[{Field.__name__}]]]",
+        type=f"Final[Sequence[type[{Dataset.__name__}] | type[{Field.__name__}]]]",
         value=f"[{', '.join(str(i.name) for i in field_class_infos)}]",
     )
     field_attributes = sorted(field_attributes, key=lambda i: i.name)
@@ -203,7 +217,7 @@ def recursive_get_field_class_info(
         LateAttribute("dataset", f"Final[type[{Dataset.__name__}]]", str(dataset_class_name)),
         LateAttribute(
             "path",
-            f"Final[Sequence[type[{Field.__name__}]]]",
+            f"Final[Sequence[type[{Dataset.__name__}] | type[{Field.__name__}]]]",
             f"[{', '.join(str(i) for i in field_path)}]",
         ),
     ]

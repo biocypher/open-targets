@@ -44,6 +44,8 @@ class ExplodingScanOperation(ScanOperation):
     | a         | c                | [d, e]          |
     | f         | g                | [i, j]          |
     | f         | h                | [i, j]          |
+
+    Nested exploding is NOT yet supported.
     """
 
     exploded_field: type[SequenceField]
