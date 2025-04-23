@@ -79,7 +79,7 @@ class SequenceBackedDataView(DataViewProtocol, DataView):
     sequence of fields which are used to access a nested structure in the
     data. When a virtual key is accessed, the view is recursively created.
 
-    For instance, an field index mapping and data could be as follows:
+    For instance, a field index mapping and corresponding data could be:
     field_index_mapping = {
         FieldA: 0,
         FieldB: 1,
