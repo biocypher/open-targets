@@ -32,6 +32,7 @@ class OpenTargetsDatasetFieldType(str, Enum):
     FLOAT = "float"
     DOUBLE = "double"
     STRING = "string"
+    DATE = "date"
     ARRAY = "array"
     MAP = "map"
     STRUCT = "struct"
@@ -68,6 +69,7 @@ OpenTargetsDatasetFieldTypePrimitiveSet: TypeAlias = Literal[
     OpenTargetsDatasetFieldType.FLOAT,
     OpenTargetsDatasetFieldType.DOUBLE,
     OpenTargetsDatasetFieldType.STRING,
+    OpenTargetsDatasetFieldType.DATE,
 ]
 
 OpenTargetsDatasetFieldTypeComplexSet: TypeAlias = Literal[
