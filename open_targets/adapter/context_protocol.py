@@ -1,4 +1,4 @@
-"""Definition of the generation context protocol."""
+"""Protocol for the acquisition context."""
 
 from collections.abc import Iterable, Sequence
 from pathlib import Path
@@ -10,11 +10,11 @@ from open_targets.data.schema_base import Dataset, Field
 
 
 class AcquisitionContextProtocol(Protocol):
-    """Protocol for the generation context.
+    """Protocol for the acquisition context.
 
-    A generation context provides information of a generation session and low
-    level access to datasets. This protocol is an abstract layer over the query
-    engine.
+    An acquisition context provides information of an acquisition session and
+    low level access to datasets. This protocol is an abstract layer over the
+    query engine.
     """
 
     def get_dataset_path(self, dataset: type[Dataset]) -> Path:

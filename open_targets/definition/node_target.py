@@ -1,4 +1,4 @@
-"""Acquisition definitions for nodes of targets."""
+"""Acquisition definition that acquires nodes of targets."""
 
 from typing import Final
 

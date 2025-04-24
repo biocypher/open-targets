@@ -1,4 +1,4 @@
-"""Acquisition definitions for nodes of mouse phenotypes."""
+"""Acquisition definition that acquires nodes of mouse phenotypes."""
 
 from typing import Final
 

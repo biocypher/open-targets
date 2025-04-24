@@ -1,4 +1,4 @@
-"""Acquisition definitions for nodes of GO terms."""
+"""Acquisition definition that acquires nodes of GO terms."""
 
 from typing import Final
 

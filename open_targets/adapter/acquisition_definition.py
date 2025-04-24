@@ -1,4 +1,4 @@
-"""Definition of acquisition definitions.
+"""Acquisition definitions at different levels of abstraction.
 
 Acquisition definitions also define the actual logic querying the datasets.
 """
@@ -24,10 +24,10 @@ from open_targets.data.schema import Field
 from open_targets.data.schema_base import Dataset
 
 Source: TypeAlias = int | float | str | type[Field] | Expression[Any]
-TAcqusitionOutput = TypeVar("TAcqusitionOutput")
+TAcquisitionOutput = TypeVar("TAcquisitionOutput")
 
 
-class AcquisitionDefinition(Generic[TAcqusitionOutput], ABC):
+class AcquisitionDefinition(Generic[TAcquisitionOutput], ABC):
     """Base class for all acquisition definitions.
 
     An acquisition definition describes how to acquire a set of nodes/edges from
@@ -41,12 +41,12 @@ class AcquisitionDefinition(Generic[TAcqusitionOutput], ABC):
         """Datasets that are required by this definition."""
 
     @abstractmethod
-    def acquire(self, context: AcquisitionContextProtocol) -> Iterable[TAcqusitionOutput]:
+    def acquire(self, context: AcquisitionContextProtocol) -> Iterable[TAcquisitionOutput]:
         """Acquire graph components by directly accessing the context."""
 
 
 class ScanningAcquisitionDefinition(
-    AcquisitionDefinition[TAcqusitionOutput],
+    AcquisitionDefinition[TAcquisitionOutput],
     ABC,
 ):
     """Acquisition definition that uses a scan operation to acquire.
@@ -69,7 +69,7 @@ class ScanningAcquisitionDefinition(
         self,
         context: AcquisitionContextProtocol,
         data_stream: Iterable[DataView],
-    ) -> Iterable[TAcqusitionOutput]:
+    ) -> Iterable[TAcquisitionOutput]:
         """Acquire graph components from the scanning result stream."""
 
     @override
@@ -78,7 +78,7 @@ class ScanningAcquisitionDefinition(
         return {self._get_scan_operation().dataset}
 
     @override
-    def acquire(self, context: AcquisitionContextProtocol) -> Iterable[TAcqusitionOutput]:
+    def acquire(self, context: AcquisitionContextProtocol) -> Iterable[TAcquisitionOutput]:
         """Create the scanning result stream from the low level access."""
         scan_result_stream = context.get_scan_result_stream(
             self._get_scan_operation(),
@@ -89,7 +89,7 @@ class ScanningAcquisitionDefinition(
 
 @dataclass(frozen=True)
 class _ExpressionAcquisitionDefinition(
-    ScanningAcquisitionDefinition[TAcqusitionOutput],
+    ScanningAcquisitionDefinition[TAcquisitionOutput],
     ABC,
 ):
     """Acquisition definition that is described by expressions.
