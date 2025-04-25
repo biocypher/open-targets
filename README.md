@@ -90,7 +90,7 @@ python ./scripts/open_targets_biocypher_run.py
 The script runs BioCypher and generates a knowledge graph using all our node/edge definition presets.
 
 ### Not So Quick Start
-Basically the [Quick Start](#quick-start) but with your own set of node/edge definiitons taken from our presets.
+Basically the [Quick Start](#quick-start) but with your own set of node/edge definitions taken from our presets:
 ```python
     from open_targets.definition import (
         ...
@@ -150,7 +150,7 @@ This is equivalent to:
 value = normalise_curie(str(data[FieldEvidenceDiseaseId]))
 ```
 
-In fact, this is almost exactly how a function will be built andrun during acquisition.
+In fact, this is almost exactly how a function will be built and run during acquisition.
 
 An edge definition is similar but includes two additional attributes, `source` and `target`, to link two nodes together.
 
