@@ -753,6 +753,227 @@ class FieldBaselineExpressionTissuesElementRnaZscore(ScalarField):
     path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
+class DatasetCooccurrences(Dataset):
+    id: Final[str]
+    fields: Final[Sequence[type[Field]]]
+    f_date: Final[type["FieldCooccurrencesDate"]]
+    f_day: Final[type["FieldCooccurrencesDay"]]
+    f_end_1: Final[type["FieldCooccurrencesEnd1"]]
+    f_end_2: Final[type["FieldCooccurrencesEnd2"]]
+    f_evidence_score: Final[type["FieldCooccurrencesEvidenceScore"]]
+    f_is_mapped: Final[type["FieldCooccurrencesIsMapped"]]
+    f_keyword_id_1: Final[type["FieldCooccurrencesKeywordId1"]]
+    f_keyword_id_2: Final[type["FieldCooccurrencesKeywordId2"]]
+    f_label_1: Final[type["FieldCooccurrencesLabel1"]]
+    f_label_2: Final[type["FieldCooccurrencesLabel2"]]
+    f_label_n1: Final[type["FieldCooccurrencesLabelN1"]]
+    f_label_n2: Final[type["FieldCooccurrencesLabelN2"]]
+    f_month: Final[type["FieldCooccurrencesMonth"]]
+    f_organisms: Final[type["FieldCooccurrencesOrganisms"]]
+    f_pmcid: Final[type["FieldCooccurrencesPmcid"]]
+    f_pmid: Final[type["FieldCooccurrencesPmid"]]
+    f_pub_date: Final[type["FieldCooccurrencesPubDate"]]
+    f_section: Final[type["FieldCooccurrencesSection"]]
+    f_start_1: Final[type["FieldCooccurrencesStart1"]]
+    f_start_2: Final[type["FieldCooccurrencesStart2"]]
+    f_text: Final[type["FieldCooccurrencesText"]]
+    f_trace_source: Final[type["FieldCooccurrencesTraceSource"]]
+    f_type: Final[type["FieldCooccurrencesType"]]
+    f_type_1: Final[type["FieldCooccurrencesType1"]]
+    f_type_2: Final[type["FieldCooccurrencesType2"]]
+    f_year: Final[type["FieldCooccurrencesYear"]]
+
+
+class FieldCooccurrencesDate(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesDay(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesEnd1(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesEnd2(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesEvidenceScore(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesIsMapped(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesKeywordId1(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesKeywordId2(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesLabel1(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesLabel2(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesLabelN1(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesLabelN2(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesMonth(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesOrganisms(SequenceField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    element: Final[type["FieldCooccurrencesOrganismsElement"]]
+
+
+class FieldCooccurrencesOrganismsElement(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesPmcid(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesPmid(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesPubDate(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesSection(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesStart1(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesStart2(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesText(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesTraceSource(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesType(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesType1(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesType2(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldCooccurrencesYear(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
 class DatasetDiseaseToPhenotype(Dataset):
     id: Final[str]
     fields: Final[Sequence[type[Field]]]
@@ -943,7 +1164,6 @@ class DatasetDiseases(Dataset):
     f_obsolete_terms: Final[type["FieldDiseasesObsoleteTerms"]]
     f_ontology: Final[type["FieldDiseasesOntology"]]
     f_parents: Final[type["FieldDiseasesParents"]]
-    f_sko: Final[type["FieldDiseasesSko"]]
     f_synonyms: Final[type["FieldDiseasesSynonyms"]]
     f_therapeutic_areas: Final[type["FieldDiseasesTherapeuticAreas"]]
 
@@ -1145,21 +1365,6 @@ class FieldDiseasesParentsElement(ScalarField):
     path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
-class FieldDiseasesSko(SequenceField):
-    name: Final[str]
-    data_type: Final[OpenTargetsDatasetFieldType]
-    dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Dataset] | type[Field]]]
-    element: Final[type["FieldDiseasesSkoElement"]]
-
-
-class FieldDiseasesSkoElement(ScalarField):
-    name: Final[str]
-    data_type: Final[OpenTargetsDatasetFieldType]
-    dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Dataset] | type[Field]]]
-
-
 class FieldDiseasesSynonyms(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
@@ -1253,8 +1458,10 @@ class DatasetDrugWarnings(Dataset):
     f_chembl_ids: Final[type["FieldDrugWarningsChemblIds"]]
     f_country: Final[type["FieldDrugWarningsCountry"]]
     f_description: Final[type["FieldDrugWarningsDescription"]]
+    f_efo_id: Final[type["FieldDrugWarningsEfoId"]]
+    f_efo_id_for_warning_class: Final[type["FieldDrugWarningsEfoIdForWarningClass"]]
+    f_efo_term: Final[type["FieldDrugWarningsEfoTerm"]]
     f_id: Final[type["FieldDrugWarningsId"]]
-    f_meddra_soc_code: Final[type["FieldDrugWarningsMeddraSocCode"]]
     f_references: Final[type["FieldDrugWarningsReferences"]]
     f_toxicity_class: Final[type["FieldDrugWarningsToxicityClass"]]
     f_warning_type: Final[type["FieldDrugWarningsWarningType"]]
@@ -1290,14 +1497,28 @@ class FieldDrugWarningsDescription(ScalarField):
     path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
-class FieldDrugWarningsId(ScalarField):
+class FieldDrugWarningsEfoId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
-class FieldDrugWarningsMeddraSocCode(ScalarField):
+class FieldDrugWarningsEfoIdForWarningClass(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldDrugWarningsEfoTerm(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldDrugWarningsId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -1455,6 +1676,109 @@ class FieldEbisearchEvidenceTargetId(ScalarField):
     path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
+class DatasetEpmcCooccurrences(Dataset):
+    id: Final[str]
+    fields: Final[Sequence[type[Field]]]
+    f_anns: Final[type["FieldEpmcCooccurrencesAnns"]]
+    f_id: Final[type["FieldEpmcCooccurrencesId"]]
+    f_provider: Final[type["FieldEpmcCooccurrencesProvider"]]
+    f_src: Final[type["FieldEpmcCooccurrencesSrc"]]
+
+
+class FieldEpmcCooccurrencesAnns(SequenceField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    element: Final[type["FieldEpmcCooccurrencesAnnsElement"]]
+
+
+class FieldEpmcCooccurrencesAnnsElement(StructField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Field]]]
+    f_exact: Final[type["FieldEpmcCooccurrencesAnnsElementExact"]]
+    f_section: Final[type["FieldEpmcCooccurrencesAnnsElementSection"]]
+    f_tags: Final[type["FieldEpmcCooccurrencesAnnsElementTags"]]
+    f_type: Final[type["FieldEpmcCooccurrencesAnnsElementType"]]
+
+
+class FieldEpmcCooccurrencesAnnsElementExact(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldEpmcCooccurrencesAnnsElementSection(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldEpmcCooccurrencesAnnsElementTags(SequenceField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    element: Final[type["FieldEpmcCooccurrencesAnnsElementTagsElement"]]
+
+
+class FieldEpmcCooccurrencesAnnsElementTagsElement(StructField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Field]]]
+    f_name: Final[type["FieldEpmcCooccurrencesAnnsElementTagsElementName"]]
+    f_uri: Final[type["FieldEpmcCooccurrencesAnnsElementTagsElementUri"]]
+
+
+class FieldEpmcCooccurrencesAnnsElementTagsElementName(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldEpmcCooccurrencesAnnsElementTagsElementUri(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldEpmcCooccurrencesAnnsElementType(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldEpmcCooccurrencesId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldEpmcCooccurrencesProvider(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldEpmcCooccurrencesSrc(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
 class DatasetEvidence(Dataset):
     id: Final[str]
     fields: Final[Sequence[type[Field]]]
@@ -1471,6 +1795,7 @@ class DatasetEvidence(Dataset):
     f_biomarker_name: Final[type["FieldEvidenceBiomarkerName"]]
     f_biomarkers: Final[type["FieldEvidenceBiomarkers"]]
     f_biosamples_from_source: Final[type["FieldEvidenceBiosamplesFromSource"]]
+    f_cell_type: Final[type["FieldEvidenceCellType"]]
     f_clinical_phase: Final[type["FieldEvidenceClinicalPhase"]]
     f_clinical_significances: Final[type["FieldEvidenceClinicalSignificances"]]
     f_clinical_status: Final[type["FieldEvidenceClinicalStatus"]]
@@ -1480,8 +1805,10 @@ class DatasetEvidence(Dataset):
     f_cohort_short_name: Final[type["FieldEvidenceCohortShortName"]]
     f_confidence: Final[type["FieldEvidenceConfidence"]]
     f_contrast: Final[type["FieldEvidenceContrast"]]
+    f_crispr_screen_library: Final[type["FieldEvidenceCrisprScreenLibrary"]]
     f_datasource_id: Final[type["FieldEvidenceDatasourceId"]]
     f_datatype_id: Final[type["FieldEvidenceDatatypeId"]]
+    f_direction_on_trait: Final[type["FieldEvidenceDirectionOnTrait"]]
     f_disease_cell_lines: Final[type["FieldEvidenceDiseaseCellLines"]]
     f_disease_from_source: Final[type["FieldEvidenceDiseaseFromSource"]]
     f_disease_from_source_id: Final[type["FieldEvidenceDiseaseFromSourceId"]]
@@ -1492,6 +1819,7 @@ class DatasetEvidence(Dataset):
     f_drug_from_source: Final[type["FieldEvidenceDrugFromSource"]]
     f_drug_id: Final[type["FieldEvidenceDrugId"]]
     f_drug_response: Final[type["FieldEvidenceDrugResponse"]]
+    f_genetic_background: Final[type["FieldEvidenceGeneticBackground"]]
     f_id: Final[type["FieldEvidenceId"]]
     f_literature: Final[type["FieldEvidenceLiterature"]]
     f_log_2_fold_change_percentile_rank: Final[type["FieldEvidenceLog2FoldChangePercentileRank"]]
@@ -1509,6 +1837,8 @@ class DatasetEvidence(Dataset):
     f_publication_year: Final[type["FieldEvidencePublicationYear"]]
     f_reaction_id: Final[type["FieldEvidenceReactionId"]]
     f_reaction_name: Final[type["FieldEvidenceReactionName"]]
+    f_release_date: Final[type["FieldEvidenceReleaseDate"]]
+    f_release_version: Final[type["FieldEvidenceReleaseVersion"]]
     f_resource_score: Final[type["FieldEvidenceResourceScore"]]
     f_score: Final[type["FieldEvidenceScore"]]
     f_sex: Final[type["FieldEvidenceSex"]]
@@ -1516,6 +1846,7 @@ class DatasetEvidence(Dataset):
     f_source_id: Final[type["FieldEvidenceSourceId"]]
     f_statistical_method: Final[type["FieldEvidenceStatisticalMethod"]]
     f_statistical_method_overview: Final[type["FieldEvidenceStatisticalMethodOverview"]]
+    f_statistical_test_tail: Final[type["FieldEvidenceStatisticalTestTail"]]
     f_study_cases: Final[type["FieldEvidenceStudyCases"]]
     f_study_cases_with_qualifying_variants: Final[type["FieldEvidenceStudyCasesWithQualifyingVariants"]]
     f_study_id: Final[type["FieldEvidenceStudyId"]]
@@ -1534,6 +1865,8 @@ class DatasetEvidence(Dataset):
     f_text_mining_sentences: Final[type["FieldEvidenceTextMiningSentences"]]
     f_urls: Final[type["FieldEvidenceUrls"]]
     f_variant_aminoacid_descriptions: Final[type["FieldEvidenceVariantAminoacidDescriptions"]]
+    f_variant_effect: Final[type["FieldEvidenceVariantEffect"]]
+    f_variant_functional_consequence_from_qtl_id: Final[type["FieldEvidenceVariantFunctionalConsequenceFromQtlId"]]
     f_variant_functional_consequence_id: Final[type["FieldEvidenceVariantFunctionalConsequenceId"]]
     f_variant_hgvs_id: Final[type["FieldEvidenceVariantHgvsId"]]
     f_variant_id: Final[type["FieldEvidenceVariantId"]]
@@ -1640,7 +1973,7 @@ class FieldEvidenceBiomarkers(StructField):
     path: Final[Sequence[type[Dataset] | type[Field]]]
     fields: Final[Sequence[type[Field]]]
     f_gene_expression: Final[type["FieldEvidenceBiomarkersGeneExpression"]]
-    f_variant: Final[type["FieldEvidenceBiomarkersVariant"]]
+    f_genetic_variation: Final[type["FieldEvidenceBiomarkersGeneticVariation"]]
 
 
 class FieldEvidenceBiomarkersGeneExpression(SequenceField):
@@ -1675,40 +2008,40 @@ class FieldEvidenceBiomarkersGeneExpressionElementName(ScalarField):
     path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
-class FieldEvidenceBiomarkersVariant(SequenceField):
+class FieldEvidenceBiomarkersGeneticVariation(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[Sequence[type[Dataset] | type[Field]]]
-    element: Final[type["FieldEvidenceBiomarkersVariantElement"]]
+    element: Final[type["FieldEvidenceBiomarkersGeneticVariationElement"]]
 
 
-class FieldEvidenceBiomarkersVariantElement(StructField):
+class FieldEvidenceBiomarkersGeneticVariationElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[Sequence[type[Dataset] | type[Field]]]
     fields: Final[Sequence[type[Field]]]
-    f_functional_consequence_id: Final[type["FieldEvidenceBiomarkersVariantElementFunctionalConsequenceId"]]
-    f_id: Final[type["FieldEvidenceBiomarkersVariantElementId"]]
-    f_name: Final[type["FieldEvidenceBiomarkersVariantElementName"]]
+    f_functional_consequence_id: Final[type["FieldEvidenceBiomarkersGeneticVariationElementFunctionalConsequenceId"]]
+    f_id: Final[type["FieldEvidenceBiomarkersGeneticVariationElementId"]]
+    f_name: Final[type["FieldEvidenceBiomarkersGeneticVariationElementName"]]
 
 
-class FieldEvidenceBiomarkersVariantElementFunctionalConsequenceId(ScalarField):
+class FieldEvidenceBiomarkersGeneticVariationElementFunctionalConsequenceId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
-class FieldEvidenceBiomarkersVariantElementId(ScalarField):
+class FieldEvidenceBiomarkersGeneticVariationElementId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
-class FieldEvidenceBiomarkersVariantElementName(ScalarField):
+class FieldEvidenceBiomarkersGeneticVariationElementName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -1724,6 +2057,13 @@ class FieldEvidenceBiosamplesFromSource(SequenceField):
 
 
 class FieldEvidenceBiosamplesFromSourceElement(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldEvidenceCellType(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -1809,6 +2149,13 @@ class FieldEvidenceContrast(ScalarField):
     path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
+class FieldEvidenceCrisprScreenLibrary(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
 class FieldEvidenceDatasourceId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
@@ -1817,6 +2164,13 @@ class FieldEvidenceDatasourceId(ScalarField):
 
 
 class FieldEvidenceDatatypeId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldEvidenceDirectionOnTrait(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -1978,6 +2332,13 @@ class FieldEvidenceDrugId(ScalarField):
 
 
 class FieldEvidenceDrugResponse(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldEvidenceGeneticBackground(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2185,6 +2546,20 @@ class FieldEvidenceReactionName(ScalarField):
     path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
+class FieldEvidenceReleaseDate(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldEvidenceReleaseVersion(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
 class FieldEvidenceResourceScore(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
@@ -2244,6 +2619,13 @@ class FieldEvidenceStatisticalMethod(ScalarField):
 
 
 class FieldEvidenceStatisticalMethodOverview(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldEvidenceStatisticalTestTail(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2474,6 +2856,20 @@ class FieldEvidenceVariantAminoacidDescriptionsElement(ScalarField):
     path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
+class FieldEvidenceVariantEffect(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldEvidenceVariantFunctionalConsequenceFromQtlId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
 class FieldEvidenceVariantFunctionalConsequenceId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
@@ -2496,6 +2892,822 @@ class FieldEvidenceVariantId(ScalarField):
 
 
 class FieldEvidenceVariantRsId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class DatasetFacetSearchDisease(Dataset):
+    id: Final[str]
+    fields: Final[Sequence[type[Field]]]
+    f_category: Final[type["FieldFacetSearchDiseaseCategory"]]
+    f_datasource_id: Final[type["FieldFacetSearchDiseaseDatasourceId"]]
+    f_entity_ids: Final[type["FieldFacetSearchDiseaseEntityIds"]]
+    f_label: Final[type["FieldFacetSearchDiseaseLabel"]]
+
+
+class FieldFacetSearchDiseaseCategory(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFacetSearchDiseaseDatasourceId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFacetSearchDiseaseEntityIds(SequenceField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    element: Final[type["FieldFacetSearchDiseaseEntityIdsElement"]]
+
+
+class FieldFacetSearchDiseaseEntityIdsElement(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFacetSearchDiseaseLabel(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class DatasetFacetSearchDisease(Dataset):
+    id: Final[str]
+    fields: Final[Sequence[type[Field]]]
+    f_category: Final[type["FieldFacetSearchDiseaseCategory"]]
+    f_datasource_id: Final[type["FieldFacetSearchDiseaseDatasourceId"]]
+    f_entity_ids: Final[type["FieldFacetSearchDiseaseEntityIds"]]
+    f_label: Final[type["FieldFacetSearchDiseaseLabel"]]
+
+
+class FieldFacetSearchDiseaseCategory(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFacetSearchDiseaseDatasourceId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFacetSearchDiseaseEntityIds(SequenceField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    element: Final[type["FieldFacetSearchDiseaseEntityIdsElement"]]
+
+
+class FieldFacetSearchDiseaseEntityIdsElement(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFacetSearchDiseaseLabel(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class DatasetFacetSearchTarget(Dataset):
+    id: Final[str]
+    fields: Final[Sequence[type[Field]]]
+    f_category: Final[type["FieldFacetSearchTargetCategory"]]
+    f_datasource_id: Final[type["FieldFacetSearchTargetDatasourceId"]]
+    f_entity_ids: Final[type["FieldFacetSearchTargetEntityIds"]]
+    f_label: Final[type["FieldFacetSearchTargetLabel"]]
+
+
+class FieldFacetSearchTargetCategory(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFacetSearchTargetDatasourceId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFacetSearchTargetEntityIds(SequenceField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    element: Final[type["FieldFacetSearchTargetEntityIdsElement"]]
+
+
+class FieldFacetSearchTargetEntityIdsElement(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFacetSearchTargetLabel(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class DatasetFacetSearchTarget(Dataset):
+    id: Final[str]
+    fields: Final[Sequence[type[Field]]]
+    f_category: Final[type["FieldFacetSearchTargetCategory"]]
+    f_datasource_id: Final[type["FieldFacetSearchTargetDatasourceId"]]
+    f_entity_ids: Final[type["FieldFacetSearchTargetEntityIds"]]
+    f_label: Final[type["FieldFacetSearchTargetLabel"]]
+
+
+class FieldFacetSearchTargetCategory(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFacetSearchTargetDatasourceId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFacetSearchTargetEntityIds(SequenceField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    element: Final[type["FieldFacetSearchTargetEntityIdsElement"]]
+
+
+class FieldFacetSearchTargetEntityIdsElement(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFacetSearchTargetLabel(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class DatasetFailedCooccurrences(Dataset):
+    id: Final[str]
+    fields: Final[Sequence[type[Field]]]
+    f_association: Final[type["FieldFailedCooccurrencesAssociation"]]
+    f_date: Final[type["FieldFailedCooccurrencesDate"]]
+    f_day: Final[type["FieldFailedCooccurrencesDay"]]
+    f_end_1: Final[type["FieldFailedCooccurrencesEnd1"]]
+    f_end_2: Final[type["FieldFailedCooccurrencesEnd2"]]
+    f_int_timestamp: Final[type["FieldFailedCooccurrencesIntTimestamp"]]
+    f_is_mapped: Final[type["FieldFailedCooccurrencesIsMapped"]]
+    f_keyword_id_1: Final[type["FieldFailedCooccurrencesKeywordId1"]]
+    f_keyword_id_2: Final[type["FieldFailedCooccurrencesKeywordId2"]]
+    f_kind: Final[type["FieldFailedCooccurrencesKind"]]
+    f_label_1: Final[type["FieldFailedCooccurrencesLabel1"]]
+    f_label_2: Final[type["FieldFailedCooccurrencesLabel2"]]
+    f_label_n1: Final[type["FieldFailedCooccurrencesLabelN1"]]
+    f_label_n2: Final[type["FieldFailedCooccurrencesLabelN2"]]
+    f_matches: Final[type["FieldFailedCooccurrencesMatches"]]
+    f_month: Final[type["FieldFailedCooccurrencesMonth"]]
+    f_organisms: Final[type["FieldFailedCooccurrencesOrganisms"]]
+    f_pmcid: Final[type["FieldFailedCooccurrencesPmcid"]]
+    f_pmid: Final[type["FieldFailedCooccurrencesPmid"]]
+    f_pprid: Final[type["FieldFailedCooccurrencesPprid"]]
+    f_pub_date: Final[type["FieldFailedCooccurrencesPubDate"]]
+    f_section: Final[type["FieldFailedCooccurrencesSection"]]
+    f_section_end: Final[type["FieldFailedCooccurrencesSectionEnd"]]
+    f_section_start: Final[type["FieldFailedCooccurrencesSectionStart"]]
+    f_sent_evidence_score: Final[type["FieldFailedCooccurrencesSentEvidenceScore"]]
+    f_start_1: Final[type["FieldFailedCooccurrencesStart1"]]
+    f_start_2: Final[type["FieldFailedCooccurrencesStart2"]]
+    f_text: Final[type["FieldFailedCooccurrencesText"]]
+    f_timestamp: Final[type["FieldFailedCooccurrencesTimestamp"]]
+    f_trace_source: Final[type["FieldFailedCooccurrencesTraceSource"]]
+    f_type_1: Final[type["FieldFailedCooccurrencesType1"]]
+    f_type_2: Final[type["FieldFailedCooccurrencesType2"]]
+    f_unique_keyword_ids_per_label_n1: Final[type["FieldFailedCooccurrencesUniqueKeywordIdsPerLabelN1"]]
+    f_unique_keyword_ids_per_label_n2: Final[type["FieldFailedCooccurrencesUniqueKeywordIdsPerLabelN2"]]
+    f_year: Final[type["FieldFailedCooccurrencesYear"]]
+
+
+class FieldFailedCooccurrencesAssociation(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesDate(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesDay(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesEnd1(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesEnd2(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesIntTimestamp(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesIsMapped(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesKeywordId1(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesKeywordId2(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesKind(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesLabel1(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesLabel2(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesLabelN1(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesLabelN2(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesMatches(SequenceField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    element: Final[type["FieldFailedCooccurrencesMatchesElement"]]
+
+
+class FieldFailedCooccurrencesMatchesElement(StructField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Field]]]
+    f_end_in_sentence: Final[type["FieldFailedCooccurrencesMatchesElementEndInSentence"]]
+    f_label: Final[type["FieldFailedCooccurrencesMatchesElementLabel"]]
+    f_start_in_sentence: Final[type["FieldFailedCooccurrencesMatchesElementStartInSentence"]]
+    f_type: Final[type["FieldFailedCooccurrencesMatchesElementType"]]
+
+
+class FieldFailedCooccurrencesMatchesElementEndInSentence(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesMatchesElementLabel(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesMatchesElementStartInSentence(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesMatchesElementType(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesMonth(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesOrganisms(SequenceField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    element: Final[type["FieldFailedCooccurrencesOrganismsElement"]]
+
+
+class FieldFailedCooccurrencesOrganismsElement(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesPmcid(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesPmid(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesPprid(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesPubDate(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesSection(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesSectionEnd(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesSectionStart(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesSentEvidenceScore(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesStart1(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesStart2(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesText(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesTimestamp(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesTraceSource(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesType1(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesType2(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesUniqueKeywordIdsPerLabelN1(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesUniqueKeywordIdsPerLabelN2(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedCooccurrencesYear(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class DatasetFailedMatches(Dataset):
+    id: Final[str]
+    fields: Final[Sequence[type[Field]]]
+    f_co_occurrence: Final[type["FieldFailedMatchesCoOccurrence"]]
+    f_date: Final[type["FieldFailedMatchesDate"]]
+    f_day: Final[type["FieldFailedMatchesDay"]]
+    f_end_in_sentence: Final[type["FieldFailedMatchesEndInSentence"]]
+    f_int_timestamp: Final[type["FieldFailedMatchesIntTimestamp"]]
+    f_is_mapped: Final[type["FieldFailedMatchesIsMapped"]]
+    f_keyword_id: Final[type["FieldFailedMatchesKeywordId"]]
+    f_kind: Final[type["FieldFailedMatchesKind"]]
+    f_label: Final[type["FieldFailedMatchesLabel"]]
+    f_label_n: Final[type["FieldFailedMatchesLabelN"]]
+    f_month: Final[type["FieldFailedMatchesMonth"]]
+    f_organisms: Final[type["FieldFailedMatchesOrganisms"]]
+    f_pmcid: Final[type["FieldFailedMatchesPmcid"]]
+    f_pmid: Final[type["FieldFailedMatchesPmid"]]
+    f_pprid: Final[type["FieldFailedMatchesPprid"]]
+    f_pub_date: Final[type["FieldFailedMatchesPubDate"]]
+    f_section: Final[type["FieldFailedMatchesSection"]]
+    f_section_end: Final[type["FieldFailedMatchesSectionEnd"]]
+    f_section_start: Final[type["FieldFailedMatchesSectionStart"]]
+    f_start_in_sentence: Final[type["FieldFailedMatchesStartInSentence"]]
+    f_text: Final[type["FieldFailedMatchesText"]]
+    f_timestamp: Final[type["FieldFailedMatchesTimestamp"]]
+    f_trace_source: Final[type["FieldFailedMatchesTraceSource"]]
+    f_type: Final[type["FieldFailedMatchesType"]]
+    f_unique_keyword_ids_per_label_n: Final[type["FieldFailedMatchesUniqueKeywordIdsPerLabelN"]]
+    f_year: Final[type["FieldFailedMatchesYear"]]
+
+
+class FieldFailedMatchesCoOccurrence(SequenceField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    element: Final[type["FieldFailedMatchesCoOccurrenceElement"]]
+
+
+class FieldFailedMatchesCoOccurrenceElement(StructField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Field]]]
+    f_association: Final[type["FieldFailedMatchesCoOccurrenceElementAssociation"]]
+    f_end_1: Final[type["FieldFailedMatchesCoOccurrenceElementEnd1"]]
+    f_end_2: Final[type["FieldFailedMatchesCoOccurrenceElementEnd2"]]
+    f_label_1: Final[type["FieldFailedMatchesCoOccurrenceElementLabel1"]]
+    f_label_2: Final[type["FieldFailedMatchesCoOccurrenceElementLabel2"]]
+    f_sent_evidence_score: Final[type["FieldFailedMatchesCoOccurrenceElementSentEvidenceScore"]]
+    f_start_1: Final[type["FieldFailedMatchesCoOccurrenceElementStart1"]]
+    f_start_2: Final[type["FieldFailedMatchesCoOccurrenceElementStart2"]]
+    f_type: Final[type["FieldFailedMatchesCoOccurrenceElementType"]]
+
+
+class FieldFailedMatchesCoOccurrenceElementAssociation(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesCoOccurrenceElementEnd1(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesCoOccurrenceElementEnd2(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesCoOccurrenceElementLabel1(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesCoOccurrenceElementLabel2(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesCoOccurrenceElementSentEvidenceScore(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesCoOccurrenceElementStart1(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesCoOccurrenceElementStart2(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesCoOccurrenceElementType(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesDate(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesDay(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesEndInSentence(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesIntTimestamp(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesIsMapped(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesKeywordId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesKind(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesLabel(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesLabelN(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesMonth(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesOrganisms(SequenceField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    element: Final[type["FieldFailedMatchesOrganismsElement"]]
+
+
+class FieldFailedMatchesOrganismsElement(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesPmcid(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesPmid(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesPprid(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesPubDate(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesSection(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesSectionEnd(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesSectionStart(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesStartInSentence(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesText(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesTimestamp(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesTraceSource(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesType(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesUniqueKeywordIdsPerLabelN(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldFailedMatchesYear(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -2886,6 +4098,7 @@ class DatasetInteractionEvidence(Dataset):
     f_expansion_method_short_name: Final[type["FieldInteractionEvidenceExpansionMethodShortName"]]
     f_host_organism_scientific_name: Final[type["FieldInteractionEvidenceHostOrganismScientificName"]]
     f_host_organism_tax_id: Final[type["FieldInteractionEvidenceHostOrganismTaxId"]]
+    f_host_organism_tissue: Final[type["FieldInteractionEvidenceHostOrganismTissue"]]
     f_int_a: Final[type["FieldInteractionEvidenceIntA"]]
     f_int_a_biological_role: Final[type["FieldInteractionEvidenceIntABiologicalRole"]]
     f_int_a_source: Final[type["FieldInteractionEvidenceIntASource"]]
@@ -2937,6 +4150,46 @@ class FieldInteractionEvidenceHostOrganismScientificName(ScalarField):
 
 
 class FieldInteractionEvidenceHostOrganismTaxId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldInteractionEvidenceHostOrganismTissue(StructField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Field]]]
+    f_full_name: Final[type["FieldInteractionEvidenceHostOrganismTissueFullName"]]
+    f_short_name: Final[type["FieldInteractionEvidenceHostOrganismTissueShortName"]]
+    f_xrefs: Final[type["FieldInteractionEvidenceHostOrganismTissueXrefs"]]
+
+
+class FieldInteractionEvidenceHostOrganismTissueFullName(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldInteractionEvidenceHostOrganismTissueShortName(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldInteractionEvidenceHostOrganismTissueXrefs(SequenceField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    element: Final[type["FieldInteractionEvidenceHostOrganismTissueXrefsElement"]]
+
+
+class FieldInteractionEvidenceHostOrganismTissueXrefsElement(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -3398,6 +4651,341 @@ class FieldKnownDrugsAggregatedUrlsElementUrl(ScalarField):
     path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
+class DatasetLiteratureIndex(Dataset):
+    id: Final[str]
+    fields: Final[Sequence[type[Field]]]
+    f_date: Final[type["FieldLiteratureIndexDate"]]
+    f_day: Final[type["FieldLiteratureIndexDay"]]
+    f_keyword_id: Final[type["FieldLiteratureIndexKeywordId"]]
+    f_keyword_type: Final[type["FieldLiteratureIndexKeywordType"]]
+    f_month: Final[type["FieldLiteratureIndexMonth"]]
+    f_pmcid: Final[type["FieldLiteratureIndexPmcid"]]
+    f_pmid: Final[type["FieldLiteratureIndexPmid"]]
+    f_relevance: Final[type["FieldLiteratureIndexRelevance"]]
+    f_year: Final[type["FieldLiteratureIndexYear"]]
+
+
+class FieldLiteratureIndexDate(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldLiteratureIndexDay(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldLiteratureIndexKeywordId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldLiteratureIndexKeywordType(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldLiteratureIndexMonth(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldLiteratureIndexPmcid(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldLiteratureIndexPmid(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldLiteratureIndexRelevance(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldLiteratureIndexYear(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class DatasetLiteratureSentences(Dataset):
+    id: Final[str]
+    fields: Final[Sequence[type[Field]]]
+    f_end_in_sentence: Final[type["FieldLiteratureSentencesEndInSentence"]]
+    f_keyword_id: Final[type["FieldLiteratureSentencesKeywordId"]]
+    f_keyword_type: Final[type["FieldLiteratureSentencesKeywordType"]]
+    f_label: Final[type["FieldLiteratureSentencesLabel"]]
+    f_pmcid: Final[type["FieldLiteratureSentencesPmcid"]]
+    f_pmid: Final[type["FieldLiteratureSentencesPmid"]]
+    f_section: Final[type["FieldLiteratureSentencesSection"]]
+    f_section_end: Final[type["FieldLiteratureSentencesSectionEnd"]]
+    f_section_start: Final[type["FieldLiteratureSentencesSectionStart"]]
+    f_start_in_sentence: Final[type["FieldLiteratureSentencesStartInSentence"]]
+
+
+class FieldLiteratureSentencesEndInSentence(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldLiteratureSentencesKeywordId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldLiteratureSentencesKeywordType(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldLiteratureSentencesLabel(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldLiteratureSentencesPmcid(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldLiteratureSentencesPmid(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldLiteratureSentencesSection(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldLiteratureSentencesSectionEnd(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldLiteratureSentencesSectionStart(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldLiteratureSentencesStartInSentence(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class DatasetMatches(Dataset):
+    id: Final[str]
+    fields: Final[Sequence[type[Field]]]
+    f_date: Final[type["FieldMatchesDate"]]
+    f_day: Final[type["FieldMatchesDay"]]
+    f_end_in_sentence: Final[type["FieldMatchesEndInSentence"]]
+    f_is_mapped: Final[type["FieldMatchesIsMapped"]]
+    f_keyword_id: Final[type["FieldMatchesKeywordId"]]
+    f_label: Final[type["FieldMatchesLabel"]]
+    f_label_n: Final[type["FieldMatchesLabelN"]]
+    f_month: Final[type["FieldMatchesMonth"]]
+    f_organisms: Final[type["FieldMatchesOrganisms"]]
+    f_pmcid: Final[type["FieldMatchesPmcid"]]
+    f_pmid: Final[type["FieldMatchesPmid"]]
+    f_pub_date: Final[type["FieldMatchesPubDate"]]
+    f_section: Final[type["FieldMatchesSection"]]
+    f_section_end: Final[type["FieldMatchesSectionEnd"]]
+    f_section_start: Final[type["FieldMatchesSectionStart"]]
+    f_start_in_sentence: Final[type["FieldMatchesStartInSentence"]]
+    f_text: Final[type["FieldMatchesText"]]
+    f_trace_source: Final[type["FieldMatchesTraceSource"]]
+    f_type: Final[type["FieldMatchesType"]]
+    f_year: Final[type["FieldMatchesYear"]]
+
+
+class FieldMatchesDate(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldMatchesDay(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldMatchesEndInSentence(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldMatchesIsMapped(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldMatchesKeywordId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldMatchesLabel(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldMatchesLabelN(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldMatchesMonth(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldMatchesOrganisms(SequenceField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    element: Final[type["FieldMatchesOrganismsElement"]]
+
+
+class FieldMatchesOrganismsElement(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldMatchesPmcid(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldMatchesPmid(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldMatchesPubDate(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldMatchesSection(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldMatchesSectionEnd(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldMatchesSectionStart(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldMatchesStartInSentence(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldMatchesText(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldMatchesTraceSource(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldMatchesType(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldMatchesYear(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
 class DatasetMechanismOfAction(Dataset):
     id: Final[str]
     fields: Final[Sequence[type[Field]]]
@@ -3544,7 +5132,6 @@ class DatasetMolecule(Dataset):
     f_parent_id: Final[type["FieldMoleculeParentId"]]
     f_synonyms: Final[type["FieldMoleculeSynonyms"]]
     f_trade_names: Final[type["FieldMoleculeTradeNames"]]
-    f_withdrawn_notice: Final[type["FieldMoleculeWithdrawnNotice"]]
     f_year_of_first_approval: Final[type["FieldMoleculeYearOfFirstApproval"]]
 
 
@@ -3765,54 +5352,6 @@ class FieldMoleculeTradeNamesElement(ScalarField):
     path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
-class FieldMoleculeWithdrawnNotice(StructField):
-    name: Final[str]
-    data_type: Final[OpenTargetsDatasetFieldType]
-    dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Dataset] | type[Field]]]
-    fields: Final[Sequence[type[Field]]]
-    f_classes: Final[type["FieldMoleculeWithdrawnNoticeClasses"]]
-    f_countries: Final[type["FieldMoleculeWithdrawnNoticeCountries"]]
-    f_year: Final[type["FieldMoleculeWithdrawnNoticeYear"]]
-
-
-class FieldMoleculeWithdrawnNoticeClasses(SequenceField):
-    name: Final[str]
-    data_type: Final[OpenTargetsDatasetFieldType]
-    dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Dataset] | type[Field]]]
-    element: Final[type["FieldMoleculeWithdrawnNoticeClassesElement"]]
-
-
-class FieldMoleculeWithdrawnNoticeClassesElement(ScalarField):
-    name: Final[str]
-    data_type: Final[OpenTargetsDatasetFieldType]
-    dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Dataset] | type[Field]]]
-
-
-class FieldMoleculeWithdrawnNoticeCountries(SequenceField):
-    name: Final[str]
-    data_type: Final[OpenTargetsDatasetFieldType]
-    dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Dataset] | type[Field]]]
-    element: Final[type["FieldMoleculeWithdrawnNoticeCountriesElement"]]
-
-
-class FieldMoleculeWithdrawnNoticeCountriesElement(ScalarField):
-    name: Final[str]
-    data_type: Final[OpenTargetsDatasetFieldType]
-    dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Dataset] | type[Field]]]
-
-
-class FieldMoleculeWithdrawnNoticeYear(ScalarField):
-    name: Final[str]
-    data_type: Final[OpenTargetsDatasetFieldType]
-    dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Dataset] | type[Field]]]
-
-
 class FieldMoleculeYearOfFirstApproval(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
@@ -3957,6 +5496,204 @@ class FieldMousePhenotypesTargetInModelEnsemblId(ScalarField):
 
 
 class FieldMousePhenotypesTargetInModelMgiId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class DatasetPharmacogenomics(Dataset):
+    id: Final[str]
+    fields: Final[Sequence[type[Field]]]
+    f_datasource_id: Final[type["FieldPharmacogenomicsDatasourceId"]]
+    f_datasource_version: Final[type["FieldPharmacogenomicsDatasourceVersion"]]
+    f_datatype_id: Final[type["FieldPharmacogenomicsDatatypeId"]]
+    f_directionality: Final[type["FieldPharmacogenomicsDirectionality"]]
+    f_drugs: Final[type["FieldPharmacogenomicsDrugs"]]
+    f_evidence_level: Final[type["FieldPharmacogenomicsEvidenceLevel"]]
+    f_genotype: Final[type["FieldPharmacogenomicsGenotype"]]
+    f_genotype_annotation_text: Final[type["FieldPharmacogenomicsGenotypeAnnotationText"]]
+    f_genotype_id: Final[type["FieldPharmacogenomicsGenotypeId"]]
+    f_haplotype_from_source_id: Final[type["FieldPharmacogenomicsHaplotypeFromSourceId"]]
+    f_haplotype_id: Final[type["FieldPharmacogenomicsHaplotypeId"]]
+    f_is_direct_target: Final[type["FieldPharmacogenomicsIsDirectTarget"]]
+    f_literature: Final[type["FieldPharmacogenomicsLiterature"]]
+    f_pgx_category: Final[type["FieldPharmacogenomicsPgxCategory"]]
+    f_phenotype_from_source_id: Final[type["FieldPharmacogenomicsPhenotypeFromSourceId"]]
+    f_phenotype_text: Final[type["FieldPharmacogenomicsPhenotypeText"]]
+    f_study_id: Final[type["FieldPharmacogenomicsStudyId"]]
+    f_target_from_source_id: Final[type["FieldPharmacogenomicsTargetFromSourceId"]]
+    f_variant_functional_consequence_id: Final[type["FieldPharmacogenomicsVariantFunctionalConsequenceId"]]
+    f_variant_rs_id: Final[type["FieldPharmacogenomicsVariantRsId"]]
+
+
+class FieldPharmacogenomicsDatasourceId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldPharmacogenomicsDatasourceVersion(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldPharmacogenomicsDatatypeId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldPharmacogenomicsDirectionality(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldPharmacogenomicsDrugs(SequenceField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    element: Final[type["FieldPharmacogenomicsDrugsElement"]]
+
+
+class FieldPharmacogenomicsDrugsElement(StructField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Field]]]
+    f_drug_from_source: Final[type["FieldPharmacogenomicsDrugsElementDrugFromSource"]]
+    f_drug_id: Final[type["FieldPharmacogenomicsDrugsElementDrugId"]]
+
+
+class FieldPharmacogenomicsDrugsElementDrugFromSource(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldPharmacogenomicsDrugsElementDrugId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldPharmacogenomicsEvidenceLevel(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldPharmacogenomicsGenotype(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldPharmacogenomicsGenotypeAnnotationText(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldPharmacogenomicsGenotypeId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldPharmacogenomicsHaplotypeFromSourceId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldPharmacogenomicsHaplotypeId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldPharmacogenomicsIsDirectTarget(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldPharmacogenomicsLiterature(SequenceField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    element: Final[type["FieldPharmacogenomicsLiteratureElement"]]
+
+
+class FieldPharmacogenomicsLiteratureElement(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldPharmacogenomicsPgxCategory(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldPharmacogenomicsPhenotypeFromSourceId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldPharmacogenomicsPhenotypeText(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldPharmacogenomicsStudyId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldPharmacogenomicsTargetFromSourceId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldPharmacogenomicsVariantFunctionalConsequenceId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldPharmacogenomicsVariantRsId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -4643,6 +6380,291 @@ class FieldSignificantAdverseTargetReactionsMeddraCode(ScalarField):
 
 
 class FieldSignificantAdverseTargetReactionsTargetId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class DatasetTargetEssentiality(Dataset):
+    id: Final[str]
+    fields: Final[Sequence[type[Field]]]
+    f_gene_essentiality: Final[type["FieldTargetEssentialityGeneEssentiality"]]
+    f_id: Final[type["FieldTargetEssentialityId"]]
+
+
+class FieldTargetEssentialityGeneEssentiality(SequenceField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    element: Final[type["FieldTargetEssentialityGeneEssentialityElement"]]
+
+
+class FieldTargetEssentialityGeneEssentialityElement(StructField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Field]]]
+    f_dep_map_essentiality: Final[type["FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality"]]
+    f_is_essential: Final[type["FieldTargetEssentialityGeneEssentialityElementIsEssential"]]
+
+
+class FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality(SequenceField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    element: Final[type["FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement"]]
+
+
+class FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement(StructField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Field]]]
+    f_screens: Final[type["FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreens"]]
+    f_tissue_id: Final[type["FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementTissueId"]]
+    f_tissue_name: Final[type["FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementTissueName"]]
+
+
+class FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreens(SequenceField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    element: Final[type["FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement"]]
+
+
+class FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement(StructField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    fields: Final[Sequence[type[Field]]]
+    f_cell_line_name: Final[type["FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementCellLineName"]]
+    f_depmap_id: Final[type["FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDepmapId"]]
+    f_disease_cell_line_id: Final[type["FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDiseaseCellLineId"]]
+    f_disease_from_source: Final[type["FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDiseaseFromSource"]]
+    f_expression: Final[type["FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementExpression"]]
+    f_gene_effect: Final[type["FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementGeneEffect"]]
+    f_mutation: Final[type["FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementMutation"]]
+
+
+class FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementCellLineName(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDepmapId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDiseaseCellLineId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDiseaseFromSource(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementExpression(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementGeneEffect(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementMutation(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementTissueId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementTissueName(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetEssentialityGeneEssentialityElementIsEssential(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetEssentialityId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class DatasetTargetPrioritisation(Dataset):
+    id: Final[str]
+    fields: Final[Sequence[type[Field]]]
+    f_genetic_constraint: Final[type["FieldTargetPrioritisationGeneticConstraint"]]
+    f_has_high_quality_chemical_probes: Final[type["FieldTargetPrioritisationHasHighQualityChemicalProbes"]]
+    f_has_ligand: Final[type["FieldTargetPrioritisationHasLigand"]]
+    f_has_pocket: Final[type["FieldTargetPrioritisationHasPocket"]]
+    f_has_safety_event: Final[type["FieldTargetPrioritisationHasSafetyEvent"]]
+    f_has_small_molecule_binder: Final[type["FieldTargetPrioritisationHasSmallMoleculeBinder"]]
+    f_has_tep: Final[type["FieldTargetPrioritisationHasTep"]]
+    f_is_cancer_driver_gene: Final[type["FieldTargetPrioritisationIsCancerDriverGene"]]
+    f_is_in_membrane: Final[type["FieldTargetPrioritisationIsInMembrane"]]
+    f_is_secreted: Final[type["FieldTargetPrioritisationIsSecreted"]]
+    f_max_clinical_trial_phase: Final[type["FieldTargetPrioritisationMaxClinicalTrialPhase"]]
+    f_mouse_ko_score: Final[type["FieldTargetPrioritisationMouseKoScore"]]
+    f_mouse_ortholog_max_identity_percentage: Final[type["FieldTargetPrioritisationMouseOrthologMaxIdentityPercentage"]]
+    f_paralog_max_identity_percentage: Final[type["FieldTargetPrioritisationParalogMaxIdentityPercentage"]]
+    f_target_id: Final[type["FieldTargetPrioritisationTargetId"]]
+    f_tissue_distribution: Final[type["FieldTargetPrioritisationTissueDistribution"]]
+    f_tissue_specificity: Final[type["FieldTargetPrioritisationTissueSpecificity"]]
+
+
+class FieldTargetPrioritisationGeneticConstraint(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetPrioritisationHasHighQualityChemicalProbes(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetPrioritisationHasLigand(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetPrioritisationHasPocket(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetPrioritisationHasSafetyEvent(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetPrioritisationHasSmallMoleculeBinder(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetPrioritisationHasTep(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetPrioritisationIsCancerDriverGene(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetPrioritisationIsInMembrane(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetPrioritisationIsSecreted(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetPrioritisationMaxClinicalTrialPhase(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetPrioritisationMouseKoScore(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetPrioritisationMouseOrthologMaxIdentityPercentage(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetPrioritisationParalogMaxIdentityPercentage(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetPrioritisationTargetId(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetPrioritisationTissueDistribution(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTargetPrioritisationTissueSpecificity(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -5556,66 +7578,58 @@ class FieldTargetsSafetyLiabilitiesElement(StructField):
     dataset: Final[type[Dataset]]
     path: Final[Sequence[type[Dataset] | type[Field]]]
     fields: Final[Sequence[type[Field]]]
-    f_biosample: Final[type["FieldTargetsSafetyLiabilitiesElementBiosample"]]
+    f_biosamples: Final[type["FieldTargetsSafetyLiabilitiesElementBiosamples"]]
     f_datasource: Final[type["FieldTargetsSafetyLiabilitiesElementDatasource"]]
     f_effects: Final[type["FieldTargetsSafetyLiabilitiesElementEffects"]]
     f_event: Final[type["FieldTargetsSafetyLiabilitiesElementEvent"]]
     f_event_id: Final[type["FieldTargetsSafetyLiabilitiesElementEventId"]]
     f_literature: Final[type["FieldTargetsSafetyLiabilitiesElementLiterature"]]
-    f_study: Final[type["FieldTargetsSafetyLiabilitiesElementStudy"]]
+    f_studies: Final[type["FieldTargetsSafetyLiabilitiesElementStudies"]]
     f_url: Final[type["FieldTargetsSafetyLiabilitiesElementUrl"]]
 
 
-class FieldTargetsSafetyLiabilitiesElementBiosample(SequenceField):
+class FieldTargetsSafetyLiabilitiesElementBiosamples(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[Sequence[type[Dataset] | type[Field]]]
-    element: Final[type["FieldTargetsSafetyLiabilitiesElementBiosampleElement"]]
+    element: Final[type["FieldTargetsSafetyLiabilitiesElementBiosamplesElement"]]
 
 
-class FieldTargetsSafetyLiabilitiesElementBiosampleElement(StructField):
+class FieldTargetsSafetyLiabilitiesElementBiosamplesElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[Sequence[type[Dataset] | type[Field]]]
     fields: Final[Sequence[type[Field]]]
-    f_cell_format: Final[type["FieldTargetsSafetyLiabilitiesElementBiosampleElementCellFormat"]]
-    f_cell_id: Final[type["FieldTargetsSafetyLiabilitiesElementBiosampleElementCellId"]]
-    f_cell_label: Final[type["FieldTargetsSafetyLiabilitiesElementBiosampleElementCellLabel"]]
-    f_tissue_id: Final[type["FieldTargetsSafetyLiabilitiesElementBiosampleElementTissueId"]]
-    f_tissue_label: Final[type["FieldTargetsSafetyLiabilitiesElementBiosampleElementTissueLabel"]]
+    f_cell_format: Final[type["FieldTargetsSafetyLiabilitiesElementBiosamplesElementCellFormat"]]
+    f_cell_label: Final[type["FieldTargetsSafetyLiabilitiesElementBiosamplesElementCellLabel"]]
+    f_tissue_id: Final[type["FieldTargetsSafetyLiabilitiesElementBiosamplesElementTissueId"]]
+    f_tissue_label: Final[type["FieldTargetsSafetyLiabilitiesElementBiosamplesElementTissueLabel"]]
 
 
-class FieldTargetsSafetyLiabilitiesElementBiosampleElementCellFormat(ScalarField):
+class FieldTargetsSafetyLiabilitiesElementBiosamplesElementCellFormat(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
-class FieldTargetsSafetyLiabilitiesElementBiosampleElementCellId(ScalarField):
+class FieldTargetsSafetyLiabilitiesElementBiosamplesElementCellLabel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
-class FieldTargetsSafetyLiabilitiesElementBiosampleElementCellLabel(ScalarField):
+class FieldTargetsSafetyLiabilitiesElementBiosamplesElementTissueId(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
-class FieldTargetsSafetyLiabilitiesElementBiosampleElementTissueId(ScalarField):
-    name: Final[str]
-    data_type: Final[OpenTargetsDatasetFieldType]
-    dataset: Final[type[Dataset]]
-    path: Final[Sequence[type[Dataset] | type[Field]]]
-
-
-class FieldTargetsSafetyLiabilitiesElementBiosampleElementTissueLabel(ScalarField):
+class FieldTargetsSafetyLiabilitiesElementBiosamplesElementTissueLabel(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -5682,40 +7696,40 @@ class FieldTargetsSafetyLiabilitiesElementLiterature(ScalarField):
     path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
-class FieldTargetsSafetyLiabilitiesElementStudy(SequenceField):
+class FieldTargetsSafetyLiabilitiesElementStudies(SequenceField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[Sequence[type[Dataset] | type[Field]]]
-    element: Final[type["FieldTargetsSafetyLiabilitiesElementStudyElement"]]
+    element: Final[type["FieldTargetsSafetyLiabilitiesElementStudiesElement"]]
 
 
-class FieldTargetsSafetyLiabilitiesElementStudyElement(StructField):
+class FieldTargetsSafetyLiabilitiesElementStudiesElement(StructField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[Sequence[type[Dataset] | type[Field]]]
     fields: Final[Sequence[type[Field]]]
-    f_description: Final[type["FieldTargetsSafetyLiabilitiesElementStudyElementDescription"]]
-    f_name: Final[type["FieldTargetsSafetyLiabilitiesElementStudyElementName"]]
-    f_type: Final[type["FieldTargetsSafetyLiabilitiesElementStudyElementType"]]
+    f_description: Final[type["FieldTargetsSafetyLiabilitiesElementStudiesElementDescription"]]
+    f_name: Final[type["FieldTargetsSafetyLiabilitiesElementStudiesElementName"]]
+    f_type: Final[type["FieldTargetsSafetyLiabilitiesElementStudiesElementType"]]
 
 
-class FieldTargetsSafetyLiabilitiesElementStudyElementDescription(ScalarField):
+class FieldTargetsSafetyLiabilitiesElementStudiesElementDescription(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
-class FieldTargetsSafetyLiabilitiesElementStudyElementName(ScalarField):
+class FieldTargetsSafetyLiabilitiesElementStudiesElementName(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
     path: Final[Sequence[type[Dataset] | type[Field]]]
 
 
-class FieldTargetsSafetyLiabilitiesElementStudyElementType(ScalarField):
+class FieldTargetsSafetyLiabilitiesElementStudiesElementType(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -5970,6 +7984,80 @@ class FieldTargetsTranscriptIds(SequenceField):
 
 
 class FieldTargetsTranscriptIdsElement(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class DatasetTrainingSet(Dataset):
+    id: Final[str]
+    fields: Final[Sequence[type[Field]]]
+    f_pmid: Final[type["FieldTrainingSetPmid"]]
+    f_terms: Final[type["FieldTrainingSetTerms"]]
+
+
+class FieldTrainingSetPmid(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldTrainingSetTerms(SequenceField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    element: Final[type["FieldTrainingSetTermsElement"]]
+
+
+class FieldTrainingSetTermsElement(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class DatasetVectors(Dataset):
+    id: Final[str]
+    fields: Final[Sequence[type[Field]]]
+    f_category: Final[type["FieldVectorsCategory"]]
+    f_norm: Final[type["FieldVectorsNorm"]]
+    f_vector: Final[type["FieldVectorsVector"]]
+    f_word: Final[type["FieldVectorsWord"]]
+
+
+class FieldVectorsCategory(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldVectorsNorm(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldVectorsVector(SequenceField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+    element: Final[type["FieldVectorsVectorElement"]]
+
+
+class FieldVectorsVectorElement(ScalarField):
+    name: Final[str]
+    data_type: Final[OpenTargetsDatasetFieldType]
+    dataset: Final[type[Dataset]]
+    path: Final[Sequence[type[Dataset] | type[Field]]]
+
+
+class FieldVectorsWord(ScalarField):
     name: Final[str]
     data_type: Final[OpenTargetsDatasetFieldType]
     dataset: Final[type[Dataset]]
@@ -6527,6 +8615,171 @@ FieldBaselineExpressionTissuesElementRnaZscore.data_type = OpenTargetsDatasetFie
 FieldBaselineExpressionTissuesElementRnaZscore.dataset = DatasetBaselineExpression
 FieldBaselineExpressionTissuesElementRnaZscore.path = [DatasetBaselineExpression, FieldBaselineExpressionTissues, FieldBaselineExpressionTissuesElement, FieldBaselineExpressionTissuesElementRna, FieldBaselineExpressionTissuesElementRnaZscore]
 
+DatasetCooccurrences.id = "cooccurrences"
+DatasetCooccurrences.fields = [FieldCooccurrencesDate, FieldCooccurrencesDay, FieldCooccurrencesEnd1, FieldCooccurrencesEnd2, FieldCooccurrencesEvidenceScore, FieldCooccurrencesIsMapped, FieldCooccurrencesKeywordId1, FieldCooccurrencesKeywordId2, FieldCooccurrencesLabel1, FieldCooccurrencesLabel2, FieldCooccurrencesLabelN1, FieldCooccurrencesLabelN2, FieldCooccurrencesMonth, FieldCooccurrencesOrganisms, FieldCooccurrencesPmcid, FieldCooccurrencesPmid, FieldCooccurrencesPubDate, FieldCooccurrencesSection, FieldCooccurrencesStart1, FieldCooccurrencesStart2, FieldCooccurrencesText, FieldCooccurrencesTraceSource, FieldCooccurrencesType, FieldCooccurrencesType1, FieldCooccurrencesType2, FieldCooccurrencesYear]
+DatasetCooccurrences.f_date = FieldCooccurrencesDate
+DatasetCooccurrences.f_day = FieldCooccurrencesDay
+DatasetCooccurrences.f_end_1 = FieldCooccurrencesEnd1
+DatasetCooccurrences.f_end_2 = FieldCooccurrencesEnd2
+DatasetCooccurrences.f_evidence_score = FieldCooccurrencesEvidenceScore
+DatasetCooccurrences.f_is_mapped = FieldCooccurrencesIsMapped
+DatasetCooccurrences.f_keyword_id_1 = FieldCooccurrencesKeywordId1
+DatasetCooccurrences.f_keyword_id_2 = FieldCooccurrencesKeywordId2
+DatasetCooccurrences.f_label_1 = FieldCooccurrencesLabel1
+DatasetCooccurrences.f_label_2 = FieldCooccurrencesLabel2
+DatasetCooccurrences.f_label_n1 = FieldCooccurrencesLabelN1
+DatasetCooccurrences.f_label_n2 = FieldCooccurrencesLabelN2
+DatasetCooccurrences.f_month = FieldCooccurrencesMonth
+DatasetCooccurrences.f_organisms = FieldCooccurrencesOrganisms
+DatasetCooccurrences.f_pmcid = FieldCooccurrencesPmcid
+DatasetCooccurrences.f_pmid = FieldCooccurrencesPmid
+DatasetCooccurrences.f_pub_date = FieldCooccurrencesPubDate
+DatasetCooccurrences.f_section = FieldCooccurrencesSection
+DatasetCooccurrences.f_start_1 = FieldCooccurrencesStart1
+DatasetCooccurrences.f_start_2 = FieldCooccurrencesStart2
+DatasetCooccurrences.f_text = FieldCooccurrencesText
+DatasetCooccurrences.f_trace_source = FieldCooccurrencesTraceSource
+DatasetCooccurrences.f_type = FieldCooccurrencesType
+DatasetCooccurrences.f_type_1 = FieldCooccurrencesType1
+DatasetCooccurrences.f_type_2 = FieldCooccurrencesType2
+DatasetCooccurrences.f_year = FieldCooccurrencesYear
+
+FieldCooccurrencesDate.name = "date"
+FieldCooccurrencesDate.data_type = OpenTargetsDatasetFieldType.DATE
+FieldCooccurrencesDate.dataset = DatasetCooccurrences
+FieldCooccurrencesDate.path = [DatasetCooccurrences, FieldCooccurrencesDate]
+
+FieldCooccurrencesDay.name = "day"
+FieldCooccurrencesDay.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldCooccurrencesDay.dataset = DatasetCooccurrences
+FieldCooccurrencesDay.path = [DatasetCooccurrences, FieldCooccurrencesDay]
+
+FieldCooccurrencesEnd1.name = "end1"
+FieldCooccurrencesEnd1.data_type = OpenTargetsDatasetFieldType.LONG
+FieldCooccurrencesEnd1.dataset = DatasetCooccurrences
+FieldCooccurrencesEnd1.path = [DatasetCooccurrences, FieldCooccurrencesEnd1]
+
+FieldCooccurrencesEnd2.name = "end2"
+FieldCooccurrencesEnd2.data_type = OpenTargetsDatasetFieldType.LONG
+FieldCooccurrencesEnd2.dataset = DatasetCooccurrences
+FieldCooccurrencesEnd2.path = [DatasetCooccurrences, FieldCooccurrencesEnd2]
+
+FieldCooccurrencesEvidenceScore.name = "evidence_score"
+FieldCooccurrencesEvidenceScore.data_type = OpenTargetsDatasetFieldType.DOUBLE
+FieldCooccurrencesEvidenceScore.dataset = DatasetCooccurrences
+FieldCooccurrencesEvidenceScore.path = [DatasetCooccurrences, FieldCooccurrencesEvidenceScore]
+
+FieldCooccurrencesIsMapped.name = "isMapped"
+FieldCooccurrencesIsMapped.data_type = OpenTargetsDatasetFieldType.BOOLEAN
+FieldCooccurrencesIsMapped.dataset = DatasetCooccurrences
+FieldCooccurrencesIsMapped.path = [DatasetCooccurrences, FieldCooccurrencesIsMapped]
+
+FieldCooccurrencesKeywordId1.name = "keywordId1"
+FieldCooccurrencesKeywordId1.data_type = OpenTargetsDatasetFieldType.STRING
+FieldCooccurrencesKeywordId1.dataset = DatasetCooccurrences
+FieldCooccurrencesKeywordId1.path = [DatasetCooccurrences, FieldCooccurrencesKeywordId1]
+
+FieldCooccurrencesKeywordId2.name = "keywordId2"
+FieldCooccurrencesKeywordId2.data_type = OpenTargetsDatasetFieldType.STRING
+FieldCooccurrencesKeywordId2.dataset = DatasetCooccurrences
+FieldCooccurrencesKeywordId2.path = [DatasetCooccurrences, FieldCooccurrencesKeywordId2]
+
+FieldCooccurrencesLabel1.name = "label1"
+FieldCooccurrencesLabel1.data_type = OpenTargetsDatasetFieldType.STRING
+FieldCooccurrencesLabel1.dataset = DatasetCooccurrences
+FieldCooccurrencesLabel1.path = [DatasetCooccurrences, FieldCooccurrencesLabel1]
+
+FieldCooccurrencesLabel2.name = "label2"
+FieldCooccurrencesLabel2.data_type = OpenTargetsDatasetFieldType.STRING
+FieldCooccurrencesLabel2.dataset = DatasetCooccurrences
+FieldCooccurrencesLabel2.path = [DatasetCooccurrences, FieldCooccurrencesLabel2]
+
+FieldCooccurrencesLabelN1.name = "labelN1"
+FieldCooccurrencesLabelN1.data_type = OpenTargetsDatasetFieldType.STRING
+FieldCooccurrencesLabelN1.dataset = DatasetCooccurrences
+FieldCooccurrencesLabelN1.path = [DatasetCooccurrences, FieldCooccurrencesLabelN1]
+
+FieldCooccurrencesLabelN2.name = "labelN2"
+FieldCooccurrencesLabelN2.data_type = OpenTargetsDatasetFieldType.STRING
+FieldCooccurrencesLabelN2.dataset = DatasetCooccurrences
+FieldCooccurrencesLabelN2.path = [DatasetCooccurrences, FieldCooccurrencesLabelN2]
+
+FieldCooccurrencesMonth.name = "month"
+FieldCooccurrencesMonth.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldCooccurrencesMonth.dataset = DatasetCooccurrences
+FieldCooccurrencesMonth.path = [DatasetCooccurrences, FieldCooccurrencesMonth]
+
+FieldCooccurrencesOrganisms.name = "organisms"
+FieldCooccurrencesOrganisms.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldCooccurrencesOrganisms.dataset = DatasetCooccurrences
+FieldCooccurrencesOrganisms.path = [DatasetCooccurrences, FieldCooccurrencesOrganisms]
+FieldCooccurrencesOrganisms.element = FieldCooccurrencesOrganismsElement
+
+FieldCooccurrencesOrganismsElement.name = "element"
+FieldCooccurrencesOrganismsElement.data_type = OpenTargetsDatasetFieldType.STRING
+FieldCooccurrencesOrganismsElement.dataset = DatasetCooccurrences
+FieldCooccurrencesOrganismsElement.path = [DatasetCooccurrences, FieldCooccurrencesOrganisms, FieldCooccurrencesOrganismsElement]
+
+FieldCooccurrencesPmcid.name = "pmcid"
+FieldCooccurrencesPmcid.data_type = OpenTargetsDatasetFieldType.STRING
+FieldCooccurrencesPmcid.dataset = DatasetCooccurrences
+FieldCooccurrencesPmcid.path = [DatasetCooccurrences, FieldCooccurrencesPmcid]
+
+FieldCooccurrencesPmid.name = "pmid"
+FieldCooccurrencesPmid.data_type = OpenTargetsDatasetFieldType.STRING
+FieldCooccurrencesPmid.dataset = DatasetCooccurrences
+FieldCooccurrencesPmid.path = [DatasetCooccurrences, FieldCooccurrencesPmid]
+
+FieldCooccurrencesPubDate.name = "pubDate"
+FieldCooccurrencesPubDate.data_type = OpenTargetsDatasetFieldType.STRING
+FieldCooccurrencesPubDate.dataset = DatasetCooccurrences
+FieldCooccurrencesPubDate.path = [DatasetCooccurrences, FieldCooccurrencesPubDate]
+
+FieldCooccurrencesSection.name = "section"
+FieldCooccurrencesSection.data_type = OpenTargetsDatasetFieldType.STRING
+FieldCooccurrencesSection.dataset = DatasetCooccurrences
+FieldCooccurrencesSection.path = [DatasetCooccurrences, FieldCooccurrencesSection]
+
+FieldCooccurrencesStart1.name = "start1"
+FieldCooccurrencesStart1.data_type = OpenTargetsDatasetFieldType.LONG
+FieldCooccurrencesStart1.dataset = DatasetCooccurrences
+FieldCooccurrencesStart1.path = [DatasetCooccurrences, FieldCooccurrencesStart1]
+
+FieldCooccurrencesStart2.name = "start2"
+FieldCooccurrencesStart2.data_type = OpenTargetsDatasetFieldType.LONG
+FieldCooccurrencesStart2.dataset = DatasetCooccurrences
+FieldCooccurrencesStart2.path = [DatasetCooccurrences, FieldCooccurrencesStart2]
+
+FieldCooccurrencesText.name = "text"
+FieldCooccurrencesText.data_type = OpenTargetsDatasetFieldType.STRING
+FieldCooccurrencesText.dataset = DatasetCooccurrences
+FieldCooccurrencesText.path = [DatasetCooccurrences, FieldCooccurrencesText]
+
+FieldCooccurrencesTraceSource.name = "trace_source"
+FieldCooccurrencesTraceSource.data_type = OpenTargetsDatasetFieldType.STRING
+FieldCooccurrencesTraceSource.dataset = DatasetCooccurrences
+FieldCooccurrencesTraceSource.path = [DatasetCooccurrences, FieldCooccurrencesTraceSource]
+
+FieldCooccurrencesType.name = "type"
+FieldCooccurrencesType.data_type = OpenTargetsDatasetFieldType.STRING
+FieldCooccurrencesType.dataset = DatasetCooccurrences
+FieldCooccurrencesType.path = [DatasetCooccurrences, FieldCooccurrencesType]
+
+FieldCooccurrencesType1.name = "type1"
+FieldCooccurrencesType1.data_type = OpenTargetsDatasetFieldType.STRING
+FieldCooccurrencesType1.dataset = DatasetCooccurrences
+FieldCooccurrencesType1.path = [DatasetCooccurrences, FieldCooccurrencesType1]
+
+FieldCooccurrencesType2.name = "type2"
+FieldCooccurrencesType2.data_type = OpenTargetsDatasetFieldType.STRING
+FieldCooccurrencesType2.dataset = DatasetCooccurrences
+FieldCooccurrencesType2.path = [DatasetCooccurrences, FieldCooccurrencesType2]
+
+FieldCooccurrencesYear.name = "year"
+FieldCooccurrencesYear.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldCooccurrencesYear.dataset = DatasetCooccurrences
+FieldCooccurrencesYear.path = [DatasetCooccurrences, FieldCooccurrencesYear]
+
 DatasetDiseaseToPhenotype.id = "diseaseToPhenotype"
 DatasetDiseaseToPhenotype.fields = [FieldDiseaseToPhenotypeDisease, FieldDiseaseToPhenotypeEvidence, FieldDiseaseToPhenotypePhenotype]
 DatasetDiseaseToPhenotype.f_disease = FieldDiseaseToPhenotypeDisease
@@ -6658,7 +8911,7 @@ FieldDiseaseToPhenotypePhenotype.dataset = DatasetDiseaseToPhenotype
 FieldDiseaseToPhenotypePhenotype.path = [DatasetDiseaseToPhenotype, FieldDiseaseToPhenotypePhenotype]
 
 DatasetDiseases.id = "diseases"
-DatasetDiseases.fields = [FieldDiseasesAncestors, FieldDiseasesChildren, FieldDiseasesCode, FieldDiseasesDbXRefs, FieldDiseasesDescendants, FieldDiseasesDescription, FieldDiseasesDirectLocationIds, FieldDiseasesId, FieldDiseasesIndirectLocationIds, FieldDiseasesName, FieldDiseasesObsoleteTerms, FieldDiseasesOntology, FieldDiseasesParents, FieldDiseasesSko, FieldDiseasesSynonyms, FieldDiseasesTherapeuticAreas]
+DatasetDiseases.fields = [FieldDiseasesAncestors, FieldDiseasesChildren, FieldDiseasesCode, FieldDiseasesDbXRefs, FieldDiseasesDescendants, FieldDiseasesDescription, FieldDiseasesDirectLocationIds, FieldDiseasesId, FieldDiseasesIndirectLocationIds, FieldDiseasesName, FieldDiseasesObsoleteTerms, FieldDiseasesOntology, FieldDiseasesParents, FieldDiseasesSynonyms, FieldDiseasesTherapeuticAreas]
 DatasetDiseases.f_ancestors = FieldDiseasesAncestors
 DatasetDiseases.f_children = FieldDiseasesChildren
 DatasetDiseases.f_code = FieldDiseasesCode
@@ -6672,7 +8925,6 @@ DatasetDiseases.f_name = FieldDiseasesName
 DatasetDiseases.f_obsolete_terms = FieldDiseasesObsoleteTerms
 DatasetDiseases.f_ontology = FieldDiseasesOntology
 DatasetDiseases.f_parents = FieldDiseasesParents
-DatasetDiseases.f_sko = FieldDiseasesSko
 DatasetDiseases.f_synonyms = FieldDiseasesSynonyms
 DatasetDiseases.f_therapeutic_areas = FieldDiseasesTherapeuticAreas
 
@@ -6821,17 +9073,6 @@ FieldDiseasesParentsElement.data_type = OpenTargetsDatasetFieldType.STRING
 FieldDiseasesParentsElement.dataset = DatasetDiseases
 FieldDiseasesParentsElement.path = [DatasetDiseases, FieldDiseasesParents, FieldDiseasesParentsElement]
 
-FieldDiseasesSko.name = "sko"
-FieldDiseasesSko.data_type = OpenTargetsDatasetFieldType.ARRAY
-FieldDiseasesSko.dataset = DatasetDiseases
-FieldDiseasesSko.path = [DatasetDiseases, FieldDiseasesSko]
-FieldDiseasesSko.element = FieldDiseasesSkoElement
-
-FieldDiseasesSkoElement.name = "element"
-FieldDiseasesSkoElement.data_type = OpenTargetsDatasetFieldType.STRING
-FieldDiseasesSkoElement.dataset = DatasetDiseases
-FieldDiseasesSkoElement.path = [DatasetDiseases, FieldDiseasesSko, FieldDiseasesSkoElement]
-
 FieldDiseasesSynonyms.name = "synonyms"
 FieldDiseasesSynonyms.data_type = OpenTargetsDatasetFieldType.STRUCT
 FieldDiseasesSynonyms.dataset = DatasetDiseases
@@ -6898,12 +9139,14 @@ FieldDiseasesTherapeuticAreasElement.dataset = DatasetDiseases
 FieldDiseasesTherapeuticAreasElement.path = [DatasetDiseases, FieldDiseasesTherapeuticAreas, FieldDiseasesTherapeuticAreasElement]
 
 DatasetDrugWarnings.id = "drugWarnings"
-DatasetDrugWarnings.fields = [FieldDrugWarningsChemblIds, FieldDrugWarningsCountry, FieldDrugWarningsDescription, FieldDrugWarningsId, FieldDrugWarningsMeddraSocCode, FieldDrugWarningsReferences, FieldDrugWarningsToxicityClass, FieldDrugWarningsWarningType, FieldDrugWarningsYear]
+DatasetDrugWarnings.fields = [FieldDrugWarningsChemblIds, FieldDrugWarningsCountry, FieldDrugWarningsDescription, FieldDrugWarningsEfoId, FieldDrugWarningsEfoIdForWarningClass, FieldDrugWarningsEfoTerm, FieldDrugWarningsId, FieldDrugWarningsReferences, FieldDrugWarningsToxicityClass, FieldDrugWarningsWarningType, FieldDrugWarningsYear]
 DatasetDrugWarnings.f_chembl_ids = FieldDrugWarningsChemblIds
 DatasetDrugWarnings.f_country = FieldDrugWarningsCountry
 DatasetDrugWarnings.f_description = FieldDrugWarningsDescription
+DatasetDrugWarnings.f_efo_id = FieldDrugWarningsEfoId
+DatasetDrugWarnings.f_efo_id_for_warning_class = FieldDrugWarningsEfoIdForWarningClass
+DatasetDrugWarnings.f_efo_term = FieldDrugWarningsEfoTerm
 DatasetDrugWarnings.f_id = FieldDrugWarningsId
-DatasetDrugWarnings.f_meddra_soc_code = FieldDrugWarningsMeddraSocCode
 DatasetDrugWarnings.f_references = FieldDrugWarningsReferences
 DatasetDrugWarnings.f_toxicity_class = FieldDrugWarningsToxicityClass
 DatasetDrugWarnings.f_warning_type = FieldDrugWarningsWarningType
@@ -6930,15 +9173,25 @@ FieldDrugWarningsDescription.data_type = OpenTargetsDatasetFieldType.STRING
 FieldDrugWarningsDescription.dataset = DatasetDrugWarnings
 FieldDrugWarningsDescription.path = [DatasetDrugWarnings, FieldDrugWarningsDescription]
 
+FieldDrugWarningsEfoId.name = "efo_id"
+FieldDrugWarningsEfoId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldDrugWarningsEfoId.dataset = DatasetDrugWarnings
+FieldDrugWarningsEfoId.path = [DatasetDrugWarnings, FieldDrugWarningsEfoId]
+
+FieldDrugWarningsEfoIdForWarningClass.name = "efo_id_for_warning_class"
+FieldDrugWarningsEfoIdForWarningClass.data_type = OpenTargetsDatasetFieldType.STRING
+FieldDrugWarningsEfoIdForWarningClass.dataset = DatasetDrugWarnings
+FieldDrugWarningsEfoIdForWarningClass.path = [DatasetDrugWarnings, FieldDrugWarningsEfoIdForWarningClass]
+
+FieldDrugWarningsEfoTerm.name = "efo_term"
+FieldDrugWarningsEfoTerm.data_type = OpenTargetsDatasetFieldType.STRING
+FieldDrugWarningsEfoTerm.dataset = DatasetDrugWarnings
+FieldDrugWarningsEfoTerm.path = [DatasetDrugWarnings, FieldDrugWarningsEfoTerm]
+
 FieldDrugWarningsId.name = "id"
 FieldDrugWarningsId.data_type = OpenTargetsDatasetFieldType.LONG
 FieldDrugWarningsId.dataset = DatasetDrugWarnings
 FieldDrugWarningsId.path = [DatasetDrugWarnings, FieldDrugWarningsId]
-
-FieldDrugWarningsMeddraSocCode.name = "meddraSocCode"
-FieldDrugWarningsMeddraSocCode.data_type = OpenTargetsDatasetFieldType.INTEGER
-FieldDrugWarningsMeddraSocCode.dataset = DatasetDrugWarnings
-FieldDrugWarningsMeddraSocCode.path = [DatasetDrugWarnings, FieldDrugWarningsMeddraSocCode]
 
 FieldDrugWarningsReferences.name = "references"
 FieldDrugWarningsReferences.data_type = OpenTargetsDatasetFieldType.ARRAY
@@ -7051,8 +9304,85 @@ FieldEbisearchEvidenceTargetId.data_type = OpenTargetsDatasetFieldType.STRING
 FieldEbisearchEvidenceTargetId.dataset = DatasetEbisearchEvidence
 FieldEbisearchEvidenceTargetId.path = [DatasetEbisearchEvidence, FieldEbisearchEvidenceTargetId]
 
+DatasetEpmcCooccurrences.id = "epmcCooccurrences"
+DatasetEpmcCooccurrences.fields = [FieldEpmcCooccurrencesAnns, FieldEpmcCooccurrencesId, FieldEpmcCooccurrencesProvider, FieldEpmcCooccurrencesSrc]
+DatasetEpmcCooccurrences.f_anns = FieldEpmcCooccurrencesAnns
+DatasetEpmcCooccurrences.f_id = FieldEpmcCooccurrencesId
+DatasetEpmcCooccurrences.f_provider = FieldEpmcCooccurrencesProvider
+DatasetEpmcCooccurrences.f_src = FieldEpmcCooccurrencesSrc
+
+FieldEpmcCooccurrencesAnns.name = "anns"
+FieldEpmcCooccurrencesAnns.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldEpmcCooccurrencesAnns.dataset = DatasetEpmcCooccurrences
+FieldEpmcCooccurrencesAnns.path = [DatasetEpmcCooccurrences, FieldEpmcCooccurrencesAnns]
+FieldEpmcCooccurrencesAnns.element = FieldEpmcCooccurrencesAnnsElement
+
+FieldEpmcCooccurrencesAnnsElement.name = "element"
+FieldEpmcCooccurrencesAnnsElement.data_type = OpenTargetsDatasetFieldType.STRUCT
+FieldEpmcCooccurrencesAnnsElement.dataset = DatasetEpmcCooccurrences
+FieldEpmcCooccurrencesAnnsElement.path = [DatasetEpmcCooccurrences, FieldEpmcCooccurrencesAnns, FieldEpmcCooccurrencesAnnsElement]
+FieldEpmcCooccurrencesAnnsElement.fields = [FieldEpmcCooccurrencesAnnsElementExact, FieldEpmcCooccurrencesAnnsElementSection, FieldEpmcCooccurrencesAnnsElementTags, FieldEpmcCooccurrencesAnnsElementType]
+FieldEpmcCooccurrencesAnnsElement.f_exact = FieldEpmcCooccurrencesAnnsElementExact
+FieldEpmcCooccurrencesAnnsElement.f_section = FieldEpmcCooccurrencesAnnsElementSection
+FieldEpmcCooccurrencesAnnsElement.f_tags = FieldEpmcCooccurrencesAnnsElementTags
+FieldEpmcCooccurrencesAnnsElement.f_type = FieldEpmcCooccurrencesAnnsElementType
+
+FieldEpmcCooccurrencesAnnsElementExact.name = "exact"
+FieldEpmcCooccurrencesAnnsElementExact.data_type = OpenTargetsDatasetFieldType.STRING
+FieldEpmcCooccurrencesAnnsElementExact.dataset = DatasetEpmcCooccurrences
+FieldEpmcCooccurrencesAnnsElementExact.path = [DatasetEpmcCooccurrences, FieldEpmcCooccurrencesAnns, FieldEpmcCooccurrencesAnnsElement, FieldEpmcCooccurrencesAnnsElementExact]
+
+FieldEpmcCooccurrencesAnnsElementSection.name = "section"
+FieldEpmcCooccurrencesAnnsElementSection.data_type = OpenTargetsDatasetFieldType.STRING
+FieldEpmcCooccurrencesAnnsElementSection.dataset = DatasetEpmcCooccurrences
+FieldEpmcCooccurrencesAnnsElementSection.path = [DatasetEpmcCooccurrences, FieldEpmcCooccurrencesAnns, FieldEpmcCooccurrencesAnnsElement, FieldEpmcCooccurrencesAnnsElementSection]
+
+FieldEpmcCooccurrencesAnnsElementTags.name = "tags"
+FieldEpmcCooccurrencesAnnsElementTags.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldEpmcCooccurrencesAnnsElementTags.dataset = DatasetEpmcCooccurrences
+FieldEpmcCooccurrencesAnnsElementTags.path = [DatasetEpmcCooccurrences, FieldEpmcCooccurrencesAnns, FieldEpmcCooccurrencesAnnsElement, FieldEpmcCooccurrencesAnnsElementTags]
+FieldEpmcCooccurrencesAnnsElementTags.element = FieldEpmcCooccurrencesAnnsElementTagsElement
+
+FieldEpmcCooccurrencesAnnsElementTagsElement.name = "element"
+FieldEpmcCooccurrencesAnnsElementTagsElement.data_type = OpenTargetsDatasetFieldType.STRUCT
+FieldEpmcCooccurrencesAnnsElementTagsElement.dataset = DatasetEpmcCooccurrences
+FieldEpmcCooccurrencesAnnsElementTagsElement.path = [DatasetEpmcCooccurrences, FieldEpmcCooccurrencesAnns, FieldEpmcCooccurrencesAnnsElement, FieldEpmcCooccurrencesAnnsElementTags, FieldEpmcCooccurrencesAnnsElementTagsElement]
+FieldEpmcCooccurrencesAnnsElementTagsElement.fields = [FieldEpmcCooccurrencesAnnsElementTagsElementName, FieldEpmcCooccurrencesAnnsElementTagsElementUri]
+FieldEpmcCooccurrencesAnnsElementTagsElement.f_name = FieldEpmcCooccurrencesAnnsElementTagsElementName
+FieldEpmcCooccurrencesAnnsElementTagsElement.f_uri = FieldEpmcCooccurrencesAnnsElementTagsElementUri
+
+FieldEpmcCooccurrencesAnnsElementTagsElementName.name = "name"
+FieldEpmcCooccurrencesAnnsElementTagsElementName.data_type = OpenTargetsDatasetFieldType.STRING
+FieldEpmcCooccurrencesAnnsElementTagsElementName.dataset = DatasetEpmcCooccurrences
+FieldEpmcCooccurrencesAnnsElementTagsElementName.path = [DatasetEpmcCooccurrences, FieldEpmcCooccurrencesAnns, FieldEpmcCooccurrencesAnnsElement, FieldEpmcCooccurrencesAnnsElementTags, FieldEpmcCooccurrencesAnnsElementTagsElement, FieldEpmcCooccurrencesAnnsElementTagsElementName]
+
+FieldEpmcCooccurrencesAnnsElementTagsElementUri.name = "uri"
+FieldEpmcCooccurrencesAnnsElementTagsElementUri.data_type = OpenTargetsDatasetFieldType.STRING
+FieldEpmcCooccurrencesAnnsElementTagsElementUri.dataset = DatasetEpmcCooccurrences
+FieldEpmcCooccurrencesAnnsElementTagsElementUri.path = [DatasetEpmcCooccurrences, FieldEpmcCooccurrencesAnns, FieldEpmcCooccurrencesAnnsElement, FieldEpmcCooccurrencesAnnsElementTags, FieldEpmcCooccurrencesAnnsElementTagsElement, FieldEpmcCooccurrencesAnnsElementTagsElementUri]
+
+FieldEpmcCooccurrencesAnnsElementType.name = "type"
+FieldEpmcCooccurrencesAnnsElementType.data_type = OpenTargetsDatasetFieldType.STRING
+FieldEpmcCooccurrencesAnnsElementType.dataset = DatasetEpmcCooccurrences
+FieldEpmcCooccurrencesAnnsElementType.path = [DatasetEpmcCooccurrences, FieldEpmcCooccurrencesAnns, FieldEpmcCooccurrencesAnnsElement, FieldEpmcCooccurrencesAnnsElementType]
+
+FieldEpmcCooccurrencesId.name = "id"
+FieldEpmcCooccurrencesId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldEpmcCooccurrencesId.dataset = DatasetEpmcCooccurrences
+FieldEpmcCooccurrencesId.path = [DatasetEpmcCooccurrences, FieldEpmcCooccurrencesId]
+
+FieldEpmcCooccurrencesProvider.name = "provider"
+FieldEpmcCooccurrencesProvider.data_type = OpenTargetsDatasetFieldType.STRING
+FieldEpmcCooccurrencesProvider.dataset = DatasetEpmcCooccurrences
+FieldEpmcCooccurrencesProvider.path = [DatasetEpmcCooccurrences, FieldEpmcCooccurrencesProvider]
+
+FieldEpmcCooccurrencesSrc.name = "src"
+FieldEpmcCooccurrencesSrc.data_type = OpenTargetsDatasetFieldType.STRING
+FieldEpmcCooccurrencesSrc.dataset = DatasetEpmcCooccurrences
+FieldEpmcCooccurrencesSrc.path = [DatasetEpmcCooccurrences, FieldEpmcCooccurrencesSrc]
+
 DatasetEvidence.id = "evidence"
-DatasetEvidence.fields = [FieldEvidenceAlleleOrigins, FieldEvidenceAllelicRequirements, FieldEvidenceAncestry, FieldEvidenceAncestryId, FieldEvidenceBeta, FieldEvidenceBetaConfidenceIntervalLower, FieldEvidenceBetaConfidenceIntervalUpper, FieldEvidenceBiologicalModelAllelicComposition, FieldEvidenceBiologicalModelGeneticBackground, FieldEvidenceBiologicalModelId, FieldEvidenceBiomarkerName, FieldEvidenceBiomarkers, FieldEvidenceBiosamplesFromSource, FieldEvidenceClinicalPhase, FieldEvidenceClinicalSignificances, FieldEvidenceClinicalStatus, FieldEvidenceCohortDescription, FieldEvidenceCohortId, FieldEvidenceCohortPhenotypes, FieldEvidenceCohortShortName, FieldEvidenceConfidence, FieldEvidenceContrast, FieldEvidenceDatasourceId, FieldEvidenceDatatypeId, FieldEvidenceDiseaseCellLines, FieldEvidenceDiseaseFromSource, FieldEvidenceDiseaseFromSourceId, FieldEvidenceDiseaseFromSourceMappedId, FieldEvidenceDiseaseId, FieldEvidenceDiseaseModelAssociatedHumanPhenotypes, FieldEvidenceDiseaseModelAssociatedModelPhenotypes, FieldEvidenceDrugFromSource, FieldEvidenceDrugId, FieldEvidenceDrugResponse, FieldEvidenceId, FieldEvidenceLiterature, FieldEvidenceLog2FoldChangePercentileRank, FieldEvidenceLog2FoldChangeValue, FieldEvidenceMutatedSamples, FieldEvidenceOddsRatio, FieldEvidenceOddsRatioConfidenceIntervalLower, FieldEvidenceOddsRatioConfidenceIntervalUpper, FieldEvidencePValueExponent, FieldEvidencePValueMantissa, FieldEvidencePathways, FieldEvidencePmcIds, FieldEvidenceProjectId, FieldEvidencePublicationFirstAuthor, FieldEvidencePublicationYear, FieldEvidenceReactionId, FieldEvidenceReactionName, FieldEvidenceResourceScore, FieldEvidenceScore, FieldEvidenceSex, FieldEvidenceSignificantDriverMethods, FieldEvidenceSourceId, FieldEvidenceStatisticalMethod, FieldEvidenceStatisticalMethodOverview, FieldEvidenceStudyCases, FieldEvidenceStudyCasesWithQualifyingVariants, FieldEvidenceStudyId, FieldEvidenceStudyOverview, FieldEvidenceStudySampleSize, FieldEvidenceStudyStartDate, FieldEvidenceStudyStopReason, FieldEvidenceStudyStopReasonCategories, FieldEvidenceTargetFromSource, FieldEvidenceTargetFromSourceId, FieldEvidenceTargetId, FieldEvidenceTargetInModel, FieldEvidenceTargetInModelEnsemblId, FieldEvidenceTargetInModelMgiId, FieldEvidenceTargetModulation, FieldEvidenceTextMiningSentences, FieldEvidenceUrls, FieldEvidenceVariantAminoacidDescriptions, FieldEvidenceVariantFunctionalConsequenceId, FieldEvidenceVariantHgvsId, FieldEvidenceVariantId, FieldEvidenceVariantRsId]
+DatasetEvidence.fields = [FieldEvidenceAlleleOrigins, FieldEvidenceAllelicRequirements, FieldEvidenceAncestry, FieldEvidenceAncestryId, FieldEvidenceBeta, FieldEvidenceBetaConfidenceIntervalLower, FieldEvidenceBetaConfidenceIntervalUpper, FieldEvidenceBiologicalModelAllelicComposition, FieldEvidenceBiologicalModelGeneticBackground, FieldEvidenceBiologicalModelId, FieldEvidenceBiomarkerName, FieldEvidenceBiomarkers, FieldEvidenceBiosamplesFromSource, FieldEvidenceCellType, FieldEvidenceClinicalPhase, FieldEvidenceClinicalSignificances, FieldEvidenceClinicalStatus, FieldEvidenceCohortDescription, FieldEvidenceCohortId, FieldEvidenceCohortPhenotypes, FieldEvidenceCohortShortName, FieldEvidenceConfidence, FieldEvidenceContrast, FieldEvidenceCrisprScreenLibrary, FieldEvidenceDatasourceId, FieldEvidenceDatatypeId, FieldEvidenceDirectionOnTrait, FieldEvidenceDiseaseCellLines, FieldEvidenceDiseaseFromSource, FieldEvidenceDiseaseFromSourceId, FieldEvidenceDiseaseFromSourceMappedId, FieldEvidenceDiseaseId, FieldEvidenceDiseaseModelAssociatedHumanPhenotypes, FieldEvidenceDiseaseModelAssociatedModelPhenotypes, FieldEvidenceDrugFromSource, FieldEvidenceDrugId, FieldEvidenceDrugResponse, FieldEvidenceGeneticBackground, FieldEvidenceId, FieldEvidenceLiterature, FieldEvidenceLog2FoldChangePercentileRank, FieldEvidenceLog2FoldChangeValue, FieldEvidenceMutatedSamples, FieldEvidenceOddsRatio, FieldEvidenceOddsRatioConfidenceIntervalLower, FieldEvidenceOddsRatioConfidenceIntervalUpper, FieldEvidencePValueExponent, FieldEvidencePValueMantissa, FieldEvidencePathways, FieldEvidencePmcIds, FieldEvidenceProjectId, FieldEvidencePublicationFirstAuthor, FieldEvidencePublicationYear, FieldEvidenceReactionId, FieldEvidenceReactionName, FieldEvidenceReleaseDate, FieldEvidenceReleaseVersion, FieldEvidenceResourceScore, FieldEvidenceScore, FieldEvidenceSex, FieldEvidenceSignificantDriverMethods, FieldEvidenceSourceId, FieldEvidenceStatisticalMethod, FieldEvidenceStatisticalMethodOverview, FieldEvidenceStatisticalTestTail, FieldEvidenceStudyCases, FieldEvidenceStudyCasesWithQualifyingVariants, FieldEvidenceStudyId, FieldEvidenceStudyOverview, FieldEvidenceStudySampleSize, FieldEvidenceStudyStartDate, FieldEvidenceStudyStopReason, FieldEvidenceStudyStopReasonCategories, FieldEvidenceTargetFromSource, FieldEvidenceTargetFromSourceId, FieldEvidenceTargetId, FieldEvidenceTargetInModel, FieldEvidenceTargetInModelEnsemblId, FieldEvidenceTargetInModelMgiId, FieldEvidenceTargetModulation, FieldEvidenceTextMiningSentences, FieldEvidenceUrls, FieldEvidenceVariantAminoacidDescriptions, FieldEvidenceVariantEffect, FieldEvidenceVariantFunctionalConsequenceFromQtlId, FieldEvidenceVariantFunctionalConsequenceId, FieldEvidenceVariantHgvsId, FieldEvidenceVariantId, FieldEvidenceVariantRsId]
 DatasetEvidence.f_allele_origins = FieldEvidenceAlleleOrigins
 DatasetEvidence.f_allelic_requirements = FieldEvidenceAllelicRequirements
 DatasetEvidence.f_ancestry = FieldEvidenceAncestry
@@ -7066,6 +9396,7 @@ DatasetEvidence.f_biological_model_id = FieldEvidenceBiologicalModelId
 DatasetEvidence.f_biomarker_name = FieldEvidenceBiomarkerName
 DatasetEvidence.f_biomarkers = FieldEvidenceBiomarkers
 DatasetEvidence.f_biosamples_from_source = FieldEvidenceBiosamplesFromSource
+DatasetEvidence.f_cell_type = FieldEvidenceCellType
 DatasetEvidence.f_clinical_phase = FieldEvidenceClinicalPhase
 DatasetEvidence.f_clinical_significances = FieldEvidenceClinicalSignificances
 DatasetEvidence.f_clinical_status = FieldEvidenceClinicalStatus
@@ -7075,8 +9406,10 @@ DatasetEvidence.f_cohort_phenotypes = FieldEvidenceCohortPhenotypes
 DatasetEvidence.f_cohort_short_name = FieldEvidenceCohortShortName
 DatasetEvidence.f_confidence = FieldEvidenceConfidence
 DatasetEvidence.f_contrast = FieldEvidenceContrast
+DatasetEvidence.f_crispr_screen_library = FieldEvidenceCrisprScreenLibrary
 DatasetEvidence.f_datasource_id = FieldEvidenceDatasourceId
 DatasetEvidence.f_datatype_id = FieldEvidenceDatatypeId
+DatasetEvidence.f_direction_on_trait = FieldEvidenceDirectionOnTrait
 DatasetEvidence.f_disease_cell_lines = FieldEvidenceDiseaseCellLines
 DatasetEvidence.f_disease_from_source = FieldEvidenceDiseaseFromSource
 DatasetEvidence.f_disease_from_source_id = FieldEvidenceDiseaseFromSourceId
@@ -7087,6 +9420,7 @@ DatasetEvidence.f_disease_model_associated_model_phenotypes = FieldEvidenceDisea
 DatasetEvidence.f_drug_from_source = FieldEvidenceDrugFromSource
 DatasetEvidence.f_drug_id = FieldEvidenceDrugId
 DatasetEvidence.f_drug_response = FieldEvidenceDrugResponse
+DatasetEvidence.f_genetic_background = FieldEvidenceGeneticBackground
 DatasetEvidence.f_id = FieldEvidenceId
 DatasetEvidence.f_literature = FieldEvidenceLiterature
 DatasetEvidence.f_log_2_fold_change_percentile_rank = FieldEvidenceLog2FoldChangePercentileRank
@@ -7104,6 +9438,8 @@ DatasetEvidence.f_publication_first_author = FieldEvidencePublicationFirstAuthor
 DatasetEvidence.f_publication_year = FieldEvidencePublicationYear
 DatasetEvidence.f_reaction_id = FieldEvidenceReactionId
 DatasetEvidence.f_reaction_name = FieldEvidenceReactionName
+DatasetEvidence.f_release_date = FieldEvidenceReleaseDate
+DatasetEvidence.f_release_version = FieldEvidenceReleaseVersion
 DatasetEvidence.f_resource_score = FieldEvidenceResourceScore
 DatasetEvidence.f_score = FieldEvidenceScore
 DatasetEvidence.f_sex = FieldEvidenceSex
@@ -7111,6 +9447,7 @@ DatasetEvidence.f_significant_driver_methods = FieldEvidenceSignificantDriverMet
 DatasetEvidence.f_source_id = FieldEvidenceSourceId
 DatasetEvidence.f_statistical_method = FieldEvidenceStatisticalMethod
 DatasetEvidence.f_statistical_method_overview = FieldEvidenceStatisticalMethodOverview
+DatasetEvidence.f_statistical_test_tail = FieldEvidenceStatisticalTestTail
 DatasetEvidence.f_study_cases = FieldEvidenceStudyCases
 DatasetEvidence.f_study_cases_with_qualifying_variants = FieldEvidenceStudyCasesWithQualifyingVariants
 DatasetEvidence.f_study_id = FieldEvidenceStudyId
@@ -7129,6 +9466,8 @@ DatasetEvidence.f_target_modulation = FieldEvidenceTargetModulation
 DatasetEvidence.f_text_mining_sentences = FieldEvidenceTextMiningSentences
 DatasetEvidence.f_urls = FieldEvidenceUrls
 DatasetEvidence.f_variant_aminoacid_descriptions = FieldEvidenceVariantAminoacidDescriptions
+DatasetEvidence.f_variant_effect = FieldEvidenceVariantEffect
+DatasetEvidence.f_variant_functional_consequence_from_qtl_id = FieldEvidenceVariantFunctionalConsequenceFromQtlId
 DatasetEvidence.f_variant_functional_consequence_id = FieldEvidenceVariantFunctionalConsequenceId
 DatasetEvidence.f_variant_hgvs_id = FieldEvidenceVariantHgvsId
 DatasetEvidence.f_variant_id = FieldEvidenceVariantId
@@ -7205,9 +9544,9 @@ FieldEvidenceBiomarkers.name = "biomarkers"
 FieldEvidenceBiomarkers.data_type = OpenTargetsDatasetFieldType.STRUCT
 FieldEvidenceBiomarkers.dataset = DatasetEvidence
 FieldEvidenceBiomarkers.path = [DatasetEvidence, FieldEvidenceBiomarkers]
-FieldEvidenceBiomarkers.fields = [FieldEvidenceBiomarkersGeneExpression, FieldEvidenceBiomarkersVariant]
+FieldEvidenceBiomarkers.fields = [FieldEvidenceBiomarkersGeneExpression, FieldEvidenceBiomarkersGeneticVariation]
 FieldEvidenceBiomarkers.f_gene_expression = FieldEvidenceBiomarkersGeneExpression
-FieldEvidenceBiomarkers.f_variant = FieldEvidenceBiomarkersVariant
+FieldEvidenceBiomarkers.f_genetic_variation = FieldEvidenceBiomarkersGeneticVariation
 
 FieldEvidenceBiomarkersGeneExpression.name = "geneExpression"
 FieldEvidenceBiomarkersGeneExpression.data_type = OpenTargetsDatasetFieldType.ARRAY
@@ -7233,35 +9572,35 @@ FieldEvidenceBiomarkersGeneExpressionElementName.data_type = OpenTargetsDatasetF
 FieldEvidenceBiomarkersGeneExpressionElementName.dataset = DatasetEvidence
 FieldEvidenceBiomarkersGeneExpressionElementName.path = [DatasetEvidence, FieldEvidenceBiomarkers, FieldEvidenceBiomarkersGeneExpression, FieldEvidenceBiomarkersGeneExpressionElement, FieldEvidenceBiomarkersGeneExpressionElementName]
 
-FieldEvidenceBiomarkersVariant.name = "variant"
-FieldEvidenceBiomarkersVariant.data_type = OpenTargetsDatasetFieldType.ARRAY
-FieldEvidenceBiomarkersVariant.dataset = DatasetEvidence
-FieldEvidenceBiomarkersVariant.path = [DatasetEvidence, FieldEvidenceBiomarkers, FieldEvidenceBiomarkersVariant]
-FieldEvidenceBiomarkersVariant.element = FieldEvidenceBiomarkersVariantElement
+FieldEvidenceBiomarkersGeneticVariation.name = "geneticVariation"
+FieldEvidenceBiomarkersGeneticVariation.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldEvidenceBiomarkersGeneticVariation.dataset = DatasetEvidence
+FieldEvidenceBiomarkersGeneticVariation.path = [DatasetEvidence, FieldEvidenceBiomarkers, FieldEvidenceBiomarkersGeneticVariation]
+FieldEvidenceBiomarkersGeneticVariation.element = FieldEvidenceBiomarkersGeneticVariationElement
 
-FieldEvidenceBiomarkersVariantElement.name = "element"
-FieldEvidenceBiomarkersVariantElement.data_type = OpenTargetsDatasetFieldType.STRUCT
-FieldEvidenceBiomarkersVariantElement.dataset = DatasetEvidence
-FieldEvidenceBiomarkersVariantElement.path = [DatasetEvidence, FieldEvidenceBiomarkers, FieldEvidenceBiomarkersVariant, FieldEvidenceBiomarkersVariantElement]
-FieldEvidenceBiomarkersVariantElement.fields = [FieldEvidenceBiomarkersVariantElementFunctionalConsequenceId, FieldEvidenceBiomarkersVariantElementId, FieldEvidenceBiomarkersVariantElementName]
-FieldEvidenceBiomarkersVariantElement.f_functional_consequence_id = FieldEvidenceBiomarkersVariantElementFunctionalConsequenceId
-FieldEvidenceBiomarkersVariantElement.f_id = FieldEvidenceBiomarkersVariantElementId
-FieldEvidenceBiomarkersVariantElement.f_name = FieldEvidenceBiomarkersVariantElementName
+FieldEvidenceBiomarkersGeneticVariationElement.name = "element"
+FieldEvidenceBiomarkersGeneticVariationElement.data_type = OpenTargetsDatasetFieldType.STRUCT
+FieldEvidenceBiomarkersGeneticVariationElement.dataset = DatasetEvidence
+FieldEvidenceBiomarkersGeneticVariationElement.path = [DatasetEvidence, FieldEvidenceBiomarkers, FieldEvidenceBiomarkersGeneticVariation, FieldEvidenceBiomarkersGeneticVariationElement]
+FieldEvidenceBiomarkersGeneticVariationElement.fields = [FieldEvidenceBiomarkersGeneticVariationElementFunctionalConsequenceId, FieldEvidenceBiomarkersGeneticVariationElementId, FieldEvidenceBiomarkersGeneticVariationElementName]
+FieldEvidenceBiomarkersGeneticVariationElement.f_functional_consequence_id = FieldEvidenceBiomarkersGeneticVariationElementFunctionalConsequenceId
+FieldEvidenceBiomarkersGeneticVariationElement.f_id = FieldEvidenceBiomarkersGeneticVariationElementId
+FieldEvidenceBiomarkersGeneticVariationElement.f_name = FieldEvidenceBiomarkersGeneticVariationElementName
 
-FieldEvidenceBiomarkersVariantElementFunctionalConsequenceId.name = "functionalConsequenceId"
-FieldEvidenceBiomarkersVariantElementFunctionalConsequenceId.data_type = OpenTargetsDatasetFieldType.STRING
-FieldEvidenceBiomarkersVariantElementFunctionalConsequenceId.dataset = DatasetEvidence
-FieldEvidenceBiomarkersVariantElementFunctionalConsequenceId.path = [DatasetEvidence, FieldEvidenceBiomarkers, FieldEvidenceBiomarkersVariant, FieldEvidenceBiomarkersVariantElement, FieldEvidenceBiomarkersVariantElementFunctionalConsequenceId]
+FieldEvidenceBiomarkersGeneticVariationElementFunctionalConsequenceId.name = "functionalConsequenceId"
+FieldEvidenceBiomarkersGeneticVariationElementFunctionalConsequenceId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldEvidenceBiomarkersGeneticVariationElementFunctionalConsequenceId.dataset = DatasetEvidence
+FieldEvidenceBiomarkersGeneticVariationElementFunctionalConsequenceId.path = [DatasetEvidence, FieldEvidenceBiomarkers, FieldEvidenceBiomarkersGeneticVariation, FieldEvidenceBiomarkersGeneticVariationElement, FieldEvidenceBiomarkersGeneticVariationElementFunctionalConsequenceId]
 
-FieldEvidenceBiomarkersVariantElementId.name = "id"
-FieldEvidenceBiomarkersVariantElementId.data_type = OpenTargetsDatasetFieldType.STRING
-FieldEvidenceBiomarkersVariantElementId.dataset = DatasetEvidence
-FieldEvidenceBiomarkersVariantElementId.path = [DatasetEvidence, FieldEvidenceBiomarkers, FieldEvidenceBiomarkersVariant, FieldEvidenceBiomarkersVariantElement, FieldEvidenceBiomarkersVariantElementId]
+FieldEvidenceBiomarkersGeneticVariationElementId.name = "id"
+FieldEvidenceBiomarkersGeneticVariationElementId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldEvidenceBiomarkersGeneticVariationElementId.dataset = DatasetEvidence
+FieldEvidenceBiomarkersGeneticVariationElementId.path = [DatasetEvidence, FieldEvidenceBiomarkers, FieldEvidenceBiomarkersGeneticVariation, FieldEvidenceBiomarkersGeneticVariationElement, FieldEvidenceBiomarkersGeneticVariationElementId]
 
-FieldEvidenceBiomarkersVariantElementName.name = "name"
-FieldEvidenceBiomarkersVariantElementName.data_type = OpenTargetsDatasetFieldType.STRING
-FieldEvidenceBiomarkersVariantElementName.dataset = DatasetEvidence
-FieldEvidenceBiomarkersVariantElementName.path = [DatasetEvidence, FieldEvidenceBiomarkers, FieldEvidenceBiomarkersVariant, FieldEvidenceBiomarkersVariantElement, FieldEvidenceBiomarkersVariantElementName]
+FieldEvidenceBiomarkersGeneticVariationElementName.name = "name"
+FieldEvidenceBiomarkersGeneticVariationElementName.data_type = OpenTargetsDatasetFieldType.STRING
+FieldEvidenceBiomarkersGeneticVariationElementName.dataset = DatasetEvidence
+FieldEvidenceBiomarkersGeneticVariationElementName.path = [DatasetEvidence, FieldEvidenceBiomarkers, FieldEvidenceBiomarkersGeneticVariation, FieldEvidenceBiomarkersGeneticVariationElement, FieldEvidenceBiomarkersGeneticVariationElementName]
 
 FieldEvidenceBiosamplesFromSource.name = "biosamplesFromSource"
 FieldEvidenceBiosamplesFromSource.data_type = OpenTargetsDatasetFieldType.ARRAY
@@ -7274,8 +9613,13 @@ FieldEvidenceBiosamplesFromSourceElement.data_type = OpenTargetsDatasetFieldType
 FieldEvidenceBiosamplesFromSourceElement.dataset = DatasetEvidence
 FieldEvidenceBiosamplesFromSourceElement.path = [DatasetEvidence, FieldEvidenceBiosamplesFromSource, FieldEvidenceBiosamplesFromSourceElement]
 
+FieldEvidenceCellType.name = "cellType"
+FieldEvidenceCellType.data_type = OpenTargetsDatasetFieldType.STRING
+FieldEvidenceCellType.dataset = DatasetEvidence
+FieldEvidenceCellType.path = [DatasetEvidence, FieldEvidenceCellType]
+
 FieldEvidenceClinicalPhase.name = "clinicalPhase"
-FieldEvidenceClinicalPhase.data_type = OpenTargetsDatasetFieldType.LONG
+FieldEvidenceClinicalPhase.data_type = OpenTargetsDatasetFieldType.DOUBLE
 FieldEvidenceClinicalPhase.dataset = DatasetEvidence
 FieldEvidenceClinicalPhase.path = [DatasetEvidence, FieldEvidenceClinicalPhase]
 
@@ -7331,6 +9675,11 @@ FieldEvidenceContrast.data_type = OpenTargetsDatasetFieldType.STRING
 FieldEvidenceContrast.dataset = DatasetEvidence
 FieldEvidenceContrast.path = [DatasetEvidence, FieldEvidenceContrast]
 
+FieldEvidenceCrisprScreenLibrary.name = "crisprScreenLibrary"
+FieldEvidenceCrisprScreenLibrary.data_type = OpenTargetsDatasetFieldType.STRING
+FieldEvidenceCrisprScreenLibrary.dataset = DatasetEvidence
+FieldEvidenceCrisprScreenLibrary.path = [DatasetEvidence, FieldEvidenceCrisprScreenLibrary]
+
 FieldEvidenceDatasourceId.name = "datasourceId"
 FieldEvidenceDatasourceId.data_type = OpenTargetsDatasetFieldType.STRING
 FieldEvidenceDatasourceId.dataset = DatasetEvidence
@@ -7340,6 +9689,11 @@ FieldEvidenceDatatypeId.name = "datatypeId"
 FieldEvidenceDatatypeId.data_type = OpenTargetsDatasetFieldType.STRING
 FieldEvidenceDatatypeId.dataset = DatasetEvidence
 FieldEvidenceDatatypeId.path = [DatasetEvidence, FieldEvidenceDatatypeId]
+
+FieldEvidenceDirectionOnTrait.name = "directionOnTrait"
+FieldEvidenceDirectionOnTrait.data_type = OpenTargetsDatasetFieldType.STRING
+FieldEvidenceDirectionOnTrait.dataset = DatasetEvidence
+FieldEvidenceDirectionOnTrait.path = [DatasetEvidence, FieldEvidenceDirectionOnTrait]
 
 FieldEvidenceDiseaseCellLines.name = "diseaseCellLines"
 FieldEvidenceDiseaseCellLines.data_type = OpenTargetsDatasetFieldType.ARRAY
@@ -7460,6 +9814,11 @@ FieldEvidenceDrugResponse.data_type = OpenTargetsDatasetFieldType.STRING
 FieldEvidenceDrugResponse.dataset = DatasetEvidence
 FieldEvidenceDrugResponse.path = [DatasetEvidence, FieldEvidenceDrugResponse]
 
+FieldEvidenceGeneticBackground.name = "geneticBackground"
+FieldEvidenceGeneticBackground.data_type = OpenTargetsDatasetFieldType.STRING
+FieldEvidenceGeneticBackground.dataset = DatasetEvidence
+FieldEvidenceGeneticBackground.path = [DatasetEvidence, FieldEvidenceGeneticBackground]
+
 FieldEvidenceId.name = "id"
 FieldEvidenceId.data_type = OpenTargetsDatasetFieldType.STRING
 FieldEvidenceId.dataset = DatasetEvidence
@@ -7508,12 +9867,12 @@ FieldEvidenceMutatedSamplesElementFunctionalConsequenceId.dataset = DatasetEvide
 FieldEvidenceMutatedSamplesElementFunctionalConsequenceId.path = [DatasetEvidence, FieldEvidenceMutatedSamples, FieldEvidenceMutatedSamplesElement, FieldEvidenceMutatedSamplesElementFunctionalConsequenceId]
 
 FieldEvidenceMutatedSamplesElementNumberMutatedSamples.name = "numberMutatedSamples"
-FieldEvidenceMutatedSamplesElementNumberMutatedSamples.data_type = OpenTargetsDatasetFieldType.LONG
+FieldEvidenceMutatedSamplesElementNumberMutatedSamples.data_type = OpenTargetsDatasetFieldType.DOUBLE
 FieldEvidenceMutatedSamplesElementNumberMutatedSamples.dataset = DatasetEvidence
 FieldEvidenceMutatedSamplesElementNumberMutatedSamples.path = [DatasetEvidence, FieldEvidenceMutatedSamples, FieldEvidenceMutatedSamplesElement, FieldEvidenceMutatedSamplesElementNumberMutatedSamples]
 
 FieldEvidenceMutatedSamplesElementNumberSamplesTested.name = "numberSamplesTested"
-FieldEvidenceMutatedSamplesElementNumberSamplesTested.data_type = OpenTargetsDatasetFieldType.LONG
+FieldEvidenceMutatedSamplesElementNumberSamplesTested.data_type = OpenTargetsDatasetFieldType.DOUBLE
 FieldEvidenceMutatedSamplesElementNumberSamplesTested.dataset = DatasetEvidence
 FieldEvidenceMutatedSamplesElementNumberSamplesTested.path = [DatasetEvidence, FieldEvidenceMutatedSamples, FieldEvidenceMutatedSamplesElement, FieldEvidenceMutatedSamplesElementNumberSamplesTested]
 
@@ -7607,6 +9966,16 @@ FieldEvidenceReactionName.data_type = OpenTargetsDatasetFieldType.STRING
 FieldEvidenceReactionName.dataset = DatasetEvidence
 FieldEvidenceReactionName.path = [DatasetEvidence, FieldEvidenceReactionName]
 
+FieldEvidenceReleaseDate.name = "releaseDate"
+FieldEvidenceReleaseDate.data_type = OpenTargetsDatasetFieldType.STRING
+FieldEvidenceReleaseDate.dataset = DatasetEvidence
+FieldEvidenceReleaseDate.path = [DatasetEvidence, FieldEvidenceReleaseDate]
+
+FieldEvidenceReleaseVersion.name = "releaseVersion"
+FieldEvidenceReleaseVersion.data_type = OpenTargetsDatasetFieldType.STRING
+FieldEvidenceReleaseVersion.dataset = DatasetEvidence
+FieldEvidenceReleaseVersion.path = [DatasetEvidence, FieldEvidenceReleaseVersion]
+
 FieldEvidenceResourceScore.name = "resourceScore"
 FieldEvidenceResourceScore.data_type = OpenTargetsDatasetFieldType.DOUBLE
 FieldEvidenceResourceScore.dataset = DatasetEvidence
@@ -7653,6 +10022,11 @@ FieldEvidenceStatisticalMethodOverview.name = "statisticalMethodOverview"
 FieldEvidenceStatisticalMethodOverview.data_type = OpenTargetsDatasetFieldType.STRING
 FieldEvidenceStatisticalMethodOverview.dataset = DatasetEvidence
 FieldEvidenceStatisticalMethodOverview.path = [DatasetEvidence, FieldEvidenceStatisticalMethodOverview]
+
+FieldEvidenceStatisticalTestTail.name = "statisticalTestTail"
+FieldEvidenceStatisticalTestTail.data_type = OpenTargetsDatasetFieldType.STRING
+FieldEvidenceStatisticalTestTail.dataset = DatasetEvidence
+FieldEvidenceStatisticalTestTail.path = [DatasetEvidence, FieldEvidenceStatisticalTestTail]
 
 FieldEvidenceStudyCases.name = "studyCases"
 FieldEvidenceStudyCases.data_type = OpenTargetsDatasetFieldType.LONG
@@ -7818,6 +10192,16 @@ FieldEvidenceVariantAminoacidDescriptionsElement.data_type = OpenTargetsDatasetF
 FieldEvidenceVariantAminoacidDescriptionsElement.dataset = DatasetEvidence
 FieldEvidenceVariantAminoacidDescriptionsElement.path = [DatasetEvidence, FieldEvidenceVariantAminoacidDescriptions, FieldEvidenceVariantAminoacidDescriptionsElement]
 
+FieldEvidenceVariantEffect.name = "variantEffect"
+FieldEvidenceVariantEffect.data_type = OpenTargetsDatasetFieldType.STRING
+FieldEvidenceVariantEffect.dataset = DatasetEvidence
+FieldEvidenceVariantEffect.path = [DatasetEvidence, FieldEvidenceVariantEffect]
+
+FieldEvidenceVariantFunctionalConsequenceFromQtlId.name = "variantFunctionalConsequenceFromQtlId"
+FieldEvidenceVariantFunctionalConsequenceFromQtlId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldEvidenceVariantFunctionalConsequenceFromQtlId.dataset = DatasetEvidence
+FieldEvidenceVariantFunctionalConsequenceFromQtlId.path = [DatasetEvidence, FieldEvidenceVariantFunctionalConsequenceFromQtlId]
+
 FieldEvidenceVariantFunctionalConsequenceId.name = "variantFunctionalConsequenceId"
 FieldEvidenceVariantFunctionalConsequenceId.data_type = OpenTargetsDatasetFieldType.STRING
 FieldEvidenceVariantFunctionalConsequenceId.dataset = DatasetEvidence
@@ -7837,6 +10221,614 @@ FieldEvidenceVariantRsId.name = "variantRsId"
 FieldEvidenceVariantRsId.data_type = OpenTargetsDatasetFieldType.STRING
 FieldEvidenceVariantRsId.dataset = DatasetEvidence
 FieldEvidenceVariantRsId.path = [DatasetEvidence, FieldEvidenceVariantRsId]
+
+DatasetFacetSearchDisease.id = "facetSearchDisease"
+DatasetFacetSearchDisease.fields = [FieldFacetSearchDiseaseCategory, FieldFacetSearchDiseaseDatasourceId, FieldFacetSearchDiseaseEntityIds, FieldFacetSearchDiseaseLabel]
+DatasetFacetSearchDisease.f_category = FieldFacetSearchDiseaseCategory
+DatasetFacetSearchDisease.f_datasource_id = FieldFacetSearchDiseaseDatasourceId
+DatasetFacetSearchDisease.f_entity_ids = FieldFacetSearchDiseaseEntityIds
+DatasetFacetSearchDisease.f_label = FieldFacetSearchDiseaseLabel
+
+FieldFacetSearchDiseaseCategory.name = "category"
+FieldFacetSearchDiseaseCategory.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFacetSearchDiseaseCategory.dataset = DatasetFacetSearchDisease
+FieldFacetSearchDiseaseCategory.path = [DatasetFacetSearchDisease, FieldFacetSearchDiseaseCategory]
+
+FieldFacetSearchDiseaseDatasourceId.name = "datasourceId"
+FieldFacetSearchDiseaseDatasourceId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFacetSearchDiseaseDatasourceId.dataset = DatasetFacetSearchDisease
+FieldFacetSearchDiseaseDatasourceId.path = [DatasetFacetSearchDisease, FieldFacetSearchDiseaseDatasourceId]
+
+FieldFacetSearchDiseaseEntityIds.name = "entityIds"
+FieldFacetSearchDiseaseEntityIds.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldFacetSearchDiseaseEntityIds.dataset = DatasetFacetSearchDisease
+FieldFacetSearchDiseaseEntityIds.path = [DatasetFacetSearchDisease, FieldFacetSearchDiseaseEntityIds]
+FieldFacetSearchDiseaseEntityIds.element = FieldFacetSearchDiseaseEntityIdsElement
+
+FieldFacetSearchDiseaseEntityIdsElement.name = "element"
+FieldFacetSearchDiseaseEntityIdsElement.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFacetSearchDiseaseEntityIdsElement.dataset = DatasetFacetSearchDisease
+FieldFacetSearchDiseaseEntityIdsElement.path = [DatasetFacetSearchDisease, FieldFacetSearchDiseaseEntityIds, FieldFacetSearchDiseaseEntityIdsElement]
+
+FieldFacetSearchDiseaseLabel.name = "label"
+FieldFacetSearchDiseaseLabel.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFacetSearchDiseaseLabel.dataset = DatasetFacetSearchDisease
+FieldFacetSearchDiseaseLabel.path = [DatasetFacetSearchDisease, FieldFacetSearchDiseaseLabel]
+
+DatasetFacetSearchDisease.id = "facetSearchDisease"
+DatasetFacetSearchDisease.fields = [FieldFacetSearchDiseaseCategory, FieldFacetSearchDiseaseDatasourceId, FieldFacetSearchDiseaseEntityIds, FieldFacetSearchDiseaseLabel]
+DatasetFacetSearchDisease.f_category = FieldFacetSearchDiseaseCategory
+DatasetFacetSearchDisease.f_datasource_id = FieldFacetSearchDiseaseDatasourceId
+DatasetFacetSearchDisease.f_entity_ids = FieldFacetSearchDiseaseEntityIds
+DatasetFacetSearchDisease.f_label = FieldFacetSearchDiseaseLabel
+
+FieldFacetSearchDiseaseCategory.name = "category"
+FieldFacetSearchDiseaseCategory.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFacetSearchDiseaseCategory.dataset = DatasetFacetSearchDisease
+FieldFacetSearchDiseaseCategory.path = [DatasetFacetSearchDisease, FieldFacetSearchDiseaseCategory]
+
+FieldFacetSearchDiseaseDatasourceId.name = "datasourceId"
+FieldFacetSearchDiseaseDatasourceId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFacetSearchDiseaseDatasourceId.dataset = DatasetFacetSearchDisease
+FieldFacetSearchDiseaseDatasourceId.path = [DatasetFacetSearchDisease, FieldFacetSearchDiseaseDatasourceId]
+
+FieldFacetSearchDiseaseEntityIds.name = "entityIds"
+FieldFacetSearchDiseaseEntityIds.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldFacetSearchDiseaseEntityIds.dataset = DatasetFacetSearchDisease
+FieldFacetSearchDiseaseEntityIds.path = [DatasetFacetSearchDisease, FieldFacetSearchDiseaseEntityIds]
+FieldFacetSearchDiseaseEntityIds.element = FieldFacetSearchDiseaseEntityIdsElement
+
+FieldFacetSearchDiseaseEntityIdsElement.name = "element"
+FieldFacetSearchDiseaseEntityIdsElement.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFacetSearchDiseaseEntityIdsElement.dataset = DatasetFacetSearchDisease
+FieldFacetSearchDiseaseEntityIdsElement.path = [DatasetFacetSearchDisease, FieldFacetSearchDiseaseEntityIds, FieldFacetSearchDiseaseEntityIdsElement]
+
+FieldFacetSearchDiseaseLabel.name = "label"
+FieldFacetSearchDiseaseLabel.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFacetSearchDiseaseLabel.dataset = DatasetFacetSearchDisease
+FieldFacetSearchDiseaseLabel.path = [DatasetFacetSearchDisease, FieldFacetSearchDiseaseLabel]
+
+DatasetFacetSearchTarget.id = "facetSearchTarget"
+DatasetFacetSearchTarget.fields = [FieldFacetSearchTargetCategory, FieldFacetSearchTargetDatasourceId, FieldFacetSearchTargetEntityIds, FieldFacetSearchTargetLabel]
+DatasetFacetSearchTarget.f_category = FieldFacetSearchTargetCategory
+DatasetFacetSearchTarget.f_datasource_id = FieldFacetSearchTargetDatasourceId
+DatasetFacetSearchTarget.f_entity_ids = FieldFacetSearchTargetEntityIds
+DatasetFacetSearchTarget.f_label = FieldFacetSearchTargetLabel
+
+FieldFacetSearchTargetCategory.name = "category"
+FieldFacetSearchTargetCategory.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFacetSearchTargetCategory.dataset = DatasetFacetSearchTarget
+FieldFacetSearchTargetCategory.path = [DatasetFacetSearchTarget, FieldFacetSearchTargetCategory]
+
+FieldFacetSearchTargetDatasourceId.name = "datasourceId"
+FieldFacetSearchTargetDatasourceId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFacetSearchTargetDatasourceId.dataset = DatasetFacetSearchTarget
+FieldFacetSearchTargetDatasourceId.path = [DatasetFacetSearchTarget, FieldFacetSearchTargetDatasourceId]
+
+FieldFacetSearchTargetEntityIds.name = "entityIds"
+FieldFacetSearchTargetEntityIds.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldFacetSearchTargetEntityIds.dataset = DatasetFacetSearchTarget
+FieldFacetSearchTargetEntityIds.path = [DatasetFacetSearchTarget, FieldFacetSearchTargetEntityIds]
+FieldFacetSearchTargetEntityIds.element = FieldFacetSearchTargetEntityIdsElement
+
+FieldFacetSearchTargetEntityIdsElement.name = "element"
+FieldFacetSearchTargetEntityIdsElement.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFacetSearchTargetEntityIdsElement.dataset = DatasetFacetSearchTarget
+FieldFacetSearchTargetEntityIdsElement.path = [DatasetFacetSearchTarget, FieldFacetSearchTargetEntityIds, FieldFacetSearchTargetEntityIdsElement]
+
+FieldFacetSearchTargetLabel.name = "label"
+FieldFacetSearchTargetLabel.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFacetSearchTargetLabel.dataset = DatasetFacetSearchTarget
+FieldFacetSearchTargetLabel.path = [DatasetFacetSearchTarget, FieldFacetSearchTargetLabel]
+
+DatasetFacetSearchTarget.id = "facetSearchTarget"
+DatasetFacetSearchTarget.fields = [FieldFacetSearchTargetCategory, FieldFacetSearchTargetDatasourceId, FieldFacetSearchTargetEntityIds, FieldFacetSearchTargetLabel]
+DatasetFacetSearchTarget.f_category = FieldFacetSearchTargetCategory
+DatasetFacetSearchTarget.f_datasource_id = FieldFacetSearchTargetDatasourceId
+DatasetFacetSearchTarget.f_entity_ids = FieldFacetSearchTargetEntityIds
+DatasetFacetSearchTarget.f_label = FieldFacetSearchTargetLabel
+
+FieldFacetSearchTargetCategory.name = "category"
+FieldFacetSearchTargetCategory.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFacetSearchTargetCategory.dataset = DatasetFacetSearchTarget
+FieldFacetSearchTargetCategory.path = [DatasetFacetSearchTarget, FieldFacetSearchTargetCategory]
+
+FieldFacetSearchTargetDatasourceId.name = "datasourceId"
+FieldFacetSearchTargetDatasourceId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFacetSearchTargetDatasourceId.dataset = DatasetFacetSearchTarget
+FieldFacetSearchTargetDatasourceId.path = [DatasetFacetSearchTarget, FieldFacetSearchTargetDatasourceId]
+
+FieldFacetSearchTargetEntityIds.name = "entityIds"
+FieldFacetSearchTargetEntityIds.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldFacetSearchTargetEntityIds.dataset = DatasetFacetSearchTarget
+FieldFacetSearchTargetEntityIds.path = [DatasetFacetSearchTarget, FieldFacetSearchTargetEntityIds]
+FieldFacetSearchTargetEntityIds.element = FieldFacetSearchTargetEntityIdsElement
+
+FieldFacetSearchTargetEntityIdsElement.name = "element"
+FieldFacetSearchTargetEntityIdsElement.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFacetSearchTargetEntityIdsElement.dataset = DatasetFacetSearchTarget
+FieldFacetSearchTargetEntityIdsElement.path = [DatasetFacetSearchTarget, FieldFacetSearchTargetEntityIds, FieldFacetSearchTargetEntityIdsElement]
+
+FieldFacetSearchTargetLabel.name = "label"
+FieldFacetSearchTargetLabel.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFacetSearchTargetLabel.dataset = DatasetFacetSearchTarget
+FieldFacetSearchTargetLabel.path = [DatasetFacetSearchTarget, FieldFacetSearchTargetLabel]
+
+DatasetFailedCooccurrences.id = "failedCooccurrences"
+DatasetFailedCooccurrences.fields = [FieldFailedCooccurrencesAssociation, FieldFailedCooccurrencesDate, FieldFailedCooccurrencesDay, FieldFailedCooccurrencesEnd1, FieldFailedCooccurrencesEnd2, FieldFailedCooccurrencesIntTimestamp, FieldFailedCooccurrencesIsMapped, FieldFailedCooccurrencesKeywordId1, FieldFailedCooccurrencesKeywordId2, FieldFailedCooccurrencesKind, FieldFailedCooccurrencesLabel1, FieldFailedCooccurrencesLabel2, FieldFailedCooccurrencesLabelN1, FieldFailedCooccurrencesLabelN2, FieldFailedCooccurrencesMatches, FieldFailedCooccurrencesMonth, FieldFailedCooccurrencesOrganisms, FieldFailedCooccurrencesPmcid, FieldFailedCooccurrencesPmid, FieldFailedCooccurrencesPprid, FieldFailedCooccurrencesPubDate, FieldFailedCooccurrencesSection, FieldFailedCooccurrencesSectionEnd, FieldFailedCooccurrencesSectionStart, FieldFailedCooccurrencesSentEvidenceScore, FieldFailedCooccurrencesStart1, FieldFailedCooccurrencesStart2, FieldFailedCooccurrencesText, FieldFailedCooccurrencesTimestamp, FieldFailedCooccurrencesTraceSource, FieldFailedCooccurrencesType1, FieldFailedCooccurrencesType2, FieldFailedCooccurrencesUniqueKeywordIdsPerLabelN1, FieldFailedCooccurrencesUniqueKeywordIdsPerLabelN2, FieldFailedCooccurrencesYear]
+DatasetFailedCooccurrences.f_association = FieldFailedCooccurrencesAssociation
+DatasetFailedCooccurrences.f_date = FieldFailedCooccurrencesDate
+DatasetFailedCooccurrences.f_day = FieldFailedCooccurrencesDay
+DatasetFailedCooccurrences.f_end_1 = FieldFailedCooccurrencesEnd1
+DatasetFailedCooccurrences.f_end_2 = FieldFailedCooccurrencesEnd2
+DatasetFailedCooccurrences.f_int_timestamp = FieldFailedCooccurrencesIntTimestamp
+DatasetFailedCooccurrences.f_is_mapped = FieldFailedCooccurrencesIsMapped
+DatasetFailedCooccurrences.f_keyword_id_1 = FieldFailedCooccurrencesKeywordId1
+DatasetFailedCooccurrences.f_keyword_id_2 = FieldFailedCooccurrencesKeywordId2
+DatasetFailedCooccurrences.f_kind = FieldFailedCooccurrencesKind
+DatasetFailedCooccurrences.f_label_1 = FieldFailedCooccurrencesLabel1
+DatasetFailedCooccurrences.f_label_2 = FieldFailedCooccurrencesLabel2
+DatasetFailedCooccurrences.f_label_n1 = FieldFailedCooccurrencesLabelN1
+DatasetFailedCooccurrences.f_label_n2 = FieldFailedCooccurrencesLabelN2
+DatasetFailedCooccurrences.f_matches = FieldFailedCooccurrencesMatches
+DatasetFailedCooccurrences.f_month = FieldFailedCooccurrencesMonth
+DatasetFailedCooccurrences.f_organisms = FieldFailedCooccurrencesOrganisms
+DatasetFailedCooccurrences.f_pmcid = FieldFailedCooccurrencesPmcid
+DatasetFailedCooccurrences.f_pmid = FieldFailedCooccurrencesPmid
+DatasetFailedCooccurrences.f_pprid = FieldFailedCooccurrencesPprid
+DatasetFailedCooccurrences.f_pub_date = FieldFailedCooccurrencesPubDate
+DatasetFailedCooccurrences.f_section = FieldFailedCooccurrencesSection
+DatasetFailedCooccurrences.f_section_end = FieldFailedCooccurrencesSectionEnd
+DatasetFailedCooccurrences.f_section_start = FieldFailedCooccurrencesSectionStart
+DatasetFailedCooccurrences.f_sent_evidence_score = FieldFailedCooccurrencesSentEvidenceScore
+DatasetFailedCooccurrences.f_start_1 = FieldFailedCooccurrencesStart1
+DatasetFailedCooccurrences.f_start_2 = FieldFailedCooccurrencesStart2
+DatasetFailedCooccurrences.f_text = FieldFailedCooccurrencesText
+DatasetFailedCooccurrences.f_timestamp = FieldFailedCooccurrencesTimestamp
+DatasetFailedCooccurrences.f_trace_source = FieldFailedCooccurrencesTraceSource
+DatasetFailedCooccurrences.f_type_1 = FieldFailedCooccurrencesType1
+DatasetFailedCooccurrences.f_type_2 = FieldFailedCooccurrencesType2
+DatasetFailedCooccurrences.f_unique_keyword_ids_per_label_n1 = FieldFailedCooccurrencesUniqueKeywordIdsPerLabelN1
+DatasetFailedCooccurrences.f_unique_keyword_ids_per_label_n2 = FieldFailedCooccurrencesUniqueKeywordIdsPerLabelN2
+DatasetFailedCooccurrences.f_year = FieldFailedCooccurrencesYear
+
+FieldFailedCooccurrencesAssociation.name = "association"
+FieldFailedCooccurrencesAssociation.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedCooccurrencesAssociation.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesAssociation.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesAssociation]
+
+FieldFailedCooccurrencesDate.name = "date"
+FieldFailedCooccurrencesDate.data_type = OpenTargetsDatasetFieldType.DATE
+FieldFailedCooccurrencesDate.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesDate.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesDate]
+
+FieldFailedCooccurrencesDay.name = "day"
+FieldFailedCooccurrencesDay.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldFailedCooccurrencesDay.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesDay.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesDay]
+
+FieldFailedCooccurrencesEnd1.name = "end1"
+FieldFailedCooccurrencesEnd1.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedCooccurrencesEnd1.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesEnd1.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesEnd1]
+
+FieldFailedCooccurrencesEnd2.name = "end2"
+FieldFailedCooccurrencesEnd2.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedCooccurrencesEnd2.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesEnd2.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesEnd2]
+
+FieldFailedCooccurrencesIntTimestamp.name = "int_timestamp"
+FieldFailedCooccurrencesIntTimestamp.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedCooccurrencesIntTimestamp.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesIntTimestamp.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesIntTimestamp]
+
+FieldFailedCooccurrencesIsMapped.name = "isMapped"
+FieldFailedCooccurrencesIsMapped.data_type = OpenTargetsDatasetFieldType.BOOLEAN
+FieldFailedCooccurrencesIsMapped.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesIsMapped.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesIsMapped]
+
+FieldFailedCooccurrencesKeywordId1.name = "keywordId1"
+FieldFailedCooccurrencesKeywordId1.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedCooccurrencesKeywordId1.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesKeywordId1.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesKeywordId1]
+
+FieldFailedCooccurrencesKeywordId2.name = "keywordId2"
+FieldFailedCooccurrencesKeywordId2.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedCooccurrencesKeywordId2.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesKeywordId2.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesKeywordId2]
+
+FieldFailedCooccurrencesKind.name = "kind"
+FieldFailedCooccurrencesKind.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedCooccurrencesKind.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesKind.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesKind]
+
+FieldFailedCooccurrencesLabel1.name = "label1"
+FieldFailedCooccurrencesLabel1.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedCooccurrencesLabel1.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesLabel1.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesLabel1]
+
+FieldFailedCooccurrencesLabel2.name = "label2"
+FieldFailedCooccurrencesLabel2.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedCooccurrencesLabel2.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesLabel2.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesLabel2]
+
+FieldFailedCooccurrencesLabelN1.name = "labelN1"
+FieldFailedCooccurrencesLabelN1.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedCooccurrencesLabelN1.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesLabelN1.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesLabelN1]
+
+FieldFailedCooccurrencesLabelN2.name = "labelN2"
+FieldFailedCooccurrencesLabelN2.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedCooccurrencesLabelN2.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesLabelN2.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesLabelN2]
+
+FieldFailedCooccurrencesMatches.name = "matches"
+FieldFailedCooccurrencesMatches.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldFailedCooccurrencesMatches.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesMatches.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesMatches]
+FieldFailedCooccurrencesMatches.element = FieldFailedCooccurrencesMatchesElement
+
+FieldFailedCooccurrencesMatchesElement.name = "element"
+FieldFailedCooccurrencesMatchesElement.data_type = OpenTargetsDatasetFieldType.STRUCT
+FieldFailedCooccurrencesMatchesElement.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesMatchesElement.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesMatches, FieldFailedCooccurrencesMatchesElement]
+FieldFailedCooccurrencesMatchesElement.fields = [FieldFailedCooccurrencesMatchesElementEndInSentence, FieldFailedCooccurrencesMatchesElementLabel, FieldFailedCooccurrencesMatchesElementStartInSentence, FieldFailedCooccurrencesMatchesElementType]
+FieldFailedCooccurrencesMatchesElement.f_end_in_sentence = FieldFailedCooccurrencesMatchesElementEndInSentence
+FieldFailedCooccurrencesMatchesElement.f_label = FieldFailedCooccurrencesMatchesElementLabel
+FieldFailedCooccurrencesMatchesElement.f_start_in_sentence = FieldFailedCooccurrencesMatchesElementStartInSentence
+FieldFailedCooccurrencesMatchesElement.f_type = FieldFailedCooccurrencesMatchesElementType
+
+FieldFailedCooccurrencesMatchesElementEndInSentence.name = "endInSentence"
+FieldFailedCooccurrencesMatchesElementEndInSentence.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedCooccurrencesMatchesElementEndInSentence.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesMatchesElementEndInSentence.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesMatches, FieldFailedCooccurrencesMatchesElement, FieldFailedCooccurrencesMatchesElementEndInSentence]
+
+FieldFailedCooccurrencesMatchesElementLabel.name = "label"
+FieldFailedCooccurrencesMatchesElementLabel.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedCooccurrencesMatchesElementLabel.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesMatchesElementLabel.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesMatches, FieldFailedCooccurrencesMatchesElement, FieldFailedCooccurrencesMatchesElementLabel]
+
+FieldFailedCooccurrencesMatchesElementStartInSentence.name = "startInSentence"
+FieldFailedCooccurrencesMatchesElementStartInSentence.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedCooccurrencesMatchesElementStartInSentence.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesMatchesElementStartInSentence.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesMatches, FieldFailedCooccurrencesMatchesElement, FieldFailedCooccurrencesMatchesElementStartInSentence]
+
+FieldFailedCooccurrencesMatchesElementType.name = "type"
+FieldFailedCooccurrencesMatchesElementType.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedCooccurrencesMatchesElementType.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesMatchesElementType.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesMatches, FieldFailedCooccurrencesMatchesElement, FieldFailedCooccurrencesMatchesElementType]
+
+FieldFailedCooccurrencesMonth.name = "month"
+FieldFailedCooccurrencesMonth.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldFailedCooccurrencesMonth.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesMonth.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesMonth]
+
+FieldFailedCooccurrencesOrganisms.name = "organisms"
+FieldFailedCooccurrencesOrganisms.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldFailedCooccurrencesOrganisms.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesOrganisms.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesOrganisms]
+FieldFailedCooccurrencesOrganisms.element = FieldFailedCooccurrencesOrganismsElement
+
+FieldFailedCooccurrencesOrganismsElement.name = "element"
+FieldFailedCooccurrencesOrganismsElement.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedCooccurrencesOrganismsElement.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesOrganismsElement.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesOrganisms, FieldFailedCooccurrencesOrganismsElement]
+
+FieldFailedCooccurrencesPmcid.name = "pmcid"
+FieldFailedCooccurrencesPmcid.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedCooccurrencesPmcid.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesPmcid.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesPmcid]
+
+FieldFailedCooccurrencesPmid.name = "pmid"
+FieldFailedCooccurrencesPmid.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedCooccurrencesPmid.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesPmid.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesPmid]
+
+FieldFailedCooccurrencesPprid.name = "pprid"
+FieldFailedCooccurrencesPprid.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedCooccurrencesPprid.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesPprid.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesPprid]
+
+FieldFailedCooccurrencesPubDate.name = "pubDate"
+FieldFailedCooccurrencesPubDate.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedCooccurrencesPubDate.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesPubDate.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesPubDate]
+
+FieldFailedCooccurrencesSection.name = "section"
+FieldFailedCooccurrencesSection.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedCooccurrencesSection.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesSection.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesSection]
+
+FieldFailedCooccurrencesSectionEnd.name = "sectionEnd"
+FieldFailedCooccurrencesSectionEnd.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedCooccurrencesSectionEnd.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesSectionEnd.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesSectionEnd]
+
+FieldFailedCooccurrencesSectionStart.name = "sectionStart"
+FieldFailedCooccurrencesSectionStart.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedCooccurrencesSectionStart.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesSectionStart.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesSectionStart]
+
+FieldFailedCooccurrencesSentEvidenceScore.name = "sentEvidenceScore"
+FieldFailedCooccurrencesSentEvidenceScore.data_type = OpenTargetsDatasetFieldType.DOUBLE
+FieldFailedCooccurrencesSentEvidenceScore.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesSentEvidenceScore.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesSentEvidenceScore]
+
+FieldFailedCooccurrencesStart1.name = "start1"
+FieldFailedCooccurrencesStart1.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedCooccurrencesStart1.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesStart1.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesStart1]
+
+FieldFailedCooccurrencesStart2.name = "start2"
+FieldFailedCooccurrencesStart2.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedCooccurrencesStart2.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesStart2.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesStart2]
+
+FieldFailedCooccurrencesText.name = "text"
+FieldFailedCooccurrencesText.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedCooccurrencesText.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesText.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesText]
+
+FieldFailedCooccurrencesTimestamp.name = "timestamp"
+FieldFailedCooccurrencesTimestamp.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedCooccurrencesTimestamp.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesTimestamp.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesTimestamp]
+
+FieldFailedCooccurrencesTraceSource.name = "trace_source"
+FieldFailedCooccurrencesTraceSource.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedCooccurrencesTraceSource.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesTraceSource.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesTraceSource]
+
+FieldFailedCooccurrencesType1.name = "type1"
+FieldFailedCooccurrencesType1.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedCooccurrencesType1.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesType1.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesType1]
+
+FieldFailedCooccurrencesType2.name = "type2"
+FieldFailedCooccurrencesType2.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedCooccurrencesType2.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesType2.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesType2]
+
+FieldFailedCooccurrencesUniqueKeywordIdsPerLabelN1.name = "uniqueKeywordIdsPerLabelN1"
+FieldFailedCooccurrencesUniqueKeywordIdsPerLabelN1.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedCooccurrencesUniqueKeywordIdsPerLabelN1.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesUniqueKeywordIdsPerLabelN1.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesUniqueKeywordIdsPerLabelN1]
+
+FieldFailedCooccurrencesUniqueKeywordIdsPerLabelN2.name = "uniqueKeywordIdsPerLabelN2"
+FieldFailedCooccurrencesUniqueKeywordIdsPerLabelN2.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedCooccurrencesUniqueKeywordIdsPerLabelN2.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesUniqueKeywordIdsPerLabelN2.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesUniqueKeywordIdsPerLabelN2]
+
+FieldFailedCooccurrencesYear.name = "year"
+FieldFailedCooccurrencesYear.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldFailedCooccurrencesYear.dataset = DatasetFailedCooccurrences
+FieldFailedCooccurrencesYear.path = [DatasetFailedCooccurrences, FieldFailedCooccurrencesYear]
+
+DatasetFailedMatches.id = "failedMatches"
+DatasetFailedMatches.fields = [FieldFailedMatchesCoOccurrence, FieldFailedMatchesDate, FieldFailedMatchesDay, FieldFailedMatchesEndInSentence, FieldFailedMatchesIntTimestamp, FieldFailedMatchesIsMapped, FieldFailedMatchesKeywordId, FieldFailedMatchesKind, FieldFailedMatchesLabel, FieldFailedMatchesLabelN, FieldFailedMatchesMonth, FieldFailedMatchesOrganisms, FieldFailedMatchesPmcid, FieldFailedMatchesPmid, FieldFailedMatchesPprid, FieldFailedMatchesPubDate, FieldFailedMatchesSection, FieldFailedMatchesSectionEnd, FieldFailedMatchesSectionStart, FieldFailedMatchesStartInSentence, FieldFailedMatchesText, FieldFailedMatchesTimestamp, FieldFailedMatchesTraceSource, FieldFailedMatchesType, FieldFailedMatchesUniqueKeywordIdsPerLabelN, FieldFailedMatchesYear]
+DatasetFailedMatches.f_co_occurrence = FieldFailedMatchesCoOccurrence
+DatasetFailedMatches.f_date = FieldFailedMatchesDate
+DatasetFailedMatches.f_day = FieldFailedMatchesDay
+DatasetFailedMatches.f_end_in_sentence = FieldFailedMatchesEndInSentence
+DatasetFailedMatches.f_int_timestamp = FieldFailedMatchesIntTimestamp
+DatasetFailedMatches.f_is_mapped = FieldFailedMatchesIsMapped
+DatasetFailedMatches.f_keyword_id = FieldFailedMatchesKeywordId
+DatasetFailedMatches.f_kind = FieldFailedMatchesKind
+DatasetFailedMatches.f_label = FieldFailedMatchesLabel
+DatasetFailedMatches.f_label_n = FieldFailedMatchesLabelN
+DatasetFailedMatches.f_month = FieldFailedMatchesMonth
+DatasetFailedMatches.f_organisms = FieldFailedMatchesOrganisms
+DatasetFailedMatches.f_pmcid = FieldFailedMatchesPmcid
+DatasetFailedMatches.f_pmid = FieldFailedMatchesPmid
+DatasetFailedMatches.f_pprid = FieldFailedMatchesPprid
+DatasetFailedMatches.f_pub_date = FieldFailedMatchesPubDate
+DatasetFailedMatches.f_section = FieldFailedMatchesSection
+DatasetFailedMatches.f_section_end = FieldFailedMatchesSectionEnd
+DatasetFailedMatches.f_section_start = FieldFailedMatchesSectionStart
+DatasetFailedMatches.f_start_in_sentence = FieldFailedMatchesStartInSentence
+DatasetFailedMatches.f_text = FieldFailedMatchesText
+DatasetFailedMatches.f_timestamp = FieldFailedMatchesTimestamp
+DatasetFailedMatches.f_trace_source = FieldFailedMatchesTraceSource
+DatasetFailedMatches.f_type = FieldFailedMatchesType
+DatasetFailedMatches.f_unique_keyword_ids_per_label_n = FieldFailedMatchesUniqueKeywordIdsPerLabelN
+DatasetFailedMatches.f_year = FieldFailedMatchesYear
+
+FieldFailedMatchesCoOccurrence.name = "co-occurrence"
+FieldFailedMatchesCoOccurrence.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldFailedMatchesCoOccurrence.dataset = DatasetFailedMatches
+FieldFailedMatchesCoOccurrence.path = [DatasetFailedMatches, FieldFailedMatchesCoOccurrence]
+FieldFailedMatchesCoOccurrence.element = FieldFailedMatchesCoOccurrenceElement
+
+FieldFailedMatchesCoOccurrenceElement.name = "element"
+FieldFailedMatchesCoOccurrenceElement.data_type = OpenTargetsDatasetFieldType.STRUCT
+FieldFailedMatchesCoOccurrenceElement.dataset = DatasetFailedMatches
+FieldFailedMatchesCoOccurrenceElement.path = [DatasetFailedMatches, FieldFailedMatchesCoOccurrence, FieldFailedMatchesCoOccurrenceElement]
+FieldFailedMatchesCoOccurrenceElement.fields = [FieldFailedMatchesCoOccurrenceElementAssociation, FieldFailedMatchesCoOccurrenceElementEnd1, FieldFailedMatchesCoOccurrenceElementEnd2, FieldFailedMatchesCoOccurrenceElementLabel1, FieldFailedMatchesCoOccurrenceElementLabel2, FieldFailedMatchesCoOccurrenceElementSentEvidenceScore, FieldFailedMatchesCoOccurrenceElementStart1, FieldFailedMatchesCoOccurrenceElementStart2, FieldFailedMatchesCoOccurrenceElementType]
+FieldFailedMatchesCoOccurrenceElement.f_association = FieldFailedMatchesCoOccurrenceElementAssociation
+FieldFailedMatchesCoOccurrenceElement.f_end_1 = FieldFailedMatchesCoOccurrenceElementEnd1
+FieldFailedMatchesCoOccurrenceElement.f_end_2 = FieldFailedMatchesCoOccurrenceElementEnd2
+FieldFailedMatchesCoOccurrenceElement.f_label_1 = FieldFailedMatchesCoOccurrenceElementLabel1
+FieldFailedMatchesCoOccurrenceElement.f_label_2 = FieldFailedMatchesCoOccurrenceElementLabel2
+FieldFailedMatchesCoOccurrenceElement.f_sent_evidence_score = FieldFailedMatchesCoOccurrenceElementSentEvidenceScore
+FieldFailedMatchesCoOccurrenceElement.f_start_1 = FieldFailedMatchesCoOccurrenceElementStart1
+FieldFailedMatchesCoOccurrenceElement.f_start_2 = FieldFailedMatchesCoOccurrenceElementStart2
+FieldFailedMatchesCoOccurrenceElement.f_type = FieldFailedMatchesCoOccurrenceElementType
+
+FieldFailedMatchesCoOccurrenceElementAssociation.name = "association"
+FieldFailedMatchesCoOccurrenceElementAssociation.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedMatchesCoOccurrenceElementAssociation.dataset = DatasetFailedMatches
+FieldFailedMatchesCoOccurrenceElementAssociation.path = [DatasetFailedMatches, FieldFailedMatchesCoOccurrence, FieldFailedMatchesCoOccurrenceElement, FieldFailedMatchesCoOccurrenceElementAssociation]
+
+FieldFailedMatchesCoOccurrenceElementEnd1.name = "end1"
+FieldFailedMatchesCoOccurrenceElementEnd1.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedMatchesCoOccurrenceElementEnd1.dataset = DatasetFailedMatches
+FieldFailedMatchesCoOccurrenceElementEnd1.path = [DatasetFailedMatches, FieldFailedMatchesCoOccurrence, FieldFailedMatchesCoOccurrenceElement, FieldFailedMatchesCoOccurrenceElementEnd1]
+
+FieldFailedMatchesCoOccurrenceElementEnd2.name = "end2"
+FieldFailedMatchesCoOccurrenceElementEnd2.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedMatchesCoOccurrenceElementEnd2.dataset = DatasetFailedMatches
+FieldFailedMatchesCoOccurrenceElementEnd2.path = [DatasetFailedMatches, FieldFailedMatchesCoOccurrence, FieldFailedMatchesCoOccurrenceElement, FieldFailedMatchesCoOccurrenceElementEnd2]
+
+FieldFailedMatchesCoOccurrenceElementLabel1.name = "label1"
+FieldFailedMatchesCoOccurrenceElementLabel1.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedMatchesCoOccurrenceElementLabel1.dataset = DatasetFailedMatches
+FieldFailedMatchesCoOccurrenceElementLabel1.path = [DatasetFailedMatches, FieldFailedMatchesCoOccurrence, FieldFailedMatchesCoOccurrenceElement, FieldFailedMatchesCoOccurrenceElementLabel1]
+
+FieldFailedMatchesCoOccurrenceElementLabel2.name = "label2"
+FieldFailedMatchesCoOccurrenceElementLabel2.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedMatchesCoOccurrenceElementLabel2.dataset = DatasetFailedMatches
+FieldFailedMatchesCoOccurrenceElementLabel2.path = [DatasetFailedMatches, FieldFailedMatchesCoOccurrence, FieldFailedMatchesCoOccurrenceElement, FieldFailedMatchesCoOccurrenceElementLabel2]
+
+FieldFailedMatchesCoOccurrenceElementSentEvidenceScore.name = "sentEvidenceScore"
+FieldFailedMatchesCoOccurrenceElementSentEvidenceScore.data_type = OpenTargetsDatasetFieldType.DOUBLE
+FieldFailedMatchesCoOccurrenceElementSentEvidenceScore.dataset = DatasetFailedMatches
+FieldFailedMatchesCoOccurrenceElementSentEvidenceScore.path = [DatasetFailedMatches, FieldFailedMatchesCoOccurrence, FieldFailedMatchesCoOccurrenceElement, FieldFailedMatchesCoOccurrenceElementSentEvidenceScore]
+
+FieldFailedMatchesCoOccurrenceElementStart1.name = "start1"
+FieldFailedMatchesCoOccurrenceElementStart1.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedMatchesCoOccurrenceElementStart1.dataset = DatasetFailedMatches
+FieldFailedMatchesCoOccurrenceElementStart1.path = [DatasetFailedMatches, FieldFailedMatchesCoOccurrence, FieldFailedMatchesCoOccurrenceElement, FieldFailedMatchesCoOccurrenceElementStart1]
+
+FieldFailedMatchesCoOccurrenceElementStart2.name = "start2"
+FieldFailedMatchesCoOccurrenceElementStart2.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedMatchesCoOccurrenceElementStart2.dataset = DatasetFailedMatches
+FieldFailedMatchesCoOccurrenceElementStart2.path = [DatasetFailedMatches, FieldFailedMatchesCoOccurrence, FieldFailedMatchesCoOccurrenceElement, FieldFailedMatchesCoOccurrenceElementStart2]
+
+FieldFailedMatchesCoOccurrenceElementType.name = "type"
+FieldFailedMatchesCoOccurrenceElementType.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedMatchesCoOccurrenceElementType.dataset = DatasetFailedMatches
+FieldFailedMatchesCoOccurrenceElementType.path = [DatasetFailedMatches, FieldFailedMatchesCoOccurrence, FieldFailedMatchesCoOccurrenceElement, FieldFailedMatchesCoOccurrenceElementType]
+
+FieldFailedMatchesDate.name = "date"
+FieldFailedMatchesDate.data_type = OpenTargetsDatasetFieldType.DATE
+FieldFailedMatchesDate.dataset = DatasetFailedMatches
+FieldFailedMatchesDate.path = [DatasetFailedMatches, FieldFailedMatchesDate]
+
+FieldFailedMatchesDay.name = "day"
+FieldFailedMatchesDay.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldFailedMatchesDay.dataset = DatasetFailedMatches
+FieldFailedMatchesDay.path = [DatasetFailedMatches, FieldFailedMatchesDay]
+
+FieldFailedMatchesEndInSentence.name = "endInSentence"
+FieldFailedMatchesEndInSentence.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedMatchesEndInSentence.dataset = DatasetFailedMatches
+FieldFailedMatchesEndInSentence.path = [DatasetFailedMatches, FieldFailedMatchesEndInSentence]
+
+FieldFailedMatchesIntTimestamp.name = "int_timestamp"
+FieldFailedMatchesIntTimestamp.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedMatchesIntTimestamp.dataset = DatasetFailedMatches
+FieldFailedMatchesIntTimestamp.path = [DatasetFailedMatches, FieldFailedMatchesIntTimestamp]
+
+FieldFailedMatchesIsMapped.name = "isMapped"
+FieldFailedMatchesIsMapped.data_type = OpenTargetsDatasetFieldType.BOOLEAN
+FieldFailedMatchesIsMapped.dataset = DatasetFailedMatches
+FieldFailedMatchesIsMapped.path = [DatasetFailedMatches, FieldFailedMatchesIsMapped]
+
+FieldFailedMatchesKeywordId.name = "keywordId"
+FieldFailedMatchesKeywordId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedMatchesKeywordId.dataset = DatasetFailedMatches
+FieldFailedMatchesKeywordId.path = [DatasetFailedMatches, FieldFailedMatchesKeywordId]
+
+FieldFailedMatchesKind.name = "kind"
+FieldFailedMatchesKind.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedMatchesKind.dataset = DatasetFailedMatches
+FieldFailedMatchesKind.path = [DatasetFailedMatches, FieldFailedMatchesKind]
+
+FieldFailedMatchesLabel.name = "label"
+FieldFailedMatchesLabel.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedMatchesLabel.dataset = DatasetFailedMatches
+FieldFailedMatchesLabel.path = [DatasetFailedMatches, FieldFailedMatchesLabel]
+
+FieldFailedMatchesLabelN.name = "labelN"
+FieldFailedMatchesLabelN.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedMatchesLabelN.dataset = DatasetFailedMatches
+FieldFailedMatchesLabelN.path = [DatasetFailedMatches, FieldFailedMatchesLabelN]
+
+FieldFailedMatchesMonth.name = "month"
+FieldFailedMatchesMonth.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldFailedMatchesMonth.dataset = DatasetFailedMatches
+FieldFailedMatchesMonth.path = [DatasetFailedMatches, FieldFailedMatchesMonth]
+
+FieldFailedMatchesOrganisms.name = "organisms"
+FieldFailedMatchesOrganisms.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldFailedMatchesOrganisms.dataset = DatasetFailedMatches
+FieldFailedMatchesOrganisms.path = [DatasetFailedMatches, FieldFailedMatchesOrganisms]
+FieldFailedMatchesOrganisms.element = FieldFailedMatchesOrganismsElement
+
+FieldFailedMatchesOrganismsElement.name = "element"
+FieldFailedMatchesOrganismsElement.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedMatchesOrganismsElement.dataset = DatasetFailedMatches
+FieldFailedMatchesOrganismsElement.path = [DatasetFailedMatches, FieldFailedMatchesOrganisms, FieldFailedMatchesOrganismsElement]
+
+FieldFailedMatchesPmcid.name = "pmcid"
+FieldFailedMatchesPmcid.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedMatchesPmcid.dataset = DatasetFailedMatches
+FieldFailedMatchesPmcid.path = [DatasetFailedMatches, FieldFailedMatchesPmcid]
+
+FieldFailedMatchesPmid.name = "pmid"
+FieldFailedMatchesPmid.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedMatchesPmid.dataset = DatasetFailedMatches
+FieldFailedMatchesPmid.path = [DatasetFailedMatches, FieldFailedMatchesPmid]
+
+FieldFailedMatchesPprid.name = "pprid"
+FieldFailedMatchesPprid.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedMatchesPprid.dataset = DatasetFailedMatches
+FieldFailedMatchesPprid.path = [DatasetFailedMatches, FieldFailedMatchesPprid]
+
+FieldFailedMatchesPubDate.name = "pubDate"
+FieldFailedMatchesPubDate.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedMatchesPubDate.dataset = DatasetFailedMatches
+FieldFailedMatchesPubDate.path = [DatasetFailedMatches, FieldFailedMatchesPubDate]
+
+FieldFailedMatchesSection.name = "section"
+FieldFailedMatchesSection.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedMatchesSection.dataset = DatasetFailedMatches
+FieldFailedMatchesSection.path = [DatasetFailedMatches, FieldFailedMatchesSection]
+
+FieldFailedMatchesSectionEnd.name = "sectionEnd"
+FieldFailedMatchesSectionEnd.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedMatchesSectionEnd.dataset = DatasetFailedMatches
+FieldFailedMatchesSectionEnd.path = [DatasetFailedMatches, FieldFailedMatchesSectionEnd]
+
+FieldFailedMatchesSectionStart.name = "sectionStart"
+FieldFailedMatchesSectionStart.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedMatchesSectionStart.dataset = DatasetFailedMatches
+FieldFailedMatchesSectionStart.path = [DatasetFailedMatches, FieldFailedMatchesSectionStart]
+
+FieldFailedMatchesStartInSentence.name = "startInSentence"
+FieldFailedMatchesStartInSentence.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedMatchesStartInSentence.dataset = DatasetFailedMatches
+FieldFailedMatchesStartInSentence.path = [DatasetFailedMatches, FieldFailedMatchesStartInSentence]
+
+FieldFailedMatchesText.name = "text"
+FieldFailedMatchesText.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedMatchesText.dataset = DatasetFailedMatches
+FieldFailedMatchesText.path = [DatasetFailedMatches, FieldFailedMatchesText]
+
+FieldFailedMatchesTimestamp.name = "timestamp"
+FieldFailedMatchesTimestamp.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedMatchesTimestamp.dataset = DatasetFailedMatches
+FieldFailedMatchesTimestamp.path = [DatasetFailedMatches, FieldFailedMatchesTimestamp]
+
+FieldFailedMatchesTraceSource.name = "trace_source"
+FieldFailedMatchesTraceSource.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedMatchesTraceSource.dataset = DatasetFailedMatches
+FieldFailedMatchesTraceSource.path = [DatasetFailedMatches, FieldFailedMatchesTraceSource]
+
+FieldFailedMatchesType.name = "type"
+FieldFailedMatchesType.data_type = OpenTargetsDatasetFieldType.STRING
+FieldFailedMatchesType.dataset = DatasetFailedMatches
+FieldFailedMatchesType.path = [DatasetFailedMatches, FieldFailedMatchesType]
+
+FieldFailedMatchesUniqueKeywordIdsPerLabelN.name = "uniqueKeywordIdsPerLabelN"
+FieldFailedMatchesUniqueKeywordIdsPerLabelN.data_type = OpenTargetsDatasetFieldType.LONG
+FieldFailedMatchesUniqueKeywordIdsPerLabelN.dataset = DatasetFailedMatches
+FieldFailedMatchesUniqueKeywordIdsPerLabelN.path = [DatasetFailedMatches, FieldFailedMatchesUniqueKeywordIdsPerLabelN]
+
+FieldFailedMatchesYear.name = "year"
+FieldFailedMatchesYear.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldFailedMatchesYear.dataset = DatasetFailedMatches
+FieldFailedMatchesYear.path = [DatasetFailedMatches, FieldFailedMatchesYear]
 
 DatasetGo.id = "go"
 DatasetGo.fields = [FieldGoId, FieldGoName]
@@ -7977,7 +10969,7 @@ FieldIndicationIndicationsElementEfoName.dataset = DatasetIndication
 FieldIndicationIndicationsElementEfoName.path = [DatasetIndication, FieldIndicationIndications, FieldIndicationIndicationsElement, FieldIndicationIndicationsElementEfoName]
 
 FieldIndicationIndicationsElementMaxPhaseForIndication.name = "maxPhaseForIndication"
-FieldIndicationIndicationsElementMaxPhaseForIndication.data_type = OpenTargetsDatasetFieldType.LONG
+FieldIndicationIndicationsElementMaxPhaseForIndication.data_type = OpenTargetsDatasetFieldType.DOUBLE
 FieldIndicationIndicationsElementMaxPhaseForIndication.dataset = DatasetIndication
 FieldIndicationIndicationsElementMaxPhaseForIndication.path = [DatasetIndication, FieldIndicationIndications, FieldIndicationIndicationsElement, FieldIndicationIndicationsElementMaxPhaseForIndication]
 
@@ -8119,12 +11111,13 @@ FieldInteractionTargetB.dataset = DatasetInteraction
 FieldInteractionTargetB.path = [DatasetInteraction, FieldInteractionTargetB]
 
 DatasetInteractionEvidence.id = "interactionEvidence"
-DatasetInteractionEvidence.fields = [FieldInteractionEvidenceEvidenceScore, FieldInteractionEvidenceExpansionMethodMiIdentifier, FieldInteractionEvidenceExpansionMethodShortName, FieldInteractionEvidenceHostOrganismScientificName, FieldInteractionEvidenceHostOrganismTaxId, FieldInteractionEvidenceIntA, FieldInteractionEvidenceIntABiologicalRole, FieldInteractionEvidenceIntASource, FieldInteractionEvidenceIntB, FieldInteractionEvidenceIntBBiologicalRole, FieldInteractionEvidenceIntBSource, FieldInteractionEvidenceInteractionDetectionMethodMiIdentifier, FieldInteractionEvidenceInteractionDetectionMethodShortName, FieldInteractionEvidenceInteractionIdentifier, FieldInteractionEvidenceInteractionResources, FieldInteractionEvidenceInteractionScore, FieldInteractionEvidenceInteractionTypeMiIdentifier, FieldInteractionEvidenceInteractionTypeShortName, FieldInteractionEvidenceParticipantDetectionMethodA, FieldInteractionEvidenceParticipantDetectionMethodB, FieldInteractionEvidencePubmedId, FieldInteractionEvidenceSpeciesA, FieldInteractionEvidenceSpeciesB, FieldInteractionEvidenceTargetA, FieldInteractionEvidenceTargetB]
+DatasetInteractionEvidence.fields = [FieldInteractionEvidenceEvidenceScore, FieldInteractionEvidenceExpansionMethodMiIdentifier, FieldInteractionEvidenceExpansionMethodShortName, FieldInteractionEvidenceHostOrganismScientificName, FieldInteractionEvidenceHostOrganismTaxId, FieldInteractionEvidenceHostOrganismTissue, FieldInteractionEvidenceIntA, FieldInteractionEvidenceIntABiologicalRole, FieldInteractionEvidenceIntASource, FieldInteractionEvidenceIntB, FieldInteractionEvidenceIntBBiologicalRole, FieldInteractionEvidenceIntBSource, FieldInteractionEvidenceInteractionDetectionMethodMiIdentifier, FieldInteractionEvidenceInteractionDetectionMethodShortName, FieldInteractionEvidenceInteractionIdentifier, FieldInteractionEvidenceInteractionResources, FieldInteractionEvidenceInteractionScore, FieldInteractionEvidenceInteractionTypeMiIdentifier, FieldInteractionEvidenceInteractionTypeShortName, FieldInteractionEvidenceParticipantDetectionMethodA, FieldInteractionEvidenceParticipantDetectionMethodB, FieldInteractionEvidencePubmedId, FieldInteractionEvidenceSpeciesA, FieldInteractionEvidenceSpeciesB, FieldInteractionEvidenceTargetA, FieldInteractionEvidenceTargetB]
 DatasetInteractionEvidence.f_evidence_score = FieldInteractionEvidenceEvidenceScore
 DatasetInteractionEvidence.f_expansion_method_mi_identifier = FieldInteractionEvidenceExpansionMethodMiIdentifier
 DatasetInteractionEvidence.f_expansion_method_short_name = FieldInteractionEvidenceExpansionMethodShortName
 DatasetInteractionEvidence.f_host_organism_scientific_name = FieldInteractionEvidenceHostOrganismScientificName
 DatasetInteractionEvidence.f_host_organism_tax_id = FieldInteractionEvidenceHostOrganismTaxId
+DatasetInteractionEvidence.f_host_organism_tissue = FieldInteractionEvidenceHostOrganismTissue
 DatasetInteractionEvidence.f_int_a = FieldInteractionEvidenceIntA
 DatasetInteractionEvidence.f_int_a_biological_role = FieldInteractionEvidenceIntABiologicalRole
 DatasetInteractionEvidence.f_int_a_source = FieldInteractionEvidenceIntASource
@@ -8170,6 +11163,36 @@ FieldInteractionEvidenceHostOrganismTaxId.name = "hostOrganismTaxId"
 FieldInteractionEvidenceHostOrganismTaxId.data_type = OpenTargetsDatasetFieldType.LONG
 FieldInteractionEvidenceHostOrganismTaxId.dataset = DatasetInteractionEvidence
 FieldInteractionEvidenceHostOrganismTaxId.path = [DatasetInteractionEvidence, FieldInteractionEvidenceHostOrganismTaxId]
+
+FieldInteractionEvidenceHostOrganismTissue.name = "hostOrganismTissue"
+FieldInteractionEvidenceHostOrganismTissue.data_type = OpenTargetsDatasetFieldType.STRUCT
+FieldInteractionEvidenceHostOrganismTissue.dataset = DatasetInteractionEvidence
+FieldInteractionEvidenceHostOrganismTissue.path = [DatasetInteractionEvidence, FieldInteractionEvidenceHostOrganismTissue]
+FieldInteractionEvidenceHostOrganismTissue.fields = [FieldInteractionEvidenceHostOrganismTissueFullName, FieldInteractionEvidenceHostOrganismTissueShortName, FieldInteractionEvidenceHostOrganismTissueXrefs]
+FieldInteractionEvidenceHostOrganismTissue.f_full_name = FieldInteractionEvidenceHostOrganismTissueFullName
+FieldInteractionEvidenceHostOrganismTissue.f_short_name = FieldInteractionEvidenceHostOrganismTissueShortName
+FieldInteractionEvidenceHostOrganismTissue.f_xrefs = FieldInteractionEvidenceHostOrganismTissueXrefs
+
+FieldInteractionEvidenceHostOrganismTissueFullName.name = "fullName"
+FieldInteractionEvidenceHostOrganismTissueFullName.data_type = OpenTargetsDatasetFieldType.STRING
+FieldInteractionEvidenceHostOrganismTissueFullName.dataset = DatasetInteractionEvidence
+FieldInteractionEvidenceHostOrganismTissueFullName.path = [DatasetInteractionEvidence, FieldInteractionEvidenceHostOrganismTissue, FieldInteractionEvidenceHostOrganismTissueFullName]
+
+FieldInteractionEvidenceHostOrganismTissueShortName.name = "shortName"
+FieldInteractionEvidenceHostOrganismTissueShortName.data_type = OpenTargetsDatasetFieldType.STRING
+FieldInteractionEvidenceHostOrganismTissueShortName.dataset = DatasetInteractionEvidence
+FieldInteractionEvidenceHostOrganismTissueShortName.path = [DatasetInteractionEvidence, FieldInteractionEvidenceHostOrganismTissue, FieldInteractionEvidenceHostOrganismTissueShortName]
+
+FieldInteractionEvidenceHostOrganismTissueXrefs.name = "xrefs"
+FieldInteractionEvidenceHostOrganismTissueXrefs.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldInteractionEvidenceHostOrganismTissueXrefs.dataset = DatasetInteractionEvidence
+FieldInteractionEvidenceHostOrganismTissueXrefs.path = [DatasetInteractionEvidence, FieldInteractionEvidenceHostOrganismTissue, FieldInteractionEvidenceHostOrganismTissueXrefs]
+FieldInteractionEvidenceHostOrganismTissueXrefs.element = FieldInteractionEvidenceHostOrganismTissueXrefsElement
+
+FieldInteractionEvidenceHostOrganismTissueXrefsElement.name = "element"
+FieldInteractionEvidenceHostOrganismTissueXrefsElement.data_type = OpenTargetsDatasetFieldType.STRING
+FieldInteractionEvidenceHostOrganismTissueXrefsElement.dataset = DatasetInteractionEvidence
+FieldInteractionEvidenceHostOrganismTissueXrefsElement.path = [DatasetInteractionEvidence, FieldInteractionEvidenceHostOrganismTissue, FieldInteractionEvidenceHostOrganismTissueXrefs, FieldInteractionEvidenceHostOrganismTissueXrefsElement]
 
 FieldInteractionEvidenceIntA.name = "intA"
 FieldInteractionEvidenceIntA.data_type = OpenTargetsDatasetFieldType.STRING
@@ -8427,7 +11450,7 @@ FieldKnownDrugsAggregatedMechanismOfAction.dataset = DatasetKnownDrugsAggregated
 FieldKnownDrugsAggregatedMechanismOfAction.path = [DatasetKnownDrugsAggregated, FieldKnownDrugsAggregatedMechanismOfAction]
 
 FieldKnownDrugsAggregatedPhase.name = "phase"
-FieldKnownDrugsAggregatedPhase.data_type = OpenTargetsDatasetFieldType.LONG
+FieldKnownDrugsAggregatedPhase.data_type = OpenTargetsDatasetFieldType.DOUBLE
 FieldKnownDrugsAggregatedPhase.dataset = DatasetKnownDrugsAggregated
 FieldKnownDrugsAggregatedPhase.path = [DatasetKnownDrugsAggregated, FieldKnownDrugsAggregatedPhase]
 
@@ -8507,6 +11530,255 @@ FieldKnownDrugsAggregatedUrlsElementUrl.name = "url"
 FieldKnownDrugsAggregatedUrlsElementUrl.data_type = OpenTargetsDatasetFieldType.STRING
 FieldKnownDrugsAggregatedUrlsElementUrl.dataset = DatasetKnownDrugsAggregated
 FieldKnownDrugsAggregatedUrlsElementUrl.path = [DatasetKnownDrugsAggregated, FieldKnownDrugsAggregatedUrls, FieldKnownDrugsAggregatedUrlsElement, FieldKnownDrugsAggregatedUrlsElementUrl]
+
+DatasetLiteratureIndex.id = "literatureIndex"
+DatasetLiteratureIndex.fields = [FieldLiteratureIndexDate, FieldLiteratureIndexDay, FieldLiteratureIndexKeywordId, FieldLiteratureIndexKeywordType, FieldLiteratureIndexMonth, FieldLiteratureIndexPmcid, FieldLiteratureIndexPmid, FieldLiteratureIndexRelevance, FieldLiteratureIndexYear]
+DatasetLiteratureIndex.f_date = FieldLiteratureIndexDate
+DatasetLiteratureIndex.f_day = FieldLiteratureIndexDay
+DatasetLiteratureIndex.f_keyword_id = FieldLiteratureIndexKeywordId
+DatasetLiteratureIndex.f_keyword_type = FieldLiteratureIndexKeywordType
+DatasetLiteratureIndex.f_month = FieldLiteratureIndexMonth
+DatasetLiteratureIndex.f_pmcid = FieldLiteratureIndexPmcid
+DatasetLiteratureIndex.f_pmid = FieldLiteratureIndexPmid
+DatasetLiteratureIndex.f_relevance = FieldLiteratureIndexRelevance
+DatasetLiteratureIndex.f_year = FieldLiteratureIndexYear
+
+FieldLiteratureIndexDate.name = "date"
+FieldLiteratureIndexDate.data_type = OpenTargetsDatasetFieldType.DATE
+FieldLiteratureIndexDate.dataset = DatasetLiteratureIndex
+FieldLiteratureIndexDate.path = [DatasetLiteratureIndex, FieldLiteratureIndexDate]
+
+FieldLiteratureIndexDay.name = "day"
+FieldLiteratureIndexDay.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldLiteratureIndexDay.dataset = DatasetLiteratureIndex
+FieldLiteratureIndexDay.path = [DatasetLiteratureIndex, FieldLiteratureIndexDay]
+
+FieldLiteratureIndexKeywordId.name = "keywordId"
+FieldLiteratureIndexKeywordId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldLiteratureIndexKeywordId.dataset = DatasetLiteratureIndex
+FieldLiteratureIndexKeywordId.path = [DatasetLiteratureIndex, FieldLiteratureIndexKeywordId]
+
+FieldLiteratureIndexKeywordType.name = "keywordType"
+FieldLiteratureIndexKeywordType.data_type = OpenTargetsDatasetFieldType.STRING
+FieldLiteratureIndexKeywordType.dataset = DatasetLiteratureIndex
+FieldLiteratureIndexKeywordType.path = [DatasetLiteratureIndex, FieldLiteratureIndexKeywordType]
+
+FieldLiteratureIndexMonth.name = "month"
+FieldLiteratureIndexMonth.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldLiteratureIndexMonth.dataset = DatasetLiteratureIndex
+FieldLiteratureIndexMonth.path = [DatasetLiteratureIndex, FieldLiteratureIndexMonth]
+
+FieldLiteratureIndexPmcid.name = "pmcid"
+FieldLiteratureIndexPmcid.data_type = OpenTargetsDatasetFieldType.STRING
+FieldLiteratureIndexPmcid.dataset = DatasetLiteratureIndex
+FieldLiteratureIndexPmcid.path = [DatasetLiteratureIndex, FieldLiteratureIndexPmcid]
+
+FieldLiteratureIndexPmid.name = "pmid"
+FieldLiteratureIndexPmid.data_type = OpenTargetsDatasetFieldType.STRING
+FieldLiteratureIndexPmid.dataset = DatasetLiteratureIndex
+FieldLiteratureIndexPmid.path = [DatasetLiteratureIndex, FieldLiteratureIndexPmid]
+
+FieldLiteratureIndexRelevance.name = "relevance"
+FieldLiteratureIndexRelevance.data_type = OpenTargetsDatasetFieldType.DOUBLE
+FieldLiteratureIndexRelevance.dataset = DatasetLiteratureIndex
+FieldLiteratureIndexRelevance.path = [DatasetLiteratureIndex, FieldLiteratureIndexRelevance]
+
+FieldLiteratureIndexYear.name = "year"
+FieldLiteratureIndexYear.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldLiteratureIndexYear.dataset = DatasetLiteratureIndex
+FieldLiteratureIndexYear.path = [DatasetLiteratureIndex, FieldLiteratureIndexYear]
+
+DatasetLiteratureSentences.id = "literatureSentences"
+DatasetLiteratureSentences.fields = [FieldLiteratureSentencesEndInSentence, FieldLiteratureSentencesKeywordId, FieldLiteratureSentencesKeywordType, FieldLiteratureSentencesLabel, FieldLiteratureSentencesPmcid, FieldLiteratureSentencesPmid, FieldLiteratureSentencesSection, FieldLiteratureSentencesSectionEnd, FieldLiteratureSentencesSectionStart, FieldLiteratureSentencesStartInSentence]
+DatasetLiteratureSentences.f_end_in_sentence = FieldLiteratureSentencesEndInSentence
+DatasetLiteratureSentences.f_keyword_id = FieldLiteratureSentencesKeywordId
+DatasetLiteratureSentences.f_keyword_type = FieldLiteratureSentencesKeywordType
+DatasetLiteratureSentences.f_label = FieldLiteratureSentencesLabel
+DatasetLiteratureSentences.f_pmcid = FieldLiteratureSentencesPmcid
+DatasetLiteratureSentences.f_pmid = FieldLiteratureSentencesPmid
+DatasetLiteratureSentences.f_section = FieldLiteratureSentencesSection
+DatasetLiteratureSentences.f_section_end = FieldLiteratureSentencesSectionEnd
+DatasetLiteratureSentences.f_section_start = FieldLiteratureSentencesSectionStart
+DatasetLiteratureSentences.f_start_in_sentence = FieldLiteratureSentencesStartInSentence
+
+FieldLiteratureSentencesEndInSentence.name = "endInSentence"
+FieldLiteratureSentencesEndInSentence.data_type = OpenTargetsDatasetFieldType.LONG
+FieldLiteratureSentencesEndInSentence.dataset = DatasetLiteratureSentences
+FieldLiteratureSentencesEndInSentence.path = [DatasetLiteratureSentences, FieldLiteratureSentencesEndInSentence]
+
+FieldLiteratureSentencesKeywordId.name = "keywordId"
+FieldLiteratureSentencesKeywordId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldLiteratureSentencesKeywordId.dataset = DatasetLiteratureSentences
+FieldLiteratureSentencesKeywordId.path = [DatasetLiteratureSentences, FieldLiteratureSentencesKeywordId]
+
+FieldLiteratureSentencesKeywordType.name = "keywordType"
+FieldLiteratureSentencesKeywordType.data_type = OpenTargetsDatasetFieldType.STRING
+FieldLiteratureSentencesKeywordType.dataset = DatasetLiteratureSentences
+FieldLiteratureSentencesKeywordType.path = [DatasetLiteratureSentences, FieldLiteratureSentencesKeywordType]
+
+FieldLiteratureSentencesLabel.name = "label"
+FieldLiteratureSentencesLabel.data_type = OpenTargetsDatasetFieldType.STRING
+FieldLiteratureSentencesLabel.dataset = DatasetLiteratureSentences
+FieldLiteratureSentencesLabel.path = [DatasetLiteratureSentences, FieldLiteratureSentencesLabel]
+
+FieldLiteratureSentencesPmcid.name = "pmcid"
+FieldLiteratureSentencesPmcid.data_type = OpenTargetsDatasetFieldType.STRING
+FieldLiteratureSentencesPmcid.dataset = DatasetLiteratureSentences
+FieldLiteratureSentencesPmcid.path = [DatasetLiteratureSentences, FieldLiteratureSentencesPmcid]
+
+FieldLiteratureSentencesPmid.name = "pmid"
+FieldLiteratureSentencesPmid.data_type = OpenTargetsDatasetFieldType.STRING
+FieldLiteratureSentencesPmid.dataset = DatasetLiteratureSentences
+FieldLiteratureSentencesPmid.path = [DatasetLiteratureSentences, FieldLiteratureSentencesPmid]
+
+FieldLiteratureSentencesSection.name = "section"
+FieldLiteratureSentencesSection.data_type = OpenTargetsDatasetFieldType.STRING
+FieldLiteratureSentencesSection.dataset = DatasetLiteratureSentences
+FieldLiteratureSentencesSection.path = [DatasetLiteratureSentences, FieldLiteratureSentencesSection]
+
+FieldLiteratureSentencesSectionEnd.name = "sectionEnd"
+FieldLiteratureSentencesSectionEnd.data_type = OpenTargetsDatasetFieldType.LONG
+FieldLiteratureSentencesSectionEnd.dataset = DatasetLiteratureSentences
+FieldLiteratureSentencesSectionEnd.path = [DatasetLiteratureSentences, FieldLiteratureSentencesSectionEnd]
+
+FieldLiteratureSentencesSectionStart.name = "sectionStart"
+FieldLiteratureSentencesSectionStart.data_type = OpenTargetsDatasetFieldType.LONG
+FieldLiteratureSentencesSectionStart.dataset = DatasetLiteratureSentences
+FieldLiteratureSentencesSectionStart.path = [DatasetLiteratureSentences, FieldLiteratureSentencesSectionStart]
+
+FieldLiteratureSentencesStartInSentence.name = "startInSentence"
+FieldLiteratureSentencesStartInSentence.data_type = OpenTargetsDatasetFieldType.LONG
+FieldLiteratureSentencesStartInSentence.dataset = DatasetLiteratureSentences
+FieldLiteratureSentencesStartInSentence.path = [DatasetLiteratureSentences, FieldLiteratureSentencesStartInSentence]
+
+DatasetMatches.id = "matches"
+DatasetMatches.fields = [FieldMatchesDate, FieldMatchesDay, FieldMatchesEndInSentence, FieldMatchesIsMapped, FieldMatchesKeywordId, FieldMatchesLabel, FieldMatchesLabelN, FieldMatchesMonth, FieldMatchesOrganisms, FieldMatchesPmcid, FieldMatchesPmid, FieldMatchesPubDate, FieldMatchesSection, FieldMatchesSectionEnd, FieldMatchesSectionStart, FieldMatchesStartInSentence, FieldMatchesText, FieldMatchesTraceSource, FieldMatchesType, FieldMatchesYear]
+DatasetMatches.f_date = FieldMatchesDate
+DatasetMatches.f_day = FieldMatchesDay
+DatasetMatches.f_end_in_sentence = FieldMatchesEndInSentence
+DatasetMatches.f_is_mapped = FieldMatchesIsMapped
+DatasetMatches.f_keyword_id = FieldMatchesKeywordId
+DatasetMatches.f_label = FieldMatchesLabel
+DatasetMatches.f_label_n = FieldMatchesLabelN
+DatasetMatches.f_month = FieldMatchesMonth
+DatasetMatches.f_organisms = FieldMatchesOrganisms
+DatasetMatches.f_pmcid = FieldMatchesPmcid
+DatasetMatches.f_pmid = FieldMatchesPmid
+DatasetMatches.f_pub_date = FieldMatchesPubDate
+DatasetMatches.f_section = FieldMatchesSection
+DatasetMatches.f_section_end = FieldMatchesSectionEnd
+DatasetMatches.f_section_start = FieldMatchesSectionStart
+DatasetMatches.f_start_in_sentence = FieldMatchesStartInSentence
+DatasetMatches.f_text = FieldMatchesText
+DatasetMatches.f_trace_source = FieldMatchesTraceSource
+DatasetMatches.f_type = FieldMatchesType
+DatasetMatches.f_year = FieldMatchesYear
+
+FieldMatchesDate.name = "date"
+FieldMatchesDate.data_type = OpenTargetsDatasetFieldType.DATE
+FieldMatchesDate.dataset = DatasetMatches
+FieldMatchesDate.path = [DatasetMatches, FieldMatchesDate]
+
+FieldMatchesDay.name = "day"
+FieldMatchesDay.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldMatchesDay.dataset = DatasetMatches
+FieldMatchesDay.path = [DatasetMatches, FieldMatchesDay]
+
+FieldMatchesEndInSentence.name = "endInSentence"
+FieldMatchesEndInSentence.data_type = OpenTargetsDatasetFieldType.LONG
+FieldMatchesEndInSentence.dataset = DatasetMatches
+FieldMatchesEndInSentence.path = [DatasetMatches, FieldMatchesEndInSentence]
+
+FieldMatchesIsMapped.name = "isMapped"
+FieldMatchesIsMapped.data_type = OpenTargetsDatasetFieldType.BOOLEAN
+FieldMatchesIsMapped.dataset = DatasetMatches
+FieldMatchesIsMapped.path = [DatasetMatches, FieldMatchesIsMapped]
+
+FieldMatchesKeywordId.name = "keywordId"
+FieldMatchesKeywordId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldMatchesKeywordId.dataset = DatasetMatches
+FieldMatchesKeywordId.path = [DatasetMatches, FieldMatchesKeywordId]
+
+FieldMatchesLabel.name = "label"
+FieldMatchesLabel.data_type = OpenTargetsDatasetFieldType.STRING
+FieldMatchesLabel.dataset = DatasetMatches
+FieldMatchesLabel.path = [DatasetMatches, FieldMatchesLabel]
+
+FieldMatchesLabelN.name = "labelN"
+FieldMatchesLabelN.data_type = OpenTargetsDatasetFieldType.STRING
+FieldMatchesLabelN.dataset = DatasetMatches
+FieldMatchesLabelN.path = [DatasetMatches, FieldMatchesLabelN]
+
+FieldMatchesMonth.name = "month"
+FieldMatchesMonth.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldMatchesMonth.dataset = DatasetMatches
+FieldMatchesMonth.path = [DatasetMatches, FieldMatchesMonth]
+
+FieldMatchesOrganisms.name = "organisms"
+FieldMatchesOrganisms.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldMatchesOrganisms.dataset = DatasetMatches
+FieldMatchesOrganisms.path = [DatasetMatches, FieldMatchesOrganisms]
+FieldMatchesOrganisms.element = FieldMatchesOrganismsElement
+
+FieldMatchesOrganismsElement.name = "element"
+FieldMatchesOrganismsElement.data_type = OpenTargetsDatasetFieldType.STRING
+FieldMatchesOrganismsElement.dataset = DatasetMatches
+FieldMatchesOrganismsElement.path = [DatasetMatches, FieldMatchesOrganisms, FieldMatchesOrganismsElement]
+
+FieldMatchesPmcid.name = "pmcid"
+FieldMatchesPmcid.data_type = OpenTargetsDatasetFieldType.STRING
+FieldMatchesPmcid.dataset = DatasetMatches
+FieldMatchesPmcid.path = [DatasetMatches, FieldMatchesPmcid]
+
+FieldMatchesPmid.name = "pmid"
+FieldMatchesPmid.data_type = OpenTargetsDatasetFieldType.STRING
+FieldMatchesPmid.dataset = DatasetMatches
+FieldMatchesPmid.path = [DatasetMatches, FieldMatchesPmid]
+
+FieldMatchesPubDate.name = "pubDate"
+FieldMatchesPubDate.data_type = OpenTargetsDatasetFieldType.STRING
+FieldMatchesPubDate.dataset = DatasetMatches
+FieldMatchesPubDate.path = [DatasetMatches, FieldMatchesPubDate]
+
+FieldMatchesSection.name = "section"
+FieldMatchesSection.data_type = OpenTargetsDatasetFieldType.STRING
+FieldMatchesSection.dataset = DatasetMatches
+FieldMatchesSection.path = [DatasetMatches, FieldMatchesSection]
+
+FieldMatchesSectionEnd.name = "sectionEnd"
+FieldMatchesSectionEnd.data_type = OpenTargetsDatasetFieldType.LONG
+FieldMatchesSectionEnd.dataset = DatasetMatches
+FieldMatchesSectionEnd.path = [DatasetMatches, FieldMatchesSectionEnd]
+
+FieldMatchesSectionStart.name = "sectionStart"
+FieldMatchesSectionStart.data_type = OpenTargetsDatasetFieldType.LONG
+FieldMatchesSectionStart.dataset = DatasetMatches
+FieldMatchesSectionStart.path = [DatasetMatches, FieldMatchesSectionStart]
+
+FieldMatchesStartInSentence.name = "startInSentence"
+FieldMatchesStartInSentence.data_type = OpenTargetsDatasetFieldType.LONG
+FieldMatchesStartInSentence.dataset = DatasetMatches
+FieldMatchesStartInSentence.path = [DatasetMatches, FieldMatchesStartInSentence]
+
+FieldMatchesText.name = "text"
+FieldMatchesText.data_type = OpenTargetsDatasetFieldType.STRING
+FieldMatchesText.dataset = DatasetMatches
+FieldMatchesText.path = [DatasetMatches, FieldMatchesText]
+
+FieldMatchesTraceSource.name = "trace_source"
+FieldMatchesTraceSource.data_type = OpenTargetsDatasetFieldType.STRING
+FieldMatchesTraceSource.dataset = DatasetMatches
+FieldMatchesTraceSource.path = [DatasetMatches, FieldMatchesTraceSource]
+
+FieldMatchesType.name = "type"
+FieldMatchesType.data_type = OpenTargetsDatasetFieldType.STRING
+FieldMatchesType.dataset = DatasetMatches
+FieldMatchesType.path = [DatasetMatches, FieldMatchesType]
+
+FieldMatchesYear.name = "year"
+FieldMatchesYear.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldMatchesYear.dataset = DatasetMatches
+FieldMatchesYear.path = [DatasetMatches, FieldMatchesYear]
 
 DatasetMechanismOfAction.id = "mechanismOfAction"
 DatasetMechanismOfAction.fields = [FieldMechanismOfActionActionType, FieldMechanismOfActionChemblIds, FieldMechanismOfActionMechanismOfAction, FieldMechanismOfActionReferences, FieldMechanismOfActionTargetName, FieldMechanismOfActionTargetType, FieldMechanismOfActionTargets]
@@ -8603,7 +11875,7 @@ FieldMechanismOfActionTargetsElement.dataset = DatasetMechanismOfAction
 FieldMechanismOfActionTargetsElement.path = [DatasetMechanismOfAction, FieldMechanismOfActionTargets, FieldMechanismOfActionTargetsElement]
 
 DatasetMolecule.id = "molecule"
-DatasetMolecule.fields = [FieldMoleculeBlackBoxWarning, FieldMoleculeCanonicalSmiles, FieldMoleculeChildChemblIds, FieldMoleculeCrossReferences, FieldMoleculeDescription, FieldMoleculeDrugType, FieldMoleculeHasBeenWithdrawn, FieldMoleculeId, FieldMoleculeInchiKey, FieldMoleculeIsApproved, FieldMoleculeLinkedDiseases, FieldMoleculeLinkedTargets, FieldMoleculeMaximumClinicalTrialPhase, FieldMoleculeName, FieldMoleculeParentId, FieldMoleculeSynonyms, FieldMoleculeTradeNames, FieldMoleculeWithdrawnNotice, FieldMoleculeYearOfFirstApproval]
+DatasetMolecule.fields = [FieldMoleculeBlackBoxWarning, FieldMoleculeCanonicalSmiles, FieldMoleculeChildChemblIds, FieldMoleculeCrossReferences, FieldMoleculeDescription, FieldMoleculeDrugType, FieldMoleculeHasBeenWithdrawn, FieldMoleculeId, FieldMoleculeInchiKey, FieldMoleculeIsApproved, FieldMoleculeLinkedDiseases, FieldMoleculeLinkedTargets, FieldMoleculeMaximumClinicalTrialPhase, FieldMoleculeName, FieldMoleculeParentId, FieldMoleculeSynonyms, FieldMoleculeTradeNames, FieldMoleculeYearOfFirstApproval]
 DatasetMolecule.f_black_box_warning = FieldMoleculeBlackBoxWarning
 DatasetMolecule.f_canonical_smiles = FieldMoleculeCanonicalSmiles
 DatasetMolecule.f_child_chembl_ids = FieldMoleculeChildChemblIds
@@ -8621,7 +11893,6 @@ DatasetMolecule.f_name = FieldMoleculeName
 DatasetMolecule.f_parent_id = FieldMoleculeParentId
 DatasetMolecule.f_synonyms = FieldMoleculeSynonyms
 DatasetMolecule.f_trade_names = FieldMoleculeTradeNames
-DatasetMolecule.f_withdrawn_notice = FieldMoleculeWithdrawnNotice
 DatasetMolecule.f_year_of_first_approval = FieldMoleculeYearOfFirstApproval
 
 FieldMoleculeBlackBoxWarning.name = "blackBoxWarning"
@@ -8747,7 +12018,7 @@ FieldMoleculeLinkedTargetsRowsElement.dataset = DatasetMolecule
 FieldMoleculeLinkedTargetsRowsElement.path = [DatasetMolecule, FieldMoleculeLinkedTargets, FieldMoleculeLinkedTargetsRows, FieldMoleculeLinkedTargetsRowsElement]
 
 FieldMoleculeMaximumClinicalTrialPhase.name = "maximumClinicalTrialPhase"
-FieldMoleculeMaximumClinicalTrialPhase.data_type = OpenTargetsDatasetFieldType.LONG
+FieldMoleculeMaximumClinicalTrialPhase.data_type = OpenTargetsDatasetFieldType.DOUBLE
 FieldMoleculeMaximumClinicalTrialPhase.dataset = DatasetMolecule
 FieldMoleculeMaximumClinicalTrialPhase.path = [DatasetMolecule, FieldMoleculeMaximumClinicalTrialPhase]
 
@@ -8782,42 +12053,6 @@ FieldMoleculeTradeNamesElement.name = "element"
 FieldMoleculeTradeNamesElement.data_type = OpenTargetsDatasetFieldType.STRING
 FieldMoleculeTradeNamesElement.dataset = DatasetMolecule
 FieldMoleculeTradeNamesElement.path = [DatasetMolecule, FieldMoleculeTradeNames, FieldMoleculeTradeNamesElement]
-
-FieldMoleculeWithdrawnNotice.name = "withdrawnNotice"
-FieldMoleculeWithdrawnNotice.data_type = OpenTargetsDatasetFieldType.STRUCT
-FieldMoleculeWithdrawnNotice.dataset = DatasetMolecule
-FieldMoleculeWithdrawnNotice.path = [DatasetMolecule, FieldMoleculeWithdrawnNotice]
-FieldMoleculeWithdrawnNotice.fields = [FieldMoleculeWithdrawnNoticeClasses, FieldMoleculeWithdrawnNoticeCountries, FieldMoleculeWithdrawnNoticeYear]
-FieldMoleculeWithdrawnNotice.f_classes = FieldMoleculeWithdrawnNoticeClasses
-FieldMoleculeWithdrawnNotice.f_countries = FieldMoleculeWithdrawnNoticeCountries
-FieldMoleculeWithdrawnNotice.f_year = FieldMoleculeWithdrawnNoticeYear
-
-FieldMoleculeWithdrawnNoticeClasses.name = "classes"
-FieldMoleculeWithdrawnNoticeClasses.data_type = OpenTargetsDatasetFieldType.ARRAY
-FieldMoleculeWithdrawnNoticeClasses.dataset = DatasetMolecule
-FieldMoleculeWithdrawnNoticeClasses.path = [DatasetMolecule, FieldMoleculeWithdrawnNotice, FieldMoleculeWithdrawnNoticeClasses]
-FieldMoleculeWithdrawnNoticeClasses.element = FieldMoleculeWithdrawnNoticeClassesElement
-
-FieldMoleculeWithdrawnNoticeClassesElement.name = "element"
-FieldMoleculeWithdrawnNoticeClassesElement.data_type = OpenTargetsDatasetFieldType.STRING
-FieldMoleculeWithdrawnNoticeClassesElement.dataset = DatasetMolecule
-FieldMoleculeWithdrawnNoticeClassesElement.path = [DatasetMolecule, FieldMoleculeWithdrawnNotice, FieldMoleculeWithdrawnNoticeClasses, FieldMoleculeWithdrawnNoticeClassesElement]
-
-FieldMoleculeWithdrawnNoticeCountries.name = "countries"
-FieldMoleculeWithdrawnNoticeCountries.data_type = OpenTargetsDatasetFieldType.ARRAY
-FieldMoleculeWithdrawnNoticeCountries.dataset = DatasetMolecule
-FieldMoleculeWithdrawnNoticeCountries.path = [DatasetMolecule, FieldMoleculeWithdrawnNotice, FieldMoleculeWithdrawnNoticeCountries]
-FieldMoleculeWithdrawnNoticeCountries.element = FieldMoleculeWithdrawnNoticeCountriesElement
-
-FieldMoleculeWithdrawnNoticeCountriesElement.name = "element"
-FieldMoleculeWithdrawnNoticeCountriesElement.data_type = OpenTargetsDatasetFieldType.STRING
-FieldMoleculeWithdrawnNoticeCountriesElement.dataset = DatasetMolecule
-FieldMoleculeWithdrawnNoticeCountriesElement.path = [DatasetMolecule, FieldMoleculeWithdrawnNotice, FieldMoleculeWithdrawnNoticeCountries, FieldMoleculeWithdrawnNoticeCountriesElement]
-
-FieldMoleculeWithdrawnNoticeYear.name = "year"
-FieldMoleculeWithdrawnNoticeYear.data_type = OpenTargetsDatasetFieldType.LONG
-FieldMoleculeWithdrawnNoticeYear.dataset = DatasetMolecule
-FieldMoleculeWithdrawnNoticeYear.path = [DatasetMolecule, FieldMoleculeWithdrawnNotice, FieldMoleculeWithdrawnNoticeYear]
 
 FieldMoleculeYearOfFirstApproval.name = "yearOfFirstApproval"
 FieldMoleculeYearOfFirstApproval.data_type = OpenTargetsDatasetFieldType.LONG
@@ -8930,6 +12165,154 @@ FieldMousePhenotypesTargetInModelMgiId.name = "targetInModelMgiId"
 FieldMousePhenotypesTargetInModelMgiId.data_type = OpenTargetsDatasetFieldType.STRING
 FieldMousePhenotypesTargetInModelMgiId.dataset = DatasetMousePhenotypes
 FieldMousePhenotypesTargetInModelMgiId.path = [DatasetMousePhenotypes, FieldMousePhenotypesTargetInModelMgiId]
+
+DatasetPharmacogenomics.id = "pharmacogenomics"
+DatasetPharmacogenomics.fields = [FieldPharmacogenomicsDatasourceId, FieldPharmacogenomicsDatasourceVersion, FieldPharmacogenomicsDatatypeId, FieldPharmacogenomicsDirectionality, FieldPharmacogenomicsDrugs, FieldPharmacogenomicsEvidenceLevel, FieldPharmacogenomicsGenotype, FieldPharmacogenomicsGenotypeAnnotationText, FieldPharmacogenomicsGenotypeId, FieldPharmacogenomicsHaplotypeFromSourceId, FieldPharmacogenomicsHaplotypeId, FieldPharmacogenomicsIsDirectTarget, FieldPharmacogenomicsLiterature, FieldPharmacogenomicsPgxCategory, FieldPharmacogenomicsPhenotypeFromSourceId, FieldPharmacogenomicsPhenotypeText, FieldPharmacogenomicsStudyId, FieldPharmacogenomicsTargetFromSourceId, FieldPharmacogenomicsVariantFunctionalConsequenceId, FieldPharmacogenomicsVariantRsId]
+DatasetPharmacogenomics.f_datasource_id = FieldPharmacogenomicsDatasourceId
+DatasetPharmacogenomics.f_datasource_version = FieldPharmacogenomicsDatasourceVersion
+DatasetPharmacogenomics.f_datatype_id = FieldPharmacogenomicsDatatypeId
+DatasetPharmacogenomics.f_directionality = FieldPharmacogenomicsDirectionality
+DatasetPharmacogenomics.f_drugs = FieldPharmacogenomicsDrugs
+DatasetPharmacogenomics.f_evidence_level = FieldPharmacogenomicsEvidenceLevel
+DatasetPharmacogenomics.f_genotype = FieldPharmacogenomicsGenotype
+DatasetPharmacogenomics.f_genotype_annotation_text = FieldPharmacogenomicsGenotypeAnnotationText
+DatasetPharmacogenomics.f_genotype_id = FieldPharmacogenomicsGenotypeId
+DatasetPharmacogenomics.f_haplotype_from_source_id = FieldPharmacogenomicsHaplotypeFromSourceId
+DatasetPharmacogenomics.f_haplotype_id = FieldPharmacogenomicsHaplotypeId
+DatasetPharmacogenomics.f_is_direct_target = FieldPharmacogenomicsIsDirectTarget
+DatasetPharmacogenomics.f_literature = FieldPharmacogenomicsLiterature
+DatasetPharmacogenomics.f_pgx_category = FieldPharmacogenomicsPgxCategory
+DatasetPharmacogenomics.f_phenotype_from_source_id = FieldPharmacogenomicsPhenotypeFromSourceId
+DatasetPharmacogenomics.f_phenotype_text = FieldPharmacogenomicsPhenotypeText
+DatasetPharmacogenomics.f_study_id = FieldPharmacogenomicsStudyId
+DatasetPharmacogenomics.f_target_from_source_id = FieldPharmacogenomicsTargetFromSourceId
+DatasetPharmacogenomics.f_variant_functional_consequence_id = FieldPharmacogenomicsVariantFunctionalConsequenceId
+DatasetPharmacogenomics.f_variant_rs_id = FieldPharmacogenomicsVariantRsId
+
+FieldPharmacogenomicsDatasourceId.name = "datasourceId"
+FieldPharmacogenomicsDatasourceId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldPharmacogenomicsDatasourceId.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsDatasourceId.path = [DatasetPharmacogenomics, FieldPharmacogenomicsDatasourceId]
+
+FieldPharmacogenomicsDatasourceVersion.name = "datasourceVersion"
+FieldPharmacogenomicsDatasourceVersion.data_type = OpenTargetsDatasetFieldType.STRING
+FieldPharmacogenomicsDatasourceVersion.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsDatasourceVersion.path = [DatasetPharmacogenomics, FieldPharmacogenomicsDatasourceVersion]
+
+FieldPharmacogenomicsDatatypeId.name = "datatypeId"
+FieldPharmacogenomicsDatatypeId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldPharmacogenomicsDatatypeId.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsDatatypeId.path = [DatasetPharmacogenomics, FieldPharmacogenomicsDatatypeId]
+
+FieldPharmacogenomicsDirectionality.name = "directionality"
+FieldPharmacogenomicsDirectionality.data_type = OpenTargetsDatasetFieldType.STRING
+FieldPharmacogenomicsDirectionality.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsDirectionality.path = [DatasetPharmacogenomics, FieldPharmacogenomicsDirectionality]
+
+FieldPharmacogenomicsDrugs.name = "drugs"
+FieldPharmacogenomicsDrugs.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldPharmacogenomicsDrugs.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsDrugs.path = [DatasetPharmacogenomics, FieldPharmacogenomicsDrugs]
+FieldPharmacogenomicsDrugs.element = FieldPharmacogenomicsDrugsElement
+
+FieldPharmacogenomicsDrugsElement.name = "element"
+FieldPharmacogenomicsDrugsElement.data_type = OpenTargetsDatasetFieldType.STRUCT
+FieldPharmacogenomicsDrugsElement.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsDrugsElement.path = [DatasetPharmacogenomics, FieldPharmacogenomicsDrugs, FieldPharmacogenomicsDrugsElement]
+FieldPharmacogenomicsDrugsElement.fields = [FieldPharmacogenomicsDrugsElementDrugFromSource, FieldPharmacogenomicsDrugsElementDrugId]
+FieldPharmacogenomicsDrugsElement.f_drug_from_source = FieldPharmacogenomicsDrugsElementDrugFromSource
+FieldPharmacogenomicsDrugsElement.f_drug_id = FieldPharmacogenomicsDrugsElementDrugId
+
+FieldPharmacogenomicsDrugsElementDrugFromSource.name = "drugFromSource"
+FieldPharmacogenomicsDrugsElementDrugFromSource.data_type = OpenTargetsDatasetFieldType.STRING
+FieldPharmacogenomicsDrugsElementDrugFromSource.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsDrugsElementDrugFromSource.path = [DatasetPharmacogenomics, FieldPharmacogenomicsDrugs, FieldPharmacogenomicsDrugsElement, FieldPharmacogenomicsDrugsElementDrugFromSource]
+
+FieldPharmacogenomicsDrugsElementDrugId.name = "drugId"
+FieldPharmacogenomicsDrugsElementDrugId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldPharmacogenomicsDrugsElementDrugId.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsDrugsElementDrugId.path = [DatasetPharmacogenomics, FieldPharmacogenomicsDrugs, FieldPharmacogenomicsDrugsElement, FieldPharmacogenomicsDrugsElementDrugId]
+
+FieldPharmacogenomicsEvidenceLevel.name = "evidenceLevel"
+FieldPharmacogenomicsEvidenceLevel.data_type = OpenTargetsDatasetFieldType.STRING
+FieldPharmacogenomicsEvidenceLevel.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsEvidenceLevel.path = [DatasetPharmacogenomics, FieldPharmacogenomicsEvidenceLevel]
+
+FieldPharmacogenomicsGenotype.name = "genotype"
+FieldPharmacogenomicsGenotype.data_type = OpenTargetsDatasetFieldType.STRING
+FieldPharmacogenomicsGenotype.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsGenotype.path = [DatasetPharmacogenomics, FieldPharmacogenomicsGenotype]
+
+FieldPharmacogenomicsGenotypeAnnotationText.name = "genotypeAnnotationText"
+FieldPharmacogenomicsGenotypeAnnotationText.data_type = OpenTargetsDatasetFieldType.STRING
+FieldPharmacogenomicsGenotypeAnnotationText.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsGenotypeAnnotationText.path = [DatasetPharmacogenomics, FieldPharmacogenomicsGenotypeAnnotationText]
+
+FieldPharmacogenomicsGenotypeId.name = "genotypeId"
+FieldPharmacogenomicsGenotypeId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldPharmacogenomicsGenotypeId.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsGenotypeId.path = [DatasetPharmacogenomics, FieldPharmacogenomicsGenotypeId]
+
+FieldPharmacogenomicsHaplotypeFromSourceId.name = "haplotypeFromSourceId"
+FieldPharmacogenomicsHaplotypeFromSourceId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldPharmacogenomicsHaplotypeFromSourceId.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsHaplotypeFromSourceId.path = [DatasetPharmacogenomics, FieldPharmacogenomicsHaplotypeFromSourceId]
+
+FieldPharmacogenomicsHaplotypeId.name = "haplotypeId"
+FieldPharmacogenomicsHaplotypeId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldPharmacogenomicsHaplotypeId.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsHaplotypeId.path = [DatasetPharmacogenomics, FieldPharmacogenomicsHaplotypeId]
+
+FieldPharmacogenomicsIsDirectTarget.name = "isDirectTarget"
+FieldPharmacogenomicsIsDirectTarget.data_type = OpenTargetsDatasetFieldType.BOOLEAN
+FieldPharmacogenomicsIsDirectTarget.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsIsDirectTarget.path = [DatasetPharmacogenomics, FieldPharmacogenomicsIsDirectTarget]
+
+FieldPharmacogenomicsLiterature.name = "literature"
+FieldPharmacogenomicsLiterature.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldPharmacogenomicsLiterature.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsLiterature.path = [DatasetPharmacogenomics, FieldPharmacogenomicsLiterature]
+FieldPharmacogenomicsLiterature.element = FieldPharmacogenomicsLiteratureElement
+
+FieldPharmacogenomicsLiteratureElement.name = "element"
+FieldPharmacogenomicsLiteratureElement.data_type = OpenTargetsDatasetFieldType.STRING
+FieldPharmacogenomicsLiteratureElement.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsLiteratureElement.path = [DatasetPharmacogenomics, FieldPharmacogenomicsLiterature, FieldPharmacogenomicsLiteratureElement]
+
+FieldPharmacogenomicsPgxCategory.name = "pgxCategory"
+FieldPharmacogenomicsPgxCategory.data_type = OpenTargetsDatasetFieldType.STRING
+FieldPharmacogenomicsPgxCategory.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsPgxCategory.path = [DatasetPharmacogenomics, FieldPharmacogenomicsPgxCategory]
+
+FieldPharmacogenomicsPhenotypeFromSourceId.name = "phenotypeFromSourceId"
+FieldPharmacogenomicsPhenotypeFromSourceId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldPharmacogenomicsPhenotypeFromSourceId.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsPhenotypeFromSourceId.path = [DatasetPharmacogenomics, FieldPharmacogenomicsPhenotypeFromSourceId]
+
+FieldPharmacogenomicsPhenotypeText.name = "phenotypeText"
+FieldPharmacogenomicsPhenotypeText.data_type = OpenTargetsDatasetFieldType.STRING
+FieldPharmacogenomicsPhenotypeText.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsPhenotypeText.path = [DatasetPharmacogenomics, FieldPharmacogenomicsPhenotypeText]
+
+FieldPharmacogenomicsStudyId.name = "studyId"
+FieldPharmacogenomicsStudyId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldPharmacogenomicsStudyId.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsStudyId.path = [DatasetPharmacogenomics, FieldPharmacogenomicsStudyId]
+
+FieldPharmacogenomicsTargetFromSourceId.name = "targetFromSourceId"
+FieldPharmacogenomicsTargetFromSourceId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldPharmacogenomicsTargetFromSourceId.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsTargetFromSourceId.path = [DatasetPharmacogenomics, FieldPharmacogenomicsTargetFromSourceId]
+
+FieldPharmacogenomicsVariantFunctionalConsequenceId.name = "variantFunctionalConsequenceId"
+FieldPharmacogenomicsVariantFunctionalConsequenceId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldPharmacogenomicsVariantFunctionalConsequenceId.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsVariantFunctionalConsequenceId.path = [DatasetPharmacogenomics, FieldPharmacogenomicsVariantFunctionalConsequenceId]
+
+FieldPharmacogenomicsVariantRsId.name = "variantRsId"
+FieldPharmacogenomicsVariantRsId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldPharmacogenomicsVariantRsId.dataset = DatasetPharmacogenomics
+FieldPharmacogenomicsVariantRsId.path = [DatasetPharmacogenomics, FieldPharmacogenomicsVariantRsId]
 
 DatasetReactome.id = "reactome"
 DatasetReactome.fields = [FieldReactomeAncestors, FieldReactomeChildren, FieldReactomeDescendants, FieldReactomeId, FieldReactomeLabel, FieldReactomeParents, FieldReactomePath]
@@ -9441,6 +12824,219 @@ FieldSignificantAdverseTargetReactionsTargetId.data_type = OpenTargetsDatasetFie
 FieldSignificantAdverseTargetReactionsTargetId.dataset = DatasetSignificantAdverseTargetReactions
 FieldSignificantAdverseTargetReactionsTargetId.path = [DatasetSignificantAdverseTargetReactions, FieldSignificantAdverseTargetReactionsTargetId]
 
+DatasetTargetEssentiality.id = "targetEssentiality"
+DatasetTargetEssentiality.fields = [FieldTargetEssentialityGeneEssentiality, FieldTargetEssentialityId]
+DatasetTargetEssentiality.f_gene_essentiality = FieldTargetEssentialityGeneEssentiality
+DatasetTargetEssentiality.f_id = FieldTargetEssentialityId
+
+FieldTargetEssentialityGeneEssentiality.name = "geneEssentiality"
+FieldTargetEssentialityGeneEssentiality.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldTargetEssentialityGeneEssentiality.dataset = DatasetTargetEssentiality
+FieldTargetEssentialityGeneEssentiality.path = [DatasetTargetEssentiality, FieldTargetEssentialityGeneEssentiality]
+FieldTargetEssentialityGeneEssentiality.element = FieldTargetEssentialityGeneEssentialityElement
+
+FieldTargetEssentialityGeneEssentialityElement.name = "element"
+FieldTargetEssentialityGeneEssentialityElement.data_type = OpenTargetsDatasetFieldType.STRUCT
+FieldTargetEssentialityGeneEssentialityElement.dataset = DatasetTargetEssentiality
+FieldTargetEssentialityGeneEssentialityElement.path = [DatasetTargetEssentiality, FieldTargetEssentialityGeneEssentiality, FieldTargetEssentialityGeneEssentialityElement]
+FieldTargetEssentialityGeneEssentialityElement.fields = [FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality, FieldTargetEssentialityGeneEssentialityElementIsEssential]
+FieldTargetEssentialityGeneEssentialityElement.f_dep_map_essentiality = FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality
+FieldTargetEssentialityGeneEssentialityElement.f_is_essential = FieldTargetEssentialityGeneEssentialityElementIsEssential
+
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality.name = "depMapEssentiality"
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality.dataset = DatasetTargetEssentiality
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality.path = [DatasetTargetEssentiality, FieldTargetEssentialityGeneEssentiality, FieldTargetEssentialityGeneEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality]
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality.element = FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement
+
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement.name = "element"
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement.data_type = OpenTargetsDatasetFieldType.STRUCT
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement.dataset = DatasetTargetEssentiality
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement.path = [DatasetTargetEssentiality, FieldTargetEssentialityGeneEssentiality, FieldTargetEssentialityGeneEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement]
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement.fields = [FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreens, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementTissueId, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementTissueName]
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement.f_screens = FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreens
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement.f_tissue_id = FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementTissueId
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement.f_tissue_name = FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementTissueName
+
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreens.name = "screens"
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreens.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreens.dataset = DatasetTargetEssentiality
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreens.path = [DatasetTargetEssentiality, FieldTargetEssentialityGeneEssentiality, FieldTargetEssentialityGeneEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreens]
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreens.element = FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement
+
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement.name = "element"
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement.data_type = OpenTargetsDatasetFieldType.STRUCT
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement.dataset = DatasetTargetEssentiality
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement.path = [DatasetTargetEssentiality, FieldTargetEssentialityGeneEssentiality, FieldTargetEssentialityGeneEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreens, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement]
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement.fields = [FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementCellLineName, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDepmapId, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDiseaseCellLineId, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDiseaseFromSource, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementExpression, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementGeneEffect, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementMutation]
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement.f_cell_line_name = FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementCellLineName
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement.f_depmap_id = FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDepmapId
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement.f_disease_cell_line_id = FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDiseaseCellLineId
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement.f_disease_from_source = FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDiseaseFromSource
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement.f_expression = FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementExpression
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement.f_gene_effect = FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementGeneEffect
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement.f_mutation = FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementMutation
+
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementCellLineName.name = "cellLineName"
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementCellLineName.data_type = OpenTargetsDatasetFieldType.STRING
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementCellLineName.dataset = DatasetTargetEssentiality
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementCellLineName.path = [DatasetTargetEssentiality, FieldTargetEssentialityGeneEssentiality, FieldTargetEssentialityGeneEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreens, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementCellLineName]
+
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDepmapId.name = "depmapId"
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDepmapId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDepmapId.dataset = DatasetTargetEssentiality
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDepmapId.path = [DatasetTargetEssentiality, FieldTargetEssentialityGeneEssentiality, FieldTargetEssentialityGeneEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreens, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDepmapId]
+
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDiseaseCellLineId.name = "diseaseCellLineId"
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDiseaseCellLineId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDiseaseCellLineId.dataset = DatasetTargetEssentiality
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDiseaseCellLineId.path = [DatasetTargetEssentiality, FieldTargetEssentialityGeneEssentiality, FieldTargetEssentialityGeneEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreens, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDiseaseCellLineId]
+
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDiseaseFromSource.name = "diseaseFromSource"
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDiseaseFromSource.data_type = OpenTargetsDatasetFieldType.STRING
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDiseaseFromSource.dataset = DatasetTargetEssentiality
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDiseaseFromSource.path = [DatasetTargetEssentiality, FieldTargetEssentialityGeneEssentiality, FieldTargetEssentialityGeneEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreens, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDiseaseFromSource]
+
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementExpression.name = "expression"
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementExpression.data_type = OpenTargetsDatasetFieldType.DOUBLE
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementExpression.dataset = DatasetTargetEssentiality
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementExpression.path = [DatasetTargetEssentiality, FieldTargetEssentialityGeneEssentiality, FieldTargetEssentialityGeneEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreens, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementExpression]
+
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementGeneEffect.name = "geneEffect"
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementGeneEffect.data_type = OpenTargetsDatasetFieldType.DOUBLE
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementGeneEffect.dataset = DatasetTargetEssentiality
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementGeneEffect.path = [DatasetTargetEssentiality, FieldTargetEssentialityGeneEssentiality, FieldTargetEssentialityGeneEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreens, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementGeneEffect]
+
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementMutation.name = "mutation"
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementMutation.data_type = OpenTargetsDatasetFieldType.STRING
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementMutation.dataset = DatasetTargetEssentiality
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementMutation.path = [DatasetTargetEssentiality, FieldTargetEssentialityGeneEssentiality, FieldTargetEssentialityGeneEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreens, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementMutation]
+
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementTissueId.name = "tissueId"
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementTissueId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementTissueId.dataset = DatasetTargetEssentiality
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementTissueId.path = [DatasetTargetEssentiality, FieldTargetEssentialityGeneEssentiality, FieldTargetEssentialityGeneEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementTissueId]
+
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementTissueName.name = "tissueName"
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementTissueName.data_type = OpenTargetsDatasetFieldType.STRING
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementTissueName.dataset = DatasetTargetEssentiality
+FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementTissueName.path = [DatasetTargetEssentiality, FieldTargetEssentialityGeneEssentiality, FieldTargetEssentialityGeneEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElement, FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementTissueName]
+
+FieldTargetEssentialityGeneEssentialityElementIsEssential.name = "isEssential"
+FieldTargetEssentialityGeneEssentialityElementIsEssential.data_type = OpenTargetsDatasetFieldType.BOOLEAN
+FieldTargetEssentialityGeneEssentialityElementIsEssential.dataset = DatasetTargetEssentiality
+FieldTargetEssentialityGeneEssentialityElementIsEssential.path = [DatasetTargetEssentiality, FieldTargetEssentialityGeneEssentiality, FieldTargetEssentialityGeneEssentialityElement, FieldTargetEssentialityGeneEssentialityElementIsEssential]
+
+FieldTargetEssentialityId.name = "id"
+FieldTargetEssentialityId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldTargetEssentialityId.dataset = DatasetTargetEssentiality
+FieldTargetEssentialityId.path = [DatasetTargetEssentiality, FieldTargetEssentialityId]
+
+DatasetTargetPrioritisation.id = "targetPrioritisation"
+DatasetTargetPrioritisation.fields = [FieldTargetPrioritisationGeneticConstraint, FieldTargetPrioritisationHasHighQualityChemicalProbes, FieldTargetPrioritisationHasLigand, FieldTargetPrioritisationHasPocket, FieldTargetPrioritisationHasSafetyEvent, FieldTargetPrioritisationHasSmallMoleculeBinder, FieldTargetPrioritisationHasTep, FieldTargetPrioritisationIsCancerDriverGene, FieldTargetPrioritisationIsInMembrane, FieldTargetPrioritisationIsSecreted, FieldTargetPrioritisationMaxClinicalTrialPhase, FieldTargetPrioritisationMouseKoScore, FieldTargetPrioritisationMouseOrthologMaxIdentityPercentage, FieldTargetPrioritisationParalogMaxIdentityPercentage, FieldTargetPrioritisationTargetId, FieldTargetPrioritisationTissueDistribution, FieldTargetPrioritisationTissueSpecificity]
+DatasetTargetPrioritisation.f_genetic_constraint = FieldTargetPrioritisationGeneticConstraint
+DatasetTargetPrioritisation.f_has_high_quality_chemical_probes = FieldTargetPrioritisationHasHighQualityChemicalProbes
+DatasetTargetPrioritisation.f_has_ligand = FieldTargetPrioritisationHasLigand
+DatasetTargetPrioritisation.f_has_pocket = FieldTargetPrioritisationHasPocket
+DatasetTargetPrioritisation.f_has_safety_event = FieldTargetPrioritisationHasSafetyEvent
+DatasetTargetPrioritisation.f_has_small_molecule_binder = FieldTargetPrioritisationHasSmallMoleculeBinder
+DatasetTargetPrioritisation.f_has_tep = FieldTargetPrioritisationHasTep
+DatasetTargetPrioritisation.f_is_cancer_driver_gene = FieldTargetPrioritisationIsCancerDriverGene
+DatasetTargetPrioritisation.f_is_in_membrane = FieldTargetPrioritisationIsInMembrane
+DatasetTargetPrioritisation.f_is_secreted = FieldTargetPrioritisationIsSecreted
+DatasetTargetPrioritisation.f_max_clinical_trial_phase = FieldTargetPrioritisationMaxClinicalTrialPhase
+DatasetTargetPrioritisation.f_mouse_ko_score = FieldTargetPrioritisationMouseKoScore
+DatasetTargetPrioritisation.f_mouse_ortholog_max_identity_percentage = FieldTargetPrioritisationMouseOrthologMaxIdentityPercentage
+DatasetTargetPrioritisation.f_paralog_max_identity_percentage = FieldTargetPrioritisationParalogMaxIdentityPercentage
+DatasetTargetPrioritisation.f_target_id = FieldTargetPrioritisationTargetId
+DatasetTargetPrioritisation.f_tissue_distribution = FieldTargetPrioritisationTissueDistribution
+DatasetTargetPrioritisation.f_tissue_specificity = FieldTargetPrioritisationTissueSpecificity
+
+FieldTargetPrioritisationGeneticConstraint.name = "geneticConstraint"
+FieldTargetPrioritisationGeneticConstraint.data_type = OpenTargetsDatasetFieldType.DOUBLE
+FieldTargetPrioritisationGeneticConstraint.dataset = DatasetTargetPrioritisation
+FieldTargetPrioritisationGeneticConstraint.path = [DatasetTargetPrioritisation, FieldTargetPrioritisationGeneticConstraint]
+
+FieldTargetPrioritisationHasHighQualityChemicalProbes.name = "hasHighQualityChemicalProbes"
+FieldTargetPrioritisationHasHighQualityChemicalProbes.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldTargetPrioritisationHasHighQualityChemicalProbes.dataset = DatasetTargetPrioritisation
+FieldTargetPrioritisationHasHighQualityChemicalProbes.path = [DatasetTargetPrioritisation, FieldTargetPrioritisationHasHighQualityChemicalProbes]
+
+FieldTargetPrioritisationHasLigand.name = "hasLigand"
+FieldTargetPrioritisationHasLigand.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldTargetPrioritisationHasLigand.dataset = DatasetTargetPrioritisation
+FieldTargetPrioritisationHasLigand.path = [DatasetTargetPrioritisation, FieldTargetPrioritisationHasLigand]
+
+FieldTargetPrioritisationHasPocket.name = "hasPocket"
+FieldTargetPrioritisationHasPocket.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldTargetPrioritisationHasPocket.dataset = DatasetTargetPrioritisation
+FieldTargetPrioritisationHasPocket.path = [DatasetTargetPrioritisation, FieldTargetPrioritisationHasPocket]
+
+FieldTargetPrioritisationHasSafetyEvent.name = "hasSafetyEvent"
+FieldTargetPrioritisationHasSafetyEvent.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldTargetPrioritisationHasSafetyEvent.dataset = DatasetTargetPrioritisation
+FieldTargetPrioritisationHasSafetyEvent.path = [DatasetTargetPrioritisation, FieldTargetPrioritisationHasSafetyEvent]
+
+FieldTargetPrioritisationHasSmallMoleculeBinder.name = "hasSmallMoleculeBinder"
+FieldTargetPrioritisationHasSmallMoleculeBinder.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldTargetPrioritisationHasSmallMoleculeBinder.dataset = DatasetTargetPrioritisation
+FieldTargetPrioritisationHasSmallMoleculeBinder.path = [DatasetTargetPrioritisation, FieldTargetPrioritisationHasSmallMoleculeBinder]
+
+FieldTargetPrioritisationHasTep.name = "hasTEP"
+FieldTargetPrioritisationHasTep.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldTargetPrioritisationHasTep.dataset = DatasetTargetPrioritisation
+FieldTargetPrioritisationHasTep.path = [DatasetTargetPrioritisation, FieldTargetPrioritisationHasTep]
+
+FieldTargetPrioritisationIsCancerDriverGene.name = "isCancerDriverGene"
+FieldTargetPrioritisationIsCancerDriverGene.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldTargetPrioritisationIsCancerDriverGene.dataset = DatasetTargetPrioritisation
+FieldTargetPrioritisationIsCancerDriverGene.path = [DatasetTargetPrioritisation, FieldTargetPrioritisationIsCancerDriverGene]
+
+FieldTargetPrioritisationIsInMembrane.name = "isInMembrane"
+FieldTargetPrioritisationIsInMembrane.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldTargetPrioritisationIsInMembrane.dataset = DatasetTargetPrioritisation
+FieldTargetPrioritisationIsInMembrane.path = [DatasetTargetPrioritisation, FieldTargetPrioritisationIsInMembrane]
+
+FieldTargetPrioritisationIsSecreted.name = "isSecreted"
+FieldTargetPrioritisationIsSecreted.data_type = OpenTargetsDatasetFieldType.INTEGER
+FieldTargetPrioritisationIsSecreted.dataset = DatasetTargetPrioritisation
+FieldTargetPrioritisationIsSecreted.path = [DatasetTargetPrioritisation, FieldTargetPrioritisationIsSecreted]
+
+FieldTargetPrioritisationMaxClinicalTrialPhase.name = "maxClinicalTrialPhase"
+FieldTargetPrioritisationMaxClinicalTrialPhase.data_type = OpenTargetsDatasetFieldType.DOUBLE
+FieldTargetPrioritisationMaxClinicalTrialPhase.dataset = DatasetTargetPrioritisation
+FieldTargetPrioritisationMaxClinicalTrialPhase.path = [DatasetTargetPrioritisation, FieldTargetPrioritisationMaxClinicalTrialPhase]
+
+FieldTargetPrioritisationMouseKoScore.name = "mouseKOScore"
+FieldTargetPrioritisationMouseKoScore.data_type = OpenTargetsDatasetFieldType.DOUBLE
+FieldTargetPrioritisationMouseKoScore.dataset = DatasetTargetPrioritisation
+FieldTargetPrioritisationMouseKoScore.path = [DatasetTargetPrioritisation, FieldTargetPrioritisationMouseKoScore]
+
+FieldTargetPrioritisationMouseOrthologMaxIdentityPercentage.name = "mouseOrthologMaxIdentityPercentage"
+FieldTargetPrioritisationMouseOrthologMaxIdentityPercentage.data_type = OpenTargetsDatasetFieldType.DOUBLE
+FieldTargetPrioritisationMouseOrthologMaxIdentityPercentage.dataset = DatasetTargetPrioritisation
+FieldTargetPrioritisationMouseOrthologMaxIdentityPercentage.path = [DatasetTargetPrioritisation, FieldTargetPrioritisationMouseOrthologMaxIdentityPercentage]
+
+FieldTargetPrioritisationParalogMaxIdentityPercentage.name = "paralogMaxIdentityPercentage"
+FieldTargetPrioritisationParalogMaxIdentityPercentage.data_type = OpenTargetsDatasetFieldType.DOUBLE
+FieldTargetPrioritisationParalogMaxIdentityPercentage.dataset = DatasetTargetPrioritisation
+FieldTargetPrioritisationParalogMaxIdentityPercentage.path = [DatasetTargetPrioritisation, FieldTargetPrioritisationParalogMaxIdentityPercentage]
+
+FieldTargetPrioritisationTargetId.name = "targetId"
+FieldTargetPrioritisationTargetId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldTargetPrioritisationTargetId.dataset = DatasetTargetPrioritisation
+FieldTargetPrioritisationTargetId.path = [DatasetTargetPrioritisation, FieldTargetPrioritisationTargetId]
+
+FieldTargetPrioritisationTissueDistribution.name = "tissueDistribution"
+FieldTargetPrioritisationTissueDistribution.data_type = OpenTargetsDatasetFieldType.DOUBLE
+FieldTargetPrioritisationTissueDistribution.dataset = DatasetTargetPrioritisation
+FieldTargetPrioritisationTissueDistribution.path = [DatasetTargetPrioritisation, FieldTargetPrioritisationTissueDistribution]
+
+FieldTargetPrioritisationTissueSpecificity.name = "tissueSpecificity"
+FieldTargetPrioritisationTissueSpecificity.data_type = OpenTargetsDatasetFieldType.DOUBLE
+FieldTargetPrioritisationTissueSpecificity.dataset = DatasetTargetPrioritisation
+FieldTargetPrioritisationTissueSpecificity.path = [DatasetTargetPrioritisation, FieldTargetPrioritisationTissueSpecificity]
+
 DatasetTargets.id = "targets"
 DatasetTargets.fields = [FieldTargetsAlternativeGenes, FieldTargetsApprovedName, FieldTargetsApprovedSymbol, FieldTargetsBiotype, FieldTargetsCanonicalExons, FieldTargetsCanonicalTranscript, FieldTargetsChemicalProbes, FieldTargetsConstraint, FieldTargetsDbXrefs, FieldTargetsFunctionDescriptions, FieldTargetsGenomicLocation, FieldTargetsGo, FieldTargetsHallmarks, FieldTargetsHomologues, FieldTargetsId, FieldTargetsNameSynonyms, FieldTargetsObsoleteNames, FieldTargetsObsoleteSymbols, FieldTargetsPathways, FieldTargetsProteinIds, FieldTargetsSafetyLiabilities, FieldTargetsSubcellularLocations, FieldTargetsSymbolSynonyms, FieldTargetsSynonyms, FieldTargetsTargetClass, FieldTargetsTep, FieldTargetsTractability, FieldTargetsTranscriptIds]
 DatasetTargets.f_alternative_genes = FieldTargetsAlternativeGenes
@@ -9612,22 +13208,22 @@ FieldTargetsChemicalProbesElementOriginElement.dataset = DatasetTargets
 FieldTargetsChemicalProbesElementOriginElement.path = [DatasetTargets, FieldTargetsChemicalProbes, FieldTargetsChemicalProbesElement, FieldTargetsChemicalProbesElementOrigin, FieldTargetsChemicalProbesElementOriginElement]
 
 FieldTargetsChemicalProbesElementProbeMinerScore.name = "probeMinerScore"
-FieldTargetsChemicalProbesElementProbeMinerScore.data_type = OpenTargetsDatasetFieldType.DOUBLE
+FieldTargetsChemicalProbesElementProbeMinerScore.data_type = OpenTargetsDatasetFieldType.LONG
 FieldTargetsChemicalProbesElementProbeMinerScore.dataset = DatasetTargets
 FieldTargetsChemicalProbesElementProbeMinerScore.path = [DatasetTargets, FieldTargetsChemicalProbes, FieldTargetsChemicalProbesElement, FieldTargetsChemicalProbesElementProbeMinerScore]
 
 FieldTargetsChemicalProbesElementProbesDrugsScore.name = "probesDrugsScore"
-FieldTargetsChemicalProbesElementProbesDrugsScore.data_type = OpenTargetsDatasetFieldType.DOUBLE
+FieldTargetsChemicalProbesElementProbesDrugsScore.data_type = OpenTargetsDatasetFieldType.LONG
 FieldTargetsChemicalProbesElementProbesDrugsScore.dataset = DatasetTargets
 FieldTargetsChemicalProbesElementProbesDrugsScore.path = [DatasetTargets, FieldTargetsChemicalProbes, FieldTargetsChemicalProbesElement, FieldTargetsChemicalProbesElementProbesDrugsScore]
 
 FieldTargetsChemicalProbesElementScoreInCells.name = "scoreInCells"
-FieldTargetsChemicalProbesElementScoreInCells.data_type = OpenTargetsDatasetFieldType.DOUBLE
+FieldTargetsChemicalProbesElementScoreInCells.data_type = OpenTargetsDatasetFieldType.LONG
 FieldTargetsChemicalProbesElementScoreInCells.dataset = DatasetTargets
 FieldTargetsChemicalProbesElementScoreInCells.path = [DatasetTargets, FieldTargetsChemicalProbes, FieldTargetsChemicalProbesElement, FieldTargetsChemicalProbesElementScoreInCells]
 
 FieldTargetsChemicalProbesElementScoreInOrganisms.name = "scoreInOrganisms"
-FieldTargetsChemicalProbesElementScoreInOrganisms.data_type = OpenTargetsDatasetFieldType.DOUBLE
+FieldTargetsChemicalProbesElementScoreInOrganisms.data_type = OpenTargetsDatasetFieldType.LONG
 FieldTargetsChemicalProbesElementScoreInOrganisms.dataset = DatasetTargets
 FieldTargetsChemicalProbesElementScoreInOrganisms.path = [DatasetTargets, FieldTargetsChemicalProbes, FieldTargetsChemicalProbesElement, FieldTargetsChemicalProbesElementScoreInOrganisms]
 
@@ -10126,57 +13722,51 @@ FieldTargetsSafetyLiabilitiesElement.name = "element"
 FieldTargetsSafetyLiabilitiesElement.data_type = OpenTargetsDatasetFieldType.STRUCT
 FieldTargetsSafetyLiabilitiesElement.dataset = DatasetTargets
 FieldTargetsSafetyLiabilitiesElement.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement]
-FieldTargetsSafetyLiabilitiesElement.fields = [FieldTargetsSafetyLiabilitiesElementBiosample, FieldTargetsSafetyLiabilitiesElementDatasource, FieldTargetsSafetyLiabilitiesElementEffects, FieldTargetsSafetyLiabilitiesElementEvent, FieldTargetsSafetyLiabilitiesElementEventId, FieldTargetsSafetyLiabilitiesElementLiterature, FieldTargetsSafetyLiabilitiesElementStudy, FieldTargetsSafetyLiabilitiesElementUrl]
-FieldTargetsSafetyLiabilitiesElement.f_biosample = FieldTargetsSafetyLiabilitiesElementBiosample
+FieldTargetsSafetyLiabilitiesElement.fields = [FieldTargetsSafetyLiabilitiesElementBiosamples, FieldTargetsSafetyLiabilitiesElementDatasource, FieldTargetsSafetyLiabilitiesElementEffects, FieldTargetsSafetyLiabilitiesElementEvent, FieldTargetsSafetyLiabilitiesElementEventId, FieldTargetsSafetyLiabilitiesElementLiterature, FieldTargetsSafetyLiabilitiesElementStudies, FieldTargetsSafetyLiabilitiesElementUrl]
+FieldTargetsSafetyLiabilitiesElement.f_biosamples = FieldTargetsSafetyLiabilitiesElementBiosamples
 FieldTargetsSafetyLiabilitiesElement.f_datasource = FieldTargetsSafetyLiabilitiesElementDatasource
 FieldTargetsSafetyLiabilitiesElement.f_effects = FieldTargetsSafetyLiabilitiesElementEffects
 FieldTargetsSafetyLiabilitiesElement.f_event = FieldTargetsSafetyLiabilitiesElementEvent
 FieldTargetsSafetyLiabilitiesElement.f_event_id = FieldTargetsSafetyLiabilitiesElementEventId
 FieldTargetsSafetyLiabilitiesElement.f_literature = FieldTargetsSafetyLiabilitiesElementLiterature
-FieldTargetsSafetyLiabilitiesElement.f_study = FieldTargetsSafetyLiabilitiesElementStudy
+FieldTargetsSafetyLiabilitiesElement.f_studies = FieldTargetsSafetyLiabilitiesElementStudies
 FieldTargetsSafetyLiabilitiesElement.f_url = FieldTargetsSafetyLiabilitiesElementUrl
 
-FieldTargetsSafetyLiabilitiesElementBiosample.name = "biosample"
-FieldTargetsSafetyLiabilitiesElementBiosample.data_type = OpenTargetsDatasetFieldType.ARRAY
-FieldTargetsSafetyLiabilitiesElementBiosample.dataset = DatasetTargets
-FieldTargetsSafetyLiabilitiesElementBiosample.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementBiosample]
-FieldTargetsSafetyLiabilitiesElementBiosample.element = FieldTargetsSafetyLiabilitiesElementBiosampleElement
+FieldTargetsSafetyLiabilitiesElementBiosamples.name = "biosamples"
+FieldTargetsSafetyLiabilitiesElementBiosamples.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldTargetsSafetyLiabilitiesElementBiosamples.dataset = DatasetTargets
+FieldTargetsSafetyLiabilitiesElementBiosamples.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementBiosamples]
+FieldTargetsSafetyLiabilitiesElementBiosamples.element = FieldTargetsSafetyLiabilitiesElementBiosamplesElement
 
-FieldTargetsSafetyLiabilitiesElementBiosampleElement.name = "element"
-FieldTargetsSafetyLiabilitiesElementBiosampleElement.data_type = OpenTargetsDatasetFieldType.STRUCT
-FieldTargetsSafetyLiabilitiesElementBiosampleElement.dataset = DatasetTargets
-FieldTargetsSafetyLiabilitiesElementBiosampleElement.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementBiosample, FieldTargetsSafetyLiabilitiesElementBiosampleElement]
-FieldTargetsSafetyLiabilitiesElementBiosampleElement.fields = [FieldTargetsSafetyLiabilitiesElementBiosampleElementCellFormat, FieldTargetsSafetyLiabilitiesElementBiosampleElementCellId, FieldTargetsSafetyLiabilitiesElementBiosampleElementCellLabel, FieldTargetsSafetyLiabilitiesElementBiosampleElementTissueId, FieldTargetsSafetyLiabilitiesElementBiosampleElementTissueLabel]
-FieldTargetsSafetyLiabilitiesElementBiosampleElement.f_cell_format = FieldTargetsSafetyLiabilitiesElementBiosampleElementCellFormat
-FieldTargetsSafetyLiabilitiesElementBiosampleElement.f_cell_id = FieldTargetsSafetyLiabilitiesElementBiosampleElementCellId
-FieldTargetsSafetyLiabilitiesElementBiosampleElement.f_cell_label = FieldTargetsSafetyLiabilitiesElementBiosampleElementCellLabel
-FieldTargetsSafetyLiabilitiesElementBiosampleElement.f_tissue_id = FieldTargetsSafetyLiabilitiesElementBiosampleElementTissueId
-FieldTargetsSafetyLiabilitiesElementBiosampleElement.f_tissue_label = FieldTargetsSafetyLiabilitiesElementBiosampleElementTissueLabel
+FieldTargetsSafetyLiabilitiesElementBiosamplesElement.name = "element"
+FieldTargetsSafetyLiabilitiesElementBiosamplesElement.data_type = OpenTargetsDatasetFieldType.STRUCT
+FieldTargetsSafetyLiabilitiesElementBiosamplesElement.dataset = DatasetTargets
+FieldTargetsSafetyLiabilitiesElementBiosamplesElement.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementBiosamples, FieldTargetsSafetyLiabilitiesElementBiosamplesElement]
+FieldTargetsSafetyLiabilitiesElementBiosamplesElement.fields = [FieldTargetsSafetyLiabilitiesElementBiosamplesElementCellFormat, FieldTargetsSafetyLiabilitiesElementBiosamplesElementCellLabel, FieldTargetsSafetyLiabilitiesElementBiosamplesElementTissueId, FieldTargetsSafetyLiabilitiesElementBiosamplesElementTissueLabel]
+FieldTargetsSafetyLiabilitiesElementBiosamplesElement.f_cell_format = FieldTargetsSafetyLiabilitiesElementBiosamplesElementCellFormat
+FieldTargetsSafetyLiabilitiesElementBiosamplesElement.f_cell_label = FieldTargetsSafetyLiabilitiesElementBiosamplesElementCellLabel
+FieldTargetsSafetyLiabilitiesElementBiosamplesElement.f_tissue_id = FieldTargetsSafetyLiabilitiesElementBiosamplesElementTissueId
+FieldTargetsSafetyLiabilitiesElementBiosamplesElement.f_tissue_label = FieldTargetsSafetyLiabilitiesElementBiosamplesElementTissueLabel
 
-FieldTargetsSafetyLiabilitiesElementBiosampleElementCellFormat.name = "cellFormat"
-FieldTargetsSafetyLiabilitiesElementBiosampleElementCellFormat.data_type = OpenTargetsDatasetFieldType.STRING
-FieldTargetsSafetyLiabilitiesElementBiosampleElementCellFormat.dataset = DatasetTargets
-FieldTargetsSafetyLiabilitiesElementBiosampleElementCellFormat.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementBiosample, FieldTargetsSafetyLiabilitiesElementBiosampleElement, FieldTargetsSafetyLiabilitiesElementBiosampleElementCellFormat]
+FieldTargetsSafetyLiabilitiesElementBiosamplesElementCellFormat.name = "cellFormat"
+FieldTargetsSafetyLiabilitiesElementBiosamplesElementCellFormat.data_type = OpenTargetsDatasetFieldType.STRING
+FieldTargetsSafetyLiabilitiesElementBiosamplesElementCellFormat.dataset = DatasetTargets
+FieldTargetsSafetyLiabilitiesElementBiosamplesElementCellFormat.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementBiosamples, FieldTargetsSafetyLiabilitiesElementBiosamplesElement, FieldTargetsSafetyLiabilitiesElementBiosamplesElementCellFormat]
 
-FieldTargetsSafetyLiabilitiesElementBiosampleElementCellId.name = "cellId"
-FieldTargetsSafetyLiabilitiesElementBiosampleElementCellId.data_type = OpenTargetsDatasetFieldType.STRING
-FieldTargetsSafetyLiabilitiesElementBiosampleElementCellId.dataset = DatasetTargets
-FieldTargetsSafetyLiabilitiesElementBiosampleElementCellId.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementBiosample, FieldTargetsSafetyLiabilitiesElementBiosampleElement, FieldTargetsSafetyLiabilitiesElementBiosampleElementCellId]
+FieldTargetsSafetyLiabilitiesElementBiosamplesElementCellLabel.name = "cellLabel"
+FieldTargetsSafetyLiabilitiesElementBiosamplesElementCellLabel.data_type = OpenTargetsDatasetFieldType.STRING
+FieldTargetsSafetyLiabilitiesElementBiosamplesElementCellLabel.dataset = DatasetTargets
+FieldTargetsSafetyLiabilitiesElementBiosamplesElementCellLabel.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementBiosamples, FieldTargetsSafetyLiabilitiesElementBiosamplesElement, FieldTargetsSafetyLiabilitiesElementBiosamplesElementCellLabel]
 
-FieldTargetsSafetyLiabilitiesElementBiosampleElementCellLabel.name = "cellLabel"
-FieldTargetsSafetyLiabilitiesElementBiosampleElementCellLabel.data_type = OpenTargetsDatasetFieldType.STRING
-FieldTargetsSafetyLiabilitiesElementBiosampleElementCellLabel.dataset = DatasetTargets
-FieldTargetsSafetyLiabilitiesElementBiosampleElementCellLabel.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementBiosample, FieldTargetsSafetyLiabilitiesElementBiosampleElement, FieldTargetsSafetyLiabilitiesElementBiosampleElementCellLabel]
+FieldTargetsSafetyLiabilitiesElementBiosamplesElementTissueId.name = "tissueId"
+FieldTargetsSafetyLiabilitiesElementBiosamplesElementTissueId.data_type = OpenTargetsDatasetFieldType.STRING
+FieldTargetsSafetyLiabilitiesElementBiosamplesElementTissueId.dataset = DatasetTargets
+FieldTargetsSafetyLiabilitiesElementBiosamplesElementTissueId.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementBiosamples, FieldTargetsSafetyLiabilitiesElementBiosamplesElement, FieldTargetsSafetyLiabilitiesElementBiosamplesElementTissueId]
 
-FieldTargetsSafetyLiabilitiesElementBiosampleElementTissueId.name = "tissueId"
-FieldTargetsSafetyLiabilitiesElementBiosampleElementTissueId.data_type = OpenTargetsDatasetFieldType.STRING
-FieldTargetsSafetyLiabilitiesElementBiosampleElementTissueId.dataset = DatasetTargets
-FieldTargetsSafetyLiabilitiesElementBiosampleElementTissueId.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementBiosample, FieldTargetsSafetyLiabilitiesElementBiosampleElement, FieldTargetsSafetyLiabilitiesElementBiosampleElementTissueId]
-
-FieldTargetsSafetyLiabilitiesElementBiosampleElementTissueLabel.name = "tissueLabel"
-FieldTargetsSafetyLiabilitiesElementBiosampleElementTissueLabel.data_type = OpenTargetsDatasetFieldType.STRING
-FieldTargetsSafetyLiabilitiesElementBiosampleElementTissueLabel.dataset = DatasetTargets
-FieldTargetsSafetyLiabilitiesElementBiosampleElementTissueLabel.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementBiosample, FieldTargetsSafetyLiabilitiesElementBiosampleElement, FieldTargetsSafetyLiabilitiesElementBiosampleElementTissueLabel]
+FieldTargetsSafetyLiabilitiesElementBiosamplesElementTissueLabel.name = "tissueLabel"
+FieldTargetsSafetyLiabilitiesElementBiosamplesElementTissueLabel.data_type = OpenTargetsDatasetFieldType.STRING
+FieldTargetsSafetyLiabilitiesElementBiosamplesElementTissueLabel.dataset = DatasetTargets
+FieldTargetsSafetyLiabilitiesElementBiosamplesElementTissueLabel.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementBiosamples, FieldTargetsSafetyLiabilitiesElementBiosamplesElement, FieldTargetsSafetyLiabilitiesElementBiosamplesElementTissueLabel]
 
 FieldTargetsSafetyLiabilitiesElementDatasource.name = "datasource"
 FieldTargetsSafetyLiabilitiesElementDatasource.data_type = OpenTargetsDatasetFieldType.STRING
@@ -10222,35 +13812,35 @@ FieldTargetsSafetyLiabilitiesElementLiterature.data_type = OpenTargetsDatasetFie
 FieldTargetsSafetyLiabilitiesElementLiterature.dataset = DatasetTargets
 FieldTargetsSafetyLiabilitiesElementLiterature.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementLiterature]
 
-FieldTargetsSafetyLiabilitiesElementStudy.name = "study"
-FieldTargetsSafetyLiabilitiesElementStudy.data_type = OpenTargetsDatasetFieldType.ARRAY
-FieldTargetsSafetyLiabilitiesElementStudy.dataset = DatasetTargets
-FieldTargetsSafetyLiabilitiesElementStudy.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementStudy]
-FieldTargetsSafetyLiabilitiesElementStudy.element = FieldTargetsSafetyLiabilitiesElementStudyElement
+FieldTargetsSafetyLiabilitiesElementStudies.name = "studies"
+FieldTargetsSafetyLiabilitiesElementStudies.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldTargetsSafetyLiabilitiesElementStudies.dataset = DatasetTargets
+FieldTargetsSafetyLiabilitiesElementStudies.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementStudies]
+FieldTargetsSafetyLiabilitiesElementStudies.element = FieldTargetsSafetyLiabilitiesElementStudiesElement
 
-FieldTargetsSafetyLiabilitiesElementStudyElement.name = "element"
-FieldTargetsSafetyLiabilitiesElementStudyElement.data_type = OpenTargetsDatasetFieldType.STRUCT
-FieldTargetsSafetyLiabilitiesElementStudyElement.dataset = DatasetTargets
-FieldTargetsSafetyLiabilitiesElementStudyElement.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementStudy, FieldTargetsSafetyLiabilitiesElementStudyElement]
-FieldTargetsSafetyLiabilitiesElementStudyElement.fields = [FieldTargetsSafetyLiabilitiesElementStudyElementDescription, FieldTargetsSafetyLiabilitiesElementStudyElementName, FieldTargetsSafetyLiabilitiesElementStudyElementType]
-FieldTargetsSafetyLiabilitiesElementStudyElement.f_description = FieldTargetsSafetyLiabilitiesElementStudyElementDescription
-FieldTargetsSafetyLiabilitiesElementStudyElement.f_name = FieldTargetsSafetyLiabilitiesElementStudyElementName
-FieldTargetsSafetyLiabilitiesElementStudyElement.f_type = FieldTargetsSafetyLiabilitiesElementStudyElementType
+FieldTargetsSafetyLiabilitiesElementStudiesElement.name = "element"
+FieldTargetsSafetyLiabilitiesElementStudiesElement.data_type = OpenTargetsDatasetFieldType.STRUCT
+FieldTargetsSafetyLiabilitiesElementStudiesElement.dataset = DatasetTargets
+FieldTargetsSafetyLiabilitiesElementStudiesElement.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementStudies, FieldTargetsSafetyLiabilitiesElementStudiesElement]
+FieldTargetsSafetyLiabilitiesElementStudiesElement.fields = [FieldTargetsSafetyLiabilitiesElementStudiesElementDescription, FieldTargetsSafetyLiabilitiesElementStudiesElementName, FieldTargetsSafetyLiabilitiesElementStudiesElementType]
+FieldTargetsSafetyLiabilitiesElementStudiesElement.f_description = FieldTargetsSafetyLiabilitiesElementStudiesElementDescription
+FieldTargetsSafetyLiabilitiesElementStudiesElement.f_name = FieldTargetsSafetyLiabilitiesElementStudiesElementName
+FieldTargetsSafetyLiabilitiesElementStudiesElement.f_type = FieldTargetsSafetyLiabilitiesElementStudiesElementType
 
-FieldTargetsSafetyLiabilitiesElementStudyElementDescription.name = "description"
-FieldTargetsSafetyLiabilitiesElementStudyElementDescription.data_type = OpenTargetsDatasetFieldType.STRING
-FieldTargetsSafetyLiabilitiesElementStudyElementDescription.dataset = DatasetTargets
-FieldTargetsSafetyLiabilitiesElementStudyElementDescription.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementStudy, FieldTargetsSafetyLiabilitiesElementStudyElement, FieldTargetsSafetyLiabilitiesElementStudyElementDescription]
+FieldTargetsSafetyLiabilitiesElementStudiesElementDescription.name = "description"
+FieldTargetsSafetyLiabilitiesElementStudiesElementDescription.data_type = OpenTargetsDatasetFieldType.STRING
+FieldTargetsSafetyLiabilitiesElementStudiesElementDescription.dataset = DatasetTargets
+FieldTargetsSafetyLiabilitiesElementStudiesElementDescription.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementStudies, FieldTargetsSafetyLiabilitiesElementStudiesElement, FieldTargetsSafetyLiabilitiesElementStudiesElementDescription]
 
-FieldTargetsSafetyLiabilitiesElementStudyElementName.name = "name"
-FieldTargetsSafetyLiabilitiesElementStudyElementName.data_type = OpenTargetsDatasetFieldType.STRING
-FieldTargetsSafetyLiabilitiesElementStudyElementName.dataset = DatasetTargets
-FieldTargetsSafetyLiabilitiesElementStudyElementName.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementStudy, FieldTargetsSafetyLiabilitiesElementStudyElement, FieldTargetsSafetyLiabilitiesElementStudyElementName]
+FieldTargetsSafetyLiabilitiesElementStudiesElementName.name = "name"
+FieldTargetsSafetyLiabilitiesElementStudiesElementName.data_type = OpenTargetsDatasetFieldType.STRING
+FieldTargetsSafetyLiabilitiesElementStudiesElementName.dataset = DatasetTargets
+FieldTargetsSafetyLiabilitiesElementStudiesElementName.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementStudies, FieldTargetsSafetyLiabilitiesElementStudiesElement, FieldTargetsSafetyLiabilitiesElementStudiesElementName]
 
-FieldTargetsSafetyLiabilitiesElementStudyElementType.name = "type"
-FieldTargetsSafetyLiabilitiesElementStudyElementType.data_type = OpenTargetsDatasetFieldType.STRING
-FieldTargetsSafetyLiabilitiesElementStudyElementType.dataset = DatasetTargets
-FieldTargetsSafetyLiabilitiesElementStudyElementType.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementStudy, FieldTargetsSafetyLiabilitiesElementStudyElement, FieldTargetsSafetyLiabilitiesElementStudyElementType]
+FieldTargetsSafetyLiabilitiesElementStudiesElementType.name = "type"
+FieldTargetsSafetyLiabilitiesElementStudiesElementType.data_type = OpenTargetsDatasetFieldType.STRING
+FieldTargetsSafetyLiabilitiesElementStudiesElementType.dataset = DatasetTargets
+FieldTargetsSafetyLiabilitiesElementStudiesElementType.path = [DatasetTargets, FieldTargetsSafetyLiabilities, FieldTargetsSafetyLiabilitiesElement, FieldTargetsSafetyLiabilitiesElementStudies, FieldTargetsSafetyLiabilitiesElementStudiesElement, FieldTargetsSafetyLiabilitiesElementStudiesElementType]
 
 FieldTargetsSafetyLiabilitiesElementUrl.name = "url"
 FieldTargetsSafetyLiabilitiesElementUrl.data_type = OpenTargetsDatasetFieldType.STRING
@@ -10441,4 +14031,58 @@ FieldTargetsTranscriptIdsElement.name = "element"
 FieldTargetsTranscriptIdsElement.data_type = OpenTargetsDatasetFieldType.STRING
 FieldTargetsTranscriptIdsElement.dataset = DatasetTargets
 FieldTargetsTranscriptIdsElement.path = [DatasetTargets, FieldTargetsTranscriptIds, FieldTargetsTranscriptIdsElement]
+
+DatasetTrainingSet.id = "trainingSet"
+DatasetTrainingSet.fields = [FieldTrainingSetPmid, FieldTrainingSetTerms]
+DatasetTrainingSet.f_pmid = FieldTrainingSetPmid
+DatasetTrainingSet.f_terms = FieldTrainingSetTerms
+
+FieldTrainingSetPmid.name = "pmid"
+FieldTrainingSetPmid.data_type = OpenTargetsDatasetFieldType.STRING
+FieldTrainingSetPmid.dataset = DatasetTrainingSet
+FieldTrainingSetPmid.path = [DatasetTrainingSet, FieldTrainingSetPmid]
+
+FieldTrainingSetTerms.name = "terms"
+FieldTrainingSetTerms.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldTrainingSetTerms.dataset = DatasetTrainingSet
+FieldTrainingSetTerms.path = [DatasetTrainingSet, FieldTrainingSetTerms]
+FieldTrainingSetTerms.element = FieldTrainingSetTermsElement
+
+FieldTrainingSetTermsElement.name = "element"
+FieldTrainingSetTermsElement.data_type = OpenTargetsDatasetFieldType.STRING
+FieldTrainingSetTermsElement.dataset = DatasetTrainingSet
+FieldTrainingSetTermsElement.path = [DatasetTrainingSet, FieldTrainingSetTerms, FieldTrainingSetTermsElement]
+
+DatasetVectors.id = "vectors"
+DatasetVectors.fields = [FieldVectorsCategory, FieldVectorsNorm, FieldVectorsVector, FieldVectorsWord]
+DatasetVectors.f_category = FieldVectorsCategory
+DatasetVectors.f_norm = FieldVectorsNorm
+DatasetVectors.f_vector = FieldVectorsVector
+DatasetVectors.f_word = FieldVectorsWord
+
+FieldVectorsCategory.name = "category"
+FieldVectorsCategory.data_type = OpenTargetsDatasetFieldType.STRING
+FieldVectorsCategory.dataset = DatasetVectors
+FieldVectorsCategory.path = [DatasetVectors, FieldVectorsCategory]
+
+FieldVectorsNorm.name = "norm"
+FieldVectorsNorm.data_type = OpenTargetsDatasetFieldType.DOUBLE
+FieldVectorsNorm.dataset = DatasetVectors
+FieldVectorsNorm.path = [DatasetVectors, FieldVectorsNorm]
+
+FieldVectorsVector.name = "vector"
+FieldVectorsVector.data_type = OpenTargetsDatasetFieldType.ARRAY
+FieldVectorsVector.dataset = DatasetVectors
+FieldVectorsVector.path = [DatasetVectors, FieldVectorsVector]
+FieldVectorsVector.element = FieldVectorsVectorElement
+
+FieldVectorsVectorElement.name = "element"
+FieldVectorsVectorElement.data_type = OpenTargetsDatasetFieldType.DOUBLE
+FieldVectorsVectorElement.dataset = DatasetVectors
+FieldVectorsVectorElement.path = [DatasetVectors, FieldVectorsVector, FieldVectorsVectorElement]
+
+FieldVectorsWord.name = "word"
+FieldVectorsWord.data_type = OpenTargetsDatasetFieldType.STRING
+FieldVectorsWord.dataset = DatasetVectors
+FieldVectorsWord.path = [DatasetVectors, FieldVectorsWord]
 
