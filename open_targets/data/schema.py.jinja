@@ -23,8 +23,8 @@ class {{ class_info.name }}({{ class_info.inherit_from }}):
 {% endmacro %}
 
 {%- block content %}
-# ruff: noqa: D101, D102, PGH003
-# type: ignore
+# ruff: noqa: D101
+# type: ignore[generalTypeIssues]
 
 from collections.abc import Sequence
 from typing import Final

@@ -1,4 +1,4 @@
-"""Acquisition definitions for nodes of mouse models."""
+"""Acquisition definition that acquires nodes of mouse models."""
 
 from typing import Final
 

@@ -1,4 +1,4 @@
-"""Definition of the license enum and utility functions."""
+"""Licence enum and utility functions."""
 
 from enum import Enum
 

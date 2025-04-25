@@ -1,4 +1,4 @@
-"""Definition of the BioCypher compatible intermediate node and edge types."""
+"""Intermediate node and edge types compatible with BioCypher."""
 
 from collections.abc import Iterator, Mapping
 from dataclasses import dataclass

@@ -47,8 +47,9 @@ class AcquisitionContext:
                 dataset. If None, all rows are retrieved.
 
         Returns:
-            AcquisitionContext: The acquisition context that can be used to
-                get generators of definitions to stream the acquired data.
+            AcquisitionContext: The handler for an acquisition which could be
+            used to stream the acquired data using the provided acquisition
+            definitions.
         """
         self.node_definitions: Final[list[AcquisitionDefinition[NodeInfo]]] = node_definitions
         self.edge_definitions: Final[list[AcquisitionDefinition[EdgeInfo]]] = edge_definitions

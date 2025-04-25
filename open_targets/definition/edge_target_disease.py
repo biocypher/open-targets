@@ -1,4 +1,4 @@
-"""Acquisition definition for edges between targets and diseases."""
+"""Acquisition definition that acquires edges between targets and diseases."""
 
 from typing import Final
 

@@ -1,4 +1,4 @@
-"""Acquisition definitions for nodes of molecules."""
+"""Acquisition definition that acquires nodes of molecules."""
 
 from typing import Final
 

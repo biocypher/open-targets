@@ -1,4 +1,4 @@
-"""Acquisition definitions for edges between targets and GO terms."""
+"""Acquisition definition that acquires edges between targets and GO terms."""
 
 from typing import Final
 

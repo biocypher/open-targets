@@ -1,4 +1,4 @@
-"""Definition of scan operations.
+"""Scan operations for data acquisition.
 
 Scan operations describe how to scan through the dataset and the shape of the
 returned items of the data stream.

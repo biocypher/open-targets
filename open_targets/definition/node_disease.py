@@ -1,4 +1,4 @@
-"""Acquisition definitions for nodes of diseases."""
+"""Acquisition definition that acquires nodes of diseases."""
 
 from typing import Final
 

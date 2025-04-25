@@ -1,3 +1,5 @@
+# type: ignore[reportUnknownMemberType]
+
 """A pipeline to build Open Targets platform data as a BioCypher KG."""
 
 from biocypher import BioCypher

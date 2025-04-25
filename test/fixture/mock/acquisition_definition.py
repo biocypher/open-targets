@@ -3,7 +3,7 @@ from typing import Any
 
 from open_targets.adapter.acquisition_definition import (
     ScanningAcquisitionDefinition,
-    TAcqusitionOutput,
+    TAcquisitionOutput,
     _ExpressionAcquisitionDefinition,
 )
 from open_targets.adapter.context_protocol import AcquisitionContextProtocol
@@ -15,7 +15,7 @@ from test.fixture.mock.scan_operation import MockScanOperation
 from test.fixture.mock.schema import MockDataset
 
 
-class MockScanningAcquisitionDefinition(ScanningAcquisitionDefinition[TAcqusitionOutput]):
+class MockScanningAcquisitionDefinition(ScanningAcquisitionDefinition[TAcquisitionOutput]):
     def _get_scan_operation(self) -> ScanOperation: ...
 
     def _get_required_fields(self) -> Iterable[type[Field]]: ...
@@ -24,7 +24,7 @@ class MockScanningAcquisitionDefinition(ScanningAcquisitionDefinition[TAcqusitio
         self,
         context: AcquisitionContextProtocol,
         data_stream: Iterable[DataViewValue],
-    ) -> Iterable[TAcqusitionOutput]: ...
+    ) -> Iterable[TAcquisitionOutput]: ...
 
 
 class MockSingleExpressionAcquisitionDefinition(_ExpressionAcquisitionDefinition[Any]):

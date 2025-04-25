@@ -1,4 +1,16 @@
-"""Definition of data views."""
+"""Data views for type-safe access to query results.
+
+This module provides a set of classes and protocols for creating type-safe views
+over data returned by queries. The views allow accessing data using field
+classes as keys, eliminating the need to know the exact field names while
+maintaining type safety.
+
+If the accessed field is a leaf field, the raw value is returned. If the
+accessed field is a nested field, an appropriate view is returned for chained
+accesses.
+
+Views are exposed as mappings and sequences for easy use.
+"""
 
 from collections.abc import Iterator, Mapping, Sequence
 from typing import Any, Protocol, TypeAlias, cast, overload, runtime_checkable
@@ -79,7 +91,7 @@ class SequenceBackedDataView(DataViewProtocol, DataView):
     sequence of fields which are used to access a nested structure in the
     data. When a virtual key is accessed, the view is recursively created.
 
-    For instance, an field index mapping and data could be as follows:
+    For instance, a field index mapping and corresponding data could be:
     field_index_mapping = {
         FieldA: 0,
         FieldB: 1,

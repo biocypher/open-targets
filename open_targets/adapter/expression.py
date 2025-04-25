@@ -1,4 +1,4 @@
-"""Definition of expressions."""
+"""A set of predefined expressions that can be used for acquisition."""
 
 from abc import abstractmethod
 from collections.abc import Callable, Sequence
