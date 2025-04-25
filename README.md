@@ -159,7 +159,7 @@ node_definition = replace(node_target, primary_id=FieldTargetsApprovedSymbol)
 ```
 
 ## Code Generation
-This repository makes use of code generation (powered by (jinja)[https://jinja.palletsprojects.com/en/stable/]) to generate some scripts such as the Open Targets data schema represented in Python classes. The code generation scripts are under `code_generation`. `*.jinja` are template files of the generated scripts and each one will have it's corresponding script generated in the same directory it resides.
+This repository makes use of code generation (powered by [jinja](https://jinja.palletsprojects.com/en/stable/)) to generate some scripts such as the Open Targets data schema represented in Python classes. The code generation scripts are under `code_generation`. `*.jinja` are template files of the generated scripts and each one will have it's corresponding script generated in the same directory it resides.
 
 ## Future
 - Streaming from cloud, eliminating the need of downloading datasets to local storage
