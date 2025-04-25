@@ -111,25 +111,25 @@ The script runs BioCypher and generates a knowledge graph using all our node/edg
 ### Not So Quick Start
 Basically the [Quick Start](#quick-start) but with your own set of node/edge definitions taken from our presets:
 ```python
-    from open_targets.definition import (
-        ...
-    )
+from open_targets.definition import (
+    ...
+)
 
-    bc = BioCypher(biocypher_config_path=...)
+bc = BioCypher(biocypher_config_path=...)
 
-    node_definitions = ... # imported node definitions
-    edge_definitions = ... # imported edge definitions
+node_definitions = ... # imported node definitions
+edge_definitions = ... # imported edge definitions
 
-    context = AcquisitionContext(
-        node_definitions=node_definitions,
-        edge_definitions=edge_definitions,
-        datasets_location=..., # directory containing the downloaded datasets
-    )
+context = AcquisitionContext(
+    node_definitions=node_definitions,
+    edge_definitions=edge_definitions,
+    datasets_location=..., # directory containing the downloaded datasets
+)
 
-    for node_definition in node_definitions:
-        bc.write_nodes(context.get_acquisition_generator(node_definition))
-    for edge_definition in edge_definitions:
-        bc.write_edges(context.get_acquisition_generator(edge_definition))
+for node_definition in node_definitions:
+    bc.write_nodes(context.get_acquisition_generator(node_definition))
+for edge_definition in edge_definitions:
+    bc.write_edges(context.get_acquisition_generator(edge_definition))
 ```
 
 In brief, first construct a context by providing a set of node/edge definitions. Then, for each definition, you can obtain a generator that streams data from a dataset to BioCypher. The data querying and transformation logic is defined in the node/edge definitions.
