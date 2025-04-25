@@ -7,17 +7,17 @@ This repository contains a [BioCypher](https://biocypher.org) adapter for Open T
 
 ## Overview
 
-BioCypher's modular design enables the use of different adapters to consume various data sources and produce knowledge graphs. This adapter serves as a primary adapter for [Open Targets data](https://platform.opentargets.org/downloads). It includes predefined sets of nodes (entities) and edges (relationships). A script is provided to run BioCypher with the adapter, creating a knowledge graph with all predefined nodes and edges. On a consumer laptop, building the full graph typically takes 1-2 hours.
+BioCypher's modular design enables the use of different adapters to consume various data sources and produce knowledge graphs. This adapter serves as a primary adapter for [Open Targets data](https://platform.opentargets.org/downloads). It includes predefined sets of node types (entities) and edge types (relationships), or in the language of this adapter, presets of node and edge definitions. A script is provided to run BioCypher with the adapter, creating a knowledge graph with all predefined nodes and edges. On a consumer laptop, building the full graph typically takes 1-2 hours.
 
 ## Features
 
 - Converts Open Targets data (version 24.09) into BioCypher-compatible format
-- Includes predefined sets of nodes and edges
+- Includes predefined sets of node types and edge types (node and edge definition presets)
 - Uses declarative syntax to minimize code needed for graph schema construction
 - Powered by [duckdb](https://duckdb.org/) for fast and memory-efficient processing
 - Implements true streaming from datasets to BioCypher with minimal intermediate memory usage
 
-## Node and Edge Presets
+## Node and Edge Types
 ### Nodes
 - Target
 - Disease
@@ -90,7 +90,7 @@ python ./scripts/open_targets_biocypher_run.py
 The script runs BioCypher and generates a knowledge graph using all our node/edge definition presets.
 
 ### Not So Quick Start
-Basically the [Quick Start](#quick-start) but with your own set of node/edge definiiton presets.
+Basically the [Quick Start](#quick-start) but with your own set of node/edge definiitons taken from our presets.
 ```python
     from open_targets.definition import (
         ...
