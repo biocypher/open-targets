@@ -3,7 +3,8 @@
 [![Python Version](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-This repository contains a [BioCypher](https://biocypher.org) adapter for Open Targets data version 24.09. The project is currently under active development.
+This repository contains a [BioCypher](https://biocypher.org) adapter for Open
+Targets data version 24.09. The project is currently under active development.
 
 ## Table of Contents
 - [Overview](#overview)
@@ -26,7 +27,17 @@ This repository contains a [BioCypher](https://biocypher.org) adapter for Open T
 
 ## Overview
 
-BioCypher's modular design enables the use of different adapters to consume various data sources and produce knowledge graphs. This adapter serves as a primary adapter for [Open Targets data](https://platform.opentargets.org/downloads). It includes predefined sets of node types (entities) and edge types (relationships), or in the language of this adapter, presets of node and edge definitions. A script is provided to run BioCypher with the adapter, creating a knowledge graph with all predefined nodes and edges. On a consumer laptop, building the full graph typically takes 1-2 hours.
+BioCypher's modular design enables the use of different adapters to consume
+various data sources and produce knowledge graphs. This adapter serves as a
+["secondary
+adapter"](https://biocypher.org/latest/learn/tutorials/tutorial003_adapters/)
+for [Open Targets data](https://platform.opentargets.org/downloads), meaning it
+adapts a pre-harmonised composite of atomic resources via the Open Targets
+pipeline. The adapter includes predefined sets of node types (entities) and edge
+types (relationships), or in the language of this adapter, presets of node and
+edge `definitions`. A script is provided to run BioCypher with the adapter,
+creating a knowledge graph with all predefined nodes and edges. On a consumer
+laptop, building the full graph typically takes 1-2 hours.
 
 ## Features
 
@@ -40,7 +51,7 @@ BioCypher's modular design enables the use of different adapters to consume vari
 ### Nodes
 - Target
 - Disease
-- Gene Ontology
+- Gene Ontology (Category)
 - Molecule
 - Mouse Model
 - Mouse Phenotype
@@ -111,7 +122,10 @@ directory-of-your-choice/
     The script runs BioCypher and generates a knowledge graph using all our node/edge definition presets.
 
 ### Not So Quick Start
-Basically the [Quick Start](#quick-start) but with your own set of node/edge definitions taken from our presets:
+
+Basically the [Quick Start](#quick-start) but with your own set of node/edge
+definitions taken from our presets:
+
 ```python
 from open_targets.definition import (
     ...
@@ -134,19 +148,36 @@ for edge_definition in edge_definitions:
     bc.write_edges(context.get_acquisition_generator(edge_definition))
 ```
 
-In brief, first construct a context by providing a set of node/edge definitions. Then, for each definition, you can obtain a generator that streams data from a dataset to BioCypher. The data querying and transformation logic is defined in the node/edge definitions.
+In brief, first construct a context by providing a set of node/edge definitions.
+Then, for each definition, you can obtain a generator that streams data from a
+dataset to BioCypher. The data querying and transformation logic is defined in
+the node/edge definitions.
 
 More details about customization are provided below.
 
 ## Open Targets Data Schema
-The full schema of Open Targets data is represented as Python classes included in this adapter. This design provides type checking for dataset and field references in code to minimize human error. All dataset and field classes can be found in `open_targets/data/schema.py`.
 
-All dataset and field classes are prefixed with `Dataset` and `Field` respectively. Field names follow their structural location in their datasets. For example, `FieldTargetsHallmarksAttributes` represents the `attributes` field in the `targets` dataset, under the `hallmarks` field.
+The full schema of Open Targets data is represented as Python classes included
+in this adapter. This design provides type checking for dataset and field
+references in code to minimize human error. All dataset and field classes can be
+found in `open_targets/data/schema.py`.
 
-The schema can be used for data discovery and is utilized in node/edge definitions.
+All dataset and field classes are prefixed with `Dataset` and `Field`,
+respectively. Field names follow their structural location in their datasets.
+For example, `FieldTargetsHallmarksAttributes` represents the `attributes` field
+in the `targets` dataset, under the `hallmarks` field.
+
+The schema can be used for data discovery and is utilized in node/edge
+definitions.
 
 ## Custom Node/Edge Definitions
-A node/edge definition describes how nodes/edges are acquired from a dataset. Each node/edge has essential attributes that make it a valid graph component, and a definition specifies how these values are acquired or computed. Each attribute has an expression that describes the chain of actions to acquire the value from the dataset. An expression can be as simple as a field access or a complex chain of transformations. Here's a simple example:
+
+A node/edge definition describes how nodes/edges are acquired from a dataset.
+Each node/edge has essential attributes that make it a valid graph component,
+and a definition specifies how these values are acquired or computed. Each
+attribute has an expression that describes the chain of actions to acquire the
+value from the dataset. An expression can be as simple as a field access or a
+complex chain of transformations. Here's a simple example:
 
 ```python
 definition = ExpressionNodeAcquisitionDefinition(
@@ -159,23 +190,32 @@ definition = ExpressionNodeAcquisitionDefinition(
 )
 ```
 
-In plain language, this definition scans through the `targets` dataset and generates a node for each row. The node's ID is assigned from the `id` field, its label is set to the literal value `ensembl`, and its properties include a single property where the key is the name of the referenced field `approvedSymbol` and the value comes from that field.
+In plain language, this definition scans through the `targets` dataset and
+generates a node for each row. The node's ID is assigned from the `id` field,
+its label is set to the literal value `ensembl`, and its properties include a
+single property where the key is the name of the referenced field
+`approvedSymbol` and the value comes from that field.
 
 Expressions can be chained together:
+
 ```python
 expression = NormaliseCurieExpression(ToStringExpression(FieldExpression(FieldEvidenceDiseaseId)))
 ```
 
 This is equivalent to:
+
 ```python
 value = normalise_curie(str(data[FieldEvidenceDiseaseId]))
 ```
 
-In fact, this is almost exactly how a function will be built and run during acquisition.
+In fact, this is almost exactly how a function will be built and run during
+acquisition.
 
-An edge definition is similar but includes two additional attributes, `source` and `target`, to link two nodes together.
+An edge definition is similar but includes two additional attributes, `source`
+and `target`, to link two nodes together.
 
 For minor customization, you can derive from one of our presets as follows:
+
 ```python
 from open_targets.data.schema import FieldTargetsApprovedSymbol
 from open_targets.definition import node_target
@@ -184,18 +224,27 @@ node_definition = replace(node_target, primary_id=FieldTargetsApprovedSymbol)
 ```
 
 ## Code Generation
-This repository uses code generation (powered by [jinja](https://jinja.palletsprojects.com/en/stable/)) to generate scripts such as the Open Targets data schema represented in Python classes. The code generation scripts are located under `code_generation`. `*.jinja` files are templates for the generated scripts, and each template has its corresponding script generated in the same directory.
+
+This repository uses code generation (powered by
+[jinja](https://jinja.palletsprojects.com/en/stable/)) to generate scripts such
+as the Open Targets data schema represented in Python classes. The code
+generation scripts are located under `code_generation`. `*.jinja` files are
+templates for the generated scripts, and each template has its corresponding
+script generated in the same directory.
 
 ## Future Plans
 - Implement cloud streaming to eliminate the need for local dataset storage
 - Develop a codeless mode for defining node/edge definitions in JSON/YAML files
+- Support Open Targets metadata migration to Croissant ML
 - Extend beyond Open Targets data to support various tabular data formats
 - Create a comprehensive set of scientifically meaningful node/edge definitions and knowledge graph schemas
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request or create an Issue if you discover any problems.
+Contributions are welcome! Please feel free to submit a Pull Request or create
+an Issue if you discover any problems.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the LICENSE file for
+details.
