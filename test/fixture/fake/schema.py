@@ -1,5 +1,4 @@
-# ruff: noqa: PGH003
-# type: ignore
+# type: ignore[generalTypeIssues]
 
 """A mock dataset schema and data generator of below structure.
 

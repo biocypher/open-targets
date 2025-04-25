@@ -1,5 +1,5 @@
-# ruff: noqa: PGH003
-# type: ignore
+# ruff: noqa: D101
+# type: ignore[generalTypeIssues]
 
 from abc import ABC
 from collections.abc import Sequence
