@@ -1,4 +1,9 @@
-"""Functions for generating the config.py file."""
+"""Functions for generating the config.py file.
+
+All project related settings are written in `pyproject.toml` for the sake of
+single source of truth. For these settings to be accessible in Python runtime,
+jinja is used to read the file and generate constants in `config.py`.
+"""
 
 from pathlib import Path
 from typing import Any

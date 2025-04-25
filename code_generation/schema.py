@@ -1,17 +1,43 @@
-"""Functions for generating the schema.py file."""
+"""Functions for generating the schema.py file.
 
-from dataclasses import dataclass
+To ease the use of the adapter and move as many errors as possible to edit time,
+the schema of the Open Targets dataset is represented as accurately typed
+Python classes in `schema.py`. By referencing these classes instead of hard
+coding the information such as dataset or field names, errors are caught at edit
+time instead of run time. This is particularly useful when the targeted Open
+Targets version is updated. Representing the schema in the Python domain also is
+useful for code completion, type checking and dataset discovery, especially for
+LLM integration.
+
+To generate the schema, metadata from the Open Targets server is downloaded
+and deserialised into Python objects. Jinja then is used to generate the schema
+classes from the metadata.
+"""
+
+from dataclasses import dataclass, replace
 from typing import Any
 
 from pydantic.alias_generators import to_pascal, to_snake
 
 from open_targets.data.metadata.model import (
     OpenTargetsDatasetArrayTypeModel,
-    OpenTargetsDatasetFieldModel,
+    OpenTargetsDatasetComplexTypeModel,
+    OpenTargetsDatasetFieldModelTypeModel,
+    OpenTargetsDatasetFieldType,
     OpenTargetsDatasetFormat,
     OpenTargetsDatasetMapTypeModel,
     OpenTargetsDatasetStructTypeModel,
 )
+from open_targets.data.schema_base import Dataset, Field, MapField, ScalarField, SequenceField, StructField
+
+
+@dataclass(frozen=True)
+class FieldInfo:
+    """Intermediate class for fields and intrinsic fields of complex type."""
+
+    name: str
+    type: OpenTargetsDatasetFieldModelTypeModel
+    nullable: bool
 
 
 @dataclass(frozen=True)
@@ -82,7 +108,6 @@ class ClassInfo:
     late_attributes: list[LateAttribute]
     dependants: list["ClassInfo"]
     inherit_from: str
-    inner_field_class: InnerClassInfo | None
 
 
 @dataclass(frozen=True)
@@ -104,12 +129,35 @@ def quote(s: str) -> str:
     return f'"{s}"'
 
 
+def get_fields(type_model: OpenTargetsDatasetFieldModelTypeModel) -> list[FieldInfo]:
+    """Get the fields or intrinsic fields of a complex type.
+
+    For struct type, get the fields. For other complex types, get their intrisic
+    fields such as `element`, `key` and `value`
+    """
+    if isinstance(type_model, OpenTargetsDatasetComplexTypeModel):
+        if isinstance(type_model, OpenTargetsDatasetStructTypeModel):
+            return [FieldInfo(name=field.name, type=field.type, nullable=field.nullable) for field in type_model.fields]
+        if isinstance(type_model, OpenTargetsDatasetArrayTypeModel):
+            return [FieldInfo(name="element", type=type_model.element_type, nullable=type_model.contains_null)]
+        if isinstance(type_model, OpenTargetsDatasetMapTypeModel):
+            return [
+                FieldInfo(name="key", type=type_model.key_type, nullable=False),
+                FieldInfo(name="value", type=type_model.value_type, nullable=type_model.value_contains_null),
+            ]
+    return []
+
+
+def prefix_field_attributes(attributes: list[LateAttribute]) -> list[LateAttribute]:
+    """Prefix the name of the attributes with `f_`."""
+    return [replace(i, name=f"f_{i.name}") for i in attributes]
+
+
 def recursive_handle_fields(
-    fields: list[OpenTargetsDatasetFieldModel],
+    fields: list[FieldInfo],
     owner_path: list[PrefixedClassName],
 ) -> FieldsHandlerResult:
     """Generate and sort attributes and class information for fields."""
-    owner_class_name = owner_path[-1]
     field_class_infos = list[ClassInfo]()
     field_attributes = list[LateAttribute]()
 
@@ -118,7 +166,7 @@ def recursive_handle_fields(
         field_class_infos.append(field_class_info)
         field_attributes.append(
             LateAttribute(
-                name=f"f_{to_snake(field.name)}",
+                name=f"{to_snake(field.name)}",
                 type=f"Final[type[{quote(str(field_class_info.name))}]]",
                 value=str(field_class_info.name),
             ),
@@ -127,7 +175,7 @@ def recursive_handle_fields(
     field_class_infos = sorted(field_class_infos, key=lambda i: str(i.name))
     fields_attribute = LateAttribute(
         name="fields",
-        type=f'Final[list[type["{owner_class_name}.Field"]]]',
+        type=f"Final[Sequence[type[{Field.__name__}]]]",
         value=f"[{', '.join(str(i.name) for i in field_class_infos)}]",
     )
     field_attributes = sorted(field_attributes, key=lambda i: i.name)
@@ -140,7 +188,7 @@ def recursive_handle_fields(
 
 
 def recursive_get_field_class_info(
-    field: OpenTargetsDatasetFieldModel,
+    field: FieldInfo,
     owner_path: list[PrefixedClassName],
 ) -> ClassInfo:
     """Convert a field to a ClassInfo.
@@ -161,45 +209,47 @@ def recursive_get_field_class_info(
         LateAttribute("name", "Final[str]", quote(field.name)),
         LateAttribute(
             name="data_type",
-            type="Final[OpenTargetsDatasetFieldType]",
+            type=f"Final[{OpenTargetsDatasetFieldType.__name__}]",
             value=str(field.type.type)
-            if isinstance(
-                field.type,
-                OpenTargetsDatasetArrayTypeModel | OpenTargetsDatasetMapTypeModel | OpenTargetsDatasetStructTypeModel,
-            )
+            if isinstance(field.type, OpenTargetsDatasetComplexTypeModel)
             else str(field.type),
         ),
-        LateAttribute("dataset", "Final[type[Dataset]]", str(dataset_class_name)),
+        LateAttribute("dataset", f"Final[type[{Dataset.__name__}]]", str(dataset_class_name)),
         LateAttribute(
             "path",
-            "Final[list[type[DatasetField]]]",
+            f"Final[Sequence[type[{Dataset.__name__}] | type[{Field.__name__}]]]",
             f"[{', '.join(str(i) for i in field_path)}]",
         ),
     ]
     dependants = list[ClassInfo]()
-
-    if isinstance(field.type, OpenTargetsDatasetStructTypeModel):
-        fields = field.type.fields
-    elif isinstance(field.type, OpenTargetsDatasetArrayTypeModel) and isinstance(
-        field.type.element_type,
-        OpenTargetsDatasetStructTypeModel,
-    ):
-        fields = field.type.element_type.fields
-    else:
-        fields = []
+    fields = get_fields(field.type)
 
     if len(fields) > 0:
         result = recursive_handle_fields(fields, field_path)
         dependants.extend(result.class_infos)
-        attributes.append(result.fields_attribute)
-        attributes.extend(result.field_attributes)
+        if isinstance(field.type, OpenTargetsDatasetStructTypeModel):
+            attributes.append(result.fields_attribute)
+        attributes.extend(
+            prefix_field_attributes(result.field_attributes)
+            if isinstance(field.type, OpenTargetsDatasetStructTypeModel)
+            else result.field_attributes,
+        )
+
+    match field.type:
+        case OpenTargetsDatasetStructTypeModel():
+            inherit_from = f"{StructField.__name__}"
+        case OpenTargetsDatasetArrayTypeModel():
+            inherit_from = f"{SequenceField.__name__}"
+        case OpenTargetsDatasetMapTypeModel():
+            inherit_from = f"{MapField.__name__}"
+        case _:
+            inherit_from = f"{ScalarField.__name__}"
 
     return ClassInfo(
         name=field_class_name,
         late_attributes=attributes,
         dependants=dependants,
-        inherit_from=f"{owner_class_name}.Field",
-        inner_field_class=InnerClassInfo(inherit_from=f"{owner_class_name}.Field") if len(dependants) > 0 else None,
+        inherit_from=inherit_from,
     )
 
 
@@ -220,18 +270,21 @@ def create_schema_render_context() -> dict[str, Any]:
         attributes = [LateAttribute(name="id", type="Final[str]", value=quote(dataset_metadata.id))]
         dependants = list[ClassInfo]()
 
-        result = recursive_handle_fields(dataset_metadata.dataset_schema.fields, [class_name])
+        fields = [
+            FieldInfo(name=field.name, type=field.type, nullable=field.nullable)
+            for field in dataset_metadata.dataset_schema.fields
+        ]
+        result = recursive_handle_fields(fields, [class_name])
         dependants.extend(result.class_infos)
         attributes.append(result.fields_attribute)
-        attributes.extend(result.field_attributes)
+        attributes.extend(prefix_field_attributes(result.field_attributes))
 
         class_infos.append(
             ClassInfo(
                 name=class_name,
                 late_attributes=attributes,
                 dependants=dependants,
-                inherit_from="Dataset",
-                inner_field_class=InnerClassInfo(inherit_from="DatasetField"),
+                inherit_from=f"{Dataset.__name__}",
             ),
         )
 

@@ -41,7 +41,7 @@ class OpenTargetsDatasetArrayTypeModel(ConfiguredBaseModel):
     """Data model of an array type in JSON."""
 
     type: Literal[OpenTargetsDatasetFieldType.ARRAY]
-    element_type: "FieldTypeDataType"
+    element_type: "OpenTargetsDatasetFieldModelTypeModel"
     contains_null: bool
 
 
@@ -49,8 +49,8 @@ class OpenTargetsDatasetMapTypeModel(ConfiguredBaseModel):
     """Data model of a map type in JSON."""
 
     type: Literal[OpenTargetsDatasetFieldType.MAP]
-    key_type: "FieldTypeDataType"
-    value_type: "FieldTypeDataType"
+    key_type: "OpenTargetsDatasetFieldModelTypeModel"
+    value_type: "OpenTargetsDatasetFieldModelTypeModel"
     value_contains_null: bool
 
 
@@ -61,18 +61,27 @@ class OpenTargetsDatasetStructTypeModel(ConfiguredBaseModel):
     fields: list["OpenTargetsDatasetFieldModel"]
 
 
-FieldTypeDataType: TypeAlias = (
-    Literal[
-        OpenTargetsDatasetFieldType.BOOLEAN,
-        OpenTargetsDatasetFieldType.INTEGER,
-        OpenTargetsDatasetFieldType.LONG,
-        OpenTargetsDatasetFieldType.FLOAT,
-        OpenTargetsDatasetFieldType.DOUBLE,
-        OpenTargetsDatasetFieldType.STRING,
-    ]
-    | OpenTargetsDatasetArrayTypeModel
-    | OpenTargetsDatasetMapTypeModel
-    | OpenTargetsDatasetStructTypeModel
+OpenTargetsDatasetFieldTypePrimitiveSet: TypeAlias = Literal[
+    OpenTargetsDatasetFieldType.BOOLEAN,
+    OpenTargetsDatasetFieldType.INTEGER,
+    OpenTargetsDatasetFieldType.LONG,
+    OpenTargetsDatasetFieldType.FLOAT,
+    OpenTargetsDatasetFieldType.DOUBLE,
+    OpenTargetsDatasetFieldType.STRING,
+]
+
+OpenTargetsDatasetFieldTypeComplexSet: TypeAlias = Literal[
+    OpenTargetsDatasetFieldType.ARRAY,
+    OpenTargetsDatasetFieldType.MAP,
+    OpenTargetsDatasetFieldType.STRUCT,
+]
+
+OpenTargetsDatasetComplexTypeModel: TypeAlias = (
+    OpenTargetsDatasetArrayTypeModel | OpenTargetsDatasetMapTypeModel | OpenTargetsDatasetStructTypeModel
+)
+
+OpenTargetsDatasetFieldModelTypeModel: TypeAlias = (
+    OpenTargetsDatasetFieldTypePrimitiveSet | OpenTargetsDatasetComplexTypeModel
 )
 
 
@@ -80,7 +89,7 @@ class OpenTargetsDatasetFieldModel(ConfiguredBaseModel):
     """Data model of a dataset field in JSON."""
 
     name: str
-    type: FieldTypeDataType
+    type: OpenTargetsDatasetFieldModelTypeModel
     nullable: bool
 
 

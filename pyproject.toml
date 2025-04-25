@@ -9,19 +9,16 @@ description = "BioCypher Open Targets Knowledge Graph adapter"
 authors = ["Sebastian Lobentanzer <sebastian.lobentanzer@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-snakeviz = "^2.1.1"
-pyspark = "^3.5.3"
-bioregistry = "^0.11.19"
-pandas = "^2.0.1"
-biocypher = "^0.6.0"
-pydantic = "^2.10.3"
+python = "^3.10"
+bioregistry = "^0.12.4"
+biocypher = "^0.9.1"
+duckdb = "^1.2.1"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.3.4"
-jinja2 = "^3.1.4"
+pytest = "^8.3.5"
+jinja2 = "^3.1.6"
 tomli = "^2.2.1"
-ruff = "^0.8.2"
+ruff = "^0.11.0"
 
 [tool.ruff]
 target-version = "py310"
@@ -33,8 +30,11 @@ select = ["ALL"]
 [tool.ruff.lint.pycodestyle]
 max-doc-length = 80
 
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
 [tool.ruff.lint.per-file-ignores]
-"test/*" = ["S101", "D100", "D103", "D104"]
+"test/*" = ["S101", "D100", "D101", "D102", "D103", "D104", "SLF001"]
 
 [tool.pyright]
 pythonVersion = "3.10"
