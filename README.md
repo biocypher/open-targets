@@ -5,6 +5,25 @@
 
 This repository contains a [BioCypher](https://biocypher.org) adapter for Open Targets data version 24.09. The project is currently under active development.
 
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Node and Edge Types](#node-and-edge-types)
+  - [Nodes](#nodes)
+  - [Edges](#edges)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Data Preparation](#data-preparation)
+- [Usage](#usage)
+  - [Quick Start](#quick-start)
+  - [Not So Quick Start](#not-so-quick-start)
+- [Open Targets Data Schema](#open-targets-data-schema)
+- [Custom Node/Edge Definitions](#custom-nodeedge-definitions)
+- [Code Generation](#code-generation)
+- [Future Plans](#future-plans)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## Overview
 
 BioCypher's modular design enables the use of different adapters to consume various data sources and produce knowledge graphs. This adapter serves as a primary adapter for [Open Targets data](https://platform.opentargets.org/downloads). It includes predefined sets of node types (entities) and edge types (relationships), or in the language of this adapter, presets of node and edge definitions. A script is provided to run BioCypher with the adapter, creating a knowledge graph with all predefined nodes and edges. On a consumer laptop, building the full graph typically takes 1-2 hours.
