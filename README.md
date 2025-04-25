@@ -100,13 +100,15 @@ directory-of-your-choice/
 
 ## Usage
 ### Quick Start
-1. Follow the [Data Preparation](#data-preparation) steps and place the downloaded Parquet files in the `data/ot_files` directory
+1. Follow the [Installation](#installation) steps
 
-2. Run the script:
-```bash
-python ./scripts/open_targets_biocypher_run.py
-```
-The script runs BioCypher and generates a knowledge graph using all our node/edge definition presets.
+2. Follow the [Data Preparation](#data-preparation) steps and place the downloaded Parquet files in the `data/ot_files` directory
+
+3. Run the script:
+    ```bash
+    python ./scripts/open_targets_biocypher_run.py
+    ```
+    The script runs BioCypher and generates a knowledge graph using all our node/edge definition presets.
 
 ### Not So Quick Start
 Basically the [Quick Start](#quick-start) but with your own set of node/edge definitions taken from our presets:
