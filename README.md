@@ -60,14 +60,15 @@ BioCypher's modular design allows it to use different adapters to consume differ
 
 ## Data Preparation
 Required datasets by node/edge definition presets:
-- (Target)[https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/24.09/output/etl/parquet/targets/]
-- (Disease)[https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/24.09/output/etl/parquet/diseases/]
-- (Molecule)[https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/24.09/output/etl/parquet/molecule/]
-- (Gene Ontology)[https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/24.09/output/etl/parquet/molecule/]
-- (Mouse Phenotypes)[https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/24.09/output/etl/parquet/mousePhenotypes/]
-- (Evidence)[https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/24.09/output/etl/parquet/evidence/]
+- [Target](https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/24.09/output/etl/parquet/targets/)
+- [Disease](https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/24.09/output/etl/parquet/diseases/)
+- [Molecule](https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/24.09/output/etl/parquet/molecule/)
+- [Gene Ontology](https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/24.09/output/etl/parquet/molecule/)
+- [Mouse Phenotypes](https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/24.09/output/etl/parquet/mousePhenotypes/)
+- [Evidence](https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/24.09/output/etl/parquet/evidence/)
 
 The resulted directory should have the following structure.
+```
 directory-of-your-choice/
 ├── targets/
 │   └── **
@@ -76,6 +77,7 @@ directory-of-your-choice/
 │   └── **
 │       └── *.parquet
 ...
+```
 
 ## Usage
 ### Quick Start
