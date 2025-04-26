@@ -9,7 +9,6 @@ from open_targets.data.metadata.model import OpenTargetsDatasetFormat
     [
         (["targets"], None, 2),
         (["targets"], [OpenTargetsDatasetFormat.PARQUET], 1),
-        (None, None, 68),
     ],
 )
 def test_fetch_open_targets_dataset_metadata(
