@@ -42,7 +42,6 @@ def main():
         node_definitions=node_definitions,
         edge_definitions=edge_definitions,
         datasets_location="data/ot_files",
-        limit=100,
     )
 
     for node_definition in node_definitions:

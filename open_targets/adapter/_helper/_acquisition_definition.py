@@ -1,7 +1,10 @@
 from collections.abc import Callable
 from typing import Any
 
-from bioregistry.resolve import normalize_curie, normalize_parsed_curie, normalize_prefix
+from bioregistry.constants import BIOREGISTRY_PATH
+from bioregistry.resource_manager import Manager
+from bioregistry.schema import Resource
+from bioregistry.schema_utils import _registry_from_path  # type: ignore[reportPrivateUsage]
 
 from open_targets.adapter.data_view import DataView
 from open_targets.adapter.expression import (
@@ -21,6 +24,16 @@ from open_targets.adapter.expression import (
 from open_targets.adapter.licence import get_datasource_license
 
 CURIE_SEPARATORS = [":", "_", "/"]
+
+# Unfortunately this seems to be the only way to add ad hoc resources without
+# making permanent changes to users' local registry.
+patched_register = dict(_registry_from_path(BIOREGISTRY_PATH))
+patched_register["otar"] = Resource(
+    prefix="otar",
+    synonyms=["OTAR"],
+    preferred_prefix="otar",
+)
+bioregistry_manager = Manager(registry=patched_register)
 
 
 def recursive_build_expression_function(
@@ -51,7 +64,7 @@ def recursive_build_expression_function(
         case ExtractCuriePrefixExpression():
             func = recursive_build_expression_function(expression.expression)
             return (
-                (lambda data: normalize_prefix(extract_curie_prefix(func(data))))
+                (lambda data: bioregistry_manager.normalize_prefix(extract_curie_prefix(func(data))))
                 if expression.normalise
                 else (lambda data: extract_curie_prefix(func(data)))
             )
@@ -77,7 +90,10 @@ def get_curie_builder(
     reference_func = recursive_build_expression_function(expression.reference)
 
     def normalise_curie_builder(data: DataView) -> str:
-        prefix, reference = normalize_parsed_curie(prefix_func(data), reference_func(data))
+        prefix, reference = bioregistry_manager.normalize_parsed_curie(
+            prefix_func(data),
+            reference_func(data),
+        )
         prefix = "" if prefix is None else prefix
         reference = "" if reference is None else reference
         return f"{prefix}:{reference}"
@@ -92,7 +108,7 @@ def get_curie_builder(
 def normalise_curie(string: str) -> str:
     for sep in CURIE_SEPARATORS:
         if sep in string:
-            result = normalize_curie(string, sep=sep)
+            result = bioregistry_manager.normalize_curie(string, sep=sep)
             if result is not None:
                 return result
             msg = f"Failed to normalize curie: {string} with separator: {sep}"
