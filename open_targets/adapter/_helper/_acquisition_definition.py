@@ -94,8 +94,6 @@ def get_curie_builder(
             prefix_func(data),
             reference_func(data),
         )
-        prefix = "" if prefix is None else prefix
-        reference = "" if reference is None else reference
         return f"{prefix}:{reference}"
 
     return (
