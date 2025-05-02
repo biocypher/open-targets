@@ -4,21 +4,21 @@ host = "ftp.ebi.ac.uk"
 
 [tool.poetry]
 name = "open_targets"
-version = "0.3.0"
-description = "BioCypher Open Targets Knowledge Graph adapter"
-authors = ["Sebastian Lobentanzer <sebastian.lobentanzer@gmail.com>"]
+version = "0.4.0"
+description = "BioCypher Open Targets data adapter"
+authors = ["Paul Ka Po To <kto@ebi.ac.uk>", "Sebastian Lobentanzer <sebastian.lobentanzer@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-bioregistry = "^0.12.4"
-biocypher = "^0.9.1"
-duckdb = "^1.2.1"
+bioregistry = "^0.12.13"
+biocypher = "^0.9.4"
+duckdb = "^1.2.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.5"
 jinja2 = "^3.1.6"
 tomli = "^2.2.1"
-ruff = "^0.11.0"
+ruff = "^0.11.8"
 
 [tool.ruff]
 target-version = "py310"
