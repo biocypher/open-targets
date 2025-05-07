@@ -1,23 +1,47 @@
+[tool.open-targets]
+data-version = "24.09"
+host = "ftp.ebi.ac.uk"
+
 [tool.poetry]
-name = "otar-biocypher"
-version = "0.3.0"
-description = "BioCypher Open Targets Knowledge Graph adapter"
-authors = ["Sebastian Lobentanzer <sebastian.lobentanzer@gmail.com>"]
+name = "open_targets"
+version = "0.4.0"
+description = "BioCypher Open Targets data adapter"
+authors = ["Paul Ka Po To <kto@ebi.ac.uk>", "Sebastian Lobentanzer <sebastian.lobentanzer@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-snakeviz = "^2.1.1"
-pyspark = "^3.5.3"
-bioregistry = "^0.11.19"
-pandas = "^2.0.1"
-biocypher = "^0.6.0"
+python = "^3.10"
+bioregistry = "^0.12.13"
+biocypher = "^0.9.4"
+duckdb = "^1.2.2"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+jinja2 = "^3.1.6"
+tomli = "^2.2.1"
+ruff = "^0.11.8"
 
-[tool.isort]
-profile = "black"
-line_length = 80
-multi_line_output = 3
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["ALL"]
+
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 80
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"test/*" = ["S101", "D100", "D101", "D102", "D103", "D104", "SLF001"]
+
+[tool.pyright]
+pythonVersion = "3.10"
+pythonPlatform = "All"
+# strict on main code, standard on test to allow private method access
+typeCheckingMode = "standard"
+strict = ["open_targets", "scripts"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
