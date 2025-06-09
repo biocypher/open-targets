@@ -1,5 +1,5 @@
 biocypher:
-  strict_mode: true
+  strict_mode: false
   schema_config_path: config/schema_config.yaml
 
 neo4j:

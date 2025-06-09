@@ -6,8 +6,11 @@ definitions can be imported and used directly or easily derived following
 Python's dataclass practices.
 """
 
+from open_targets.definition.edge_molecule_disease import edge_molecule_disease
+from open_targets.definition.edge_molecule_target import edge_molecule_target
 from open_targets.definition.edge_target_disease import edge_target_disease
 from open_targets.definition.edge_target_go import edge_target_go
+from open_targets.definition.edge_target_target import edge_target_target
 from open_targets.definition.node_disease import node_diseases
 from open_targets.definition.node_gene_ontology import node_gene_ontology
 from open_targets.definition.node_molecule import node_molecule
@@ -17,8 +20,11 @@ from open_targets.definition.node_mouse_target import node_mouse_target
 from open_targets.definition.node_target import node_targets
 
 __all__ = [
+    "edge_molecule_disease",
+    "edge_molecule_target",
     "edge_target_disease",
     "edge_target_go",
+    "edge_target_target",
     "node_diseases",
     "node_gene_ontology",
     "node_molecule",

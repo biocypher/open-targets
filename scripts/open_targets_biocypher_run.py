@@ -6,8 +6,11 @@ from biocypher import BioCypher
 
 from open_targets.adapter.context import AcquisitionContext
 from open_targets.definition import (
+    edge_molecule_disease,
+    edge_molecule_target,
     edge_target_disease,
     edge_target_go,
+    edge_target_target,
     node_diseases,
     node_gene_ontology,
     node_molecule,
@@ -35,7 +38,13 @@ def main():
         node_mouse_phenotype,
         node_mouse_target,
     ]
-    edge_definitions = [edge_target_disease, edge_target_go]
+    edge_definitions = [
+        edge_target_disease,
+        edge_target_go,
+        edge_target_target,
+        edge_molecule_target,
+        edge_molecule_disease,
+    ]
 
     # Open Targets
     context = AcquisitionContext(
