@@ -1,3 +1,4 @@
+import uuid
 from collections.abc import Callable
 from typing import Any
 
@@ -15,6 +16,7 @@ from open_targets.adapter.expression import (
     ExtractSubstringExpression,
     FieldExpression,
     LiteralExpression,
+    NewUuidExpression,
     NormaliseCurieExpression,
     StringConcatenationExpression,
     StringLowerExpression,
@@ -50,6 +52,8 @@ def recursive_build_expression_function(
                 return lambda _: expression.function(None)
             func = recursive_build_expression_function(expression.expression)
             return lambda data: expression.function(func(data))
+        case NewUuidExpression():
+            return lambda _: str(uuid.uuid4())
         case ToStringExpression():
             func = recursive_build_expression_function(expression.expression)
             return lambda data: str(func(data))

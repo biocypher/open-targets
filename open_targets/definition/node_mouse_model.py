@@ -13,14 +13,12 @@ from open_targets.data.schema import (
     FieldMousePhenotypesBiologicalModels,
     FieldMousePhenotypesModelPhenotypeClasses,
 )
-from open_targets.definition.node_shared import node_static_properties
 
 node_mouse_model: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
     scan_operation=RowScanOperation(dataset=DatasetMousePhenotypes),
     primary_id=FieldMousePhenotypesBiologicalModels,
-    label="",
+    label="MOUSE_MODEL",
     properties=[
         FieldMousePhenotypesModelPhenotypeClasses,
-        *node_static_properties,
     ],
 )

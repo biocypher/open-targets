@@ -64,6 +64,11 @@ class TransformExpression(HasDependentExpressionMixin, Expression[TValue]):
 
 
 @dataclass(frozen=True)
+class NewUuidExpression(Expression[str]):
+    """Expression that generates a new UUID."""
+
+
+@dataclass(frozen=True)
 class ToStringExpression(HasDependentExpressionMixin, Expression[str]):
     """Expression that converts any value to a string."""
 
