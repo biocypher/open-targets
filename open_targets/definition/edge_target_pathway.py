@@ -1,30 +1,28 @@
-"""Acquisition definition that acquires edges between targets and diseases."""
+"""Acquisition definition that acquires edges between targets and pathways."""
 
 from typing import Final
 
 from open_targets.adapter.acquisition_definition import AcquisitionDefinition, ExpressionEdgeAcquisitionDefinition
 from open_targets.adapter.output import EdgeInfo
-from open_targets.adapter.scan_operation import RowScanOperation
+from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetEvidence,
-    FieldEvidenceDatasourceId,
-    FieldEvidenceDiseaseId,
-    FieldEvidenceId,
-    FieldEvidenceLiterature,
-    FieldEvidenceScore,
+    FieldEvidencePathways,
+    FieldEvidencePathwaysElementId,
     FieldEvidenceTargetId,
 )
+from open_targets.definition.helper import get_arrow_expression
 
-edge_target_disease: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
-    scan_operation=RowScanOperation(dataset=DatasetEvidence),
-    primary_id=FieldEvidenceId,
+edge_target_pathway: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
+    scan_operation=ExplodingScanOperation(
+        dataset=DatasetEvidence,
+        exploded_field=FieldEvidencePathways,
+    ),
+    primary_id=get_arrow_expression(FieldEvidenceTargetId, FieldEvidencePathwaysElementId),
     source=FieldEvidenceTargetId,
-    target=FieldEvidenceDiseaseId,
-    label="TARGET_TO_DISEASE_ASSOCIATION",
+    target=FieldEvidencePathwaysElementId,
+    label="TARGET_IN_PATHWAY",
     properties=[
-        FieldEvidenceDatasourceId,
-        FieldEvidenceLiterature,
-        FieldEvidenceScore,
         FieldEvidenceConfidence,
         FieldEvidenceResourceScore,
         FieldEvidenceReleaseDate,

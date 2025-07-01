@@ -21,5 +21,9 @@ node_diseases: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitio
         FieldDiseasesCode,
         FieldDiseasesDescription,
         FieldDiseasesName,
+        FieldDiseasesObsoleteTerms,
+        FieldDiseasesOntologyIsTherapeuticArea,
+        FieldDiseasesOntologyLeaf,
+        FieldDiseasesOntologySources,
     ],
 )

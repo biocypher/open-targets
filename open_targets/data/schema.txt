@@ -1,0 +1,384 @@
+DatasetAOTFClickhouse
+- datasource_id: string
+- datatype_id: string
+- disease_data: string
+- disease_id: string
+- row_id: string
+- row_score: float
+- target_data: string
+- target_id: string
+
+DatasetAdverseDrugReactions
+- a: long
+- acterm: string
+- aterm: string
+- b: long
+- c: long
+- chembl_id: string
+- cterm: string
+- d: long
+- llr: float
+- meddra_code: string
+- reaction_reactionmeddrapt: string
+- uniq_report_ids_by_drug: long
+- uniq_report_ids_by_reaction: long
+
+DatasetAdverseTargetReactions
+- a: long
+- acterm: string
+- aterm: string
+- b: long
+- c: long
+- cterm: string
+- d: long
+- llr: float
+- meddra_code: string
+- reaction_reactionmeddrapt: string
+- target_id: string
+- uniq_report_ids_by_reaction: long
+- uniq_report_ids_by_target: long
+
+DatasetAssociationByDatasourceDirect
+- datasource_id: string
+- datatype_id: string
+- disease_id: string
+- evidence_count: long
+- score: double
+- target_id: string
+
+DatasetAssociationByDatasourceIndirect
+- datasource_id: string
+- datatype_id: string
+- disease_id: string
+- evidence_count: long
+- score: double
+- target_id: string
+
+DatasetAssociationByDatatypeDirect
+- datatype_id: string
+- disease_id: string
+- evidence_count: long
+- score: double
+- target_id: string
+
+DatasetAssociationByDatatypeIndirect
+- datatype_id: string
+- disease_id: string
+- evidence_count: long
+- score: double
+- target_id: string
+
+DatasetAssociationByOverallDirect
+- disease_id: string
+- evidence_count: long
+- score: double
+- target_id: string
+
+DatasetAssociationByOverallIndirect
+- disease_id: string
+- evidence_count: long
+- score: double
+- target_id: string
+
+DatasetBaselineExpression
+- id: string
+- tissues: array
+  - anatomical_systems: array
+    - element: string
+  - efo_code: string
+  - label: string
+  - organs: array
+    - element: string
+  - protein: struct
+    - cell_type: array
+      - element: struct
+        - level: integer
+        - name: string
+        - reliability: string
+    - level: integer
+    - reliability: string
+  - rna: struct
+    - level: integer
+    - unit: string
+    - value: float
+    - zscore: float
+
+DatasetCooccurrences
+- date: string
+- day: integer
+- end_1: integer
+- end_2: integer
+- evidence_score: double
+- is_mapped: boolean
+- keyword_id_1: string
+- keyword_id_2: string
+- label_1: string
+- label_2: string
+- label_n1: string
+- label_n2: string
+- month: integer
+- organisms: array
+  - element: long
+- pmcid: string
+- pmid: string
+- pub_date: string
+- section: string
+- start_1: integer
+- start_2: integer
+- text: string
+- trace_source: string
+- type: string
+- type_1: string
+- type_2: string
+- year: integer
+
+DatasetDiseaseToPhenotype
+- disease: string
+- evidence: array
+  - element: struct
+    - aspect: string
+    - bio_curation: string
+    - disease_from_source: string
+    - disease_from_source_id: string
+    - disease_name: string
+    - evidence_type: string
+    - frequency: string
+    - modifiers: array
+      - element: string
+    - onset: array
+      - element: string
+    - qualifier: string
+    - qualifier_not: boolean
+    - references: array
+      - element: string
+    - resource: string
+    - sex: string
+- phenotype: string
+
+DatasetDiseases
+- ancestors: array
+  - element: string
+- children: array
+  - element: string
+- code: string
+- db_x_refs: array
+  - element: string
+- descendants: array
+  - element: string
+- description: string
+- direct_location_ids: array
+  - element: string
+- id: string
+- indirect_location_ids: array
+  - element: string
+- name: string
+- obsolete_terms: array
+  - element: struct
+    - id: string
+    - label: string
+    - replaced_by: string
+- ontology: struct
+  - is_therapeutic_area: boolean
+  - leaf: boolean
+  - sources: struct
+    - name: string
+    - url: string
+- parents: array
+  - element: string
+- synonyms: struct
+  - has_broad_synonym: array
+    - element: string
+  - has_exact_synonym: array
+    - element: string
+  - has_narrow_synonym: array
+    - element: string
+  - has_related_synonym: array
+    - element: string
+- therapeutic_areas: array
+  - element: string
+
+DatasetDrugWarnings
+- chembl_ids: array
+  - element: string
+- country: string
+- description: string
+- efo_id: string
+- efo_id_for_warning_class: string
+- efo_term: string
+- id: long
+- references: array
+  - element: struct
+    - ref_id: string
+    - ref_type: string
+    - ref_url: string
+- toxicity_class: string
+- warning_type: string
+- year: long
+
+DatasetEbisearchAssociations
+- approved_symbol: string
+- disease_id: string
+- name: string
+- score: double
+- target_id: string
+
+DatasetEbisearchEvidence
+- approved_symbol: string
+- disease_id: string
+- name: string
+- score: double
+- target_id: string
+
+DatasetEpmcCooccurrences
+- anns: array
+  - element: struct
+    - exact: string
+    - section: string
+    - tags: array
+      - element: struct
+        - name: string
+        - uri: string
+    - type: string
+- id: string
+- provider: string
+- src: string
+
+DatasetEvidence
+- allele_origins: array
+  - element: string
+- allelic_requirements: array
+  - element: string
+- ancestry: string
+- ancestry_id: string
+- beta: double
+- beta_confidence_interval_lower: double
+- beta_confidence_interval_upper: double
+- biological_model_allelic_composition: string
+- biological_model_genetic_background: string
+- biological_model_id: string
+- biomarker_name: string
+- biomarkers: struct
+  - gene_expression: array
+    - element: struct
+      - id: string
+      - name: string
+  - genetic_variation: array
+    - element: struct
+      - id: string
+      - name: string
+- biosamples_from_source: array
+  - element: string
+- cell_type: string
+- clinical_phase: integer
+- clinical_significances: array
+  - element: string
+- clinical_status: string
+- cohort_description: string
+- cohort_id: string
+- cohort_phenotypes: array
+  - element: string
+- cohort_short_name: string
+- confidence: string
+- contrast: string
+- crispr_screen_library: string
+- datasource_id: string
+- datatype_id: string
+- direction_on_trait: string
+- disease_cell_lines: array
+  - element: struct
+    - id: string
+    - name: string
+- disease_from_source: string
+- disease_from_source_id: string
+- disease_from_source_mapped_id: string
+- disease_id: string
+- disease_model_associated_human_phenotypes: array
+  - element: struct
+    - id: string
+    - name: string
+- disease_model_associated_model_phenotypes: array
+  - element: struct
+    - id: string
+    - name: string
+- drug_from_source: string
+- drug_id: string
+- drug_response: struct
+  - drug: struct
+    - id: string
+    - name: string
+  - response: string
+- genetic_background: string
+- id: string
+- literature: array
+  - element: string
+- log_2_fold_change_percentile_rank: double
+- log_2_fold_change_value: double
+- mutated_samples: array
+  - element: struct
+    - functional_consequence_id: string
+    - number_mutated_samples: integer
+    - number_samples_tested: integer
+- odds_ratio: double
+- odds_ratio_confidence_interval_lower: double
+- odds_ratio_confidence_interval_upper: double
+- p_value_exponent: long
+- p_value_mantissa: double
+- pathways: array
+  - element: struct
+    - id: string
+    - name: string
+- pmc_ids: array
+  - element: string
+- project_id: string
+- publication_first_author: string
+- publication_year: long
+- reaction_id: string
+- reaction_name: string
+- release_date: string
+- release_version: string
+- resource_score: double
+- score: double
+- sex: array
+  - element: string
+- significant_driver_methods: array
+  - element: string
+- source_id: string
+- statistical_method: string
+- statistical_method_overview: string
+- statistical_test_tail: string
+- study_cases: long
+- study_cases_with_qualifying_variants: long
+- study_id: string
+- study_overview: string
+- study_sample_size: long
+- study_start_date: string
+- study_stop_reason: string
+- study_stop_reason_categories: array
+  - element: string
+- target_from_source: string
+- target_from_source_id: string
+- target_id: string
+- target_in_model: string
+- target_in_model_ensembl_id: string
+- target_in_model_mgi_id: string
+- target_modulation: string
+- text_mining_sentences: array
+  - element: struct
+    - d_end: integer
+    - d_start: integer
+    - section: string
+    - t_end: integer
+    - t_start: integer
+    - text: string
+- urls: array
+  - element: struct
+    - name: string
+    - url: string
+- variant_aminoacid_descriptions: array
+  - element: string
+- variant_effect: string
+- variant_functional_consequence_from_qtl_id: string
+- variant_functional_consequence_id: string
+- variant_hgvs_id: string
+- variant_id: string
+- variant_rs_id: string
