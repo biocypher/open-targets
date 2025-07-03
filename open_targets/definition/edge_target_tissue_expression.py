@@ -25,7 +25,11 @@ edge_target_tissue_expression: Final[AcquisitionDefinition[EdgeInfo]] = Expressi
     target=FieldBaselineExpressionTissuesElementEfoCode,
     label="TARGET_TISSUE_EXPRESSION",
     properties=[
-        FieldBaselineExpressionTissuesElementRna,
-        FieldBaselineExpressionTissuesElementProtein,
+        FieldBaselineExpressionTissuesElementRnaValue,
+        FieldBaselineExpressionTissuesElementRnaZscore,
+        FieldBaselineExpressionTissuesElementRnaLevel,
+        FieldBaselineExpressionTissuesElementRnaUnit,
+        FieldBaselineExpressionTissuesElementProteinReliability,
+        FieldBaselineExpressionTissuesElementProteinLevel,
     ],
 )

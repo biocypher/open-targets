@@ -9,7 +9,7 @@ from open_targets.data.schema import (
     DatasetEvidence,
     FieldEvidenceUrls,
     FieldEvidenceUrlsElementUrl,
-    FieldEvidenceUrlsElementName,
+    FieldEvidenceUrlsElementNiceName,
 )
 
 node_url: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(

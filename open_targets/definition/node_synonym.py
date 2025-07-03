@@ -7,7 +7,6 @@ from open_targets.adapter.output import NodeInfo
 from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetDiseases,
-    FieldDiseasesSynonyms,
     FieldDiseasesSynonymsHasBroadSynonym,
     FieldDiseasesSynonymsHasExactSynonym,
     FieldDiseasesSynonymsHasNarrowSynonym,
@@ -15,12 +14,11 @@ from open_targets.data.schema import (
     DatasetMolecule,
     FieldMoleculeSynonyms,
 )
-from open_targets.adapter.expression import BuildCurieExpression, LiteralExpression, FieldExpression
 
 node_disease_synonym_broad: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
     scan_operation=ExplodingScanOperation(
         dataset=DatasetDiseases,
-        exploded_field=FieldDiseasesSynonyms.f_has_broad_synonym,
+        exploded_field=FieldDiseasesSynonymsHasBroadSynonym,
     ),
     primary_id=FieldDiseasesSynonymsHasBroadSynonym.element,
     label="SYNONYM",
@@ -30,7 +28,7 @@ node_disease_synonym_broad: Final[AcquisitionDefinition[NodeInfo]] = ExpressionN
 node_disease_synonym_exact: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
     scan_operation=ExplodingScanOperation(
         dataset=DatasetDiseases,
-        exploded_field=FieldDiseasesSynonyms.f_has_exact_synonym,
+        exploded_field=FieldDiseasesSynonymsHasExactSynonym,
     ),
     primary_id=FieldDiseasesSynonymsHasExactSynonym.element,
     label="SYNONYM",
@@ -40,7 +38,7 @@ node_disease_synonym_exact: Final[AcquisitionDefinition[NodeInfo]] = ExpressionN
 node_disease_synonym_narrow: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
     scan_operation=ExplodingScanOperation(
         dataset=DatasetDiseases,
-        exploded_field=FieldDiseasesSynonyms.f_has_narrow_synonym,
+        exploded_field=FieldDiseasesSynonymsHasNarrowSynonym,
     ),
     primary_id=FieldDiseasesSynonymsHasNarrowSynonym.element,
     label="SYNONYM",
@@ -50,7 +48,7 @@ node_disease_synonym_narrow: Final[AcquisitionDefinition[NodeInfo]] = Expression
 node_disease_synonym_related: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
     scan_operation=ExplodingScanOperation(
         dataset=DatasetDiseases,
-        exploded_field=FieldDiseasesSynonyms.f_has_related_synonym,
+        exploded_field=FieldDiseasesSynonymsHasRelatedSynonym,
     ),
     primary_id=FieldDiseasesSynonymsHasRelatedSynonym.element,
     label="SYNONYM",

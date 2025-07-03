@@ -24,5 +24,6 @@ node_mutated_sample: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcqu
     properties=[
         FieldEvidenceMutatedSamplesElementNumberMutatedSamples,
         FieldEvidenceMutatedSamplesElementNumberSamplesTested,
+        FieldEvidenceMutatedSamplesElementNumberSamplesWithMutationType,
     ],
 )

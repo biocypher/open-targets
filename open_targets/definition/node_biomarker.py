@@ -43,5 +43,6 @@ node_biomarker_genetic_variation: Final[AcquisitionDefinition[NodeInfo]] = Expre
     label="BIOMARKER",
     properties=[
         FieldEvidenceBiomarkersGeneticVariationElementName,
+        FieldEvidenceBiomarkersGeneticVariationElementFunctionalConsequenceId,
     ],
 )

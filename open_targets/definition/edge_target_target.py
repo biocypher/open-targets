@@ -8,6 +8,8 @@ from open_targets.adapter.scan_operation import RowScanOperation
 from open_targets.data.schema import (
     DatasetInteraction,
     FieldInteractionCount,
+    FieldInteractionIntA,
+    FieldInteractionIntB,
     FieldInteractionScoring,
     FieldInteractionTargetA,
     FieldInteractionTargetB,

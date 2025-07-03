@@ -8,11 +8,11 @@ from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetEvidence,
     FieldEvidenceTextMiningSentences,
-    FieldEvidenceTextMiningSentencesElementDend,
-    FieldEvidenceTextMiningSentencesElementDstart,
+    FieldEvidenceTextMiningSentencesElementDEnd,
+    FieldEvidenceTextMiningSentencesElementDStart,
     FieldEvidenceTextMiningSentencesElementSection,
-    FieldEvidenceTextMiningSentencesElementTend,
-    FieldEvidenceTextMiningSentencesElementTstart,
+    FieldEvidenceTextMiningSentencesElementTEnd,
+    FieldEvidenceTextMiningSentencesElementTStart,
     FieldEvidenceTextMiningSentencesElementText,
 )
 from open_targets.adapter.expression import BuildCurieExpression, FieldExpression, LiteralExpression
