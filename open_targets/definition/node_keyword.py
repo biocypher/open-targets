@@ -1,0 +1,33 @@
+"""Acquisition definition that acquires nodes of keywords."""
+
+from typing import Final
+
+from open_targets.adapter.acquisition_definition import AcquisitionDefinition, ExpressionNodeAcquisitionDefinition
+from open_targets.adapter.output import NodeInfo
+from open_targets.adapter.scan_operation import RowScanOperation
+from open_targets.data.schema import (
+    DatasetCooccurrences,
+    FieldCooccurrencesKeywordId1,
+    FieldCooccurrencesType1,
+    DatasetLiteratureIndex,
+    FieldLiteratureIndexKeywordId,
+    FieldLiteratureIndexKeywordType,
+)
+
+node_keyword_cooccurrence: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
+    scan_operation=RowScanOperation(dataset=DatasetCooccurrences),
+    primary_id=FieldCooccurrencesKeywordId1,
+    label="KEYWORD",
+    properties=[
+        FieldCooccurrencesType1,
+    ],
+)
+
+node_keyword_literature_index: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
+    scan_operation=RowScanOperation(dataset=DatasetLiteratureIndex),
+    primary_id=FieldLiteratureIndexKeywordId,
+    label="KEYWORD",
+    properties=[
+        FieldLiteratureIndexKeywordType,
+    ],
+)

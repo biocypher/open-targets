@@ -1,4 +1,4 @@
-"""Acquisition definition that acquires edges from drug warnings to drug warning references."""
+"""Acquisition definition that acquires edges from drug warnings to references."""
 
 from typing import Final
 
