@@ -1,0 +1,25 @@
+"""Acquisition definition that acquires edges from diseases to keywords."""
+
+from typing import Final
+
+from open_targets.adapter.acquisition_definition import AcquisitionDefinition, ExpressionEdgeAcquisitionDefinition
+from open_targets.adapter.output import EdgeInfo
+from open_targets.adapter.scan_operation import ExplodingScanOperation
+from open_targets.data.schema import (
+    DatasetSearchDisease,
+    FieldSearchDiseaseId,
+    FieldSearchDiseaseKeywords,
+)
+from open_targets.definition.helper import get_arrow_expression
+
+edge_disease_has_keyword: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
+    scan_operation=ExplodingScanOperation(
+        dataset=DatasetSearchDisease,
+        exploded_field=FieldSearchDiseaseKeywords,
+    ),
+    primary_id=get_arrow_expression(FieldSearchDiseaseId, FieldSearchDiseaseKeywords.element),
+    source=FieldSearchDiseaseId,
+    target=FieldSearchDiseaseKeywords.element,
+    label="HAS_KEYWORD",
+    properties=[],
+)
