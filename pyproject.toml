@@ -1,5 +1,5 @@
 [tool.open-targets]
-data-version = "24.09"
+data-version = "25.06"
 host = "ftp.ebi.ac.uk"
 
 [tool.poetry]

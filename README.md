@@ -1,10 +1,10 @@
-# BioCypher Open Targets Data (24.09) Adapter
+# BioCypher Open Targets Data (25.06) Adapter
 
 [![Python Version](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 This repository contains a [BioCypher](https://biocypher.org) adapter for Open
-Targets data version 24.09. The project is currently under active development.
+Targets data version 25.06. The project is currently under active development.
 
 ## Table of Contents
 - [Overview](#overview)
@@ -41,7 +41,7 @@ laptop, building the full graph typically takes 1-2 hours.
 
 ## Features
 
-- Converts Open Targets data (version 24.09) into BioCypher-compatible format
+- Converts Open Targets data (version 25.06) into BioCypher-compatible format
 - Includes predefined sets of node types and edge types (node and edge definition presets)
 - Uses declarative syntax to minimize code needed for graph schema construction
 - Powered by [duckdb](https://duckdb.org/) for fast and memory-efficient processing
@@ -90,12 +90,12 @@ laptop, building the full graph typically takes 1-2 hours.
 
 ## Data Preparation
 Required datasets for node/edge definition presets:
-- [Target](https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/24.09/output/etl/parquet/targets/)
-- [Disease](https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/24.09/output/etl/parquet/diseases/)
-- [Molecule](https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/24.09/output/etl/parquet/molecule/)
-- [Gene Ontology](https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/24.09/output/etl/parquet/molecule/)
-- [Mouse Phenotypes](https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/24.09/output/etl/parquet/mousePhenotypes/)
-- [Evidence](https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/24.09/output/etl/parquet/evidence/)
+- [Target](https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/25.06/output/etl/parquet/target/)
+- [Disease](https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/25.06/output/etl/parquet/disease/)
+- [Molecule](https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/25.06/output/etl/parquet/drug_molecule/)
+- [Gene Ontology](https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/25.06/output/etl/parquet/go/)
+- [Mouse Phenotypes](https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/25.06/output/etl/parquet/mouse_phenotypes/)
+- [Evidence](https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/25.06/output/etl/parquet/evidence/)
 
 The resulting directory should have the following structure:
 ```
@@ -107,6 +107,11 @@ directory-of-your-choice/
 │   └── **
 │       └── *.parquet
 ...
+```
+
+Use the `download.sh` script to download the datasets. First check the version of the Open Targets data you want to download. Then, go to the folder `data/ot_files/` and execute the following command:
+```bash
+bash ../../scripts/download.sh
 ```
 
 ## Usage

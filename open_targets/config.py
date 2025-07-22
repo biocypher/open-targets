@@ -3,5 +3,5 @@
 
 from typing import Final
 
-DATA_VERSION: Final[str] = "24.09"
+DATA_VERSION: Final[str] = "25.06"
 HOST: Final[str] = "ftp.ebi.ac.uk"

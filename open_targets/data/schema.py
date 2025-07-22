@@ -8910,7 +8910,7 @@ FieldDiseaseToPhenotypePhenotype.data_type = OpenTargetsDatasetFieldType.STRING
 FieldDiseaseToPhenotypePhenotype.dataset = DatasetDiseaseToPhenotype
 FieldDiseaseToPhenotypePhenotype.path = [DatasetDiseaseToPhenotype, FieldDiseaseToPhenotypePhenotype]
 
-DatasetDiseases.id = "diseases"
+DatasetDiseases.id = "disease"
 DatasetDiseases.fields = [FieldDiseasesAncestors, FieldDiseasesChildren, FieldDiseasesCode, FieldDiseasesDbXRefs, FieldDiseasesDescendants, FieldDiseasesDescription, FieldDiseasesDirectLocationIds, FieldDiseasesId, FieldDiseasesIndirectLocationIds, FieldDiseasesName, FieldDiseasesObsoleteTerms, FieldDiseasesOntology, FieldDiseasesParents, FieldDiseasesSynonyms, FieldDiseasesTherapeuticAreas]
 DatasetDiseases.f_ancestors = FieldDiseasesAncestors
 DatasetDiseases.f_children = FieldDiseasesChildren
@@ -11874,7 +11874,7 @@ FieldMechanismOfActionTargetsElement.data_type = OpenTargetsDatasetFieldType.STR
 FieldMechanismOfActionTargetsElement.dataset = DatasetMechanismOfAction
 FieldMechanismOfActionTargetsElement.path = [DatasetMechanismOfAction, FieldMechanismOfActionTargets, FieldMechanismOfActionTargetsElement]
 
-DatasetMolecule.id = "molecule"
+DatasetMolecule.id = "drug_molecule"
 DatasetMolecule.fields = [FieldMoleculeBlackBoxWarning, FieldMoleculeCanonicalSmiles, FieldMoleculeChildChemblIds, FieldMoleculeCrossReferences, FieldMoleculeDescription, FieldMoleculeDrugType, FieldMoleculeHasBeenWithdrawn, FieldMoleculeId, FieldMoleculeInchiKey, FieldMoleculeIsApproved, FieldMoleculeLinkedDiseases, FieldMoleculeLinkedTargets, FieldMoleculeMaximumClinicalTrialPhase, FieldMoleculeName, FieldMoleculeParentId, FieldMoleculeSynonyms, FieldMoleculeTradeNames, FieldMoleculeYearOfFirstApproval]
 DatasetMolecule.f_black_box_warning = FieldMoleculeBlackBoxWarning
 DatasetMolecule.f_canonical_smiles = FieldMoleculeCanonicalSmiles
@@ -13037,7 +13037,7 @@ FieldTargetPrioritisationTissueSpecificity.data_type = OpenTargetsDatasetFieldTy
 FieldTargetPrioritisationTissueSpecificity.dataset = DatasetTargetPrioritisation
 FieldTargetPrioritisationTissueSpecificity.path = [DatasetTargetPrioritisation, FieldTargetPrioritisationTissueSpecificity]
 
-DatasetTargets.id = "targets"
+DatasetTargets.id = "target"
 DatasetTargets.fields = [FieldTargetsAlternativeGenes, FieldTargetsApprovedName, FieldTargetsApprovedSymbol, FieldTargetsBiotype, FieldTargetsCanonicalExons, FieldTargetsCanonicalTranscript, FieldTargetsChemicalProbes, FieldTargetsConstraint, FieldTargetsDbXrefs, FieldTargetsFunctionDescriptions, FieldTargetsGenomicLocation, FieldTargetsGo, FieldTargetsHallmarks, FieldTargetsHomologues, FieldTargetsId, FieldTargetsNameSynonyms, FieldTargetsObsoleteNames, FieldTargetsObsoleteSymbols, FieldTargetsPathways, FieldTargetsProteinIds, FieldTargetsSafetyLiabilities, FieldTargetsSubcellularLocations, FieldTargetsSymbolSynonyms, FieldTargetsSynonyms, FieldTargetsTargetClass, FieldTargetsTep, FieldTargetsTractability, FieldTargetsTranscriptIds]
 DatasetTargets.f_alternative_genes = FieldTargetsAlternativeGenes
 DatasetTargets.f_approved_name = FieldTargetsApprovedName
@@ -14085,4 +14085,3 @@ FieldVectorsWord.name = "word"
 FieldVectorsWord.data_type = OpenTargetsDatasetFieldType.STRING
 FieldVectorsWord.dataset = DatasetVectors
 FieldVectorsWord.path = [DatasetVectors, FieldVectorsWord]
-
