@@ -13,6 +13,15 @@ from open_targets.data.schema import (
     FieldEvidenceLiterature,
     FieldEvidenceScore,
     FieldEvidenceTargetId,
+    FieldEvidenceConfidence,
+    FieldEvidenceResourceScore,
+    FieldEvidenceReleaseDate,
+    FieldEvidenceReleaseVersion,
+    FieldEvidenceSourceId,
+    FieldEvidenceStatisticalMethod,
+    FieldEvidenceStatisticalMethodOverview,
+    FieldEvidencePublicationFirstAuthor,
+    FieldEvidencePublicationYear,
 )
 from open_targets.definition.helper import get_arrow_expression
 

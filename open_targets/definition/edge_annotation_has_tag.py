@@ -5,13 +5,12 @@ from typing import Final
 from open_targets.adapter.acquisition_definition import AcquisitionDefinition, ExpressionEdgeAcquisitionDefinition
 from open_targets.adapter.output import EdgeInfo
 from open_targets.adapter.scan_operation import ExplodingScanOperation
-from open_targets.adapter.expression import FieldExpression
 from open_targets.data.schema import (
     DatasetEpmcCooccurrences,
     FieldEpmcCooccurrencesAnns,
+    FieldEpmcCooccurrencesAnnsElementExact,
     FieldEpmcCooccurrencesAnnsElementTags,
     FieldEpmcCooccurrencesAnnsElementTagsElementName,
-    FieldEpmcCooccurrencesAnnsElementExact,
 )
 from open_targets.definition.helper import get_arrow_expression
 

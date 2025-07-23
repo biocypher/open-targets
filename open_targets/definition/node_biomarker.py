@@ -14,6 +14,7 @@ from open_targets.data.schema import (
     FieldEvidenceBiomarkersGeneticVariation,
     FieldEvidenceBiomarkersGeneticVariationElementId,
     FieldEvidenceBiomarkersGeneticVariationElementName,
+    FieldEvidenceBiomarkersGeneticVariationElementFunctionalConsequenceId,
 )
 
 node_biomarker_gene_expression: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(

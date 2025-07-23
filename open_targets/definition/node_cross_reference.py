@@ -27,7 +27,7 @@ node_molecule_cross_reference: Final[AcquisitionDefinition[NodeInfo]] = Expressi
         dataset=DatasetMolecule,
         exploded_field=FieldMoleculeCrossReferences,
     ),
-    primary_id=FieldMoleculeCrossReferences.element,
+    primary_id=FieldMoleculeCrossReferences.value.element,
     label="CROSS_REFERENCE",
     properties=[],
 )

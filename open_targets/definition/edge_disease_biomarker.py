@@ -3,16 +3,25 @@
 from typing import Final
 
 from open_targets.adapter.acquisition_definition import AcquisitionDefinition, ExpressionEdgeAcquisitionDefinition
+from open_targets.adapter.expression import BuildCurieExpression, FieldExpression, LiteralExpression
 from open_targets.adapter.output import EdgeInfo
 from open_targets.adapter.scan_operation import ExplodingScanOperation
-from open_targets.adapter.expression import BuildCurieExpression, FieldExpression, LiteralExpression
 from open_targets.data.schema import (
     DatasetEvidence,
     FieldEvidenceBiomarkersGeneExpression,
     FieldEvidenceBiomarkersGeneExpressionElementId,
     FieldEvidenceBiomarkersGeneticVariation,
     FieldEvidenceBiomarkersGeneticVariationElementId,
+    FieldEvidenceConfidence,
     FieldEvidenceDiseaseId,
+    FieldEvidencePublicationFirstAuthor,
+    FieldEvidencePublicationYear,
+    FieldEvidenceReleaseDate,
+    FieldEvidenceReleaseVersion,
+    FieldEvidenceResourceScore,
+    FieldEvidenceSourceId,
+    FieldEvidenceStatisticalMethod,
+    FieldEvidenceStatisticalMethodOverview,
 )
 from open_targets.definition.helper import get_arrow_expression
 

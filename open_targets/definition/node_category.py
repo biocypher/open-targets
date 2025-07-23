@@ -13,9 +13,9 @@ from open_targets.data.schema import (
 node_category: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
     scan_operation=ExplodingScanOperation(
         dataset=DatasetFacetSearchDisease,
-        exploded_field=FieldFacetSearchDiseaseCategory,
-    ),
-    primary_id=FieldFacetSearchDiseaseCategory.element,
+        exploded_field=DatasetFacetSearchDisease.f_category,
+),
+    primary_id=DatasetFacetSearchDisease.f_category,
     label="CATEGORY",
     properties=[],
 )
