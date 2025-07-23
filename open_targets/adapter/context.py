@@ -155,9 +155,13 @@ class AcquisitionContext:
             view = SequenceBackedDataView(field_path_map, data, required_fields)
             sequence_data = cast("Sequence[DataView]", view[exploded_field])
             for item in sequence_data:
+                try:
+                    raw_item = item.raw_data
+                except AttributeError:
+                    raw_item = item
                 yield SequenceBackedDataView(
                     field_path_map,
-                    [*data, cast("DataViewProtocol", item).raw_data],
+                    [*data, raw_item],
                     requested_fields,
                 )
 
