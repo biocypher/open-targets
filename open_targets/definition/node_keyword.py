@@ -14,14 +14,7 @@ from open_targets.data.schema import (
     FieldLiteratureIndexKeywordType,
 )
 
-node_keyword_cooccurrence: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
-    scan_operation=RowScanOperation(dataset=DatasetCooccurrences),
-    primary_id=FieldCooccurrencesKeywordId1,
-    label="KEYWORD",
-    properties=[
-        FieldCooccurrencesType1,
-    ],
-)
+
 
 node_keyword_literature_index: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
     scan_operation=RowScanOperation(dataset=DatasetLiteratureIndex),

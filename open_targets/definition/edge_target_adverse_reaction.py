@@ -35,5 +35,6 @@ edge_target_adverse_reaction: Final[AcquisitionDefinition[EdgeInfo]] = Expressio
         FieldAdverseTargetReactionsD,
         FieldAdverseTargetReactionsUniqReportIdsByReaction,
         FieldAdverseTargetReactionsUniqReportIdsByTarget,
+        FieldAdverseTargetReactionsCritval,
     ],
 )

@@ -35,5 +35,6 @@ edge_molecule_adverse_reaction: Final[AcquisitionDefinition[EdgeInfo]] = Express
         FieldAdverseDrugReactionsD,
         FieldAdverseDrugReactionsUniqReportIdsByDrug,
         FieldAdverseDrugReactionsUniqReportIdsByReaction,
+        FieldAdverseDrugReactionsCritval,
     ],
 )
