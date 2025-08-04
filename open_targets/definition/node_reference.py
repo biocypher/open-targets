@@ -15,7 +15,7 @@ node_reference: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisiti
         dataset=DatasetDiseaseToPhenotype,
         exploded_field=FieldDiseaseToPhenotypeEvidenceElementReferences,
     ),
-    primary_id=FieldDiseaseToPhenotypeEvidenceElementReferences.element,
+    primary_id=FieldDiseaseToPhenotypeEvidenceElementReferencesElement,
     label="REFERENCE",
     properties=[],
 )

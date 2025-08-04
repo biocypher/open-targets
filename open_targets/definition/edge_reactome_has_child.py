@@ -7,8 +7,8 @@ from open_targets.adapter.output import EdgeInfo
 from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetReactome,
-    FieldReactomeId,
     FieldReactomeChildren,
+    FieldReactomeId,
 )
 from open_targets.definition.helper import get_arrow_expression
 
@@ -17,9 +17,9 @@ edge_reactome_has_child: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdge
         dataset=DatasetReactome,
         exploded_field=FieldReactomeChildren,
     ),
-    primary_id=get_arrow_expression(FieldReactomeId, FieldReactomeChildren.element),
+    primary_id=get_arrow_expression(FieldReactomeId, FieldReactomeChildrenElement),
     source=FieldReactomeId,
-    target=FieldReactomeChildren.element,
+    target=FieldReactomeChildrenElement,
     label="REACTOME_HAS_CHILD",
     properties=[],
 )

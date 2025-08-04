@@ -17,9 +17,9 @@ edge_disease_has_child: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeA
         dataset=DatasetDiseases,
         exploded_field=FieldDiseasesChildren,
     ),
-    primary_id=get_arrow_expression(FieldDiseasesId, FieldDiseasesChildren.element),
+    primary_id=get_arrow_expression(FieldDiseasesId, FieldDiseasesChildrenElement),
     source=FieldDiseasesId,
-    target=FieldDiseasesChildren.element,
+    target=FieldDiseasesChildrenElement,
     label="DISEASE_HAS_CHILD",
     properties=[],
 )

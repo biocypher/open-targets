@@ -15,7 +15,7 @@ node_disease_synonym_narrow: Final[AcquisitionDefinition[NodeInfo]] = Expression
         dataset=DatasetDiseases,
         exploded_field=FieldDiseasesSynonymsHasNarrowSynonym,
     ),
-    primary_id=FieldDiseasesSynonymsHasNarrowSynonym.element,
+    primary_id=FieldDiseasesSynonymsHasNarrowSynonymElement,
     label="SYNONYM",
     properties=[],
 )

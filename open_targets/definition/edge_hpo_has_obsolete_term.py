@@ -17,9 +17,9 @@ edge_hpo_has_obsolete_term: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionE
         dataset=DatasetHpo,
         exploded_field=FieldHpoObsoleteTerms,
     ),
-    primary_id=get_arrow_expression(FieldHpoId, FieldHpoObsoleteTerms.element),
+    primary_id=get_arrow_expression(FieldHpoId, FieldHpoObsoleteTermsElement),
     source=FieldHpoId,
-    target=FieldHpoObsoleteTerms.element,
+    target=FieldHpoObsoleteTermsElement,
     label="HPO_HAS_OBSOLETE_TERM",
     properties=[],
 )

@@ -15,7 +15,7 @@ node_disease_synonym_exact: Final[AcquisitionDefinition[NodeInfo]] = ExpressionN
         dataset=DatasetDiseases,
         exploded_field=FieldDiseasesSynonymsHasExactSynonym,
     ),
-    primary_id=FieldDiseasesSynonymsHasExactSynonym.element,
+    primary_id=FieldDiseasesSynonymsHasExactSynonymElement,
     label="SYNONYM",
     properties=[],
 )

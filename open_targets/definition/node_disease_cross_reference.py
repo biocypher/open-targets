@@ -15,7 +15,7 @@ node_disease_cross_reference: Final[AcquisitionDefinition[NodeInfo]] = Expressio
         dataset=DatasetDiseases,
         exploded_field=FieldDiseasesDbXRefs,
     ),
-    primary_id=FieldDiseasesDbXRefs.element,
+    primary_id=FieldDiseasesDbXRefsElement,
     label="CROSS_REFERENCE",
     properties=[],
 )

@@ -17,9 +17,9 @@ edge_molecule_has_child: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdge
         dataset=DatasetMolecule,
         exploded_field=FieldMoleculeChildChemblIds,
     ),
-    primary_id=get_arrow_expression(FieldMoleculeId, FieldMoleculeChildChemblIds.element),
+    primary_id=get_arrow_expression(FieldMoleculeId, FieldMoleculeChildChemblIdsElement),
     source=FieldMoleculeId,
-    target=FieldMoleculeChildChemblIds.element,
+    target=FieldMoleculeChildChemblIdsElement,
     label="HAS_CHILD_MOLECULE",
     properties=[],
 )

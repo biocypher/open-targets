@@ -15,7 +15,7 @@ node_molecule_synonym: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAc
         dataset=DatasetMolecule,
         exploded_field=FieldMoleculeSynonyms,
     ),
-    primary_id=FieldMoleculeSynonyms.element,
+    primary_id=FieldMoleculeSynonymsElement,
     label="SYNONYM",
     properties=[],
 )

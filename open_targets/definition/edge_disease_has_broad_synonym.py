@@ -17,9 +17,9 @@ edge_disease_has_broad_synonym: Final[AcquisitionDefinition[EdgeInfo]] = Express
         dataset=DatasetDiseases,
         exploded_field=FieldDiseasesSynonymsHasBroadSynonym,
     ),
-    primary_id=get_arrow_expression(FieldDiseasesId, FieldDiseasesSynonymsHasBroadSynonym.element),
+    primary_id=get_arrow_expression(FieldDiseasesId, FieldDiseasesSynonymsHasBroadSynonymElement),
     source=FieldDiseasesId,
-    target=FieldDiseasesSynonymsHasBroadSynonym.element,
+    target=FieldDiseasesSynonymsHasBroadSynonymElement,
     label="HAS_BROAD_SYNONYM",
     properties=[],
 )

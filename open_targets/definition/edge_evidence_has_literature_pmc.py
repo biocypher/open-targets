@@ -22,13 +22,13 @@ edge_evidence_has_literature_pmc: Final[AcquisitionDefinition[EdgeInfo]] = Expre
         FieldEvidenceId,
         BuildCurieExpression(
             prefix=LiteralExpression("pmc"),
-            reference=FieldExpression(FieldEvidencePmcIds.element),
+            reference=FieldExpression(FieldEvidencePmcIdsElement),
         ),
     ),
     source=FieldEvidenceId,
     target=BuildCurieExpression(
         prefix=LiteralExpression("pmc"),
-        reference=FieldExpression(FieldEvidencePmcIds.element),
+        reference=FieldExpression(FieldEvidencePmcIdsElement),
     ),
     label="HAS_LITERATURE",
     properties=[],

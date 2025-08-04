@@ -17,9 +17,9 @@ edge_disease_in_therapeutic_area: Final[AcquisitionDefinition[EdgeInfo]] = Expre
         dataset=DatasetDiseases,
         exploded_field=FieldDiseasesTherapeuticAreas,
     ),
-    primary_id=get_arrow_expression(FieldDiseasesId, FieldDiseasesTherapeuticAreas.element),
+    primary_id=get_arrow_expression(FieldDiseasesId, FieldDiseasesTherapeuticAreasElement),
     source=FieldDiseasesId,
-    target=FieldDiseasesTherapeuticAreas.element,
+    target=FieldDiseasesTherapeuticAreasElement,
     label="IS_IN_THERAPEUTIC_AREA",
     properties=[],
 )

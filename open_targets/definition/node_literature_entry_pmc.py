@@ -18,7 +18,7 @@ node_literature_entry_pmc: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNo
     ),
     primary_id=BuildCurieExpression(
         prefix=LiteralExpression("pmc"),
-        reference=FieldExpression(FieldEvidencePmcIds.element),
+        reference=FieldExpression(FieldEvidencePmcIdsElement),
     ),
     label="LITERATURE_ENTRY",
     properties=[],

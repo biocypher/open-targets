@@ -23,8 +23,8 @@ edge_molecule_drug_warning: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionE
         dataset=DatasetDrugWarnings,
         exploded_field=FieldDrugWarningsChemblIds,
     ),
-    primary_id=get_arrow_expression(FieldDrugWarningsChemblIds.element, FieldDrugWarningsEfoId),
-    source=FieldDrugWarningsChemblIds.element,
+    primary_id=get_arrow_expression(FieldDrugWarningsChemblIdsElement, FieldDrugWarningsEfoId),
+    source=FieldDrugWarningsChemblIdsElement,
     target=FieldDrugWarningsEfoId,
     label="MOLECULE_TO_DRUG_WARNING",
     properties=[

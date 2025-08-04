@@ -8,9 +8,8 @@ from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetDiseaseToPhenotype,
     FieldDiseaseToPhenotypeDisease,
-    FieldDiseaseToPhenotypePhenotype,
-    FieldDiseaseToPhenotypeEvidence,
     FieldDiseaseToPhenotypeEvidenceElementReferences,
+    FieldDiseaseToPhenotypePhenotype,
 )
 from open_targets.definition.helper import get_arrow_expression
 
@@ -21,10 +20,10 @@ edge_evidence_has_reference: Final[AcquisitionDefinition[EdgeInfo]] = Expression
     ),
     primary_id=get_arrow_expression(
         get_arrow_expression(FieldDiseaseToPhenotypeDisease, FieldDiseaseToPhenotypePhenotype),
-        FieldDiseaseToPhenotypeEvidenceElementReferences.element,
+        FieldDiseaseToPhenotypeEvidenceElementReferencesElement,
     ),
     source=get_arrow_expression(FieldDiseaseToPhenotypeDisease, FieldDiseaseToPhenotypePhenotype),
-    target=FieldDiseaseToPhenotypeEvidenceElementReferences.element,
+    target=FieldDiseaseToPhenotypeEvidenceElementReferencesElement,
     label="HAS_REFERENCE",
     properties=[],
 )

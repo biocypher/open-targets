@@ -17,9 +17,9 @@ edge_molecule_linked_disease: Final[AcquisitionDefinition[EdgeInfo]] = Expressio
         dataset=DatasetMolecule,
         exploded_field=FieldMoleculeLinkedDiseases,
     ),
-    primary_id=get_arrow_expression(FieldMoleculeId, FieldMoleculeLinkedDiseases.element),
+    primary_id=get_arrow_expression(FieldMoleculeId, FieldMoleculeLinkedDiseasesElement),
     source=FieldMoleculeId,
-    target=FieldMoleculeLinkedDiseases.element,
+    target=FieldMoleculeLinkedDiseasesElement,
     label="LINKED_TO_DISEASE",
     properties=[],
 )

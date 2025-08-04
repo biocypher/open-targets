@@ -7,7 +7,6 @@ from open_targets.adapter.output import EdgeInfo
 from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetDrugWarnings,
-    FieldDrugWarningsChemblIds,
     FieldDrugWarningsEfoId,
     FieldDrugWarningsReferences,
     FieldDrugWarningsReferencesElementRefId,
@@ -20,10 +19,10 @@ edge_drug_warning_has_reference: Final[AcquisitionDefinition[EdgeInfo]] = Expres
         exploded_field=FieldDrugWarningsReferences,
     ),
     primary_id=get_arrow_expression(
-        get_arrow_expression(FieldDrugWarningsChemblIds.element, FieldDrugWarningsEfoId),
+        get_arrow_expression(FieldDrugWarningsChemblIdsElement, FieldDrugWarningsEfoId),
         FieldDrugWarningsReferencesElementRefId,
     ),
-    source=get_arrow_expression(FieldDrugWarningsChemblIds.element, FieldDrugWarningsEfoId),
+    source=get_arrow_expression(FieldDrugWarningsChemblIdsElement, FieldDrugWarningsEfoId),
     target=FieldDrugWarningsReferencesElementRefId,
     label="HAS_DRUG_WARNING_REFERENCE",
     properties=[],

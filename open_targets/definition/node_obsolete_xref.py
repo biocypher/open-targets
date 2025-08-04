@@ -15,7 +15,7 @@ node_obsolete_xref: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcqui
         dataset=DatasetDiseases,
         exploded_field=FieldDiseasesObsoleteXRefs,
     ),
-    primary_id=FieldDiseasesObsoleteXRefs.element,
+    primary_id=FieldDiseasesObsoleteXRefsElement,
     label="OBSOLETE_XREF",
     properties=[],
 )

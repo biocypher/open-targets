@@ -17,9 +17,9 @@ edge_molecule_linked_target: Final[AcquisitionDefinition[EdgeInfo]] = Expression
         dataset=DatasetMolecule,
         exploded_field=FieldMoleculeLinkedTargets,
     ),
-    primary_id=get_arrow_expression(FieldMoleculeId, FieldMoleculeLinkedTargets.element),
+    primary_id=get_arrow_expression(FieldMoleculeId, FieldMoleculeLinkedTargetsElement),
     source=FieldMoleculeId,
-    target=FieldMoleculeLinkedTargets.element,
+    target=FieldMoleculeLinkedTargetsElement,
     label="LINKED_TO_TARGET",
     properties=[],
 )

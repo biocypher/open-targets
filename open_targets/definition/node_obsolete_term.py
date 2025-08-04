@@ -15,7 +15,7 @@ node_obsolete_term: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcqui
         dataset=DatasetDiseases,
         exploded_field=FieldDiseasesObsoleteTerms,
     ),
-    primary_id=FieldDiseasesObsoleteTerms.element,
+    primary_id=FieldDiseasesObsoleteTermsElement,
     label="OBSOLETE_TERM",
     properties=[],
 )

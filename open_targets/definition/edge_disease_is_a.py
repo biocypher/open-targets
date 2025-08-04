@@ -17,9 +17,9 @@ edge_disease_is_a: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquis
         dataset=DatasetDiseases,
         exploded_field=FieldDiseasesParents,
     ),
-    primary_id=get_arrow_expression(FieldDiseasesId, FieldDiseasesParents.element),
+    primary_id=get_arrow_expression(FieldDiseasesId, FieldDiseasesParentsElement),
     source=FieldDiseasesId,
-    target=FieldDiseasesParents.element,
+    target=FieldDiseasesParentsElement,
     label="DISEASE_IS_A",
     properties=[],
 )

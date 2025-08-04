@@ -15,7 +15,7 @@ node_therapeutic_area: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAc
         dataset=DatasetDiseases,
         exploded_field=FieldDiseasesTherapeuticAreas,
     ),
-    primary_id=FieldDiseasesTherapeuticAreas.element,
+    primary_id=FieldDiseasesTherapeuticAreasElement,
     label="THERAPEUTIC_AREA",
     properties=[],
 )

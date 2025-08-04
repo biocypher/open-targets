@@ -17,9 +17,9 @@ edge_disease_has_narrow_synonym: Final[AcquisitionDefinition[EdgeInfo]] = Expres
         dataset=DatasetDiseases,
         exploded_field=FieldDiseasesSynonymsHasNarrowSynonym,
     ),
-    primary_id=get_arrow_expression(FieldDiseasesId, FieldDiseasesSynonymsHasNarrowSynonym.element),
+    primary_id=get_arrow_expression(FieldDiseasesId, FieldDiseasesSynonymsHasNarrowSynonymElement),
     source=FieldDiseasesId,
-    target=FieldDiseasesSynonymsHasNarrowSynonym.element,
+    target=FieldDiseasesSynonymsHasNarrowSynonymElement,
     label="HAS_NARROW_SYNONYM",
     properties=[],
 )

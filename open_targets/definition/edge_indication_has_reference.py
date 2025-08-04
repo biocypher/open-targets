@@ -8,10 +8,8 @@ from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetIndication,
     FieldIndicationId,
-    FieldIndicationIndications,
     FieldIndicationIndicationsElementDisease,
     FieldIndicationIndicationsElementReferences,
-    FieldIndicationIndicationsElementReferencesElementIds,
 )
 from open_targets.definition.helper import get_arrow_expression
 
@@ -22,10 +20,10 @@ edge_indication_has_reference: Final[AcquisitionDefinition[EdgeInfo]] = Expressi
     ),
     primary_id=get_arrow_expression(
         get_arrow_expression(FieldIndicationId, FieldIndicationIndicationsElementDisease),
-        FieldIndicationIndicationsElementReferencesElementIds.element,
+        FieldIndicationIndicationsElementReferencesElementIdsElement,
     ),
     source=get_arrow_expression(FieldIndicationId, FieldIndicationIndicationsElementDisease),
-    target=FieldIndicationIndicationsElementReferencesElementIds.element,
+    target=FieldIndicationIndicationsElementReferencesElementIdsElement,
     label="HAS_REFERENCE",
     properties=[],
 )

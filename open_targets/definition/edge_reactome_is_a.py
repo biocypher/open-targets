@@ -17,9 +17,9 @@ edge_reactome_is_a: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcqui
         dataset=DatasetReactome,
         exploded_field=FieldReactomeParents,
     ),
-    primary_id=get_arrow_expression(FieldReactomeId, FieldReactomeParents.element),
+    primary_id=get_arrow_expression(FieldReactomeId, FieldReactomeParentsElement),
     source=FieldReactomeId,
-    target=FieldReactomeParents.element,
+    target=FieldReactomeParentsElement,
     label="REACTOME_IS_A",
     properties=[],
 )

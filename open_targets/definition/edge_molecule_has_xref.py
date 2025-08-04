@@ -17,9 +17,9 @@ edge_molecule_has_xref: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeA
         dataset=DatasetMolecule,
         exploded_field=FieldMoleculeCrossReferences,
     ),
-    primary_id=get_arrow_expression(FieldMoleculeId, FieldMoleculeCrossReferences.element),
+    primary_id=get_arrow_expression(FieldMoleculeId, FieldMoleculeCrossReferencesElement),
     source=FieldMoleculeId,
-    target=FieldMoleculeCrossReferences.element,
+    target=FieldMoleculeCrossReferencesElement,
     label="HAS_XREF",
     properties=[],
 )

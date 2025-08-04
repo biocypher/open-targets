@@ -17,9 +17,9 @@ edge_hpo_term_is_a: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcqui
         dataset=DatasetHpo,
         exploded_field=FieldHpoParents,
     ),
-    primary_id=get_arrow_expression(FieldHpoId, FieldHpoParents.element),
+    primary_id=get_arrow_expression(FieldHpoId, FieldHpoParentsElement),
     source=FieldHpoId,
-    target=FieldHpoParents.element,
+    target=FieldHpoParentsElement,
     label="HPO_TERM_IS_A",
     properties=[],
 )

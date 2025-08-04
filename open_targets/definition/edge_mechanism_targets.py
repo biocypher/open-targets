@@ -7,7 +7,6 @@ from open_targets.adapter.output import EdgeInfo
 from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetMechanismOfAction,
-    FieldMechanismOfActionChemblIds,
     FieldMechanismOfActionMechanismOfAction,
     FieldMechanismOfActionTargets,
 )
@@ -19,11 +18,11 @@ edge_mechanism_targets: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeA
         exploded_field=FieldMechanismOfActionTargets,
     ),
     primary_id=get_arrow_expression(
-        get_arrow_expression(FieldMechanismOfActionChemblIds.element, FieldMechanismOfActionMechanismOfAction),
-        FieldMechanismOfActionTargets.element,
+        get_arrow_expression(FieldMechanismOfActionChemblIdsElement, FieldMechanismOfActionMechanismOfAction),
+        FieldMechanismOfActionTargetsElement,
     ),
-    source=get_arrow_expression(FieldMechanismOfActionChemblIds.element, FieldMechanismOfActionMechanismOfAction),
-    target=FieldMechanismOfActionTargets.element,
+    source=get_arrow_expression(FieldMechanismOfActionChemblIdsElement, FieldMechanismOfActionMechanismOfAction),
+    target=FieldMechanismOfActionTargetsElement,
     label="MECHANISM_TARGETS",
     properties=[],
 )

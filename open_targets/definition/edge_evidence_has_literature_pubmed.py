@@ -22,13 +22,13 @@ edge_evidence_has_literature_pubmed: Final[AcquisitionDefinition[EdgeInfo]] = Ex
         FieldEvidenceId,
         BuildCurieExpression(
             prefix=LiteralExpression("pubmed"),
-            reference=FieldExpression(FieldEvidenceLiterature.element),
+            reference=FieldExpression(FieldEvidenceLiteratureElement),
         ),
     ),
     source=FieldEvidenceId,
     target=BuildCurieExpression(
         prefix=LiteralExpression("pubmed"),
-        reference=FieldExpression(FieldEvidenceLiterature.element),
+        reference=FieldExpression(FieldEvidenceLiteratureElement),
     ),
     label="HAS_LITERATURE",
     properties=[],

@@ -17,9 +17,9 @@ edge_disease_has_related_synonym: Final[AcquisitionDefinition[EdgeInfo]] = Expre
         dataset=DatasetDiseases,
         exploded_field=FieldDiseasesSynonymsHasRelatedSynonym,
     ),
-    primary_id=get_arrow_expression(FieldDiseasesId, FieldDiseasesSynonymsHasRelatedSynonym.element),
+    primary_id=get_arrow_expression(FieldDiseasesId, FieldDiseasesSynonymsHasRelatedSynonymElement),
     source=FieldDiseasesId,
-    target=FieldDiseasesSynonymsHasRelatedSynonym.element,
+    target=FieldDiseasesSynonymsHasRelatedSynonymElement,
     label="HAS_RELATED_SYNONYM",
     properties=[],
 )

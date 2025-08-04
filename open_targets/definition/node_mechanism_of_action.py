@@ -20,7 +20,7 @@ node_mechanism_of_action: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNod
         dataset=DatasetMechanismOfAction,
         exploded_field=FieldMechanismOfActionChemblIds,
     ),
-    primary_id=get_arrow_expression(FieldMechanismOfActionChemblIds.element, FieldMechanismOfActionMechanismOfAction),
+    primary_id=get_arrow_expression(FieldMechanismOfActionChemblIdsElement, FieldMechanismOfActionMechanismOfAction),
     label="MECHANISM_OF_ACTION",
     properties=[
         FieldMechanismOfActionActionType,

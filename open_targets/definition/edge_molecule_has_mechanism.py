@@ -18,11 +18,11 @@ edge_molecule_has_mechanism: Final[AcquisitionDefinition[EdgeInfo]] = Expression
         exploded_field=FieldMechanismOfActionChemblIds,
     ),
     primary_id=get_arrow_expression(
-        FieldMechanismOfActionChemblIds.element,
-        get_arrow_expression(FieldMechanismOfActionChemblIds.element, FieldMechanismOfActionMechanismOfAction),
+        FieldMechanismOfActionChemblIdsElement,
+        get_arrow_expression(FieldMechanismOfActionChemblIdsElement, FieldMechanismOfActionMechanismOfAction),
     ),
-    source=FieldMechanismOfActionChemblIds.element,
-    target=get_arrow_expression(FieldMechanismOfActionChemblIds.element, FieldMechanismOfActionMechanismOfAction),
+    source=FieldMechanismOfActionChemblIdsElement,
+    target=get_arrow_expression(FieldMechanismOfActionChemblIdsElement, FieldMechanismOfActionMechanismOfAction),
     label="HAS_MECHANISM",
     properties=[],
 )

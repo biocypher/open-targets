@@ -17,9 +17,9 @@ edge_molecule_has_synonym: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEd
         dataset=DatasetMolecule,
         exploded_field=FieldMoleculeSynonyms,
     ),
-    primary_id=get_arrow_expression(FieldMoleculeId, FieldMoleculeSynonyms.element),
+    primary_id=get_arrow_expression(FieldMoleculeId, FieldMoleculeSynonymsElement),
     source=FieldMoleculeId,
-    target=FieldMoleculeSynonyms.element,
+    target=FieldMoleculeSynonymsElement,
     label="HAS_SYNONYM",
     properties=[],
 )

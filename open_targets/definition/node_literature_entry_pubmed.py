@@ -18,7 +18,7 @@ node_literature_entry_pubmed: Final[AcquisitionDefinition[NodeInfo]] = Expressio
     ),
     primary_id=BuildCurieExpression(
         prefix=LiteralExpression("pubmed"),
-        reference=FieldExpression(FieldEvidenceLiterature.element),
+        reference=FieldExpression(FieldEvidenceLiteratureElement),
     ),
     label="LITERATURE_ENTRY",
     properties=[],

@@ -17,9 +17,9 @@ edge_disease_has_xref: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAc
         dataset=DatasetDiseases,
         exploded_field=FieldDiseasesDbXRefs,
     ),
-    primary_id=get_arrow_expression(FieldDiseasesId, FieldDiseasesDbXRefs.element),
+    primary_id=get_arrow_expression(FieldDiseasesId, FieldDiseasesDbXRefsElement),
     source=FieldDiseasesId,
-    target=FieldDiseasesDbXRefs.element,
+    target=FieldDiseasesDbXRefsElement,
     label="HAS_XREF",
     properties=[],
 )
