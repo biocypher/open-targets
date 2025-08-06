@@ -8,6 +8,7 @@ from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetDiseases,
     FieldDiseasesDbXRefs,
+    FieldDiseasesDbXRefsElement,
 )
 
 node_disease_cross_reference: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(

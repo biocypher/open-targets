@@ -9,6 +9,7 @@ from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetEvidence,
     FieldEvidenceLiterature,
+    FieldEvidenceLiteratureElement,
 )
 
 node_literature_entry_pubmed: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(

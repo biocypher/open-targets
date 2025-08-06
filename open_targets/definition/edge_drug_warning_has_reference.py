@@ -7,6 +7,7 @@ from open_targets.adapter.output import EdgeInfo
 from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetDrugWarnings,
+    FieldDrugWarningsChemblIdsElement,
     FieldDrugWarningsEfoId,
     FieldDrugWarningsReferences,
     FieldDrugWarningsReferencesElementRefId,

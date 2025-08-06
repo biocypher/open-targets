@@ -8,8 +8,8 @@ from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetEvidence,
     FieldEvidenceUrls,
-    FieldEvidenceUrlsElementUrl,
     FieldEvidenceUrlsElementNiceName,
+    FieldEvidenceUrlsElementUrl,
 )
 
 node_url: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
@@ -20,6 +20,6 @@ node_url: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefi
     primary_id=FieldEvidenceUrlsElementUrl,
     label="URL",
     properties=[
-        FieldEvidenceUrlsElementName,
+        FieldEvidenceUrlsElementNiceName,
     ],
 )

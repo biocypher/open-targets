@@ -8,18 +8,19 @@ from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetMolecule,
     FieldMoleculeId,
-    FieldMoleculeLinkedDiseases,
+    FieldMoleculeLinkedDiseasesRows,
+    FieldMoleculeLinkedDiseasesRowsElement,
 )
 from open_targets.definition.helper import get_arrow_expression
 
 edge_molecule_linked_disease: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
     scan_operation=ExplodingScanOperation(
         dataset=DatasetMolecule,
-        exploded_field=FieldMoleculeLinkedDiseases,
+        exploded_field=FieldMoleculeLinkedDiseasesRows,
     ),
-    primary_id=get_arrow_expression(FieldMoleculeId, FieldMoleculeLinkedDiseasesElement),
+    primary_id=get_arrow_expression(FieldMoleculeId, FieldMoleculeLinkedDiseasesRowsElement),
     source=FieldMoleculeId,
-    target=FieldMoleculeLinkedDiseasesElement,
+    target=FieldMoleculeLinkedDiseasesRowsElement,
     label="LINKED_TO_DISEASE",
     properties=[],
 )

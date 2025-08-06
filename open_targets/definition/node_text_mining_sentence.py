@@ -3,6 +3,7 @@
 from typing import Final
 
 from open_targets.adapter.acquisition_definition import AcquisitionDefinition, ExpressionNodeAcquisitionDefinition
+from open_targets.adapter.expression import BuildCurieExpression, FieldExpression, LiteralExpression
 from open_targets.adapter.output import NodeInfo
 from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
@@ -12,10 +13,9 @@ from open_targets.data.schema import (
     FieldEvidenceTextMiningSentencesElementDStart,
     FieldEvidenceTextMiningSentencesElementSection,
     FieldEvidenceTextMiningSentencesElementTEnd,
-    FieldEvidenceTextMiningSentencesElementTStart,
     FieldEvidenceTextMiningSentencesElementText,
+    FieldEvidenceTextMiningSentencesElementTStart,
 )
-from open_targets.adapter.expression import BuildCurieExpression, FieldExpression, LiteralExpression
 
 node_text_mining_sentence: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
     scan_operation=ExplodingScanOperation(
@@ -28,11 +28,11 @@ node_text_mining_sentence: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNo
     ),
     label="TEXT_MINING_SENTENCE",
     properties=[
-        FieldEvidenceTextMiningSentencesElementDend,
-        FieldEvidenceTextMiningSentencesElementDstart,
+        FieldEvidenceTextMiningSentencesElementDEnd,
+        FieldEvidenceTextMiningSentencesElementDStart,
         FieldEvidenceTextMiningSentencesElementSection,
-        FieldEvidenceTextMiningSentencesElementTend,
-        FieldEvidenceTextMiningSentencesElementTstart,
+        FieldEvidenceTextMiningSentencesElementTEnd,
+        FieldEvidenceTextMiningSentencesElementTStart,
         FieldEvidenceTextMiningSentencesElementText,
     ],
 )

@@ -10,6 +10,7 @@ from open_targets.data.schema import (
     DatasetEvidence,
     FieldEvidenceId,
     FieldEvidencePmcIds,
+    FieldEvidencePmcIdsElement,
 )
 from open_targets.definition.helper import get_arrow_expression
 

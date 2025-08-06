@@ -7,8 +7,17 @@ from open_targets.adapter.output import EdgeInfo
 from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetEvidence,
+    FieldEvidenceConfidence,
     FieldEvidencePathways,
     FieldEvidencePathwaysElementId,
+    FieldEvidencePublicationFirstAuthor,
+    FieldEvidencePublicationYear,
+    FieldEvidenceReleaseDate,
+    FieldEvidenceReleaseVersion,
+    FieldEvidenceResourceScore,
+    FieldEvidenceSourceId,
+    FieldEvidenceStatisticalMethod,
+    FieldEvidenceStatisticalMethodOverview,
     FieldEvidenceTargetId,
 )
 from open_targets.definition.helper import get_arrow_expression

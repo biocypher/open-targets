@@ -7,13 +7,19 @@ from open_targets.adapter.output import EdgeInfo
 from open_targets.adapter.scan_operation import RowScanOperation
 from open_targets.data.schema import (
     DatasetAdverseTargetReactions,
+    FieldAdverseTargetReactionsA,
     FieldAdverseTargetReactionsActerm,
     FieldAdverseTargetReactionsAterm,
+    FieldAdverseTargetReactionsB,
+    FieldAdverseTargetReactionsC,
     FieldAdverseTargetReactionsCterm,
+    FieldAdverseTargetReactionsD,
     FieldAdverseTargetReactionsLlr,
     FieldAdverseTargetReactionsMeddraCode,
     FieldAdverseTargetReactionsReactionReactionmeddrapt,
     FieldAdverseTargetReactionsTargetId,
+    FieldAdverseTargetReactionsUniqReportIdsByReaction,
+    FieldAdverseTargetReactionsUniqReportIdsByTarget,
 )
 from open_targets.definition.helper import get_arrow_expression
 
@@ -35,6 +41,5 @@ edge_target_adverse_reaction: Final[AcquisitionDefinition[EdgeInfo]] = Expressio
         FieldAdverseTargetReactionsD,
         FieldAdverseTargetReactionsUniqReportIdsByReaction,
         FieldAdverseTargetReactionsUniqReportIdsByTarget,
-        FieldAdverseTargetReactionsCritval,
     ],
 )

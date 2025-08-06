@@ -10,8 +10,12 @@ from open_targets.data.schema import (
     FieldBaselineExpressionId,
     FieldBaselineExpressionTissues,
     FieldBaselineExpressionTissuesElementEfoCode,
-    FieldBaselineExpressionTissuesElementProtein,
-    FieldBaselineExpressionTissuesElementRna,
+    FieldBaselineExpressionTissuesElementProteinLevel,
+    FieldBaselineExpressionTissuesElementProteinReliability,
+    FieldBaselineExpressionTissuesElementRnaLevel,
+    FieldBaselineExpressionTissuesElementRnaUnit,
+    FieldBaselineExpressionTissuesElementRnaValue,
+    FieldBaselineExpressionTissuesElementRnaZscore,
 )
 from open_targets.definition.helper import get_arrow_expression
 

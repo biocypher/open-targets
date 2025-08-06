@@ -8,10 +8,10 @@ from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetTargets,
     FieldTargetsSubcellularLocations,
+    FieldTargetsSubcellularLocationsElementLabelSl,
     FieldTargetsSubcellularLocationsElementLocation,
-    FieldTargetsSubcellularLocationsElementLabelSL,
     FieldTargetsSubcellularLocationsElementSource,
-    FieldTargetsSubcellularLocationsElementTermSL,
+    FieldTargetsSubcellularLocationsElementTermSl,
 )
 
 node_subcellular_location: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
@@ -22,8 +22,8 @@ node_subcellular_location: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNo
     primary_id=FieldTargetsSubcellularLocationsElementLocation,
     label="SUBCELLULAR_LOCATION",
     properties=[
-        FieldTargetsSubcellularLocationsElementLabelSL,
+        FieldTargetsSubcellularLocationsElementLabelSl,
         FieldTargetsSubcellularLocationsElementSource,
-        FieldTargetsSubcellularLocationsElementTermSL,
+        FieldTargetsSubcellularLocationsElementTermSl,
     ],
 )

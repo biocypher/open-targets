@@ -8,6 +8,7 @@ from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetDiseases,
     FieldDiseasesObsoleteTerms,
+    FieldDiseasesObsoleteTermsElement,
 )
 
 node_obsolete_term: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(

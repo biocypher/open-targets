@@ -7,9 +7,12 @@ from open_targets.adapter.output import NodeInfo
 from open_targets.adapter.scan_operation import RowScanOperation
 from open_targets.data.schema import (
     DatasetHpo,
+    FieldHpoDbXRefs,
+    FieldHpoDescription,
     FieldHpoId,
     FieldHpoName,
-    FieldHpoDescription,
+    FieldHpoNamespace,
+    FieldHpoObsoleteTerms,
 )
 
 node_hpo_term: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(

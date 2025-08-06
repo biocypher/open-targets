@@ -10,6 +10,15 @@ from open_targets.data.schema import (
     DatasetEvidence,
     FieldEvidenceBiomarkersGeneExpression,
     FieldEvidenceBiomarkersGeneExpressionElementId,
+    FieldEvidenceConfidence,
+    FieldEvidencePublicationFirstAuthor,
+    FieldEvidencePublicationYear,
+    FieldEvidenceReleaseDate,
+    FieldEvidenceReleaseVersion,
+    FieldEvidenceResourceScore,
+    FieldEvidenceSourceId,
+    FieldEvidenceStatisticalMethod,
+    FieldEvidenceStatisticalMethodOverview,
     FieldEvidenceTargetId,
 )
 from open_targets.definition.helper import get_arrow_expression

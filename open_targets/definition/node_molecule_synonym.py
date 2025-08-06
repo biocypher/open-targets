@@ -8,6 +8,7 @@ from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetMolecule,
     FieldMoleculeSynonyms,
+    FieldMoleculeSynonymsElement,
 )
 
 node_molecule_synonym: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(

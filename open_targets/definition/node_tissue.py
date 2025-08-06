@@ -8,8 +8,10 @@ from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetBaselineExpression,
     FieldBaselineExpressionTissues,
+    FieldBaselineExpressionTissuesElementAnatomicalSystems,
     FieldBaselineExpressionTissuesElementEfoCode,
     FieldBaselineExpressionTissuesElementLabel,
+    FieldBaselineExpressionTissuesElementOrgans,
 )
 
 node_tissue: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(

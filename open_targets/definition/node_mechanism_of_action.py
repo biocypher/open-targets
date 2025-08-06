@@ -9,6 +9,7 @@ from open_targets.data.schema import (
     DatasetMechanismOfAction,
     FieldMechanismOfActionActionType,
     FieldMechanismOfActionChemblIds,
+    FieldMechanismOfActionChemblIdsElement,
     FieldMechanismOfActionMechanismOfAction,
     FieldMechanismOfActionTargetName,
     FieldMechanismOfActionTargetType,

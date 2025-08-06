@@ -11,8 +11,8 @@ from open_targets.data.schema import (
     FieldEvidenceMutatedSamplesElementFunctionalConsequenceId,
     FieldEvidenceMutatedSamplesElementNumberMutatedSamples,
     FieldEvidenceMutatedSamplesElementNumberSamplesTested,
+    FieldEvidenceMutatedSamplesElementNumberSamplesWithMutationType,
 )
-from open_targets.definition.helper import get_arrow_expression
 
 node_mutated_sample: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
     scan_operation=ExplodingScanOperation(

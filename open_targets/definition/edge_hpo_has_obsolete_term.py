@@ -9,6 +9,7 @@ from open_targets.data.schema import (
     DatasetHpo,
     FieldHpoId,
     FieldHpoObsoleteTerms,
+    FieldHpoObsoleteTermsElement,
 )
 from open_targets.definition.helper import get_arrow_expression
 

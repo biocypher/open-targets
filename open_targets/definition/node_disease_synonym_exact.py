@@ -8,6 +8,7 @@ from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetDiseases,
     FieldDiseasesSynonymsHasExactSynonym,
+    FieldDiseasesSynonymsHasExactSynonymElement,
 )
 
 node_disease_synonym_exact: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(

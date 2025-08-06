@@ -7,8 +7,6 @@ from open_targets.adapter.output import NodeInfo
 from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetTargetEssentiality,
-    FieldTargetEssentialityGeneEssentiality,
-    FieldTargetEssentialityGeneEssentialityElementDepMapEssentiality,
     FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreens,
     FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementCellLineName,
     FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementDepmapId,
@@ -42,7 +40,7 @@ node_gene_essentiality_measurement: Final[AcquisitionDefinition[NodeInfo]] = Exp
         FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementGeneEffect,
         FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementMutation,
         FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementTissueId,
-        FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementScreensElementTissueName,
+        FieldTargetEssentialityGeneEssentialityElementDepMapEssentialityElementTissueName,
         FieldTargetEssentialityGeneEssentialityElementIsEssential,
     ],
 )

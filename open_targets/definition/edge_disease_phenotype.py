@@ -8,7 +8,6 @@ from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetDiseaseToPhenotype,
     FieldDiseaseToPhenotypeDisease,
-    FieldDiseaseToPhenotypePhenotype,
     FieldDiseaseToPhenotypeEvidence,
     FieldDiseaseToPhenotypeEvidenceElementAspect,
     FieldDiseaseToPhenotypeEvidenceElementBioCuration,
@@ -24,6 +23,7 @@ from open_targets.data.schema import (
     FieldDiseaseToPhenotypeEvidenceElementReferences,
     FieldDiseaseToPhenotypeEvidenceElementResource,
     FieldDiseaseToPhenotypeEvidenceElementSex,
+    FieldDiseaseToPhenotypePhenotype,
 )
 from open_targets.definition.helper import get_arrow_expression
 

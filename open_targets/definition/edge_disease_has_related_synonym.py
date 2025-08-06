@@ -9,6 +9,7 @@ from open_targets.data.schema import (
     DatasetDiseases,
     FieldDiseasesId,
     FieldDiseasesSynonymsHasRelatedSynonym,
+    FieldDiseasesSynonymsHasRelatedSynonymElement,
 )
 from open_targets.definition.helper import get_arrow_expression
 

@@ -9,6 +9,7 @@ from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetPharmacogenomics,
     FieldPharmacogenomicsLiterature,
+    FieldPharmacogenomicsLiteratureElement,
     FieldPharmacogenomicsStudyId,
 )
 from open_targets.definition.helper import get_arrow_expression

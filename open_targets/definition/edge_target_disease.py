@@ -7,11 +7,20 @@ from open_targets.adapter.output import EdgeInfo
 from open_targets.adapter.scan_operation import RowScanOperation
 from open_targets.data.schema import (
     DatasetEvidence,
+    FieldEvidenceConfidence,
     FieldEvidenceDatasourceId,
     FieldEvidenceDiseaseId,
     FieldEvidenceId,
     FieldEvidenceLiterature,
+    FieldEvidencePublicationFirstAuthor,
+    FieldEvidencePublicationYear,
+    FieldEvidenceReleaseDate,
+    FieldEvidenceReleaseVersion,
+    FieldEvidenceResourceScore,
     FieldEvidenceScore,
+    FieldEvidenceSourceId,
+    FieldEvidenceStatisticalMethod,
+    FieldEvidenceStatisticalMethodOverview,
     FieldEvidenceTargetId,
 )
 

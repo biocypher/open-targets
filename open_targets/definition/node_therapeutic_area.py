@@ -8,6 +8,7 @@ from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetDiseases,
     FieldDiseasesTherapeuticAreas,
+    FieldDiseasesTherapeuticAreasElement,
 )
 
 node_therapeutic_area: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
