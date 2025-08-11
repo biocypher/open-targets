@@ -204,6 +204,38 @@ from open_targets.definition.edge_target_has_datasource import edge_target_has_d
 from open_targets.definition.edge_disease_has_keyword import edge_disease_has_keyword
 from open_targets.definition.edge_drug_has_keyword import edge_drug_has_keyword
 from open_targets.definition.edge_target_has_keyword import edge_target_has_keyword
+from open_targets.definition.node_evidence_cancer_gene_census import node_evidence_cancer_gene_census
+from open_targets.definition.node_evidence_eva import node_evidence_eva
+from open_targets.definition.node_evidence_chembl import node_evidence_chembl
+from open_targets.definition.node_evidence_clingen import node_evidence_clingen
+from open_targets.definition.node_evidence_crispr import node_evidence_crispr
+from open_targets.definition.node_evidence_crispr_screen import node_evidence_crispr_screen
+from open_targets.definition.node_evidence_europepmc import node_evidence_europepmc
+from open_targets.definition.node_evidence_gene2phenotype import node_evidence_gene2phenotype
+from open_targets.definition.node_evidence_gene_burden import node_evidence_gene_burden
+from open_targets.definition.node_evidence_genomics_england import node_evidence_genomics_england
+from open_targets.definition.node_evidence_impc import node_evidence_impc
+from open_targets.definition.node_evidence_intogen import node_evidence_intogen
+from open_targets.definition.node_evidence_ot_genetics_portal import node_evidence_ot_genetics_portal
+from open_targets.definition.node_evidence_progeny import node_evidence_progeny
+from open_targets.definition.node_evidence_reactome import node_evidence_reactome
+from open_targets.definition.node_evidence_slapenrich import node_evidence_slapenrich
+from open_targets.definition.node_evidence_sysbio import node_evidence_sysbio
+from open_targets.definition.node_evidence_uniprot_literature import node_evidence_uniprot_literature
+from open_targets.definition.node_evidence_uniprot_variants import node_evidence_uniprot_variants
+from open_targets.definition.node_evidence_cancer_biomarkers import node_evidence_cancer_biomarkers
+from open_targets.definition.node_evidence_expression_atlas import node_evidence_expression_atlas
+from open_targets.definition.node_evidence_eva_somatic import node_evidence_eva_somatic
+from open_targets.definition.node_evidence_orphanet import node_evidence_orphanet
+from open_targets.definition.edge_target_has_association_evidence import edge_target_has_association_evidence
+from open_targets.definition.edge_evidence_for_disease import edge_evidence_for_disease
+from open_targets.definition.edge_evidence_has_variant import edge_evidence_has_variant
+from open_targets.definition.edge_evidence_has_drug import edge_evidence_has_drug
+from open_targets.definition.edge_evidence_has_literature import edge_evidence_has_literature
+from open_targets.definition.edge_evidence_has_biomarker import edge_evidence_has_biomarker_gene_expression, edge_evidence_has_biomarker_genetic_variation
+from open_targets.definition.edge_evidence_has_clinical_trial import edge_evidence_has_clinical_trial
+from open_targets.definition.edge_evidence_has_biological_model import edge_evidence_has_biological_model
+from open_targets.definition.edge_evidence_has_pathway import edge_evidence_has_pathway
 
 from open_targets.definition.edge_disease_biomarker import edge_disease_biomarker_gene_expression, edge_disease_biomarker_genetic_variation
 from open_targets.definition.edge_disease_has_child import edge_disease_has_child
@@ -344,4 +376,37 @@ __all__ = [
     "edge_disease_has_keyword",
     "edge_drug_has_keyword",
     "edge_target_has_keyword",
+    "node_evidence_cancer_gene_census",
+    "node_evidence_eva",
+    "node_evidence_chembl",
+    "node_evidence_clingen",
+    "node_evidence_crispr",
+    "node_evidence_crispr_screen",
+    "node_evidence_europepmc",
+    "node_evidence_gene2phenotype",
+    "node_evidence_gene_burden",
+    "node_evidence_genomics_england",
+    "node_evidence_impc",
+    "node_evidence_intogen",
+    "node_evidence_ot_genetics_portal",
+    "node_evidence_progeny",
+    "node_evidence_reactome",
+    "node_evidence_slapenrich",
+    "node_evidence_sysbio",
+    "node_evidence_uniprot_literature",
+    "node_evidence_uniprot_variants",
+    "node_evidence_cancer_biomarkers",
+    "node_evidence_expression_atlas",
+    "node_evidence_eva_somatic",
+    "node_evidence_orphanet",
+    "edge_target_has_association_evidence",
+    "edge_evidence_for_disease",
+    "edge_evidence_has_variant",
+    "edge_evidence_has_drug",
+    "edge_evidence_has_literature",
+    "edge_evidence_has_biomarker_gene_expression",
+    "edge_evidence_has_biomarker_genetic_variation",
+    "edge_evidence_has_clinical_trial",
+    "edge_evidence_has_biological_model",
+    "edge_evidence_has_pathway",
 ]

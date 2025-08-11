@@ -1,4 +1,4 @@
-"""Acquisition definition that acquires edges from evidence to URLs."""
+"""Acquisition definition that acquires edges from evidence to pathways."""
 
 from typing import Final
 
@@ -8,19 +8,19 @@ from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetEvidence,
     FieldEvidenceId,
-    FieldEvidenceUrls,
-    FieldEvidenceUrlsElementUrl,
+    FieldEvidencePathways,
+    FieldEvidencePathwaysElementId,
 )
 from open_targets.definition.helper import get_arrow_expression
 
-edge_evidence_has_url: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
+edge_evidence_has_pathway: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
     scan_operation=ExplodingScanOperation(
         dataset=DatasetEvidence,
-        exploded_field=FieldEvidenceUrls,
+        exploded_field=FieldEvidencePathways,
     ),
-    primary_id=get_arrow_expression(FieldEvidenceId, FieldEvidenceUrlsElementUrl),
+    primary_id=get_arrow_expression(FieldEvidenceId, FieldEvidencePathwaysElementId),
     source=FieldEvidenceId,
-    target=FieldEvidenceUrlsElementUrl,
-    label="HAS_URL",
+    target=FieldEvidencePathwaysElementId,
+    label="HAS_PATHWAY",
     properties=[],
 )

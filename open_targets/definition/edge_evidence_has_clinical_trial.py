@@ -1,4 +1,4 @@
-"""Acquisition definition that acquires edges from evidence to biological models."""
+"""Acquisition definition that acquires edges from evidence to clinical trials."""
 
 from typing import Final
 
@@ -8,15 +8,15 @@ from open_targets.adapter.scan_operation import RowScanOperation
 from open_targets.data.schema import (
     DatasetEvidence,
     FieldEvidenceId,
-    FieldEvidenceBiologicalModelId,
+    FieldEvidenceStudyId,
 )
 from open_targets.definition.helper import get_arrow_expression
 
-edge_evidence_from_biological_model: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
+edge_evidence_has_clinical_trial: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
     scan_operation=RowScanOperation(dataset=DatasetEvidence),
-    primary_id=get_arrow_expression(FieldEvidenceId, FieldEvidenceBiologicalModelId),
+    primary_id=get_arrow_expression(FieldEvidenceId, FieldEvidenceStudyId),
     source=FieldEvidenceId,
-    target=FieldEvidenceBiologicalModelId,
-    label="FROM_BIOLOGICAL_MODEL",
+    target=FieldEvidenceStudyId,
+    label="HAS_CLINICAL_TRIAL",
     properties=[],
 )

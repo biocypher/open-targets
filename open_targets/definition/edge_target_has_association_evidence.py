@@ -1,4 +1,4 @@
-"""Acquisition definition that acquires edges from evidence to drug responses."""
+"""Acquisition definition that acquires edges from targets to evidence."""
 
 from typing import Final
 
@@ -8,17 +8,15 @@ from open_targets.adapter.scan_operation import RowScanOperation
 from open_targets.data.schema import (
     DatasetEvidence,
     FieldEvidenceId,
-    FieldEvidenceDrugResponse,
+    FieldEvidenceTargetId,
 )
 from open_targets.definition.helper import get_arrow_expression
 
-edge_evidence_has_drug_response: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
+edge_target_has_association_evidence: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
     scan_operation=RowScanOperation(dataset=DatasetEvidence),
-    primary_id=get_arrow_expression(FieldEvidenceId, FieldEvidenceDrugResponse),
-    source=FieldEvidenceId,
-    target=FieldEvidenceDrugResponse,
-    label="HAS_DRUG_RESPONSE",
-    properties=[
-        FieldEvidenceDrugResponse,
-    ],
+    primary_id=get_arrow_expression(FieldEvidenceTargetId, FieldEvidenceId),
+    source=FieldEvidenceTargetId,
+    target=FieldEvidenceId,
+    label="HAS_ASSOCIATION_EVIDENCE",
+    properties=[],
 )
