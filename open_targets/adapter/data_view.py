@@ -17,7 +17,7 @@ from typing import Any, Protocol, TypeAlias, cast, overload, runtime_checkable
 
 from open_targets.data.schema_base import Field, SequenceField, StructField
 
-DataViewPrimitiveValue: TypeAlias = str | int | float | bool
+DataViewPrimitiveValue: TypeAlias = str | int | float | bool | None
 DataView: TypeAlias = Mapping[
     type[Field],
     "DataViewPrimitiveValue | DataView | Sequence[DataViewPrimitiveValue | DataView]",
@@ -156,10 +156,9 @@ class SequenceBackedDataView(DataViewProtocol, DataView):
             if data is None:
                 if issubclass(field, SequenceField):
                     return []
-                msg = f"Path {path} involves a None value for field {field}."
-                raise ValueError(msg)
+                return None
             if isinstance(data, Mapping):
-                data = data[field.name]
+                data = data.get(field.name)
             elif isinstance(data, Sequence):
                 data = data[cast("int", self._field_path_mapping[field])]
             else:

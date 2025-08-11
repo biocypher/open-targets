@@ -156,7 +156,7 @@ class AcquisitionContext:
             sequence_data = cast("Sequence[DataView]", view[exploded_field])
             for item in sequence_data:
                 try:
-                    raw_item = cast("DataViewProtocol", item).raw_data
+                    raw_item = item.raw_data
                 except AttributeError:
                     raw_item = item
                 yield SequenceBackedDataView(
