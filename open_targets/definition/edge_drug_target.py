@@ -34,10 +34,10 @@ edge_drug_target: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisi
             ),
             LiteralExpression("->"),
             BuildCurieExpression(
-        prefix=LiteralExpression(ENSEMBL_PREFIX),
-        reference=FieldExpression(FieldMoleculeLinkedTargetsRowsElement),
-        normalise=True,
-    ),
+                prefix=LiteralExpression(ENSEMBL_PREFIX),
+                reference=FieldExpression(FieldMoleculeLinkedTargetsRowsElement),
+                normalise=True,
+            ),
         ],
     ),
     source=BuildCurieExpression(

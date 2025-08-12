@@ -20,7 +20,6 @@ from open_targets.data.schema import (
     FieldMoleculeLinkedDiseasesRowsElement,
 )
 from open_targets.definition.curie_prefix import CHEMBL_PREFIX
-
 from open_targets.definition.node_shared import node_static_properties
 
 edge_drug_disease: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
@@ -47,5 +46,4 @@ edge_drug_disease: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquis
     target=NormaliseCurieExpression(ToStringExpression(FieldExpression(FieldMoleculeLinkedDiseasesRowsElement))),
     label=LiteralExpression("DRUG_TO_DISEASE_ASSOCIATION"),
     properties=node_static_properties,
-    
 )
