@@ -152,7 +152,7 @@ class AcquisitionContext:
             },
         )
 
-        if exploded_field.element.data_type in (OpenTargetsDatasetFieldType.ARRAY, OpenTargetsDatasetFieldType.MAP):
+        if exploded_field.element.data_type in (OpenTargetsDatasetFieldType.ARRAY, OpenTargetsDatasetFieldType.STRUCT):
 
             def exploded_field_element_raw_data_getter(item: Any) -> Any:
                 return cast("DataViewProtocol", item).raw_data
