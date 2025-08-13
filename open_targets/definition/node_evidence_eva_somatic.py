@@ -7,7 +7,6 @@ from open_targets.adapter.output import NodeInfo
 from open_targets.adapter.scan_operation import RowScanOperation
 from open_targets.data.schema import (
     DatasetEvidence,
-    FieldEvidenceId,
     FieldEvidenceAlleleOrigins,
     FieldEvidenceAllelicRequirements,
     FieldEvidenceClinicalSignificances,
@@ -16,6 +15,7 @@ from open_targets.data.schema import (
     FieldEvidenceDirectionOnTrait,
     FieldEvidenceDiseaseFromSource,
     FieldEvidenceDiseaseFromSourceId,
+    FieldEvidenceId,
     FieldEvidenceLiterature,
     FieldEvidenceReleaseDate,
     FieldEvidenceScore,

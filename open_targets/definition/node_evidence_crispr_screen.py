@@ -7,13 +7,12 @@ from open_targets.adapter.output import NodeInfo
 from open_targets.adapter.scan_operation import RowScanOperation
 from open_targets.data.schema import (
     DatasetEvidence,
-    FieldEvidenceId,
     FieldEvidenceCellType,
     FieldEvidenceContrast,
     FieldEvidenceCrisprScreenLibrary,
     FieldEvidenceDiseaseFromSource,
     FieldEvidenceGeneticBackground,
-    FieldEvidenceLiterature,
+    FieldEvidenceId,
     FieldEvidenceLog2FoldChangeValue,
     FieldEvidenceProjectId,
     FieldEvidenceResourceScore,
@@ -36,7 +35,6 @@ node_evidence_crispr_screen: Final[AcquisitionDefinition[NodeInfo]] = Expression
         FieldEvidenceCrisprScreenLibrary,
         FieldEvidenceDiseaseFromSource,
         FieldEvidenceGeneticBackground,
-        FieldEvidenceLiterature,
         FieldEvidenceLog2FoldChangeValue,
         FieldEvidenceProjectId,
         FieldEvidenceResourceScore,

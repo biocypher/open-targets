@@ -7,20 +7,19 @@ from open_targets.adapter.output import NodeInfo
 from open_targets.adapter.scan_operation import RowScanOperation
 from open_targets.data.schema import (
     DatasetEvidence,
-    FieldEvidenceId,
     FieldEvidenceClinicalPhase,
     FieldEvidenceClinicalStatus,
     FieldEvidenceCohortPhenotypes,
     FieldEvidenceDirectionOnTrait,
     FieldEvidenceDiseaseFromSource,
     FieldEvidenceDrugId,
+    FieldEvidenceId,
     FieldEvidenceScore,
     FieldEvidenceStudyId,
     FieldEvidenceStudyStartDate,
     FieldEvidenceStudyStopReason,
     FieldEvidenceStudyStopReasonCategories,
     FieldEvidenceTargetFromSource,
-    FieldEvidenceUrls,
     FieldEvidenceVariantEffect,
 )
 
@@ -44,7 +43,6 @@ node_evidence_chembl: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcq
         FieldEvidenceStudyStopReason,
         FieldEvidenceStudyStopReasonCategories,
         FieldEvidenceTargetFromSource,
-        FieldEvidenceUrls,
         FieldEvidenceVariantEffect,
     ],
 )

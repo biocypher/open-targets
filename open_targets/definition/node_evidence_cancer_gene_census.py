@@ -7,14 +7,12 @@ from open_targets.adapter.output import NodeInfo
 from open_targets.adapter.scan_operation import RowScanOperation
 from open_targets.data.schema import (
     DatasetEvidence,
-    FieldEvidenceId,
     FieldEvidenceDirectionOnTrait,
-    FieldEvidenceMutatedSamples,
+    FieldEvidenceId,
     FieldEvidenceResourceScore,
     FieldEvidenceScore,
     FieldEvidenceStudyId,
     FieldEvidenceVariantEffect,
-    FieldEvidenceLiterature,
 )
 
 node_evidence_cancer_gene_census: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
@@ -26,11 +24,9 @@ node_evidence_cancer_gene_census: Final[AcquisitionDefinition[NodeInfo]] = Expre
     label="CANCER_GENE_CENSUS_EVIDENCE",
     properties=[
         FieldEvidenceDirectionOnTrait,
-        FieldEvidenceMutatedSamples,
         FieldEvidenceResourceScore,
         FieldEvidenceScore,
         FieldEvidenceStudyId,
         FieldEvidenceVariantEffect,
-        FieldEvidenceLiterature,
     ],
 )

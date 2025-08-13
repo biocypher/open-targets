@@ -7,10 +7,8 @@ from open_targets.adapter.output import NodeInfo
 from open_targets.adapter.scan_operation import RowScanOperation
 from open_targets.data.schema import (
     DatasetEvidence,
-    FieldEvidenceId,
-    FieldEvidenceDiseaseCellLines,
     FieldEvidenceDiseaseFromSource,
-    FieldEvidenceLiterature,
+    FieldEvidenceId,
     FieldEvidenceResourceScore,
     FieldEvidenceScore,
     FieldEvidenceTargetFromSource,
@@ -24,9 +22,7 @@ node_evidence_crispr: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcq
     primary_id=FieldEvidenceId,
     label="CRISPR_EVIDENCE",
     properties=[
-        FieldEvidenceDiseaseCellLines,
         FieldEvidenceDiseaseFromSource,
-        FieldEvidenceLiterature,
         FieldEvidenceResourceScore,
         FieldEvidenceScore,
         FieldEvidenceTargetFromSource,

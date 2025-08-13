@@ -8,12 +8,9 @@ from open_targets.adapter.scan_operation import RowScanOperation
 from open_targets.data.schema import (
     DatasetEvidence,
     FieldEvidenceId,
-    FieldEvidenceLiterature,
-    FieldEvidencePmcIds,
     FieldEvidencePublicationYear,
     FieldEvidenceResourceScore,
     FieldEvidenceScore,
-    FieldEvidenceTextMiningSentences,
 )
 
 node_evidence_europepmc: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
@@ -24,11 +21,8 @@ node_evidence_europepmc: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNode
     primary_id=FieldEvidenceId,
     label="EUROPEPMC_EVIDENCE",
     properties=[
-        FieldEvidenceLiterature,
-        FieldEvidencePmcIds,
         FieldEvidencePublicationYear,
         FieldEvidenceResourceScore,
         FieldEvidenceScore,
-        FieldEvidenceTextMiningSentences,
     ],
 )

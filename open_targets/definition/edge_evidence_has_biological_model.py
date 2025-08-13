@@ -7,8 +7,8 @@ from open_targets.adapter.output import EdgeInfo
 from open_targets.adapter.scan_operation import RowScanOperation
 from open_targets.data.schema import (
     DatasetEvidence,
-    FieldEvidenceId,
     FieldEvidenceBiologicalModelId,
+    FieldEvidenceId,
 )
 from open_targets.definition.helper import get_arrow_expression
 

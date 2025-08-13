@@ -1,4 +1,4 @@
-"""Acquisition definition that acquires edges from evidence to literature entries."""
+"""Acquisition definition that acquires edges from evidence to text mining sentences."""
 
 from typing import Final
 
@@ -9,27 +9,28 @@ from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetEvidence,
     FieldEvidenceId,
-    FieldEvidenceLiterature,
+    FieldEvidenceTextMiningSentences,
+    FieldEvidenceTextMiningSentencesElementText,
 )
 from open_targets.definition.helper import get_arrow_expression
 
-edge_evidence_has_literature: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
+edge_evidence_has_text_mining_sentence: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
     scan_operation=ExplodingScanOperation(
         dataset=DatasetEvidence,
-        exploded_field=FieldEvidenceLiterature,
+        exploded_field=FieldEvidenceTextMiningSentences,
     ),
     primary_id=get_arrow_expression(
         FieldEvidenceId,
         BuildCurieExpression(
-            prefix=LiteralExpression("pubmed"),
-            reference=FieldExpression(FieldEvidenceLiterature.element),
+            prefix=LiteralExpression("text_mining_sentence"),
+            reference=FieldExpression(FieldEvidenceTextMiningSentencesElementText),
         ),
     ),
     source=FieldEvidenceId,
     target=BuildCurieExpression(
-        prefix=LiteralExpression("pubmed"),
-        reference=FieldExpression(FieldEvidenceLiterature.element),
+        prefix=LiteralExpression("text_mining_sentence"),
+        reference=FieldExpression(FieldEvidenceTextMiningSentencesElementText),
     ),
-    label="HAS_LITERATURE",
+    label="HAS_TEXT_MINING_SENTENCE",
     properties=[],
 )

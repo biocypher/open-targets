@@ -7,13 +7,12 @@ from open_targets.adapter.output import NodeInfo
 from open_targets.adapter.scan_operation import RowScanOperation
 from open_targets.data.schema import (
     DatasetEvidence,
-    FieldEvidenceId,
     FieldEvidenceAllelicRequirements,
     FieldEvidenceConfidence,
     FieldEvidenceDirectionOnTrait,
     FieldEvidenceDiseaseFromSource,
     FieldEvidenceDiseaseFromSourceId,
-    FieldEvidenceLiterature,
+    FieldEvidenceId,
     FieldEvidenceScore,
     FieldEvidenceStudyId,
     FieldEvidenceVariantEffect,
@@ -33,7 +32,6 @@ node_evidence_gene2phenotype: Final[AcquisitionDefinition[NodeInfo]] = Expressio
         FieldEvidenceDirectionOnTrait,
         FieldEvidenceDiseaseFromSource,
         FieldEvidenceDiseaseFromSourceId,
-        FieldEvidenceLiterature,
         FieldEvidenceScore,
         FieldEvidenceStudyId,
         FieldEvidenceVariantEffect,
