@@ -18,7 +18,7 @@ from test.fixture.mock.schema import MockDataset
 class MockScanningAcquisitionDefinition(ScanningAcquisitionDefinition[TAcquisitionOutput]):
     def _get_scan_operation(self) -> ScanOperation: ...
 
-    def _get_required_fields(self) -> Iterable[type[Field]]: ...
+    def _get_required_fields(self) -> Sequence[type[Field]]: ...
 
     def _acquire_from_scanning(
         self,
@@ -29,7 +29,7 @@ class MockScanningAcquisitionDefinition(ScanningAcquisitionDefinition[TAcquisiti
 
 class MockSingleExpressionAcquisitionDefinition(_ExpressionAcquisitionDefinition[Any]):
     def __init__(self, expression: Expression[Any]) -> None:
-        super().__init__(MockScanOperation(MockDataset))
+        super().__init__(MockScanOperation(dataset=MockDataset))
         self._expression = expression
 
     def _acquire_from_scanning(

@@ -7,14 +7,15 @@ from os import PathLike
 from pathlib import Path
 from typing import Any, Final, cast, overload
 
-import duckdb
+from duckdb import ColumnExpression, ConstantExpression, DuckDBPyRelation, read_parquet
 
 from open_targets.adapter.acquisition_definition import AcquisitionDefinition
 from open_targets.adapter.data_view import DataView, DataViewProtocol, SequenceBackedDataView
 from open_targets.adapter.output import EdgeInfo, NodeInfo
 from open_targets.adapter.scan_operation import ExplodingScanOperation, RowScanOperation, ScanOperation
+from open_targets.adapter.scan_operation_predicate import PushdownEqualityPredicate, ScanOperationPredicate
 from open_targets.data.metadata.model import OpenTargetsDatasetFieldType
-from open_targets.data.schema_base import Dataset, Field, SequenceField
+from open_targets.data.schema_base import Dataset, Field
 
 TOP_FIELD_PATH_INDEX = 1
 TOP_FIELD_PATH_LENGTH = TOP_FIELD_PATH_INDEX + 1
@@ -75,13 +76,9 @@ class AcquisitionContext:
         """Get the scan result stream."""
         match scan_operation:
             case RowScanOperation():
-                return self._get_row_scan_result_stream(scan_operation.dataset, requested_fields)
+                return self._get_row_scan_result_stream(scan_operation, requested_fields)
             case ExplodingScanOperation():
-                return self._get_exploded_scan_result_stream(
-                    scan_operation.dataset,
-                    scan_operation.exploded_field,
-                    requested_fields,
-                )
+                return self._get_exploded_scan_result_stream(scan_operation, requested_fields)
             case _:
                 msg = f"Unsupported scan operation: {scan_operation}"
                 raise ValueError(msg)
@@ -109,25 +106,27 @@ class AcquisitionContext:
 
     def _get_row_scan_result_stream(
         self,
-        dataset: type[Dataset],
+        scan_operation: RowScanOperation,
         requested_fields: Sequence[type[Field]],
     ) -> Iterable[DataView]:
+        dataset = scan_operation.dataset
         top_fields, nested_fields = self._compute_field_hierarchy(requested_fields, TOP_FIELD_PATH_INDEX)
         field_index_map = {field: index for index, field in enumerate(top_fields)}
         field_path_map: dict[type[Field], int | Sequence[type[Field]]] = {
             field: cast("Sequence[type[Field]]", field.path[TOP_FIELD_PATH_INDEX:]) for field in nested_fields
         }
         field_path_map.update(field_index_map)
-        query_result_stream = self._get_query_result(dataset, top_fields)
+        query_result_stream = self._get_query_result(dataset, scan_operation.predicate, top_fields)
         for data in query_result_stream:
             yield SequenceBackedDataView(field_path_map, data, requested_fields)
 
     def _get_exploded_scan_result_stream(
         self,
-        dataset: type[Dataset],
-        exploded_field: type[SequenceField],
+        scan_operation: ExplodingScanOperation,
         requested_fields: Sequence[type[Field]],
     ) -> Iterable[DataView]:
+        dataset = scan_operation.dataset
+        exploded_field = scan_operation.exploded_field
         required_fields = [exploded_field, *requested_fields]
         top_fields, nested_fields = self._compute_field_hierarchy(required_fields, TOP_FIELD_PATH_INDEX)
         field_index_map = {field: index for index, field in enumerate([*top_fields, exploded_field.element])}
@@ -161,7 +160,7 @@ class AcquisitionContext:
             def exploded_field_element_raw_data_getter(item: Any) -> Any:
                 return item
 
-        for data in self._get_query_result(dataset, top_fields):
+        for data in self._get_query_result(dataset, scan_operation.predicate, top_fields):
             view = SequenceBackedDataView(field_path_map, data, required_fields)
             sequence_data = cast("Sequence[DataView] | None", view[exploded_field])
             if sequence_data is None:
@@ -190,14 +189,27 @@ class AcquisitionContext:
     def _get_query_result(
         self,
         dataset: type[Dataset],
+        predicate: ScanOperationPredicate | None,
         fields: Iterable[type[Field]],
     ) -> Iterable[tuple[Any]]:
-        query = duckdb.read_parquet(str(self.get_dataset_path(dataset))).select(*[field.name for field in fields])
+        query = read_parquet(str(self.get_dataset_path(dataset)))
+        match predicate:
+            case PushdownEqualityPredicate():
+                query = query.filter(
+                    ColumnExpression(predicate.field.name) == ConstantExpression(predicate.value),
+                )
+            case None:
+                pass
+            case _:
+                msg = f"Unsupported predicate: {predicate}"
+                raise ValueError(msg)
+
+        query = query.select(*[field.name for field in fields])
         if self.limit is not None:
             query = query.limit(self.limit)
         return self._get_query_result_stream(query)
 
-    def _get_query_result_stream(self, query: duckdb.DuckDBPyRelation) -> Iterable[tuple[Any]]:
+    def _get_query_result_stream(self, query: DuckDBPyRelation) -> Iterable[tuple[Any]]:
         while True:
             item = cast("tuple[Any] | None", query.fetchone())
             if item is None:
