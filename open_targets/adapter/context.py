@@ -13,6 +13,7 @@ from open_targets.adapter.acquisition_definition import AcquisitionDefinition
 from open_targets.adapter.data_view import DataView, DataViewProtocol, SequenceBackedDataView
 from open_targets.adapter.output import EdgeInfo, NodeInfo
 from open_targets.adapter.scan_operation import ExplodingScanOperation, RowScanOperation, ScanOperation
+from open_targets.data.metadata.model import OpenTargetsDatasetFieldType
 from open_targets.data.schema_base import Dataset, Field, SequenceField
 
 TOP_FIELD_PATH_INDEX = 1
@@ -151,19 +152,31 @@ class AcquisitionContext:
             },
         )
 
+        if exploded_field.element.data_type in (OpenTargetsDatasetFieldType.ARRAY, OpenTargetsDatasetFieldType.STRUCT):
+
+            def exploded_field_element_raw_data_getter(item: Any) -> Any:
+                return cast("DataViewProtocol", item).raw_data
+        else:
+
+            def exploded_field_element_raw_data_getter(item: Any) -> Any:
+                return item
+
         for data in self._get_query_result(dataset, top_fields):
             view = SequenceBackedDataView(field_path_map, data, required_fields)
-            sequence_data = cast("Sequence[DataView]", view[exploded_field])
-            for item in sequence_data:
-                try:
-                    raw_item = cast("DataViewProtocol", item).raw_data
-                except AttributeError:
-                    raw_item = item
+            sequence_data = cast("Sequence[DataView] | None", view[exploded_field])
+            if sequence_data is None:
                 yield SequenceBackedDataView(
                     field_path_map,
-                    [*data, raw_item],
+                    [*data, None],
                     requested_fields,
                 )
+            else:
+                for item in sequence_data:
+                    yield SequenceBackedDataView(
+                        field_path_map,
+                        [*data, exploded_field_element_raw_data_getter(item)],
+                        requested_fields,
+                    )
 
     def _compute_field_hierarchy(
         self,

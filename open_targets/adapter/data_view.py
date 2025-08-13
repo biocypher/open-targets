@@ -154,10 +154,8 @@ class SequenceBackedDataView(DataViewProtocol, DataView):
         field = cast("type[Field]", None)
         for field in path:
             if data is None:
-                if issubclass(field, SequenceField):
-                    return []
-                msg = f"Path {path} involves a None value for field {field}."
-                raise ValueError(msg)
+                break
+
             if isinstance(data, Mapping):
                 data = data[field.name]
             elif isinstance(data, Sequence):
