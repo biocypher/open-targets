@@ -153,6 +153,9 @@ class SequenceBackedDataView(DataViewProtocol, DataView):
     ) -> DataViewValue:
         field = cast("type[Field]", None)
         for field in path:
+            if data is None:
+                break
+
             if isinstance(data, Mapping):
                 data = data[field.name]
             elif isinstance(data, Sequence):

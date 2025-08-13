@@ -94,3 +94,17 @@ gene to go term association:
   source: gene
   target: go term
   input_label: GENE_TO_GO_TERM_ASSOCIATION
+
+drug to disease association:
+  is_a: association
+  represented_as: edge
+  source: drug
+  target: disease
+  input_label: DRUG_TO_DISEASE_ASSOCIATION
+
+drug to gene association:
+  is_a: association
+  represented_as: edge
+  source: drug
+  target: gene
+  input_label: DRUG_TO_GENE_ASSOCIATION

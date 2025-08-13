@@ -6,6 +6,8 @@ definitions can be imported and used directly or easily derived following
 Python's dataclass practices.
 """
 
+from open_targets.definition.edge_drug_disease import edge_drug_disease
+from open_targets.definition.edge_drug_target import edge_drug_target
 from open_targets.definition.edge_target_disease import edge_target_disease
 from open_targets.definition.edge_target_go import edge_target_go
 from open_targets.definition.node_disease import node_diseases
@@ -17,6 +19,8 @@ from open_targets.definition.node_mouse_target import node_mouse_target
 from open_targets.definition.node_target import node_targets
 
 __all__ = [
+    "edge_drug_disease",
+    "edge_drug_target",
     "edge_target_disease",
     "edge_target_go",
     "node_diseases",
