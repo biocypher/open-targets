@@ -41,8 +41,8 @@ class TestScanningAcquisitionDefinition:
     @pytest.mark.parametrize(
         "scan_operation",
         [
-            RowScanOperation(DatasetFake),
-            ExplodingScanOperation(DatasetFake, SequenceField),
+            RowScanOperation(dataset=DatasetFake),
+            ExplodingScanOperation(dataset=DatasetFake, exploded_field=SequenceField),
         ],
     )
     def test_get_required_datasets(self, scan_operation: ScanOperation) -> None:
@@ -302,7 +302,7 @@ class TestExpressionNodeAcquisitionDefinition:
         expected: Any,
     ) -> None:
         definition = ExpressionNodeAcquisitionDefinition(
-            MockScanOperation(MockDataset),
+            MockScanOperation(dataset=MockDataset),
             primary_id,
             label,
             properties,
@@ -387,7 +387,7 @@ class TestExpressionEdgeAcquisitionDefinition:
         expected: Any,
     ) -> None:
         definition = ExpressionEdgeAcquisitionDefinition(
-            MockScanOperation(MockDataset),
+            MockScanOperation(dataset=MockDataset),
             primary_id,
             source,
             target,

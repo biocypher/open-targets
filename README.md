@@ -60,6 +60,8 @@ laptop, building the full graph typically takes 1-2 hours.
 ### Edges
 - Target -> Disease
 - Target -> Gene Ontology
+- Molecule -> Associated Target
+- Molecule -> Associated Disease
 
 ## Prerequisites
 

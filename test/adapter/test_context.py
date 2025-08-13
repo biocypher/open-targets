@@ -6,6 +6,7 @@ import pytest
 from open_targets.adapter.context import AcquisitionContext
 from open_targets.adapter.data_view import ArrayDataView, MappingBackedDataView, SequenceBackedDataView
 from open_targets.adapter.scan_operation import ExplodingScanOperation, RowScanOperation
+from open_targets.adapter.scan_operation_predicate import ScanOperationPredicate
 from open_targets.data.schema_base import Dataset, Field
 from test.fixture.fake.schema import (
     DatasetFake,
@@ -28,7 +29,11 @@ def mock_get_query_result_field_value(field: type[Field]) -> Any:
     raise ValueError(msg)
 
 
-def mock_get_query_result(dataset: type[Dataset], fields: Iterable[type[Field]]) -> Iterable[tuple[Any]]:
+def mock_get_query_result(
+    dataset: type[Dataset],
+    predicate: ScanOperationPredicate | None,
+    fields: Iterable[type[Field]],
+) -> Iterable[tuple[Any]]:
     return [tuple(mock_get_query_result_field_value(field) for field in fields)]
 
 
@@ -83,7 +88,7 @@ def test_get_scan_result_stream_row_scan_operation(
     expected_result: Sequence[Any],
 ) -> None:
     stream = context.get_scan_result_stream(
-        RowScanOperation(DatasetFake),
+        RowScanOperation(dataset=DatasetFake),
         requested_fields,
     )
     result = next(iter(stream))
@@ -174,7 +179,7 @@ def test_get_scan_result_stream_exploding_scan_operation(
     expected_result: Sequence[Any],
 ) -> None:
     stream = context.get_scan_result_stream(
-        ExplodingScanOperation(DatasetFake, FieldFakeStructSequence),
+        ExplodingScanOperation(dataset=DatasetFake, exploded_field=FieldFakeStructSequence),
         requested_fields,
     )
     result = list(stream)
