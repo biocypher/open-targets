@@ -5,11 +5,13 @@ from typing import Final
 from open_targets.adapter.acquisition_definition import AcquisitionDefinition, ExpressionNodeAcquisitionDefinition
 from open_targets.adapter.output import NodeInfo
 from open_targets.adapter.scan_operation import RowScanOperation
+from open_targets.adapter.scan_operation_predicate import PushdownEqualityPredicate
 from open_targets.data.schema import (
     DatasetEvidence,
     FieldEvidenceBiosamplesFromSource,
     FieldEvidenceConfidence,
     FieldEvidenceContrast,
+    FieldEvidenceDatasourceId,
     FieldEvidenceId,
     FieldEvidenceLiterature,
     FieldEvidenceLog2FoldChangePercentileRank,
@@ -23,7 +25,7 @@ from open_targets.data.schema import (
 node_evidence_expression_atlas: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
     scan_operation=RowScanOperation(
         dataset=DatasetEvidence,
-        filter="datasourceId == 'expression_atlas'",
+        predicate=PushdownEqualityPredicate(FieldEvidenceDatasourceId, "expression_atlas"),
     ),
     primary_id=FieldEvidenceId,
     label="EXPRESSION_ATLAS_EVIDENCE",

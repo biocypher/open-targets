@@ -5,6 +5,7 @@ from typing import Final
 from open_targets.adapter.acquisition_definition import AcquisitionDefinition, ExpressionNodeAcquisitionDefinition
 from open_targets.adapter.output import NodeInfo
 from open_targets.adapter.scan_operation import RowScanOperation
+from open_targets.adapter.scan_operation_predicate import PushdownEqualityPredicate
 from open_targets.data.schema import (
     DatasetEvidence,
     FieldEvidenceAllelicRequirements,
@@ -14,6 +15,7 @@ from open_targets.data.schema import (
     FieldEvidenceBetaConfidenceIntervalLower,
     FieldEvidenceBetaConfidenceIntervalUpper,
     FieldEvidenceCohortId,
+    FieldEvidenceDatasourceId,
     FieldEvidenceDirectionOnTrait,
     FieldEvidenceDiseaseFromSource,
     FieldEvidenceDiseaseFromSourceId,
@@ -41,7 +43,7 @@ from open_targets.data.schema import (
 node_evidence_gene_burden: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
     scan_operation=RowScanOperation(
         dataset=DatasetEvidence,
-        filter="datasourceId == 'gene_burden'",
+        predicate=PushdownEqualityPredicate(FieldEvidenceDatasourceId, "gene_burden"),
     ),
     primary_id=FieldEvidenceId,
     label="GENE_BURDEN_EVIDENCE",

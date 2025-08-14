@@ -5,6 +5,7 @@ from typing import Final
 from open_targets.adapter.acquisition_definition import AcquisitionDefinition, ExpressionNodeAcquisitionDefinition
 from open_targets.adapter.output import NodeInfo
 from open_targets.adapter.scan_operation import RowScanOperation
+from open_targets.adapter.scan_operation_predicate import PushdownEqualityPredicate
 from open_targets.data.schema import (
     DatasetEvidence,
     FieldEvidenceAlleleOrigins,
@@ -12,6 +13,7 @@ from open_targets.data.schema import (
     FieldEvidenceClinicalSignificances,
     FieldEvidenceCohortPhenotypes,
     FieldEvidenceConfidence,
+    FieldEvidenceDatasourceId,
     FieldEvidenceDirectionOnTrait,
     FieldEvidenceDiseaseFromSource,
     FieldEvidenceDiseaseFromSourceId,
@@ -30,7 +32,7 @@ from open_targets.data.schema import (
 node_evidence_eva_somatic: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
     scan_operation=RowScanOperation(
         dataset=DatasetEvidence,
-        filter="datasourceId == 'eva_somatic'",
+        predicate=PushdownEqualityPredicate(FieldEvidenceDatasourceId, "eva_somatic"),
     ),
     primary_id=FieldEvidenceId,
     label="EVA_SOMATIC_EVIDENCE",
