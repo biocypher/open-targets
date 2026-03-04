@@ -19,11 +19,11 @@ from open_targets.data.schema import (
 )
 from open_targets.definition.reference_kg.constant import EdgeLabel
 from open_targets.definition.reference_kg.expression import (
-    target_target_interaction_literature_expression,
+    target_target_interaction_literature_entry_expression,
     target_target_interaction_primary_id_expression,
 )
 
-edge_target_target_interaction_supported_by_literature: Final[AcquisitionDefinition[EdgeInfo]] = (
+edge_target_target_interaction_supported_by_literature_entry: Final[AcquisitionDefinition[EdgeInfo]] = (
     ExpressionEdgeAcquisitionDefinition(
         scan_operation=RowScanOperation(
             dataset=DatasetInteractionEvidence,
@@ -31,7 +31,7 @@ edge_target_target_interaction_supported_by_literature: Final[AcquisitionDefinit
         ),
         primary_id=NewUuidExpression(),
         source=target_target_interaction_primary_id_expression,
-        target=target_target_interaction_literature_expression,
+        target=target_target_interaction_literature_entry_expression,
         label=EdgeLabel.SUPPORTED_BY,
         properties=[],
     )

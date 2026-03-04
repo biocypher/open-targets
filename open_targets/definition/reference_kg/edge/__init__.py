@@ -159,8 +159,8 @@ from open_targets.definition.reference_kg.edge.edge_target_disease_association_o
 from open_targets.definition.reference_kg.edge.edge_target_disease_association_reactome_has_object_disease import (
     edge_target_disease_association_reactome_has_object_disease,
 )
-from open_targets.definition.reference_kg.edge.edge_target_disease_association_supported_by_literature import (
-    edge_target_disease_association_supported_by_literature,
+from open_targets.definition.reference_kg.edge.edge_target_disease_association_supported_by_literature_entry import (
+    edge_target_disease_association_supported_by_literature_entry,
 )
 from open_targets.definition.reference_kg.edge.edge_target_disease_association_uniprot_literature_has_object_disease import (
     edge_target_disease_association_uniprot_literature_has_object_disease,
@@ -266,8 +266,8 @@ from open_targets.definition.reference_kg.edge.edge_target_subject_of_target_dis
 from open_targets.definition.reference_kg.edge.edge_target_subject_of_target_disease_association_uniprot_variants import (
     edge_target_subject_of_target_disease_association_uniprot_variants,
 )
-from open_targets.definition.reference_kg.edge.edge_target_target_interaction_supported_by_literature import (
-    edge_target_target_interaction_supported_by_literature,
+from open_targets.definition.reference_kg.edge.edge_target_target_interaction_supported_by_literature_entry import (
+    edge_target_target_interaction_supported_by_literature_entry,
 )
 
 __all__ = [

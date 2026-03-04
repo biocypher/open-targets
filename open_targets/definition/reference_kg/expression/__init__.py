@@ -59,10 +59,10 @@ from open_targets.definition.reference_kg.expression.target_classification_prima
     target_classification_primary_id_expression,
 )
 from open_targets.definition.reference_kg.expression.target_disease_association_literature_expression import (
-    target_disease_association_literature_expression,
+    target_disease_association_literature_entry_expression,
 )
 from open_targets.definition.reference_kg.expression.target_target_interaction_literature_expression import (
-    target_target_interaction_literature_expression,
+    target_target_interaction_literature_entry_expression,
 )
 from open_targets.definition.reference_kg.expression.target_target_interaction_primary_id_expression import (
     target_target_interaction_primary_id_expression,

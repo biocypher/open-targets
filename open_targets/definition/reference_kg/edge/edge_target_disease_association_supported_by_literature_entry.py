@@ -18,9 +18,9 @@ from open_targets.data.schema import (
     FieldEvidenceCancerBiomarkersId,
 )
 from open_targets.definition.reference_kg.constant import EdgeLabel
-from open_targets.definition.reference_kg.expression import target_disease_association_literature_expression
+from open_targets.definition.reference_kg.expression import target_disease_association_literature_entry_expression
 
-edge_target_disease_association_supported_by_literature: Final[AcquisitionDefinition[EdgeInfo]] = (
+edge_target_disease_association_supported_by_literature_entry: Final[AcquisitionDefinition[EdgeInfo]] = (
     ExpressionEdgeAcquisitionDefinition(
         scan_operation=ExplodingScanOperation(
             dataset=DatasetEvidenceCancerBiomarkers,
@@ -28,7 +28,7 @@ edge_target_disease_association_supported_by_literature: Final[AcquisitionDefini
         ),
         primary_id=NewUuidExpression(),
         source=FieldEvidenceCancerBiomarkersId,
-        target=target_disease_association_literature_expression,
+        target=target_disease_association_literature_entry_expression,
         label=EdgeLabel.SUPPORTED_BY,
         properties=[],
     )
