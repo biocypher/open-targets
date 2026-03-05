@@ -352,61 +352,35 @@ supported_by:
   is_a: association
   represented_as: edge
 
-target_disease_association_supported_by:
-  input_label: TARGET_DISEASE_ASSOCIATION_SUPPORTED_BY
-  is_a: supported_by
-  represented_as: edge
-  source: target_disease_association
-  target: literature_entry
-
-target_target_interaction_supported_by:
-  input_label: TARGET_TARGET_INTERACTION_SUPPORTED_BY
-  is_a: supported_by
-  represented_as: edge
-  source: target_target_interaction
-  target: literature_entry
-
 tested_in:
   input_label: TESTED_IN
   is_a: association
   represented_as: edge
-  source: target_disease_association_crispr
-  target: cell_line
 
 has_colocalisation:
   input_label: HAS_COLOCALISATION
   is_a: association
   represented_as: edge
-  source: study_locus
-  target: colocalisation
 
 has_credible_set:
   input_label: HAS_CREDIBLE_SET
   is_a: association
   represented_as: edge
-  source: study_locus
-  target: credible_set
 
 has_participating_variant:
   input_label: HAS_PARTICIPATING_VARIANT
   is_a: association
   represented_as: edge
-  source: credible_set
-  target: variant
 
 has_publication:
   input_label: HAS_PUBLICATION
   is_a: association
   represented_as: edge
-  source: study
-  target: literature_entry
 
 has_study_locus:
   input_label: HAS_STUDY_LOCUS
   is_a: association
   represented_as: edge
-  source: study
-  target: study_locus
 
 has_summary_association:
   input_label:
@@ -429,5 +403,3 @@ has_summary_association:
     ]
   is_a: association
   represented_as: edge
-  source: target
-  target: disease
