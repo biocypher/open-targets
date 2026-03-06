@@ -11,9 +11,6 @@ from open_targets.definition.reference_kg.expression.adverse_reaction_primary_id
 from open_targets.definition.reference_kg.expression.colocalisation_primary_id_expression import (
     colocalisation_primary_id_expression,
 )
-from open_targets.definition.reference_kg.expression.credible_set_primary_id_expression import (
-    credible_set_primary_id_expression,
-)
 from open_targets.definition.reference_kg.expression.database_cross_reference_disease_primary_id_expression import (
     database_cross_reference_disease_primary_id_expression,
 )
@@ -77,7 +74,6 @@ from open_targets.definition.reference_kg.expression.target_target_interaction_p
 __all__ = [
     "adverse_reaction_primary_id_expression",
     "colocalisation_primary_id_expression",
-    "credible_set_primary_id_expression",
     "database_cross_reference_disease_primary_id_expression",
     "database_cross_reference_hpo_primary_id_expression",
     "database_cross_reference_target_primary_id_expression",

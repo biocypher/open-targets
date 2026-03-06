@@ -1,6 +1,6 @@
-"""Summary: STUDY_LOCUS -> TARGET edges for L2G predictions.
+"""Summary: CREDIBLE_SET -> TARGET edges for L2G predictions.
 
-Definition for LOCUS_TO_GENE edges: Connects a StudyLocus (source)
+Definition for PREDICTS_TARGET edges: Connects a CredibleSet (source)
 to a Target gene (target) with an L2G prediction score.
 """
 
@@ -21,12 +21,12 @@ from open_targets.data.schema import (
 )
 from open_targets.definition.reference_kg.constant import EdgeLabel
 
-edge_study_locus_locus_to_gene_target: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
+edge_credible_set_predicts_target_target: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
     scan_operation=RowScanOperation(dataset=DatasetL2GPrediction),
     primary_id=NewUuidExpression(),
     source=FieldL2GPredictionStudyLocusId,
     target=FieldL2GPredictionGeneId,
-    label=EdgeLabel.LOCUS_TO_GENE,
+    label=EdgeLabel.PREDICTS_TARGET,
     properties=[
         FieldL2GPredictionScore,
     ],

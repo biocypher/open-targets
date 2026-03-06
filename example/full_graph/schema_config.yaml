@@ -192,11 +192,6 @@ genetic_association_study:
   is_a: named thing
   represented_as: node
 
-study_locus:
-  input_label: STUDY_LOCUS
-  is_a: named thing
-  represented_as: node``
-
 variant:
   input_label: VARIANT
   is_a: named thing
@@ -392,13 +387,18 @@ has_credible_set:
   is_a: association
   represented_as: edge
 
-has_participating_variant:
-  input_label: HAS_PARTICIPATING_VARIANT
+contains_variant:
+  input_label: CONTAINS_VARIANT
   is_a: association
   represented_as: edge
 
-has_publication:
-  input_label: HAS_PUBLICATION
+compares_signal:
+  input_label: COMPARES_SIGNAL
+  is_a: association
+  represented_as: edge
+
+published_in:
+  input_label: PUBLISHED_IN
   is_a: association
   represented_as: edge
 
@@ -449,8 +449,8 @@ has_variant:
   is_a: association
   represented_as: edge
 
-locus_to_gene:
-  input_label: LOCUS_TO_GENE
+predicts_target:
+  input_label: PREDICTS_TARGET
   is_a: association
   represented_as: edge
 

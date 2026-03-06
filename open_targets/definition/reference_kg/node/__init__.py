@@ -39,7 +39,6 @@ from open_targets.definition.reference_kg.node.node_reaction import node_reactio
 from open_targets.definition.reference_kg.node.node_regulatory_element import node_regulatory_element
 from open_targets.definition.reference_kg.node.node_so_term import node_so_term
 from open_targets.definition.reference_kg.node.node_species import node_species
-from open_targets.definition.reference_kg.node.node_study_locus import node_study_locus
 from open_targets.definition.reference_kg.node.node_subcellular_location import node_subcellular_location
 from open_targets.definition.reference_kg.node.node_target import node_target
 from open_targets.definition.reference_kg.node.node_target_classification import node_target_classification
@@ -140,7 +139,6 @@ __all__ = [
     "node_regulatory_element",
     "node_so_term",
     "node_species",
-    "node_study_locus",
     "node_subcellular_location",
     "node_target",
     "node_target_classification",

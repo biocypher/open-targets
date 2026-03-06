@@ -1,7 +1,6 @@
-"""Summary: GENETIC_ASSOCIATION_STUDY HAS LiteratureEntry edge.
+"""Summary: Edge connecting GENETIC_ASSOCIATION_STUDY node to LITERATURE_ENTRY node.
 
-Definition for HAS_PUBLICATION edge: Connects a GENETIC_ASSOCIATION_STUDY
-to its LiteratureEntry via pubmedId.
+Definition for edge: GENETIC_ASSOCIATION_STUDY -> LITERATURE_ENTRY
 """
 
 from typing import Final
@@ -15,15 +14,15 @@ from open_targets.adapter.output import EdgeInfo
 from open_targets.adapter.scan_operation import RowScanOperation
 from open_targets.data.schema import DatasetStudy, FieldStudyStudyId
 from open_targets.definition.reference_kg.constant import EdgeLabel
-from open_targets.definition.reference_kg.expression import study_literature_expression
+from open_targets.definition.reference_kg.expression import literature_entry_primary_id_expression
 
-edge_genetic_association_study_has_publication_literature_entry: Final[AcquisitionDefinition[EdgeInfo]] = (
+edge_genetic_association_study_published_in_literature_entry: Final[AcquisitionDefinition[EdgeInfo]] = (
     ExpressionEdgeAcquisitionDefinition(
         scan_operation=RowScanOperation(dataset=DatasetStudy),
         primary_id=NewUuidExpression(),
         source=FieldStudyStudyId,
-        target=study_literature_expression,
-        label=EdgeLabel.HAS_PUBLICATION,
+        target=literature_entry_primary_id_expression,
+        label=EdgeLabel.PUBLISHED_IN,
         properties=[],
     )
 )
