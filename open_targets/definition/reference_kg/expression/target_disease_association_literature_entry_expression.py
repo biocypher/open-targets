@@ -13,6 +13,6 @@ from open_targets.data.schema import FieldEvidenceCancerBiomarkersLiterature
 from open_targets.definition.helper import get_namespaced_expression
 
 target_disease_association_literature_entry_expression: Final[Expression[str]] = get_namespaced_expression(
-    "literature_index",
+    "literature_entry",
     FieldEvidenceCancerBiomarkersLiterature,
 )

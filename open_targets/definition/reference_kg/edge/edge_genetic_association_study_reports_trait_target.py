@@ -13,6 +13,7 @@ from open_targets.adapter.acquisition_definition import (
 from open_targets.adapter.expression import NewUuidExpression
 from open_targets.adapter.output import EdgeInfo
 from open_targets.adapter.scan_operation import RowScanOperation
+from open_targets.adapter.scan_operation_predicate import EqualityExpression, NotExpression
 from open_targets.data.schema import (
     DatasetStudy,
     FieldStudyGeneId,
@@ -22,7 +23,10 @@ from open_targets.definition.reference_kg.constant import EdgeLabel
 
 edge_genetic_association_study_reports_trait_target: Final[AcquisitionDefinition[EdgeInfo]] = (
     ExpressionEdgeAcquisitionDefinition(
-        scan_operation=RowScanOperation(dataset=DatasetStudy),
+        scan_operation=RowScanOperation(
+            dataset=DatasetStudy,
+            predicate=NotExpression(EqualityExpression(FieldStudyGeneId, None)),
+        ),
         primary_id=NewUuidExpression(),
         source=FieldStudyStudyId,
         target=FieldStudyGeneId,

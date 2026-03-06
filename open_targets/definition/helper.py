@@ -9,6 +9,7 @@ from open_targets.adapter.expression import (
     StringConcatenationExpression,
     StringHashExpression,
     ToStringExpression,
+    TransformExpression,
 )
 from open_targets.data.schema_base import Field
 
@@ -73,3 +74,10 @@ def get_namespaced_hash_expression(
         value_expression = ToStringExpression(value_expression)
 
     return get_namespaced_expression(namespace, StringHashExpression(value_expression))
+
+
+def get_null_to_dummy_string_expression(value_expression: Expression[Any] | type[Field]) -> TransformExpression[Any]:
+    """A hack for missing predicate in exploding scan operation."""
+    if isinstance(value_expression, type):
+        value_expression = FieldExpression(value_expression)
+    return TransformExpression(value_expression, lambda v: "*" if v is None else v)

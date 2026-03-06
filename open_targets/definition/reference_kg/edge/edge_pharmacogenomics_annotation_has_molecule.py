@@ -21,6 +21,7 @@ from open_targets.data.schema import (
     FieldPharmacogenomicsDrugs,
     FieldPharmacogenomicsDrugsElementDrugId,
 )
+from open_targets.definition.helper import get_null_to_dummy_string_expression
 from open_targets.definition.reference_kg.constant import EdgeLabel
 from open_targets.definition.reference_kg.expression import (
     pharmacogenomics_annotation_primary_id_expression,
@@ -34,7 +35,7 @@ edge_pharmacogenomics_annotation_has_molecule: Final[AcquisitionDefinition[EdgeI
         ),
         primary_id=NewUuidExpression(),
         source=pharmacogenomics_annotation_primary_id_expression,
-        target=FieldPharmacogenomicsDrugsElementDrugId,
+        target=get_null_to_dummy_string_expression(FieldPharmacogenomicsDrugsElementDrugId),
         label=EdgeLabel.HAS_MOLECULE,
         properties=[],
     )

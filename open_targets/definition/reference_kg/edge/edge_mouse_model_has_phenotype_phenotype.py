@@ -17,6 +17,7 @@ from open_targets.data.schema import (
     FieldEvidenceImpcDiseaseModelAssociatedHumanPhenotypes,
     FieldEvidenceImpcDiseaseModelAssociatedHumanPhenotypesElementId,
 )
+from open_targets.definition.helper import get_null_to_dummy_string_expression
 from open_targets.definition.reference_kg.constant import EdgeLabel
 
 edge_mouse_model_has_phenotype_phenotype: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
@@ -25,8 +26,8 @@ edge_mouse_model_has_phenotype_phenotype: Final[AcquisitionDefinition[EdgeInfo]]
         exploded_field=FieldEvidenceImpcDiseaseModelAssociatedHumanPhenotypes,
     ),
     primary_id=NewUuidExpression(),
-    source=FieldEvidenceImpcBiologicalModelId,
-    target=FieldEvidenceImpcDiseaseModelAssociatedHumanPhenotypesElementId,
+    source=get_null_to_dummy_string_expression(FieldEvidenceImpcBiologicalModelId),
+    target=get_null_to_dummy_string_expression(FieldEvidenceImpcDiseaseModelAssociatedHumanPhenotypesElementId),
     label=EdgeLabel.HAS_PHENOTYPE,
     properties=[],
 )

@@ -41,6 +41,9 @@ from open_targets.definition.reference_kg.expression.disease_synonym_related_pri
 from open_targets.definition.reference_kg.expression.drug_warning_primary_id_expression import (
     drug_warning_primary_id_expression,
 )
+from open_targets.definition.reference_kg.expression.genetic_association_study_literature_entry_expression import (
+    genetic_association_study_literature_entry_expression,
+)
 from open_targets.definition.reference_kg.expression.literature_entry_primary_id_expression import (
     literature_entry_primary_id_expression,
 )
@@ -51,7 +54,6 @@ from open_targets.definition.reference_kg.expression.pharmacogenomics_annotation
     pharmacogenomics_annotation_primary_id_expression,
 )
 from open_targets.definition.reference_kg.expression.species_primary_id_expression import species_primary_id_expression
-from open_targets.definition.reference_kg.expression.study_literature_expression import study_literature_expression
 from open_targets.definition.reference_kg.expression.subcellular_location_primary_id_expression import (
     subcellular_location_primary_id_expression,
 )
@@ -84,11 +86,11 @@ __all__ = [
     "disease_synonym_narrow_primary_id_expression",
     "disease_synonym_related_primary_id_expression",
     "drug_warning_primary_id_expression",
+    "genetic_association_study_literature_entry_expression",
     "literature_entry_primary_id_expression",
     "mechanism_of_action_primary_id_expression",
     "pharmacogenomics_annotation_primary_id_expression",
     "species_primary_id_expression",
-    "study_literature_expression",
     "subcellular_location_primary_id_expression",
     "target_classification_primary_id_expression",
     "target_disease_association_literature_entry_expression",

@@ -204,7 +204,7 @@ reference_kg_definition: Final[KnowledgeGraphDefinition] = KnowledgeGraphDefinit
         node_phenotype,
         node_reaction,
         node_regulatory_element,
-        # Awaiting review
+        # Unsure usage
         # node_so_term,
         node_species,
         node_subcellular_location,

@@ -5,6 +5,8 @@ This example demonstrates how to select specific node and edge definitions
 from the reference knowledge graph to build a smaller, focused knowledge graph.
 """
 
+import itertools
+
 from biocypher import BioCypher
 
 from open_targets.adapter.context import AcquisitionContext
@@ -49,11 +51,25 @@ def main() -> None:
     for node_definition in node_definitions:
         print(f"{count}: {node_definition.label}")  # noqa: T201
         count += 1
-        biocypher_instance.write_nodes(context.get_acquisition_generator(node_definition))
+        try:
+            iterable = context.get_acquisition_generator(node_definition)
+            first = next(iterable)
+        except StopIteration:
+            continue
+        else:
+            iterable = itertools.chain([first], iterable)
+        biocypher_instance.write_nodes(iterable)
     for edge_definition in edge_definitions:
         print(f"{count}: {edge_definition.label}")  # noqa: T201
         count += 1
-        biocypher_instance.write_edges(context.get_acquisition_generator(edge_definition))
+        try:
+            iterable = context.get_acquisition_generator(edge_definition)
+            first = next(iterable)
+        except StopIteration:
+            continue
+        else:
+            iterable = itertools.chain([first], iterable)
+        biocypher_instance.write_edges(iterable)
 
     # Finalize
     biocypher_instance.write_import_call()

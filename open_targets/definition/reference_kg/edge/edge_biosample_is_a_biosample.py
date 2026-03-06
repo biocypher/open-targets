@@ -17,6 +17,7 @@ from open_targets.data.schema import (
     FieldBiosampleParents,
     FieldBiosampleParentsElement,
 )
+from open_targets.definition.helper import get_null_to_dummy_string_expression
 from open_targets.definition.reference_kg.constant import EdgeLabel
 
 edge_biosample_is_a_biosample: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
@@ -26,7 +27,7 @@ edge_biosample_is_a_biosample: Final[AcquisitionDefinition[EdgeInfo]] = Expressi
     ),
     primary_id=NewUuidExpression(),
     source=FieldBiosampleBiosampleId,
-    target=FieldBiosampleParentsElement,
+    target=get_null_to_dummy_string_expression(FieldBiosampleParentsElement),
     label=EdgeLabel.IS_A,
     properties=[],
 )

@@ -12,7 +12,7 @@ from open_targets.adapter.expression import (
 from open_targets.data.schema import FieldStudyPubmedId
 from open_targets.definition.helper import get_namespaced_expression
 
-study_literature_expression: Final[Expression[str]] = get_namespaced_expression(
-    "literature_index",
+genetic_association_study_literature_entry_expression: Final[Expression[str]] = get_namespaced_expression(
+    "literature_entry",
     FieldStudyPubmedId,
 )

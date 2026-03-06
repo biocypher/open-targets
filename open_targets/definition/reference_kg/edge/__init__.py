@@ -1,8 +1,6 @@
 """Summary: edge definitions for the reference knowledge graph."""
 
-from open_targets.definition.reference_kg.edge.edge_biosample_is_a_biosample import (
-    edge_biosample_is_a_biosample,
-)
+from open_targets.definition.reference_kg.edge.edge_biosample_is_a_biosample import edge_biosample_is_a_biosample
 from open_targets.definition.reference_kg.edge.edge_cell_line_sampled_from_tissue import (
     edge_cell_line_sampled_from_tissue,
 )
@@ -309,6 +307,7 @@ from open_targets.definition.reference_kg.edge.edge_target_target_interaction_su
 )
 
 __all__ = [
+    "edge_biosample_is_a_biosample",
     "edge_cell_line_sampled_from_tissue",
     "edge_colocalisation_compares_signal_credible_set_left",
     "edge_colocalisation_compares_signal_credible_set_right",

@@ -13,6 +13,6 @@ from open_targets.data.schema import FieldInteractionEvidencePubmedId
 from open_targets.definition.helper import get_namespaced_expression
 
 target_target_interaction_literature_entry_expression: Final[Expression[str]] = get_namespaced_expression(
-    "literature_index",
+    "literature_entry",
     FieldInteractionEvidencePubmedId,
 )

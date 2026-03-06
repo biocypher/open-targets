@@ -19,6 +19,7 @@ from open_targets.data.schema import (
     FieldStudyDiseaseIdsElement,
     FieldStudyStudyId,
 )
+from open_targets.definition.helper import get_null_to_dummy_string_expression
 from open_targets.definition.reference_kg.constant import EdgeLabel
 
 edge_genetic_association_study_reports_trait_disease: Final[AcquisitionDefinition[EdgeInfo]] = (
@@ -29,7 +30,7 @@ edge_genetic_association_study_reports_trait_disease: Final[AcquisitionDefinitio
         ),
         primary_id=NewUuidExpression(),
         source=FieldStudyStudyId,
-        target=FieldStudyDiseaseIdsElement,
+        target=get_null_to_dummy_string_expression(FieldStudyDiseaseIdsElement),
         label=EdgeLabel.REPORTS_TRAIT,
         properties=[],
     )
