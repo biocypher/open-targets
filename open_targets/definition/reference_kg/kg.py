@@ -4,6 +4,7 @@ from typing import Final
 
 from open_targets.definition.knowledge_graph import KnowledgeGraphDefinition
 from open_targets.definition.reference_kg.edge import (
+    edge_biosample_is_a_biosample,
     edge_cell_line_sampled_from_tissue,
     edge_colocalisation_compares_signal_credible_set_left,
     edge_colocalisation_compares_signal_credible_set_right,
@@ -114,6 +115,7 @@ from open_targets.definition.reference_kg.edge import (
 )
 from open_targets.definition.reference_kg.node import (
     node_adverse_reaction,
+    node_biosample,
     node_cell_line,
     node_colocalisation,
     node_credible_set,
@@ -174,8 +176,7 @@ from open_targets.definition.reference_kg.node import (
 reference_kg_definition: Final[KnowledgeGraphDefinition] = KnowledgeGraphDefinition(
     node_definitions=[
         node_adverse_reaction,
-        # Awaiting review
-        # node_biosample,
+        node_biosample,
         node_cell_line,
         node_colocalisation,
         node_credible_set,
@@ -235,6 +236,7 @@ reference_kg_definition: Final[KnowledgeGraphDefinition] = KnowledgeGraphDefinit
         node_variant,
     ],
     edge_definitions=[
+        edge_biosample_is_a_biosample,
         edge_cell_line_sampled_from_tissue,
         edge_colocalisation_compares_signal_credible_set_left,
         edge_colocalisation_compares_signal_credible_set_right,

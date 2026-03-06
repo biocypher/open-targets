@@ -17,11 +17,13 @@ from open_targets.data.schema import (
 )
 from open_targets.definition.reference_kg.constant import EdgeLabel
 
-edge_target_disease_association_crispr_has_object_disease: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
-    scan_operation=RowScanOperation(dataset=DatasetEvidenceCrispr),
-    primary_id=NewUuidExpression(),
-    source=FieldEvidenceCrisprId,
-    target=FieldEvidenceCrisprDiseaseId,
-    label=EdgeLabel.HAS_OBJECT,
-    properties=[],
+edge_target_disease_association_crispr_has_object_disease: Final[AcquisitionDefinition[EdgeInfo]] = (
+    ExpressionEdgeAcquisitionDefinition(
+        scan_operation=RowScanOperation(dataset=DatasetEvidenceCrispr),
+        primary_id=NewUuidExpression(),
+        source=FieldEvidenceCrisprId,
+        target=FieldEvidenceCrisprDiseaseId,
+        label=EdgeLabel.HAS_OBJECT,
+        properties=[],
+    )
 )

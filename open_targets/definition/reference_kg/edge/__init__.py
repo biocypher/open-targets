@@ -1,5 +1,8 @@
 """Summary: edge definitions for the reference knowledge graph."""
 
+from open_targets.definition.reference_kg.edge.edge_biosample_is_a_biosample import (
+    edge_biosample_is_a_biosample,
+)
 from open_targets.definition.reference_kg.edge.edge_cell_line_sampled_from_tissue import (
     edge_cell_line_sampled_from_tissue,
 )

@@ -17,11 +17,13 @@ from open_targets.data.schema import (
 )
 from open_targets.definition.reference_kg.constant import EdgeLabel
 
-edge_target_disease_association_europepmc_has_object_disease: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
-    scan_operation=RowScanOperation(dataset=DatasetEvidenceEuropepmc),
-    primary_id=NewUuidExpression(),
-    source=FieldEvidenceEuropepmcId,
-    target=FieldEvidenceEuropepmcDiseaseId,
-    label=EdgeLabel.HAS_OBJECT,
-    properties=[],
+edge_target_disease_association_europepmc_has_object_disease: Final[AcquisitionDefinition[EdgeInfo]] = (
+    ExpressionEdgeAcquisitionDefinition(
+        scan_operation=RowScanOperation(dataset=DatasetEvidenceEuropepmc),
+        primary_id=NewUuidExpression(),
+        source=FieldEvidenceEuropepmcId,
+        target=FieldEvidenceEuropepmcDiseaseId,
+        label=EdgeLabel.HAS_OBJECT,
+        properties=[],
+    )
 )
