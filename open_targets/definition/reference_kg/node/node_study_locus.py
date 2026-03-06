@@ -11,13 +11,13 @@ from open_targets.adapter.acquisition_definition import AcquisitionDefinition, E
 from open_targets.adapter.output import NodeInfo
 from open_targets.adapter.scan_operation import RowScanOperation
 from open_targets.data.schema import (
-    DatasetL2GPrediction,
-    FieldL2GPredictionStudyLocusId,
+    DatasetCredibleSet,
+    FieldCredibleSetStudyLocusId,
 )
 
 node_study_locus: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
-    scan_operation=RowScanOperation(dataset=DatasetL2GPrediction),
-    primary_id=FieldL2GPredictionStudyLocusId,
+    scan_operation=RowScanOperation(dataset=DatasetCredibleSet),
+    primary_id=FieldCredibleSetStudyLocusId,
     label="STUDY_LOCUS",
     properties=[],
 )

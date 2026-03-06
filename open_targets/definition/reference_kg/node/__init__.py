@@ -23,6 +23,7 @@ from open_targets.definition.reference_kg.node.node_disease_synonym_exact import
 from open_targets.definition.reference_kg.node.node_disease_synonym_narrow import node_disease_synonym_narrow
 from open_targets.definition.reference_kg.node.node_disease_synonym_related import node_disease_synonym_related
 from open_targets.definition.reference_kg.node.node_drug_warning import node_drug_warning
+from open_targets.definition.reference_kg.node.node_genetic_association_study import node_genetic_association_study
 from open_targets.definition.reference_kg.node.node_go_term import node_go_term
 from open_targets.definition.reference_kg.node.node_literature_entry import node_literature_entry
 from open_targets.definition.reference_kg.node.node_mechanism_of_action import node_mechanism_of_action
@@ -32,11 +33,12 @@ from open_targets.definition.reference_kg.node.node_mouse_model import node_mous
 from open_targets.definition.reference_kg.node.node_mouse_phenotype import node_mouse_phenotype
 from open_targets.definition.reference_kg.node.node_mouse_phenotype_class import node_mouse_phenotype_class
 from open_targets.definition.reference_kg.node.node_pathway import node_pathway
+from open_targets.definition.reference_kg.node.node_pharmacogenomics_annotation import node_pharmacogenomics_annotation
 from open_targets.definition.reference_kg.node.node_phenotype import node_phenotype
 from open_targets.definition.reference_kg.node.node_reaction import node_reaction
+from open_targets.definition.reference_kg.node.node_regulatory_element import node_regulatory_element
 from open_targets.definition.reference_kg.node.node_so_term import node_so_term
 from open_targets.definition.reference_kg.node.node_species import node_species
-from open_targets.definition.reference_kg.node.node_study import node_study
 from open_targets.definition.reference_kg.node.node_study_locus import node_study_locus
 from open_targets.definition.reference_kg.node.node_subcellular_location import node_subcellular_location
 from open_targets.definition.reference_kg.node.node_target import node_target
@@ -101,6 +103,7 @@ from open_targets.definition.reference_kg.node.node_target_disease_association_u
 from open_targets.definition.reference_kg.node.node_target_disease_association_uniprot_variants import (
     node_target_disease_association_uniprot_variants,
 )
+from open_targets.definition.reference_kg.node.node_target_prioritisation import node_target_prioritisation
 from open_targets.definition.reference_kg.node.node_target_target_interaction import node_target_target_interaction
 from open_targets.definition.reference_kg.node.node_tissue import node_tissue
 from open_targets.definition.reference_kg.node.node_variant import node_variant
@@ -121,6 +124,7 @@ __all__ = [
     "node_disease_synonym_narrow",
     "node_disease_synonym_related",
     "node_drug_warning",
+    "node_genetic_association_study",
     "node_go_term",
     "node_literature_entry",
     "node_mechanism_of_action",
@@ -130,11 +134,12 @@ __all__ = [
     "node_mouse_phenotype",
     "node_mouse_phenotype_class",
     "node_pathway",
+    "node_pharmacogenomics_annotation",
     "node_phenotype",
     "node_reaction",
+    "node_regulatory_element",
     "node_so_term",
     "node_species",
-    "node_study",
     "node_study_locus",
     "node_subcellular_location",
     "node_target",
@@ -159,6 +164,7 @@ __all__ = [
     "node_target_disease_association_reactome",
     "node_target_disease_association_uniprot_literature",
     "node_target_disease_association_uniprot_variants",
+    "node_target_prioritisation",
     "node_target_target_interaction",
     "node_tissue",
     "node_variant",

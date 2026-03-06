@@ -23,8 +23,8 @@ credible_set_primary_id_expression: Final[Expression[str]] = get_namespaced_hash
     "credible_set",
     StringConcatenationExpression(
         [
-            FieldExpression(FieldCredibleSetStudyLocusId),
-            FieldExpression(FieldCredibleSetFinemappingMethod),
+            ToStringExpression(FieldExpression(FieldCredibleSetStudyLocusId)),
+            ToStringExpression(FieldExpression(FieldCredibleSetFinemappingMethod)),
             ToStringExpression(FieldExpression(FieldCredibleSetCredibleSetIndex)),
         ],
     ),
