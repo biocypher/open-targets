@@ -187,18 +187,38 @@ credible_set:
   is_a: named thing
   represented_as: node
 
-study:
-  input_label: STUDY
-  is_a: named thing
-  represented_as: node
-
-study_locus:
-  input_label: STUDY_LOCUS
+genetic_association_study:
+  input_label: GENETIC_ASSOCIATION_STUDY
   is_a: named thing
   represented_as: node
 
 variant:
   input_label: VARIANT
+  is_a: named thing
+  represented_as: node
+
+pharmacogenomics_annotation:
+  input_label: PHARMACOGENOMICS_ANNOTATION
+  is_a: named thing
+  represented_as: node
+
+regulatory_element:
+  input_label: REGULATORY_ELEMENT
+  is_a: named thing
+  represented_as: node
+
+biosample:
+  input_label: BIOSAMPLE
+  is_a: named thing
+  represented_as: node
+
+so_term:
+  input_label: SO_TERM
+  is_a: named thing
+  represented_as: node
+
+target_prioritisation:
+  input_label: TARGET_PRIORITISATION
   is_a: named thing
   represented_as: node
 
@@ -367,13 +387,18 @@ has_credible_set:
   is_a: association
   represented_as: edge
 
-has_participating_variant:
-  input_label: HAS_PARTICIPATING_VARIANT
+contains_variant:
+  input_label: CONTAINS_VARIANT
   is_a: association
   represented_as: edge
 
-has_publication:
-  input_label: HAS_PUBLICATION
+compares_signal:
+  input_label: COMPARES_SIGNAL
+  is_a: association
+  represented_as: edge
+
+published_in:
+  input_label: PUBLISHED_IN
   is_a: association
   represented_as: edge
 
@@ -401,5 +426,45 @@ has_summary_association:
       by_overall_direct,
       by_overall_indirect,
     ]
+  is_a: association
+  represented_as: edge
+
+active_in:
+  input_label: ACTIVE_IN
+  is_a: association
+  represented_as: edge
+
+expressed_in:
+  input_label: EXPRESSED_IN
+  is_a: association
+  represented_as: edge
+
+has_prioritisation:
+  input_label: HAS_PRIORITISATION
+  is_a: association
+  represented_as: edge
+
+has_variant:
+  input_label: HAS_VARIANT
+  is_a: association
+  represented_as: edge
+
+predicts_target:
+  input_label: PREDICTS_TARGET
+  is_a: association
+  represented_as: edge
+
+reports_trait:
+  input_label: REPORTS_TRAIT
+  is_a: association
+  represented_as: edge
+
+measured_in:
+  input_label: MEASURED_IN
+  is_a: association
+  represented_as: edge
+
+regulates:
+  input_label: REGULATES
   is_a: association
   represented_as: edge
