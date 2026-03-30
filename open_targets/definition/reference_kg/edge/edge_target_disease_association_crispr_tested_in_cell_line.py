@@ -10,20 +10,24 @@ from typing import Final
 from open_targets.adapter.acquisition_definition import AcquisitionDefinition, ExpressionEdgeAcquisitionDefinition
 from open_targets.adapter.expression import NewUuidExpression
 from open_targets.adapter.output import EdgeInfo
-from open_targets.adapter.scan_operation import RowScanOperation
+from open_targets.adapter.scan_operation import ExplodingScanOperation
 from open_targets.data.schema import (
     DatasetEvidenceCrispr,
     FieldEvidenceCrisprDiseaseCellLines,
+    FieldEvidenceCrisprDiseaseCellLinesElementId,
     FieldEvidenceCrisprId,
 )
 from open_targets.definition.reference_kg.constant import EdgeLabel
 
 edge_target_disease_association_crispr_tested_in_cell_line: Final[AcquisitionDefinition[EdgeInfo]] = (
     ExpressionEdgeAcquisitionDefinition(
-        scan_operation=RowScanOperation(dataset=DatasetEvidenceCrispr),
+        scan_operation=ExplodingScanOperation(
+            dataset=DatasetEvidenceCrispr,
+            exploded_field=FieldEvidenceCrisprDiseaseCellLines,
+        ),
         primary_id=NewUuidExpression(),
         source=FieldEvidenceCrisprId,
-        target=FieldEvidenceCrisprDiseaseCellLines,
+        target=FieldEvidenceCrisprDiseaseCellLinesElementId,
         label=EdgeLabel.TESTED_IN,
         properties=[],
     )

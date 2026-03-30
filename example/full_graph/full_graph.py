@@ -1,4 +1,5 @@
 # type: ignore[reportUnknownMemberType]
+import itertools
 import logging
 
 from biocypher import BioCypher
@@ -18,7 +19,7 @@ def main():
     context = AcquisitionContext(
         node_definitions=reference_kg_definition.node_definitions,
         edge_definitions=reference_kg_definition.edge_definitions,
-        datasets_location="datasets",  # directory containing the downloaded datasets
+        datasets_location="datasets",  # directory containing the downloaded datasets,
     )
 
     count = 1
@@ -26,11 +27,25 @@ def main():
     for node_definition in reference_kg_definition.node_definitions:
         print(f"{count}: {node_definition.label}")  # noqa: T201
         count += 1
-        biocypher_instance.write_nodes(context.get_acquisition_generator(node_definition))
+        try:
+            iterable = context.get_acquisition_generator(node_definition)
+            first = next(iterable)
+        except StopIteration:
+            continue
+        else:
+            iterable = itertools.chain([first], iterable)
+        biocypher_instance.write_nodes(iterable)
     for edge_definition in reference_kg_definition.edge_definitions:
         print(f"{count}: {edge_definition.label}")  # noqa: T201
         count += 1
-        biocypher_instance.write_edges(context.get_acquisition_generator(edge_definition))
+        try:
+            iterable = context.get_acquisition_generator(edge_definition)
+            first = next(iterable)
+        except StopIteration:
+            continue
+        else:
+            iterable = itertools.chain([first], iterable)
+        biocypher_instance.write_edges(iterable)
 
     biocypher_instance.write_import_call()
     biocypher_instance.summary()

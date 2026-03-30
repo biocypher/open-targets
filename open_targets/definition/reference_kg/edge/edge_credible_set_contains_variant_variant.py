@@ -1,6 +1,6 @@
-"""Summary: Edge connecting CredibleSet node to Variant node.
+"""Summary: Edge connecting CREDIBLE_SET node to VARIANT node.
 
-Definition for edge: CredibleSet -> Variant
+Definition for edge: CREDIBLE_SET -> VARIANT
 """
 
 from typing import Final
@@ -22,20 +22,20 @@ from open_targets.data.schema import (
     FieldCredibleSetLocusElementPValueMantissa,
     FieldCredibleSetLocusElementStandardError,
     FieldCredibleSetLocusElementVariantId,
+    FieldCredibleSetStudyLocusId,
 )
 from open_targets.definition.reference_kg.constant import EdgeLabel
-from open_targets.definition.reference_kg.expression import credible_set_primary_id_expression
 
-edge_credible_set_has_participating_variant_variant: Final[AcquisitionDefinition[EdgeInfo]] = (
+edge_credible_set_contains_variant_variant: Final[AcquisitionDefinition[EdgeInfo]] = (
     ExpressionEdgeAcquisitionDefinition(
         scan_operation=ExplodingScanOperation(
             dataset=DatasetCredibleSet,
             exploded_field=FieldCredibleSetLocus,
         ),
         primary_id=NewUuidExpression(),
-        source=credible_set_primary_id_expression,
+        source=FieldCredibleSetStudyLocusId,
         target=FieldCredibleSetLocusElementVariantId,
-        label=EdgeLabel.HAS_PARTICIPATING_VARIANT,
+        label=EdgeLabel.CONTAINS_VARIANT,
         properties=[
             FieldCredibleSetLocusElementPosteriorProbability,
             FieldCredibleSetLocusElementLogBf,

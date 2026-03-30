@@ -1,10 +1,20 @@
 """Summary: edge definitions for the reference knowledge graph."""
 
+from open_targets.definition.reference_kg.edge.edge_biosample_is_a_biosample import edge_biosample_is_a_biosample
 from open_targets.definition.reference_kg.edge.edge_cell_line_sampled_from_tissue import (
     edge_cell_line_sampled_from_tissue,
 )
-from open_targets.definition.reference_kg.edge.edge_credible_set_has_participating_variant_variant import (
-    edge_credible_set_has_participating_variant_variant,
+from open_targets.definition.reference_kg.edge.edge_colocalisation_compares_signal_credible_set_left import (
+    edge_colocalisation_compares_signal_credible_set_left,
+)
+from open_targets.definition.reference_kg.edge.edge_colocalisation_compares_signal_credible_set_right import (
+    edge_colocalisation_compares_signal_credible_set_right,
+)
+from open_targets.definition.reference_kg.edge.edge_credible_set_contains_variant_variant import (
+    edge_credible_set_contains_variant_variant,
+)
+from open_targets.definition.reference_kg.edge.edge_credible_set_predicts_target_target import (
+    edge_credible_set_predicts_target_target,
 )
 from open_targets.definition.reference_kg.edge.edge_disease_has_database_cross_reference_database_cross_reference import (
     edge_disease_has_database_cross_reference_database_cross_reference,
@@ -28,8 +38,21 @@ from open_targets.definition.reference_kg.edge.edge_disease_phenotype_associatio
 from open_targets.definition.reference_kg.edge.edge_disease_subject_of_disease_phenotype_association import (
     edge_disease_subject_of_disease_phenotype_association,
 )
-from open_targets.definition.reference_kg.edge.edge_enhancer_to_gene import edge_enhancer_to_gene
-from open_targets.definition.reference_kg.edge.edge_l2g_prediction import edge_l2g_prediction
+from open_targets.definition.reference_kg.edge.edge_genetic_association_study_has_credible_set_credible_set import (
+    edge_genetic_association_study_has_credible_set_credible_set,
+)
+from open_targets.definition.reference_kg.edge.edge_genetic_association_study_measured_in_biosample import (
+    edge_genetic_association_study_measured_in_biosample,
+)
+from open_targets.definition.reference_kg.edge.edge_genetic_association_study_published_in_literature_entry import (
+    edge_genetic_association_study_published_in_literature_entry,
+)
+from open_targets.definition.reference_kg.edge.edge_genetic_association_study_reports_trait_disease import (
+    edge_genetic_association_study_reports_trait_disease,
+)
+from open_targets.definition.reference_kg.edge.edge_genetic_association_study_reports_trait_target import (
+    edge_genetic_association_study_reports_trait_target,
+)
 from open_targets.definition.reference_kg.edge.edge_literature_mentions_entity import edge_literature_mentions_entity
 from open_targets.definition.reference_kg.edge.edge_mechanism_of_action_has_target_target import (
     edge_mechanism_of_action_has_target_target,
@@ -61,25 +84,34 @@ from open_targets.definition.reference_kg.edge.edge_pathway_annotated_with_disea
     edge_pathway_annotated_with_disease,
 )
 from open_targets.definition.reference_kg.edge.edge_pathway_is_part_of_pathway import edge_pathway_is_part_of_pathway
+from open_targets.definition.reference_kg.edge.edge_pharmacogenomics_annotation_associated_with_disease import (
+    edge_pharmacogenomics_annotation_associated_with_disease,
+)
+from open_targets.definition.reference_kg.edge.edge_pharmacogenomics_annotation_has_molecule import (
+    edge_pharmacogenomics_annotation_has_molecule,
+)
+from open_targets.definition.reference_kg.edge.edge_pharmacogenomics_annotation_has_target import (
+    edge_pharmacogenomics_annotation_has_target,
+)
+from open_targets.definition.reference_kg.edge.edge_pharmacogenomics_annotation_has_variant import (
+    edge_pharmacogenomics_annotation_has_variant,
+)
+from open_targets.definition.reference_kg.edge.edge_pharmacogenomics_annotation_supported_by_literature_entry import (
+    edge_pharmacogenomics_annotation_supported_by_literature_entry,
+)
 from open_targets.definition.reference_kg.edge.edge_phenotype_has_database_cross_reference_database_cross_reference import (
     edge_phenotype_has_database_cross_reference_database_cross_reference,
 )
 from open_targets.definition.reference_kg.edge.edge_phenotype_is_a_phenotype import edge_phenotype_is_a_phenotype
 from open_targets.definition.reference_kg.edge.edge_reaction_is_part_of_pathway import edge_reaction_is_part_of_pathway
-from open_targets.definition.reference_kg.edge.edge_study_has_publication_literature_entry import (
-    edge_study_has_publication_literature_entry,
+from open_targets.definition.reference_kg.edge.edge_regulatory_element_active_in_biosample import (
+    edge_regulatory_element_active_in_biosample,
 )
-from open_targets.definition.reference_kg.edge.edge_study_has_study_locus_study_locus import (
-    edge_study_has_study_locus_study_locus,
+from open_targets.definition.reference_kg.edge.edge_regulatory_element_regulates_target import (
+    edge_regulatory_element_regulates_target,
 )
-from open_targets.definition.reference_kg.edge.edge_study_locus_has_colocalisation_colocalisation_left import (
-    edge_study_locus_has_colocalisation_colocalisation_left,
-)
-from open_targets.definition.reference_kg.edge.edge_study_locus_has_colocalisation_colocalisation_right import (
-    edge_study_locus_has_colocalisation_colocalisation_right,
-)
-from open_targets.definition.reference_kg.edge.edge_study_locus_has_credible_set_credible_set import (
-    edge_study_locus_has_credible_set_credible_set,
+from open_targets.definition.reference_kg.edge.edge_regulatory_element_supported_by_literature_entry import (
+    edge_regulatory_element_supported_by_literature_entry,
 )
 from open_targets.definition.reference_kg.edge.edge_target_associated_with_adverse_reaction import (
     edge_target_associated_with_adverse_reaction,
@@ -159,8 +191,8 @@ from open_targets.definition.reference_kg.edge.edge_target_disease_association_o
 from open_targets.definition.reference_kg.edge.edge_target_disease_association_reactome_has_object_disease import (
     edge_target_disease_association_reactome_has_object_disease,
 )
-from open_targets.definition.reference_kg.edge.edge_target_disease_association_supported_by_literature import (
-    edge_target_disease_association_supported_by_literature,
+from open_targets.definition.reference_kg.edge.edge_target_disease_association_supported_by_literature_entry import (
+    edge_target_disease_association_supported_by_literature_entry,
 )
 from open_targets.definition.reference_kg.edge.edge_target_disease_association_uniprot_literature_has_object_disease import (
     edge_target_disease_association_uniprot_literature_has_object_disease,
@@ -168,12 +200,16 @@ from open_targets.definition.reference_kg.edge.edge_target_disease_association_u
 from open_targets.definition.reference_kg.edge.edge_target_disease_association_uniprot_variants_has_object_disease import (
     edge_target_disease_association_uniprot_variants_has_object_disease,
 )
+from open_targets.definition.reference_kg.edge.edge_target_expressed_in_biosample import (
+    edge_target_expressed_in_biosample,
+)
 from open_targets.definition.reference_kg.edge.edge_target_has_database_cross_reference_database_cross_reference import (
     edge_target_has_database_cross_reference_database_cross_reference,
 )
 from open_targets.definition.reference_kg.edge.edge_target_has_homologue_in_species_species import (
     edge_target_has_homologue_in_species_species,
 )
+from open_targets.definition.reference_kg.edge.edge_target_has_prioritisation import edge_target_has_prioritisation
 from open_targets.definition.reference_kg.edge.edge_target_has_summary_association_by_datasource_direct_disease import (
     edge_target_has_summary_association_by_datasource_direct_disease,
 )
@@ -266,13 +302,17 @@ from open_targets.definition.reference_kg.edge.edge_target_subject_of_target_dis
 from open_targets.definition.reference_kg.edge.edge_target_subject_of_target_disease_association_uniprot_variants import (
     edge_target_subject_of_target_disease_association_uniprot_variants,
 )
-from open_targets.definition.reference_kg.edge.edge_target_target_interaction_supported_by_literature import (
-    edge_target_target_interaction_supported_by_literature,
+from open_targets.definition.reference_kg.edge.edge_target_target_interaction_supported_by_literature_entry import (
+    edge_target_target_interaction_supported_by_literature_entry,
 )
 
 __all__ = [
+    "edge_biosample_is_a_biosample",
     "edge_cell_line_sampled_from_tissue",
-    "edge_credible_set_has_participating_variant_variant",
+    "edge_colocalisation_compares_signal_credible_set_left",
+    "edge_colocalisation_compares_signal_credible_set_right",
+    "edge_credible_set_contains_variant_variant",
+    "edge_credible_set_predicts_target_target",
     "edge_disease_has_database_cross_reference_database_cross_reference",
     "edge_disease_has_synonym_synonym_broad",
     "edge_disease_has_synonym_synonym_exact",
@@ -281,8 +321,11 @@ __all__ = [
     "edge_disease_is_a_disease",
     "edge_disease_phenotype_association_has_object_phenotype",
     "edge_disease_subject_of_disease_phenotype_association",
-    "edge_enhancer_to_gene",
-    "edge_l2g_prediction",
+    "edge_genetic_association_study_has_credible_set_credible_set",
+    "edge_genetic_association_study_measured_in_biosample",
+    "edge_genetic_association_study_published_in_literature_entry",
+    "edge_genetic_association_study_reports_trait_disease",
+    "edge_genetic_association_study_reports_trait_target",
     "edge_literature_mentions_entity",
     "edge_mechanism_of_action_has_target_target",
     "edge_molecule_derived_from_molecule",
@@ -296,14 +339,17 @@ __all__ = [
     "edge_mouse_phenotype_classified_as_mouse_phenotype_class",
     "edge_pathway_annotated_with_disease",
     "edge_pathway_is_part_of_pathway",
+    "edge_pharmacogenomics_annotation_associated_with_disease",
+    "edge_pharmacogenomics_annotation_has_molecule",
+    "edge_pharmacogenomics_annotation_has_target",
+    "edge_pharmacogenomics_annotation_has_variant",
+    "edge_pharmacogenomics_annotation_supported_by_literature_entry",
     "edge_phenotype_has_database_cross_reference_database_cross_reference",
     "edge_phenotype_is_a_phenotype",
     "edge_reaction_is_part_of_pathway",
-    "edge_study_has_publication_literature_entry",
-    "edge_study_has_study_locus_study_locus",
-    "edge_study_locus_has_colocalisation_colocalisation_left",
-    "edge_study_locus_has_colocalisation_colocalisation_right",
-    "edge_study_locus_has_credible_set_credible_set",
+    "edge_regulatory_element_active_in_biosample",
+    "edge_regulatory_element_regulates_target",
+    "edge_regulatory_element_supported_by_literature_entry",
     "edge_target_associated_with_adverse_reaction",
     "edge_target_belongs_to_target_classification",
     "edge_target_disease_association_cancer_biomarkers_has_drug_response_entity",
@@ -330,11 +376,13 @@ __all__ = [
     "edge_target_disease_association_intogen_has_object_disease",
     "edge_target_disease_association_orphanet_has_object_disease",
     "edge_target_disease_association_reactome_has_object_disease",
-    "edge_target_disease_association_supported_by_literature",
+    "edge_target_disease_association_supported_by_literature_entry",
     "edge_target_disease_association_uniprot_literature_has_object_disease",
     "edge_target_disease_association_uniprot_variants_has_object_disease",
+    "edge_target_expressed_in_biosample",
     "edge_target_has_database_cross_reference_database_cross_reference",
     "edge_target_has_homologue_in_species_species",
+    "edge_target_has_prioritisation",
     "edge_target_has_summary_association_by_datasource_direct_disease",
     "edge_target_has_summary_association_by_datasource_indirect_disease",
     "edge_target_has_summary_association_by_datatype_direct_disease",
@@ -367,5 +415,5 @@ __all__ = [
     "edge_target_subject_of_target_disease_association_reactome",
     "edge_target_subject_of_target_disease_association_uniprot_literature",
     "edge_target_subject_of_target_disease_association_uniprot_variants",
-    "edge_target_target_interaction_supported_by_literature",
+    "edge_target_target_interaction_supported_by_literature_entry",
 ]

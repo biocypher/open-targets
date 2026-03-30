@@ -1,8 +1,8 @@
-"""Summary: STUDY nodes from Study dataset.
+"""Summary: GENETIC_ASSOCIATION_STUDY nodes from Study dataset.
 
-Definition for STUDY nodes: represents scientific studies (e.g., GWAS, clinical trials)
-from the Study dataset, acting as central hubs for linking traits, diseases, and
-genetic associations in the KG.
+Definition for GENETIC_ASSOCIATION_STUDY nodes: represents scientific studies
+(e.g., GWAS, clinical trials) from the Study dataset, acting as central hubs
+for linking traits, diseases, and genetic associations in the KG.
 """
 
 from typing import Final
@@ -30,10 +30,10 @@ from open_targets.data.schema import (
     FieldStudyTraitFromSource,
 )
 
-node_study: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
+node_genetic_association_study: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
     scan_operation=RowScanOperation(dataset=DatasetStudy),
     primary_id=FieldStudyStudyId,
-    label="STUDY",
+    label="GENETIC_ASSOCIATION_STUDY",
     properties=[
         FieldStudyProjectId,
         FieldStudyStudyType,

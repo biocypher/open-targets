@@ -10,6 +10,7 @@ from open_targets.adapter.expression import (
     Expression,
     FieldExpression,
     StringConcatenationExpression,
+    ToStringExpression,
 )
 from open_targets.data.schema import (
     FieldColocalisationLeftStudyLocusId,
@@ -21,8 +22,8 @@ colocalisation_primary_id_expression: Final[Expression[str]] = get_namespaced_ha
     "colocalisation",
     StringConcatenationExpression(
         [
-            FieldExpression(FieldColocalisationLeftStudyLocusId),
-            FieldExpression(FieldColocalisationRightStudyLocusId),
+            ToStringExpression(FieldExpression(FieldColocalisationLeftStudyLocusId)),
+            ToStringExpression(FieldExpression(FieldColocalisationRightStudyLocusId)),
         ],
     ),
 )

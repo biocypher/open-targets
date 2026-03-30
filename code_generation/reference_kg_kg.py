@@ -8,16 +8,13 @@ from code_generation.base import GenerationDefinitionBase
 # Node definitions that should be hidden (commented out) in kg.py
 # Maps definition name to the comment/reason for hiding
 HIDDEN_KG_NODE_DEFINITIONS: dict[str, str] = {
-    "node_biosample": "Awaiting review",
-    "node_so_term": "Awaiting review",
+    "node_so_term": "Unsure usage",
 }
 
 # Edge definitions that should be hidden (commented out) in kg.py
 # Maps definition name to the comment/reason for hiding
 HIDDEN_KG_EDGE_DEFINITIONS: dict[str, str] = {
     "edge_literature_mentions_entity": "Disabled due to unrealistically huge computational burden",
-    "edge_enhancer_to_gene": "Awaiting review",
-    "edge_l2g_prediction": "Awaiting review",
 }
 
 

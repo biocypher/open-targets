@@ -9,10 +9,10 @@ from typing import Final
 from open_targets.adapter.expression import (
     Expression,
 )
-from open_targets.data.schema import FieldStudyPubmedId
+from open_targets.data.schema import FieldInteractionEvidencePubmedId
 from open_targets.definition.helper import get_namespaced_expression
 
-study_literature_expression: Final[Expression[str]] = get_namespaced_expression(
-    "literature_index",
-    FieldStudyPubmedId,
+target_target_interaction_literature_entry_expression: Final[Expression[str]] = get_namespaced_expression(
+    "literature_entry",
+    FieldInteractionEvidencePubmedId,
 )

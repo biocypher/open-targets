@@ -8,10 +8,10 @@ authors = [
 ]
 requires-python = ">=3.10,<3.11"
 dependencies = [
-    "bioregistry>=0.12.13,<0.13",
-    "biocypher>=0.9.4,<0.10",
-    "duckdb>=1.2.2,<2",
-    "xxhash>=3.5.0,<3.6",
+    "biocypher>=0.12.5",
+    "bioregistry>=0.13.21",
+    "duckdb>=1.4.4",
+    "xxhash>=3.6.0",
 ]
 
 [tool.open-targets]
@@ -20,10 +20,10 @@ metadata-url = "https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/25.12/c
 
 [dependency-groups]
 dev = [
-    "pytest>=8.3.5,<9",
-    "jinja2>=3.1.6,<4",
-    "tomli>=2.2.1,<3",
-    "ruff>=0.11.8,<0.12",
+    "pytest>=9.0.2",
+    "jinja2>=3.1.6",
+    "tomli>=2.4.0",
+    "ruff>=0.15.4",
 ]
 
 [build-system]

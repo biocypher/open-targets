@@ -212,11 +212,23 @@ class AcquisitionContext:
         return self._get_query_result_stream(query)
 
     def _get_query_result_stream(self, query: DuckDBPyRelation) -> Iterable[tuple[Any]]:
+        # TODO(<Paul>): Proper logging here
+        # https://github.com/biocypher/open-targets/issues/72
+        retry = 0
         while True:
-            item = cast("tuple[Any] | None", query.fetchone())
-            if item is None:
+            try:
+                item = cast("tuple[Any] | None", query.fetchone())
+                if item is None:
+                    break
+                retry = 0
+                yield item
+            except Exception as e:
+                print(f"Error {e}")
+                if retry < 5:
+                    print(f"Retry {retry}")
+                    retry = retry + 1
+                    continue
                 break
-            yield item
 
     def _build_duckdb_filter_expression(
         self,
