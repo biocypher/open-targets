@@ -212,6 +212,8 @@ class AcquisitionContext:
         return self._get_query_result_stream(query)
 
     def _get_query_result_stream(self, query: DuckDBPyRelation) -> Iterable[tuple[Any]]:
+        # TODO(<Paul>): Proper logging here
+        # https://github.com/biocypher/open-targets/issues/72
         retry = 0
         while True:
             try:
