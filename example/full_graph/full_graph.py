@@ -48,6 +48,7 @@ def main():
         biocypher_instance.write_edges(iterable)
 
     biocypher_instance.write_import_call()
+    biocypher_instance.write_schema_info()
     biocypher_instance.summary()
 
 
