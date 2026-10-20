@@ -1,7 +1,6 @@
 """Protocol for the acquisition context."""
 
 from collections.abc import Iterable, Sequence
-from pathlib import Path
 from typing import Protocol
 
 from open_targets.adapter.data_view import DataView
@@ -17,7 +16,7 @@ class AcquisitionContextProtocol(Protocol):
     query engine.
     """
 
-    def get_dataset_path(self, dataset: type[Dataset]) -> Path:
+    def get_dataset_path(self, dataset: type[Dataset]) -> str:
         """Get the path to the dataset."""
         ...
 

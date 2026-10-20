@@ -167,7 +167,28 @@ This script:
 
 ## Data Location Configuration
 
-The `datasets_location` parameter in `AcquisitionContext` should point to a directory containing Open Targets parquet files organized by dataset name.
+The `datasets_location` parameter in `AcquisitionContext` is required and
+accepts:
+
+- A local directory path
+- A `file://` URL pointing to a local directory
+- An `s3://` repository root, streamed anonymously with DuckDB
+
+For example:
+
+```python
+from open_targets.config import DATA_REPOSITORY_URLS_S3
+
+context = AcquisitionContext(
+    node_definitions=...,
+    edge_definitions=...,
+    datasets_location=DATA_REPOSITORY_URLS_S3,
+)
+```
+
+The S3 URL is generated from `pyproject.toml` as `DATA_REPOSITORY_URLS_S3`.
+Remote access requires the `httpfs` DuckDB extension, which is installed and
+loaded automatically.
 
 ## Common Pitfalls
 

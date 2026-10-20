@@ -103,6 +103,32 @@ Runnable examples are provided in the `example/` directory. Each example include
 
 See `example/README.md` for details on all available examples and how to create your own.
 
+### Data Sources
+
+`AcquisitionContext` accepts local and remote data through the same
+`datasets_location` parameter:
+
+```python
+from open_targets.adapter.context import AcquisitionContext
+from open_targets.config import DATA_REPOSITORY_URLS_S3
+
+# Local directory
+context = AcquisitionContext(
+    node_definitions=...,
+    edge_definitions=...,
+    datasets_location="datasets",
+)
+
+# Public S3 bucket, streamed anonymously with DuckDB
+context = AcquisitionContext(
+    node_definitions=...,
+    edge_definitions=...,
+    datasets_location=DATA_REPOSITORY_URLS_S3,
+)
+```
+
+Only local locations and `s3://` URLs are supported.
+
 ## Reference Knowledge Graph
 
 The reference knowledge graph includes 40+ node types and 50+ edge types. **Each definition file contains detailed docstrings explaining what it does, what data it uses, and how it works.**

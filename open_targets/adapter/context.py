@@ -5,10 +5,16 @@
 from collections.abc import Iterable, Sequence
 from functools import reduce
 from os import PathLike
-from pathlib import Path
 from typing import Any, Final, cast, overload
 
-from duckdb import ColumnExpression, ConstantExpression, DuckDBPyRelation, Expression, read_parquet
+from duckdb import (
+    ColumnExpression,
+    ConstantExpression,
+    DuckDBPyConnection,
+    DuckDBPyRelation,
+    Expression,
+    connect,
+)
 
 from open_targets.adapter.acquisition_definition import AcquisitionDefinition
 from open_targets.adapter.data_view import DataView, DataViewProtocol, SequenceBackedDataView
@@ -21,6 +27,7 @@ from open_targets.adapter.scan_operation_predicate import (
     OrExpression,
     ScanOperationPredicateExpression,
 )
+from open_targets.data.location import build_dataset_path, resolve_datasets_location
 from open_targets.data.metadata.model import OpenTargetsDatasetFieldType
 from open_targets.data.schema_base import Dataset, Field
 
@@ -50,8 +57,8 @@ class AcquisitionContext:
                 definitions of the nodes to acquire.
             edge_definitions (list[AcquisitionDefinition[EdgeInfo]]): The
                 definitions of the edges to acquire.
-            datasets_location (str | PathLike[str]): The location of the
-                directory containing the datasets.
+            datasets_location (str | PathLike[str]): A local directory, a
+                ``file://`` URL, or an ``s3://`` repository root.
             limit (int | None): The maximum number of rows to retrieve from each
                 dataset. If None, all rows are retrieved.
 
@@ -68,12 +75,16 @@ class AcquisitionContext:
             for dataset in definition.get_required_datasets()
         )
         self.datasets: Final[frozenset[type[Dataset]]] = all_datasets_required
-        self.datasets_location: Final[str | PathLike[str]] = datasets_location
+        is_remote, datasets_location_base = resolve_datasets_location(datasets_location)
+        self.is_remote: Final[bool] = is_remote
+        self.datasets_location: Final[str] = datasets_location_base
         self.limit: Final[int | None] = limit
+        self._connection: Final[DuckDBPyConnection] = connect()
+        self._remote_connection_configured: bool = False
 
-    def get_dataset_path(self, dataset: type[Dataset]) -> Path:
-        """Get the path to the dataset."""
-        return Path(self.datasets_location) / dataset.id / "**" / "*.parquet"
+    def get_dataset_path(self, dataset: type[Dataset]) -> str:
+        """Get the parquet glob path of the dataset."""
+        return build_dataset_path(self.datasets_location, dataset, remote=self.is_remote)
 
     def get_scan_result_stream(
         self,
@@ -199,7 +210,9 @@ class AcquisitionContext:
         predicate: ScanOperationPredicateExpression | None,
         fields: Iterable[type[Field]],
     ) -> Iterable[tuple[Any]]:
-        query = read_parquet(str(self.get_dataset_path(dataset)), hive_partitioning=True)
+        if self.is_remote:
+            self._ensure_remote_connection()
+        query = self._connection.read_parquet(self.get_dataset_path(dataset), hive_partitioning=True)
 
         if predicate is not None:
             query = query.filter(self._build_duckdb_filter_expression(None, predicate))
@@ -210,6 +223,16 @@ class AcquisitionContext:
             query = query.limit(self.limit)
 
         return self._get_query_result_stream(query)
+
+    def _ensure_remote_connection(self) -> None:
+        """Install and configure the DuckDB extension for remote datasets."""
+        if self._remote_connection_configured:
+            return
+        self._connection.execute("INSTALL httpfs")
+        self._connection.execute("LOAD httpfs")
+        self._connection.execute("SET http_timeout = 30")
+        self._connection.execute("SET http_retries = 3")
+        self._remote_connection_configured = True
 
     def _get_query_result_stream(self, query: DuckDBPyRelation) -> Iterable[tuple[Any]]:
         # TODO(<Paul>): Proper logging here

@@ -2,7 +2,7 @@
 {% block content %}
 from typing import Final
 
-{% for key, value in config.items() %}
-{{ key }}: Final[str] = "{{ value }}"
+{% for name, value in config %}
+{{ name }}: Final[str] = {{ value }}
 {% endfor %}
 {% endblock %}

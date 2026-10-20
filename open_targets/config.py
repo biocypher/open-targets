@@ -5,3 +5,5 @@ from typing import Final
 
 DATA_VERSION: Final[str] = "25.12"
 METADATA_URL: Final[str] = "https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/25.12/croissant.json"
+DATA_REPOSITORY_URLS_FTP: Final[str] = "ftp://ftp.ebi.ac.uk/pub/databases/opentargets/platform/25.12/output/"
+DATA_REPOSITORY_URLS_S3: Final[str] = "s3://open-targets-public-data-releases/platform/25.12/output/"
