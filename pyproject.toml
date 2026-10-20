@@ -8,7 +8,7 @@ authors = [
 ]
 requires-python = ">=3.10,<3.11"
 dependencies = [
-    "biocypher>=0.12.5",
+    "biocypher[bigdata,neo4j]>=0.12.5",
     "bioregistry>=0.13.21",
     "duckdb>=1.4.4",
     "xxhash>=3.6.0",
