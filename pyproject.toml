@@ -18,6 +18,10 @@ dependencies = [
 data-version = "25.12"
 metadata-url = "https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/25.12/croissant.json"
 
+[tool.open-targets.data-repository-urls]
+ftp = "ftp://ftp.ebi.ac.uk/pub/databases/opentargets/platform/25.12/output/"
+s3 = "s3://open-targets-public-data-releases/platform/25.12/output/"
+
 [dependency-groups]
 dev = [
     "pytest>=9.0.2",
