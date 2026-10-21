@@ -76,7 +76,7 @@ nodes and edges. On a consumer laptop, building the full graph typically takes
 Runnable examples are provided in the `example/` directory. Each example includes:
 - A Python script demonstrating usage
 - Configuration files
-- Data preparation instructions in `datasets/README.md`
+- Local data preparation instructions in `example/README.md`
 
 > [!IMPORTANT]
 > When running the example scripts, ensure your current working directory is the project root.
@@ -85,14 +85,10 @@ Runnable examples are provided in the `example/` directory. Each example include
 ### Quick Start
 
 1. Follow the [Installation](#installation) steps
-2. Navigate to an example directory:
+2. Examples use the public S3 repository by default. For local data, follow the
+   [Local Data Preparation](example/README.md#local-data-preparation) guide.
+3. **Important:** Run example scripts from the project root:
    ```bash
-   cd example/full_graph
-   ```
-3. Follow the data preparation instructions in `datasets/README.md`
-4. **Important:** Ensure your current working directory is the project root when running example scripts:
-   ```bash
-   cd /path/to/open-targets  # Navigate to project root
    uv run python example/full_graph/full_graph.py
    ```
 
@@ -100,6 +96,7 @@ Runnable examples are provided in the `example/` directory. Each example include
 
 - **Full Graph** (`example/full_graph/`): Builds the complete reference knowledge graph using all predefined definitions
 - **Custom Subset** (`example/custom_subset/`): Demonstrates selecting specific node/edge definitions
+- **Parallel Full Graph** (`example/full_graph_parallel/`): Builds the full reference graph in parallel, grouping definitions by label
 
 See `example/README.md` for details on all available examples and how to create your own.
 

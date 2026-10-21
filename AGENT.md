@@ -155,9 +155,11 @@ When working with data:
 Main entry point: `example/full_graph/full_graph.py` (and other examples)
 
 ```bash
-cd example/full_graph
-uv run python full_graph.py
+uv run python example/full_graph/full_graph.py
 ```
+
+Examples use the public S3 repository by default. See `example/README.md` for
+local data preparation.
 
 This script:
 1. Initializes BioCypher with config from `biocypher_config.yaml`

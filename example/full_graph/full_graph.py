@@ -5,6 +5,7 @@ import logging
 from biocypher import BioCypher
 
 from open_targets.adapter.context import AcquisitionContext
+from open_targets.config import DATA_REPOSITORY_URLS_S3
 from open_targets.definition.reference_kg import reference_kg_definition
 
 
@@ -19,7 +20,7 @@ def main():
     context = AcquisitionContext(
         node_definitions=reference_kg_definition.node_definitions,
         edge_definitions=reference_kg_definition.edge_definitions,
-        datasets_location="datasets",  # directory containing the downloaded datasets,
+        datasets_location=DATA_REPOSITORY_URLS_S3,
     )
 
     count = 1
