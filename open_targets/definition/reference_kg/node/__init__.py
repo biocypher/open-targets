@@ -31,7 +31,7 @@ from open_targets.definition.reference_kg.node.node_molecule import node_molecul
 from open_targets.definition.reference_kg.node.node_mouse_gene import node_mouse_gene
 from open_targets.definition.reference_kg.node.node_mouse_model import node_mouse_model
 from open_targets.definition.reference_kg.node.node_mouse_phenotype import node_mouse_phenotype
-from open_targets.definition.reference_kg.node.node_mouse_phenotype_class import node_mouse_phenotype_class
+from open_targets.definition.reference_kg.node.node_mouse_phenotype_class_term import node_mouse_phenotype_class_term
 from open_targets.definition.reference_kg.node.node_pathway import node_pathway
 from open_targets.definition.reference_kg.node.node_pharmacogenomics_annotation import node_pharmacogenomics_annotation
 from open_targets.definition.reference_kg.node.node_phenotype import node_phenotype
@@ -104,7 +104,6 @@ from open_targets.definition.reference_kg.node.node_target_disease_association_u
 )
 from open_targets.definition.reference_kg.node.node_target_prioritisation import node_target_prioritisation
 from open_targets.definition.reference_kg.node.node_target_target_interaction import node_target_target_interaction
-from open_targets.definition.reference_kg.node.node_tissue import node_tissue
 from open_targets.definition.reference_kg.node.node_variant import node_variant
 
 __all__ = [
@@ -131,7 +130,7 @@ __all__ = [
     "node_mouse_gene",
     "node_mouse_model",
     "node_mouse_phenotype",
-    "node_mouse_phenotype_class",
+    "node_mouse_phenotype_class_term",
     "node_pathway",
     "node_pharmacogenomics_annotation",
     "node_phenotype",
@@ -164,6 +163,5 @@ __all__ = [
     "node_target_disease_association_uniprot_variants",
     "node_target_prioritisation",
     "node_target_target_interaction",
-    "node_tissue",
     "node_variant",
 ]

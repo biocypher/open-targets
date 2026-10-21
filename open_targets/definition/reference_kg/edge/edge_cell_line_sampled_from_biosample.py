@@ -1,8 +1,8 @@
-"""Summary: CELL_LINE -> TISSUE sampling relationships from CRISPR evidence.
+"""Summary: CELL_LINE -> BIOSAMPLE sampling relationships from CRISPR evidence.
 
 Definition for SAMPLED_FROM edges: explodes CRISPR evidence cell line entries to
-link each CELL_LINE to its TISSUE, capturing anatomical origin of assay models
-in the KG.
+link each CELL_LINE to its anatomical BIOSAMPLE, capturing the tissue context of
+assay models in the KG.
 """
 
 from typing import Final
@@ -19,7 +19,7 @@ from open_targets.data.schema import (
 )
 from open_targets.definition.reference_kg.constant import EdgeLabel
 
-edge_cell_line_sampled_from_tissue: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
+edge_cell_line_sampled_from_biosample: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
     scan_operation=ExplodingScanOperation(
         dataset=DatasetEvidenceCrispr,
         exploded_field=FieldEvidenceCrisprDiseaseCellLines,
