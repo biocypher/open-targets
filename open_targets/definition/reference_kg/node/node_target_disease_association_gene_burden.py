@@ -14,6 +14,7 @@ hits.
 from typing import Final
 
 from open_targets.adapter.acquisition_definition import AcquisitionDefinition, ExpressionNodeAcquisitionDefinition
+from open_targets.adapter.expression import FieldExpression, TransformExpression
 from open_targets.adapter.output import NodeInfo
 from open_targets.adapter.scan_operation import RowScanOperation
 from open_targets.data.schema import (
@@ -44,6 +45,7 @@ from open_targets.data.schema import (
     FieldEvidenceGeneBurdenStudySampleSize,
     FieldEvidenceGeneBurdenTargetFromSourceId,
     FieldEvidenceGeneBurdenUrls,
+    FieldEvidenceGeneBurdenUrlsElementUrl,
 )
 
 node_target_disease_association_gene_burden: Final[AcquisitionDefinition[NodeInfo]] = (
@@ -76,7 +78,17 @@ node_target_disease_association_gene_burden: Final[AcquisitionDefinition[NodeInf
             FieldEvidenceGeneBurdenStudyCasesWithQualifyingVariants,
             FieldEvidenceGeneBurdenStudySampleSize,
             FieldEvidenceGeneBurdenTargetFromSourceId,
-            FieldEvidenceGeneBurdenUrls,
+            (
+                FieldEvidenceGeneBurdenUrls.name,
+                TransformExpression(
+                    FieldExpression(FieldEvidenceGeneBurdenUrls),
+                    lambda urls: [
+                        str(url[FieldEvidenceGeneBurdenUrlsElementUrl])
+                        for url in urls
+                        if url[FieldEvidenceGeneBurdenUrlsElementUrl] is not None
+                    ],
+                ),
+            ),
         ],
     )
 )

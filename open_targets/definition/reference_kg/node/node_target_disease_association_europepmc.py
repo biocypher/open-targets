@@ -10,6 +10,7 @@ assign relevance score → represent as literature-derived association in the KG
 from typing import Final
 
 from open_targets.adapter.acquisition_definition import AcquisitionDefinition, ExpressionNodeAcquisitionDefinition
+from open_targets.adapter.expression import FieldExpression, TransformExpression
 from open_targets.adapter.output import NodeInfo
 from open_targets.adapter.scan_operation import RowScanOperation
 from open_targets.data.schema import (
@@ -21,6 +22,7 @@ from open_targets.data.schema import (
     FieldEvidenceEuropepmcScore,
     FieldEvidenceEuropepmcTargetFromSourceId,
     FieldEvidenceEuropepmcTextMiningSentences,
+    FieldEvidenceEuropepmcTextMiningSentencesElementText,
 )
 
 node_target_disease_association_europepmc: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
@@ -33,6 +35,16 @@ node_target_disease_association_europepmc: Final[AcquisitionDefinition[NodeInfo]
         FieldEvidenceEuropepmcResourceScore,
         FieldEvidenceEuropepmcScore,
         FieldEvidenceEuropepmcTargetFromSourceId,
-        FieldEvidenceEuropepmcTextMiningSentences,
+        (
+            FieldEvidenceEuropepmcTextMiningSentences.name,
+            TransformExpression(
+                FieldExpression(FieldEvidenceEuropepmcTextMiningSentences),
+                lambda sentences: [
+                    str(sentence[FieldEvidenceEuropepmcTextMiningSentencesElementText])
+                    for sentence in sentences
+                    if sentence[FieldEvidenceEuropepmcTextMiningSentencesElementText] is not None
+                ],
+            ),
+        ),
     ],
 )
