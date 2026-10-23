@@ -172,6 +172,8 @@ class AcquisitionContext:
         if exploded_field.element.data_type in (OpenTargetsDatasetFieldType.ARRAY, OpenTargetsDatasetFieldType.STRUCT):
 
             def exploded_field_element_raw_data_getter(item: Any) -> Any:
+                if item is None:
+                    return None
                 return cast("DataViewProtocol", item).raw_data
         else:
 
@@ -180,8 +182,10 @@ class AcquisitionContext:
 
         for data in self._get_query_result(dataset, scan_operation.predicate, top_fields):
             view = SequenceBackedDataView(field_path_map, data, required_fields)
-            sequence_data = cast("Sequence[DataView] | None", view[exploded_field])
+            sequence_data = cast("Sequence[DataView | None] | None", view[exploded_field])
             if sequence_data is None:
+                if scan_operation.drop_null_elements:
+                    continue
                 yield SequenceBackedDataView(
                     field_path_map,
                     [*data, None],
@@ -189,9 +193,12 @@ class AcquisitionContext:
                 )
             else:
                 for item in sequence_data:
+                    raw_data = exploded_field_element_raw_data_getter(item)
+                    if scan_operation.drop_null_elements and raw_data is None:
+                        continue
                     yield SequenceBackedDataView(
                         field_path_map,
-                        [*data, exploded_field_element_raw_data_getter(item)],
+                        [*data, raw_data],
                         requested_fields,
                     )
 

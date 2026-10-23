@@ -12,10 +12,14 @@ from open_targets.adapter.scan_operation import ExplodingScanOperation, RowScanO
 from open_targets.adapter.scan_operation_predicate import ScanOperationPredicateExpression
 from open_targets.config import DATA_REPOSITORY_URLS_S3
 from open_targets.data.schema import DatasetTarget, FieldTargetId
-from open_targets.data.schema_base import Dataset, Field
+from open_targets.data.schema_base import Dataset, Field, SequenceField
 from test.fixture.fake.schema import (
     DatasetFake,
     FieldFakeScalar,
+    FieldFakeNullElementSequence,
+    FieldFakeNullElementSequenceElement,
+    FieldFakeNullSequence,
+    FieldFakeNullSequenceElement,
     FieldFakeStruct,
     FieldFakeStructSequence,
     FieldFakeStructSequenceElement,
@@ -30,6 +34,8 @@ def mock_get_query_result_field_value(field: type[Field]) -> Any:
         return field.get_value(row_id=0)
     if field is FieldFakeStructSequence:
         return field.get_value(row_id=0, num_elements=2)
+    if field is FieldFakeNullSequence or field is FieldFakeNullElementSequence:
+        return field.get_value(row_id=0)
     msg = f"Field {field} is not a top field"
     raise ValueError(msg)
 
@@ -189,6 +195,44 @@ def test_get_scan_result_stream_exploding_scan_operation(
     )
     result = list(stream)
     result = [_serialise(i) for i in result]
+    assert result == expected_result
+
+
+@pytest.mark.parametrize(
+    ("requested_fields", "exploded_field", "drop_null_elements", "expected_result"),
+    [
+        ((FieldFakeNullSequenceElement,), FieldFakeNullSequence, True, []),
+        ((FieldFakeNullElementSequenceElement,), FieldFakeNullElementSequence, True, []),
+        (
+            (FieldFakeNullSequenceElement,),
+            FieldFakeNullSequence,
+            False,
+            [{FieldFakeNullSequenceElement: FieldFakeNullSequenceElement.get_null_value()}],
+        ),
+        (
+            (FieldFakeNullElementSequenceElement,),
+            FieldFakeNullElementSequence,
+            False,
+            [{FieldFakeNullElementSequenceElement: FieldFakeNullElementSequenceElement.get_null_value()}],
+        ),
+    ],
+)
+def test_get_scan_result_stream_exploding_null_elements(
+    context: AcquisitionContext,
+    requested_fields: Sequence[type[Field]],
+    exploded_field: type[SequenceField],
+    drop_null_elements: bool,
+    expected_result: Sequence[Any],
+) -> None:
+    stream = context.get_scan_result_stream(
+        ExplodingScanOperation(
+            dataset=DatasetFake,
+            exploded_field=exploded_field,
+            drop_null_elements=drop_null_elements,
+        ),
+        requested_fields,
+    )
+    result = [_serialise(i) for i in stream]
     assert result == expected_result
 
 

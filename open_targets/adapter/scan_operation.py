@@ -48,6 +48,10 @@ class ExplodingScanOperation(ScanOperation):
     | f         | h                | [i, j]          |
 
     Nested exploding is NOT yet supported.
+
+    Null sequences and null elements are skipped by default. Set
+    ``drop_null_elements=False`` to keep null elements.
     """
 
     exploded_field: type[SequenceField]
+    drop_null_elements: bool = True

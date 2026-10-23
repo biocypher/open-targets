@@ -20,9 +20,11 @@ from open_targets.data.schema_base import Field, SequenceField, StructField
 DataViewPrimitiveValue: TypeAlias = str | int | float | bool
 DataView: TypeAlias = Mapping[
     type[Field],
-    "DataViewPrimitiveValue | DataView | Sequence[DataViewPrimitiveValue | DataView]",
+    "DataViewPrimitiveValue | DataView | Sequence[DataViewPrimitiveValue | DataView | None] | None",
 ]
-DataViewValue: TypeAlias = "DataViewPrimitiveValue | DataView | Sequence[DataViewPrimitiveValue | DataView]"
+DataViewValue: TypeAlias = (
+    "DataViewPrimitiveValue | DataView | Sequence[DataViewPrimitiveValue | DataView | None] | None"
+)
 
 
 @runtime_checkable
@@ -39,10 +41,14 @@ class DataViewProtocol(Protocol):
         """Get the raw data."""
 
 
-class ArrayDataView(DataViewProtocol, Sequence[DataView]):
+class ArrayDataView(DataViewProtocol, Sequence[DataView | None]):
     """Data view for raw data that is a sequence."""
 
-    def __init__(self, data: Sequence[dict[str, Any]], element_fields: Sequence[type[Field]]) -> None:
+    def __init__(
+        self,
+        data: Sequence[dict[str, Any] | None],
+        element_fields: Sequence[type[Field]],
+    ) -> None:
         """Initialize the data view with raw data that is a sequence.
 
         Args:
@@ -53,24 +59,27 @@ class ArrayDataView(DataViewProtocol, Sequence[DataView]):
         self._data = data
         self._element_fields = element_fields
 
-    def __iter__(self) -> Iterator[DataView]:
+    def __iter__(self) -> Iterator[DataView | None]:
         """Iterate over the sequence."""
-        return (MappingBackedDataView(x, self._element_fields) for x in self._data)
+        return (None if x is None else MappingBackedDataView(x, self._element_fields) for x in self._data)
 
     @overload
-    def __getitem__(self, index: int) -> DataView: ...
+    def __getitem__(self, index: int) -> DataView | None: ...
 
     @overload
-    def __getitem__(self, index: slice) -> Sequence[DataView]: ...
+    def __getitem__(self, index: slice) -> Sequence[DataView | None]: ...
 
     def __getitem__(
         self,
         index: int | slice,
-    ) -> DataView | Sequence[DataView]:
+    ) -> DataView | None | Sequence[DataView | None]:
         """Access in sequence protocol with items returned as views."""
         if isinstance(index, int):
-            return MappingBackedDataView(self._data[index], self._element_fields)
-        return [MappingBackedDataView(item, self._element_fields) for item in self._data[index]]
+            item = self._data[index]
+            return None if item is None else MappingBackedDataView(item, self._element_fields)
+        return [
+            None if item is None else MappingBackedDataView(item, self._element_fields) for item in self._data[index]
+        ]
 
     def __len__(self) -> int:
         """Get the length of the sequence."""
@@ -157,9 +166,9 @@ class SequenceBackedDataView(DataViewProtocol, DataView):
                 break
 
             if isinstance(data, Mapping):
-                data = data[field.name]
+                data = cast("Mapping[str, Any]", data)[field.name]
             elif isinstance(data, Sequence):
-                data = data[cast("int", self._field_path_mapping[field])]
+                data = cast("Sequence[Any]", data)[cast("int", self._field_path_mapping[field])]
             else:
                 msg = f"Path {path} involves non-container field {field} in the middle."
                 raise KeyError(msg)
@@ -208,8 +217,10 @@ class MappingBackedDataView(DataViewProtocol, DataView):
 
 
 def _create_view_value(data: Any, field: type[Field]) -> DataViewValue:
+    if data is None:
+        return None
     if issubclass(field, StructField):
         return MappingBackedDataView(data, field.fields)
     if issubclass(field, SequenceField) and issubclass(field.element, StructField):
-        return ArrayDataView(data if data is not None else [], field.element.fields)
+        return ArrayDataView(data, field.element.fields)
     return data
