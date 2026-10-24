@@ -4,5 +4,5 @@ biocypher:
   big_data: true
 
 neo4j:
-  database_name: custom_subset
+  database_name: custom-subset
   skip_bad_relationships: true

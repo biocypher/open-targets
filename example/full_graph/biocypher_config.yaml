@@ -4,5 +4,5 @@ biocypher:
   big_data: true
 
 neo4j:
-  database_name: reference_kg
+  database_name: reference-kg
   skip_bad_relationships: true
