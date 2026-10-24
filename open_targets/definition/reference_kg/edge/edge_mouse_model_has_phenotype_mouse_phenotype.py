@@ -12,13 +12,13 @@ from open_targets.adapter.acquisition_definition import AcquisitionDefinition, E
 from open_targets.adapter.expression import NewUuidExpression
 from open_targets.adapter.output import EdgeInfo
 from open_targets.adapter.scan_operation import ExplodingScanOperation
+from open_targets.adapter.scan_operation_predicate import EqualityExpression, NotExpression
 from open_targets.data.schema import (
     DatasetMousePhenotype,
     FieldMousePhenotypeBiologicalModels,
     FieldMousePhenotypeBiologicalModelsElementId,
     FieldMousePhenotypeModelPhenotypeId,
 )
-from open_targets.definition.helper import get_null_to_dummy_string_expression
 from open_targets.definition.reference_kg.constant import EdgeLabel
 
 edge_mouse_model_has_phenotype_mouse_phenotype: Final[AcquisitionDefinition[EdgeInfo]] = (
@@ -26,10 +26,12 @@ edge_mouse_model_has_phenotype_mouse_phenotype: Final[AcquisitionDefinition[Edge
         scan_operation=ExplodingScanOperation(
             dataset=DatasetMousePhenotype,
             exploded_field=FieldMousePhenotypeBiologicalModels,
+            drop_null_elements=[FieldMousePhenotypeBiologicalModelsElementId],
+            predicate=NotExpression(EqualityExpression(FieldMousePhenotypeModelPhenotypeId, None)),
         ),
         primary_id=NewUuidExpression(),
-        source=get_null_to_dummy_string_expression(FieldMousePhenotypeBiologicalModelsElementId),
-        target=get_null_to_dummy_string_expression(FieldMousePhenotypeModelPhenotypeId),
+        source=FieldMousePhenotypeBiologicalModelsElementId,
+        target=FieldMousePhenotypeModelPhenotypeId,
         label=EdgeLabel.HAS_PHENOTYPE,
         properties=[],
     )

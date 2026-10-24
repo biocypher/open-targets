@@ -8,26 +8,30 @@ PHENOTYPE terms, capturing cross-species phenotype observations in the KG.
 from typing import Final
 
 from open_targets.adapter.acquisition_definition import AcquisitionDefinition, ExpressionEdgeAcquisitionDefinition
-from open_targets.adapter.expression import NewUuidExpression
+from open_targets.adapter.expression import FieldExpression, NewUuidExpression, TransformExpression
 from open_targets.adapter.output import EdgeInfo
 from open_targets.adapter.scan_operation import ExplodingScanOperation
+from open_targets.adapter.scan_operation_predicate import EqualityExpression, NotExpression
 from open_targets.data.schema import (
     DatasetEvidenceImpc,
     FieldEvidenceImpcBiologicalModelId,
     FieldEvidenceImpcDiseaseModelAssociatedHumanPhenotypes,
     FieldEvidenceImpcDiseaseModelAssociatedHumanPhenotypesElementId,
 )
-from open_targets.definition.helper import get_null_to_dummy_string_expression
 from open_targets.definition.reference_kg.constant import EdgeLabel
 
 edge_mouse_model_has_phenotype_phenotype: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
     scan_operation=ExplodingScanOperation(
         dataset=DatasetEvidenceImpc,
         exploded_field=FieldEvidenceImpcDiseaseModelAssociatedHumanPhenotypes,
+        predicate=NotExpression(EqualityExpression(FieldEvidenceImpcBiologicalModelId, None)),
     ),
     primary_id=NewUuidExpression(),
-    source=get_null_to_dummy_string_expression(FieldEvidenceImpcBiologicalModelId),
-    target=get_null_to_dummy_string_expression(FieldEvidenceImpcDiseaseModelAssociatedHumanPhenotypesElementId),
+    source=FieldEvidenceImpcBiologicalModelId,
+    target=TransformExpression(
+        FieldExpression(FieldEvidenceImpcDiseaseModelAssociatedHumanPhenotypesElementId),
+        lambda value: value.replace(":", "_", 1),
+    ),
     label=EdgeLabel.HAS_PHENOTYPE,
     properties=[],
 )

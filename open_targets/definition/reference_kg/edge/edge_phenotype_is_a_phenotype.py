@@ -16,7 +16,6 @@ from open_targets.data.schema import (
     FieldDiseaseHpoParents,
     FieldDiseaseHpoParentsElement,
 )
-from open_targets.definition.helper import get_null_to_dummy_string_expression
 from open_targets.definition.reference_kg.constant import EdgeLabel
 
 edge_phenotype_is_a_phenotype: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
@@ -26,7 +25,7 @@ edge_phenotype_is_a_phenotype: Final[AcquisitionDefinition[EdgeInfo]] = Expressi
     ),
     primary_id=NewUuidExpression(),
     source=FieldDiseaseHpoId,
-    target=get_null_to_dummy_string_expression(FieldDiseaseHpoParentsElement),
+    target=FieldDiseaseHpoParentsElement,
     label=EdgeLabel.IS_A,
     properties=[],
 )

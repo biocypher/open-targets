@@ -17,7 +17,6 @@ from open_targets.data.schema import (
     FieldDiseaseParents,
     FieldDiseaseParentsElement,
 )
-from open_targets.definition.helper import get_null_to_dummy_string_expression
 from open_targets.definition.reference_kg.constant import EdgeLabel
 
 edge_disease_is_a_disease: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
@@ -27,7 +26,7 @@ edge_disease_is_a_disease: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEd
     ),
     primary_id=NewUuidExpression(),
     source=FieldDiseaseId,
-    target=get_null_to_dummy_string_expression(FieldDiseaseParentsElement),
+    target=FieldDiseaseParentsElement,
     label=EdgeLabel.IS_A,
     properties=[],
 )
