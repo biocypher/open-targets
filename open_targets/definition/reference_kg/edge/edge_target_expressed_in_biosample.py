@@ -31,6 +31,7 @@ from open_targets.data.schema import (
     FieldExpressionTissuesElementRnaValue,
     FieldExpressionTissuesElementRnaZscore,
 )
+from open_targets.definition.helper import get_namespaced_expression
 from open_targets.definition.reference_kg.constant import EdgeLabel
 
 edge_target_expressed_in_biosample: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
@@ -40,7 +41,7 @@ edge_target_expressed_in_biosample: Final[AcquisitionDefinition[EdgeInfo]] = Exp
     ),
     primary_id=NewUuidExpression(),
     source=FieldExpressionId,
-    target=FieldExpressionTissuesElementEfoCode,
+    target=get_namespaced_expression("biosample", FieldExpressionTissuesElementEfoCode),
     label=EdgeLabel.EXPRESSED_IN,
     properties=[
         FieldExpressionTissuesElementLabel,

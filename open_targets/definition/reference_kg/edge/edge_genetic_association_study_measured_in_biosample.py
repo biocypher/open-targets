@@ -19,6 +19,7 @@ from open_targets.data.schema import (
     FieldStudyBiosampleId,
     FieldStudyStudyId,
 )
+from open_targets.definition.helper import get_namespaced_expression
 from open_targets.definition.reference_kg.constant import EdgeLabel
 
 edge_genetic_association_study_measured_in_biosample: Final[AcquisitionDefinition[EdgeInfo]] = (
@@ -29,7 +30,7 @@ edge_genetic_association_study_measured_in_biosample: Final[AcquisitionDefinitio
         ),
         primary_id=NewUuidExpression(),
         source=FieldStudyStudyId,
-        target=FieldStudyBiosampleId,
+        target=get_namespaced_expression("biosample", FieldStudyBiosampleId),
         label=EdgeLabel.MEASURED_IN,
         properties=[],
     )

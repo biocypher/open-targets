@@ -17,6 +17,7 @@ from open_targets.data.schema import (
     FieldEvidenceCrisprDiseaseCellLinesElementId,
     FieldEvidenceCrisprDiseaseCellLinesElementTissueId,
 )
+from open_targets.definition.helper import get_namespaced_expression
 from open_targets.definition.reference_kg.constant import EdgeLabel
 
 edge_cell_line_sampled_from_biosample: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
@@ -26,7 +27,7 @@ edge_cell_line_sampled_from_biosample: Final[AcquisitionDefinition[EdgeInfo]] = 
     ),
     primary_id=NewUuidExpression(),
     source=FieldEvidenceCrisprDiseaseCellLinesElementId,
-    target=FieldEvidenceCrisprDiseaseCellLinesElementTissueId,
+    target=get_namespaced_expression("biosample", FieldEvidenceCrisprDiseaseCellLinesElementTissueId),
     label=EdgeLabel.SAMPLED_FROM,
     properties=[],
 )

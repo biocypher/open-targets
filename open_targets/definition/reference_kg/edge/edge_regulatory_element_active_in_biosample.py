@@ -20,6 +20,7 @@ from open_targets.data.schema import (
     FieldEnhancerToGeneBiosampleId,
     FieldEnhancerToGeneIntervalId,
 )
+from open_targets.definition.helper import get_namespaced_expression
 from open_targets.definition.reference_kg.constant import EdgeLabel
 
 edge_regulatory_element_active_in_biosample: Final[AcquisitionDefinition[EdgeInfo]] = (
@@ -27,7 +28,7 @@ edge_regulatory_element_active_in_biosample: Final[AcquisitionDefinition[EdgeInf
         scan_operation=RowScanOperation(dataset=DatasetEnhancerToGene),
         primary_id=NewUuidExpression(),
         source=FieldEnhancerToGeneIntervalId,
-        target=FieldEnhancerToGeneBiosampleId,
+        target=get_namespaced_expression("biosample", FieldEnhancerToGeneBiosampleId),
         label=EdgeLabel.ACTIVE_IN,
         properties=[],
     )

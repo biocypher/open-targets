@@ -17,7 +17,7 @@ from open_targets.data.schema import (
     FieldDiseaseHpoDbXRefsElement,
     FieldDiseaseHpoId,
 )
-from open_targets.definition.helper import get_namespaced_hash_expression
+from open_targets.definition.helper import get_namespaced_expression, get_namespaced_hash_expression
 from open_targets.definition.reference_kg.constant import EdgeLabel, Namespace
 
 edge_phenotype_has_database_cross_reference_database_cross_reference: Final[AcquisitionDefinition[EdgeInfo]] = (
@@ -27,7 +27,7 @@ edge_phenotype_has_database_cross_reference_database_cross_reference: Final[Acqu
             exploded_field=FieldDiseaseHpoDbXRefs,
         ),
         primary_id=NewUuidExpression(),
-        source=FieldDiseaseHpoId,
+        source=get_namespaced_expression("phenotype", FieldDiseaseHpoId),
         target=get_namespaced_hash_expression(
             Namespace.DATABASE_CROSS_REFERENCE,
             FieldDiseaseHpoDbXRefsElement,

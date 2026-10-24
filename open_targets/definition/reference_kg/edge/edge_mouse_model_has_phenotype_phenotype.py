@@ -18,6 +18,7 @@ from open_targets.data.schema import (
     FieldEvidenceImpcDiseaseModelAssociatedHumanPhenotypes,
     FieldEvidenceImpcDiseaseModelAssociatedHumanPhenotypesElementId,
 )
+from open_targets.definition.helper import get_namespaced_expression
 from open_targets.definition.reference_kg.constant import EdgeLabel
 
 edge_mouse_model_has_phenotype_phenotype: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
@@ -28,9 +29,12 @@ edge_mouse_model_has_phenotype_phenotype: Final[AcquisitionDefinition[EdgeInfo]]
     ),
     primary_id=NewUuidExpression(),
     source=FieldEvidenceImpcBiologicalModelId,
-    target=TransformExpression(
-        FieldExpression(FieldEvidenceImpcDiseaseModelAssociatedHumanPhenotypesElementId),
-        lambda value: value.replace(":", "_", 1),
+    target=get_namespaced_expression(
+        "phenotype",
+        TransformExpression(
+            FieldExpression(FieldEvidenceImpcDiseaseModelAssociatedHumanPhenotypesElementId),
+            lambda value: value.replace(":", "_", 1),
+        ),
     ),
     label=EdgeLabel.HAS_PHENOTYPE,
     properties=[],
