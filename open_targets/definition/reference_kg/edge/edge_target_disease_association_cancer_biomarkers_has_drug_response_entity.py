@@ -9,7 +9,7 @@ association in the KG.
 from typing import Final
 
 from open_targets.adapter.acquisition_definition import AcquisitionDefinition, ExpressionEdgeAcquisitionDefinition
-from open_targets.adapter.expression import NewUuidExpression
+from open_targets.adapter.expression import FieldExpression, NewUuidExpression, TransformExpression
 from open_targets.adapter.output import EdgeInfo
 from open_targets.adapter.scan_operation import RowScanOperation
 from open_targets.data.schema import (
@@ -24,7 +24,10 @@ edge_target_disease_association_cancer_biomarkers_has_drug_response_entity: Fina
         scan_operation=RowScanOperation(dataset=DatasetEvidenceCancerBiomarkers),
         primary_id=NewUuidExpression(),
         source=FieldEvidenceCancerBiomarkersId,
-        target=FieldEvidenceCancerBiomarkersDrugResponse,
+        target=TransformExpression(
+            FieldExpression(FieldEvidenceCancerBiomarkersDrugResponse),
+            lambda value: value.replace("_", ":", 1),
+        ),
         label=EdgeLabel.HAS_DRUG_RESPONSE,
         properties=[],
     )
