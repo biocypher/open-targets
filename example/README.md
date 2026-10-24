@@ -34,7 +34,7 @@ components run through a bounded process pool.
 
 **Run:**
 ```bash
-uv run python example/full_graph_parallel/parallel.py
+uv run python example/full_graph_parallel/full_graph_parallel.py
 ```
 
 **Data:** Uses the public S3 repository by default. For local data, see
@@ -42,10 +42,14 @@ uv run python example/full_graph_parallel/parallel.py
 concurrency of 32 processes; failures are recorded in `parallel_errors.log` and
 the run continues.
 
-At the end, successful component outputs are merged into a `merged/`
-subdirectory containing flat parquet files, a merged `schema_info.yaml`, and a
-single combined Neo4j import script. Set `MERGE_RESULTS = False` in
-`parallel.py` to skip merging.
+At the end, successful component outputs are moved into a `merged/`
+subdirectory containing flat parquet files, a merged `schema_info.yaml`, a
+single combined Neo4j import script, and a combined `console.log`. The
+per-component directories are removed after merging. Set `MERGE_RESULTS = False`
+in `full_graph_parallel.py` to skip merging and keep the component directories.
+
+The console falls back automatically in Jupyter/IDLE or when fd redirection is
+unavailable. Set `FORCE_STREAM_CAPTURE = True` in `console.py` to force it.
 
 ## Local Data Preparation
 
