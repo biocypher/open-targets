@@ -11,7 +11,7 @@ dependencies = [
     "biocypher[bigdata,neo4j]>=0.12.5",
     "bioregistry>=0.13.21",
     "duckdb>=1.4.4",
-    "xxhash>=3.6.0",
+    "xxhash>=3.6.0,<4",
 ]
 
 [tool.open-targets]
