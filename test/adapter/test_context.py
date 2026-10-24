@@ -6,7 +6,7 @@ from typing import Any
 import duckdb
 import pytest
 
-from open_targets.adapter.context import AcquisitionContext
+from open_targets.adapter.context import AcquisitionContext, _should_drop_exploded_element
 from open_targets.adapter.data_view import ArrayDataView, MappingBackedDataView, SequenceBackedDataView
 from open_targets.adapter.scan_operation import ExplodingScanOperation, RowScanOperation
 from open_targets.adapter.scan_operation_predicate import ScanOperationPredicateExpression
@@ -234,6 +234,19 @@ def test_get_scan_result_stream_exploding_null_elements(
     )
     result = [_serialise(i) for i in stream]
     assert result == expected_result
+
+
+def test_should_drop_exploded_element_checks_nested_fields() -> None:
+    operation = ExplodingScanOperation(
+        dataset=DatasetFake,
+        exploded_field=FieldFakeStructSequence,
+        drop_null_elements=[FieldFakeStructSequenceElementScalar],
+    )
+    item = MappingBackedDataView(
+        {FieldFakeStructSequenceElementScalar.name: FieldFakeStructSequenceElementScalar.get_null_value()},
+        [FieldFakeStructSequenceElementScalar],
+    )
+    assert _should_drop_exploded_element(operation, item) is True
 
 
 def _serialise(

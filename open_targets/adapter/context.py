@@ -2,7 +2,7 @@
 
 """Implementation of the acquisition context protocol."""
 
-from collections.abc import Iterable, Sequence
+from collections.abc import Iterable, Mapping, Sequence
 from functools import reduce
 from os import PathLike
 from typing import Any, Final, cast, overload
@@ -29,10 +29,47 @@ from open_targets.adapter.scan_operation_predicate import (
 )
 from open_targets.data.location import build_dataset_path, resolve_datasets_location
 from open_targets.data.metadata.model import OpenTargetsDatasetFieldType
-from open_targets.data.schema_base import Dataset, Field
+from open_targets.data.schema_base import Dataset, Field, SequenceField
 
 TOP_FIELD_PATH_INDEX = 1
 TOP_FIELD_PATH_LENGTH = TOP_FIELD_PATH_INDEX + 1
+
+
+def _should_drop_exploded_element(
+    scan_operation: ExplodingScanOperation,
+    item: DataView | None,
+) -> bool:
+    """Return whether an exploded element should be dropped."""
+    drop = scan_operation.drop_null_elements
+    if drop is False:
+        return False
+    if item is None:
+        return True
+    if drop is True:
+        return False
+    return any(
+        _get_exploded_field_value(cast("DataViewProtocol", item), field, scan_operation.exploded_field) is None
+        for field in drop
+    )
+
+
+def _get_exploded_field_value(
+    item: DataViewProtocol,
+    field: type[Field],
+    exploded_field: type[SequenceField],
+) -> Any:
+    """Resolve a nested field relative to the exploded element."""
+    data: Any = item.raw_data
+    path = field.path[len(exploded_field.path) + 1 :]
+    for nested_field in path:
+        if data is None:
+            return None
+        if isinstance(data, Mapping):
+            data = cast("Mapping[str, Any]", data)[cast("type[Field]", nested_field).name]
+        else:
+            msg = f"Field {field.__name__} is not a mapping field path"
+            raise TypeError(msg)
+    return data
 
 
 class AcquisitionContext:
@@ -184,7 +221,7 @@ class AcquisitionContext:
             view = SequenceBackedDataView(field_path_map, data, required_fields)
             sequence_data = cast("Sequence[DataView | None] | None", view[exploded_field])
             if sequence_data is None:
-                if scan_operation.drop_null_elements:
+                if scan_operation.drop_null_elements is not False:
                     continue
                 yield SequenceBackedDataView(
                     field_path_map,
@@ -194,7 +231,7 @@ class AcquisitionContext:
             else:
                 for item in sequence_data:
                     raw_data = exploded_field_element_raw_data_getter(item)
-                    if scan_operation.drop_null_elements and raw_data is None:
+                    if _should_drop_exploded_element(scan_operation, item):
                         continue
                     yield SequenceBackedDataView(
                         field_path_map,
