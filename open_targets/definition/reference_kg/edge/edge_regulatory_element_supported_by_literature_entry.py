@@ -20,6 +20,7 @@ from open_targets.data.schema import (
     FieldEnhancerToGeneIntervalId,
     FieldEnhancerToGenePmid,
 )
+from open_targets.definition.helper import get_namespaced_expression
 from open_targets.definition.reference_kg.constant import EdgeLabel
 
 edge_regulatory_element_supported_by_literature_entry: Final[AcquisitionDefinition[EdgeInfo]] = (
@@ -27,7 +28,7 @@ edge_regulatory_element_supported_by_literature_entry: Final[AcquisitionDefiniti
         scan_operation=RowScanOperation(dataset=DatasetEnhancerToGene),
         primary_id=NewUuidExpression(),
         source=FieldEnhancerToGeneIntervalId,
-        target=FieldEnhancerToGenePmid,
+        target=get_namespaced_expression("literature_entry", FieldEnhancerToGenePmid),
         label=EdgeLabel.SUPPORTED_BY,
         properties=[],
     )
