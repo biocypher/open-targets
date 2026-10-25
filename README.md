@@ -33,8 +33,8 @@ The adapter includes a comprehensive reference knowledge graph with predefined
 sets of node types (entities) and edge types (relationships), or in the language
 of this adapter, presets of node and edge `definitions`. A script is provided
 to run BioCypher with the adapter, creating a knowledge graph with all predefined
-nodes and edges. On a consumer laptop, building the full graph typically takes
-1-2 hours.
+nodes and edges. Building the full graph typically takes several hours,
+depending on network and storage performance.
 
 **Key Features:**
 - **Includes a comprehensive knowledge graph definition designed to cover all data provided by the Open Targets Platform.** See [Reference Knowledge Graph](#reference-knowledge-graph) for details.
@@ -124,11 +124,14 @@ context = AcquisitionContext(
 )
 ```
 
-Only local locations and `s3://` URLs are supported.
+Local paths, `file://` URLs, and `s3://` URLs are supported.
 
 ## Reference Knowledge Graph
 
-The reference knowledge graph includes 40+ node types and 50+ edge types. **Each definition file contains detailed docstrings explaining what it does, what data it uses, and how it works.**
+The reference knowledge graph currently defines 56 node definitions and 108 edge
+definitions, covering 50 node labels and 48 relationship types. **Each definition
+file contains detailed docstrings explaining what it does, what data it uses, and
+how it works.**
 
 ### Finding Definition Files
 
@@ -167,8 +170,8 @@ For details on creating custom definitions, see the adapter layer documentation 
 The full schema of Open Targets data is represented as Python classes in `open_targets/data/schema.py`. This provides type checking for dataset and field references.
 
 **Naming Conventions:**
-- Dataset classes: `Dataset` prefix (e.g., `DatasetTargets`, `DatasetDiseases`)
-- Field classes: `Field` prefix (e.g., `FieldTargetsId`, `FieldTargetsApprovedSymbol`)
+- Dataset classes: `Dataset` prefix (e.g., `DatasetTarget`, `DatasetDisease`)
+- Field classes: `Field` prefix (e.g., `FieldTargetId`, `FieldTargetApprovedSymbol`)
 - Field names follow their structural location in datasets
 
 The schema is generated from Open Targets metadata using code generation (see below). Schema classes are used throughout node/edge definitions for type-safe data access.
@@ -177,13 +180,13 @@ The schema is generated from Open Targets metadata using code generation (see be
 
 The Open Targets data schema is generated using [Jinja](https://jinja.palletsprojects.com/en/stable/) templates.
 
-- **Templates**: `open_targets/*.jinja`
+- **Templates**: `open_targets/**/*.jinja`
 - **Generated code**: `open_targets/data/schema.py`
 - **Generation script**: `code_generation/generate.py`
 
 **Important:** Never edit generated files directly. Always modify templates and regenerate:
 ```bash
-python code_generation/generate.py
+uv run python code_generation/generate.py
 ```
 
 ## Contributing

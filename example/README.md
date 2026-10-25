@@ -38,15 +38,20 @@ uv run python example/full_graph_parallel/full_graph_parallel.py
 ```
 
 **Data:** Uses the public S3 repository by default. For local data, see
-[Local Data Preparation](#local-data-preparation). Components run with a fixed
-concurrency of 32 processes; failures are recorded in `parallel_errors.log` and
-the run continues.
+[Local Data Preparation](#local-data-preparation). Components run with a
+concurrency of up to 32 processes; component process failures are recorded in
+`parallel_errors.log` and the run continues.
 
-At the end, successful component outputs are moved into a `merged/`
-subdirectory containing flat parquet files, a merged `schema_info.yaml`, a
-single combined Neo4j import script, and a combined `console.log`. The
-per-component directories are removed after merging. Set `MERGE_RESULTS = False`
-in `full_graph_parallel.py` to skip merging and keep the component directories.
+> [!NOTE]
+> Errors logged internally by BioCypher may not be reflected in the component
+> status. A component can report `OK` while a writer error prevented it from
+> producing output. Inspect the merged `console.log` for `ERROR` lines.
+
+At the end, component outputs are moved into a `merged/` subdirectory
+containing flat parquet files, a merged `schema_info.yaml`, a single combined
+Neo4j import script, and a combined `console.log`. The per-component directories
+are removed after merging. Set `MERGE_RESULTS = False` in
+`full_graph_parallel.py` to skip merging and keep the component directories.
 
 The console falls back automatically in Jupyter/IDLE or when fd redirection is
 unavailable. Set `FORCE_STREAM_CAPTURE = True` in `console.py` to force it.
