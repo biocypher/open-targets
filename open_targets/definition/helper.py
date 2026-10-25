@@ -1,6 +1,6 @@
 """Helper functions for quickly building commonly used expressions."""
 
-from typing import Any, get_args
+from typing import Any, cast, get_args
 
 from open_targets.adapter.expression import (
     Expression,
@@ -9,6 +9,7 @@ from open_targets.adapter.expression import (
     StringConcatenationExpression,
     StringHashExpression,
     ToStringExpression,
+    TransformExpression,
 )
 from open_targets.data.schema_base import Field
 
@@ -73,3 +74,23 @@ def get_namespaced_hash_expression(
         value_expression = ToStringExpression(value_expression)
 
     return get_namespaced_expression(namespace, StringHashExpression(value_expression))
+
+
+def _null_if_empty_list(value: Any) -> Any:  # noqa: ANN401
+    """Return null for an empty list, otherwise the original value."""
+    if isinstance(value, list) and not value:
+        return None
+    return cast("Any", value)
+
+
+def get_null_if_empty_list_expression(
+    value_expression: Expression[Any] | type[Field],
+) -> Expression[Any]:
+    """Get an expression that turns empty lists into null.
+
+    Neo4j's parquet importer stores empty lists as empty byte arrays. Writing
+    null instead of an empty list avoids the resulting `LIST<INTEGER>` type.
+    """
+    if isinstance(value_expression, type):
+        value_expression = FieldExpression(value_expression)
+    return TransformExpression(value_expression, _null_if_empty_list)

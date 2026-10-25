@@ -39,11 +39,16 @@ node_target_disease_association_europepmc: Final[AcquisitionDefinition[NodeInfo]
             FieldEvidenceEuropepmcTextMiningSentences.name,
             TransformExpression(
                 FieldExpression(FieldEvidenceEuropepmcTextMiningSentences),
-                lambda sentences: [
-                    str(sentence[FieldEvidenceEuropepmcTextMiningSentencesElementText])
-                    for sentence in sentences
-                    if sentence[FieldEvidenceEuropepmcTextMiningSentencesElementText] is not None
-                ],
+                lambda sentences: (
+                    None
+                    if not sentences
+                    else [
+                        str(sentence[FieldEvidenceEuropepmcTextMiningSentencesElementText])
+                        for sentence in sentences
+                        if sentence is not None
+                        and sentence[FieldEvidenceEuropepmcTextMiningSentencesElementText] is not None
+                    ]
+                ),
             ),
         ),
     ],

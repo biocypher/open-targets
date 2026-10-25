@@ -17,7 +17,7 @@ from open_targets.data.schema import (
     FieldBiosampleDescription,
     FieldBiosampleSynonyms,
 )
-from open_targets.definition.helper import get_namespaced_expression
+from open_targets.definition.helper import get_namespaced_expression, get_null_if_empty_list_expression
 
 node_biosample: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
     scan_operation=RowScanOperation(dataset=DatasetBiosample),
@@ -26,6 +26,6 @@ node_biosample: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisiti
     properties=[
         FieldBiosampleBiosampleName,
         FieldBiosampleDescription,
-        FieldBiosampleSynonyms,
+        (FieldBiosampleSynonyms.name, get_null_if_empty_list_expression(FieldBiosampleSynonyms)),
     ],
 )
