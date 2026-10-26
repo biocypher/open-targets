@@ -21,6 +21,7 @@ from open_targets.data.schema import (
     FieldTargetFunctionDescriptions,
     FieldTargetId,
 )
+from open_targets.definition.helper import get_null_if_empty_list_expression
 
 node_target: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
     scan_operation=RowScanOperation(dataset=DatasetTarget),
@@ -30,6 +31,6 @@ node_target: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionD
         FieldTargetApprovedSymbol,
         FieldTargetBiotype,
         FieldTargetApprovedName,
-        FieldTargetFunctionDescriptions,
+        (FieldTargetFunctionDescriptions.name, get_null_if_empty_list_expression(FieldTargetFunctionDescriptions)),
     ],
 )

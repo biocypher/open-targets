@@ -16,10 +16,11 @@ from open_targets.data.schema import (
     FieldDiseaseHpoId,
     FieldDiseaseHpoName,
 )
+from open_targets.definition.helper import get_namespaced_expression
 
 node_phenotype: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
     scan_operation=RowScanOperation(dataset=DatasetDiseaseHpo),
-    primary_id=FieldDiseaseHpoId,
+    primary_id=get_namespaced_expression("phenotype", FieldDiseaseHpoId),
     label="PHENOTYPE",
     properties=[
         FieldDiseaseHpoName,

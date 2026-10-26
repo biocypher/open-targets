@@ -1,15 +1,24 @@
+import os
 from collections.abc import Iterable, Mapping, Sequence
+from pathlib import Path
 from typing import Any
 
+import duckdb
 import pytest
 
-from open_targets.adapter.context import AcquisitionContext
+from open_targets.adapter.context import AcquisitionContext, _should_drop_exploded_element
 from open_targets.adapter.data_view import ArrayDataView, MappingBackedDataView, SequenceBackedDataView
 from open_targets.adapter.scan_operation import ExplodingScanOperation, RowScanOperation
 from open_targets.adapter.scan_operation_predicate import ScanOperationPredicateExpression
-from open_targets.data.schema_base import Dataset, Field
+from open_targets.config import DATA_REPOSITORY_URLS_S3
+from open_targets.data.schema import DatasetTarget, FieldTargetId
+from open_targets.data.schema_base import Dataset, Field, SequenceField
 from test.fixture.fake.schema import (
     DatasetFake,
+    FieldFakeNullElementSequence,
+    FieldFakeNullElementSequenceElement,
+    FieldFakeNullSequence,
+    FieldFakeNullSequenceElement,
     FieldFakeScalar,
     FieldFakeStruct,
     FieldFakeStructSequence,
@@ -25,6 +34,8 @@ def mock_get_query_result_field_value(field: type[Field]) -> Any:
         return field.get_value(row_id=0)
     if field is FieldFakeStructSequence:
         return field.get_value(row_id=0, num_elements=2)
+    if field is FieldFakeNullSequence or field is FieldFakeNullElementSequence:
+        return field.get_value(row_id=0)
     msg = f"Field {field} is not a top field"
     raise ValueError(msg)
 
@@ -187,6 +198,57 @@ def test_get_scan_result_stream_exploding_scan_operation(
     assert result == expected_result
 
 
+@pytest.mark.parametrize(
+    ("requested_fields", "exploded_field", "drop_null_elements", "expected_result"),
+    [
+        ((FieldFakeNullSequenceElement,), FieldFakeNullSequence, True, []),
+        ((FieldFakeNullElementSequenceElement,), FieldFakeNullElementSequence, True, []),
+        (
+            (FieldFakeNullSequenceElement,),
+            FieldFakeNullSequence,
+            False,
+            [{FieldFakeNullSequenceElement: FieldFakeNullSequenceElement.get_null_value()}],
+        ),
+        (
+            (FieldFakeNullElementSequenceElement,),
+            FieldFakeNullElementSequence,
+            False,
+            [{FieldFakeNullElementSequenceElement: FieldFakeNullElementSequenceElement.get_null_value()}],
+        ),
+    ],
+)
+def test_get_scan_result_stream_exploding_null_elements(
+    context: AcquisitionContext,
+    requested_fields: Sequence[type[Field]],
+    exploded_field: type[SequenceField],
+    drop_null_elements: bool,
+    expected_result: Sequence[Any],
+) -> None:
+    stream = context.get_scan_result_stream(
+        ExplodingScanOperation(
+            dataset=DatasetFake,
+            exploded_field=exploded_field,
+            drop_null_elements=drop_null_elements,
+        ),
+        requested_fields,
+    )
+    result = [_serialise(i) for i in stream]
+    assert result == expected_result
+
+
+def test_should_drop_exploded_element_checks_nested_fields() -> None:
+    operation = ExplodingScanOperation(
+        dataset=DatasetFake,
+        exploded_field=FieldFakeStructSequence,
+        drop_null_elements=[FieldFakeStructSequenceElementScalar],
+    )
+    item = MappingBackedDataView(
+        {FieldFakeStructSequenceElementScalar.name: FieldFakeStructSequenceElementScalar.get_null_value()},
+        [FieldFakeStructSequenceElementScalar],
+    )
+    assert _should_drop_exploded_element(operation, item) is True
+
+
 def _serialise(
     value: Any,
 ) -> Sequence[Any] | Mapping[type[Field], Any]:
@@ -197,3 +259,64 @@ def _serialise(
     if isinstance(value, MappingBackedDataView):
         return {i: _serialise(v) for i, v in value.items()}
     return value
+
+
+def test_get_dataset_path_local() -> None:
+    context = AcquisitionContext(
+        node_definitions=[],
+        edge_definitions=[],
+        datasets_location="datasets",
+    )
+    assert context.is_remote is False
+    assert context.get_dataset_path(DatasetTarget) == "datasets/target/**/*.parquet"
+
+
+def test_get_dataset_path_local_file_url(tmp_path: Path) -> None:
+    context = AcquisitionContext(
+        node_definitions=[],
+        edge_definitions=[],
+        datasets_location=f"file://{tmp_path}",
+    )
+    assert context.is_remote is False
+    assert context.get_dataset_path(DatasetTarget) == str(tmp_path / "target" / "**" / "*.parquet")
+
+
+def test_get_dataset_path_remote_s3() -> None:
+    context = AcquisitionContext(
+        node_definitions=[],
+        edge_definitions=[],
+        datasets_location=DATA_REPOSITORY_URLS_S3,
+    )
+    assert context.is_remote is True
+    assert context.get_dataset_path(DatasetTarget) == f"{DATA_REPOSITORY_URLS_S3}target/**/*.parquet"
+
+
+def test_get_scan_result_stream_from_local_path(tmp_path: Path) -> None:
+    dataset_dir = tmp_path / DatasetTarget.id
+    dataset_dir.mkdir()
+    connection = duckdb.connect()
+    connection.sql("SELECT * FROM (VALUES ('ENSG1'), ('ENSG2')) AS t(id)").write_parquet(
+        str(dataset_dir / "data.parquet"),
+    )
+    context = AcquisitionContext(
+        node_definitions=[],
+        edge_definitions=[],
+        datasets_location=tmp_path,
+    )
+    stream = context.get_scan_result_stream(RowScanOperation(dataset=DatasetTarget), [FieldTargetId])
+    assert [row[FieldTargetId] for row in stream] == ["ENSG1", "ENSG2"]
+
+
+@pytest.mark.skipif(
+    not os.environ.get("OPEN_TARGETS_S3_INTEGRATION"),
+    reason="Set OPEN_TARGETS_S3_INTEGRATION=1 to run S3 integration tests.",
+)
+def test_get_scan_result_stream_from_s3() -> None:
+    context = AcquisitionContext(
+        node_definitions=[],
+        edge_definitions=[],
+        datasets_location=DATA_REPOSITORY_URLS_S3,
+        limit=3,
+    )
+    stream = context.get_scan_result_stream(RowScanOperation(dataset=DatasetTarget), [FieldTargetId])
+    assert len(list(stream)) == context.limit

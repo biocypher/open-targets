@@ -17,7 +17,7 @@ from open_targets.data.schema import (
     FieldTargetId,
 )
 from open_targets.definition.reference_kg.constant import EdgeLabel
-from open_targets.definition.reference_kg.expression import database_cross_reference_target_value_expression
+from open_targets.definition.reference_kg.expression import database_cross_reference_target_primary_id_expression
 
 edge_target_has_database_cross_reference_database_cross_reference: Final[AcquisitionDefinition[EdgeInfo]] = (
     ExpressionEdgeAcquisitionDefinition(
@@ -27,7 +27,7 @@ edge_target_has_database_cross_reference_database_cross_reference: Final[Acquisi
         ),
         primary_id=NewUuidExpression(),
         source=FieldTargetId,
-        target=database_cross_reference_target_value_expression,
+        target=database_cross_reference_target_primary_id_expression,
         label=EdgeLabel.HAS_DATABASE_CROSS_REFERENCE,
         properties=[],
     )

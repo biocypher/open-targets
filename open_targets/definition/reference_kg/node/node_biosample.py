@@ -17,14 +17,15 @@ from open_targets.data.schema import (
     FieldBiosampleDescription,
     FieldBiosampleSynonyms,
 )
+from open_targets.definition.helper import get_namespaced_expression, get_null_if_empty_list_expression
 
 node_biosample: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
     scan_operation=RowScanOperation(dataset=DatasetBiosample),
-    primary_id=FieldBiosampleBiosampleId,
+    primary_id=get_namespaced_expression("biosample", FieldBiosampleBiosampleId),
     label="BIOSAMPLE",
     properties=[
         FieldBiosampleBiosampleName,
         FieldBiosampleDescription,
-        FieldBiosampleSynonyms,
+        (FieldBiosampleSynonyms.name, get_null_if_empty_list_expression(FieldBiosampleSynonyms)),
     ],
 )

@@ -21,6 +21,7 @@ from open_targets.data.schema import (
     FieldPharmacogenomicsLiterature,
     FieldPharmacogenomicsLiteratureElement,
 )
+from open_targets.definition.helper import get_namespaced_expression
 from open_targets.definition.reference_kg.constant import EdgeLabel
 from open_targets.definition.reference_kg.expression import (
     pharmacogenomics_annotation_primary_id_expression,
@@ -34,7 +35,7 @@ edge_pharmacogenomics_annotation_supported_by_literature_entry: Final[Acquisitio
         ),
         primary_id=NewUuidExpression(),
         source=pharmacogenomics_annotation_primary_id_expression,
-        target=FieldPharmacogenomicsLiteratureElement,
+        target=get_namespaced_expression("literature_entry", FieldPharmacogenomicsLiteratureElement),
         label=EdgeLabel.SUPPORTED_BY,
         properties=[],
     )

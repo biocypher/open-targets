@@ -1,8 +1,8 @@
-"""Summary: MOUSE_PHENOTYPE -> MOUSE_PHENOTYPE_CLASS classification edges.
+"""Summary: MOUSE_PHENOTYPE -> MOUSE_PHENOTYPE classification edges.
 
-Definition for CLASSIFIED_AS edges: explodes phenotype class annotations in Mouse
-Phenotypes parquet to link each MOUSE_PHENOTYPE to its MOUSE_PHENOTYPE_CLASS,
-capturing MP class grouping in the KG.
+Definition for CLASSIFIED_AS edges: explodes phenotype class annotations in
+Mouse Phenotypes parquet to link each observed MOUSE_PHENOTYPE to its broader MP
+class term, both represented under the canonical MOUSE_PHENOTYPE node label.
 """
 
 from typing import Final
@@ -19,7 +19,7 @@ from open_targets.data.schema import (
 )
 from open_targets.definition.reference_kg.constant import EdgeLabel
 
-edge_mouse_phenotype_classified_as_mouse_phenotype_class: Final[AcquisitionDefinition[EdgeInfo]] = (
+edge_mouse_phenotype_classified_as_mouse_phenotype: Final[AcquisitionDefinition[EdgeInfo]] = (
     ExpressionEdgeAcquisitionDefinition(
         scan_operation=ExplodingScanOperation(
             dataset=DatasetMousePhenotype,

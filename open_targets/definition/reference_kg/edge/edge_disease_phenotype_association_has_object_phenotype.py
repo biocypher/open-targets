@@ -17,6 +17,7 @@ from open_targets.data.schema import (
     FieldDiseasePhenotypeEvidence,
     FieldDiseasePhenotypePhenotype,
 )
+from open_targets.definition.helper import get_namespaced_expression
 from open_targets.definition.reference_kg.constant import EdgeLabel
 from open_targets.definition.reference_kg.expression import disease_phenotype_association_primary_id_expression
 
@@ -28,7 +29,7 @@ edge_disease_phenotype_association_has_object_phenotype: Final[AcquisitionDefini
         ),
         primary_id=NewUuidExpression(),
         source=disease_phenotype_association_primary_id_expression,
-        target=FieldDiseasePhenotypePhenotype,
+        target=get_namespaced_expression("phenotype", FieldDiseasePhenotypePhenotype),
         label=EdgeLabel.HAS_OBJECT,
         properties=[],
     )

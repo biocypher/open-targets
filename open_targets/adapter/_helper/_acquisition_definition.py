@@ -131,6 +131,6 @@ def normalise_curie(string: str) -> str:
 def extract_curie_prefix(string: str) -> str:
     for sep in CURIE_SEPARATORS:
         if sep in string:
-            return string.split(sep)[0]
+            return string.split(sep, maxsplit=1)[0]
     msg = f"Failed to extract curie prefix from: {string}"
     raise ValueError(msg)

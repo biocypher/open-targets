@@ -1,0 +1,458 @@
+adverse_reaction:
+  input_label: ADVERSE_REACTION
+  is_a: named thing
+  represented_as: node
+
+cell_line:
+  input_label: CELL_LINE
+  is_a: named thing
+  represented_as: node
+
+database_cross_reference:
+  input_label: DATABASE_CROSS_REFERENCE
+  is_a: named thing
+  represented_as: node
+
+disease:
+  input_label: DISEASE
+  is_a: named thing
+  represented_as: node
+
+disease_phenotype_association:
+  input_label: DISEASE_PHENOTYPE_ASSOCIATION
+  is_a: named thing
+  represented_as: node
+
+disease_synonym:
+  input_label: DISEASE_SYNONYM
+  is_a: named thing
+  represented_as: node
+
+drug_warning:
+  input_label: DRUG_WARNING
+  is_a: named thing
+  represented_as: node
+
+go_term:
+  input_label: GO_TERM
+  is_a: named thing
+  represented_as: node
+
+homologue:
+  input_label: HOMOLOGUE
+  is_a: named thing
+  represented_as: node
+
+literature_entry:
+  input_label: LITERATURE_ENTRY
+  is_a: named thing
+  represented_as: node
+
+mechanism_of_action:
+  input_label: MECHANISM_OF_ACTION
+  is_a: named thing
+  represented_as: node
+
+molecule:
+  input_label: MOLECULE
+  is_a: named thing
+  represented_as: node
+
+mouse_gene:
+  input_label: MOUSE_GENE
+  is_a: named thing
+  represented_as: node
+
+mouse_model:
+  input_label: MOUSE_MODEL
+  is_a: named thing
+  represented_as: node
+
+mouse_phenotype:
+  input_label: MOUSE_PHENOTYPE
+  is_a: named thing
+  represented_as: node
+
+pathway:
+  input_label: PATHWAY
+  is_a: named thing
+  represented_as: node
+
+phenotype:
+  input_label: PHENOTYPE
+  is_a: named thing
+  represented_as: node
+
+reaction:
+  input_label: REACTION
+  is_a: named thing
+  represented_as: node
+
+species:
+  input_label: SPECIES
+  is_a: named thing
+  represented_as: node
+
+subcellular_location:
+  input_label: SUBCELLULAR_LOCATION
+  is_a: named thing
+  represented_as: node
+
+target:
+  input_label: TARGET
+  is_a: named thing
+  represented_as: node
+
+target_classification:
+  input_label: TARGET_CLASSIFICATION
+  is_a: named thing
+  represented_as: node
+
+target_disease_association:
+  input_label:
+    [
+      TARGET_DISEASE_ASSOCIATION_CANCER_BIOMARKERS,
+      TARGET_DISEASE_ASSOCIATION_CANCER_GENE_CENSUS,
+      TARGET_DISEASE_ASSOCIATION_CHEMBL,
+      TARGET_DISEASE_ASSOCIATION_CLINGEN,
+      TARGET_DISEASE_ASSOCIATION_CRISPR,
+      TARGET_DISEASE_ASSOCIATION_CRISPR_SCREEN,
+      TARGET_DISEASE_ASSOCIATION_EUROPEPMC,
+      TARGET_DISEASE_ASSOCIATION_EVA,
+      TARGET_DISEASE_ASSOCIATION_EVA_SOMATIC,
+      TARGET_DISEASE_ASSOCIATION_EXPRESSION_ATLAS,
+      TARGET_DISEASE_ASSOCIATION_GENE2PHENOTYPE,
+      TARGET_DISEASE_ASSOCIATION_GENE_BURDEN,
+      TARGET_DISEASE_ASSOCIATION_GENOMICS_ENGLAND,
+      TARGET_DISEASE_ASSOCIATION_IMPC,
+      TARGET_DISEASE_ASSOCIATION_INTOGEN,
+      TARGET_DISEASE_ASSOCIATION_ORPHANET,
+      TARGET_DISEASE_ASSOCIATION_OT_GENETICS_PORTAL,
+      TARGET_DISEASE_ASSOCIATION_REACTOME,
+      TARGET_DISEASE_ASSOCIATION_UNIPROT_LITERATURE,
+      TARGET_DISEASE_ASSOCIATION_UNIPROT_VARIANTS,
+      TARGET_DISEASE_ASSOCIATION_GWAS_CREDIBLE_SETS,
+    ]
+  preferred_id:
+    [
+      cancer_biomarkers,
+      cancer_gene_census,
+      chembl,
+      clingen,
+      crispr,
+      crispr_screen,
+      europepmc,
+      eva,
+      eva_somatic,
+      expression_atlas,
+      gene2phenotype,
+      gene_burden,
+      genomics_england,
+      impc,
+      intogen,
+      orphanet,
+      ot_genetics_portal,
+      reactome,
+      uniprot_literature,
+      uniprot_variants,
+      gwas_credible_sets,
+    ]
+  is_a: named thing
+  represented_as: node
+
+target_target_interaction:
+  input_label: TARGET_TARGET_INTERACTION
+  is_a: named thing
+  represented_as: node
+
+colocalisation:
+  input_label: COLOCALISATION
+  is_a: named thing
+  represented_as: node
+
+credible_set:
+  input_label: CREDIBLE_SET
+  is_a: named thing
+  represented_as: node
+
+genetic_association_study:
+  input_label: GENETIC_ASSOCIATION_STUDY
+  is_a: named thing
+  represented_as: node
+
+variant:
+  input_label: VARIANT
+  is_a: named thing
+  represented_as: node
+
+pharmacogenomics_annotation:
+  input_label: PHARMACOGENOMICS_ANNOTATION
+  is_a: named thing
+  represented_as: node
+
+regulatory_element:
+  input_label: REGULATORY_ELEMENT
+  is_a: named thing
+  represented_as: node
+
+biosample:
+  input_label: BIOSAMPLE
+  is_a: named thing
+  represented_as: node
+
+so_term:
+  input_label: SO_TERM
+  is_a: named thing
+  represented_as: node
+
+target_prioritisation:
+  input_label: TARGET_PRIORITISATION
+  is_a: named thing
+  represented_as: node
+
+allele_in:
+  input_label: ALLELE_IN
+  is_a: association
+  represented_as: edge
+
+annotated_with:
+  input_label: ANNOTATED_WITH
+  is_a: association
+  represented_as: edge
+
+associated_with:
+  input_label: ASSOCIATED_WITH
+  is_a: association
+  represented_as: edge
+
+belongs_to:
+  input_label: BELONGS_TO
+  is_a: association
+  represented_as: edge
+
+classified_as:
+  input_label: CLASSIFIED_AS
+  is_a: association
+  represented_as: edge
+
+derived_from:
+  input_label: DERIVED_FROM
+  is_a: association
+  represented_as: edge
+
+has_adverse_reaction:
+  input_label: HAS_ADVERSE_REACTION
+  is_a: association
+  represented_as: edge
+
+has_database_cross_reference:
+  input_label: HAS_DATABASE_CROSS_REFERENCE
+  is_a: association
+  represented_as: edge
+
+has_drug_response:
+  input_label: HAS_DRUG_RESPONSE
+  is_a: association
+  represented_as: edge
+
+has_drug_warning:
+  input_label: HAS_DRUG_WARNING
+  is_a: association
+  represented_as: edge
+
+has_homologue_in_species:
+  input_label: HAS_HOMOLOGUE_IN_SPECIES
+  is_a: association
+  represented_as: edge
+
+has_mechanism_of_action:
+  input_label: HAS_MECHANISM_OF_ACTION
+  is_a: association
+  represented_as: edge
+
+has_molecule:
+  input_label: HAS_MOLECULE
+  is_a: association
+  represented_as: edge
+
+has_object:
+  input_label: HAS_OBJECT
+  is_a: association
+  represented_as: edge
+
+has_phenotype:
+  input_label: HAS_PHENOTYPE
+  is_a: association
+  represented_as: edge
+
+has_synonym:
+  input_label: HAS_SYNONYM
+  is_a: association
+  represented_as: edge
+
+has_target:
+  input_label: HAS_TARGET
+  is_a: association
+  represented_as: edge
+
+has_target_target_interaction:
+  input_label: HAS_TARGET_TARGET_INTERACTION
+  is_a: association
+  represented_as: edge
+
+indicates:
+  input_label: INDICATES
+  is_a: association
+  represented_as: edge
+
+inferred_from:
+  input_label: INFERRED_FROM
+  is_a: association
+  represented_as: edge
+
+involves_in:
+  input_label: INVOLVES_IN
+  is_a: association
+  represented_as: edge
+
+is_a:
+  input_label: IS_A
+  is_a: association
+  represented_as: edge
+
+is_part_of:
+  input_label: IS_PART_OF
+  is_a: association
+  represented_as: edge
+
+located_in:
+  input_label: LOCATED_IN
+  is_a: association
+  represented_as: edge
+
+mentions:
+  input_label: MENTIONS
+  is_a: association
+  represented_as: edge
+
+modelled_by:
+  input_label: MODELLED_BY
+  is_a: association
+  represented_as: edge
+
+related_to:
+  input_label: RELATED_TO
+  is_a: association
+  represented_as: edge
+
+sampled_from:
+  input_label: SAMPLED_FROM
+  is_a: association
+  represented_as: edge
+
+subject_of:
+  input_label: SUBJECT_OF
+  is_a: association
+  represented_as: edge
+
+supported_by:
+  input_label: SUPPORTED_BY
+  is_a: association
+  represented_as: edge
+
+tested_in:
+  input_label: TESTED_IN
+  is_a: association
+  represented_as: edge
+
+has_colocalisation:
+  input_label: HAS_COLOCALISATION
+  is_a: association
+  represented_as: edge
+
+has_credible_set:
+  input_label: HAS_CREDIBLE_SET
+  is_a: association
+  represented_as: edge
+
+contains_variant:
+  input_label: CONTAINS_VARIANT
+  is_a: association
+  represented_as: edge
+
+compares_signal:
+  input_label: COMPARES_SIGNAL
+  is_a: association
+  represented_as: edge
+
+published_in:
+  input_label: PUBLISHED_IN
+  is_a: association
+  represented_as: edge
+
+has_study_locus:
+  input_label: HAS_STUDY_LOCUS
+  is_a: association
+  represented_as: edge
+
+has_summary_association:
+  input_label:
+    [
+      HAS_SUMMARY_ASSOCIATION_BY_DATASOURCE_DIRECT,
+      HAS_SUMMARY_ASSOCIATION_BY_DATASOURCE_INDIRECT,
+      HAS_SUMMARY_ASSOCIATION_BY_DATATYPE_DIRECT,
+      HAS_SUMMARY_ASSOCIATION_BY_DATATYPE_INDIRECT,
+      HAS_SUMMARY_ASSOCIATION_BY_OVERALL_DIRECT,
+      HAS_SUMMARY_ASSOCIATION_BY_OVERALL_INDIRECT,
+    ]
+  preferred_id:
+    [
+      by_datasource_direct,
+      by_datasource_indirect,
+      by_datatype_direct,
+      by_datatype_indirect,
+      by_overall_direct,
+      by_overall_indirect,
+    ]
+  is_a: association
+  represented_as: edge
+
+active_in:
+  input_label: ACTIVE_IN
+  is_a: association
+  represented_as: edge
+
+expressed_in:
+  input_label: EXPRESSED_IN
+  is_a: association
+  represented_as: edge
+
+has_prioritisation:
+  input_label: HAS_PRIORITISATION
+  is_a: association
+  represented_as: edge
+
+has_variant:
+  input_label: HAS_VARIANT
+  is_a: association
+  represented_as: edge
+
+predicts_target:
+  input_label: PREDICTS_TARGET
+  is_a: association
+  represented_as: edge
+
+reports_trait:
+  input_label: REPORTS_TRAIT
+  is_a: association
+  represented_as: edge
+
+measured_in:
+  input_label: MEASURED_IN
+  is_a: association
+  represented_as: edge
+
+regulates:
+  input_label: REGULATES
+  is_a: association
+  represented_as: edge

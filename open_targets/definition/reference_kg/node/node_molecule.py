@@ -29,6 +29,7 @@ from open_targets.data.schema import (
     FieldDrugMoleculeTradeNames,
     FieldDrugMoleculeYearOfFirstApproval,
 )
+from open_targets.definition.helper import get_null_if_empty_list_expression
 
 node_molecule: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitionDefinition(
     scan_operation=RowScanOperation(dataset=DatasetDrugMolecule),
@@ -43,8 +44,8 @@ node_molecule: Final[AcquisitionDefinition[NodeInfo]] = ExpressionNodeAcquisitio
         FieldDrugMoleculeMaximumClinicalTrialPhase,
         FieldDrugMoleculeHasBeenWithdrawn,
         FieldDrugMoleculeIsApproved,
-        FieldDrugMoleculeTradeNames,
-        FieldDrugMoleculeSynonyms,
+        (FieldDrugMoleculeTradeNames.name, get_null_if_empty_list_expression(FieldDrugMoleculeTradeNames)),
+        (FieldDrugMoleculeSynonyms.name, get_null_if_empty_list_expression(FieldDrugMoleculeSynonyms)),
         FieldDrugMoleculeDescription,
     ],
 )

@@ -17,17 +17,17 @@ from open_targets.data.schema import (
     FieldMousePhenotypeBiologicalModelsElementId,
     FieldMousePhenotypeTargetInModelEnsemblId,
 )
-from open_targets.definition.helper import get_null_to_dummy_string_expression
 from open_targets.definition.reference_kg.constant import EdgeLabel
 
 edge_mouse_gene_allele_in_mouse_model: Final[AcquisitionDefinition[EdgeInfo]] = ExpressionEdgeAcquisitionDefinition(
     scan_operation=ExplodingScanOperation(
         dataset=DatasetMousePhenotype,
         exploded_field=FieldMousePhenotypeBiologicalModels,
+        drop_null_elements=[FieldMousePhenotypeBiologicalModelsElementId],
     ),
     primary_id=NewUuidExpression(),
     source=FieldMousePhenotypeTargetInModelEnsemblId,
-    target=get_null_to_dummy_string_expression(FieldMousePhenotypeBiologicalModelsElementId),
+    target=FieldMousePhenotypeBiologicalModelsElementId,
     label=EdgeLabel.ALLELE_IN,
     properties=[],
 )

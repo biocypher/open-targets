@@ -1,8 +1,8 @@
 """Summary: edge definitions for the reference knowledge graph."""
 
 from open_targets.definition.reference_kg.edge.edge_biosample_is_a_biosample import edge_biosample_is_a_biosample
-from open_targets.definition.reference_kg.edge.edge_cell_line_sampled_from_tissue import (
-    edge_cell_line_sampled_from_tissue,
+from open_targets.definition.reference_kg.edge.edge_cell_line_sampled_from_biosample import (
+    edge_cell_line_sampled_from_biosample,
 )
 from open_targets.definition.reference_kg.edge.edge_colocalisation_compares_signal_credible_set_left import (
     edge_colocalisation_compares_signal_credible_set_left,
@@ -77,8 +77,8 @@ from open_targets.definition.reference_kg.edge.edge_mouse_model_has_phenotype_mo
 from open_targets.definition.reference_kg.edge.edge_mouse_model_has_phenotype_phenotype import (
     edge_mouse_model_has_phenotype_phenotype,
 )
-from open_targets.definition.reference_kg.edge.edge_mouse_phenotype_classified_as_mouse_phenotype_class import (
-    edge_mouse_phenotype_classified_as_mouse_phenotype_class,
+from open_targets.definition.reference_kg.edge.edge_mouse_phenotype_classified_as_mouse_phenotype import (
+    edge_mouse_phenotype_classified_as_mouse_phenotype,
 )
 from open_targets.definition.reference_kg.edge.edge_pathway_annotated_with_disease import (
     edge_pathway_annotated_with_disease,
@@ -308,7 +308,7 @@ from open_targets.definition.reference_kg.edge.edge_target_target_interaction_su
 
 __all__ = [
     "edge_biosample_is_a_biosample",
-    "edge_cell_line_sampled_from_tissue",
+    "edge_cell_line_sampled_from_biosample",
     "edge_colocalisation_compares_signal_credible_set_left",
     "edge_colocalisation_compares_signal_credible_set_right",
     "edge_credible_set_contains_variant_variant",
@@ -336,7 +336,7 @@ __all__ = [
     "edge_mouse_gene_allele_in_mouse_model",
     "edge_mouse_model_has_phenotype_mouse_phenotype",
     "edge_mouse_model_has_phenotype_phenotype",
-    "edge_mouse_phenotype_classified_as_mouse_phenotype_class",
+    "edge_mouse_phenotype_classified_as_mouse_phenotype",
     "edge_pathway_annotated_with_disease",
     "edge_pathway_is_part_of_pathway",
     "edge_pharmacogenomics_annotation_associated_with_disease",

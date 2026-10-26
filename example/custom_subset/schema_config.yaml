@@ -73,11 +73,6 @@ mouse_phenotype:
   is_a: named thing
   represented_as: node
 
-mouse_phenotype_class:
-  input_label: MOUSE_PHENOTYPE_CLASS
-  is_a: named thing
-  represented_as: node
-
 pathway:
   input_label: PATHWAY
   is_a: named thing
@@ -167,11 +162,6 @@ target_disease_association:
 
 target_target_interaction:
   input_label: TARGET_TARGET_INTERACTION
-  is_a: named thing
-  represented_as: node
-
-tissue:
-  input_label: TISSUE
   is_a: named thing
   represented_as: node
 

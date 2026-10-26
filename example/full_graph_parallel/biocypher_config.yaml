@@ -1,0 +1,8 @@
+biocypher:
+  strict_mode: false
+  schema_config_path: example/full_graph_parallel/schema_config.yaml
+  big_data: true
+
+neo4j:
+  database_name: reference-kg
+  skip_bad_relationships: true

@@ -23,8 +23,8 @@ This is a **BioCypher adapter** for Open Targets data that converts Open Targets
 
 3. **Data Schema** (`open_targets/data/`):
    - Python classes representing Open Targets data schema
-   - All dataset classes prefixed with `Dataset` (e.g., `DatasetTargets`)
-   - All field classes prefixed with `Field` (e.g., `FieldTargetsId`)
+   - All dataset classes prefixed with `Dataset` (e.g., `DatasetTarget`)
+   - All field classes prefixed with `Field` (e.g., `FieldTargetId`)
    - Generated via code generation (see Code Generation section)
 
 4. **Code Generation** (`code_generation/`):
@@ -39,11 +39,11 @@ Node and edge definitions use an expression-based declarative syntax:
 
 ```python
 definition = ExpressionNodeAcquisitionDefinition(
-    scan_operation=RowScanOperation(dataset=DatasetTargets),
-    primary_id=FieldExpression(FieldTargetsId),
-    label=LiteralExpression("ensembl"),
+    scan_operation=RowScanOperation(dataset=DatasetTarget),
+    primary_id=FieldTargetId,
+    label="TARGET",
     properties=[
-        (LiteralExpression(FieldTargetsApprovedSymbol.name), FieldExpression(FieldTargetsApprovedSymbol))
+        (FieldTargetApprovedSymbol.name, FieldExpression(FieldTargetApprovedSymbol)),
     ],
 )
 ```
@@ -53,10 +53,10 @@ definition = ExpressionNodeAcquisitionDefinition(
 Expressions can be chained for complex transformations:
 
 ```python
-expression = NormaliseCurieExpression(ToStringExpression(FieldExpression(FieldEvidenceDiseaseId)))
+expression = NormaliseCurieExpression(ToStringExpression(FieldExpression(FieldDiseaseId)))
 ```
 
-This is equivalent to: `normalise_curie(str(data[FieldEvidenceDiseaseId]))`
+This is equivalent to: `normalise_curie(str(data[FieldDiseaseId]))`
 
 ### Data Access Pattern
 
@@ -86,9 +86,9 @@ When working with data:
 ## Code Generation Workflow
 
 1. **Schema Generation**: 
-   - Templates: `open_targets/*.jinja`
+   - Templates: `open_targets/**/*.jinja`
    - Generated: `open_targets/data/schema.py`
-   - Run: `code_generation/generate.py`
+   - Run: `uv run python code_generation/generate.py`
 
 2. **When to Regenerate**:
    - When Open Targets schema changes
@@ -107,6 +107,9 @@ When working with data:
 1. Create a new file in `open_targets/definition/reference_kg/node/`
 2. Define using `ExpressionNodeAcquisitionDefinition`
 3. Import and add to `reference_kg_definition.node_definitions` in `kg.py`
+4. For optional list-valued properties, use
+   `get_null_if_empty_list_expression()` so empty lists are written as null;
+   Neo4j's parquet importer otherwise stores them as byte arrays.
 
 ### Adding a New Edge Definition
 
@@ -123,8 +126,8 @@ When working with data:
 ### Modifying Data Schema
 
 1. **Never edit generated schema files directly**
-2. Update the Jinja template in `open_targets/*.jinja`
-3. Run code generation: `python code_generation/generate.py`
+2. Update the Jinja template in `open_targets/**/*.jinja`
+3. Run code generation: `uv run python code_generation/generate.py`
 4. Verify the generated schema matches expectations
 
 ## Testing
@@ -145,19 +148,28 @@ When working with data:
 
 ## Important Dependencies
 
-- `biocypher>=0.9.4,<0.10`: Core BioCypher framework
-- `duckdb>=1.2.2,<2`: Database for efficient data processing
-- `bioregistry>=0.12.13,<0.13`: CURIE normalization
-- `jinja2`: Code generation templates
+- `biocypher[bigdata,neo4j]>=0.12.5`: Core BioCypher framework and Neo4j support
+- `duckdb>=1.4.4`: Database for efficient data processing
+- `bioregistry>=0.13.21`: CURIE normalization
+- `xxhash>=3.6.0,<4`: Hashing for stable identifiers
+- `jinja2>=3.1.6`: Development dependency for code generation templates
 
 ## Running the Adapter
 
 Main entry point: `example/full_graph/full_graph.py` (and other examples)
 
 ```bash
-cd example/full_graph
-uv run python full_graph.py
+uv run python example/full_graph/full_graph.py
 ```
+
+For the full graph, the parallel builder is usually faster:
+
+```bash
+uv run python example/full_graph_parallel/full_graph_parallel.py
+```
+
+Examples use the public S3 repository by default. See `example/README.md` for
+local data preparation and parallel-build merge details.
 
 This script:
 1. Initializes BioCypher with config from `biocypher_config.yaml`
@@ -167,37 +179,69 @@ This script:
 
 ## Data Location Configuration
 
-The `datasets_location` parameter in `AcquisitionContext` should point to a directory containing Open Targets parquet files organized by dataset name.
+The `datasets_location` parameter in `AcquisitionContext` is required and
+accepts:
+
+- A local directory path
+- A `file://` URL pointing to a local directory
+- An `s3://` repository root, streamed anonymously with DuckDB
+
+For example:
+
+```python
+from open_targets.config import DATA_REPOSITORY_URLS_S3
+
+context = AcquisitionContext(
+    node_definitions=...,
+    edge_definitions=...,
+    datasets_location=DATA_REPOSITORY_URLS_S3,
+)
+```
+
+The S3 URL is generated from `pyproject.toml` as `DATA_REPOSITORY_URLS_S3`.
+Remote access requires the `httpfs` DuckDB extension, which is installed and
+loaded automatically.
 
 ## Common Pitfalls
 
 1. **Don't edit generated files**: Always edit templates and regenerate
 2. **Version mismatch**: The adapter targets a single data version. Ensure the data directory, schema, and definitions all match the same Open Targets version
 3. **Expression order matters**: Chain expressions in the correct order
-4. **Field references**: Always use schema classes (e.g., `FieldTargetsId`) not string literals
-5. **Memory usage**: The adapter streams data, but very large datasets may still require attention
+4. **Field references**: Always use schema classes (e.g., `FieldTargetId`) not string literals
+5. **Optional list properties**: Neo4j's parquet importer stores empty lists as
+   `b''` with type `LIST<INTEGER>`. Use
+   `get_null_if_empty_list_expression()` for optional list-valued node
+   properties, or otherwise return `None` instead of `[]`.
+6. **Component success reporting**: BioCypher can log `ERROR` while the
+   component still reports `OK`. Check component `console.log` files and verify
+   expected output files and counts; `parallel_errors.log` only records process
+   failures.
+7. **Memory usage**: The adapter streams data, but very large datasets may still require attention
 
 ## Debugging Tips
 
 1. Check `biocypher-log/` for BioCypher execution logs
-2. Use `limit` parameter in `AcquisitionContext` to test with small datasets
-3. Verify dataset paths and structure match expected format
-4. Check that all required datasets are present in the data directory
+2. For parallel builds, inspect the merged `console.log` for `ERROR` lines and
+   verify that every expected component produced an output file
+3. Use `limit` parameter in `AcquisitionContext` to test with small datasets
+4. Verify dataset paths and structure match expected format
+5. Check that all required datasets are present in the data directory
 
 ## Future Development Areas
 
-- Cloud streaming support
 - Codeless JSON/YAML definition mode
-- Croissant ML metadata support
 - Extended tabular data format support
+- Additional cloud storage backends
 
 ## Key Files to Understand
 
 1. `open_targets/adapter/context.py` - Main acquisition context
 2. `open_targets/adapter/expression.py` - Expression system
 3. `open_targets/definition/reference_kg/kg.py` - Main KG definition
-4. `example/full_graph/full_graph.py` - Execution script example
-5. `code_generation/generate.py` - Code generation logic
+4. `open_targets/definition/helper.py` - Shared expression helpers
+5. `example/full_graph/full_graph.py` - Execution script example
+6. `example/full_graph_parallel/full_graph_parallel.py` - Parallel build entry point
+7. `code_generation/generate.py` - Code generation logic
 
 ## When Making Changes
 

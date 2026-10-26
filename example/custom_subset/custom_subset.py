@@ -10,6 +10,7 @@ import itertools
 from biocypher import BioCypher
 
 from open_targets.adapter.context import AcquisitionContext
+from open_targets.config import DATA_REPOSITORY_URLS_S3
 from open_targets.definition.reference_kg.edge import (
     edge_molecule_indicates_disease,
     edge_target_has_summary_association_by_overall_direct_disease,
@@ -42,7 +43,7 @@ def main() -> None:
     context = AcquisitionContext(
         node_definitions=node_definitions,
         edge_definitions=edge_definitions,
-        datasets_location="datasets",  # directory containing the downloaded datasets
+        datasets_location=DATA_REPOSITORY_URLS_S3,
         limit=100,
     )
 
