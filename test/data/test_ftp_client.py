@@ -52,6 +52,6 @@ epmc.input.cooccurences.path = "gs://open-targets-pre-data-releases/22.11/output
 // include this to short-circuit calculation of literature step
 literature.processing.outputs.literatureIndex.path = "gs://open-targets-pre-data-releases/22.11/literature-etl/parquet/"
 """
-    result = cast(bytes, ftp_client.retrieve_file(path))
+    result = cast("bytes", ftp_client.retrieve_file(path))
     text = result.decode()
     assert text == expected_text

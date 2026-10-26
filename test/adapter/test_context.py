@@ -15,11 +15,11 @@ from open_targets.data.schema import DatasetTarget, FieldTargetId
 from open_targets.data.schema_base import Dataset, Field, SequenceField
 from test.fixture.fake.schema import (
     DatasetFake,
-    FieldFakeScalar,
     FieldFakeNullElementSequence,
     FieldFakeNullElementSequenceElement,
     FieldFakeNullSequence,
     FieldFakeNullSequenceElement,
+    FieldFakeScalar,
     FieldFakeStruct,
     FieldFakeStructSequence,
     FieldFakeStructSequenceElement,
