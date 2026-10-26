@@ -85,11 +85,14 @@ node_target_disease_association_gene_burden: Final[AcquisitionDefinition[NodeInf
                     lambda urls: (
                         None
                         if not urls
-                        else [
-                            str(url[FieldEvidenceGeneBurdenUrlsElementUrl])
-                            for url in urls
-                            if url is not None and url[FieldEvidenceGeneBurdenUrlsElementUrl] is not None
-                        ]
+                        else (
+                            [
+                                str(url[FieldEvidenceGeneBurdenUrlsElementUrl])
+                                for url in urls
+                                if url is not None and url[FieldEvidenceGeneBurdenUrlsElementUrl] is not None
+                            ]
+                            or None
+                        )
                     ),
                 ),
             ),

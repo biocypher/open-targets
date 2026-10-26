@@ -42,12 +42,15 @@ node_target_disease_association_europepmc: Final[AcquisitionDefinition[NodeInfo]
                 lambda sentences: (
                     None
                     if not sentences
-                    else [
-                        str(sentence[FieldEvidenceEuropepmcTextMiningSentencesElementText])
-                        for sentence in sentences
-                        if sentence is not None
-                        and sentence[FieldEvidenceEuropepmcTextMiningSentencesElementText] is not None
-                    ]
+                    else (
+                        [
+                            str(sentence[FieldEvidenceEuropepmcTextMiningSentencesElementText])
+                            for sentence in sentences
+                            if sentence is not None
+                            and sentence[FieldEvidenceEuropepmcTextMiningSentencesElementText] is not None
+                        ]
+                        or None
+                    )
                 ),
             ),
         ),
